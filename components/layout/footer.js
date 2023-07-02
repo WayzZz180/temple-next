@@ -4,8 +4,6 @@ import Image from 'next/image'
 import stars from '@/assets/stars.svg'
 import logoChi from '@/assets/logoChi.svg'
 import logoEng from '@/assets/logoEng.svg'
-import Bar from './item/bar'
-import Word from './item/word'
 
 export default function Footer() {
   const info = ['購物須知', '訂單疑問', '與我們聯繫', '隱私權使用聲明']
@@ -33,14 +31,18 @@ export default function Footer() {
                 if (i == len - 1) {
                   return (
                     <>
-                      <Word content={v} />
+                      <a href="#" className={styles.ahref}>
+                        {v}
+                      </a>
                     </>
                   )
                 }
                 return (
                   <>
-                    <Word content={v} />
-                    <Bar />
+                    <a href="#" className={styles.ahref}>
+                      {v}
+                    </a>
+                    <span> ｜ </span>
                   </>
                 )
               })}
