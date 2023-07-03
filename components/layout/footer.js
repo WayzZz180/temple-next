@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './footer.module.css'
 import Image from 'next/image'
+import Link from 'next/link'
 import stars from '@/assets/stars.svg'
 import logoChi from '@/assets/logoChi.svg'
 import logoEng from '@/assets/logoEng.svg'
@@ -15,12 +16,12 @@ export default function Footer() {
         <div className={`${styles.footer}`}>
           {/* logo */}
           <div className={`${styles.flex_col}`}>
-            <a href="#">
+            <Link href="#">
               <Image src={logoChi} width={85} alt="logo" />
-            </a>
-            <a href="#">
+            </Link>
+            <Link href="#">
               <Image src={logoEng} width={100} alt="logo" />
-            </a>
+            </Link>
           </div>
 
           {/* 第二排內容 */}
@@ -31,17 +32,17 @@ export default function Footer() {
                 if (i == len - 1) {
                   return (
                     <>
-                      <a href="#" className={styles.ahref}>
+                      <Link href="#" className={styles.ahref}>
                         {v}
-                      </a>
+                      </Link>
                     </>
                   )
                 }
                 return (
                   <>
-                    <a href="#" className={styles.ahref}>
+                    <Link href="#" className={styles.ahref}>
                       {v}
-                    </a>
+                    </Link>
                     <span> ｜ </span>
                   </>
                 )
