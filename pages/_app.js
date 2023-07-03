@@ -1,4 +1,4 @@
-// import '@/styles/globals.css'
+import '@/styles/globals.css'
 // import '@/styles/book-list.css'
 
 import { AuthProvider } from '@/hooks/use-auth'
