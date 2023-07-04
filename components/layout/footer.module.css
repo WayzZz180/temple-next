@@ -1,0 +1,32 @@
+.footer {
+    background-color: #C39A6B;
+    position: absolute;
+    left:0;
+    bottom: 0;
+    width: 100%;
+    font-weight: bold;
+    padding-top: 15px;
+}
+.flex_col{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10px;
+}
+.flex_row{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: 15px;
+    color:#241B15;
+}
+.h15px{
+    font-size: 15px;
+}
+.h12px{
+    font-size: 12px;
+}
+.ahref{
+    text-decoration: none;
+    color:#241B15;
+}
