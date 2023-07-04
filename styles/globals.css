@@ -1,57 +1,27 @@
+.btn{
+    margin-top: 20px;
+    color:#fff;
+    border-radius: 7px;
+    border:0;
+    box-sizing:border-box;
+    padding:15px 60px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn:hover{
+    border-radius: 0px;
+    transform: translateY(-2px);
+}
+
 .btn_b{
-    margin-top: 20px;
     background-color: #000;
-    color:#fff;
-    border-radius: 7px;
-    border:0;
-    box-sizing:border-box;
-    padding:15px 60px;
-    transition: all 0.3s ease-in-out;
 } 
-.btn_b:hover{
-    border-radius: 0px;
-transform: translateY(-2px);
-}
-  /*Check it out in light theme :) <3 */
 .btn_p{
-    margin-top: 20px;
     background-color: #E4007E;
-    color:#fff;
-    border-radius: 7px;
-    border:0;
-    box-sizing:border-box;
-    padding:15px 60px;
-    transition: all 0.3s ease-in-out;
 } 
-.btn_p:hover{
-    border-radius: 0px;
-transform: translateY(-2px);
-}
 .btn_g{
-    margin-top: 20px;
     background-color: #47B990;
-    color:#fff;
-    border-radius: 7px;
-    border:0;
-    box-sizing:border-box;
-    padding:15px 60px;
-    transition: all 0.3s ease-in-out;
 } 
-.btn_g:hover{
-    border-radius: 0px;
-transform: translateY(-2px);
-}
 .btn_y{
-    margin-top: 20px;
     background-color: #C39A6B;
-    color:#fff;
-    border-radius: 7px;
-    border:0;
-    box-sizing:border-box;
-    padding:15px 60px;
-    transition: all 0.3s ease-in-out;
 } 
-.btn_y:hover{
-    border-radius: 0px;
-transform: translateY(-2px);
-}
