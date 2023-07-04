@@ -1,27 +1,48 @@
-import React from 'react'
-// import styles from '@/styles/inputBox.module.css'
+import { useState } from 'react'
+import styles from '@/components/common/inputBox/inputBox.module.css'
 
-export default function InputBox() {
+function InputBox({ type = 'text', prompt = '', placeholder, onChange }) {
+  const [inputValue, setInputValue] = useState('')
+  const [isClicked, setIsClicked] = useState(false)
+
+  const handleChange = (event) => {
+    setInputValue(event.target.value)
+    if (onChange) {
+      onChange(event.target.value)
+      console.log(inputValue)
+    }
+  }
+
+  const handleClick = () => {
+    setIsClicked(true)
+  }
+
   return (
     <>
-      <div className="mb-3">
-        <label htmlFor="exampleFormControlInput1" className="form-label">
-          Email address
-        </label>
+      <div> {prompt}</div>
+      <div>
         <input
-          type="email"
-          className="form-control short_input"
-          id="exampleFormControlInput1"
-          placeholder="name@example.com"
+          type={type}
+          value={inputValue}
+          onChange={handleChange}
+          onClick={handleClick}
+          placeholder={placeholder}
+          // className={isClicked ? styles.clicked : ''}
+          // className="form-control"
         />
       </div>
-      <style jsx>
-        {`
-          .short_input {
-            width: 500px;
-          }
-        `}
-      </style>
     </>
   )
 }
+
+export default function InputBoxTest2() {
+  return (
+    <>
+      <InputBox prompt="name" type="text" placeholder="insert your name" />
+      <InputBox prompt="email" type="email" placeholder="insert your email" />
+    </>
+  )
+}
+
+//TODO
+//onClick 變色
