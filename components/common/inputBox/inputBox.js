@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '@/styles/inputBox.module.css'
+// import styles from '@/styles/inputBox.module.css'
 
 export default function InputBox() {
   return (
