@@ -1,4 +1,4 @@
-// import '@/styles/globals.css'
+import '@/styles/globals.css'
 import Layout from '@/components/layout/default-layout'
 
 import { AuthProvider } from '@/hooks/use-auth'
