@@ -32,9 +32,17 @@
     color: #666;
   }
   
-  .colored_line {
+  .colored_line_green {
     width: 139px;
     height: 8px;
     background-color: #47B990;
+    margin: auto;
+  }
+
+
+  .colored_line_red {
+    width: 139px;
+    height: 8px;
+    background-color: #E4007E;
     margin: auto;
   }

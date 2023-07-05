@@ -1,0 +1,13 @@
+.short-input
+{
+
+  width:30px
+}
+
+.clicked {
+    /* Your clicked input box styles */
+    border-color: blue;
+    box-shadow: 0 0 55px rgba(43, 183, 195, 0.5);
+  }
+
+  
