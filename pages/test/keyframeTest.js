@@ -1,3 +1,4 @@
+//keyframes應用(bounce)
 import { css, keyframes } from '@emotion/css'
 
 const bounce = keyframes({

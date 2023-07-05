@@ -1,8 +1,9 @@
+//emotion動畫
 import styled from '@emotion/styled'
 import stars from '@/assets/stars.svg'
 
-const Flower = styled.img`
-  @keyframes FlowerTurn {
+const Stars = styled.img`
+  @keyframes StarsTurn {
     0% {
       transform: rotateY(0deg);
     }
@@ -13,17 +14,17 @@ const Flower = styled.img`
       transform: rotateY(720deg);
     }
   }
-  animation: FlowerTurn 8s ease infinite;
+  animation: StarsTurn 8s ease infinite;
 `
 export default function EmotionTest2() {
   return (
     <>
       {/* assets吃不到 */}
-      {/* <Flower src="../../assets/stars.svg" style={{ width: '20%' }} /> */}
+      {/* <Stars src="../../assets/stars.svg" style={{ width: '20%' }} /> */}
       {/* public相對路徑 */}
-      {/* <Flower src="../../stars.svg" style={{ width: '20%' }} /> */}
+      {/* <Stars src="../../stars.svg" style={{ width: '20%' }} /> */}
       {/* .src很重要 */}
-      <Flower src={stars.src} style={{ width: '20%' }} />
+      <Stars src={stars.src} style={{ width: '20%' }} />
     </>
   )
 }
