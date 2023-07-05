@@ -31,20 +31,20 @@ export default function Footer() {
               {info.map((v, i) => {
                 if (i == len - 1) {
                   return (
-                    <>
+                    <React.Fragment key={i}>
                       <Link href="#" className={styles.ahref}>
                         {v}
                       </Link>
-                    </>
+                    </React.Fragment>
                   )
                 }
                 return (
-                  <>
+                  <React.Fragment key={i}>
                     <Link href="#" className={styles.ahref}>
                       {v}
                     </Link>
                     <span> ｜ </span>
-                  </>
+                  </React.Fragment>
                 )
               })}
             </span>

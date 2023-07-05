@@ -1,3 +1,5 @@
+@import '../_variables.module.scss';
+
 .btn{
     margin-top: 20px;
     color:#fff;
@@ -12,16 +14,16 @@
     border-radius: 0px;
     transform: translateY(-2px);
 }
-
-/* .btn_b{
-    background-color: #000;
-} 
+.btn_b{
+    background-color: $black;
+}
+ 
 .btn_p{
-    background-color: #E4007E;
-} 
+    background-color: $hot-pink;
+}
 .btn_g{
-    background-color: #47B990;
-} 
+    background-color: $green;
+}
 .btn_y{
-    background-color: #C39A6B;
-}  */
+    background-color: $brown;
+}

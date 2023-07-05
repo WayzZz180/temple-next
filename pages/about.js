@@ -1,5 +1,6 @@
 import React from 'react'
-import Button from '@/components/common/button/index'
+import Button from '@/components/common/button'
+
 
 export default function About() {
   return (
