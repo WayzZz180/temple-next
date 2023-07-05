@@ -1,9 +1,14 @@
 import { useState } from 'react'
 import styles from '@/components/common/inputBox/inputBox.module.css'
 
-function InputBox({ type = 'text', prompt = '', placeholder, onChange }) {
+export default function InputBox({
+  type = 'text',
+  prompt = '',
+  placeholder,
+  onChange,
+}) {
   const [inputValue, setInputValue] = useState('')
-  const [isClicked, setIsClicked] = useState(false)
+  const [isFocus, setIsFocus] = useState(false)
 
   const handleChange = (event) => {
     setInputValue(event.target.value)
@@ -13,8 +18,8 @@ function InputBox({ type = 'text', prompt = '', placeholder, onChange }) {
     }
   }
 
-  const handleClick = () => {
-    setIsClicked(true)
+  const handleFocus = () => {
+    setIsFocus(true)
   }
 
   return (
@@ -25,21 +30,12 @@ function InputBox({ type = 'text', prompt = '', placeholder, onChange }) {
           type={type}
           value={inputValue}
           onChange={handleChange}
-          onClick={handleClick}
+          onFocus={handleFocus}
           placeholder={placeholder}
-          // className={isClicked ? styles.clicked : ''}
+          className={isFocus ? styles.focus : ''}
           // className="form-control"
         />
       </div>
-    </>
-  )
-}
-
-export default function InputBoxTest2() {
-  return (
-    <>
-      <InputBox prompt="name" type="text" placeholder="insert your name" />
-      <InputBox prompt="email" type="email" placeholder="insert your email" />
     </>
   )
 }

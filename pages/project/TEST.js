@@ -1,13 +1,23 @@
-import TitleTest1 from '@/components/common/title/title'
+import Title from '@/components/common/title/title'
 import styles from '@/pages/project/TEST.module.css'
-import InputBoxTest2 from '@/components/common/inputBox/inputBox.js'
+import InputBox from '@/components/common/inputBox/inputBox.js'
 
-export default function TEST3() {
+export default function TEST0() {
   return (
     <>
-      <TitleTest1 />
+      <Title
+        CHNtext="登入會員"
+        ENGtext="SIGN UP"
+        colored_line={styles.colored_line_green}
+      />
+      <Title
+        CHNtext="步驟"
+        ENGtext="STEPS"
+        colored_line={styles.colored_line_red}
+      />
 
-      <InputBoxTest2 />
+      <InputBox prompt="name" type="text" placeholder="insert your name" />
+      <InputBox prompt="email" type="email" placeholder="insert your email" />
     </>
   )
 }
