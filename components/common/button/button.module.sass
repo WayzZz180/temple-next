@@ -1,3 +1,4 @@
+@import '@/styles/mixins/_mixin'
 @import '@/styles/_variables.module.sass'
 
 .btn
@@ -13,15 +14,8 @@
     border-radius: 0px
     transform: translateY(-2px)
 
-.btn_b
-    background-color: $black
- 
-.btn_p
-    background-color: $hot_pink
- 
-.btn_g
-    background-color: $green
- 
-.btn_y
-    background-color: $brown
- 
+$btn_style: "btn_b","btn_p","btn_g","btn_y"
+$btn_color: $black,$hot_pink, $green,$brown
+
+@for $i from 1 through 4
+    @include bgc(nth($btn_style,$i),nth($btn_color,$i))

@@ -1,4 +1,4 @@
-import '@/styles/globals.css'
+import '@/styles/globals.sass'
 import { AuthProvider } from '@/hooks/use-auth'
 import Layout from '@/components/layout/default-layout'
 export default function MyApp({ Component, pageProps }) {
