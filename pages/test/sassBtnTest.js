@@ -11,7 +11,7 @@
 // }
 import Button from '@/components/common/button/test'
 
-export default function Test() {
+export default function SassTest() {
   return (
     <>
       <Button text="TRY1" btnColor="green" />
