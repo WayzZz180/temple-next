@@ -1,4 +1,4 @@
-@import '../_variables.module.scss';
+@use '../_variables.module.scss' as *;
 
 .btn{
     margin-top: 20px;
@@ -14,6 +14,7 @@
     border-radius: 0px;
     transform: translateY(-2px);
 }
+
 .btn_b{
     background-color: $black;
 }

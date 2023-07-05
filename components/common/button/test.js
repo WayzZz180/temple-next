@@ -1,5 +1,5 @@
 // import '@/styles/mixins/button.module.sass'
-import '@/styles/mixins/button.module.scss'
+import '@/styles/mixins/button.module.sass'
 import variables from '@/styles/_variables.module.scss'
 
 export default function Button({ text = 'content', btnColor = 'black' }) {

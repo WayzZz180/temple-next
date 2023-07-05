@@ -1,7 +1,5 @@
 import React from 'react'
 import Button from '@/components/common/button/index'
-import variables from '@/styles/_variables.module.scss'
-import '@/styles/mixins/button.module.sass'
 
 export default function About() {
   return (

@@ -12,7 +12,7 @@
     border-radius: 0px;
     transform: translateY(-2px);
 }
-
+/* 
 .btn_b{
     background-color: #000;
 } 
@@ -24,4 +24,7 @@
 } 
 .btn_y{
     background-color: #C39A6B;
-} 
+}  */
+body{
+    background-color: #EEECE0;
+}

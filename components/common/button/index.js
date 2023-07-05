@@ -1,3 +1,5 @@
+import '@/styles/mixins/button.module.sass'
+
 export default function Button({ text = 'text', btnColor = 'btn' }) {
   return (
     <>

@@ -15,7 +15,7 @@ export default function SassTest() {
   return (
     <>
       <Button text="TRY1" btnColor="green" />
-      <Button text="TRY2" btnColor="hot-pink" />
+      <Button text="TRY2" btnColor="hot_pink" />
     </>
   )
 }

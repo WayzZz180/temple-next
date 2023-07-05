@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 import stars from '@/assets/stars.svg'
 
-const Flower = styled.img`
-  @keyframes FlowerTurn {
+const Stars = styled.img`
+  @keyframes StarsTurn {
     0% {
       transform: rotateY(0deg);
     }
@@ -13,13 +13,8 @@ const Flower = styled.img`
       transform: rotateY(720deg);
     }
   }
-  animation: FlowerTurn 8s ease infinite;
+  animation: StarsTurn 8s ease infinite;
 `
-export default function Stars() {
-  return (
-    <>
-      <Flower src="../../stars.svg" style={{ width: '20%' }} />
-      <Flower src={stars.src} style={{ width: '20%' }} />
-    </>
-  )
+export default function StarsMove() {
+  return <Stars src={stars.src} style={{ width: '150' }} />
 }

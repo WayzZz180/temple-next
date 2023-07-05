@@ -1,36 +1,34 @@
-import { css, keyframes } from '@emotion/react'
+import { css, keyframes } from '@emotion/css'
 
-export default function KeyframeTest() {
-  const bounce = keyframes`
-      from, 20%, 53%, 80%, to {
-        transform: translate3d(0,0,0);
-      }
-    
-      40%, 43% {
-        transform: translate3d(0, -30px, 0);
-      }
-    
-      70% {
-        transform: translate3d(0, -15px, 0);
-      }
-    
-      90% {
-        transform: translate3d(0,-4px,0);
-      }
-    `
+const bounce = keyframes({
+  'from, 20%, 53%, 80%, to': {
+    transform: 'translate3d(0,0,0)',
+  },
+  '40%, 43%': {
+    transform: 'translate3d(0, -30px, 0)',
+  },
+  '70%': {
+    transform: 'translate3d(0, -15px, 0)',
+  },
+  '90%': {
+    transform: 'translate3d(0, -4px, 0)',
+  },
+})
+
+export default function CheckOut() {
   return (
-    <>
-      <div className="test">some bouncing text!</div>
-      <style>
-        {`
-        .test{
-          animation: ${bounce} 1s ease infinite;
-          width:500px;
-          height:500px; 
-          color:green; 
-        }
-        `}
-      </style>
-    </>
+    <div
+      className={css({
+        width: 200,
+        height: 200,
+        position: 'relative',
+        top: 100,
+        borderRadius: '50%',
+        animation: `${bounce} 1s ease infinite`,
+        transformOrigin: 'center bottom',
+      })}
+    >
+      some bouncing text!
+    </div>
   )
 }
