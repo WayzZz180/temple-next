@@ -25,7 +25,7 @@ export default function Footer() {
           </div>
 
           {/* 第二排內容 */}
-          <div className={`${styles.flex_row} ${styles.h15px}`}>
+          <div className={`${styles.flex_row} h15px`}>
             <Image src={stars} width={150} alt="stars" />
             <span>
               {info.map((v, i) => {
@@ -52,7 +52,7 @@ export default function Footer() {
           </div>
 
           {/* copyright */}
-          <div className={`${styles.flex_row} ${styles.h12px}`}>
+          <div className={`${styles.flex_row} h12px`}>
             copyright © 2023 Temple Round Jing Co.,Ltd
           </div>
         </div>

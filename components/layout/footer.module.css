@@ -1,6 +1,6 @@
 .footer {
     background-color: #C39A6B;
-    position: absolute;
+    position: relative;
     left:0;
     bottom: 0;
     width: 100%;
@@ -20,12 +20,7 @@
     padding-bottom: 25px;
     color:#241B15;
 }
-.h15px{
-    font-size: 15px;
-}
-.h12px{
-    font-size: 12px;
-}
+
 .ahref{
     text-decoration: none;
     color:#241B15;
