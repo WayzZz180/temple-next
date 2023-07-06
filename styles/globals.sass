@@ -18,14 +18,50 @@ $font-weight:"Normal","Bold","Bolder","Lighter"
 @for $i from 1 through 4
     @include fwn(nth($font-weight,$i))
     
-// p1px ~ p100px 
-@for $i from 1 through 100
-    @include pnpx($i)
-
-//h1px ~ h2000px
+// h1px ~ h2000px
 @for $i from 1 through 2000
     @include hnpx($i)
 
-//w1px ~ w2000px
+// w1px ~ w2000px
 @for $i from 1 through 2000
     @include wnpx($i)
+
+// p1px ~ p1000px 
+@for $i from 1 through 1000
+    @include pnpx($i)
+
+// m1px ~ m1000px 
+@for $i from 1 through 1000
+    @include mnpx($i)
+
+// pt1px ~ pt1000px 
+@for $i from 1 through 1000
+    @include ptnpx($i)
+
+// mt1px ~ mt1000px 
+@for $i from 1 through 1000
+    @include mtnpx($i)
+
+// pb1px ~ pb1000px 
+@for $i from 1 through 1000
+    @include pbnpx($i)
+
+// mb1px ~ mb000px 
+@for $i from 1 through 1000
+    @include mbnpx($i)
+
+// ps1px ~ ps1000px 
+@for $i from 1 through 1000
+    @include psnpx($i)
+
+// ms1px ~ ms1000px 
+@for $i from 1 through 1000
+    @include msnpx($i)
+
+// pe1px ~ pe1000px 
+@for $i from 1 through 1000
+    @include penpx($i)
+
+// me1px ~ me1000px 
+@for $i from 1 through 1000
+    @include menpx($i)
