@@ -22,7 +22,7 @@ export default function MarqueeCard({ name = 'name', price = 100 }) {
               className={styles.shadow}
             ></img> */}
           </div>
-          <div className={`${styles.word} fs20px fwBolder`}>{name}</div>
+          <div className={`p10px fs20px fwBolder`}>{name}</div>
           <div className={'fs16px fwBolder'}>${price}</div>
         </div>
       </div>

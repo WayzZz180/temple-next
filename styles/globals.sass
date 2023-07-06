@@ -16,3 +16,14 @@ $font-weight:"Normal","Bold","Bolder","Lighter"
 @for $i from 1 through 4
     @include fwn(nth($font-weight,$i))
     
+// p1px ~ p100px 
+@for $i from 1 through 100
+    @include pnpx($i)
+
+//h1px ~ h2000px
+@for $i from 1 through 2000
+    @include hnpx($i)
+
+//w1px ~ w2000px
+@for $i from 1 through 2000
+    @include wnpx($i)
