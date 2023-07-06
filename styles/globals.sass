@@ -1,0 +1,31 @@
+@import '@/styles/mixins/_mixin'
+@import '@/styles/_variables.module.sass'
+
+html 
+    width: 100%
+body
+    background-color: $bgColor
+    font-family: 'Noto Sans TC', sans-serif
+    color: $fontColor
+
+// fs12px ~ fs30px 
+@for $i from 12 through 30
+    @include fsnpx($i)
+
+$font-weight:"Normal","Bold","Bolder","Lighter"
+
+// fwNormal, fwBold, fwBolder, fwLighter
+@for $i from 1 through 4
+    @include fwn(nth($font-weight,$i))
+    
+// p1px ~ p100px 
+@for $i from 1 through 100
+    @include pnpx($i)
+
+//h1px ~ h2000px
+@for $i from 1 through 2000
+    @include hnpx($i)
+
+//w1px ~ w2000px
+@for $i from 1 through 2000
+    @include wnpx($i)
