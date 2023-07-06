@@ -1,5 +1,6 @@
 import React from 'react'
-import Button from '@/components/common/button/index'
+import Button from '@/components/common/button'
+// import DefaultLayout from '@/components/layout/default-layout'
 
 export default function About() {
   return (
@@ -9,6 +10,7 @@ export default function About() {
       <Button text="選購" btnColor="btn_b" />
       <Button text="媽祖" btnColor="btn_g" />
       <Button text="刪除" btnColor="btn_y" />
+      {/* <DefaultLayout /> */}
     </>
   )
 }

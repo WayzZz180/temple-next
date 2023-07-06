@@ -1,0 +1,134 @@
+@import '@/styles/_variables.module.sass'
+
+// body
+
+
+.head
+  margin-top:130px
+  position: relative
+  background-color: $brown
+  height:100%
+
+.flex_row
+    width:100%
+    display: flex
+    justify-content: center
+    align-items: flex-end
+    position: absolute
+    top:130px
+
+.nav
+    width: 100%
+    display: flex
+    justify-content: center
+    align-items: flex-end
+    bottom: 0
+//     display: flex
+//     justify-content: center
+    position: absolute
+    overflow: hidden
+
+.cloud
+   padding-top: 250px
+   display: flex
+   justify-content: center
+   align-items: center
+
+ul.drop_down_menu 
+  margin: 0
+  padding: 0
+  list-style: none
+  display: inline-block
+  font-size: 13px
+
+
+ul.drop_down_menu li 
+  position: relative
+  white-space: nowrap
+
+
+ul.drop_down_menu>li:last-child 
+  border-right: none
+
+
+ul.drop_down_menu>li 
+  float: left
+  /* 只有第一層是靠左對齊*/
+
+ul.drop_down_menu a 
+  color: #000
+  display: block
+  padding: 0 30px
+  text-decoration: none
+  line-height: 35px
+
+ul.drop_down_menu ul li
+  background: transparent
+  border: none
+  padding: 3px 2px
+  color: #000
+  text-transform: uppercase
+  position: relative
+  transition: .2s ease
+
+
+ul.drop_down_menu ul li::before 
+  content: ''
+  position: absolute
+  left: 23px
+  bottom: 0
+  height: 3px
+  width: 0
+  background-color: #14d2bf
+  transition: .2s ease
+
+
+ul.drop_down_menu ul li:hover 
+  transition-delay: .2s
+
+
+ul.drop_down_menu ul li:hover::before 
+  width: 60%
+
+
+ul.drop_down_menu ul li::after 
+  content: ''
+  position: absolute
+  left: 0
+  bottom: 0
+  height: 0
+  width: 60%
+  background-color: #14d2bf
+  transition: .2s ease
+  z-index: -1
+
+
+ul.drop_down_menu ul 
+  margin: 0
+  padding: 0
+  list-style: none
+  background-color: #ffffff
+  position: absolute
+  z-index: 99
+  left: -1px
+  top: 100%
+  min-width: 80px
+
+
+ul.drop_down_menu ul 
+  /*隱藏次選單*/
+  display: none
+
+ul.drop_down_menu li:hover>ul 
+  /* 滑鼠滑入展開次選單*/
+  display: block
+
+.title
+  color: #F4E62A
+  padding: 0px 30px 0px
+
+.title2
+  color: #000
+  display: block
+  padding: 0px 30px 15px
+  text-decoration: none
