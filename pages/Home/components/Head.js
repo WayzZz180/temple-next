@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './head.module.sass'
+import styles from '../head.module.sass'
 import Image from 'next/image'
 import foo_dog_left from '@/assets/foo_dog_left.svg'
 import foo_dog_right from '@/assets/foo_dog_right.svg'
