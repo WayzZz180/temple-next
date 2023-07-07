@@ -1,6 +1,6 @@
-import Title from '@/components/common/title/title'
+import Title from '@/components/common/title'
 import styles from '@/pages/project/TEST.module.css'
-import InputBox from '@/components/common/inputBox/inputBox.js'
+import InputBox from '@/components/common/inputBox/index.js'
 
 export default function TEST0() {
   return (
