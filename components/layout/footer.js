@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './footer.module.css'
+import styles from './footer.module.sass'
 import Image from 'next/image'
 import Link from 'next/link'
 import stars from '@/assets/stars.svg'
@@ -13,7 +13,7 @@ export default function Footer() {
   return (
     <>
       <footer>
-        <div className={`${styles.footer}`}>
+        <div className={`${styles.footer} fwBold`}>
           {/* logo */}
           <div className={`${styles.flex_col}`}>
             <Link href="#">
@@ -25,7 +25,7 @@ export default function Footer() {
           </div>
 
           {/* 第二排內容 */}
-          <div className={`${styles.flex_row} ${styles.h15px}`}>
+          <div className={`${styles.flex_row} fs15px fwBolder`}>
             <Image src={stars} width={150} alt="stars" />
             <span>
               {info.map((v, i) => {
@@ -52,7 +52,7 @@ export default function Footer() {
           </div>
 
           {/* copyright */}
-          <div className={`${styles.flex_row} ${styles.h12px}`}>
+          <div className={`${styles.flex_row} fs12px`}>
             copyright © 2023 Temple Round Jing Co.,Ltd
           </div>
         </div>
