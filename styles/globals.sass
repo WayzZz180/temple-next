@@ -7,7 +7,7 @@ body
     background-color: $bgColor
     font-family: 'Noto Sans TC', sans-serif
     color: $fontColor
-
+    overflow-x: hidden
 // fs12px ~ fs30px 
 @for $i from 12 through 30
     @include fsnpx($i)
@@ -65,3 +65,18 @@ $font-weight:"Normal","Bold","Bolder","Lighter"
 // me1px ~ me1000px 
 @for $i from 1 through 1000
     @include menpx($i)
+
+::-webkit-scrollbar
+  width: 15px
+  height: 10px
+
+::-webkit-scrollbar-track
+  background-color: white
+
+
+::-webkit-scrollbar-thumb
+    // #BB952A #CDAE50 #FDE182 generate
+    background-image: linear-gradient(to top, #bb952a, #be9a32, #c19e39, #c5a340, #c8a847, #ceae4e, #d3b555, #d9bb5c, #e2c465, #ebce6f, #f4d778, #fde182)
+
+    height:20px
+

@@ -28,25 +28,14 @@ export default function Footer() {
           <div className={`${styles.flex_row} fs15px fwBolder`}>
             <Image src={stars} width={150} alt="stars" />
             <span>
-              {info.map((v, i) => {
-                if (i == len - 1) {
-                  return (
-                    <React.Fragment key={i}>
-                      <Link href="#" className={styles.ahref}>
-                        {v}
-                      </Link>
-                    </React.Fragment>
-                  )
-                }
-                return (
-                  <React.Fragment key={i}>
-                    <Link href="#" className={styles.ahref}>
-                      {v}
-                    </Link>
-                    <span> ｜ </span>
-                  </React.Fragment>
-                )
-              })}
+              {info.map((v, i) => (
+                <React.Fragment key={i}>
+                  <Link href="#" className={styles.ahref}>
+                    {v}
+                  </Link>
+                  {i !== len - 1 && <span> ｜ </span>}
+                </React.Fragment>
+              ))}
             </span>
             <Image src={stars} width={150} alt="stars" />
           </div>

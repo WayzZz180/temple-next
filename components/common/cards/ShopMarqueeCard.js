@@ -6,13 +6,13 @@ import styles from './ShopMarqueeCard.module.sass'
 export default function MarqueeCard({ name = 'name', price = 100 }) {
   return (
     <>
-      <div className={styles.container}>
+      <div className="m10px">
         <div className={styles.flex}>
-          <div>
+          <div className={`${styles.container} ${styles.flex}`}>
             <Image
               src={chips}
               alt=""
-              width="200"
+              width="180"
               className={styles.shadow}
             ></Image>
             {/* <img
@@ -22,8 +22,8 @@ export default function MarqueeCard({ name = 'name', price = 100 }) {
               className={styles.shadow}
             ></img> */}
           </div>
-          <div className={`p10px fs20px fwBolder`}>{name}</div>
-          <div className={'fs16px fwBolder'}>${price}</div>
+          <div className={`p10px mt50px fs20px fwBolder`}>{name}</div>
+          <div className={'pb10px fs16px fwBolder'}>${price}</div>
         </div>
       </div>
     </>
