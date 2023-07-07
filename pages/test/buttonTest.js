@@ -1,5 +1,7 @@
 import React from 'react'
 import Button from '@/components/common/button'
+import Title from '@/components/common/title'
+import HomeGod from '@/components/common/cards/HomeGod'
 // import DefaultLayout from '@/components/layout/default-layout'
 
 export default function About() {
@@ -9,6 +11,12 @@ export default function About() {
       <Button text="選購" btnColor="btn_b" />
       <Button text="媽祖" btnColor="btn_g" />
       <Button text="刪除" btnColor="btn_y" />
+      <Title
+        text="供品套組精選"
+        text2="OFFERING SELECTION SET"
+        lineColor="line_g"
+      />
+      <HomeGod />
     </>
   )
 }
