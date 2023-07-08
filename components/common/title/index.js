@@ -1,6 +1,6 @@
 import styles from './title.module.sass'
 
-export default function Button({
+export default function Title({
   text = 'text',
   text2 = 'text',
   lineColor = 'line_p',
