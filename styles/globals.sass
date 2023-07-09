@@ -7,7 +7,9 @@ body
     background-color: $bgColor
     font-family: 'Noto Sans TC', sans-serif
     color: $fontColor
+    scroll-behavior: smooth
     overflow-x: hidden
+
 // fs12px ~ fs30px 
 @for $i from 12 through 30
     @include fsnpx($i)
@@ -80,3 +82,20 @@ $font-weight:"Normal","Bold","Bolder","Lighter"
 
     height:20px
 
+    
+.shadow
+    filter: drop-shadow(0.2rem 0.2rem 0.25rem $shadow)
+    
+.border
+    border:1px red solid
+
+.nowrap
+    display: flex
+    justify-content: center
+    align-items: center
+
+.shopContainer
+    width:80%
+    margin-left: auto
+    margin-right: auto
+  

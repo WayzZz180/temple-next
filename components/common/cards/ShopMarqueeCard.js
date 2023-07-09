@@ -9,12 +9,7 @@ export default function MarqueeCard({ name = 'name', price = 100 }) {
       <div className="m10px">
         <div className={styles.flex}>
           <div className={`${styles.container} ${styles.flex}`}>
-            <Image
-              src={chips}
-              alt=""
-              width="180"
-              className={styles.shadow}
-            ></Image>
+            <Image src={chips} alt="" width="180" className="shadow"></Image>
             {/* <img
               src="../../../chips (4).png"
               alt=""
