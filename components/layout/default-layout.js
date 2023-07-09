@@ -1,4 +1,4 @@
-import Header from './header'
+import Header from './header/index'
 import Navbar from './navbar'
 import Footer from './footer'
 

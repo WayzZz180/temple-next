@@ -1,5 +1,46 @@
 @import '@/styles/_variables.module.sass'
 
+.head
+    background-color: $brown
+    position: relative
+    left: 0
+    top: 0
+    width: 100%
+    font-weight: bold
+    padding-top: 28px
+
+.flex_row2
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: space-around
+    padding-bottom: 25px
+    color: #241B15
+
+.flex_col2
+    display: flex
+    flex-direction: column
+    align-items: center
+
+.h15px
+    font-size: 15px
+
+.nav
+    width: 100%
+    bottom: 0
+    display: flex
+    justify-content: center
+    position: absolute
+    overflow: hidden
+
+.cloud
+    padding-top: 130px
+    display: flex
+    justify-content: center
+    align-items: center
+
+.dog
+
 ul.drop_down_menu
     margin: 0
     padding: 0
@@ -16,7 +57,6 @@ ul.drop_down_menu>li:last-child
 
 ul.drop_down_menu>li 
     float: left
-  /* 只有第一層是靠左對齊*/
 
 ul.drop_down_menu a
     color: #000
@@ -73,11 +113,9 @@ ul.drop_down_menu ul
     min-width: 80px
 
 ul.drop_down_menu ul
-  /*隱藏次選單*/
     display: none
 
 ul.drop_down_menu li:hover>ul
-  /* 滑鼠滑入展開次選單*/
     display: block
 
 .title
