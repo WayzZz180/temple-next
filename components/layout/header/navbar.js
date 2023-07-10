@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './header.module.sass'
 import NavbarItem from './navbaritem'
 
-export default function NavbarLeft(info="left") {
+export default function Navbar( {info = "left"}) {
     const info_left = [
         {
           title: '01',
@@ -71,7 +71,7 @@ export default function NavbarLeft(info="left") {
         },
     ]
     
-    const data = ({info} === "left" ? info_left : info_right)
+    const data = (info === "left" ? info_left : info_right)
   return (
       <ul className={`${styles.drop_down_menu}`}>
         {data.map((item, index) => (

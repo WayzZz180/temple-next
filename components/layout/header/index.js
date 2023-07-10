@@ -5,7 +5,7 @@ import Navbar from './navbar'
 import Logo from './logo'
 import headerBg from '@/assets/header.svg'
 
-export default function Index() {
+export default function Header() {
   return (
       <header>
           <div className={`${styles.flex_row} ${styles.head} pt20px`}>
