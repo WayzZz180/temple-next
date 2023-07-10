@@ -1,27 +1,20 @@
 import React from 'react'
+import Image from 'next/image'
 import styles from './header.module.sass'
-import NavbarLeft from './navbarleft'
-import NavbarRight from './navbarright'
+import Navbar from './navbar'
 import Logo from './logo'
+import headerBg from '@/assets/header.svg'
 
 export default function Index() {
   return (
-    <>
-      <header className={`${styles.header_container}`}>
-        <div>
-          {/* navbar left */}
-          <div className={`${styles.flex_row2} ${styles.h15px} ${styles.head}`}>
-            <NavbarLeft />
-
-            {/* logo */}
+      <header>
+          <div className={`${styles.flex_row} ${styles.head} pt20px`}>
+            <Navbar info="left"/>
             <Logo />
-
-            {/* navbar right*/}
-            <NavbarRight />
+            <Navbar info="right"/>
           </div>
-          {/* <Image src={Header_Tri} alt="tri" /> */}
-        </div>
+            <Image src={headerBg} alt='header' className={`${styles.headerBg}`}></Image>
+          <div className={`${styles.box}`}></div>
       </header>
-    </>
   )
 }
