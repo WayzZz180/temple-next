@@ -36,14 +36,14 @@ export default function Shop() {
   return (
     <Container className={'shopContainer'}>
       {/* 類別 */}
-      <Row className="nowrap mt100px mb100px fwBold fs28px">
+      <Row className="nowrap mt100px mb30px fwBold fs28px">
         <Col>咱有的物件</Col>
       </Row>
-      <Row className={`nowrap fwBold fs24px mb100px`}>
+      <Row className={`nowrap fwBold fs24px mb30px`}>
         {data.map((v, i) => {
           return (
-            <Col key={i} className={`${styles.relative} m50px`}>
-              <Link href="#" className={`${styles.category} p30px`}>
+            <Col key={i} className={`m30px`}>
+              <Link href="#" className={`${styles.category} p15px`}>
                 {v.text}
               </Link>
             </Col>
