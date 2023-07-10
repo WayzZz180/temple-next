@@ -5,10 +5,10 @@ import Button from '@/components/common/button'
 export default function About() {
   return (
     <>
-      <Button text="來去報名" btnColor="btn_p" />
-      <Button text="選購" btnColor="btn_b" />
-      <Button text="媽祖" btnColor="btn_g" />
-      <Button text="刪除" btnColor="btn_y" />
+      <Button text="來去報名" btnColor="hot_pink" />
+      <Button text="選購" btnColor="green" />
+      <Button text="媽祖" btnColor="black" />
+      <Button text="刪除" btnColor="brown" />
     </>
   )
 }

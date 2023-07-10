@@ -1,0 +1,22 @@
+@import '@/styles/_variables.module.sass'
+
+.category
+    width: 100%
+    color: $fontColor
+    display: block
+    text-decoration: none
+    position: relative
+    box-sizing: border-box
+
+.category::after
+    content: ""
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 0
+    height: 3px
+    background-color: $deep_black
+    transition: width 1s ease-out
+
+.category:hover::after
+    width: 100%

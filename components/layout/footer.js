@@ -11,52 +11,39 @@ export default function Footer() {
   const len = info.length
 
   return (
-    <>
-      <footer>
-        <div className={`${styles.footer} fwBold`}>
-          {/* logo */}
-          <div className={`${styles.flex_col}`}>
-            <Link href="#">
-              <Image src={logoChi} width={85} alt="logo" />
-            </Link>
-            <Link href="#">
-              <Image src={logoEng} width={100} alt="logo" />
-            </Link>
-          </div>
-
-          {/* 第二排內容 */}
-          <div className={`${styles.flex_row} fs15px fwBolder`}>
-            <Image src={stars} width={150} alt="stars" />
-            <span>
-              {info.map((v, i) => {
-                if (i == len - 1) {
-                  return (
-                    <React.Fragment key={i}>
-                      <Link href="#" className={styles.ahref}>
-                        {v}
-                      </Link>
-                    </React.Fragment>
-                  )
-                }
-                return (
-                  <React.Fragment key={i}>
-                    <Link href="#" className={styles.ahref}>
-                      {v}
-                    </Link>
-                    <span> ｜ </span>
-                  </React.Fragment>
-                )
-              })}
-            </span>
-            <Image src={stars} width={150} alt="stars" />
-          </div>
-
-          {/* copyright */}
-          <div className={`${styles.flex_row} fs12px`}>
-            copyright © 2023 Temple Round Jing Co.,Ltd
-          </div>
+    <footer className="mt100px">
+      <div className={`${styles.footer} wBold`}>
+        {/* logo */}
+        <div className={`${styles.flex_col}`}>
+          <Link href="#">
+            <Image src={logoChi} width={85} alt="logo" />
+          </Link>
+          <Link href="#">
+            <Image src={logoEng} width={100} alt="logo" />
+          </Link>
         </div>
-      </footer>
-    </>
+
+        {/* 第二排內容 */}
+        <div className={`${styles.flex_row} fs15px fwBolder`}>
+          <Image src={stars} width={150} alt="stars" />
+          <span>
+            {info.map((v, i) => (
+              <React.Fragment key={i}>
+                <Link href="#" className={styles.ahref}>
+                  {v}
+                </Link>
+                {i !== len - 1 && <span> ｜ </span>}
+              </React.Fragment>
+            ))}
+          </span>
+          <Image src={stars} width={150} alt="stars" />
+        </div>
+
+        {/* copyright */}
+        <div className={`${styles.flex_row} fs12px`}>
+          copyright © 2023 Temple Round Jing Co.,Ltd
+        </div>
+      </div>
+    </footer>
   )
 }

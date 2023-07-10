@@ -13,9 +13,3 @@
 .btn:hover
     border-radius: 0px
     transform: translateY(-2px)
-
-$btn_style: "btn_b","btn_p","btn_g","btn_y"
-$btn_color: $black,$hot_pink, $green,$brown
-
-@for $i from 1 through 4
-    @include bgc(nth($btn_style,$i),nth($btn_color,$i))
