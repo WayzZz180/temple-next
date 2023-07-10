@@ -1,6 +1,7 @@
 import React from 'react'
 import InputBox from '@/components/common/inputBox/index.js'
 import Title from '@/components/common/title/index.js'
+import BasicExample from '@/components/common/inputBox/123'
 
 export default function WayzTEST() {
   return (
@@ -16,6 +17,7 @@ export default function WayzTEST() {
         <InputBox prompt="123" type="email" placeholder="請輸入..." onChange />
         <Title CHNtext="中文" ENGtext="ENG" colored_line_blue />
         <Title CHNtext="中文" ENGtext="ENG" colored_line_blue />
+        <BasicExample />
       </div>
     </>
   )
