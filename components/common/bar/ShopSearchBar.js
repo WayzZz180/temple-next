@@ -15,8 +15,8 @@ export default function ShopSearchBar() {
 
   return (
     <div className={`${styles.container}`}>
-      <div className={`${styles.searchIcon} p5px`}>
-        <Image src={search} alt="search" width={30} />
+      <div className={`${styles.searchIcon} ps5px pe5px`}>
+        <Image src={search} alt="search" width={25} />
       </div>
       <input
         type="text"
