@@ -1,7 +1,8 @@
 import React from 'react'
-import Button from '@/components/common/button'
+import Button from 'react-bootstrap/Button'
 import Title from '@/components/common/title'
 import HomeGod from '@/components/common/cards/HomeGod'
+import HomeCarousel from '@/components/common/carousel/HomeCarousels'
 // import DefaultLayout from '@/components/layout/default-layout'
 
 export default function About() {
@@ -17,6 +18,7 @@ export default function About() {
         lineColor="line_g"
       />
       <HomeGod />
+      <HomeCarousel />
     </>
   )
 }

@@ -1,6 +1,7 @@
 @import '@/styles/_variables.module.sass'
 
 .background
+  top:-1px
   position: relative
   background-color: $brown
   z-index: -2
@@ -15,7 +16,7 @@
     display: flex
     justify-content: center
     align-items: flex-end
-    bottom: 0px
+    bottom: -2px
     position: absolute
     overflow: hidden
     z-index: 3
@@ -30,6 +31,39 @@
     position: absolute
     left: 445px
     bottom:14px
+
+.lighting
+    position: absolute
+    left: 600px
+    bottom:250px
+    animation-name: light1
+    animation-duration: 1s      
+    animation-iteration-count: infinite 
+    animation-timing-function: ease 
+
+.light_div
+    transform: rotate(-35deg)
+    position: absolute
+    left: 590px
+    bottom:225px
+
+.lighting2
+    animation-name: light1
+    animation-duration: 1.5s      
+    animation-iteration-count: infinite 
+    animation-timing-function: ease 
+
+@keyframes light1
+    100%
+      transform: translate(-30%, -30%)translate(0, 0)
+
+    @for $i from 2 through 4
+      #{$i * 50%} 
+        @if($i % 2 == 0) 
+          opacity: 0
+        @else 
+          opacity: 1
+
 
 .signIn
     position: absolute
@@ -158,12 +192,10 @@ ul.drop_down_menu ul
     justify-content: center
     align-items: center
 
-.right
-  padding-right: 70px
-  padding-bottom: 5px 
+// .right
+//   padding-right: 70px
+//   padding-bottom: 5px 
 
-.left
-  padding-left: 70px
-  padding-bottom: 5px 
-
-  
+// .left
+//   padding-left: 70px
+//   padding-bottom: 5px 

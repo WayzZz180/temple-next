@@ -28,7 +28,7 @@ export default function HomeGod({
           <Image src={Arched} alt="" width="430"></Image>
         </div>
         <div className={`${styles.title}`}>{text1}</div>
-        <div>
+        <div className="mt20px">
           <Button text={text2} btnColor="btn_g" />
         </div>
       </div>

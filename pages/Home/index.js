@@ -7,10 +7,14 @@ import foo_dog_right from '@/assets/foo_dog_right.svg'
 import Temple from '@/components/common/temple'
 import dog from '@/assets/dog_in.gif'
 import pink_star from '@/assets/Pink_Star.svg'
+import lighting from '@/assets/green_lighting.svg'
 import signIn from '@/assets/sing_in.svg'
-import HomeSet from '@/components/common/cards/HomeSet'
 import Title from '@/components/common/title'
 import God from '@/components/common/cards/HomeGod'
+import Online from '@/components/common/cards/HomeOnline'
+import Pocket from '@/components/common/cards/HomePocket'
+import Job from '@/components/common/cards/HomeJob'
+import HomeCarousels from '@/components/common/carousel/HomeCarousels'
 
 export default function Home() {
   return (
@@ -23,14 +27,25 @@ export default function Home() {
           <div className={styles.flex_row}>
             <Image
               src={foo_dog_left}
-              width={195}
+              width={295}
               alt="foo_dog_left"
               className={`${styles.right}`}
             />
             <Temple />
+            <div>
             {/* dog */}
             <div className={`${styles.dog}`}>
               <Image src={dog} width={400} alt="dog" />
+            </div>
+            {/* lighting */}
+            <div className={`${styles.lighting}`}>
+              <Image src={lighting} width={25} alt="lighting" />
+            </div>
+            {/* lighting */}
+            <div className={`${styles.light_div}`}>
+            <div className={`${styles.lighting2}`}>
+              <Image src={lighting} width={25} alt="lighting" />
+            </div>
             </div>
             {/* signin star */}
             <div className={`${styles.pinkStar}`}>
@@ -42,9 +57,10 @@ export default function Home() {
             <div className={`${styles.signIn}`}>
               <Image src={signIn} width={30} alt="signIn" />
             </div>
+            </div>
             <Image
               src={foo_dog_right}
-              width={195}
+              width={295}
               alt="foo_dog_right"
               className={`${styles.left}`}
             />
@@ -56,17 +72,29 @@ export default function Home() {
         text2="OFFERING SELECTION SET"
         lineColor="line_p"
       />
-      <HomeSet />
+      <HomeCarousels />
       <Title
         text="求神問卜"
         text2="INQUIRING OF THE DIVINE"
         lineColor="line_g"
       />
       <div className={styles.flex_row2}>
-        <God text1="媽祖" text2="求籤" pic="MazuGod"/>
-        <God text1="月老" text2="求紅線"/>
-        <God text1="文昌" text2="點學業燈" pic="StudyGod"/>
+        <God text1="媽祖" text2="求籤" pic="MazuGod" />
+        <God text1="月老" text2="求紅線" />
+        <God text1="文昌" text2="點學業燈" pic="StudyGod" />
       </div>
+      <Title text="遶境online" text2="PILGRIMAGE ONLINE" lineColor="line_p" />
+      <div>
+        <Online />
+      </div>
+      <Title text="錦囊小知識" text2="POCKET TRIVIA" lineColor="line_g" />
+      <div>
+        <Pocket />
+      </div>
+      <div className="mt60px">
+      <Title text="加入我們" text2="JOB ADVERTISEMENT" lineColor="line_p" />
+      </div>
+      <Job />
     </>
   )
 }
