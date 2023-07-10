@@ -3,6 +3,8 @@ import styles from './header.module.sass'
 import NavbarLeft from './navbarleft'
 import NavbarRight from './navbarright'
 import Logo from './logo'
+// import Image from 'next/image'
+// import Header_Tri from '@/assets/header_tri.svg'
 
 export default function Index() {
   return (
@@ -18,6 +20,7 @@ export default function Index() {
           {/* navbar right*/}
           <NavbarRight />
         </div>
+        {/* <Image src={Header_Tri} alt="tri" /> */}
       </header>
     </>
   )
