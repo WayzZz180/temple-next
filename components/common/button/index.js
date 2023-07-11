@@ -14,7 +14,7 @@ export default function Button({ text = 'text', btnColor = 'btn' }) {
           className={`${styles.btn}`}
           style={{ backgroundColor: var_color }}
         >
-          <span className={`${styles.IconContainer}`}>
+          <span className={`${styles.IconContainer} `}>
             <Image
               src={Star}
               alt=""
@@ -22,7 +22,7 @@ export default function Button({ text = 'text', btnColor = 'btn' }) {
               className={`${styles.img}`}
             ></Image>
           </span>
-          <p className={`${styles.text}`}>{text}</p>
+          <div className={`${styles.text}`}> {text}</div>
           <span className={`${styles.IconContainer2}`}>
             <Image
               src={Star}

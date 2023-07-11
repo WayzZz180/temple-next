@@ -5,6 +5,7 @@
   position: relative
   background-color: $brown
   z-index: -2
+  height:100%
 
 .place
   padding-top:5px
@@ -23,8 +24,8 @@
 
 .dog
     position: absolute
-    left: 445px
-    bottom:14px
+    left: 480px
+    bottom:15px
 
 .lighting
     position: absolute
@@ -61,21 +62,27 @@
 
 .signIn
     position: absolute
-    right: 630px
-    bottom:133px
+    right: 192px
+    bottom:120px
+
+.signInBlock
+  position: relative
+  height: 100%
+  width: 100%
+  background: red
 
 .pinkStar
     display: inline-block
     transform: translateZ(1px)
     position: absolute
-    right: 625px
-    bottom:235px
+    right: 188px
+    bottom:222px
+      
+.rotate
+  border: 1px red solid
+  animation: star_rotate 3s linear infinite alternate
 
-.pinkStar>div
-  display: inline-block
-  animation: pinkStar 3s linear infinite alternate
-
-@keyframes pinkStar 
+@keyframes star_rotate 
   0% 
     transform: rotateY(0deg)
   100% 
@@ -157,7 +164,7 @@ ul.drop_down_menu ul
   list-style: none
   background-color: #ffffff
   position: absolute
-  z-index: 99
+  z-index: 3
   left: -1px
   top: 100%
   min-width: 80px
@@ -166,6 +173,7 @@ ul.drop_down_menu ul
 ul.drop_down_menu ul 
   /*隱藏次選單*/
   display: none
+  
 .flex_row
     width:100%
     display: flex
@@ -178,10 +186,3 @@ ul.drop_down_menu ul
     justify-content: center
     align-items: center
 
-// .right
-//   padding-right: 70px
-//   padding-bottom: 5px 
-
-// .left
-//   padding-left: 70px
-//   padding-bottom: 5px 

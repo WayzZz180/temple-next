@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from '@emotion/styled'
 import styles from './head.module.sass'
 import Image from 'next/image'
 import nav from '@/assets/nav.svg'
@@ -15,8 +16,14 @@ import Online from '@/components/common/cards/HomeOnline'
 import Pocket from '@/components/common/cards/HomePocket'
 import Job from '@/components/common/cards/HomeJob'
 import HomeCarousels from '@/components/common/carousel/HomeCarousels'
+import { useHoverIndex } from '@/hooks/useHoverIndex'
 
 export default function Home() {
+  const {
+    hoveredIndex: hoveredIndexStar,
+    handleMouseEnter: handleMouseEnterStar,
+    handleMouseLeave: handleMouseLeaveStar,
+  } = useHoverIndex(-1)
   return (
     <>
       <div className={`${styles.background}`}>
@@ -25,17 +32,12 @@ export default function Home() {
             <Image src={nav} width={1990} alt="nav" />
           </div>
           <div className={styles.flex_row}>
-            <Image
-              src={foo_dog_left}
-              width={295}
-              alt="foo_dog_left"
-              className={`${styles.right}`}
-            />
+            <Image src={foo_dog_left} width={250} alt="foo_dog_left" />
             <Temple />
             <div>
               {/* dog */}
               <div className={`${styles.dog}`}>
-                <Image src={dog} width={400} alt="dog" />
+                <Image src={dog} width={367} alt="dog" />
               </div>
               {/* lighting */}
               <div className={`${styles.lighting}`}>
@@ -47,54 +49,58 @@ export default function Home() {
                   <Image src={lighting} width={25} alt="lighting" />
                 </div>
               </div>
-              <div className={`${styles.signInBlock}`}>
+
+              <div
+                className={`${styles.signInBlock}`}
+                onMouseEnter={() => {
+                  handleMouseEnterStar(1)
+                }}
+                onMouseLeave={handleMouseLeaveStar}
+              >
                 {/* signin star */}
-                <div className={`${styles.pinkStar}`}>
-                  <div>
-                    <Image src={pink_star} width={40} alt="star" />
-                  </div>
+                <div
+                  className={`${styles.pinkStar} ${
+                    hoveredIndexStar === 1 ? styles.rotate : ''
+                  }`}
+                >
+                  <Image src={pink_star} width={36} alt="star" />
                 </div>
                 {/* sign in word */}
                 <div className={`${styles.signIn}`}>
-                  <Image src={signIn} width={30} alt="signIn" />
+                  <Image src={signIn} width={28} alt="signIn" />
                 </div>
               </div>
             </div>
-            <Image
-              src={foo_dog_right}
-              width={295}
-              alt="foo_dog_right"
-              className={`${styles.left}`}
-            />
+            <Image src={foo_dog_right} width={250} alt="foo_dog_right" />
           </div>
         </div>
       </div>
       <Title
         text="供品套組精選"
         text2="OFFERING SELECTION SET"
-        lineColor="hot_pink"
+        lineColor="green"
       />
       <HomeCarousels />
       <Title
         text="求神問卜"
         text2="INQUIRING OF THE DIVINE"
-        lineColor="green"
+        lineColor="hot_pink"
       />
       <div className={styles.flex_row2}>
         <God text1="媽祖" text2="求籤" pic="MazuGod" />
         <God text1="月老" text2="求紅線" />
         <God text1="文昌" text2="點學業燈" pic="StudyGod" />
       </div>
-      <Title text="遶境online" text2="PILGRIMAGE ONLINE" lineColor="hot_pink" />
+      <Title text="遶境online" text2="PILGRIMAGE ONLINE" lineColor="green" />
       <div>
         <Online />
       </div>
-      <Title text="錦囊小知識" text2="POCKET TRIVIA" lineColor="green" />
+      <Title text="錦囊小知識" text2="POCKET TRIVIA" lineColor="hot_pink" />
       <div>
         <Pocket />
       </div>
       <div className="mt60px">
-        <Title text="加入我們" text2="JOB ADVERTISEMENT" lineColor="hot_pink" />
+        <Title text="加入我們" text2="JOB ADVERTISEMENT" lineColor="green" />
       </div>
       <Job />
     </>

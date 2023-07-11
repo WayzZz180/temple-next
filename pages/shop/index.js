@@ -51,17 +51,17 @@ export default function Shop() {
   return (
     <Container className={'shopContainer'}>
       {/* 類別 */}
-      <Row className="nowrap mt100px mb50px fwBold fs24px">
+      <Row className="nowrap mt100px mb50px fs24px">
         {/* 標題 */}
         <Col>
-          <Title text="咱有的物件" text2="" lineColor="" />
+          <p className={`${styles.title}`}>咱有的物件</p>
         </Col>
       </Row>
       <Row className={`nowrap fwBold fs20px mb50px`}>
         {/* 類別詳細 */}
         {data.map((v, i) => {
           return (
-            <Col key={i} className={`${styles.categoryC}`}>
+            <Col key={i} className={`${styles.category}`}>
               <Link
                 href="#"
                 onMouseEnter={() => handleMouseEnterStar(i)}
@@ -81,7 +81,7 @@ export default function Shop() {
                   ></Image>
                 </span>
                 {/* 文字 */}
-                <span className={`${styles.link} pb15px  $`}>{v.text}</span>
+                <span className={`${styles.link} pb15px`}>{v.text}</span>
               </Link>
             </Col>
           )
