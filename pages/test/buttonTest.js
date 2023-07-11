@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from 'react-bootstrap/Button'
+import Button from '@/components/common/button'
 import Title from '@/components/common/title'
 import HomeGod from '@/components/common/cards/HomeGod'
 import HomeCarousel from '@/components/common/carousel/HomeCarousels'
