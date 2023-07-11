@@ -11,6 +11,40 @@ import arrowL_outline from '@/assets/arrowL_outline.svg'
 import arrowL_fill from '@/assets/arrowL_fill.svg'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 
+const imgSrc = []
+//1
+for (let i = 1; i <= 10; i++) {
+  const imagePath = require(`@/public/img/cookies/pancake/pancake (${i}).png`)
+  imgSrc.push(imagePath.default)
+}
+// //2
+// for (let i = 1; i <= 10; i++) {
+//   const imagePath = require(`@/public/img/candy/candy/candy (${i}).png`)
+//   imgSrc.push(imagePath.default)
+// }
+// //3
+// for (let i = 1; i <= 10; i++) {
+//   const imagePath = require(`@/public/img/drinks/juice/juice (${i}).png`)
+//   imgSrc.push(imagePath.default)
+// }
+// //4
+// for (let i = 1; i <= 10; i++) {
+//   const imagePath = require(`@/public/img/gifts/gong/gong (${i}).png`)
+//   imgSrc.push(imagePath.default)
+// }
+// //5
+// for (let i = 1; i <= 10; i++) {
+//   const imagePath = require(`@/public/img/salty/can/can (${i}).png`)
+//   imgSrc.push(imagePath.default)
+// }
+
+function chunkArray(arr, size) {
+  const chunks = []
+  for (let i = 0; i < arr.length; i += size) {
+    chunks.push(arr.slice(i, i + size))
+  }
+  return chunks
+}
 export default function ProductsCarousel() {
   const data = [
     {
@@ -44,6 +78,9 @@ export default function ProductsCarousel() {
     handleMouseEnter: handleMouseEnterRight,
     handleMouseLeave: handleMouseLeaveRight,
   } = useHoverIndex(-1)
+
+  const imgChunks = chunkArray(imgSrc, 5)
+
   return data.map((v, i) => {
     return (
       <Fragment key={i}>
@@ -61,36 +98,15 @@ export default function ProductsCarousel() {
             />
           </Col>
           <Row className={`nowrap ${styles.carousel}`}>
-            <Col>
-              <ShopProductsCard />
-            </Col>
-            <Col>
-              <ShopProductsCard />
-            </Col>
-            <Col>
-              <ShopProductsCard />
-            </Col>
-            <Col>
-              <ShopProductsCard />
-            </Col>
-            <Col>
-              <ShopProductsCard />
-            </Col>
-            <Col>
-              <ShopProductsCard />
-            </Col>
-            <Col>
-              <ShopProductsCard />
-            </Col>
-            <Col>
-              <ShopProductsCard />
-            </Col>
-            <Col>
-              <ShopProductsCard />
-            </Col>
-            <Col>
-              <ShopProductsCard />
-            </Col>
+            {imgChunks.map((chunk, rowIndex) => (
+              <Row key={rowIndex} className={`${styles.row}  nowrap`}>
+                {chunk.map((src, colIndex) => (
+                  <Col key={colIndex} className={`${styles.flex_start}`}>
+                    <ShopProductsCard src={src} />
+                  </Col>
+                ))}
+              </Row>
+            ))}
           </Row>
           <Col>
             <Image
