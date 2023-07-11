@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './head.module.sass'
+import styles from './header.module.sass'
 import Image from 'next/image'
 import logoChi from '@/assets/logoChi.svg'
 import logoEng from '@/assets/logoEng.svg'
@@ -149,3 +149,76 @@ export default function Header() {
     </>
   )
 }
+// import React from 'react'
+// import styles from './header.module.css'
+// import Image from 'next/image'
+// import Link from 'next/link'
+// import logoChiHeader from '@/assets/logoChiHeader.svg'
+// import logoEngHeader from '@/assets/logoEngHeader.svg'
+
+// export default function Header() {
+//   const info = [
+//     '01會員中心',
+//     '02線上拜拜',
+//     '03供品商城',
+//     '04遶境',
+//     '05求神問卜',
+//     '06民俗論壇',
+//   ]
+//   const ainfo = info.slice(0, 3)
+//   const binfo = info.slice(3)
+
+//   return (
+//     <>
+//       <header>
+//         <div className={`${styles.header}`}>
+//           <div className={`${styles.flex_colleft} ${styles.h16px}`}>
+//             {ainfo.map((v, i) => {
+//               for (i = 0; i < 3; i++) {
+//                 return (
+//                   <>
+//                     <Link href="#" className={styles.ahref}>
+//                       {v}
+//                     </Link>
+//                   </>
+//                 )
+//               }
+//             })}
+//           </div>
+//           {/* logo */}
+//           <div className={`${styles.flex_col}`}>
+//             <Link href="#">
+//               <Image
+//                 src={logoChiHeader}
+//                 width={91.11}
+//                 height={19.07}
+//                 alt="logo"
+//               />
+//             </Link>
+//             <Link href="#">
+//               <Image
+//                 src={logoEngHeader}
+//                 width={103.01}
+//                 height={7.74}
+//                 alt="logo"
+//               />
+//             </Link>
+//           </div>
+//           <div className={`${styles.flex_colright} ${styles.h16px}`}>
+//             {binfo.map((v, i) => {
+//               for (i = 0; i < 3; i++) {
+//                 return (
+//                   <>
+//                     <Link href="#" className={styles.ahref}>
+//                       {v}
+//                     </Link>
+//                   </>
+//                 )
+//               }
+//             })}
+//           </div>
+//         </div>
+//       </header>
+//     </>
+//   )
+// }

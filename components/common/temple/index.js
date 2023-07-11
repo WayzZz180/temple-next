@@ -4,6 +4,7 @@ import cloud from '@/assets/cloud.svg'
 import temple from '@/assets/temple.svg'
 import styles from './temple.module.sass'
 
+// 首頁的廟
 export default function Temple() {
   return (
     <>
