@@ -47,15 +47,17 @@ export default function Home() {
                   <Image src={lighting} width={25} alt="lighting" />
                 </div>
               </div>
-              {/* signin star */}
-              <div className={`${styles.pinkStar}`}>
-                <div>
-                  <Image src={pink_star} width={40} alt="star" />
+              <div className={`${styles.signInBlock}`}>
+                {/* signin star */}
+                <div className={`${styles.pinkStar}`}>
+                  <div>
+                    <Image src={pink_star} width={40} alt="star" />
+                  </div>
                 </div>
-              </div>
-              {/* sign in word */}
-              <div className={`${styles.signIn}`}>
-                <Image src={signIn} width={30} alt="signIn" />
+                {/* sign in word */}
+                <div className={`${styles.signIn}`}>
+                  <Image src={signIn} width={30} alt="signIn" />
+                </div>
               </div>
             </div>
             <Image

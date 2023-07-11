@@ -3,6 +3,8 @@ import Button from '@/components/common/button'
 import Title from '@/components/common/title'
 import HomeGod from '@/components/common/cards/HomeGod'
 import HomeCarousel from '@/components/common/carousel/HomeCarousels'
+import HomeDoor from '@/components/common/cards/HomeDoor'
+
 // import DefaultLayout from '@/components/layout/default-layout'
 
 export default function About() {
@@ -17,8 +19,9 @@ export default function About() {
         text2="OFFERING SELECTION SET"
         lineColor="line_g"
       />
-      <HomeGod />
-      <HomeCarousel />
+      {/* <HomeGod />
+      <HomeCarousel /> */}
+      <HomeDoor />
     </>
   )
 }
