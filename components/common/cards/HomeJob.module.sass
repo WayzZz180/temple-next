@@ -1,0 +1,94 @@
+.flex_col
+   display: flex
+   flex-direction: column
+   align-items: center
+   justify-content: center
+
+.flex_row
+    display: flex
+    align-items: space-between
+    justify-content: center
+    
+.flex
+    display: flex
+    align-items: center
+    justify-content: center
+
+.eye
+    position: absolute
+    animation-direction: alternate-revers
+    animation: wink 1.5s ease infinite alternate
+
+@keyframes wink
+  0% 
+    transform: scaleY(1)
+  20% 
+    transform: scaleY(1)
+  30% 
+    transform: scaleY(0.5)
+  50% 
+    transform: scaleY(0)
+  60% 
+    transform: scaleY(0.5)
+  70% 
+    transform: scaleY(1)
+  100% 
+    transform: scaleY(1)
+
+.title
+   color: #241B15
+   text-align: center
+   font-size: 74px
+   font-weight: 700
+   line-height: 128.2%
+   letter-spacing: 37px
+
+.want
+   color: #47B990
+   text-align: center
+   font-size: 40px
+   font-weight: 700
+   line-height: 219.2%
+   letter-spacing: 8px
+
+.star1
+  padding:0px 20px 
+  animation-name: star1
+  animation-duration: 1.5s 
+  animation-direction: alternate-revers         
+  animation-iteration-count: infinite 
+  animation-timing-function: linear   
+
+@keyframes star1
+  0%
+    transform: scale(1.1)rotate(70deg)
+
+  30%
+    transform: scale(1.3)rotate(-20deg)
+
+  50%
+    transform: scale(1.5)rotate(20deg)
+
+  100%
+    transform: scale(1.1)rotate(70deg)
+
+.star2
+  padding:0px 10px 
+  animation-name: star2
+  animation-duration: 1s       
+  animation-direction: alternate-revers   
+  animation-iteration-count: infinite 
+  animation-timing-function: linear   
+
+@keyframes star2
+  0%
+    transform: scale(1.2)rotate(10deg)
+
+  30%
+    transform: scale(0.8)rotate(-30deg)
+
+  60%
+    transform: scale(1.0)rotate(80deg)
+
+  100%
+    transform: scale(1.2)rotate(10deg)

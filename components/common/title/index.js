@@ -1,18 +1,23 @@
-import React from 'react'
-import styles from '@/components/common/title/title.module.css'
+import styles from './title.module.sass'
+import variables from '@/styles/_variables.module.sass'
 
+//text = 大標
+//text2 = 小標
+// lineColor = black, green, hot_pink, brown
 export default function Title({
-  CHNtext = '中文標題',
-  ENGtext = '英文標題',
-  colored_line,
+  text = 'text',
+  text2 = 'text',
+  lineColor = 'green',
 }) {
+  const var_color = variables[lineColor]
   return (
-    <>
-      <div className={styles.title_container}>
-        <h1 className={styles.title}>{CHNtext}</h1>
-        <h2 className={styles.subtitle}>{ENGtext}</h2>
-        <div className={colored_line}></div>
-      </div>
-    </>
+    <div className={`${styles.flex} mt120px`}>
+      <div className={`${styles.title}`}>{text}</div>
+      <div className={`${styles.title2}`}>{text2}</div>
+      <div
+        className={`${styles.line}`}
+        style={{ backgroundColor: var_color }}
+      ></div>
+    </div>
   )
 }
