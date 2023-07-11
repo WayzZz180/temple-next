@@ -7,14 +7,18 @@ import headerBg from '@/assets/header.svg'
 
 export default function Index() {
   return (
-      <header>
-          <div className={`${styles.flex_row} ${styles.head} pt20px`}>
-            <Navbar info="left"/>
-            <Logo />
-            <Navbar info="right"/>
-          </div>
-            <Image src={headerBg} alt='header' className={`${styles.headerBg}`}></Image>
-          <div className={`${styles.box}`}></div>
-      </header>
+    <header>
+      <div className={`${styles.flex_row} ${styles.head} pt20px`}>
+        <Navbar info="left" />
+        <Logo />
+        <Navbar info="right" />
+      </div>
+      <Image
+        src={headerBg}
+        alt="header"
+        className={`${styles.headerBg}`}
+      ></Image>
+      <div className={`${styles.box}`}></div>
+    </header>
   )
 }
