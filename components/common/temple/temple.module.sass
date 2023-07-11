@@ -3,8 +3,17 @@
     justify-content: center
     align-content: center
     position: relative
-    
 .cloud
     position: absolute
     z-index: -1
     top:200px
+    animation: float 4s ease-in-out infinite alternate
+
+
+@keyframes float 
+  0% 
+     transform: translate(0, 20px)
+  100% 
+     transform: translate(0, -30px)
+  
+

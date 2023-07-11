@@ -1,5 +1,7 @@
 import styles from './button.module.sass'
 import variables from '@/styles/_variables.module.sass'
+import Star from '@/assets/Star_white.svg'
+import Image from 'next/image'
 
 // text = Button content
 // btnColor = black, green, hot_pink, brown
@@ -12,7 +14,23 @@ export default function Button({ text = 'text', btnColor = 'btn' }) {
           className={`${styles.btn}`}
           style={{ backgroundColor: var_color }}
         >
-          {text}
+          <span className={`${styles.IconContainer}`}>
+            <Image
+              src={Star}
+              alt=""
+              width="25"
+              className={`${styles.img}`}
+            ></Image>
+          </span>
+          <p className={`${styles.text}`}>{text}</p>
+          <span className={`${styles.IconContainer2}`}>
+            <Image
+              src={Star}
+              alt=""
+              width="25"
+              className={`${styles.img}`}
+            ></Image>
+          </span>
         </button>
       </div>
     </>

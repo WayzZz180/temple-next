@@ -30,6 +30,13 @@ export default function ShopSearchBar() {
         onChange={(e) => {
           setContent(e.target.value)
         }}
+        onKeyDown={(e) => {
+          // 按下Enter鍵
+          if (e.key === 'Enter') {
+            // 清空文字輸入框
+            setContent('')
+          }
+        }}
       ></input>
     </div>
   )

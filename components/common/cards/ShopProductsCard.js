@@ -2,7 +2,6 @@ import Image from 'next/image'
 import styles from './ShopProductsCard.module.sass'
 import variables from '@/styles/_variables.module.sass'
 // assests
-import chips from '@/assets/chips (4).png'
 import goldenStar_fill from '@/assets/goldenStar_fill.svg'
 import goldenStar_outline from '@/assets/goldenStar_outline.svg'
 import Heart_fill from '@mui/icons-material/Favorite'
@@ -13,17 +12,19 @@ import cart_outline from '@/assets/cart_outline.svg'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import { useClick } from '@/hooks/useClick.js'
 
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
-export default function ShopProductsCard() {
+export default function ShopProductsCard({ src }) {
   //判斷hover
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-1)
   const isHeartHovered = hoveredIndex === 1
   const isCartHovered = hoveredIndex === 2
 
   //判斷有無點擊收藏和購物車
-  const { clickState: heartClickState, handleClick: handleHeartClick } = useClick(false)
-  const { clickState: cartClickState, handleClick: handleCartClick } = useClick(false)
+  const { clickState: heartClickState, handleClick: handleHeartClick } =
+    useClick(false)
+  const { clickState: cartClickState, handleClick: handleCartClick } =
+    useClick(false)
 
   //mui icons color
   const theme = createTheme({
@@ -31,17 +32,23 @@ export default function ShopProductsCard() {
       MuiSvgIcon: {
         styleOverrides: {
           root: {
-            color: variables.hot_pink
+            color: variables.hot_pink,
           },
         },
       },
     },
-  });
-  
+  })
+
   return (
     <div className={`${styles.container} m30px`}>
       {/* 產品圖 */}
-      <Image src={chips} alt="" width="150" className="shadow mb20px"></Image>
+      <Image
+        src={src}
+        alt="product"
+        width={150}
+        height={150}
+        className="shadow mb20px"
+      ></Image>
       {/* 分隔線 */}
       <div className={`${styles.line} w180px h3px`}></div>
       {/* 標題 */}
@@ -68,8 +75,13 @@ export default function ShopProductsCard() {
             onMouseLeave={handleMouseLeave}
             className={`${styles.inlineBlock} me5px`}
           >
-            {isHeartHovered || heartClickState ?  (<ThemeProvider theme={theme}>
-            <Heart_fill /></ThemeProvider>) : <Heart_outline />}
+            {isHeartHovered || heartClickState ? (
+              <ThemeProvider theme={theme}>
+                <Heart_fill />
+              </ThemeProvider>
+            ) : (
+              <Heart_outline />
+            )}
           </span>
           {/* 購物車 */}
           <span
