@@ -23,7 +23,7 @@ export default function HomeOnline() {
               alt="Star_Pink"
               className={`${styles.img}`}
             />
-            <Button text="開始遶境" btnColor="btn_p" />
+            <Button text="開始遶境" btnColor="hot_pink" />
             <Image
               src={Star}
               width={90}

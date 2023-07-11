@@ -33,30 +33,30 @@ export default function Home() {
             />
             <Temple />
             <div>
-            {/* dog */}
-            <div className={`${styles.dog}`}>
-              <Image src={dog} width={400} alt="dog" />
-            </div>
-            {/* lighting */}
-            <div className={`${styles.lighting}`}>
-              <Image src={lighting} width={25} alt="lighting" />
-            </div>
-            {/* lighting */}
-            <div className={`${styles.light_div}`}>
-            <div className={`${styles.lighting2}`}>
-              <Image src={lighting} width={25} alt="lighting" />
-            </div>
-            </div>
-            {/* signin star */}
-            <div className={`${styles.pinkStar}`}>
-              <div>
-                <Image src={pink_star} width={40} alt="star" />
+              {/* dog */}
+              <div className={`${styles.dog}`}>
+                <Image src={dog} width={400} alt="dog" />
               </div>
-            </div>
-            {/* sign in word */}
-            <div className={`${styles.signIn}`}>
-              <Image src={signIn} width={30} alt="signIn" />
-            </div>
+              {/* lighting */}
+              <div className={`${styles.lighting}`}>
+                <Image src={lighting} width={25} alt="lighting" />
+              </div>
+              {/* lighting */}
+              <div className={`${styles.light_div}`}>
+                <div className={`${styles.lighting2}`}>
+                  <Image src={lighting} width={25} alt="lighting" />
+                </div>
+              </div>
+              {/* signin star */}
+              <div className={`${styles.pinkStar}`}>
+                <div>
+                  <Image src={pink_star} width={40} alt="star" />
+                </div>
+              </div>
+              {/* sign in word */}
+              <div className={`${styles.signIn}`}>
+                <Image src={signIn} width={30} alt="signIn" />
+              </div>
             </div>
             <Image
               src={foo_dog_right}
@@ -70,29 +70,29 @@ export default function Home() {
       <Title
         text="供品套組精選"
         text2="OFFERING SELECTION SET"
-        lineColor="line_p"
+        lineColor="hot_pink"
       />
       <HomeCarousels />
       <Title
         text="求神問卜"
         text2="INQUIRING OF THE DIVINE"
-        lineColor="line_g"
+        lineColor="green"
       />
       <div className={styles.flex_row2}>
         <God text1="媽祖" text2="求籤" pic="MazuGod" />
         <God text1="月老" text2="求紅線" />
         <God text1="文昌" text2="點學業燈" pic="StudyGod" />
       </div>
-      <Title text="遶境online" text2="PILGRIMAGE ONLINE" lineColor="line_p" />
+      <Title text="遶境online" text2="PILGRIMAGE ONLINE" lineColor="hot_pink" />
       <div>
         <Online />
       </div>
-      <Title text="錦囊小知識" text2="POCKET TRIVIA" lineColor="line_g" />
+      <Title text="錦囊小知識" text2="POCKET TRIVIA" lineColor="green" />
       <div>
         <Pocket />
       </div>
       <div className="mt60px">
-      <Title text="加入我們" text2="JOB ADVERTISEMENT" lineColor="line_p" />
+        <Title text="加入我們" text2="JOB ADVERTISEMENT" lineColor="hot_pink" />
       </div>
       <Job />
     </>

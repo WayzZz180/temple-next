@@ -31,7 +31,7 @@ export default function HomePocket() {
             機器上放包「綠乖乖」就能保佑運轉？為何放「黃乖乖」就母湯。在機器上擺放乖乖，機器才會乖，而且乖乖必須是綠色的，要是擺錯，機器就會出事…！在現代，零食「乖乖」已成為機房中不可或缺的重要物品，有時還是被准許進入機房重地的唯一食物，這是因為，人們相信，「乖乖大神」可以保佑機器乖乖運行。
           </div>
           <div className="mt70px">
-            <Button text="了解更多" btnColor="btn_g" />
+            <Button text="了解更多" btnColor="green" />
           </div>
         </div>
       </div>

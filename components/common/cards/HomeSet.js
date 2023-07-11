@@ -22,7 +22,7 @@ export default function HomeSet({
           <div className={`${styles.line}`}></div>
           <div className={`${styles.content}`}>{text3}</div>
           <div className="mt150px">
-            <Button text="選購去" btnColor="btn_p" />
+            <Button text="選購去" btnColor="hot_pink" />
           </div>
         </div>
         <div>

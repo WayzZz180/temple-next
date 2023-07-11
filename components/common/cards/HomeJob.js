@@ -47,7 +47,7 @@ export default function HomeJob() {
         <div className={`${styles.title} mt45px`}>志•工•招•募•中</div>
         <div className={`${styles.want} mt10px`}>WE WANT YOU!</div>
         <div className="mt100px mb175px">
-          <Button text="來去報名" btnColor="btn_p" />
+          <Button text="來去報名" btnColor="hot_pink" />
         </div>
       </div>
     </>

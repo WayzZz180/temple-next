@@ -29,7 +29,7 @@ export default function HomeGod({
         </div>
         <div className={`${styles.title}`}>{text1}</div>
         <div className="mt20px">
-          <Button text={text2} btnColor="btn_g" />
+          <Button text={text2} btnColor="green" />
         </div>
       </div>
     </>
