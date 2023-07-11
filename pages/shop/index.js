@@ -54,7 +54,7 @@ export default function Shop() {
       <Row className="nowrap mt100px mb50px fwBold fs24px">
         {/* 標題 */}
         <Col>
-          <Title text="咱有的物件" text2="Categories" lineColor="hot_pink" />
+          <Title text="咱有的物件" text2="" lineColor="" />
         </Col>
       </Row>
       <Row className={`nowrap fwBold fs20px mb50px`}>
