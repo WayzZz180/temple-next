@@ -1,5 +1,8 @@
+import React from 'react'
 import { useState } from 'react'
+import styles from '@/components/common/inputBox/inputBox.module.sass'
 
+// onChange 用來記錄輸入文字的
 export default function InputBox({
   type = 'text',
   prompt = '',
@@ -7,7 +10,7 @@ export default function InputBox({
   onChange,
 }) {
   const [inputValue, setInputValue] = useState('')
-  // const [isFocus, setIsFocus] = useState(false)
+  const [isFocus, setIsFocus] = useState(false)
 
   const handleChange = (event) => {
     setInputValue(event.target.value)
@@ -16,10 +19,13 @@ export default function InputBox({
     }
   }
 
-  // const handleFocus = () => {
-  //   setIsFocus(true)
-  // }
-  // ??!
+  const handleFocus = () => {
+    setIsFocus(true)
+  }
+
+  const handleBlur = () => {
+    setIsFocus(false)
+  }
 
   return (
     <>
@@ -29,18 +35,12 @@ export default function InputBox({
           type={type}
           value={inputValue}
           onChange={handleChange}
-          // onFocus={handleFocus}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           placeholder={placeholder}
-          // className={isFocus ? styles.focus : ''}
-          // className="form-control"
+          className={`${isFocus ? styles.focus : ''} ${styles.standard_input}`}
         />
       </div>
     </>
   )
 }
-
-//TODO
-//onClick 變色
-
-// https://mui.com/material-ui/react-text-field/
-//use ref
