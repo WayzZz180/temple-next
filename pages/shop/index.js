@@ -61,15 +61,16 @@ export default function Shop() {
         {/* 類別詳細 */}
         {data.map((v, i) => {
           return (
-            <Col key={i} className={`${styles.category}`}>
+            <Col key={i} 
+            onMouseEnter={() => handleMouseEnterStar(i)}
+            onMouseLeave={handleMouseLeaveStar}
+            >
               <Link
                 href="#"
-                onMouseEnter={() => handleMouseEnterStar(i)}
-                onMouseLeave={handleMouseLeaveStar}
-                className={`${styles.category} p15px`}
+                className={`${styles.category} ${hoveredIndexStar === i ? styles.hovered : ''} m15px`}
               >
                 {/* 星星 */}
-                <span className={`${styles.star} pe15px $`}>
+                <span className={`${styles.star} pe15px `}>
                   <Image
                     src={
                       hoveredIndexStar === i
@@ -81,7 +82,7 @@ export default function Shop() {
                   ></Image>
                 </span>
                 {/* 文字 */}
-                <span className={`${styles.link} pb15px`}>{v.text}</span>
+                <span className={`${styles.link} $ pb15px`}>{v.text}</span>
               </Link>
             </Col>
           )

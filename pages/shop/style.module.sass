@@ -1,7 +1,6 @@
 @import '@/styles/_variables.module.sass'
 
 .category
-  width: 100%
   color: $fontColor
   display: block
   text-decoration: none
@@ -12,19 +11,19 @@
   display: inline-block
   position: relative
 
-.link::after
+.hovered::after
   content: ""
   position: absolute
   bottom: 0
-  left: 0
-  width: 100%
+  left: 35px
+  width: 66%
   height: 2px
   background-color: $brown
   transform: scaleX(0)
   transform-origin: left
   transition: transform 0.2s ease-in
 
-.link:hover::after
+.hovered:hover::after
   transform: scaleX(1)
 
 .title
