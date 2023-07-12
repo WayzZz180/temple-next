@@ -15,58 +15,62 @@ import Online from '@/components/common/cards/HomeOnline'
 import Pocket from '@/components/common/cards/HomePocket'
 import Job from '@/components/common/cards/HomeJob'
 import HomeCarousels from '@/components/common/carousel/HomeCarousels'
+import HomeDoor from '@/components/common/cards/HomeDoor'
 
 export default function Home() {
   return (
     <>
-      <div className={`${styles.background}`}>
-        <div className={`${styles.place}`}>
-          <div className={`${styles.floor}`}>
-            <Image src={nav} width={1990} alt="nav" />
-          </div>
-          <div className={styles.flex_row}>
-            <Image
-              src={foo_dog_left}
-              width={295}
-              alt="foo_dog_left"
-              className={`${styles.right}`}
-            />
-            <Temple />
-            <div>
-              {/* dog */}
-              <div className={`${styles.dog}`}>
-                <Image src={dog} width={400} alt="dog" />
-              </div>
-              {/* lighting */}
-              <div className={`${styles.lighting}`}>
-                <Image src={lighting} width={25} alt="lighting" />
-              </div>
-              {/* lighting */}
-              <div className={`${styles.light_div}`}>
-                <div className={`${styles.lighting2}`}>
-                  <Image src={lighting} width={25} alt="lighting" />
-                </div>
-              </div>
+      <div className={`${styles.container}`}>
+        <div className={`${styles.background}`}>
+          <div className={`${styles.place}`}>
+            <div className={`${styles.floor}`}>
+              <Image src={nav} width={1990} alt="nav" />
+            </div>
+            <div className={styles.flex_row}>
+              <Image
+                src={foo_dog_left}
+                width={295}
+                alt="foo_dog_left"
+                className={`${styles.right}`}
+              />
+              <Temple />
               <div className={`${styles.signInBlock}`}>
                 {/* signin star */}
                 <div className={`${styles.pinkStar}`}>
-                  <div>
-                    <Image src={pink_star} width={40} alt="star" />
-                  </div>
+                  <Image src={pink_star} width={40} alt="star" />
                 </div>
                 {/* sign in word */}
                 <div className={`${styles.signIn}`}>
                   <Image src={signIn} width={30} alt="signIn" />
                 </div>
               </div>
+              <div>
+                {/* dog */}
+                <div className={`${styles.dog}`}>
+                  <Image src={dog} width={400} alt="dog" />
+                </div>
+                {/* lighting */}
+                <div className={`${styles.lighting}`}>
+                  <Image src={lighting} width={25} alt="lighting" />
+                </div>
+                {/* lighting */}
+                <div className={`${styles.light_div}`}>
+                  <div className={`${styles.lighting2}`}>
+                    <Image src={lighting} width={25} alt="lighting" />
+                  </div>
+                </div>
+              </div>
+              <Image
+                src={foo_dog_right}
+                width={295}
+                alt="foo_dog_right"
+                className={`${styles.left}`}
+              />
             </div>
-            <Image
-              src={foo_dog_right}
-              width={295}
-              alt="foo_dog_right"
-              className={`${styles.left}`}
-            />
           </div>
+        </div>
+        <div className={`${styles.HomeDoor}`}>
+          <HomeDoor />
         </div>
       </div>
       <Title

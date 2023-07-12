@@ -1,60 +1,54 @@
-.flex
-    width: 1920px
-    height:1080px
-    display: flex
-    justify-content: center
+.container
+    display: grid
+    justify-self: center
+    justify-items: center
+    align-self: center
     align-items: center
 
 .b
-    position: absolute
-    overflow: hidden
-    animation: door_b 1.5s ease-in-out 1
+    animation: door_b 3s ease-in-out infinite
 
 @keyframes door_b
   0% 
     transform: scale(1)
-  100% 
-    transform: scale(10)
+  84% 
+    transform: scale(20)
 .o
     position: absolute
-    overflow: hidden
-    animation: door_o 2s ease-in-out 1
+    animation: door_o 3s ease-in-out infinite
 
 @keyframes door_o
-  0% 
+  10% 
     transform: scale(1)
-  100% 
-    transform: scale(10)
+  88% 
+    transform: scale(20)
 
 .p
     position: absolute
-    overflow: hidden
-    animation: door_p 2s ease-in-out 1
+    animation: door_p 3s ease-in-out infinite
 
 @keyframes door_p
-  0% 
+  16% 
     transform: scale(1)
-  100% 
-    transform: scale(10)
+  92% 
+    transform: scale(20)
 
 .z
     position: absolute
-    overflow: hidden
-    animation: door_z 2s ease-in-out 1
+    animation: door_z 3s ease-in-out infinite
 
 @keyframes door_z
-  0% 
+  22% 
     transform: scale(1)
-  100% 
-    transform: scale(10)
+  96% 
+    transform: scale(20)
 
 .y
     position: absolute
-    overflow: hidden
-    animation: door_y 2s ease-in-out 1
+    animation: door_y 3s ease-in-out infinite
 
 @keyframes door_y
-  0% 
+  30% 
     transform: scale(1)
   100% 
-    transform: scale(10)
+    transform: scale(20)
