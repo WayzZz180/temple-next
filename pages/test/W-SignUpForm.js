@@ -7,53 +7,59 @@ import styles from '@/pages/test/W-SignUpForm.module.sass'
 
 export default function SignUpForm() {
   return (
-    <div>
-      <Container className={styles.flex}>
+    <div className={styles.flex}>
+      <Container>
         <Row>
           <Col>
             <Title text="加入會員" text2="SIGN UP" lineColor="green" />
           </Col>
         </Row>
 
-        <Row className="mb10px">
+        <Row className={styles.flex_space_between}>
           <Col>
-            <div className={styles.flexRow}>
-              <InputBox type="text" placeholder="姓名" onChange />
-              <InputBox type="text" placeholder="暱稱" onChange />
-            </div>
+            <InputBox type="text" placeholder="姓名" onChange width={232} />
+          </Col>
+
+          <Col>
+            <InputBox type="text" placeholder="暱稱" onChange width={232} />
           </Col>
         </Row>
 
-        <Row className="mb10px">
+        <Row className={styles.flex_space_between}>
           <Col>
-            <InputBox type="email" placeholder=" 電子郵件信箱" onChange />
+            <InputBox
+              prompt="Email"
+              type="email"
+              placeholder="電子郵件信箱"
+              onChange
+            />
           </Col>
         </Row>
-        <Row className="mb10px">
+        <Row className={styles.flex_space_between}>
           <Col>
-            <InputBox type="text" placeholder=" 密碼" onChange />
+            <InputBox type="text" placeholder="密碼" onChange />
           </Col>
         </Row>
-        <Row className="mb10px">
+        <Row className={styles.flex_space_between}>
           <Col>
             <InputBox type="date" placeholder="出生年月日 " onChange />
           </Col>
         </Row>
-        <Row className="mb10px">
+        <Row className={styles.flex_space_between}>
           <Col>
             <InputBox type="text" placeholder="現居地址 " onChange />
           </Col>
         </Row>
-        <Row className="mb10px">
+        <Row className={styles.flex_centre}>
           <Col>
-            <p>
+            <div>
               如建立帳號，即同意錦囊廟祭的<b>隱私權政策</b>和<b>使用條款</b>
-            </p>
+            </div>
           </Col>
         </Row>
-        <Row className="mb10px">
+        <Row className={styles.flex_centre}>
           <Col>
-            <Button text="加入" btnColor="black" className="w400px" />
+            <Button text="加入" btnColor="black" />
           </Col>
         </Row>
       </Container>
