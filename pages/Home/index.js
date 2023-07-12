@@ -72,6 +72,27 @@ export default function Home() {
         <div className={`${styles.HomeDoor}`}>
           <HomeDoor />
         </div>
+        <div className={`${styles.signInDoor}`}>
+        <svg
+        width="0"
+        height="0"
+        x="0"
+        y="0"
+          id="圖層_2"
+          data-name="圖層 2"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 155.39 226.45"
+        >
+        <defs>
+        <clipPath id="Door">
+          <path d="M155.39,77.69A77.69,77.69,0,0,0,77.69,0h0A77.69,77.69,0,0,0,0,77.69V226.45H155.39Z" />
+          </clipPath>
+          </defs>
+        </svg>
+        <div className={`${styles.HomeDoor2}`}>
+          <HomeDoor />
+        </div>
+      </div>
       </div>
       <Title
         text="供品套組精選"

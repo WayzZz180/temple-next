@@ -21,7 +21,8 @@ export default function About() {
       />
       {/* <HomeGod />
       <HomeCarousel /> */}
-      <HomeDoor />
+      
+
     </>
   )
 }
