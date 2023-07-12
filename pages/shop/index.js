@@ -99,8 +99,9 @@ export default function Shop() {
       </Row>
 
       {/* Products */}
-
-      <ProductsCarousel />
+      {data.map((v, i) => {
+        return <ProductsCarousel key={i} text={v.text} color={v.color} i={i} />
+      })}
     </Container>
   )
 }

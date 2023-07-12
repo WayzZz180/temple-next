@@ -10,6 +10,19 @@ body
     scroll-behavior: smooth
     overflow-x: hidden
 
+// div::selection
+//     color: $green
+// span::selection
+//     color: $hot_pink
+
+img::selection
+    background: transparent
+
+$tag:"div","span","p","h1","h2","h3","h4","h5"
+
+@for $i from 1 through 8
+    @include selection(nth($tag,$i),$hot_pink)
+
 // fs12px ~ fs30px 
 @for $i from 12 through 30
     @include fsnpx($i)
@@ -97,4 +110,4 @@ $font-weight:"Normal","Bold","Bolder","Lighter"
     width:80%
     margin-left: auto
     margin-right: auto
-  
+

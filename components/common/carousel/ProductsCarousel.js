@@ -18,36 +18,14 @@ for (let i = 1; i <= 10; i++) {
   imgSrc.push(imagePath.default)
 }
 
-function chunkArray(arr, size) {
-  const chunks = []
-  for (let i = 0; i < arr.length; i += size) {
-    chunks.push(arr.slice(i, i + size))
-  }
-  return chunks
-}
-export default function ProductsCarousel() {
-  const data = [
-    {
-      text: '唰嘴ㄟ',
-      color: 'green',
-    },
-    {
-      text: '呷甜甜',
-      color: 'hot_pink',
-    },
-    {
-      text: '啉涼涼',
-      color: 'green',
-    },
-    {
-      text: '呷飽飽',
-      color: 'hot_pink',
-    },
-    {
-      text: '本土ㄟ',
-      color: 'green',
-    },
-  ]
+// function chunkArray(arr, size) {
+//   const chunks = []
+//   for (let i = 0; i < arr.length; i += size) {
+//     chunks.push(arr.slice(i, i + size))
+//   }
+//   return chunks
+// }
+export default function ProductsCarousel({ text, color, i }) {
   const {
     hoveredIndex: hoveredIndexLeft,
     handleMouseEnter: handleMouseEnterLeft,
@@ -59,64 +37,60 @@ export default function ProductsCarousel() {
     handleMouseLeave: handleMouseLeaveRight,
   } = useHoverIndex(-1)
 
+  // for carousel
   const [position, setPosition] = useState(0)
 
-  const imgChunks = chunkArray(imgSrc, 5)
+  // const imgChunks = chunkArray(imgSrc, 5)
 
-  return data.map((v, i) => {
-    return (
-      // 一個類別
-      <Fragment key={i}>
-        {/* 類別標題 */}
-        <ShopCategory text={v.text} color={v.color} />
-        {/* 第一層row */}
-        <Row className={`${styles.row} `}>
-          {/* 左箭頭 */}
-          <Image
-            src={hoveredIndexLeft === i ? arrowL_fill : arrowL_outline}
-            width={30}
-            height={40}
-            alt="arrow_left"
-            onMouseEnter={() => handleMouseEnterLeft(i)}
-            onMouseLeave={handleMouseLeaveLeft}
-            className={`${styles.arrow}`}
-            onClick={() => {
-              position <= 0 ? setPosition(0) : setPosition(position - 1)
-            }}
-          />
-          {/*一大個商品類別 */}
-          <div className={`${styles.carousel}`}>
-            <div
-              className={`${styles.move} `}
-              style={{ right: `${240 * position}px` }}
-            >
-              {imgChunks.map((chunk, rowIndex) => (
-                <Fragment key={rowIndex}>
-                  {/* 類別裡的個別商品卡片 */}
-                  {chunk.map((src, colIndex) => (
-                    <Col key={colIndex} className={`${styles.flex_start}`}>
-                      <ShopProductsCard src={src} />
-                    </Col>
-                  ))}
-                </Fragment>
-              ))}
-            </div>
+  return (
+    // 一個類別
+    <Fragment key={i}>
+      {/* 類別標題 */}
+      <ShopCategory text={text} color={color} />
+      {/* 第一層row */}
+      <Row className={`${styles.row} `}>
+        {/* 左箭頭 */}
+        <Image
+          src={hoveredIndexLeft === i ? arrowL_fill : arrowL_outline}
+          width={30}
+          height={40}
+          alt="arrow_left"
+          onMouseEnter={() => handleMouseEnterLeft(i)}
+          onMouseLeave={handleMouseLeaveLeft}
+          className={`${styles.arrow} ${position <= 0 ? styles.display : ''}`}
+          onClick={() => {
+            position <= 0 ? setPosition(0) : setPosition(position - 1)
+          }}
+        />
+        {/*一大個商品類別 */}
+        <div className={`${styles.carousel}`}>
+          <div
+            className={`${styles.move} `}
+            style={{ right: `${240 * position}px` }}
+          >
+            {/*個別商品類別 */}
+            {imgSrc.map((src, i) => (
+              <Col key={i} className={`${styles.flex_start}`}>
+                <ShopProductsCard src={src} />
+              </Col>
+            ))}
           </div>
-          {/* 右箭頭 */}
-          <Image
-            src={hoveredIndexRight === i ? arrowR_fill : arrowR_outline}
-            width={30}
-            height={40}
-            alt="arrow_right"
-            onMouseEnter={() => handleMouseEnterRight(i)}
-            onMouseLeave={handleMouseLeaveRight}
-            className={`${styles.arrow}`}
-            onClick={() => {
-              position > 4 ? setPosition(5) : setPosition(position + 1)
-            }}
-          />
-        </Row>
-      </Fragment>
-    )
-  })
+        </div>
+        {/* 右箭頭 */}
+
+        <Image
+          src={hoveredIndexRight === i ? arrowR_fill : arrowR_outline}
+          width={30}
+          height={40}
+          alt="arrow_right"
+          onMouseEnter={() => handleMouseEnterRight(i)}
+          onMouseLeave={handleMouseLeaveRight}
+          className={`${styles.arrow} ${position > 4 ? styles.display : ''}`}
+          onClick={() => {
+            position > 4 ? setPosition(5) : setPosition(position + 1)
+          }}
+        />
+      </Row>
+    </Fragment>
+  )
 }
