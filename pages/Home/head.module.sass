@@ -193,37 +193,55 @@ ul.drop_down_menu ul
     justify-content: center
     align-items: center
 
-// .right
-//   padding-right: 70px
-//   padding-bottom: 5px 
-
-// .left
-//   padding-left: 70px
-//   padding-bottom: 5px 
-
 .HomeDoor
   width:1920px
   box-sizing: border-box
   position: absolute
   left:317px
-  top:175px
+  top:715px
   display: none
-
 
 
 .signInBlock:active ~ .HomeDoor
   display: block
+  animation: showHide 6s linear 
+
+@keyframes showHide
+  0% 
+    opacity: 0
+    visibility: hidden
+  63.5% 
+    opacity: 0
+    visibility: hidden
+  
+  63.8% 
+    opacity: 1
+    visibility: visible
+  
+  99% 
+    opacity: 1
+    visibility: visible
+  
+  100% 
+    opacity: 0
+    visibility: hidden
 
 .signInDoor
+  left:1201px
+  bottom:259px
   position: absolute
-  align-items: center
-  justify-content: center
-  width:200px
-  height:
+  width:151px
+  height:218px
   overflow: hidden
+  border-radius: 80px 80px 0 0
+  box-sizing: border-box
+  display: none
 
 .HomeDoor2
-  width:100px
-  position: absolute
-  box-sizing: border-box
-  clip-path:url(#Door)
+  display: flex
+  padding: 107px 77px
+
+.signInBlock:active ~ .signInDoor
+  display: block
+
+

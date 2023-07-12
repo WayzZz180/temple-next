@@ -16,7 +16,7 @@ import Pocket from '@/components/common/cards/HomePocket'
 import Job from '@/components/common/cards/HomeJob'
 import HomeCarousels from '@/components/common/carousel/HomeCarousels'
 import HomeDoor from '@/components/common/cards/HomeDoor'
-import homeDoorOverlay from '@/assets/homeDoorOverlay.svg'
+import HomeDoor2 from '@/components/common/cards/HomeDoor2'
 
 export default function Home() {
   return (
@@ -60,7 +60,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className={`${styles.signInBlock}`}>
+        <div id="change" className={`${styles.signInBlock}`}>
           {/* signin star */}
           <div className={`${styles.pinkStar}`}>
             <Image src={pink_star} width={40} alt="star" />
@@ -74,26 +74,10 @@ export default function Home() {
           <HomeDoor />
         </div>
         <div className={`${styles.signInDoor}`}>
-        <svg
-        width="0"
-        height="0"
-        x="0"
-        y="0"
-          id="圖層_2"
-          data-name="圖層 2"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 155.39 226.45"
-        >
-        <defs>
-        <clipPath id="Door">
-          <path d="M155.39,77.69A77.69,77.69,0,0,0,77.69,0h0A77.69,77.69,0,0,0,0,77.69V226.45H155.39Z" />
-          </clipPath>
-          </defs>
-        </svg>
-        <div className={`${styles.HomeDoor2}`}>
-          <HomeDoor />
+          <div className={styles.HomeDoor2}>
+            <HomeDoor2 />
+          </div>
         </div>
-      </div>
       </div>
       <Title
         text="供品套組精選"
