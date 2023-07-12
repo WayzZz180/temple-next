@@ -1,4 +1,5 @@
-import styles from './imgTest.module.sass'
+import { useRouter } from 'next/router'
+import styles from './category.module.sass'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'

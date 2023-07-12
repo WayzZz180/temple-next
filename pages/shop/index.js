@@ -54,20 +54,23 @@ export default function Shop() {
       <Row className="nowrap mt100px mb50px fs24px">
         {/* 標題 */}
         <Col>
-          <p className={`${styles.title}`}>咱有的物件</p>
+          <p className={`${styles.title}`}>咱有的物仔</p>
         </Col>
       </Row>
       <Row className={`nowrap fwBold fs20px mb50px`}>
         {/* 類別詳細 */}
         {data.map((v, i) => {
           return (
-            <Col key={i} 
-            onMouseEnter={() => handleMouseEnterStar(i)}
-            onMouseLeave={handleMouseLeaveStar}
+            <Col
+              key={i}
+              onMouseEnter={() => handleMouseEnterStar(i)}
+              onMouseLeave={handleMouseLeaveStar}
             >
               <Link
                 href="#"
-                className={`${styles.category} ${hoveredIndexStar === i ? styles.hovered : ''} m15px`}
+                className={`${styles.category} ${
+                  hoveredIndexStar === i ? styles.hovered : ''
+                } m15px`}
               >
                 {/* 星星 */}
                 <span className={`${styles.star} pe15px `}>
