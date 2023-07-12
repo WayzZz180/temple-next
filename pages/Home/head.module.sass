@@ -63,9 +63,17 @@
           opacity: 0
         @else 
           opacity: 1
-
-.signIn:hover ~ .pinkStar
-  animation: pinkStar 3s linear infinite alternate
+.signInBlock
+  left:1198px
+  bottom:250px
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  position: absolute
+  width:160px
+  height:225px
+  border-radius:40% 40% 0 0
 
 .signIn
     position: relative
@@ -76,7 +84,12 @@
     transform: translateZ(1px)
     position: relative
 
- 
+.signInBlock:hover > .pinkStar
+  animation: pinkStar 3s linear infinite alternate
+
+.signInBlock:active > .pinkStar
+  animation: pinkStar 3s linear infinite alternate
+
 @keyframes pinkStar 
   0% 
     transform: rotateY(0deg)
@@ -195,16 +208,6 @@ ul.drop_down_menu ul
   left:317px
   top:175px
   display: none
-.signInBlock
-  left:1198px
-  bottom:100px
-  display: flex
-  flex-direction: column
-  align-items: center
-  justify-content: center
-  position: absolute
-  width:160px
-  height:225px
-  border-radius:40% 40% 0 0
+
 .signInBlock:active ~ .HomeDoor
   display: block

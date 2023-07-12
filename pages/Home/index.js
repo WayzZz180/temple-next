@@ -16,6 +16,7 @@ import Pocket from '@/components/common/cards/HomePocket'
 import Job from '@/components/common/cards/HomeJob'
 import HomeCarousels from '@/components/common/carousel/HomeCarousels'
 import HomeDoor from '@/components/common/cards/HomeDoor'
+import homeDoorOverlay from '@/assets/homeDoorOverlay.svg'
 
 export default function Home() {
   return (
@@ -34,16 +35,6 @@ export default function Home() {
                 className={`${styles.right}`}
               />
               <Temple />
-              <div className={`${styles.signInBlock}`}>
-                {/* signin star */}
-                <div className={`${styles.pinkStar}`}>
-                  <Image src={pink_star} width={40} alt="star" />
-                </div>
-                {/* sign in word */}
-                <div className={`${styles.signIn}`}>
-                  <Image src={signIn} width={30} alt="signIn" />
-                </div>
-              </div>
               <div>
                 {/* dog */}
                 <div className={`${styles.dog}`}>
@@ -69,7 +60,17 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className={`${styles.HomeDoor}`}>
+        <div className={`${styles.signInBlock}`}>
+          {/* signin star */}
+          <div className={`${styles.pinkStar}`}>
+            <Image src={pink_star} width={40} alt="star" />
+          </div>
+          {/* sign in word */}
+          <div className={`${styles.signIn}`}>
+            <Image src={signIn} width={30} alt="signIn" />
+          </div>
+        </div>
+        <div className={styles.HomeDoor}>
           <HomeDoor />
         </div>
       </div>
