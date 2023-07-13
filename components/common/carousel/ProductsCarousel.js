@@ -10,22 +10,10 @@ import arrowR_fill from '@/assets/arrowR_fill.svg'
 import arrowL_outline from '@/assets/arrowL_outline.svg'
 import arrowL_fill from '@/assets/arrowL_fill.svg'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
+import usePath from '@/hooks/usePath.js'
 
-const imgSrc = []
-
-for (let i = 1; i <= 10; i++) {
-  const imagePath = require(`@/public/img/cookies/pancake/pancake (${i}).png`)
-  imgSrc.push(imagePath.default)
-}
-
-// function chunkArray(arr, size) {
-//   const chunks = []
-//   for (let i = 0; i < arr.length; i += size) {
-//     chunks.push(arr.slice(i, i + size))
-//   }
-//   return chunks
-// }
 export default function ProductsCarousel({ text, color, i }) {
+  const { imgSrc } = usePath('cookies', 'pancake', 10)
   const {
     hoveredIndex: hoveredIndexLeft,
     handleMouseEnter: handleMouseEnterLeft,
@@ -39,8 +27,6 @@ export default function ProductsCarousel({ text, color, i }) {
 
   // for carousel
   const [position, setPosition] = useState(0)
-
-  // const imgChunks = chunkArray(imgSrc, 5)
 
   return (
     // 一個類別
