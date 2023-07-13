@@ -1,0 +1,48 @@
+.TEST::after {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 3px;
+    background-color: rgb(232, 44, 44);
+  }
+
+  .title_container {
+    text-align: center;
+    display: inline-block;
+    border: 2px solid #422de6;
+    padding: 16px;
+  
+  }
+
+  
+  .title {
+  
+    color: #2C2C2C;
+    text-align: center;
+    font-size: 36px;
+    font-style:normal;
+    font-weight: 700;
+    line-height: 88.2%;
+    letter-spacing: 7.2px;
+
+  }
+  
+  .subtitle {
+    font-size: 24px;
+    color: #666;
+  }
+  
+  .colored_line_green {
+    width: 139px;
+    height: 8px;
+    background-color: #47B990;
+    margin: auto;
+  }
+
+
+  .colored_line_red {
+    width: 139px;
+    height: 8px;
+    background-color: #E4007E;
+    margin: auto;
+  }
