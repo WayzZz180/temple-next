@@ -7,57 +7,72 @@
 
 .b
     position: absolute
-    animation: door_b 2s ease-in-out infinite alternate
+    animation: door_b 2.5s ease-in-out infinite alternate-reverse
 
 @keyframes door_b
   0% 
-    transform: scale(2)
-  100% 
     transform: scale(1.1)
+  100% 
+    transform: scale(2)
 .o
     position: absolute
-    animation: door_o 2s ease-in-out infinite alternate
+    animation: door_o 2.5s ease-in-out infinite alternate-reverse
 
 @keyframes door_o
   0% 
-    transform: scale(2.25)
-  90% 
+    transform: scale(0.9)
+  10% 
     transform: scale(0.9)
   100% 
-    transform: scale(0.9)
+    transform: scale(2.25)
 
 .p
     position: absolute
-    animation: door_p 2s ease-in-out infinite alternate
+    animation: door_p 2.5s ease-in-out infinite alternate-reverse
 
 @keyframes door_p
   0% 
-    transform: scale(2.5)
-  84% 
+    transform: scale(0.7)
+  16% 
     transform: scale(0.7)
   100% 
-    transform: scale(0.7)
+    transform: scale(2.5)
 
 .z
     position: absolute
-    animation: door_z 2s ease-in-out infinite alternate
+    animation: door_z 2.5s ease-in-out infinite alternate-reverse
 
 @keyframes door_z
   0% 
-    transform: scale(2.75)
-  82% 
+    transform: scale(0.5)
+  22% 
     transform: scale(0.5)
   100% 
-    transform: scale(0.5)
+    transform: scale(2.75)
 
 .y
     position: absolute
-    animation: door_y 2s ease-in-out infinite alternate
+    animation: door_y 2.5s ease-in-out infinite alternate-reverse
 
 @keyframes door_y
   0% 
-    transform: scale(3)
-  80% 
+    transform: scale(0.3)
+  30% 
     transform: scale(0.3)
   100% 
-    transform: scale(0.3)
+    transform: scale(3)
+
+.bg
+  position: absolute
+  width: 1300px
+  height:1300px
+  background-color: #000
+  animation: door_bg 2.5s linear infinite
+
+@keyframes door_bg
+  0% 
+    opacity: 0
+  30% 
+    opacity: 1
+  100% 
+    opacity: 1

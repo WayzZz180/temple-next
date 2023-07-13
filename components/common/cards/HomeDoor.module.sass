@@ -7,18 +7,18 @@
 
 .b
     position: absolute
-    animation: door_b 3.5s ease-out infinite 
-    animation-delay:2.8s
+    animation: door_b  2.5s ease-out infinite 
+    animation-delay:3.5s
 
 @keyframes door_b
   0% 
     transform: scale(0.9)
   100% 
-    transform: scale(24)
+    transform: scale(22)
 .o
     position: absolute
-    animation: door_o 3.5s ease-out infinite 
-    animation-delay:2.8s
+    animation: door_o  2.5s ease-out infinite 
+    animation-delay:3.5s
 
 @keyframes door_o
   0% 
@@ -30,8 +30,8 @@
 
 .p
     position: absolute
-    animation: door_p 3.5s ease-out infinite 
-    animation-delay:2.8s
+    animation: door_p  2.5s ease-out infinite 
+    animation-delay:3.5s
 
 @keyframes door_p
   0% 
@@ -39,12 +39,12 @@
   16% 
     transform: scale(0.9)
   100% 
-    transform: scale(20)
+    transform: scale(22)
 
 .z
     position: absolute
-    animation: door_z 3.5s ease-out infinite 
-    animation-delay:2.8s
+    animation: door_z  2.5s ease-out infinite 
+    animation-delay:3.5s
 
 @keyframes door_z
   0% 
@@ -52,12 +52,12 @@
   22% 
     transform: scale(0.9)
   100% 
-    transform: scale(18)
+    transform: scale(22)
 
 .y
     position: absolute
-    animation: door_y 3.5s ease-out infinite 
-    animation-delay:2.8s
+    animation: door_y  2.5s ease-out infinite 
+    animation-delay:3.5s
 
 @keyframes door_y
   0% 
@@ -65,4 +65,28 @@
   30% 
     transform: scale(0.9)
   100% 
-    transform: scale(16)
+    transform: scale(22)
+
+.bg
+  position: absolute
+  width: 1920px
+  height:1920px
+  background-color: #000
+  animation-delay:3.5s
+  animation: door_bg 6s linear infinite
+
+@keyframes door_bg
+  0% 
+    transform: scale(1)
+    opacity: 0
+    visibility: visible
+  10% 
+    opacity: 1
+    visibility: visible
+  99% 
+    opacity: 1
+    visibility: visible
+  100% 
+    transform: scale(24)
+    opacity: 0
+    visibility: hidden

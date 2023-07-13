@@ -10,6 +10,7 @@ import styles from './HomeDoor.module.sass'
 export default function HomeDoor() {
   return (
     <div className={`${styles.container}`}>
+      <div className={`${styles.bg}`}></div>
       <div className={`${styles.y}`}>
         <Image src={Y} alt="" width="1900"></Image>
       </div>
