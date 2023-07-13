@@ -8,13 +8,46 @@ import ShopTitle from '@/components/common/title/ShopTitle'
 
 
 export default function Category() {
+  const imgSrc = []
   const router = useRouter();
   const { category, data } = router.query;
   const parsedData = JSON.parse(data);
   const categoryData = parsedData.find((item) => item.id === category);
+  const products = [
+    {
+      category: 'cookies',
+      details: [
+        'chips',
+        'crisps',
+        'milk_crackers',
+        'oodles',
+        'pancake',
+        'puffs',
+        'shaqima',
+        'soda_crackers',
+        'yolk_pie'
+      ]
+    },
+    {
+      category: 'candy',
+      details: ['candy', 'chocolate', 'fudge', 'soft', 'throat']
+    },
+    {
+      category: 'drinks',
+      details: ['black_tea', 'eight', 'green_tea', 'juice', 'oolong', 'soda', 'water']
+    },
+    {
+      category: 'gifts',
+      details: ['cow', 'floss', 'gong', 'pineapple', 'yolk']
+    },
+    {
+      category: 'salty',
+      details: ['can', 'instant_noodles', 'peanut']
+    }
+  ];
 
-  const imgSrc = []
-  const path = ``
+  const path = products.filter((v)=> v.category === {category})
+  console.log(path)
   for (let i = 1; i <= 54; i++) {
     const imagePath = require(`@/public/img/${category}/yolk_pie/yolk_pie (${i}).png`)
     imgSrc.push(imagePath.default)
