@@ -26,6 +26,7 @@ export default function Home() {
   } = useHoverIndex(-1)
   return (
     <>
+      {/* section1 */}
       <div className={`${styles.background}`}>
         <div className={`${styles.place}`}>
           <div className={`${styles.floor}`}>
@@ -36,17 +37,19 @@ export default function Home() {
             <Temple />
             <div>
               {/* dog */}
-              <div className={`${styles.dog}`}>
-                <Image src={dog} width={367} alt="dog" />
-              </div>
-              {/* lighting */}
-              <div className={`${styles.lighting}`}>
-                <Image src={lighting} width={25} alt="lighting" />
-              </div>
-              {/* lighting */}
-              <div className={`${styles.light_div}`}>
-                <div className={`${styles.lighting2}`}>
+              <div className={`${styles.position}`}>
+                <div className={`${styles.dog}`}>
+                  <Image src={dog} width={367} alt="dog" />
+                </div>
+                {/* lighting */}
+                <div className={`${styles.lighting}`}>
                   <Image src={lighting} width={25} alt="lighting" />
+                </div>
+                {/* lighting */}
+                <div className={`${styles.light_div}`}>
+                  <div className={`${styles.lighting2}`}>
+                    <Image src={lighting} width={25} alt="lighting" />
+                  </div>
                 </div>
               </div>
 
@@ -75,12 +78,16 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* section2 */}
       <Title
         text="供品套組精選"
         text2="OFFERING SELECTION SET"
         lineColor="green"
       />
       <HomeCarousels />
+
+      {/* section3 */}
       <Title
         text="求神問卜"
         text2="INQUIRING OF THE DIVINE"
@@ -91,14 +98,17 @@ export default function Home() {
         <God text1="月老" text2="求紅線" />
         <God text1="文昌" text2="點學業燈" pic="StudyGod" />
       </div>
+      {/* section4 */}
       <Title text="遶境online" text2="PILGRIMAGE ONLINE" lineColor="green" />
       <div>
         <Online />
       </div>
+      {/* section5 */}
       <Title text="錦囊小知識" text2="POCKET TRIVIA" lineColor="hot_pink" />
       <div>
         <Pocket />
       </div>
+      {/* section6 */}
       <div className="mt60px">
         <Title text="加入我們" text2="JOB ADVERTISEMENT" lineColor="green" />
       </div>
