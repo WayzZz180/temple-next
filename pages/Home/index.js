@@ -16,6 +16,8 @@ import Online from '@/components/common/cards/HomeOnline'
 import Pocket from '@/components/common/cards/HomePocket'
 import Job from '@/components/common/cards/HomeJob'
 import HomeCarousels from '@/components/common/carousel/HomeCarousels'
+import HomeDoor from '@/components/common/cards/HomeDoor'
+import HomeDoor2 from '@/components/common/cards/HomeDoor2'
 import { useHoverIndex } from '@/hooks/useHoverIndex'
 
 export default function Home() {
