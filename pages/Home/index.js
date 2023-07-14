@@ -21,6 +21,7 @@ import HomeDoor2 from '@/components/common/cards/HomeDoor2'
 export default function Home() {
   return (
     <>
+      {/* section1 */}
       <div className={`${styles.container}`}>
         <div className={`${styles.background}`}>
           <div className={`${styles.place}`}>
@@ -30,12 +31,12 @@ export default function Home() {
             <div className={styles.flex_row}>
               <Image
                 src={foo_dog_left}
-                width={295}
+                width={250}
                 alt="foo_dog_left"
                 className={`${styles.right}`}
               />
               <Temple />
-              <div>
+              <div className={`${styles.position}`}>
                 {/* dog */}
                 <div className={`${styles.dog}`}>
                   <Image src={dog} width={400} alt="dog" />
@@ -53,38 +54,44 @@ export default function Home() {
               </div>
               <Image
                 src={foo_dog_right}
-                width={295}
+                width={250}
                 alt="foo_dog_right"
                 className={`${styles.left}`}
               />
             </div>
           </div>
         </div>
-        <div id="change" className={`${styles.signInBlock}`}>
-          {/* signin star */}
-          <div className={`${styles.pinkStar}`}>
-            <Image src={pink_star} width={40} alt="star" />
+        <div className={`${styles.position}`}>
+          <div id="change" className={`${styles.signInBlock}`}>
+            {/* signin star */}
+            <div className={`${styles.pinkStar}`}>
+              <Image src={pink_star} width={40} alt="star" />
+            </div>
+            {/* sign in word */}
+            <div className={`${styles.signIn}`}>
+              <Image src={signIn} width={30} alt="signIn" />
+            </div>
           </div>
-          {/* sign in word */}
-          <div className={`${styles.signIn}`}>
-            <Image src={signIn} width={30} alt="signIn" />
+          <div className={styles.HomeDoor}>
+            <HomeDoor />
           </div>
-        </div>
-        <div className={styles.HomeDoor}>
-          <HomeDoor />
-        </div>
-        <div className={`${styles.signInDoor}`}>
-          <div className={styles.HomeDoor2}>
-            <HomeDoor2 />
+          <div className={`${styles.signInDoor}`}>
+            <div className={styles.HomeDoor2}>
+              <HomeDoor2 />
+            </div>
           </div>
         </div>
       </div>
+
+      {/* section2 */}
       <Title
         text="供品套組精選"
         text2="OFFERING SELECTION SET"
         lineColor="hot_pink"
       />
       <HomeCarousels />
+
+      {/* section3 */}
       <Title
         text="求神問卜"
         text2="INQUIRING OF THE DIVINE"
@@ -95,11 +102,13 @@ export default function Home() {
         <God text1="月老" text2="求紅線" />
         <God text1="文昌" text2="點學業燈" pic="StudyGod" />
       </div>
-      <Title text="遶境online" text2="PILGRIMAGE ONLINE" lineColor="hot_pink" />
+      {/* section4 */}
+      <Title text="遶境online" text2="PILGRIMAGE ONLINE" lineColor="green" />
       <div>
         <Online />
       </div>
-      <Title text="錦囊小知識" text2="POCKET TRIVIA" lineColor="green" />
+      {/* section5 */}
+      <Title text="錦囊小知識" text2="POCKET TRIVIA" lineColor="hot_pink" />
       <div>
         <Pocket />
       </div>
