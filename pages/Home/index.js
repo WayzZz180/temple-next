@@ -39,7 +39,7 @@ export default function Home() {
               <div className={`${styles.position}`}>
                 {/* dog */}
                 <div className={`${styles.dog}`}>
-                  <Image src={dog} width={370} alt="dog" />
+                  <Image src={dog} width={400} alt="dog" />
                 </div>
                 {/* lighting */}
                 <div className={`${styles.lighting}`}>
@@ -90,6 +90,7 @@ export default function Home() {
         lineColor="hot_pink"
       />
       <HomeCarousels />
+
       {/* section3 */}
       <Title
         text="求神問卜"
@@ -102,16 +103,15 @@ export default function Home() {
         <God text1="文昌" text2="點學業燈" pic="StudyGod" />
       </div>
       {/* section4 */}
-      <Title text="遶境online" text2="PILGRIMAGE ONLINE" lineColor="hot_pink" />
+      <Title text="遶境online" text2="PILGRIMAGE ONLINE" lineColor="green" />
       <div>
         <Online />
       </div>
       {/* section5 */}
-      <Title text="錦囊小知識" text2="POCKET TRIVIA" lineColor="green" />
+      <Title text="錦囊小知識" text2="POCKET TRIVIA" lineColor="hot_pink" />
       <div>
         <Pocket />
       </div>
-      {/* section6 */}
       <div className="mt60px">
         <Title text="加入我們" text2="JOB ADVERTISEMENT" lineColor="hot_pink" />
       </div>
