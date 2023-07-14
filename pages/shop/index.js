@@ -79,9 +79,9 @@ export default function Shop() {
                   query: { data: JSON.stringify(data) },
                 }}
                 as={`/shop/${v.id}`}
-                className={`${styles.category} ${
-                  hoveredIndexStar === i ? styles.hovered : ''
-                } m15px`}
+                className={`${styles.category}
+                 ${hoveredIndexStar === i ? styles.hovered : ''} 
+                m15px`}
               >
                 {/* 星星 */}
                 <span className={`${styles.star} pe15px `}>
