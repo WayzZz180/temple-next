@@ -1,60 +1,92 @@
-.flex
-    width: 1920px
-    height:1080px
-    display: flex
-    justify-content: center
+.container
+    display: grid
+    justify-self: center
+    justify-items: center
+    align-self: center
     align-items: center
 
 .b
     position: absolute
-    overflow: hidden
-    animation: door_b 1.5s ease-in-out 1
+    animation: door_b  1.8s ease-out infinite 
+    animation-delay:3.5s
 
 @keyframes door_b
   0% 
-    transform: scale(1)
+    transform: scale(0.8)
   100% 
-    transform: scale(10)
+    transform: scale(22)
 .o
     position: absolute
-    overflow: hidden
-    animation: door_o 2s ease-in-out 1
+    animation: door_o  1.8s ease-out infinite 
+    animation-delay:3.5s
 
 @keyframes door_o
   0% 
-    transform: scale(1)
+    transform: scale(0.8)
+  10% 
+    transform: scale(0.8)
   100% 
-    transform: scale(10)
+    transform: scale(22)
 
 .p
     position: absolute
-    overflow: hidden
-    animation: door_p 2s ease-in-out 1
+    animation: door_p  1.8s ease-out infinite 
+    animation-delay:3.5s
 
 @keyframes door_p
   0% 
-    transform: scale(1)
+    transform: scale(0.8)
+  16% 
+    transform: scale(0.8)
   100% 
-    transform: scale(10)
+    transform: scale(22)
 
 .z
     position: absolute
-    overflow: hidden
-    animation: door_z 2s ease-in-out 1
+    animation: door_z  1.8s ease-out infinite 
+    animation-delay:3.5s
 
 @keyframes door_z
   0% 
-    transform: scale(1)
+    transform: scale(0.8)
+  22% 
+    transform: scale(0.8)
   100% 
-    transform: scale(10)
+    transform: scale(22)
 
 .y
     position: absolute
-    overflow: hidden
-    animation: door_y 2s ease-in-out 1
+    animation: door_y  1.8s ease-out infinite 
+    animation-delay:3.5s
 
 @keyframes door_y
   0% 
-    transform: scale(1)
+    transform: scale(0.8)
+  28% 
+    transform: scale(0.8)
   100% 
-    transform: scale(10)
+    transform: scale(22)
+
+.bg
+  position: absolute
+  width: 1920px
+  height:1920px
+  background-color: #000
+  animation-delay:3.5s
+  animation: door_bg 6s linear infinite
+
+@keyframes door_bg
+  0% 
+    transform: scale(1)
+    opacity: 0
+    visibility: visible
+  10% 
+    opacity: 1
+    visibility: visible
+  99% 
+    opacity: 1
+    visibility: visible
+  100% 
+    transform: scale(24)
+    opacity: 0
+    visibility: hidden

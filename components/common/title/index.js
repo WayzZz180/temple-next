@@ -11,7 +11,7 @@ export default function Title({
 }) {
   const var_color = variables[lineColor]
   return (
-    <div className={`${styles.flex}`}>
+    <div className={`${styles.flex} mt120px`}>
       <div className={`${styles.title}`}>{text}</div>
       <div className={`${styles.title2}`}>{text2}</div>
       <div

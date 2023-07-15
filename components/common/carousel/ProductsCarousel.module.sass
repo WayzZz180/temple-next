@@ -2,10 +2,23 @@
   padding:15px
   cursor: pointer
 
-.carousel 
-  width: 75%
-  overflow: hidden
-  white-space: nowrap
+.row
   display: flex
-  flex-wrap: nowrap
+  align-items: center
+  justify-content: center
+  
+.carousel
+  width:1200px
+  display: flex
+  flex-direction: row
+  overflow: hidden
 
+.move
+  width:1200px
+  display: flex
+  position: relative
+  transition: right 0.6s ease-out
+
+.display
+  // pointer-events: none
+  opacity: 0

@@ -60,6 +60,10 @@
 
 @mixin color($name, $color)
     .#{$name}
+        color: $color 
+
+@mixin selection($name, $color)
+    #{$name}::selection
         color: $color
 
 

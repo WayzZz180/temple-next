@@ -6,6 +6,12 @@
   background-color: $brown
   z-index: -2
 
+.container
+  position: relative
+  width: 1920px
+  height:1080px
+  overflow: hidden
+
 .place
   padding-top:5px
   position: relative
@@ -23,12 +29,12 @@
 
 .dog
     position: absolute
-    left: 445px
+    left: 465px
     bottom:14px
 
 .lighting
     position: absolute
-    left: 600px
+    left: 620px
     bottom:250px
     animation-name: light1
     animation-duration: 1s      
@@ -38,7 +44,7 @@
 .light_div
     transform: rotate(-35deg)
     position: absolute
-    left: 590px
+    left: 610px
     bottom:225px
 
 .lighting2
@@ -57,22 +63,32 @@
           opacity: 0
         @else 
           opacity: 1
-
+.signInBlock
+  left:1183px
+  bottom:320px
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  position: absolute
+  width:140px
+  height:203px
+  border-radius:75px 75px 0 0
+  border: none
 
 .signIn
-    position: absolute
-    right: 630px
-    bottom:133px
+    position: relative
 
 .pinkStar
+    padding-bottom: 20px
     display: inline-block
     transform: translateZ(1px)
-    position: absolute
-    right: 625px
-    bottom:235px
+    position: relative
 
-.pinkStar>div
-  display: inline-block
+.signInBlock:hover > .pinkStar
+  animation: pinkStar 3s linear infinite alternate
+
+.signInBlock:active > .pinkStar
   animation: pinkStar 3s linear infinite alternate
 
 @keyframes pinkStar 
@@ -178,10 +194,54 @@ ul.drop_down_menu ul
     justify-content: center
     align-items: center
 
-// .right
-//   padding-right: 70px
-//   padding-bottom: 5px 
+.HomeDoor
+  width:1920px
+  box-sizing: border-box
+  position: absolute
+  left:290px
+  top:650px
+  display: none
 
-// .left
-//   padding-left: 70px
-//   padding-bottom: 5px 
+.signInBlock:active ~ .HomeDoor
+  display: block
+  animation: showHide 6s linear 
+
+@keyframes showHide
+  0% 
+    opacity: 0
+    visibility: hidden
+  59% 
+    opacity: 0
+    visibility: hidden
+  
+  59.5% 
+    opacity: 1
+    visibility: visible
+  
+  99% 
+    opacity: 1
+    visibility: visible
+  
+  100% 
+    opacity: 0
+    visibility: hidden
+
+.signInDoor
+  left:1182px
+  bottom:323px
+  position: absolute
+  width:140px
+  height:200px
+  overflow: hidden
+  border: none
+  border-radius: 78px 78px 0 0
+  box-sizing: border-box
+  display: none
+
+.HomeDoor2
+  display: flex
+  border: none
+  padding: 101px 71px
+
+.signInBlock:active ~ .signInDoor
+  display: block

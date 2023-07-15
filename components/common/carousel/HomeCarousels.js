@@ -47,8 +47,9 @@ class CarouselMain extends Component {
           index={this.state.index}
           direction={this.state.direction}
           onSelect={this.handleSelect}
+          interval={3000}
         >
-          <Carousel.Item>
+          <Carousel.Item >
             <HomeSet text1="吉祥如意" text2="媽祖基本款" pic1="MazuSet" />
           </Carousel.Item>
           <Carousel.Item>
