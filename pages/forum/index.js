@@ -6,7 +6,7 @@ import Rightgod from '@/assets/rightgod.svg'
 import Leftgod from '@/assets/leftgod.svg'
 import ForumLogo from '@/components/common/forumlogo'
 import Title from '@/components/common/title'
-// import Forumcard from '@/components/common/forumcard'
+import Forumcard from '@/components/common/cards/forumcard'
 
 export default function Forum() {
   return (
