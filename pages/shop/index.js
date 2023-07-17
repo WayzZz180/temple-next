@@ -14,39 +14,9 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-export default function Shop() {
-  const data = [
-    {
-      text: '咱有的',
-      id: 'all',
-    },
-    {
-      text: '唰嘴ㄟ',
-      id: 'cookies',
-      color: 'green',
-    },
-    {
-      text: '呷甜甜',
-      id: 'candy',
-      color: 'hot_pink',
-    },
-    {
-      text: '啉涼涼',
-      id: 'drinks',
-      color: 'green',
-    },
-    {
-      text: '呷飽飽',
-      id: 'salty',
-      color: 'hot_pink',
-    },
-    {
-      text: '本土ㄟ',
-      id: 'gifts',
-      color: 'green',
-    },
-  ]
+import data from '@/components/mydata/productsTitleData'
 
+export default function Shop() {
   // 類別hover
   const {
     hoveredIndex: hoveredIndexStar,
