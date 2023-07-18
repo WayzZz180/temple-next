@@ -9,12 +9,18 @@ import Heart_outline from '@mui/icons-material/FavoriteBorderSharp'
 import cart_fill from '@/assets/cart_fill.svg'
 import cart_outline from '@/assets/cart_outline.svg'
 //hooks
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import { useClick } from '@/hooks/useClick.js'
 
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
-export default function ShopProductsCard({ src }) {
+export default function ShopProductsCard({
+  src,
+  text = '洋芋片',
+  price = 100,
+}) {
   //判斷hover
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-1)
   const isHeartHovered = hoveredIndex === 1
@@ -53,7 +59,7 @@ export default function ShopProductsCard({ src }) {
       <div className={`${styles.line} w180px h3px`}></div>
       {/* 標題 */}
       <div className={`${styles.flexStart} mt15px fwBold fs18px`}>
-        <div className={'w180px'}>洋芋片洋芋片洋芋片</div>
+        <div className={`${styles.textContainer} w180px h55px`}>{text}</div>
       </div>
       {/* 星星 */}
       <div className={`${styles.flexStart} mt15px `}>
@@ -66,7 +72,7 @@ export default function ShopProductsCard({ src }) {
       {/* 價格+icons */}
       <div className={`${styles.flexBetween} mt30px `}>
         {/* 價格 */}
-        <span className={`${styles.inlineBlock} fs20px fwBold`}>$80</span>
+        <span className={`${styles.inlineBlock} fs20px fwBold`}>${price}</span>
         <span className={`${styles.inlineBlock} ${styles.icons}`}>
           {/* 愛心 */}
           <span
