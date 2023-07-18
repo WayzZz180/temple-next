@@ -5,8 +5,9 @@ import nav from '@/assets/nav.svg'
 import Rightgod from '@/assets/rightgod.svg'
 import Leftgod from '@/assets/leftgod.svg'
 import ForumLogo from '@/components/common/forumlogo'
-import Title from '@/components/common/title'
+import Title from '@/components/common/title/forumtitle'
 import Forumcard from '@/components/common/cards/forumcard'
+// import gossiplogo from '@/assets/gossiplogo.svg'
 
 export default function Forum() {
   return (
@@ -24,7 +25,28 @@ export default function Forum() {
         </div>
       </div>
       <Title text="主題看板" text2="TOPIC BOARD" />
-      <div>{/* <Forumcard text /> */}</div>
+      <div className={`${styles.flex_row2}`}>
+        <Forumcard text1="八卦版" text2="湊一腳" pic="gossiplogo" />
+        <Forumcard text1="鬼故事版" text2="涼一下" pic="marvellogo" />
+        <Forumcard text1="愛情版" text2="男人嘴" pic="lovelogo" />
+        <Forumcard text1="籤詩版" text2="抽一根" pic="godtellyoulogo" />
+      </div>
+      <div className={`${styles.flex_know}`}>
+        <Title text="知識區" text2="KNOWLEDGE普拉斯" />
+      </div>
+      <div className={`${styles.flex_row2}`}>
+        <Forumcard text1="神佛介紹" text2="長知識" pic="introgod" />
+        <Forumcard text1="禁忌百科" text2="母湯喔" pic="dontdo" />
+        <Forumcard text1="節期拜法" text2="長知識" pic="howtobye" />
+        <Forumcard text1="山野怪談" text2="長知識" pic="monogatari" />
+      </div>
+      <div className={`${styles.flex_know}`}>
+        <Title
+          text="鬼門關倒數"
+          text2="GHOST GATE COUNTDOWN TIMER"
+          lineColor="hot_pink"
+        />
+      </div>
     </>
   )
 }
