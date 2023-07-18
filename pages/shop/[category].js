@@ -62,11 +62,12 @@ export default function Category() {
   const [data, setData] = useState()
 
   useEffect(() => {
+    if(!category) return
+    console.log(`${process.env.API_SERVER}/shop/${category}`);
     fetch(`${process.env.API_SERVER}/shop/${category}`)
       .then((r) => r.json())
       .then((data) => {
         setData(data)
-        console.log(data)
       })
   }, [router.query])
 
@@ -80,6 +81,7 @@ export default function Category() {
   }
   const imgChunks = chunkArray(imgSrc, 5)
 
+  console.log({imgChunks})
   return (
     <Container className={`${styles.container}`}>
       <ShopTop />
@@ -89,13 +91,13 @@ export default function Category() {
       {imgChunks.map((chunk, rowIndex) => (
         <Row key={rowIndex} className={`${styles.row}`}>
           {chunk.map((src, colIndex) => {
-            const product = data[colIndex + rowIndex * 5]
+            const product = data[colIndex + rowIndex * 5];
             return (
               <Col key={colIndex} className={``}>
                 <ShopProductsCard
                   src={src}
-                  text={product.product_name} // 传递product_name
-                  price={product.product_price} // 传递product_price
+                  text={product?.product_name}
+                  price={product?.product_price} 
                 />
               </Col>
             )

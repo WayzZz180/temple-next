@@ -4,13 +4,13 @@ import variables from '@/styles/_variables.module.sass'
 // assests
 import goldenStar_fill from '@/assets/goldenStar_fill.svg'
 import goldenStar_outline from '@/assets/goldenStar_outline.svg'
-import Heart_fill from '@mui/icons-material/Favorite'
-import Heart_outline from '@mui/icons-material/FavoriteBorderSharp'
+import heart_fill from '@/assets/heart_fill.svg'
+import heart_outline from '@/assets/heart_outline.svg'
+// import Heart_fill from '@mui/icons-material/Favorite'
+// import Heart_outline from '@mui/icons-material/FavoriteBorderSharp'
 import cart_fill from '@/assets/cart_fill.svg'
 import cart_outline from '@/assets/cart_outline.svg'
 //hooks
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import { useClick } from '@/hooks/useClick.js'
 
@@ -48,13 +48,13 @@ export default function ShopProductsCard({
   return (
     <div className={`${styles.container} m30px`}>
       {/* 產品圖 */}
-      <Image
+      {/* <Image
         src={src}
         alt="product"
         width={150}
         height={150}
         className="shadow mb20px"
-      ></Image>
+      ></Image> */}
       {/* 分隔線 */}
       <div className={`${styles.line} w180px h3px`}></div>
       {/* 標題 */}
@@ -81,13 +81,13 @@ export default function ShopProductsCard({
             onMouseLeave={handleMouseLeave}
             className={`${styles.inlineBlock} me5px`}
           >
-            {isHeartHovered || heartClickState ? (
-              <ThemeProvider theme={theme}>
-                <Heart_fill />
-              </ThemeProvider>
-            ) : (
-              <Heart_outline />
-            )}
+            <Image
+              src={
+                isHeartHovered || heartClickState ? heart_fill : heart_outline
+              }
+              alt=""
+              width={20}
+            />
           </span>
           {/* 購物車 */}
           <span
