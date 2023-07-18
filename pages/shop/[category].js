@@ -62,6 +62,8 @@ export default function Category() {
   const [data, setData] = useState()
 
   useEffect(() => {
+    if(!category) return
+    console.log(`${process.env.API_SERVER}/shop/${category}`)
     fetch(`${process.env.API_SERVER}/shop/${category}`)
       .then((r) => r.json())
       .then((data) => {
@@ -80,13 +82,14 @@ export default function Category() {
   }
   const imgChunks = chunkArray(imgSrc, 5)
 
+  if(!data)return <p>Loading...</p>
   return (
     <Container className={`${styles.container}`}>
       <ShopTop />
       {/* Title */}
       <ShopTitle text={categoryData?.text} lineColor="green" />
       {/* 商品 */}
-      {imgChunks.map((chunk, rowIndex) => (
+      {imgChunks?.map((chunk, rowIndex) => (
         <Row key={rowIndex} className={`${styles.row}`}>
           {chunk.map((src, colIndex) => {
             const product = data[colIndex + rowIndex * 5]
@@ -94,8 +97,8 @@ export default function Category() {
               <Col key={colIndex} className={``}>
                 <ShopProductsCard
                   src={src}
-                  text={product.product_name} // 传递product_name
-                  price={product.product_price} // 传递product_price
+                  text={product?.product_name} 
+                  price={product?.product_price} 
                 />
               </Col>
             )
