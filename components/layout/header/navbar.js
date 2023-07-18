@@ -21,7 +21,7 @@ export default function Navbar({ info = 'left' }) {
       title: '02',
       title2: '線上拜拜',
       links: [
-        { label: '服務據點', url: '#' },
+        { label: '商城首頁', url: '/shop' },
         { label: '服務客戶', url: '#' },
         { label: '服務地區', url: '#' },
         { label: '徵才資訊', url: '#' },

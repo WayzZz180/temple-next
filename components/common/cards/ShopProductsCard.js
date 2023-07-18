@@ -48,13 +48,13 @@ export default function ShopProductsCard({
   return (
     <div className={`${styles.container} m30px`}>
       {/* 產品圖 */}
-      {/* <Image
+      <Image
         src={src}
         alt="product"
         width={150}
         height={150}
         className="shadow mb20px"
-      ></Image> */}
+      ></Image>
       {/* 分隔線 */}
       <div className={`${styles.line} w180px h3px`}></div>
       {/* 標題 */}
