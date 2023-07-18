@@ -1,25 +1,21 @@
 import { useState, useEffect } from 'react'
 
-export default function usePath(
-  category = 'cookies',
-  product = 'pancake',
-  length = 10
-) {
+export default function usePath(data) {
   const [imgSrc, setImgSrc] = useState([])
 
   useEffect(() => {
     const loadImagePaths = () => {
-      const paths = Array.from({ length }, (_, i) => {
-        const imagePath = require(`@/public/img/${category}/${product}/${product} (${
-          i + 1
-        }).png`)
-        return imagePath.default
-      })
-      setImgSrc(paths)
+      if (data && Array.isArray(data)) {
+        const paths = data.map((v, i) => {
+          const imagePath = require(`@/public/${v.image}`)
+          return imagePath.default
+        })
+        setImgSrc(paths)
+      }
     }
 
     loadImagePaths()
-  }, [category, product])
+  }, [data])
 
   return { imgSrc, setImgSrc }
 }
