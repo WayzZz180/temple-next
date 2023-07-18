@@ -59,7 +59,7 @@ export default function ShopProductsCard({
       <div className={`${styles.line} w180px h3px`}></div>
       {/* 標題 */}
       <div className={`${styles.flexStart} mt15px fwBold fs18px`}>
-        <div className={'w180px'}>{text}</div>
+        <div className={`${styles.textContainer} w180px h55px`}>{text}</div>
       </div>
       {/* 星星 */}
       <div className={`${styles.flexStart} mt15px `}>

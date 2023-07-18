@@ -1,12 +1,16 @@
+import styles from './category.module.sass'
+// hooks
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
-import styles from './category.module.sass'
+import usePath from '@/hooks/usePath.js'
+// Bootstrap
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+//components
+import ShopTop from '@/components/common/shopTop'
 import ShopProductsCard from '@/components/common/cards/ShopProductsCard'
 import ShopTitle from '@/components/common/title/ShopTitle'
-import usePath from '@/hooks/usePath.js'
 import TitleData from '@/components/mydata/productsTitleData'
 
 export default function Category() {
@@ -78,13 +82,14 @@ export default function Category() {
 
   return (
     <Container className={`${styles.container}`}>
+      <ShopTop />
       {/* Title */}
       <ShopTitle text={categoryData?.text} lineColor="green" />
       {/* 商品 */}
       {imgChunks.map((chunk, rowIndex) => (
         <Row key={rowIndex} className={`${styles.row}`}>
           {chunk.map((src, colIndex) => {
-            const product = data[colIndex + rowIndex * 5] // 获取对应索引的产品数据
+            const product = data[colIndex + rowIndex * 5]
             return (
               <Col key={colIndex} className={``}>
                 <ShopProductsCard
