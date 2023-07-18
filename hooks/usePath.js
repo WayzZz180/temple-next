@@ -7,8 +7,9 @@ export default function usePath(data) {
     const loadImagePaths = () => {
       if (data && Array.isArray(data)) {
         const paths = data.map((v, i) => {
-          const imagePath = require(`@/public/${v.image}`)
-          return imagePath.default
+          // const imagePath = require(`/${v.image}`)
+          // return imagePath.default
+          return `/${v.image}`
         })
         setImgSrc(paths)
       }
