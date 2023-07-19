@@ -8,7 +8,10 @@ export default function InputBox({
   prompt = '',
   placeholder = '',
   onChange,
-  width = ' 487px',
+  width = ' 453px',
+  // 487 - 15*2 空白 -2*2border = 453
+  height = '45px',
+  // 49 -2*2 border = 45
 }) {
   const [inputValue, setInputValue] = useState('')
   const [isFocus, setIsFocus] = useState(false)
@@ -39,7 +42,7 @@ export default function InputBox({
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder={placeholder}
-          style={{ width }}
+          style={{ width, height }}
           className={`${isFocus ? styles.focus : ''} ${styles.standard_input}`}
         />
       </div>
