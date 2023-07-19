@@ -6,10 +6,8 @@ export default function usePath(data) {
   useEffect(() => {
     const loadImagePaths = () => {
       if (data && Array.isArray(data)) {
-        const paths = data.map((v, i) => {
-          // const imagePath = require(`/${v.image}`)
-          // return imagePath.default
-          return `/${v.image}`
+        const paths = data.map((v) => {
+          return `/${v.image}?v=12345`
         })
         setImgSrc(paths)
       }
