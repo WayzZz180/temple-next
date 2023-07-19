@@ -58,6 +58,8 @@ export default function Category() {
                   src={src}
                   text={product?.product_name}
                   price={product?.product_price}
+                  category={category}
+                  pid={product?.pid}
                 />
               </Col>
             )

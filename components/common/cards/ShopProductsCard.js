@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import styles from './ShopProductsCard.module.sass'
 import variables from '@/styles/_variables.module.sass'
 // assests
@@ -14,12 +15,12 @@ import cart_outline from '@/assets/cart_outline.svg'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import { useClick } from '@/hooks/useClick.js'
 
-import { createTheme, ThemeProvider } from '@mui/material/styles'
-
 export default function ShopProductsCard({
   src,
   text = '洋芋片',
   price = 100,
+  pid=1,
+  category="cookies"
 }) {
   //判斷hover
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-1)
@@ -32,35 +33,27 @@ export default function ShopProductsCard({
   const { clickState: cartClickState, handleClick: handleCartClick } =
     useClick(false)
 
-  //mui icons color
-  const theme = createTheme({
-    components: {
-      MuiSvgIcon: {
-        styleOverrides: {
-          root: {
-            color: variables.hot_pink,
-          },
-        },
-      },
-    },
-  })
 
   return (
-    <div className={`${styles.container} m30px`}>
+    <div className={`${styles.container}  p30px`}>
       {/* 產品圖 */}
-      <Image
-        src={src}
-        alt="product"
-        width={150}
-        height={150}
-        className="shadow mb20px"
-      ></Image>
+      <Link href={`/shop/${category}/${pid}`}>
+        <Image
+          src={src}
+          alt="product"
+          width={150}
+          height={150}
+          className="shadow mb20px"
+        ></Image>
+      </Link>
       {/* 分隔線 */}
       <div className={`${styles.line} w180px h3px`}></div>
       {/* 標題 */}
+      <Link href={`/shop/${category}/${pid}`} className='link'>
       <div className={`${styles.flexStart} mt15px fwBold fs18px`}>
         <div className={`${styles.textContainer} w180px h55px`}>{text}</div>
       </div>
+      </Link>
       {/* 星星 */}
       <div className={`${styles.flexStart} mt15px `}>
         <Image src={goldenStar_fill} alt="" width={20} />
