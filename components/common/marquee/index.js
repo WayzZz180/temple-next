@@ -9,10 +9,10 @@ import Row from 'react-bootstrap/Row'
 const Cards = styled.div`
   @keyframes CardsRun {
     0% {
-      transform: translateX(-100%);
+      transform: translateX(0);
     }
     100% {
-      transform: translateX(0);
+      transform: translateX(-100%);
     }
   }
   animation: ${(props) =>

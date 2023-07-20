@@ -17,58 +17,17 @@ export default function Category() {
   const router = useRouter()
   const { category } = router.query //抓出類別
   const categoryData = TitleData.find((item) => item.id === category)
-  // const products = [
-  //   {
-  //     category: 'cookies',
-  //     details: [
-  //       'chips',
-  //       'crisps',
-  //       'milk_crackers',
-  //       'oodles',
-  //       'pancake',
-  //       'puffs',
-  //       'shaqima',
-  //       'soda_crackers',
-  //       'yolk_pie',
-  //     ],
-  //   },
-  //   {
-  //     category: 'candy',
-  //     details: ['candy', 'chocolate', 'fudge', 'soft', 'throat'],
-  //   },
-  //   {
-  //     category: 'drinks',
-  //     details: [
-  //       'black_tea',
-  //       'eight',
-  //       'green_tea',
-  //       'juice',
-  //       'oolong',
-  //       'soda',
-  //       'water',
-  //     ],
-  //   },
-  //   {
-  //     category: 'gifts',
-  //     details: ['cow', 'floss', 'gong', 'pineapple', 'yolk'],
-  //   },
-  //   {
-  //     category: 'salty',
-  //     details: ['can', 'instant_noodles', 'peanut'],
-  //   },
-  // ]
 
   // const [keyword, setKeyword] = useState('')
   const [data, setData] = useState()
 
   useEffect(() => {
-    if(!category) return
-    console.log(`${process.env.API_SERVER}/shop/${category}`)
+    if (!category) return
+    // console.log(`${process.env.API_SERVER}/shop/${category}`)
     fetch(`${process.env.API_SERVER}/shop/${category}`)
       .then((r) => r.json())
       .then((data) => {
         setData(data)
-        console.log(data)
       })
   }, [router.query])
 
@@ -82,7 +41,7 @@ export default function Category() {
   }
   const imgChunks = chunkArray(imgSrc, 5)
 
-  if(!data)return <p>Loading...</p>
+  if (!data) return <p>Loading...</p>
   return (
     <Container className={`${styles.container}`}>
       <ShopTop />
@@ -94,11 +53,13 @@ export default function Category() {
           {chunk.map((src, colIndex) => {
             const product = data[colIndex + rowIndex * 5]
             return (
-              <Col key={colIndex} className={``}>
+              <Col key={colIndex}>
                 <ShopProductsCard
                   src={src}
-                  text={product?.product_name} 
-                  price={product?.product_price} 
+                  text={product?.product_name}
+                  price={product?.product_price}
+                  category={category}
+                  pid={product?.pid}
                 />
               </Col>
             )

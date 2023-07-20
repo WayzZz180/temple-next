@@ -1,19 +1,46 @@
-import { useState, Fragment } from 'react'
 import styles from './ProductsCarousel.module.sass'
+import Image from 'next/image'
+// Bootstrap
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Image from 'next/image'
+// hooks
+import { useState, useEffect, Fragment } from 'react'
+import { useHoverIndex } from '@/hooks/useHoverIndex.js'
+import usePath from '@/hooks/usePath.js'
+//components
 import ShopCategory from '@/components/common/title/ShopCategory'
 import ShopProductsCard from '@/components/common/cards/ShopProductsCard'
+//svg
 import arrowR_outline from '@/assets/arrowR_outline.svg'
 import arrowR_fill from '@/assets/arrowR_fill.svg'
 import arrowL_outline from '@/assets/arrowL_outline.svg'
 import arrowL_fill from '@/assets/arrowL_fill.svg'
-import { useHoverIndex } from '@/hooks/useHoverIndex.js'
-import usePath from '@/hooks/usePath.js'
+//data
+import TitleData from '@/components/mydata/productsTitleData'
 
 export default function ProductsCarousel({ text, color, i }) {
-  const { imgSrc } = usePath('cookies', 'pancake', 10)
+  const reqData = TitleData.filter((v) => {
+    return text === v.text
+  })
+  // console.log(reqData)
+  const [data, setData] = useState()
+  useEffect(() => {
+    fetch(process.env.API_SERVER + '/shop', {
+      method: 'POST',
+      body: JSON.stringify({ requestData: reqData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        setData(data)
+        // console.log('data:', data)
+      })
+  }, [])
+
+  const { imgSrc } = usePath(data)
+
   const {
     hoveredIndex: hoveredIndexLeft,
     handleMouseEnter: handleMouseEnterLeft,
@@ -57,7 +84,13 @@ export default function ProductsCarousel({ text, color, i }) {
             {/*個別商品類別 */}
             {imgSrc.map((src, i) => (
               <Col key={i} className={`${styles.flex_start}`}>
-                <ShopProductsCard src={src} />
+                <ShopProductsCard
+                  src={src}
+                  text={data[i].product_name}
+                  price={data[i].product_price}
+                  pid={data[i].pid}
+                  category={reqData[0].id}
+                />
               </Col>
             ))}
           </div>

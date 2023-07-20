@@ -3,6 +3,8 @@
     display: flex
     flex-direction: column
     align-items: center
+    position: relative
+    overflow: hidden
 
 .line
     background-color: $brown
@@ -14,7 +16,6 @@
     align-items: center
 
 .textContainer
-    // white-space: nowrap
     overflow: hidden 
     text-overflow: ellipsis 
     display: -webkit-box
@@ -36,3 +37,49 @@
     display: flex
     align-items: center
     cursor: pointer
+
+
+// .container:hover::before 
+//     content: ""
+//     position: absolute
+//     width: 0
+//     height: 0
+//     bottom: 0
+//     left: 0
+//     border: 2px solid $brown
+//     animation: animate 1s linear 1
+
+// .container::before
+//      content: ""
+//      position: absolute
+//      transform: translateX(100%)
+//      bottom: 0
+//      left: 0
+//      width: 99.5%
+//      height: 0px
+//      border-bottom: 2px solid $brown
+//      border-left: 2px solid $brown
+
+// .container::after
+//     content: ""
+//     position: absolute
+//     transform: translateX(-100%)  
+//     top: 0
+//     left: 0
+//     width: 99.5%
+//     height: 0px
+//     border-top: 2px solid $brown
+//     border-right: 2px solid $brown
+
+// .container:hover::before
+//     transition: 0.3s transform linear, 0.3s height linear 0.3s
+//     transform: translateX(0)
+//     height: 100%
+//     border-color: $brown
+
+// .container:hover::after
+//     transition: 0.3s transform linear 0.2s, 0.3s height linear 0.3s
+//     transform: translateX(0)
+//     height: 100%
+//     border-color: $brown
+    

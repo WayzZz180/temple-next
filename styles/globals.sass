@@ -11,18 +11,15 @@ body
     scroll-behavior: smooth
     overflow-x: hidden
 
-// div::selection
-//     color: $green
-// span::selection
-//     color: $hot_pink
-
 img::selection
     background: transparent
 
-$tag:"div","span","p","h1","h2","h3","h4","h5"
+$tag:"div","span","p","h1","h2","h3","h4","h5","a"
 
-@for $i from 1 through 8
+@for $i from 1 through 2
     @include selection(nth($tag,$i),$hot_pink)
+@for $i from 3 through 9
+    @include selection(nth($tag,$i),$green)
 
 // fs12px ~ fs30px 
 @for $i from 12 through 30
@@ -82,6 +79,7 @@ $font-weight:"Normal","Bold","Bolder","Lighter"
 @for $i from 1 through 1000
     @include menpx($i)
 
+// 卷軸
 ::-webkit-scrollbar
   width: 15px
   height: 10px
@@ -95,20 +93,31 @@ $font-weight:"Normal","Bold","Bolder","Lighter"
     background-image: linear-gradient(to top, #bb952a, #be9a32, #c19e39, #c5a340, #c8a847, #ceae4e, #d3b555, #d9bb5c, #e2c465, #ebce6f, #f4d778, #fde182)
     height:20px
 
-    
+// 圖片陰影
 .shadow
     filter: drop-shadow(0.2rem 0.2rem 0.25rem $shadow)
-    
+
+// 切版方便測試用
 .border
     border:1px red solid
 
+// Bootstrap Row 下這個讓 Col 不換行
 .nowrap
     display: flex
     justify-content: center
     align-items: center
 
+// 商城Container大小
 .shopContainer
     width:80%
     margin-left: auto
     margin-right: auto
+
+// Link預設樣式
+.link
+    color: $fontColor
+    text-decoration: none
+
+.link:hover
+    // color: #CDAE50
 

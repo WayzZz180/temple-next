@@ -40,11 +40,7 @@ export default function Shop() {
               onMouseLeave={handleMouseLeaveStar}
             >
               <Link
-                href={{
-                  pathname: `/shop/${v.id}`,
-                  query: { data: JSON.stringify(data) },
-                }}
-                as={`/shop/${v.id}`}
+                href={`/shop/${v.id}`}
                 className={`${styles.category} ${
                   hoveredIndexStar === i ? styles.hovered : ''
                 } m15px`}
