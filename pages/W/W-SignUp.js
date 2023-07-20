@@ -4,7 +4,7 @@ import styles from '@/pages/W/W-SignUp.module.sass'
 // components
 import InputBox from '@/components/common/inputBox/index.js'
 import Title from '@/components/common/title/index.js'
-import Button from '@/components/common/button/index.js'
+import Button from '@/components/common/button/memberButton.js'
 import doorGodLeft from '@/assets/doorGodLeft.svg'
 import doorGodRight from '@/assets/doorGodRight.svg'
 

@@ -5,7 +5,7 @@ import styles from '@/pages/W/W-MyAccount.module.sass'
 // components
 import InputBox from '@/components/common/inputBox/index.js'
 import Title from '@/components/common/title/index.js'
-import Button from '@/components/common/button/index.js'
+import Button from '@/components/common/button/memberButton.js'
 import ProfileNavbar from '@/components/profileNavbar'
 
 //bootstrap
@@ -80,7 +80,6 @@ export default function SignUp() {
               placeholder="出生年月日 "
               onChange
               width={994}
-              style={{ fontSize: 'px' }}
             />
           </Col>
           {/* Q3 */}
@@ -109,7 +108,7 @@ export default function SignUp() {
         </Row>
         <Row className={styles.flex_end}>
           <Col>
-            <Button text="儲存變更" btnColor="black" width={250} />
+            <Button text="儲存變更" btnColor="black" width={229} />
           </Col>
         </Row>
       </Container>

@@ -1,4 +1,4 @@
-import styles from './title.module.sass'
+import styles from './memberTitle.module.sass'
 import variables from '@/styles/_variables.module.sass'
 
 //text = 大標
@@ -8,6 +8,7 @@ export default function Title({
   text = 'text',
   text2 = 'text',
   lineColor = 'green',
+  width = '',
 }) {
   const var_color = variables[lineColor]
   return (
@@ -16,7 +17,7 @@ export default function Title({
       <div className={`${styles.title2}`}>{text2}</div>
       <div
         className={`${styles.line}`}
-        style={{ backgroundColor: var_color }}
+        style={{ backgroundColor: var_color, width: width }}
       ></div>
     </div>
   )
