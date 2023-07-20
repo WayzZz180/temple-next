@@ -1,8 +1,9 @@
 import Image from 'next/image'
+import styles from './pid.module.sass'
 //hooks
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import styles from './pid.module.sass'
+
 //components
 import Marquee from '@/components/common/marquee'
 import Title from '@/components/common/title'
@@ -19,22 +20,25 @@ export default function Pid() {
   const [rows, setRows] = useState()
 
   useEffect(() => {
-    // console.log(`${process.env.API_SERVER}${currentPath}`)
     fetch(`${process.env.API_SERVER}${currentPath}`)
       .then((r) => r.json())
       .then((data) => {
         setData(data.data[0])
+        console.log(data.data[0])
         setRows(data.rows)
         console.log(data.rows)
       })
   }, [currentPath])
 
-  const startIndex = data?.product_details.indexOf('\r\n')
-  const product_details =
-    startIndex >= 0
-      ? data?.product_details.substring(startIndex + 2)
-      : data?.product_details
+  if (!data || !data.product_details) {
+    return <div>productDetails Not found</div>
+  }
 
+  const replaceWhiteSpace = (productDetails) => {
+    const sanitizedData = productDetails.replace(`\\r\\n`, '<br /><br />')
+    console.log('sanitizedData:', sanitizedData)
+    return sanitizedData
+  }
   return (
     <>
       <Container>
@@ -51,10 +55,13 @@ export default function Pid() {
             <div className="fwBold fs30px mb30px">${data?.product_price}</div>
             {/* 商品描述 */}
             <div className={`mb30px ${styles.line}`}></div>
-            <div
-              className="fs24px mb30px"
-              dangerouslySetInnerHTML={{ __html: product_details }}
-            ></div>
+            <div className="fs24px mb30px">
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: replaceWhiteSpace(data.product_details),
+                }}
+              />
+            </div>
           </Col>
           <Col className={`${styles.container}`}>
             {/* 產品圖 */}
