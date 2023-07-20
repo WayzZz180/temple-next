@@ -5,7 +5,7 @@ import styles from '@/pages/W/W-Login.module.sass'
 // components
 import InputBox from '@/components/common/inputBox/index.js'
 import Title from '@/components/common/title/memberTitle.js'
-import Button from '@/components/common/button/memberButton.js'
+import Button from '@/components/common/button/memberProfileButton.js'
 import doorGodLeft from '@/assets/doorGodLeft.svg'
 import doorGodRight from '@/assets/doorGodRight.svg'
 import Checkbox from '@/components/common/checkBox'
@@ -19,12 +19,14 @@ export default function Login() {
       <Container>
         <Row>
           <Col>
-            <Image
-              src={doorGodLeft}
-              alt="doorGodLeft"
-              height={835}
-              width={631}
-            ></Image>
+            <div className="mt100px">
+              <Image
+                src={doorGodLeft}
+                alt="doorGodLeft"
+                height={835}
+                width={631}
+              ></Image>
+            </div>
           </Col>
         </Row>
       </Container>
@@ -81,12 +83,14 @@ export default function Login() {
       <Container>
         <Row>
           <Col>
-            <Image
-              src={doorGodRight}
-              alt="doorGodRight"
-              height={835}
-              width={631}
-            ></Image>
+            <div className="mt100px">
+              <Image
+                src={doorGodRight}
+                alt="doorGodRight"
+                height={835}
+                width={631}
+              ></Image>
+            </div>
           </Col>
         </Row>
       </Container>
