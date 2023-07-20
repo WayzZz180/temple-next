@@ -53,7 +53,7 @@ export default function Category() {
           {chunk.map((src, colIndex) => {
             const product = data[colIndex + rowIndex * 5]
             return (
-              <Col key={colIndex} className={``}>
+              <Col key={colIndex}>
                 <ShopProductsCard
                   src={src}
                   text={product?.product_name}

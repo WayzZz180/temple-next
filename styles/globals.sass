@@ -14,10 +14,12 @@ body
 img::selection
     background: transparent
 
-$tag:"div","span","p","h1","h2","h3","h4","h5"
+$tag:"div","span","p","h1","h2","h3","h4","h5","a"
 
-@for $i from 1 through 8
+@for $i from 1 through 2
     @include selection(nth($tag,$i),$hot_pink)
+@for $i from 3 through 9
+    @include selection(nth($tag,$i),$green)
 
 // fs12px ~ fs30px 
 @for $i from 12 through 30

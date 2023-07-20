@@ -35,20 +35,9 @@ export default function ProductsCarousel({ text, color, i }) {
       .then((r) => r.json())
       .then((data) => {
         setData(data)
-        console.log('data:', data)
+        // console.log('data:', data)
       })
   }, [])
-
-  // const [data, setData] = useState()
-
-  // useEffect(() => {
-  //   // console.log(`${process.env.API_SERVER}/shop/${category}`)
-  //   fetch(`${process.env.API_SERVER}/shop`)
-  //     .then((r) => r.json())
-  //     .then((data) => {
-  //       setData(data)
-  //     })
-  // }, [])
 
   const { imgSrc } = usePath(data)
 
@@ -99,6 +88,8 @@ export default function ProductsCarousel({ text, color, i }) {
                   src={src}
                   text={data[i].product_name}
                   price={data[i].product_price}
+                  pid={data[i].pid}
+                  category={reqData[0].id}
                 />
               </Col>
             ))}

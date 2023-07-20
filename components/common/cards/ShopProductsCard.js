@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './ShopProductsCard.module.sass'
-import variables from '@/styles/_variables.module.sass'
 // assests
 import goldenStar_fill from '@/assets/goldenStar_fill.svg'
 import goldenStar_outline from '@/assets/goldenStar_outline.svg'
@@ -19,8 +18,8 @@ export default function ShopProductsCard({
   src,
   text = '洋芋片',
   price = 100,
-  pid=1,
-  category="cookies"
+  pid = 1,
+  category = 'cookies',
 }) {
   //判斷hover
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-1)
@@ -32,7 +31,6 @@ export default function ShopProductsCard({
     useClick(false)
   const { clickState: cartClickState, handleClick: handleCartClick } =
     useClick(false)
-
 
   return (
     <div className={`${styles.container}  p30px`}>
@@ -49,10 +47,10 @@ export default function ShopProductsCard({
       {/* 分隔線 */}
       <div className={`${styles.line} w180px h3px`}></div>
       {/* 標題 */}
-      <Link href={`/shop/${category}/${pid}`} className='link'>
-      <div className={`${styles.flexStart} mt15px fwBold fs18px`}>
-        <div className={`${styles.textContainer} w180px h55px`}>{text}</div>
-      </div>
+      <Link href={`/shop/${category}/${pid}`} className="link">
+        <div className={`${styles.flexStart} mt15px fwBold fs18px`}>
+          <div className={`${styles.textContainer} w180px h55px`}>{text}</div>
+        </div>
       </Link>
       {/* 星星 */}
       <div className={`${styles.flexStart} mt15px `}>
