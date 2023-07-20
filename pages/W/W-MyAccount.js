@@ -3,11 +3,9 @@ import styles from '@/pages/W/W-MyAccount.module.sass'
 
 // components
 import InputBox from '@/components/common/inputBox/index.js'
-import Title from '@/components/common/title/memberTitle.js'
-import Button from '@/components/common/button/memberProfileButton.js'
-import Button2 from '@/components/common/button/memberButton.js'
-
-import MemberNavbar from '@/components/memberNavbar'
+import Title from '@/components/common/title/index.js'
+import Button from '@/components/common/button/index.js'
+import MemberNavbar from '@/components/common/memberNavbar/index.js'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'

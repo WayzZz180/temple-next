@@ -5,8 +5,8 @@ import Link from 'next/link'
 
 // components
 import InputBox from '@/components/common/inputBox/index.js'
-import Title from '@/components/common/title/memberTitle.js'
-import Button from '@/components/common/button/memberProfileButton.js'
+import Title from '@/components/common/title/index.js'
+import Button from '@/components/common/button/index.js'
 import doorGodLeft from '@/assets/doorGodLeft.svg'
 import doorGodRight from '@/assets/doorGodRight.svg'
 import Checkbox from '@/components/common/checkBox'
@@ -42,7 +42,7 @@ export default function Login() {
         <Row className={styles.flex_centre}>
           <Col>
             <InputBox
-              prompt="Email"
+              prompt="測試用~Email"
               type="email"
               placeholder="電子郵件地址"
               onChange
@@ -57,12 +57,14 @@ export default function Login() {
         <Row>
           <Col className={styles.flex_checkbox}>
             <Checkbox label="保持登入狀態?" />
-            <a href="">忘記密碼？</a>
+            <Link href="#" className="link">
+              忘記密碼？
+            </Link>
           </Col>
         </Row>
         <Row className={styles.flex_container}>
           <Col>
-            <div>
+            <div className="ls6px">
               如登入，即同意錦囊廟祭的
               <Link href="#" className="link">
                 隱私權政策
@@ -82,7 +84,10 @@ export default function Login() {
         <Row className={styles.flex_centre}>
           <Col>
             <div>
-              不是會員? <a href="">加入我們</a>
+              不是會員?{' '}
+              <Link href="#" className="link">
+                加入我們
+              </Link>
             </div>
           </Col>
         </Row>

@@ -5,8 +5,8 @@ import Link from 'next/link'
 
 // components
 import InputBox from '@/components/common/inputBox/index.js'
-import Title from '@/components/common/title/memberTitle.js'
-import Button from '@/components/common/button/memberProfileButton.js'
+import Title from '@/components/common/title/index.js'
+import Button from '@/components/common/button/index.js'
 import doorGodLeft from '@/assets/doorGodLeft.svg'
 import doorGodRight from '@/assets/doorGodRight.svg'
 
@@ -77,8 +77,14 @@ export default function SignUp() {
             <div>
               {/* <div style={{ letterSpacing: '4.1px' }}> */}
               {/* Q4 */}
-              如建立帳號，即同意錦囊廟祭的 <Link href="">隱私權政策</Link>和
-              <Link href="">使用條款</Link>
+              如建立帳號，即同意錦囊廟祭的{' '}
+              <Link href="#" className="link">
+                隱私權政策
+              </Link>
+              和
+              <Link href="#" className="link">
+                使用條款
+              </Link>
             </div>
           </Col>
         </Row>
@@ -90,7 +96,10 @@ export default function SignUp() {
         <Row className={styles.flex_centre}>
           <Col>
             <div>
-              已經是會員了嗎? <a href="">登入</a>
+              已經是會員了嗎?
+              <Link href="#" className="link">
+                登入
+              </Link>
             </div>
           </Col>
         </Row>

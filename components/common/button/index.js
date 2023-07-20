@@ -8,14 +8,14 @@ import Image from 'next/image'
 export default function Button({
   text = 'text',
   btnColor = 'btn',
-  width = '',
+  width = '100%',
 }) {
   const var_color = variables[btnColor]
   return (
     <div>
       <button
         className={`${styles.btn}`}
-        style={{ backgroundColor: var_color, width }}
+        style={{ backgroundColor: var_color, width: width }}
       >
         <span className={`${styles.IconContainer} `}>
           <Image

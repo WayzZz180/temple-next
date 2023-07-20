@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '@/components/memberNavbar/memberNavbar.module.sass'
+import styles from '@/components/common/memberNavbar/memberNavbar.module.sass'
 import Link from 'next/link'
 //Components
 import data from '@/components/mydata/memberNavbarData'
@@ -10,7 +10,9 @@ export default function MemberNavbar() {
     <Row className={styles.flex_space_around}>
       {data.map((v, i) => (
         <Col key={i}>
-          <Link href="">{v.text}</Link>
+          <Link href="" className="link">
+            {v.text}
+          </Link>
         </Col>
       ))}
     </Row>

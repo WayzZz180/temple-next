@@ -33,7 +33,7 @@ export default function InputBox({
 
   return (
     <>
-      <div> {prompt}</div>
+      <div className="mb6px"> {prompt}</div>
       <div>
         <input
           type={type}
