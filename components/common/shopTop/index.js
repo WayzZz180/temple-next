@@ -27,7 +27,7 @@ export default function Shop() {
       <Row className="nowrap mt100px mb50px fs24px">
         {/* 標題 */}
         <Col>
-          <p className={`${styles.title}`}>咱有的物仔</p>
+          <p className={`${styles.title}`}>神明尬意ㄟ</p>
         </Col>
       </Row>
       <Row className={`nowrap fs20px mb50px`}>

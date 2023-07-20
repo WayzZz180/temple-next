@@ -44,13 +44,17 @@ export default function Pid() {
           product_name={data?.product_name}
         />
         <Row className="nowrap">
-          <Col className={`border ${styles.container}`}>
+          <Col className={` ${styles.container}`}>
             {/* 商品名稱 */}
-            <div className="fwBold fs30px">{data?.product_name}</div>
+            <div className="fwBold fs30px mb30px">{data?.product_name}</div>
             {/* 商品價格 */}
-            <div>${data?.product_price}</div>
+            <div className="fwBold fs30px mb30px">${data?.product_price}</div>
             {/* 商品描述 */}
-            <div dangerouslySetInnerHTML={{ __html: product_details }}></div>
+            <div className={`mb30px ${styles.line}`}></div>
+            <div
+              className="fs24px mb30px"
+              dangerouslySetInnerHTML={{ __html: product_details }}
+            ></div>
           </Col>
           <Col className={`${styles.container}`}>
             {/* 產品圖 */}
@@ -62,14 +66,14 @@ export default function Pid() {
               className={`shadow`}
             />
           </Col>
-          <Col className={`border ${styles.container}`}>
+          <Col className={` ${styles.container}`}>
             {/* 加入購物車 & 收藏 */}
-            <span>加入購物車</span>
-            <span> 愛心</span>
+            <span className={`fs20px`}>加入購物車</span>
+            <span className={`fs20px`}> 愛心</span>
             {/* 其他描述 */}
-            <div>瀏覽量：{data?.browse_num}</div>
-            <div>購買人數：{data?.purchase_num}</div>
-            <div>庫存：{data?.stock_num}</div>
+            <div className={`fs20px`}>瀏覽量：{data?.browse_num}</div>
+            <div className={`fs20px`}>購買人數：{data?.purchase_num}</div>
+            <div className={`fs20px`}>庫存：{data?.stock_num}</div>
           </Col>
         </Row>
         {/* 跑馬燈 */}
