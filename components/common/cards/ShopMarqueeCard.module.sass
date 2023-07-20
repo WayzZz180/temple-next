@@ -1,15 +1,24 @@
 @import '@/styles/_variables.module.sass' 
 
-.container
-    width: 120px
-    height: 110px
-    background: white
-    border-radius: 50% 50% 0px 0px
-    padding: 30px
-    margin: auto
-
 .flex
     display: flex
     flex-direction: column
     align-items: center
 
+.container
+    width: 100px
+    height: 100px
+    background: white
+    border-radius: 50% 50% 0px 0px
+    padding: 30px
+    margin: auto
+
+.textContainer
+    overflow: hidden 
+    text-overflow: ellipsis 
+    display: -webkit-box
+    -webkit-line-clamp: 2 
+    -webkit-box-orient: vertical
+    white-space: normal
+    font-weight: 600
+    height: 45px

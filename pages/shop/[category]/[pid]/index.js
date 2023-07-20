@@ -16,28 +16,44 @@ export default function Pid() {
   const router = useRouter()
   const currentPath = router.asPath
   const [data, setData] = useState()
+  const [rows, setRows] = useState()
 
   useEffect(() => {
+    // console.log(`${process.env.API_SERVER}${currentPath}`)
     fetch(`${process.env.API_SERVER}${currentPath}`)
       .then((r) => r.json())
       .then((data) => {
-        setData(data[0])
+        setData(data.data[0])
+        setRows(data.rows)
+        console.log(data.rows)
       })
   }, [currentPath])
+
+  const startIndex = data?.product_details.indexOf('\r\n')
+  const product_details =
+    startIndex >= 0
+      ? data?.product_details.substring(startIndex + 2)
+      : data?.product_details
 
   return (
     <>
       <Container>
+        {/* 路由 */}
         <DetailsRoute
           category={data?.category_name}
           product_name={data?.product_name}
         />
         <Row className="nowrap">
           <Col className={`border ${styles.container}`}>
-            <div>{data?.product_name}</div>
-            <div>{data?.product_details}</div>
+            {/* 商品名稱 */}
+            <div className="fwBold fs30px">{data?.product_name}</div>
+            {/* 商品價格 */}
+            <div>${data?.product_price}</div>
+            {/* 商品描述 */}
+            <div dangerouslySetInnerHTML={{ __html: product_details }}></div>
           </Col>
-          <Col className={`border  ${styles.container}`}>
+          <Col className={`${styles.container}`}>
+            {/* 產品圖 */}
             <Image
               src={`/${data?.image}`}
               alt="details"
@@ -47,16 +63,18 @@ export default function Pid() {
             />
           </Col>
           <Col className={`border ${styles.container}`}>
-            <div>${data?.product_price}</div>
+            {/* 加入購物車 & 收藏 */}
             <span>加入購物車</span>
             <span> 愛心</span>
+            {/* 其他描述 */}
             <div>瀏覽量：{data?.browse_num}</div>
             <div>購買人數：{data?.purchase_num}</div>
             <div>庫存：{data?.stock_num}</div>
           </Col>
         </Row>
+        {/* 跑馬燈 */}
         <Row>
-          <Marquee />
+          <Marquee data={rows ? rows : []} />
         </Row>
         <Title text="商品評價" text2="products rewiews" />
       </Container>
