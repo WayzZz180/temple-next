@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from '@/pages/W/W-SignUp.module.sass'
+import Link from 'next/link'
 
 // components
 import InputBox from '@/components/common/inputBox/index.js'
@@ -76,8 +77,8 @@ export default function SignUp() {
             <div>
               {/* <div style={{ letterSpacing: '4.1px' }}> */}
               {/* Q4 */}
-              如建立帳號，即同意錦囊廟祭的 <a href="">隱私權政策</a>和
-              <a href="">使用條款</a>
+              如建立帳號，即同意錦囊廟祭的 <Link href="">隱私權政策</Link>和
+              <Link href="">使用條款</Link>
             </div>
           </Col>
         </Row>
