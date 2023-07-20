@@ -4,7 +4,7 @@ import styles from '@/pages/W/W-Login.module.sass'
 
 // components
 import InputBox from '@/components/common/inputBox/index.js'
-import Title from '@/components/common/title/index.js'
+import Title from '@/components/common/title/memberTitle.js'
 import Button from '@/components/common/button/memberButton.js'
 import doorGodLeft from '@/assets/doorGodLeft.svg'
 import doorGodRight from '@/assets/doorGodRight.svg'
@@ -13,7 +13,7 @@ import Checkbox from '@/components/common/checkBox'
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 
-export default function SignUp() {
+export default function Login() {
   return (
     <div className={styles.flex}>
       <Container>
@@ -30,7 +30,7 @@ export default function SignUp() {
       </Container>
 
       <Container>
-        <Row className={styles.flex_centre}>
+        <Row>
           <Col>
             <Title text="登入會員" text2="LOGIN" lineColor="green" />
           </Col>

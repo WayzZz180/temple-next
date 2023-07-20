@@ -1,17 +1,16 @@
 import React from 'react'
-
 import styles from '@/pages/W/W-MyAccount.module.sass'
 
 // components
 import InputBox from '@/components/common/inputBox/index.js'
-import Title from '@/components/common/title/index.js'
+import Title from '@/components/common/title/memberTitle.js'
 import Button from '@/components/common/button/memberButton.js'
-import ProfileNavbar from '@/components/profileNavbar'
+import MemberNavbar from '@/components/memberNavbar'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 
-export default function SignUp() {
+export default function MyAccount() {
   return (
     <div className={styles.flex}>
       <Container>
@@ -19,14 +18,14 @@ export default function SignUp() {
           <Col>
             <Title
               text="變更資料"
-              text2="SIGN UP"
+              text2="PROFILE DETAILS"
               lineColor="green"
               width={860}
             />
           </Col>
         </Row>
 
-        <ProfileNavbar />
+        <MemberNavbar />
 
         <Row className={styles.flex_space_between}>
           <Col>
@@ -57,6 +56,7 @@ export default function SignUp() {
               placeholder="電子郵件地址"
               onChange
               width={994}
+              style={{ letterSpacing: '40px' }}
             />
           </Col>
         </Row>

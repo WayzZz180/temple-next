@@ -1,9 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from '@/pages/W/W-SignUp.module.sass'
+
 // components
 import InputBox from '@/components/common/inputBox/index.js'
-import Title from '@/components/common/title/index.js'
+import Title from '@/components/common/title/memberTitle.js'
 import Button from '@/components/common/button/memberButton.js'
 import doorGodLeft from '@/assets/doorGodLeft.svg'
 import doorGodRight from '@/assets/doorGodRight.svg'

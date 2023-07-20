@@ -1,11 +1,11 @@
 import React from 'react'
-import styles from '@/components/profileNavbar/profileNavbar.module.sass'
+import styles from '@/components/memberNavbar/memberNavbar.module.sass'
 
 //Components
-import data from '@/components/mydata/profileNavbar'
+import data from '@/components/mydata/memberNavbar'
 import { Row, Col } from 'react-bootstrap'
 
-export default function ProfileNavbar() {
+export default function MemberNavbar() {
   return (
     <Row className={styles.flex_space_around}>
       {data.map((v, i) => (
