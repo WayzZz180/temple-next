@@ -17,7 +17,12 @@ export default function Button({
     <div>
       <button
         className={`${styles.btn}`}
-        style={{ backgroundColor: var_color, width: width }}
+        style={{
+          backgroundColor: var_color,
+          width: `${width}`,
+          padding: `${padding}`,
+          fontSize: `${fontSize}`,
+        }}
       >
         <span className={`${styles.IconContainer} `}>
           <Image
