@@ -9,11 +9,16 @@
     display: flex
     flex-direction: row
     align-items: center
+    justify-content: flex-start
 
 .flex_col
     display: flex
     flex-direction: column
     justify-content: center
+
+.detailsContainer
+    display: flex
+    flex-direction: column
 
 .imgContainer
     width: 550px
@@ -31,17 +36,31 @@
     cursor: pointer
 
 .add
-    width: 30%
+    width: 20%
     border: 1px $black solid
     display: flex
     justify-content: space-between
     align-items: center
 
+.addValue
+    border: 0
+    background: $bgColor
+    width:30%
+    text-align: center
+
+.addValue:focus
+    border: 0
+    outline: none
+
+
 .button
     border: 0   
     background: $bgColor
-    cursor: pointer
     font-size: 30px
 
 .button:hover
     color: $hot_pink
+
+.detailsData
+    display: flex
+    flex-direction: column

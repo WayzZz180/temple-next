@@ -23,7 +23,6 @@ export default function Category() {
 
   useEffect(() => {
     if (!category) return
-    // console.log(`${process.env.API_SERVER}/shop/${category}`)
     fetch(`${process.env.API_SERVER}/shop/${category}`)
       .then((r) => r.json())
       .then((data) => {

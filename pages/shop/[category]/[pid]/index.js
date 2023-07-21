@@ -1,19 +1,27 @@
 import Image from 'next/image'
 import styles from './pid.module.sass'
 
-//hooks
+// hooks
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import { useClick } from '@/hooks/useClick.js'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-//components
+// components
 import Marquee from '@/components/common/marquee'
 import Title from '@/components/common/title'
 import DetailsRoute from '@/components/common/shopTop/detailsRoute'
 import Button from '@/components/common/button'
+
+// svg
 import heart_fill from '@/assets/heart_fill.svg'
 import heart_outline from '@/assets/heart_outline.svg'
+import add from '@/assets/add.svg'
+import minus from '@/assets/minus.svg'
+import monkey from '@/assets/monkey.svg'
+import buy from '@/assets/buy.svg'
+import inStock from '@/assets/in_stock.svg'
+import emptyStock from '@/assets/empty_stock.svg'
 
 // Bootstrap
 import Container from 'react-bootstrap/Container'
@@ -75,6 +83,8 @@ export default function Pid() {
     return result
   }
 
+
+
   return (
     <>
       <Container>
@@ -85,19 +95,21 @@ export default function Pid() {
         />
         <Row className="nowrap ">
           <Col className={` ${styles.container} ${styles.flex_col}`}>
-            {/* 商品名稱 */}
-            <div className="fwBold fs27px mb30px">{data?.product_name}</div>
-            {/* 商品價格 */}
-            <div className="fwBold fs27px mb30px">${data?.product_price}</div>
-            {/* 分隔線 */}
-            <div className={`mb30px ${styles.line}`}></div>
-            {/* 商品描述 */}
-            <div className="fs20px mb30px">
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: replaceWhiteSpace(data.product_details),
-                }}
-              />
+            <div className={`${styles.detailsContainer}`}>
+              {/* 商品名稱 */}
+              <div className="fwBold fs27px mb30px">{data?.product_name}</div>
+              {/* 商品價格 */}
+              <div className="fwBold fs27px mb30px">${data?.product_price}</div>
+              {/* 分隔線 */}
+              <div className={`${styles.line}`}></div>
+              {/* 商品描述 */}
+              <div className="fs20px mt30px">
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: replaceWhiteSpace(data.product_details),
+                  }}
+                />
+              </div>
             </div>
           </Col>
           <Col className={`${styles.container}`}>
@@ -113,15 +125,40 @@ export default function Pid() {
             </div>
           </Col>
           <Col className={`${styles.container} ${styles.flex_col}`}> 
-            <div className={`${styles.add} fs24px mb50px`}>
+            <div className={`${styles.add} fs24px mb50px pt10px pb10px`}>
               {/* － */}
-              <button className={`${styles.button}`}
+              <Image src={minus} width={30} className={`${styles.button}`}
+               style={{ cursor: data?.stock_num !== 0 ? 'pointer' : 'default' }}
               onClick={()=>{ 
-                if(count<=1){setCount(1)}else{setCount(count-1)}}}>–</button> 
+                if(count<=1){setCount(1)}else{setCount(count-1)}}} />
                {/* 數量 */}
-                {count} 
-              <button className={`${styles.button}`} 
-              onClick={()=>{setCount(count+1)}}>＋</button> 
+               <input type='text' 
+               inputmode="numeric"
+               value={data?.stock_num ? count : 0} 
+               className={`${styles.addValue} fs16px `} 
+               onChange={(e)=>{
+                if(!isNaN(e.target.value) && e.target.value!=0){
+                  if(Number(e.target.value) > data?.stock_num){
+                    setCount(Number(data?.stock_num))
+                  }else{
+                    setCount(Number(e.target.value))
+                  }
+                }else{
+                  setCount(Number(count))
+                }
+                }}
+                readOnly={data?.stock_num === 0}
+                >
+               </input>
+              <Image src={add} width={30} className={`${styles.button}`} 
+               style={{ cursor: data?.stock_num !== 0 ? 'pointer' : 'default' }}
+              onClick={()=>{
+                if(count >= data?.stock_num){
+                  setCount(data?.stock_num)
+                }else{
+                  setCount(count+1)
+                }
+                }} />
             </div>
             {/* 加入購物車 & 收藏 */}
             <div className= {`${styles.flex_row}`}>
@@ -150,9 +187,22 @@ export default function Pid() {
             </div>
            
             {/* 其他描述 */}
-            <div className={`fs20px`}>瀏覽量：{data?.browse_num}</div>
-            <div className={`fs20px`}>購買人數：{data?.purchase_num}</div>
-            <div className={`fs20px`}>庫存：{data?.stock_num}</div>
+            <div className={`${styles.detailsData}`}>
+              <div className={`${styles.flex_row} fs20px mt50px pb30px`}>
+                <Image src={monkey} width={30} height={30}/>
+                　瀏覽量　{data?.browse_num} /次
+              </div>
+
+              <div className={`${styles.flex_row} fs20px pb30px`}>
+                <Image src={buy } width={30} height={30} />
+                　購買人數　{data?.purchase_num} /人
+              </div>
+
+              <div className={`${styles.flex_row} fs20px pb30px`}>
+                <Image src={emptyStock} width={30} height={30}/>
+                　庫存　{data?.stock_num} /個
+              </div>
+            </div>
           </Col>
         </Row>
         {/* 跑馬燈 */}
