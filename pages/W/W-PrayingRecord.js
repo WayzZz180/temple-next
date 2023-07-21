@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '@/pages/W/W-MyAccount.module.sass'
+import styles from '@/pages/W/W-PrayingRecord.module.sass'
 
 // components
 import InputBox from '@/components/common/inputBox/index.js'
@@ -11,7 +11,7 @@ import Coupons from '@/components/common/coupons/index.js'
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 
-export default function MyAccount() {
+export default function PrayingRecord() {
   return (
     <div className={styles.flex}>
       <Container>
@@ -26,7 +26,6 @@ export default function MyAccount() {
           </Col>
         </Row>
         <MemberNavbar />
-
         <Coupons />
       </Container>
     </div>

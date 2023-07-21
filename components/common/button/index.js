@@ -8,7 +8,7 @@ import Image from 'next/image'
 export default function Button({
   text = 'text',
   btnColor = 'btn',
-  width = '100%',
+  width = '',
 }) {
   const var_color = variables[btnColor]
   return (

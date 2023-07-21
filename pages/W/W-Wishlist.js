@@ -2,11 +2,10 @@ import React from 'react'
 import styles from '@/pages/W/W-MyAccount.module.sass'
 
 // components
-import InputBox from '@/components/common/inputBox/index.js'
 import Title from '@/components/common/title/index.js'
 import Button from '@/components/common/button/index.js'
 import MemberNavbar from '@/components/common/memberNavbar'
-import Coupons from '@/components/common/coupons/index.js'
+import Wishlist from '@/components/common/wishlist'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
@@ -27,7 +26,7 @@ export default function MyAccount() {
         </Row>
         <MemberNavbar />
 
-        <Coupons />
+        <Wishlist />
       </Container>
     </div>
   )
