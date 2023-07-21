@@ -4,6 +4,8 @@ import Title from '@/components/common/title/'
 // import variables from '@/styles/_variables.module.sass'
 import Forumline from '@/components/common/forumlogo/forumline'
 import Navbar from '@/components/common/forumlogo/navbar'
+import Forumper from '@/components/common/forumlogo/forumper'
+import AdvancedExample from '@/components/common/forumlogo/pagination'
 
 export default function Forumgossip() {
   return (
@@ -14,6 +16,12 @@ export default function Forumgossip() {
         </div>
         <Navbar />
         <Forumline lineColor="brown" />
+        <Forumper />
+        <Forumper />
+        <Forumper />
+        <Forumper />
+        <Forumper />
+        <Forumper />
       </div>
     </>
   )

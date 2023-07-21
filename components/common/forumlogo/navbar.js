@@ -24,14 +24,14 @@ export default function Navbar() {
         </div>
         <div className={`${styles.flex_row2}`}>
           <div className={`${styles.flex_row21}`}>
-            <li className="fs20px">
+            <li className={`${styles.setmid}`}>
               <Link href="#" className={`${styles.no_underline}`}>
                 <AddIcon />
                 發佈文章
               </Link>
             </li>
           </div>
-          <li className="fs20px">
+          <li className={`${styles.setmid}`}>
             <Link href="#" className={`${styles.no_underline}`}>
               <SearchIcon />
               搜尋文章
