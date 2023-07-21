@@ -14,37 +14,34 @@ export default function Button({
 }) {
   const var_color = variables[btnColor]
   return (
-    <>
-      <div>
-        <button
-          onClick={link}
-          className={`${styles.btn}`}
-          style={{
-            backgroundColor: var_color,
-            width: `${width}`,
-            padding: `${padding}`,
-            fontSize: `${fontSize}`,
-          }}
-        >
-          <span className={`${styles.IconContainer} `}>
-            <Image
-              src={Star}
-              alt=""
-              width="25"
-              className={`${styles.img}`}
-            ></Image>
-          </span>
-          <div className={`${styles.text}`}> {text}</div>
-          <span className={`${styles.IconContainer2}`}>
-            <Image
-              src={Star}
-              alt=""
-              width="25"
-              className={`${styles.img}`}
-            ></Image>
-          </span>
-        </button>
-      </div>
-    </>
+    <div>
+      <button
+        className={`${styles.btn}`}
+        style={{
+          backgroundColor: var_color,
+          width: `${width}`,
+          padding: `${padding}`,
+          fontSize: `${fontSize}`,
+        }}
+      >
+        <span className={`${styles.IconContainer} `}>
+          <Image
+            src={Star}
+            alt=""
+            width="25"
+            className={`${styles.img}`}
+          ></Image>
+        </span>
+        <div className={`${styles.text}`}> {text}</div>
+        <span className={`${styles.IconContainer2}`}>
+          <Image
+            src={Star}
+            alt=""
+            width="25"
+            className={`${styles.img}`}
+          ></Image>
+        </span>
+      </button>
+    </div>
   )
 }
