@@ -5,14 +5,25 @@ import Image from 'next/image'
 
 // text = Button content
 // btnColor = black, green, hot_pink, brown
-export default function Button({ text = 'text', btnColor = 'btn' }) {
+export default function Button({
+  text = 'text',
+  btnColor = 'btn',
+  width = '',
+  padding = '15px 60px',
+  fontSize = '24px',
+}) {
   const var_color = variables[btnColor]
   return (
     <>
       <div>
         <button
           className={`${styles.btn}`}
-          style={{ backgroundColor: var_color }}
+          style={{
+            backgroundColor: var_color,
+            width: `${width}`,
+            padding: `${padding}`,
+            fontSize: `${fontSize}`,
+          }}
         >
           <span className={`${styles.IconContainer} `}>
             <Image
