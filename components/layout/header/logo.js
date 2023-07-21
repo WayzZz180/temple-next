@@ -8,10 +8,10 @@ import logoEngHeader from '@/assets/logoEngHeader.svg'
 export default function Logo() {
   return (
     <div className={`${styles.flex_col} ms14px`}>
-      <Link href="#">
+      <Link href="/Home">
         <Image src={logoChiHeader} width={100} alt="logo" />
       </Link>
-      <Link href="#">
+      <Link href="/Home">
         <Image src={logoEngHeader} width={118} alt="logo" />
       </Link>
     </div>

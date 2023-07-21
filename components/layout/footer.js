@@ -15,10 +15,10 @@ export default function Footer() {
       <div className={`${styles.footer} wBold`}>
         {/* logo */}
         <div className={`${styles.flex_col}`}>
-          <Link href="#">
+          <Link href="/Home">
             <Image src={logoChi} width={85} alt="logo" />
           </Link>
-          <Link href="#">
+          <Link href="/Home">
             <Image src={logoEng} width={100} alt="logo" />
           </Link>
         </div>
