@@ -49,7 +49,7 @@ export default function Mazu1() {
             <Image
               src={mazu}
               alt=""
-              width="830"
+              width="930"
               className={`${styles.mazu}`}
             ></Image>
             <div className={`${styles.divlight}`}>

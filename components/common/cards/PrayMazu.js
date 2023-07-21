@@ -12,7 +12,7 @@ import { Route, useRouter } from 'next/router'
 export default function PrayMazu() {
   const Router = useRouter()
 
-  const handleButtonClick = () => {
+  const ButtonClick = () => {
     Router.push('/Pray/mazu1')
   }
 
@@ -85,7 +85,7 @@ export default function PrayMazu() {
             址、求問事項。點選開始求籤。擲筊請示媽祖是否為此籤。若為聖筊則可觀看詩籤內容。若為笑筊或陰筊則需重新求籤。{' '}
           </div>
           <div className={`${styles.btn} mt90px`}>
-            <Button text="求籤" btnColor="hot_pink" link={handleButtonClick} />
+            <Button text="求籤" btnColor="hot_pink" link={ButtonClick} />
           </div>
         </div>
       </div>
