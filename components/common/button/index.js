@@ -9,6 +9,8 @@ export default function Button({
   text = 'text',
   btnColor = 'btn',
   width = '',
+  padding = '15px 60px',
+  fontSize = '24px',
 }) {
   const var_color = variables[btnColor]
   return (
