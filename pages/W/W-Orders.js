@@ -6,6 +6,7 @@ import Title from '@/components/common/title/index.js'
 import Button from '@/components/common/button/index.js'
 import MemberNavbar from '@/components/common/memberNavbar'
 import Wishlist from '@/components/common/wishlist'
+import OrderDetails from '@/components/common/orderDetails'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
@@ -26,7 +27,7 @@ export default function MyAccount() {
         </Row>
         <MemberNavbar />
 
-        <Wishlist />
+        <OrderDetails />
       </Container>
     </div>
   )
