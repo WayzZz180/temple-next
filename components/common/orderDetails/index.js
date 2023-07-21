@@ -13,8 +13,22 @@ export default function OrderDetails() {
     <>
       <Row className={styles.flex}>
         <Col>
-          訂單編號 訂單日期 配送方式 付款方式 收件資訊 23061067307593 2023/06/10
-          宅配 |已出貨 信用卡一次付清 高雄市大樹區統嶺路1號
+          <div className={styles.flex_column}>
+            <div>訂單編號</div>
+            <div>訂單日期</div>
+            <div>配送方式</div>
+            <div>付款方式</div>
+            <div>收件資訊</div>
+          </div>
+        </Col>
+        <Col>
+          <div className={styles.flex_column}>
+            <div>23061067307593</div>
+            <div> 2023/06/10</div>
+            <div>宅配 |已出貨</div>
+            <div>信用卡一次付清</div>
+            <div>高雄市大樹區統嶺路1號</div>
+          </div>
         </Col>
         <Col className={styles.btnflex}>
           <div>
