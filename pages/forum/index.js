@@ -5,7 +5,7 @@ import nav from '@/assets/nav.svg'
 import Rightgod from '@/assets/rightgod.svg'
 import Leftgod from '@/assets/leftgod.svg'
 import ForumLogo from '@/components/common/forumlogo'
-import Title from '@/components/common/title/forumtitle'
+import Title from '@/components/common/title'
 import Forumcard from '@/components/common/cards/forumcard'
 // import gossiplogo from '@/assets/gossiplogo.svg'
 
@@ -14,13 +14,15 @@ export default function Forum() {
     <>
       <div className={`${styles.background}`}>
         <div className={`${styles.place}`}>
+          <div className={`${styles.flex_row}`}>
+            <div className={`${styles.gods}`}>
+              <Image src={Leftgod} alt="leftgod" height={1150} />
+              <ForumLogo />
+              <Image src={Rightgod} alt="rightgod" height={1150} />
+            </div>
+          </div>
           <div className={`${styles.floor}`}>
             <Image src={nav} width={1990} alt="nav" />
-          </div>
-          <div className={`${styles.flex_row}`}>
-            <Image src={Leftgod} alt="leftgod" height={850} />
-            <ForumLogo />
-            <Image src={Rightgod} alt="rightgod" height={850} />
           </div>
         </div>
       </div>
