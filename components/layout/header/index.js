@@ -3,7 +3,7 @@ import Image from 'next/image'
 import styles from './header.module.sass'
 import Navbar from './navbar'
 import Logo from './logo'
-import headerBg from '@/assets/header.svg'
+import headerBg from '@/assets/header2.svg'
 
 export default function Header() {
   return (

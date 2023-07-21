@@ -20,8 +20,8 @@ import add from '@/assets/add.svg'
 import minus from '@/assets/minus.svg'
 import monkey from '@/assets/monkey.svg'
 import buy from '@/assets/buy.svg'
-import inStock from '@/assets/in_stock.svg'
-import emptyStock from '@/assets/empty_stock.svg'
+import inStock from '@/assets/inStock.svg'
+import emptyStock from '@/assets/emptyStock.svg'
 
 // Bootstrap
 import Container from 'react-bootstrap/Container'
@@ -77,7 +77,7 @@ export default function Pid() {
       .replace(/[●★◆]/g, `<br />★　`)
       // .replace(/(\d+)\./g, '<br />★　')
 
-      .replace(/[。!]/g, (match) => `${match}<br /><br />`)
+      .replace(/[。]/g, (match) => `${match}<br /><br />`)
       .replace(/＊必買原因＊/g, '<br /><br />＊必買原因＊<br />')
       .replace(/＊必吃原因＊/g, '<br /><br />＊必吃原因＊<br />')
     return result
@@ -124,7 +124,7 @@ export default function Pid() {
               />
             </div>
           </Col>
-          <Col className={`${styles.container} ${styles.flex_col}`}> 
+          <Col className={`${styles.container} ${styles.flex_col}  ms50px`}> 
             <div className={`${styles.add} fs24px mb50px pt10px pb10px`}>
               {/* － */}
               <Image src={minus} width={30} className={`${styles.button}`}
@@ -189,18 +189,18 @@ export default function Pid() {
             {/* 其他描述 */}
             <div className={`${styles.detailsData}`}>
               <div className={`${styles.flex_row} fs20px mt50px pb30px`}>
-                <Image src={monkey} width={30} height={30}/>
+                <Image src={monkey} width={50} height={50}/>
                 　瀏覽量　{data?.browse_num} /次
               </div>
 
               <div className={`${styles.flex_row} fs20px pb30px`}>
-                <Image src={buy } width={30} height={30} />
-                　購買人數　{data?.purchase_num} /人
+                <Image src={buy } width={50} height={50} />
+                　銷售量　{data?.purchase_num} /件
               </div>
 
               <div className={`${styles.flex_row} fs20px pb30px`}>
-                <Image src={emptyStock} width={30} height={30}/>
-                　庫存　{data?.stock_num} /個
+                <Image src={data?.stock_num ? inStock : emptyStock} width={50} height={50}/>
+                　庫存　{data?.stock_num} /件
               </div>
             </div>
           </Col>
