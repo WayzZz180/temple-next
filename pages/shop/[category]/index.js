@@ -50,15 +50,17 @@ export default function Category() {
       {imgChunks?.map((chunk, rowIndex) => (
         <Row key={rowIndex} className={`${styles.row}`}>
           {chunk.map((src, colIndex) => {
-            const product = data[colIndex + rowIndex * 5]
+            const products = data[colIndex + rowIndex * 5]
             return (
               <Col key={colIndex}>
                 <ShopProductsCard
                   src={src}
-                  text={product?.product_name}
-                  price={product?.product_price}
+                  text={products?.product_name}
+                  price={products?.product_price}
                   category={category}
-                  pid={product?.pid}
+                  pid={products?.pid}
+                  stars={products?.stars}
+                  stock_num={products?.stock_num}
                 />
               </Col>
             )
