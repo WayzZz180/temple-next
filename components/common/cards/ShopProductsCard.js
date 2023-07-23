@@ -1,25 +1,29 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './ShopProductsCard.module.sass'
-// assests
+// svg
 import goldenStar_fill from '@/assets/goldenStar_fill.svg'
 import goldenStar_outline from '@/assets/goldenStar_outline.svg'
 import heart_fill from '@/assets/heart_fill.svg'
 import heart_outline from '@/assets/heart_outline.svg'
-// import Heart_fill from '@mui/icons-material/Favorite'
-// import Heart_outline from '@mui/icons-material/FavoriteBorderSharp'
 import cart_fill from '@/assets/cart_fill.svg'
 import cart_outline from '@/assets/cart_outline.svg'
+import cart_noStock from '@/assets/cart_noStock.svg'
+
 //hooks
+import { useState } from 'react'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import { useClick } from '@/hooks/useClick.js'
+import { css, keyframes } from '@emotion/css'
 
 export default function ShopProductsCard({
   src,
   text = '洋芋片',
+  category = 'cookies',
   price = 100,
   pid = 1,
-  category = 'cookies',
+  stars = 5,
+  stock_num = 10,
 }) {
   //判斷hover
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-1)
@@ -31,6 +35,37 @@ export default function ShopProductsCard({
     useClick(false)
   const { clickState: cartClickState, handleClick: handleCartClick } =
     useClick(false)
+  
+  //購物車彈跳＋1動畫
+  const [animationEnd, setAnimationEnd] = useState(false)
+  const y = 0
+  const y2 = y-25
+  const y3 = y-10
+  const y4 = y-4
+  const x = 0
+  const bounce = keyframes({
+    'from, 20%, 53%, 80%, to': {
+      transform: `translate3d(${x}px,${y}px,0)`,
+    },
+    '40%, 43%': {
+      transform: `translate3d(${x}px, ${y2}px, 0)`,
+    },
+    '70%': {
+      transform: `translate3d(${x}px, ${y3}px, 0)`,
+    },
+    '90%': {
+      transform: `translate3d(${x}px, ${y4}px, 0)`,
+    },
+  })
+  const handleAnimationEnd = () => {
+    setAnimationEnd(true)
+    setTimeout(() => {
+      setAnimationEnd(false);
+    }, 1200);
+  };
+
+  const totalStars = 5;
+  const starArray = Array.from({ length: stars });
 
   return (
     <div className={`${styles.container}  p30px`}>
@@ -53,15 +88,42 @@ export default function ShopProductsCard({
         </div>
       </Link>
       {/* 星星 */}
-      <div className={`${styles.flexStart} mt15px `}>
-        <Image src={goldenStar_fill} alt="" width={20} />
-        <Image src={goldenStar_fill} alt="" width={20} />
-        <Image src={goldenStar_fill} alt="" width={20} />
-        <Image src={goldenStar_fill} alt="" width={20} />
-        <Image src={goldenStar_outline} alt="" width={20} />
-      </div>
+     <div className={`${styles.flexStart} mt15px`}>
+      {starArray.map((_, index) => (
+        <Image
+          key={index}
+          src={goldenStar_fill}
+          alt="star"
+          width={20}
+        />
+      ))}
+      {Array.from({ length: totalStars - stars }).map((_, index) => (
+        <Image
+          key={index + stars}
+          src={goldenStar_outline}
+          alt="star"
+          width={20}
+        />
+      ))}
+    </div>
       {/* 價格+icons */}
-      <div className={`${styles.flexBetween} mt30px `}>
+      <div className={`${styles.alert}`}>
+        <div className={css({
+                    // display:'block',
+                    display: animationEnd && cartClickState ? '':'none',
+                    width: 180,
+                    height: 30,
+                    position: 'absolute',
+                    marginLeft:160,
+                    color: '#363636',
+                    animation: `${bounce} 1s ease-out 1`,
+                    transformOrigin: 'center bottom',
+                    fontSize: 14,
+                    letterSpacing: 2 
+                  })}
+          >+1</div>
+      </div>
+      <div className={`${styles.flexBetween}`}>
         {/* 價格 */}
         <span className={`${styles.inlineBlock} fs20px fwBold`}>${price}</span>
         <span className={`${styles.inlineBlock} ${styles.icons}`}>
@@ -82,16 +144,27 @@ export default function ShopProductsCard({
           </span>
           {/* 購物車 */}
           <span
-            onClick={handleCartClick}
+            onClick={()=>{
+              if(stock_num!=0){
+                handleCartClick()
+                handleAnimationEnd()
+              }else{
+                alert(`無庫存`)
+              }
+              }}
             onMouseEnter={() => handleMouseEnter(2)}
             onMouseLeave={handleMouseLeave}
             className={`${styles.inlineBlock}`}
           >
-            <Image
-              src={isCartHovered || cartClickState ? cart_fill : cart_outline}
-              alt=""
+          
+            
+          <Image
+              src={stock_num === 0 ? cart_noStock : (isCartHovered || cartClickState ? cart_fill : cart_outline)}
+              alt="cart"
               width={25}
             />
+
+          
           </span>
         </span>
       </div>
