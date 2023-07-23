@@ -22,14 +22,14 @@ export default function DetailsRoute({
   const data = TitleData.filter((v) => {
     return v.id === category
   })
-  console.log(data)
+  // console.log(data)
   let category_name = ''
   {
     data.length > 0 ? (category_name = data[0].text) : (category_name = 'test')
   }
 
   return (
-    <Row className={`nowrap mt100px mb50px`}>
+    <Row className={`nowrap mt100px mb100px`}>
       <Col className={`${styles.flex_align}`}>
         <div className={`${styles.block}`}>
           <Link
