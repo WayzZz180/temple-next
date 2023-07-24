@@ -6,6 +6,7 @@ import Study from '@/components/common/cards/PrayStudy'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ArrowRight from '@/components/common/arrow/arrowRight'
 import ArrowLeft from '@/components/common/arrow/arrowLeft'
+import styles from './mazu.module.sass'
 
 class CarouselMain extends Component {
   constructor(props) {
@@ -42,6 +43,7 @@ class CarouselMain extends Component {
           background-color: #EEECE0
         }`}
         </style>
+        <div className={styles.parent_container}>
         <Carousel
           indicators={false}
           nextIcon={nextIcon}
@@ -60,8 +62,10 @@ class CarouselMain extends Component {
             <Study />
           </Carousel.Item>
         </Carousel>
+        </div>
       </>
     )
   }
 }
 export default CarouselMain
+CarouselMain.getLayout = (page) => <>{page}</>

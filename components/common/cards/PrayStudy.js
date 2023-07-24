@@ -7,11 +7,20 @@ import Button from '@/components/common/button'
 import star from '@/assets/green_sq.svg'
 import shadow from '@/assets/GodShadow.svg'
 import name from '@/assets/GodName.svg'
+import { useRouter } from 'next/router'
 
 export default function PrayStudy() {
+  const Router = useRouter()
+
+  const studyA = () => {
+    Router.push('/Pray/studyA-1')
+  }
+  const studyB = () => {
+    Router.push('/Pray/studyB-1')
+  }
   return (
     <>
-      <div className={`${styles.flex_row} mt180px`}>
+      <div className={`${styles.flex_row} mt150px`}>
         <div className={`${styles.god}`}>
           <div className={`${styles.starsA}`}>
             <Image
@@ -30,7 +39,7 @@ export default function PrayStudy() {
           <Image
             src={study}
             alt=""
-            width="460"
+            width="550"
             height="670"
             className={`${styles.study}`}
           ></Image>
@@ -76,9 +85,9 @@ export default function PrayStudy() {
           文昌帝君主管考試、命運，掌管天下文運祿籍，助佑讀書撰文之神，是讀書文人、求科名者所最尊奉的神祗，自古以來就受到士人學子的崇拜。心中默念出你想祈求的事情，祈請文昌帝君，考試運勢或工作運勢一切順利。
           </div>
           <div className={`${styles.btn} mt90px`}>
-            <Button text="點學業燈" btnColor="green" />
+            <Button text="點學業燈" btnColor="green" link={studyA}/>
             <span className={`${styles.btn2}`}>
-              <Button text="上傳准考證" btnColor="green" />
+              <Button text="上傳准考證" btnColor="green" link={studyB}/>
             </span>
           </div>
         </div>

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
-import mazu from '@/assets/mazuGod.svg'
+import love from '@/assets/loveGod.svg'
 import godlight from '@/assets/GodLight.svg'
-import styles from './mazu1.module.sass'
+import styles from './loveA-1.module.sass'
 import Button from '@/components/common/button'
 import star from '@/assets/Star_pink.svg'
 import handLeft from '@/assets/handLeft.svg'
@@ -47,7 +47,7 @@ export default function Mazu1() {
               ></Image>
             </div>
             <Image
-              src={mazu}
+              src={love}
               alt=""
               width="930"
               className={`${styles.mazu}`}
@@ -99,7 +99,7 @@ export default function Mazu1() {
           </div>
         </div>
         <div className={`${styles.btn} ${isVisible ? styles.show : ''}`}>
-          <Button text="擲筊" btnColor="brown" />
+          <Button text="擲筊" btnColor="hot_pink" />
         </div>
       </div>
     </>
