@@ -14,10 +14,12 @@ import Title from '@/components/common/title'
 import DetailsRoute from '@/components/common/shopTop/detailsRoute'
 import Button from '@/components/common/button'
 import Comment from '@/components/common/cards/ShopCommentCard'
+import Stars from '@/components/common/stars'
 
 // svg
 import cart_fill from '@/assets/cart_fill.svg'
 import cart_outline from '@/assets/cart_outline.svg'
+import cart_noStock from '@/assets/cart_noStock.svg'
 import heart_fill from '@/assets/heart_fill.svg'
 import heart_outline from '@/assets/heart_outline.svg'
 import add from '@/assets/add.svg'
@@ -59,10 +61,8 @@ export default function Pid() {
       .then((data) => {
         // 單筆pid資料
         setData(data.data[0])
-        // console.log(data.data[0])
         // 相關推薦
         setRows(data.rows)
-        // console.log(data.rows)
       })
   }, [currentPath])
 
@@ -93,6 +93,8 @@ export default function Pid() {
       .replace(/＊必吃原因＊/g, '<br /><br />＊必吃原因＊<br />')
     return result
   }
+
+  // 購物車彈跳動畫
   const y = 0
   const y2 = y - 30
   const y3 = y - 15
@@ -112,11 +114,28 @@ export default function Pid() {
       transform: `translate3d(${x}px, ${y4}px, 0)`,
     },
   })
+  
   const handleAnimationEnd = () => {
     setAnimationEnd(true)
     setTimeout(() => {
       setAnimationEnd(false)
     }, 1200)
+  }
+
+  const addToCart = (count)=>{
+    const reqData = count
+    console.log(count)
+    fetch(`${process.env.API_SERVER}${currentPath}`, {
+      method: 'POST',
+      body: JSON.stringify({ requestData: reqData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        console.log('data:', data)
+      })
   }
 
   return (
@@ -164,10 +183,10 @@ export default function Pid() {
           <Col className={`${styles.container} ${styles.flex_col} `}>
             <div className={``}>
               {/* 選擇數量 */}
-              <div className={`${styles.add} fs24px mb50px `}>
+              <div className={`${styles.add} fs24px mb35px `}>
                 {/* － */}
                 <Image
-                  src={minus}
+                  src={minus} 
                   width={30}
                   alt="minus"
                   className={`${styles.button}`}
@@ -219,11 +238,14 @@ export default function Pid() {
                 />
               </div>
               {/* 加入購物車 & 收藏 */}
+              {/* 購物車 */}
               <div
-                className={`${styles.flex_row} mb50px `}
+                className={`${styles.flex_row} mb35px `}
                 onClick={() => {
-                  cartClickState ? '' : handleCartClick()
-                  handleAnimationEnd()
+                  if(data?.stock_num != 0){
+                    cartClickState ? '' : handleCartClick()
+                    handleAnimationEnd()
+                  }
                 }}
                 onMouseEnter={() => handleMouseEnter(2)}
                 onMouseLeave={handleMouseLeave}
@@ -231,25 +253,26 @@ export default function Pid() {
                 <Button
                   text="加入購物車"
                   btnColor="black"
-                  width="100%"
+                  width="275px"
                   padding="15px 60px"
                   fontSize="20px"
                   hoverColor="hot_pink"
+                  link={()=>{addToCart(count)}}
                 />
                 {/* 購物車 */}
                 <span
                   onClick={() => {
+                  if(data?.stock_num != 0){
                     cartClickState ? '' : handleCartClick()
                     handleAnimationEnd()
+                  }
                   }}
                   onMouseEnter={() => handleMouseEnter(2)}
                   onMouseLeave={handleMouseLeave}
-                  className={`${styles.inlineBlock} ms30px`}
+                  className={`${styles.inlineBlock} ms25px`}
                 >
                   <Image
-                    src={
-                      isCartHovered || cartClickState ? cart_fill : cart_outline
-                    }
+                    src={data?.stock_num === 0 ? cart_noStock : (isCartHovered || cartClickState ? cart_fill : cart_outline)}
                     alt="cart"
                     width={38}
                   />
@@ -259,10 +282,10 @@ export default function Pid() {
                   className={css({
                     display: animationEnd ? 'block' : 'none',
                     width: 60,
-                    height: 0,
-                    position: 'relative',
-                    bottom: 15,
-                    left: 5,
+                    height: 10,
+                    position: 'absolute',
+                    top: 527,
+                    right: 145,
                     color: '#363636',
                     animation: `${bounce} 1s ease-out 1`,
                     transformOrigin: 'center bottom',
@@ -271,8 +294,9 @@ export default function Pid() {
                   + {count}
                 </span>
               </div>
+              {/* 收藏 */}
               <div
-                className={`${styles.flex_row} mb50px `}
+                className={`${styles.flex_row} mb35px `}
                 onClick={handleHeartClick}
                 onMouseEnter={() => handleMouseEnter(1)}
                 onMouseLeave={handleMouseLeave}
@@ -280,9 +304,12 @@ export default function Pid() {
                 <Button
                   text="加入收藏"
                   btnColor="black"
-                  width="100%"
+                  width="275px"
                   padding="15px 60px"
                   fontSize="20px"
+                  link={()=>{
+                  console.log('surprise~!')
+                  }}
                 />
                 {/* 愛心 */}
                 <span className={`${styles.inlineBlock} ms30px`}>
@@ -299,12 +326,12 @@ export default function Pid() {
               </div>
               {/* 其他描述 */}
               <div className={`${styles.detailsData}`}>
-                <div className={`${styles.flex_row} fs20px  pb15px`}>
+                <div className={`${styles.flex_row} fs20px  pb10px`}>
                   <Image src={monkey} width={50} height={50} alt="browse" />
                   　瀏覽量　{data?.browse_num} /次
                 </div>
 
-                <div className={`${styles.flex_row} fs20px pb15px`}>
+                <div className={`${styles.flex_row} fs20px pb10px`}>
                   <Image src={buy} width={50} height={50} alt="sales" />
                   　銷售量　{data?.purchase_num} /件
                 </div>
@@ -330,10 +357,12 @@ export default function Pid() {
         <Row>
           <Col>
             <Title text="商品評價" text2="products rewiews" />
+            <div className={`${styles.stars} mt25px mb30px`}>
+              <Stars stars={data?.stars} width={30}/>
+            </div>
           </Col>
           <Col className={`mt50px`}>
             <div className={`${styles.commentLine}`}></div>
-
             {/* 評價內容 */}
             <Comment />
             <Comment

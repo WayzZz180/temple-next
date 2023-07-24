@@ -17,7 +17,7 @@ export default function Button({
   return (
     <div>
       <button
-        // onClick={link}
+        onClick={link}
         className={`${styles.btn}`}
         style={{
           backgroundColor: var_color,

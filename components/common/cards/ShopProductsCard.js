@@ -2,8 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styles from './ShopProductsCard.module.sass'
 // svg
-import goldenStar_fill from '@/assets/goldenStar_fill.svg'
-import goldenStar_outline from '@/assets/goldenStar_outline.svg'
 import heart_fill from '@/assets/heart_fill.svg'
 import heart_outline from '@/assets/heart_outline.svg'
 import cart_fill from '@/assets/cart_fill.svg'
@@ -15,6 +13,9 @@ import { useState } from 'react'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import { useClick } from '@/hooks/useClick.js'
 import { css, keyframes } from '@emotion/css'
+
+//components
+import Stars from '@/components/common/stars'
 
 export default function ShopProductsCard({
   src,
@@ -64,9 +65,6 @@ export default function ShopProductsCard({
     }, 1200);
   };
 
-  const totalStars = 5;
-  const starArray = Array.from({ length: stars });
-
   return (
     <div className={`${styles.container}  p30px`}>
       {/* 產品圖 */}
@@ -89,27 +87,11 @@ export default function ShopProductsCard({
       </Link>
       {/* 星星 */}
      <div className={`${styles.flexStart} mt15px`}>
-      {starArray.map((_, index) => (
-        <Image
-          key={index}
-          src={goldenStar_fill}
-          alt="star"
-          width={20}
-        />
-      ))}
-      {Array.from({ length: totalStars - stars }).map((_, index) => (
-        <Image
-          key={index + stars}
-          src={goldenStar_outline}
-          alt="star"
-          width={20}
-        />
-      ))}
+      <Stars width={20}  stars ={stars}/>
     </div>
       {/* 價格+icons */}
       <div className={`${styles.alert}`}>
         <div className={css({
-                    // display:'block',
                     display: animationEnd && cartClickState ? '':'none',
                     width: 180,
                     height: 30,
