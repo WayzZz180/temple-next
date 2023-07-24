@@ -6,6 +6,7 @@ import Forumline from '@/components/common/forumlogo/forumline'
 import Navbar from '@/components/common/forumlogo/navbar'
 import Forumper from '@/components/common/forumlogo/forumper'
 import AdvancedExample from '@/components/common/forumlogo/pagination'
+import LaunchForum from '@/components/common/launchdemo/launchforum'
 
 export default function Forumgossip() {
   return (

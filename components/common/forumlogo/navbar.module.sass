@@ -30,16 +30,24 @@
     width: 150px
     justify-content: space-around
 .no_underline
-    text-decoration: none
-    color: $deep_black
-    font-size: 20px
-    display: flex
-    align-items: center
-    justify-content: center
-.no_underline:hover
-    color: $green
-.no_underline:active
-    color: $green
+  text-decoration: none
+  color: $deep_black
+  font-size: 20px
+  display: flex
+  align-items: center
+  justify-content: center
+
+.no_underline:hover,
+.no_underline:active,
+.custom_button:focus
+  color: $green
+
+.custom_button:focus 
+  box-shadow: none
+  outline: none
+  border: none
+  background-color: transparent
+
 // .setmid
 //     font-size: 20px
 //     display: flex
