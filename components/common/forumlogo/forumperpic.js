@@ -1,8 +1,9 @@
 import Figure from 'react-bootstrap/Figure'
+import styles from './forumperpic.module.sass'
 
 function FigureExample() {
   return (
-    <Figure>
+    <Figure className={`${styles.margin}`}>
       <Figure.Image
         width={118}
         height={118}
