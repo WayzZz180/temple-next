@@ -7,7 +7,7 @@ import { useState } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 // components
-import Button from '@/components/common/button'
+import NoButton from '@/components/common/button/noButton'
 // svg
 import add from '@/assets/add.svg'
 import minus from '@/assets/minus.svg'
@@ -125,10 +125,10 @@ export default function ShopCartContentCard({
                 </div>
                 <div className={`${styles.total}`}>${price*count}</div>
                 <div className={`${styles.delete}`}>
-                <Button   
+                <NoButton   
                     text = '刪除'
                     btnColor = 'brown'
-                    width = '120px'
+                    width = '100px'
                     padding = '15px 0px'
                     fontSize = '16px'
                     link = {()=>{deleteFromCart(pid)}}/>
