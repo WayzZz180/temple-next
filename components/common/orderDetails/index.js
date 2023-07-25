@@ -1,48 +1,49 @@
 import Image from 'next/image'
 import { Container, Row, Col } from 'react-bootstrap'
 
-import variables from '@/styles/_variables.module.sass'
-
 //components
-import styles from '@/components/common/wishlist/wishlist.module.sass'
-import coupon from '@/assets/coupon.svg'
+import styles from '@/components/common/orderDetails/orderDetails.module.sass'
+
 import Button from '@/components/common/button/index.js'
+import DetailsText from '@/components/common/detailsText/index.js'
 
-export default function Wishlist() {
-  const wishlistRow = (
-    <Row className={styles.flex}>
-      <Col>
-        <Image src={coupon} alt="product" height={121} width={121} />
-      </Col>
-      <Col>
-        <div>
-          <b>杏仁巧克力棒</b>
-        </div>
-      </Col>
-      <Col className={styles.valid}>
-        <div>$150</div>
-      </Col>
-      <Col className={styles.btnflex}>
-        <div>
-          <Button text="加入購物車" btnColor="brown" width={147} />
-        </div>
-        <div>
-          <Button text="刪除" btnColor="brown" width={107} />
-        </div>
-      </Col>
-    </Row>
+export default function OrderDetails() {
+  return (
+    <>
+      <Row className={styles.flex}>
+        <Col>
+          <DetailsText />
+        </Col>
+        <Col className={styles.btnflex}>
+          <div className="m5px">
+            <Button
+              text="訂單詳情"
+              btnColor="brown"
+              width="229px"
+              height="50px"
+              fontSize="20px"
+            />
+          </div>
+          <div className="m5px">
+            <Button
+              text="留下評論"
+              btnColor="brown"
+              width="229px"
+              height="50px"
+              fontSize="20px"
+            />
+          </div>
+
+          <div>
+            訂單金額
+            <span className={`${styles.text_pink} fs30px ms5px`}>$132</span>
+          </div>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col className={styles.line}></Col>
+      </Row>
+    </>
   )
-
-  const lineRow = (
-    <Row>
-      <Col className={styles.line}></Col>
-    </Row>
-  )
-
-  const combinedRows = []
-  const numberOfRows = 3 // 資料的比數
-  for (let i = 0; i < numberOfRows; i++) {
-    combinedRows.push(i % 2 === 0 ? wishlistRow : lineRow)
-  }
-  return <> {combinedRows}</>
 }

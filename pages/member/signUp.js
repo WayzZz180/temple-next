@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import styles from '@/pages/W/W-SignUp.module.sass'
+import styles from '@/pages/member/signUp.module.sass'
 import Link from 'next/link'
 
 // components

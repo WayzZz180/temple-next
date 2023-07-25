@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '@/pages/W/W-MyAccount.module.sass'
+import styles from '@/pages/member/profile.module.sass'
 
 // components
 import InputBox from '@/components/common/inputBox/index.js'

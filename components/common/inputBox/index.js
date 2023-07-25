@@ -8,20 +8,22 @@ export default function InputBox({
   prompt = '',
   placeholder = '',
   onChange,
+  value,
+  id,
   width = ' 453px',
   // 487 - 15*2 空白 -2*2border = 453
   height = '45px',
   // 49 -2*2 border = 45
 }) {
-  const [inputValue, setInputValue] = useState('')
+  // const [inputValue, setInputValue] = useState('')
   const [isFocus, setIsFocus] = useState(false)
 
-  const handleChange = (event) => {
-    setInputValue(event.target.value)
-    if (onChange) {
-      console.log(inputValue)
-    }
-  }
+  // const handleChange = (event) => {
+  //   setInputValue(event.target.value)
+  //   if (onChange) {
+  //     console.log(inputValue)
+  //   }
+  // }
 
   const handleFocus = () => {
     setIsFocus(true)
@@ -37,8 +39,10 @@ export default function InputBox({
       <div>
         <input
           type={type}
-          value={inputValue}
-          onChange={handleChange}
+          // value={inputValue}
+          onChange={onChange}
+          value={value} 
+          id={id}
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder={placeholder}

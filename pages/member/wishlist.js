@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '@/pages/W/W-MyAccount.module.sass'
+import styles from '@/pages/member/wishlist.module.sass'
 
 // components
 import Title from '@/components/common/title/index.js'
