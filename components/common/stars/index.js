@@ -1,20 +1,30 @@
-import styled from '@emotion/styled'
-import stars from '@/assets/stars.svg'
+import React from 'react'
+import Image from 'next/image';
+// svg
+import goldenStar_fill from '@/assets/goldenStar_fill.svg'
+import goldenStar_outline from '@/assets/goldenStar_outline.svg'
 
-const Stars = styled.img`
-  @keyframes StarsTurn {
-    0% {
-      transform: rotateY(0deg);
-    }
-    50% {
-      transform: rotateY(deg) 360;
-    }
-    100% {
-      transform: rotateY(720deg);
-    }
-  }
-  animation: StarsTurn 8s ease infinite;
-`
-export default function StarsMove() {
-  return <Stars src={stars.src} style={{ width: '150' }} />
+export default function Stars( {width=20, stars=5}) {
+  const totalStars = 5;
+  const starArray = Array.from({ length: stars });
+  return (
+    <div>
+      {starArray.map((_, index) => (
+        <Image
+          key={index}
+          src={goldenStar_fill}
+          alt="star"
+          width={width}
+        />
+      ))}
+      {Array.from({ length: totalStars - stars }).map((_, index) => (
+        <Image
+          key={index + stars}
+          src={goldenStar_outline}
+          alt="star"
+          width={width}
+        />
+      ))}
+  </div>
+  )
 }
