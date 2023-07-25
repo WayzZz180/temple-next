@@ -12,7 +12,7 @@ export default function Button({
   height = '',
   padding = '15px 60px',
   fontSize = '24px',
-  link = '',
+  link = ()=>{},
 }) {
   const var_color = variables[btnColor]
   return (
