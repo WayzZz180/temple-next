@@ -1,14 +1,14 @@
 import styles from './ShopCartContentCard.module.sass'
 import Image from 'next/image'
-import { use, useState } from 'react'
 import Link from 'next/link'
+// hooks
+import { useState } from 'react'
 // bootstrap
-import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 // components
 import Button from '@/components/common/button'
-//svg
+// svg
 import add from '@/assets/add.svg'
 import minus from '@/assets/minus.svg'
 import TitleData from '@/components/mydata/productsTitleData'
@@ -27,24 +27,32 @@ export default function ShopCartContentCard({
     console.log(category);
  
     const deleteFromCart = (pid)=>{
-        const reqData = pid
+        const reqData = {member_id:'wayz', pid: pid}
         console.log(pid)
-        fetch(`${process.env.API_SERVER}${currentPath}`, {
-          method: 'POST',
-          body: JSON.stringify({ requestData: reqData }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
+        console.log(reqData)
+        // fetch(`${process.env.API_SERVER}/:pid`, {
+        //   method: 'DELETE',
+        // }
+        // {
+        //   method: 'POST',
+        //   body: JSON.stringify({ requestData: reqData }),
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        // }
+        fetch(`${process.env.API_SERVER}/:pid`, {
+          method: 'DELETE',
         })
-          .then((r) => r.json())
+        .then((r) => r.json())
           .then((data) => {
+            location.reload();
             console.log('data:', data)
           })
       }
  
  
     return (
-    <Row className={`${styles.row} nowrap`}>
+    <Row className={`${styles.row} nowrap fwBold`}>
         <Col>
             <div className={`${styles.container} pt30px pb30px fs18px`}>
                 <div className={`${styles.image}`}>    
@@ -119,7 +127,7 @@ export default function ShopCartContentCard({
                 <div className={`${styles.delete}`}>
                 <Button   
                     text = '刪除'
-                    btnColor = 'black'
+                    btnColor = 'brown'
                     width = '120px'
                     padding = '15px 0px'
                     fontSize = '16px'
