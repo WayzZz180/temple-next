@@ -124,7 +124,6 @@ export default function Pid() {
 
   const addToCart = (count)=>{
     const reqData = count
-    // console.log(count)
     fetch(`${process.env.API_SERVER}${currentPath}`, {
       method: 'POST',
       body: JSON.stringify({ requestData: reqData }),

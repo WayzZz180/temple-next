@@ -34,7 +34,7 @@ export default function ShopProductsCard({
   //判斷有無點擊收藏和購物車
   const { clickState: heartClickState, handleClick: handleHeartClick } =
     useClick(false)
-  const { clickState: cartClickState, handleClick: handleCartClick } =
+  const { clickState: cartClickState, handleClick: handleCartClick, setClickState: setClickState } =
     useClick(false)
   
   //購物車彈跳＋1動畫
@@ -62,8 +62,24 @@ export default function ShopProductsCard({
     setAnimationEnd(true)
     setTimeout(() => {
       setAnimationEnd(false);
+      setClickState(false)
     }, 1200);
   };
+
+  const addToCart = (count)=>{
+    const reqData = count
+    fetch(`${process.env.API_SERVER}/shop/${category}/${pid}`, {
+      method: 'POST',
+      body: JSON.stringify({ requestData: reqData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        console.log('data:', data)
+      })
+  }
 
   return (
     <div className={`${styles.container}  p30px`}>
@@ -130,6 +146,7 @@ export default function ShopProductsCard({
               if(stock_num!=0){
                 handleCartClick()
                 handleAnimationEnd()
+                addToCart(1)
               }else{
                 alert(`無庫存`)
               }

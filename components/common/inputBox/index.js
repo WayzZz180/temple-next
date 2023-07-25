@@ -11,6 +11,7 @@ export default function InputBox({
   value,
   id,
   width = ' 453px',
+  value='',
   // 487 - 15*2 空白 -2*2border = 453
   height = '45px',
   // 49 -2*2 border = 45

@@ -1,16 +1,16 @@
 import styles from './noButton.module.sass'
 import variables from '@/styles/_variables.module.sass'
-import Star from '@/assets/Star_white.svg'
-import Image from 'next/image'
+
 
 // text = Button content
 // btnColor = black, green, hot_pink, brown
 export default function Button({ 
-    text = 'text', btnColor = 'btn', 
+    text = 'text', btnColor = 'hot_pink', 
     width = '',
     padding = '15px 60px',
     fontSize = '24px',
-    link = '', }) {
+    borderRadius = '7px',
+    link = ()=>{}, }) {
   const var_color = variables[btnColor]
   return (
     <>
@@ -23,6 +23,7 @@ export default function Button({
           width: `${width}`,
           padding: `${padding}`,
           fontSize: `${fontSize}`,
+          borderRadius: `${borderRadius}`,
         }}
         >
           <div className={`${styles.text}`}>{text}</div>
