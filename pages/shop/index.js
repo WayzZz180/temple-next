@@ -22,13 +22,13 @@ export default function Shop() {
       </Row>
 
       {/* Products */}
-      {/* {data.map((v, i) => {
+      {data.map((v, i) => {
         return (
           i != 0 && (
             <ProductsCarousel key={i} text={v.text} color={v.color} i={i} />
           )
         )
-      })} */}
+      })}
     </Container>
   )
 }

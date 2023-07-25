@@ -1,18 +1,38 @@
 import React from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
 import styles from './ShopMarqueeCard.module.sass'
+import { useRouter } from 'next/router'
 
 // 根據recommend顯示圖片
-export default function MarqueeCard({ name = 'name', price = 100, recommend }) {
+export default function ShopMarqueeCard({
+  name = 'name',
+  price = 100,
+  src = '',
+  pid = 1,
+}) {
+  const router = useRouter()
   return (
-    <div className="m10px">
-      <div className={styles.flex}>
-        <div className={`${styles.container} ${styles.flex}`}>
-          <Image src={''} alt="" width="180" className="shadow"></Image>
+    <Link href={`/shop/${router.query.category}/${pid}`} className="link">
+      <div className="m30px">
+        <div className={styles.flex}>
+          <div className={`${styles.container} ${styles.flex}`}>
+            <Image
+              src={src}
+              alt=""
+              width={160}
+              height={160}
+              className="shadow"
+            ></Image>
+          </div>
+          <div
+            className={`${styles.textContainer} p10px mt30px fs18px fwBolder`}
+          >
+            {name}
+          </div>
+          <div className={'pt10px pb10px fs20px fwBolder'}>${price}</div>
         </div>
-        <div className={`p10px mt50px fs20px fwBolder`}>{name}</div>
-        <div className={'pb10px fs16px fwBolder'}>${price}</div>
       </div>
-    </div>
+    </Link>
   )
 }

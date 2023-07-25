@@ -1,31 +1,33 @@
-import React, { useState } from 'react'
-import styled from '@emotion/styled'
 import styles from './marquee.module.sass'
+// hooks
+import { useState } from 'react'
+// emotion
+import styled from '@emotion/styled'
+// components
 import Title from '@/components/common/title'
 import ShopMarqueeCard from '@/components/common/cards/ShopMarqueeCard'
+// Bootstrap
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 
 const Cards = styled.div`
   @keyframes CardsRun {
     0% {
-      transform: translateX(-100%);
+      transform: translateX(0);
     }
     100% {
-      transform: translateX(0);
+      transform: translateX(-100%);
     }
   }
   animation: ${(props) =>
-    props.isRunning ? 'CardsRun 3s steps(1000) infinite' : 'none'};
+    props.isRunning ? 'CardsRun 5s steps(1000) infinite' : 'none'};
 `
 
 const AnimatedCard = styled(ShopMarqueeCard)`
   animation: ${(props) =>
-    props.isRunning ? 'CardsRun 3s steps(1000) infinite' : 'none'};
+    props.isRunning ? 'CardsRun 5s steps(1000) infinite' : 'none'};
 `
-// 根據pid去select出recommend
-export default function Marquee({ pid }) {
-  const recommend = pid
+export default function Marquee({ data }) {
   const [isRunning, setIsRunning] = useState(true)
 
   const handleMouseEnter = () => {
@@ -46,17 +48,24 @@ export default function Marquee({ pid }) {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            {' '}
-            {Array.from({ length: 200 }, (_, index) => (
-              <Cards
-                key={index}
-                style={{ width: '100%' }}
-                isRunning={isRunning}
-                className={`${styles.marquee}`}
-              >
-                <AnimatedCard isRunning={isRunning} recommend={recommend} />
-              </Cards>
-            ))}
+            {data.map((v, i) => {
+              return (
+                <Cards
+                  key={i}
+                  style={{ width: '100%' }}
+                  isRunning={isRunning}
+                  className={`${styles.marquee}`}
+                >
+                  <AnimatedCard
+                    isRunning={isRunning}
+                    name={v.product_name}
+                    price={v.product_price}
+                    src={`/${v.image}`}
+                    pid={v.pid}
+                  />
+                </Cards>
+              )
+            })}
           </Row>
         </div>
       </Container>

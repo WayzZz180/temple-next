@@ -27,7 +27,7 @@ export default function Shop() {
       <Row className="nowrap mt100px mb50px fs24px">
         {/* 標題 */}
         <Col>
-          <p className={`${styles.title}`}>咱有的物仔</p>
+          <div className={`${styles.title}`}>神明尬意ㄟ</div>
         </Col>
       </Row>
       <Row className={`nowrap fs20px mb50px`}>
@@ -40,11 +40,7 @@ export default function Shop() {
               onMouseLeave={handleMouseLeaveStar}
             >
               <Link
-                href={{
-                  pathname: `/shop/${v.id}`,
-                  query: { data: JSON.stringify(data) },
-                }}
-                as={`/shop/${v.id}`}
+                href={`/shop/${v.id}`}
                 className={`${styles.category} ${
                   hoveredIndexStar === i ? styles.hovered : ''
                 } m15px`}
