@@ -14,10 +14,14 @@ export default function Cart() {
   const router = useRouter();
   const title = ["商 品 資 料","單 件 價 格","數 量","小 計"]
   const [data, setData] = useState([])
-  
-  const reqData = {member_id: 'wayz'}
-  
+  const member = {member_id:'wayz', count:null, pid:null }
+  const [dataFromChild, setDataFromChild] = useState(member)
+  console.log(dataFromChild);
+
   useEffect(() => {
+    const reqData = dataFromChild
+    console.log(reqData);
+    
     fetch(process.env.API_SERVER + '/shop/cart', {
       method: 'POST',
       body: JSON.stringify({ requestData: reqData }),
@@ -28,9 +32,10 @@ export default function Cart() {
       .then((r) => r.json())
       .then((data) => {
         setData(data)
+        console.log(data)
       })
-  }, [router.query])
-  
+  }, [dataFromChild, router.query])
+  console.log(data)
   if(!data) return <p>Loading...</p>
 
   return (
@@ -46,17 +51,18 @@ export default function Cart() {
           }
         </Col>
       </Row>
-        {data?.map((v,i)=>{ return <ShopCartContentCard key={i}
-          src={`/${v.image}`}
-          name={`${v.product_name}`}
-          price={`${v.product_price}`}
-          quantity = {`${v.quantity}`}
-          stock_num = {`${v.stock_num}`}
-          pid={`${v.pid}`}
-          cid={`${v.cid}`}
-          />
-        })
-        }
+        {
+            data?.map((v,i)=>{ return <ShopCartContentCard key={i}
+              src={`/${v.image}`}
+              name={`${v.product_name}`}
+              price={`${v.product_price}`}
+              quantity = {`${v.quantity}`}
+              stock_num = {`${v.stock_num}`}
+              pid={`${v.pid}`}
+              cid={`${v.cid}`}
+              setDataFromChild={setDataFromChild}
+              />
+        })}
     </Container>
     </>
   )

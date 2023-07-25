@@ -8,12 +8,14 @@ export default function InputBox({
   prompt = '',
   placeholder = '',
   onChange,
+  func=()=>{},
   width = ' 453px',
+  value='',
   // 487 - 15*2 空白 -2*2border = 453
   height = '45px',
   // 49 -2*2 border = 45
 }) {
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState(value)
   const [isFocus, setIsFocus] = useState(false)
 
   const handleChange = (event) => {
@@ -38,7 +40,10 @@ export default function InputBox({
         <input
           type={type}
           value={inputValue}
-          onChange={handleChange}
+          onChange={(event)=>{
+            handleChange(event)
+            func()
+            }}
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder={placeholder}
