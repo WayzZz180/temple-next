@@ -7,6 +7,7 @@ import moto from '@/assets/moto.svg'
 import pavilion from '@/assets/pavilion.svg'
 import tree2 from '@/assets/tree2.svg'
 import temple from '@/assets/templeonline.svg'
+import smoke from '@/assets/smoke.svg'
 import burner from '@/assets/burner.svg'
 import stall from '@/assets/stall.svg'
 import teabox from '@/assets/teabox.svg'
@@ -17,119 +18,9 @@ import C2 from '@/assets/littleC2.svg'
 import C3 from '@/assets/OnlineCould.svg'
 import C4 from '@/assets/OnlineCould2.svg'
 import fly from '@/assets/fly.gif'
-import sonaR from '@/assets/sonaR.gif'
-import sonaL from '@/assets/sonaL.gif'
-import samR from '@/assets/samR.gif'
-import samL from '@/assets/samL.gif'
-import carR from '@/assets/carR.gif'
-import carL from '@/assets/carL.gif'
-import chiR from '@/assets/chiR.gif'
-import chiL from '@/assets/chiL.gif'
-import umbR from '@/assets/umbR.gif'
-import umbL from '@/assets/umbL.gif'
+import Teams from './teams'
 
 export default function Pilgrimage() {
-  const [x, setX] = useState(0);
-  const [direction, setDirection] = useState('down');
-  const [isMoving, setIsMoving] = useState(false);
-  const [samX, setSamX] = useState(0);
-  const [carX, setCarX] = useState(0);
-  const [chiX, setChiX] = useState(0);
-  const [umbX, setUmbX] = useState(0);
-  const speed = 5;
-
-  const isMovingRef = useRef(isMoving);
-  const directionRef = useRef(direction);
-
-  const handleKeyDown = (event) => {
-    switch (event.key) {
-      case 'ArrowLeft': // 按下左移鍵
-        setDirection('left');
-        setIsMoving(true);
-        break;
-      case 'ArrowRight': // 按下右移鍵
-        setDirection('right');
-        setIsMoving(true);
-        break;
-      default:
-        break;
-    }
-  };
-
-  const handleKeyUp = () => {
-    setIsMoving(false);
-  };
-
-  const updateCharacterPosition = () => {
-    setX((prevX) => {
-      if (isMovingRef.current) {
-        if (directionRef.current === 'left') {
-          return prevX - speed;
-        } else if (directionRef.current === 'right') {
-          return prevX + speed;
-        }
-      }
-      return prevX;
-    });
-  };
-
-  useEffect(() => {
-    const character = document.getElementById('down');
-    character.style.transform = `translateX(${x}px)`;
-  }, [x]);
-
-  useEffect(() => {
-    isMovingRef.current = isMoving;
-    directionRef.current = direction;
-  }, [isMoving, direction]);
-
-  useEffect(() => {
-    let animationFrameId;
-
-    const animate = () => {
-      updateCharacterPosition();
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    if (isMoving) {
-      animationFrameId = requestAnimationFrame(animate);
-    } else {
-      cancelAnimationFrame(animationFrameId);
-    }
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, [isMoving]);
-
-  useEffect(() => {
-    const samCharacter = document.getElementById('sam');
-    setSamX(x - 50); // 將 sam 的位置設定為 x - 50，跟隨在 sona 後面
-    samCharacter.style.transform = `translateX(${samX}px)`;
-  }, [x, samX]);
-  useEffect(() => {
-    const carCharacter = document.getElementById('car');
-    setCarX(x - 50); 
-    carCharacter.style.transform = `translateX(${carX}px)`;
-  }, [x, carX]);
-  useEffect(() => {
-    const chiCharacter = document.getElementById('chi');
-    setChiX(x - 50); 
-    chiCharacter.style.transform = `translateX(${chiX}px)`;
-  }, [x, chiX]);
-  useEffect(() => {
-    const umbCharacter = document.getElementById('umb');
-    setUmbX(x - 50); 
-    umbCharacter.style.transform = `translateX(${umbX}px)`;
-  }, [x, umbX]);
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp);
-    };
-  }, []);
 
   return (
     <div className={styles.parent_container}>
@@ -187,6 +78,14 @@ export default function Pilgrimage() {
           width="1050"
           className={`${styles.temple}`}
         ></Image>
+        <div className={`${styles.smokemask}`}>
+        <Image
+          src={smoke}
+          alt=""
+          width="265"
+          className={`${styles.smoke}`}
+        ></Image>
+        </div>
         <Image
           src={burner}
           alt=""
@@ -212,38 +111,7 @@ export default function Pilgrimage() {
           className={`${styles.tree3}`}
         ></Image>
       </div>
-      <div>
-      <Image
-          id="umb"
-          alt="Umb"
-          src={direction === 'left' ? umbL : umbR}
-          className={`${styles.umb}`}
-        />
-      <Image
-          id="chi"
-          alt="Chi"
-          src={direction === 'left' ? chiL : chiR}
-          className={`${styles.chi}`}
-        />
-      <Image
-          id="car"
-          alt="Car"
-          src={direction === 'left' ? carL : carR}
-          className={`${styles.car}`}
-        />
-        <Image
-          id="sam"
-          alt="Sam"
-          src={direction === 'left' ? samL : samR}
-          className={`${styles.sam}`}
-        />
-        <Image
-          id="down"
-          alt="sona"
-          src={direction === 'left' ? sonaL : sonaR}
-          className={`${styles.sona}`}
-        />
-      </div>
+     <Teams />
     </div>
   )
 }

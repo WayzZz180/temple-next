@@ -1,0 +1,54 @@
+@import '@/styles/mixins/_mixin'
+@import '@/styles/_variables.module.sass'
+
+// .btn
+//     color:#fff
+//     border-radius: 7px
+//     border:0
+//     box-sizing:border-box
+//     padding:15px 60px
+//     font-size:20px
+//     letter-spacing: 3px
+//     font-weight: 400
+//     transition: all 0.3s ease-in-out
+
+// .btn:hover
+//     border-radius: 0px
+//     transform: translateY(-2px)
+
+.btn
+  box-sizing: border-box
+  border-radius: 7px
+  letter-spacing: 3px
+  font-size:25px
+  padding:15px 60px
+  border: none
+  display: flex
+  align-items: center
+  justify-content: center
+  cursor: pointer
+  transition-duration: .5s
+  overflow: hidden
+  position: relative
+
+.text 
+  margin-left:5px
+  margin-bottom: 0px
+  padding: 0
+  height: 100%
+  width: 100%
+  display: flex
+  align-items: center
+  justify-content: center
+  color: #fff
+  transition-duration: .5s
+  font-size: 25px
+  font-weight: 500
+
+.btn:hover .text
+    transform: scale(1.1)
+    font-weight:700
+
+.btn:active 
+  transform: scale(0.95)
+  transition-duration: .5s

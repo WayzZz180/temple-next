@@ -25,6 +25,14 @@
 .tree1
     position: absolute
     left:80px
+    transform-origin: bottom
+    animation: tree1 2s linear infinite alternate-reverse
+
+@keyframes tree1
+  0%
+    transform: skew(1deg)
+  100%
+   transform: skew(-1deg)
 
 .pavilion
     position: absolute
@@ -33,10 +41,27 @@
 .tree2
     position: absolute
     left:1270px
+    transform-origin: bottom
+    animation: tree2 2s linear infinite alternate-reverse
+
+@keyframes tree2
+  0%
+    transform: skew(1deg)
+  100%
+   transform: skew(-1deg)
 
 .tree3
     position: absolute
     right:65px
+    z-index: 2
+    transform-origin: bottom
+    animation: tree3 2s linear infinite alternate-reverse
+
+@keyframes tree3
+  0%
+    transform: skew(1deg)
+  100%
+   transform: skew(-1deg)
 
 .teabox
     position: absolute
@@ -45,6 +70,31 @@
 .stall
     position: absolute
     right:615px
+
+.smokemask
+    position: absolute
+    width:265px
+    height:126px
+    right:975px
+    bottom:310px
+    z-index:2
+    overflow: hidden
+
+.smoke
+    transform-origin: left bottom
+    animation: show 4s linear infinite forwards
+
+@keyframes show
+  0%
+    opacity: 0
+    transform: skew(10deg, 10deg) scale(0)
+  10%
+   opacity: 1
+  90%
+   opacity: 1
+  100%
+   opacity: 0
+   transform: skew(-50deg, -20deg) scale(1)
 
 .burner
     position: absolute
@@ -65,66 +115,66 @@
 
 .C1
     position: absolute
-    animation: could 175s linear infinite 
+    animation: could 135s linear infinite 
 
 @keyframes could
   0%
-    transform: translateX(2200px) translateZ(0)
+    transform: translateX(-2200px) translateZ(0)
     opacity: 0
   5%
     opacity: 1
   90%
     opacity: 1
   100% 
-    transform: translateX(-1050px) translateZ(0)
+    transform: translateX(1050px) translateZ(0)
     opacity: 0
 
 .C2
     position: absolute
-    animation: could2 170s linear infinite 
+    animation: could2 130s linear infinite 
 
 @keyframes could2
   0%
-    transform: translateX(-1250px) translateZ(0)
+    transform: translateX(1250px) translateZ(0)
     opacity: 0
   5%
     opacity: 1
   90%
     opacity: 1
   100% 
-    transform: translateX(-2250px) translateZ(0)
+    transform: translateX(2250px) translateZ(0)
     opacity: 0
 
 .C3
     position: absolute
-    animation: could3 220s linear infinite 
+    animation: could3 180s linear infinite 
 
 @keyframes could3
   0%
-    transform: translateX(750px) translateZ(0)
+    transform: translateX(-750px) translateZ(0)
     opacity: 0
   5%
     opacity: 1
   90%
     opacity: 1
   100% 
-    transform: translateX(-1250px) translateZ(0)
+    transform: translateX(1250px) translateZ(0)
     opacity: 0
 
 .C4
     position: absolute
-    animation: could4 275s linear infinite 
+    animation: could4 125s linear infinite 
 
 @keyframes could4
   0%
-    transform: translateX(-500px) translateZ(0)
+    transform: translateX(500px) translateZ(0)
     opacity: 0
   5%
     opacity: 1
   90%
     opacity: 1
   100% 
-    transform: translateX(-2350px) translateZ(0)
+    transform: translateX(2350px) translateZ(0)
     opacity: 0
 
 .fly
