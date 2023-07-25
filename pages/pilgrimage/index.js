@@ -111,9 +111,7 @@ export default function Pilgrimage() {
           className={`${styles.tree3}`}
         ></Image>
       </div>
-      <div className={`${styles.flex}`}>
      <Teams />
-     </div>
     </div>
   )
 }
