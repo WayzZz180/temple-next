@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-export default function ShopStepBar({state="/shop/cart"}) {
+export default function ShopStepBar({path="/shop/cart"}) {
 
   const steps = [
     { 
@@ -30,11 +30,11 @@ export default function ShopStepBar({state="/shop/cart"}) {
               <Fragment key={i}>
                 <div className={`${styles.align}`}>
                   <div className={`${styles.circle} ${styles.active} fs24px`}
-                  style={{ opacity: v.path === state ? 1 : 0.5 }}
+                  style={{ opacity: v.path === path ? 1 : 0.5 }}
                   >
                     {i + 1}
                   </div>
-                  <div className='fwBold mt10px' style={{ opacity: v.path === state ? 1 : 0.5 }}>{v.text}</div>
+                  <div className='fwBold mt10px' style={{ opacity: v.path === path ? 1 : 0.5 }}>{v.text}</div>
                 </div>
                 { i!= steps.length-1 ? <div className={`${styles.line} mb30px`}></div>:""}
               </Fragment>

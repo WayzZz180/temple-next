@@ -11,6 +11,8 @@ import Col from 'react-bootstrap/Col'
 import ShopStepBar from '@/components/common/bar/ShopStepBar'
 import ShopCartContentCard from '@/components/common/cards/ShopCartContentCard'
 import CartCategory from '@/components/common/button/CartCategory'
+import Button from '@/components/common/button'
+import Marquee from '@/components/common/marquee'
 
 export default function Cart() {
   const router = useRouter();
@@ -19,15 +21,15 @@ export default function Cart() {
     {width:"365px",text:"商品名稱"},
     {width:"145px",text:"單件價格"},
     {width:"195px",text:"數量"},
-    {width:"260px",text:"小計"}]
+    {width:"274px",text:"小計"}]
 
   const [data, setData] = useState([])
+  const [marquee, setMarquee] = useState([])
   const member = {member_id:'wayz', count:null, pid:null }
   const [dataFromChild, setDataFromChild] = useState(member)
   
   useEffect(() => {
     const reqData = dataFromChild
-    
     fetch(process.env.API_SERVER + '/shop/cart', {
       method: 'POST',
       body: JSON.stringify({ requestData: reqData }),
@@ -40,17 +42,63 @@ export default function Cart() {
         setData(data)
       })
   }, [dataFromChild, router.query])
+
+
+  // 瀏覽紀錄
+  useEffect(()=>{
+    const reqData = false
+    fetch(`${process.env.API_SERVER}/shop/cart`, {
+      method: 'POST',
+      body: JSON.stringify({ requestData: reqData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((r) => r.json())
+    .then((data) => {
+      setMarquee(data)
+    })
+  },[router.query])
+
   if(!data) return <p>Loading...</p>
+
+  // for 一鍵清空
+  const pid_array = data?.map((v,i)=>{
+    return v.pid
+  })
+
+  // 小計
+  const total = data?.reduce((result, v) => {
+    return result + v.product_price * v.quantity;
+  }, 0);
+
+  // 優惠券
+  const coupon = 100
+
+
+  if(!marquee) return <p>Loading...</p>
 
   return (
     <>
     <Container>
-      <ShopStepBar />
-      <Row className='nowrap mt100px' >
+      {/* Step */}
+      <Row>
         <Col>
-          <CartCategory />
+          <ShopStepBar />
         </Col>
       </Row>
+      {/* 購物車、下次再買、一鍵清空 */}
+      <Row className={`${styles.row} nowrap mt100px`}>
+        <Col className={`${styles.top}`}>
+            <CartCategory />
+            <button className={`${styles.button} fs18px mb10px`}
+            onClick={()=>{
+              setDataFromChild({member_id:'wayz', count:null, pid:pid_array})
+            }}
+            >一鍵清空</button>
+        </Col>
+      </Row>
+      {/* 標題列 */}
       <Row className='nowrap'>
         <Col className={`${styles.container} `}>
           {
@@ -62,8 +110,10 @@ export default function Cart() {
           }
         </Col>
       </Row>
+      {/* 購物車內容 */}
       { 
-        (data.length === 0) ? (
+        (data?.length === 0) ? 
+        (
           <Row className='nowrap'>
             <Col className={`${styles.insertInfo} mt100px fs24px`}>
               快去新增幾筆商品吧！
@@ -71,7 +121,7 @@ export default function Cart() {
             </Col>
           </Row>
         ) : (
-          data.map((v,i) => (
+          data?.map((v,i) => (
             <ShopCartContentCard
               key={i}
               src={`/${v.image}`}
@@ -86,6 +136,41 @@ export default function Cart() {
           ))
         )
       }
+      {/* 明細 */}
+      <Row className='nowrap'>
+        <Col className={`${styles.col} mt50px fs18px`}>
+          <div className={`${styles.detailsContainer}`}>
+            <div className={`${styles.detailsCategory}`}>
+              <span className={`${styles.details}`}>小計：</span>
+              <span className={`${styles.details}`}>${total}</span>
+            </div>
+            <div className={`${styles.detailsCategory}`}>
+              <span className={`${styles.details}`}>使用優惠券：</span>
+              <span className={`${styles.details}`}>-${coupon}</span>
+            </div>
+            <div className={`${styles.detailsCategory} mt30px`}>
+              <span className={`${styles.details}`}>合計：</span>
+              <span className={`${styles.details}`}>${total-coupon}</span>
+            </div>
+          </div>
+            <div className={`${styles.detailsButton} mt30px`}>
+              <Button 
+                  text = '前往結帳'
+                  btnColor = 'hot_pink'
+                  width = '100%'
+                  height = ''
+                  padding = '15px 60px'
+                  fontSize = '18px'
+                  link={()=>{
+                    router.push('/shop/order')
+                  }}
+               />
+            </div>
+        </Col>
+      </Row>
+      <Row>
+        <Marquee data={marquee} text="瀏覽紀錄" text2='browse history' lineColor='green'/>
+      </Row>
     </Container>
     </>
   )

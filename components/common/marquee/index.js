@@ -27,7 +27,12 @@ const AnimatedCard = styled(ShopMarqueeCard)`
   animation: ${(props) =>
     props.isRunning ? 'CardsRun 5s steps(1000) infinite' : 'none'};
 `
-export default function Marquee({ data }) {
+export default function Marquee({ 
+  data, 
+  text = '相關選擇',
+  text2="Related Choice" ,
+  lineColor="hot_pink"
+   }) {
   const [isRunning, setIsRunning] = useState(true)
 
   const handleMouseEnter = () => {
@@ -40,9 +45,9 @@ export default function Marquee({ data }) {
 
   return (
     <>
-      <Title text="相關選擇" text2="Related Choice" lineColor="hot_pink" />
       <Container className={`${styles.marqueeContainer}`}>
-        <div className={`${styles.marqueeContent}`}>
+      <Title text={text} text2={text2} lineColor={lineColor}/>
+        <div className={`${styles.marqueeContent} mt30px`}>
           <Row
             className="nowrap"
             onMouseEnter={handleMouseEnter}

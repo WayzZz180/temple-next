@@ -39,11 +39,11 @@ export default function SignUp() {
         </Row>
         <Row className={styles.flex_space_between}>
           <Col>
-            <InputBox type="text" placeholder="姓名" onChange width={202} />
+            <InputBox type="text" placeholder="姓名" prompt="姓名" onChange width={202} />
           </Col>
           {/* 202-15*2空白 = 202 */}
           <Col>
-            <InputBox type="text" placeholder="暱稱" onChange width={202} />
+            <InputBox type="text"  prompt="暱稱" placeholder="暱稱" onChange width={202} />
           </Col>
         </Row>
         <Row className={styles.flex_centre}>
