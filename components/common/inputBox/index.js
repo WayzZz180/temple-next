@@ -1,30 +1,20 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import styles from '@/components/common/inputBox/inputBox.module.sass'
 
-// onChange 用來記錄輸入文字的
 export default function InputBox({
   type = 'text',
   prompt = '',
   placeholder = '',
   onChange,
-  value,
   id,
-  width = ' 453px',
-  value='',
-  // 487 - 15*2 空白 -2*2border = 453
+  width = '453px',
+  value = '',
   height = '45px',
-  // 49 -2*2 border = 45
+  validationRules,
+  isError,
+  errorMessage, // Receive the error message as a prop
 }) {
-  // const [inputValue, setInputValue] = useState('')
   const [isFocus, setIsFocus] = useState(false)
-
-  // const handleChange = (event) => {
-  //   setInputValue(event.target.value)
-  //   if (onChange) {
-  //     console.log(inputValue)
-  //   }
-  // }
 
   const handleFocus = () => {
     setIsFocus(true)
@@ -34,23 +24,49 @@ export default function InputBox({
     setIsFocus(false)
   }
 
+  const validateInput = () => {
+    const errors = {}
+    if (validationRules) {
+      for (const field in validationRules) {
+        const rule = validationRules[field]
+        if (rule.required && (!value || value.trim() === '')) {
+          errors[field] = rule.message
+        }
+        if (rule.regex && !rule.regex.test(value)) {
+          errors[field] = rule.message
+        }
+        if (rule.regex && !rule.regex.test(value)) {
+          errors[field] = rule.message
+        }
+      }
+    }
+    return errors
+  }
+
+  const errors = validateInput()
+
   return (
-    <>
-      <div className="mb6px"> {prompt}</div>
-      <div>
+    <div className={styles.input_box_container}>
+      <div className={styles.prompt}>{prompt}</div>
+      <div className={styles.input_box_wrapper}>
         <input
           type={type}
-          // value={inputValue}
-          onChange={onChange}
-          value={value} 
+          value={value}
           id={id}
+          onChange={onChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder={placeholder}
           style={{ width, height }}
-          className={`${isFocus ? styles.focus : ''} ${styles.standard_input}`}
+          // Apply error styles based on the isError prop
+          className={`${styles.standard_input} ${
+            isError && errors[id] ? styles.error_input : ''
+          } ${isFocus ? styles.standard_focus : ''}`}
         />
+        {isError && errors[id] && (
+          <div className={styles.error_message}>{errors[id]}</div>
+        )}
       </div>
-    </>
+    </div>
   )
 }
