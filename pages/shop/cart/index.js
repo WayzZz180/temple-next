@@ -162,7 +162,9 @@ export default function Cart() {
                   padding = '15px 60px'
                   fontSize = '18px'
                   link={()=>{
+                    if(data?.length!=0){
                     router.push('/shop/order')
+                    }
                   }}
                />
             </div>
