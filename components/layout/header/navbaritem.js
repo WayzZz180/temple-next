@@ -1,24 +1,12 @@
 import React from 'react'
 import styles from './header.module.sass'
 import Link from 'next/link'
-import { useState, useEffect, useContext  } from 'react'
+import { useContext } from 'react'
 import CartContext from '@/contexts/CartContext'
-import { useRouter } from 'next/router'
 
 export default function NavbarItem({ title, title2, links }) {
-  // const [ cartCount, setCartCount] = useState(0)
   const { cartCount } = useContext(CartContext);
-  // console.log(count)
-  const router = useRouter();
-  // useEffect(() => {
-  //   fetch(`${process.env.API_SERVER}/shop`)
-  //     .then((r) => r.json())
-  //     .then((data) => {
-  //       setCartCount(data)
-  //     })
-  // }, [router.query])
-
-
+  
   return (
     <li className={`mt10px`}>
       <div className={`${styles.title} fs14px ps30px `}>{title}</div>
