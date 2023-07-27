@@ -1,8 +1,9 @@
 import styles from './cart.module.sass'
 
 //hooks
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
+import CartContext from '@/contexts/CartContext'
 
 // bootstrap
 import Container from 'react-bootstrap/Container'
@@ -39,6 +40,7 @@ export default function Cart() {
   const [dataFromChild, setDataFromChild] = useState(member)
   const [state, setState] = useState(false)
   const [idFromChild, setIdFromChild] = useState(1)
+  const { cartCount, setCartCount, getCartCount } = useContext(CartContext);
   
   useEffect(() => {
     const reqData = {...dataFromChild, id:idFromChild}
@@ -52,7 +54,8 @@ export default function Cart() {
       .then((r) => r.json())
       .then((data) => {
         setData(data)
-      })
+        getCartCount()
+        })
   }, [dataFromChild, idFromChild, state, router.query])
 
 

@@ -4,7 +4,9 @@ import Link from 'next/link'
 import variables from '@/styles/_variables.module.sass'
  
 // hooks
-import { useState,useEffect } from 'react'
+import { useState,useEffect,useContext } from 'react'
+import CartContext from '@/contexts/CartContext'
+
 // bootstrap
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -27,7 +29,7 @@ export default function ShopCartContentCard({
     state=false
 }) {
     if(isNaN(quantity)) return <p>Loading</p>
-
+    const { cartCount, setCartCount, getCartCount } = useContext(CartContext);
     const [count, setCount] = useState(Number(quantity))
     const category = TitleData[cid].id
     const initial = {member_id:'wayz', count:count, pid:pid, wannaBuy:false }
@@ -62,6 +64,7 @@ export default function ShopCartContentCard({
       })
         .then((r) => r.json())
         .then((data) => {
+          getCartCount()
         })
     }
 

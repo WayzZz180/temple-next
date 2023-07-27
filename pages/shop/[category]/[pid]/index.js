@@ -4,9 +4,10 @@ import styles from './pid.module.sass'
 // hooks
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import { useClick } from '@/hooks/useClick.js'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import { css, keyframes } from '@emotion/css'
+import CartContext from '@/contexts/CartContext'
 
 // components
 import Marquee from '@/components/common/marquee'
@@ -36,6 +37,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 export default function Pid() {
+  const { cartCount, setCartCount, getCartCount } = useContext(CartContext);
   const router = useRouter()
   const currentPath = router.asPath
   const [data, setData] = useState()
@@ -137,6 +139,8 @@ export default function Pid() {
     })
       .then((r) => r.json())
       .then((data) => {
+        // setCartCount(cartCount+1)
+        getCartCount()
       })
   }
 
@@ -289,6 +293,7 @@ export default function Pid() {
                       hoverColor="hot_pink"
                       link={() => {
                           addToCart(count);
+                          
                       }}
                     />
                   )
