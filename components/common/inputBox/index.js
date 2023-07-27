@@ -10,9 +10,10 @@ export default function InputBox({
   width = '453px',
   value = '',
   height = '45px',
-  validationRules,
+
   isError,
-  errorMessage, // Receive the error message as a prop
+  showError, // 新增一個 showError 屬性來控制錯誤訊息的顯示
+  errorMessage,
 }) {
   const [isFocus, setIsFocus] = useState(false)
 
@@ -23,27 +24,6 @@ export default function InputBox({
   const handleBlur = () => {
     setIsFocus(false)
   }
-
-  const validateInput = () => {
-    const errors = {}
-    if (validationRules) {
-      for (const field in validationRules) {
-        const rule = validationRules[field]
-        if (rule.required && (!value || value.trim() === '')) {
-          errors[field] = rule.message
-        }
-        if (rule.regex && !rule.regex.test(value)) {
-          errors[field] = rule.message
-        }
-        if (rule.regex && !rule.regex.test(value)) {
-          errors[field] = rule.message
-        }
-      }
-    }
-    return errors
-  }
-
-  const errors = validateInput()
 
   return (
     <div className={styles.input_box_container}>
@@ -60,12 +40,11 @@ export default function InputBox({
           style={{ width, height }}
           // Apply error styles based on the isError prop
           className={`${styles.standard_input} ${
-            isError && errors[id] ? styles.error_input : ''
+            isError ? styles.error_input : ''
           } ${isFocus ? styles.standard_focus : ''}`}
         />
-        {isError && errors[id] && (
-          <div className={styles.error_message}>{errors[id]}</div>
-        )}
+        {/* 根據 isError 屬性來決定是否顯示錯誤訊息 */}
+        {isError && <div className={styles.error_message}>{errorMessage}</div>}
       </div>
     </div>
   )

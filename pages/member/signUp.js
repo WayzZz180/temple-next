@@ -16,29 +16,29 @@ import { Container, Row, Col } from 'react-bootstrap'
 export default function SignUp() {
   const router = useRouter()
   const [user, setUser] = useState('')
-  const [invalidField, setInvalidField] = useState('')
-  const [isError, setIsError] = useState(false) // 是否有錯誤
-  const [error, setError] = useState(null) // Define a state variable to store the error message
+  const [invalidFields, setInvalidFields] = useState([])
+
+  // const [error, setError] = useState(null) // Define a state variable to store the error message
 
   const changeUser = (e) => {
     setUser((old) => ({
       ...old,
       [e.target.id]: e.target.value,
     }))
-    setInvalidField('') // 清除之前的驗證失敗狀態
   }
   // 定義驗證規則
   const validationRules = {
     member_name: {
-      regex: /^[\u4e00-\u9fa5]{1,10}$/,
-      message: '請輸入中文，最多10個字',
+      required: true,
+      regex: /^[\u4e00-\u9fa5]{2,10}$/,
+      message: '請輸入中文姓名，最多10個字',
     },
     member_forum_name: {
-      required: false,
-      regex: /^[\u4e00-\u9fa5]{1,12}$|^[a-zA-Z]{1,24}$/,
+      regex: /^[\u4e00-\u9fa5a-zA-Z0-9]{1,20}$/,
       message: '暱稱過長，請重新輸入',
     },
     member_account: {
+      required: true,
       regex: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
       message: '請輸入有效的Email格式',
     },
@@ -62,6 +62,28 @@ export default function SignUp() {
       message: '地址請輸入中文(和數字)',
     },
   }
+
+  // Collect all the invalid fields and set the state
+  const invalidFieldsArray = Object.keys(validationRules).map((field) => {
+    const rule = validationRules[field]
+    // Return an object containing field and message for each invalid field
+    return rule.required && (!user[field] || user[field].trim() === '')
+      ? { field, message: rule.message }
+      : rule.regex && !rule.regex.test(user[field])
+      ? { field, message: rule.message }
+      : field === 'confirm_password' && !rule.custom(user[field], user)
+      ? { field, message: rule.message }
+      : null
+  })
+
+  // 定義 getErrorForField 函式
+  const getErrorForField = (field) => {
+    const invalidFieldObj = invalidFieldsArray.find(
+      (item) => item && item.field === field
+    )
+    return invalidFieldObj ? invalidFieldObj.message : ''
+  }
+
   const validateForm = () => {
     for (const field in validationRules) {
       const rule = validationRules[field]
@@ -74,30 +96,62 @@ export default function SignUp() {
         return { field, message: rule.message }
       }
 
-      if (rule.custom && !rule.custom(user[field], user)) {
-        // Check custom rule for confirm_password
-        return { field, message: rule.message }
+      if (field === 'confirm_password') {
+        // 檢查 confirm_password 的自訂規則
+        if (!rule.custom(user[field], user)) {
+          return { field, message: rule.message }
+        }
       }
     }
 
-    return null // 若表單通過驗證，沒有錯誤
+    return null // 代表表單通過驗證，沒有錯誤 //有回傳代表有錯誤
   }
 
   const doSignUp = (e) => {
     e.preventDefault()
-    setIsError(false) // 在驗證之前重置 isError 狀態
-    setError(null) // Reset the error state before validation
 
     const validateResult = validateForm()
     if (validateResult) {
-      // 驗證失敗，處理錯誤
-      const { field, message } = validateResult // Destructure the field and message from validateResult
-      setError(message) // Set the error message in the state
-      alert(message)
-      setInvalidField(field)
-      setIsError(true) // 設置 isError 狀態為 true 以套用錯誤樣式
+      // Collect all the invalid fields and set the state
+      const invalidFieldsArray = Object.keys(validationRules).map((field) => {
+        const rule = validationRules[field]
+        return rule.required && (!user[field] || user[field].trim() === '')
+          ? field
+          : rule.regex && !rule.regex.test(user[field])
+          ? field
+          : field === 'confirm_password' && !rule.custom(user[field], user)
+          ? field
+          : null
+      })
+      setInvalidFields(invalidFieldsArray.filter((field) => field !== null))
+
+      alert('資料有誤，請檢查一下喔!')
+
       return
     }
+
+    // const doSignUp = (e) => {
+    //   e.preventDefault()
+
+    //   const validateResult = validateForm()
+    //   if (validateResult) {
+    //     // Collect all the invalid fields and set the state
+    //     const invalidFieldsArray = Object.keys(validationRules).map((field) => {
+    //       const rule = validationRules[field]
+    //       return rule.required && (!user[field] || user[field].trim() === '')
+    //         ? field
+    //         : rule.regex && !rule.regex.test(user[field])
+    //         ? field
+    //         : field === 'confirm_password' && !rule.custom(user[field], user)
+    //         ? field
+    //         : null
+    //     })
+    //     setInvalidFields(invalidFieldsArray.filter((field) => field !== null))
+
+    //     alert('資料有誤，請檢查一下喔!')
+
+    //     return
+    //   }
 
     // 驗證通過，繼續進行表單提交
     // 取得或提交表單資料
@@ -122,6 +176,7 @@ export default function SignUp() {
         alert('資料有誤，請重新填寫', error)
       })
   }
+
   return (
     <div className={styles.flex}>
       <Container>
@@ -149,6 +204,7 @@ export default function SignUp() {
           <Row className={styles.flex_space_between}>
             <Col>
               <InputBox
+                prompt="姓名"
                 type="text"
                 id="member_name"
                 placeholder="姓名"
@@ -156,13 +212,15 @@ export default function SignUp() {
                 validationRules={validationRules}
                 value={user.member_name}
                 width={202}
-                isError={invalidField === 'member_name'} // 根據 invalidField 設置 isError 屬性
-                errorMessage={error} // Pass the error message as a prop
+                // 判斷是否為錯誤欄位，以及是否顯示錯誤訊息
+                isError={invalidFields.includes('member_name')}
+                errorMessage={getErrorForField('member_name')} // 取得該欄位的錯誤訊息
               />
             </Col>
             {/* 202-15*2空白 = 202 */}
             <Col>
               <InputBox
+                prompt="暱稱"
                 type="text"
                 id="member_forum_name"
                 placeholder="暱稱"
@@ -170,8 +228,8 @@ export default function SignUp() {
                 validationRules={validationRules}
                 value={user.member_forum_name}
                 width={202}
-                isError={invalidField === 'member_forum_name'}
-                errorMessage={error}
+                isError={invalidFields.includes('member_forum_name')}
+                errorMessage={getErrorForField('member_forum_name')}
               />
             </Col>
           </Row>
@@ -185,8 +243,8 @@ export default function SignUp() {
                 onChange={changeUser}
                 validationRules={validationRules}
                 value={user.member_account}
-                isError={invalidField === 'member_account'}
-                errorMessage={error}
+                isError={invalidFields.includes('member_account')}
+                errorMessage={getErrorForField('member_account')}
               />
             </Col>
           </Row>
@@ -199,8 +257,8 @@ export default function SignUp() {
                 onChange={changeUser}
                 validationRules={validationRules}
                 value={user.member_password}
-                isError={invalidField === 'member_password'}
-                errorMessage={error}
+                isError={invalidFields.includes('member_password')}
+                errorMessage={getErrorForField('member_password')}
               />
             </Col>
           </Row>
@@ -213,8 +271,8 @@ export default function SignUp() {
                 onChange={changeUser}
                 validationRules={validationRules}
                 value={user.confirm_password}
-                isError={invalidField === 'confirm_password'}
-                errorMessage={error}
+                isError={invalidFields.includes('confirm_password')}
+                errorMessage={getErrorForField('confirm_password')}
               />
             </Col>
           </Row>
@@ -227,8 +285,8 @@ export default function SignUp() {
                 onChange={changeUser}
                 validationRules={validationRules}
                 value={user.member_birthday}
-                isError={invalidField === 'member_birthday'}
-                errorMessage={error}
+                isError={invalidFields.includes('member_birthday')}
+                errorMessage={getErrorForField('member_birthday')}
               />
             </Col>
             {/* Q3 */}
@@ -242,8 +300,8 @@ export default function SignUp() {
                 onChange={changeUser}
                 validationRules={validationRules}
                 value={user.member_address}
-                isError={invalidField === 'member_address'}
-                errorMessage={error}
+                isError={invalidFields.includes('member_address')}
+                errorMessage={getErrorForField('member_address')}
               />
             </Col>
           </Row>
