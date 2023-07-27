@@ -64,6 +64,8 @@ export default function Pid() {
         setData(data.data[0])
         // 相關推薦
         setRows(data.rows)
+        // 重置數量
+        setCount(1)
       })
   }, [currentPath])
 
@@ -125,7 +127,7 @@ export default function Pid() {
 
   // 加入購物車
   const addToCart = (count)=>{
-    const reqData = count
+    const reqData = {quantity: count}
     fetch(`${process.env.API_SERVER}${currentPath}`, {
       method: 'POST',
       body: JSON.stringify({ requestData: reqData }),

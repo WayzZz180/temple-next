@@ -14,14 +14,14 @@ const data = [
     color: 'hot_pink',
   },
   {
-    text: '啉涼涼',
-    id: 'drinks',
-    color: 'green',
-  },
-  {
     text: '呷飽飽',
     id: 'salty',
     color: 'hot_pink',
+  },
+  {
+    text: '啉涼涼',
+    id: 'drinks',
+    color: 'green',
   },
   {
     text: '本土ㄟ',

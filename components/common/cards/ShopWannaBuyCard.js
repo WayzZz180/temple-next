@@ -21,7 +21,10 @@ export default function ShopWannaBuyCard({
     stock_num=30,
     pid=2,
     cid=1,
+    date='2023-08-16',
     setDataFromChild = ()=>{},
+    setState=()=>{},
+    state=false
 }) {
     const [count, setCount] = useState(Number(quantity))
     const category = TitleData[cid].id
@@ -32,23 +35,19 @@ export default function ShopWannaBuyCard({
     useEffect(() => {
       setDataFromChild(childData)
     }, [childData])
-    
-    // 更新數量
-    const updateCount = (count,pid)=>{
-        const updatedData = { member_id: 'wayz', count: count, pid: pid };
-        setChildData(updatedData); // 更新 childData
-      }
-      
+ 
     // 刪除個別商品
     const deleteFromWannaBuy = (pid)=>{
-      const deletedData = {member_id:'wayz', pid: pid, }
+      const deletedData = {member_id:'wayz', pid: pid, wannaBuy:true }
       setChildData(deletedData); // 更新 childData
     }
 
-    // 加入下次再買
-    const addToWannaBuy = (pid)=>{
-      const reqData = {member_id:'wayz', pid: pid}
-      fetch(`${process.env.API_SERVER}/shop/wannaBuy`, {
+    // 加入購物車
+    const addToCart = ()=>{
+      setState(!state)
+      const reqData = {quantity: 1, wannaBuy: true}
+      const currentPath =`/shop/${category}/${pid}`
+      fetch(`${process.env.API_SERVER}${currentPath}`, {
         method: 'POST',
         body: JSON.stringify({ requestData: reqData }),
         headers: {
@@ -57,13 +56,10 @@ export default function ShopWannaBuyCard({
       })
         .then((r) => r.json())
         .then((data) => {
-          console.log('data:', data)
         })
     }
-
-
- 
- 
+    
+    const date_slice = date.slice(0,10)
     return (
     <Row className={`${styles.row} nowrap fwBold`}>
         <Col>
@@ -88,7 +84,7 @@ export default function ShopWannaBuyCard({
                      {stock_num > 0 ? "有" : "無"}
                 </div>
                 {/* 放入時間 */}
-                <div className={`${styles.date}`}>2023-08-16</div>
+                <div className={`${styles.date}`}>{date_slice}</div>
                
                 {/* 放入購物車 */}
                 <div className={`${styles.addToCart}`}>
@@ -98,7 +94,7 @@ export default function ShopWannaBuyCard({
                       width = '150px'
                       padding = '15px 0px'
                       fontSize = '16px'
-                      link = {()=>{addToWannaBuy(pid)}}
+                      link = {()=>{addToCart()}}
                    />
                 </div>
                 <div className={`${styles.delete}`}>

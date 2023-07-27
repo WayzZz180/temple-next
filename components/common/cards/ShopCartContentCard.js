@@ -23,10 +23,13 @@ export default function ShopCartContentCard({
     pid=2,
     cid=1,
     setDataFromChild = ()=>{},
+    setState= ()=>{},
+    state=false
 }) {
+    if(isNaN(quantity)) return <p>Loading</p>
+
     const [count, setCount] = useState(Number(quantity))
     const category = TitleData[cid].id
-    
     const initial = {member_id:'wayz', count:count, pid:pid, wannaBuy:false }
     const [childData, setChildData] = useState(initial)
 
@@ -48,6 +51,7 @@ export default function ShopCartContentCard({
 
     // 加入下次再買
     const addToWannaBuy = (pid)=>{
+      setState(!state)
       const reqData = {member_id:'wayz', pid: pid, id:1, wannaBuy:true}
       fetch(`${process.env.API_SERVER}/shop/cart`, {
         method: 'POST',
@@ -58,12 +62,9 @@ export default function ShopCartContentCard({
       })
         .then((r) => r.json())
         .then((data) => {
-          location.reload()
         })
     }
 
-
-    // if(isNaN(quantity)) return <p>Loading</p>
  
     return (
     <Row className={`${styles.row} nowrap fwBold`}>
@@ -98,7 +99,8 @@ export default function ShopCartContentCard({
                     }}
                     onClick={() => {
                       if (count <= 1) {
-                        deleteFromCart(pid)
+                        // deleteFromCart(pid)
+                        setCount(1)
                       } else {
                         setCount(count - 1)
                         updateCount(count-1,pid)

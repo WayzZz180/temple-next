@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Carousel } from 'react-bootstrap'
 import HomeSet from '../cards/HomeSet'
-import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/dist/css/bootstrap.min.css'
 import ArrowRight from '@/components/common/arrow/arrowRight'
 import ArrowLeft from '@/components/common/arrow/arrowLeft'
 

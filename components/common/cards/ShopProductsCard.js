@@ -67,7 +67,7 @@ export default function ShopProductsCard({
   };
 
   const addToCart = (count)=>{
-    const reqData = count
+    const reqData = {quantity:count}
     fetch(`${process.env.API_SERVER}/shop/${category}/${pid}`, {
       method: 'POST',
       body: JSON.stringify({ requestData: reqData }),

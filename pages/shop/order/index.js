@@ -23,6 +23,7 @@ import Arrow from '@/assets/orderArrow.svg'
 
 export default function Order() {
     const [data, setData] = useState([])
+    const [init, setInit] = useState(false)
     //判斷有無點擊收藏和購物車
     const { clickState: openClickState, handleClick: handleOpenClick } =
     useClick(true)
@@ -58,20 +59,25 @@ export default function Order() {
         <Row className="nowrap mt100px">
             <Col className='w100'>
                 <div className={`${styles.totalBox} pt30px pb30px`}
-                onClick={handleOpenClick}
+                onClick={()=>{
+                    handleOpenClick()
+                    if(!init){
+                        setInit(true)
+                    }
+                }}
                 >
                     <div className={` fs28px fwBolder`}>合計：NT${total}</div>
                     <div className={`${styles.flex_row} fs24px`}>
                         <div>
                             購物車：{data?.length}件&nbsp;
                         </div>
-                        <div className={`${openClickState ? styles.arrowDown : styles.arrowUp } pt5px`}
+                        <div className={`${openClickState ? (init ? styles.arrowDown:"") : styles.arrowUp } pt5px`}
                         > 
                             <Image src={Arrow} alt="open" width={20}/>
                         </div>
                     </div>
                 </div>
-            </Col>
+            </Col>  
         </Row>
         {/* 商品內容 */}
         <Row

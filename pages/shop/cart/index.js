@@ -19,17 +19,25 @@ import Marquee from '@/components/common/marquee'
 
 export default function Cart() {
   const router = useRouter();
-  const title = [
-    {width:"216px",text:"商品圖片"},
-    {width:"365px",text:"商品名稱"},
-    {width:"145px",text:"單件價格"},
-    {width:"195px",text:"數量"},
-    {width:"274px",text:"小計"}]
+  const title_cart = [
+    {width:"16%",text:"商品圖片"},
+    {width:"16.8%",text:"商品名稱"},
+    {width:"11.3%",text:"單價"},
+    {width:"11.1%",text:"數量"},
+    {width:"17%",text:"小計"}]
+
+  const title_wannaBuy = [
+    {width:"19%",text:"商品圖片"},
+    {width:"21%",text:"商品名稱"},
+    {width:"6%",text:"單價"},
+    {width:"5.5%",text:"庫存"},
+    {width:"17%",text:"加入時間"}]
 
   const [data, setData] = useState([])
   const [marquee, setMarquee] = useState([])
   const member = {member_id:'wayz', count:null, pid:null }
   const [dataFromChild, setDataFromChild] = useState(member)
+  const [state, setState] = useState(false)
   const [idFromChild, setIdFromChild] = useState(1)
   
   useEffect(() => {
@@ -45,7 +53,7 @@ export default function Cart() {
       .then((data) => {
         setData(data)
       })
-  }, [dataFromChild, idFromChild, router.query])
+  }, [dataFromChild, idFromChild, state, router.query])
 
 
   // 瀏覽紀錄
@@ -95,23 +103,27 @@ export default function Cart() {
       <Row className={`${styles.row} nowrap mt100px`}>
         <Col className={`${styles.top}`}>
             <CartCategory idFromChild={idFromChild} setIdFromChild={setIdFromChild}/>
-            <button className={`${styles.button} fs18px mb10px`}
-            onClick={()=>{
-              setDataFromChild({member_id:'wayz', count:null, pid:pid_array})
-            }}
-            >一鍵清空</button>
         </Col>
       </Row>
       {/* 標題列 */}
       <Row className='nowrap'>
         <Col className={`${styles.container} `}>
           {
-            title.map((v,i)=>{
-              return <span key={i} className={`${styles.title}  fs20px p15px`}
+            (idFromChild===1?title_cart:title_wannaBuy).map((v,i)=>{
+              return <span key={i} className={`${styles.title} ${ i===0 ? 'ps65px':''} fs20px p15px`}
               style={{width:v.width}}
               >{v.text}</span>
             })
           }
+          {
+            idFromChild === 1 ? (
+            <button className={`${styles.button} fwBold fs18px`}
+            onClick={()=>{
+              setDataFromChild({member_id:'wayz', count:null, pid:pid_array})
+            }}
+            >清空購物車</button>
+            ) : ("")
+            }
         </Col>
       </Row>
       {/* 購物車內容 */}
@@ -120,29 +132,34 @@ export default function Cart() {
         data?.length === 0 ? (
           <Row className='nowrap'>
             <Col className={`${styles.insertInfo} mt100px fs24px`}>
-              快去新增幾筆商品吧！
+              {/* 快去新增幾筆商品吧！ */}
+              物即是空，空即是物
               <div className={`${styles.line} mt100px`}></div>
             </Col>
           </Row>
         ) : (
           idFromChild === 1 ? (
             data?.map((v, i) => (
+              <>
               <ShopCartContentCard
-                key={i}
+                key={v.pid}
                 src={`/${v.image}`}
                 name={`${v.product_name}`}
                 price={`${v.product_price}`}
-                quantity={`${v.quantity}`}
+                quantity={`${Number(v.quantity)}`}
                 stock_num={`${v.stock_num}`}
                 pid={`${v.pid}`}
                 cid={`${v.cid}`}
                 setDataFromChild={setDataFromChild}
+                setState={setState}
+                state={state}
               />
+              </>
             ))
           ) : (
             data?.map((v, i) => (
               <ShopWannaBuyCard
-                key={i}
+                key={`${v.pid}`}
                 src={`/${v.image}`}
                 name={`${v.product_name}`}
                 price={`${v.product_price}`}
@@ -150,7 +167,10 @@ export default function Cart() {
                 stock_num={`${v.stock_num}`}
                 pid={`${v.pid}`}
                 cid={`${v.cid}`}
+                date={`${v.created_at}`}
                 setDataFromChild={setDataFromChild}
+                setState={setState}
+                state={state}
               />
             ))
           )
