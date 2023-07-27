@@ -26,10 +26,12 @@ export default function Order() {
     //判斷有無點擊收藏和購物車
     const { clickState: openClickState, handleClick: handleOpenClick } =
     useClick(true)
+    
     const router = useRouter()
+
     useEffect(() => {
         // const member_id = 'wayz'
-        const reqData = { member_id: 'wayz' }
+        const reqData = { member_id: 'wayz', id:1 }
         fetch(process.env.API_SERVER + '/shop/cart', {
             method: 'POST',
             body: JSON.stringify({ requestData: reqData }),
@@ -42,7 +44,8 @@ export default function Order() {
             setData(data)
             })
     }, [router.query])
-      // 小計
+
+  // 小計
   const total = data?.reduce((result, v) => {
     return result + v.product_price * v.quantity;
   }, 0);

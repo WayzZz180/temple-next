@@ -27,9 +27,10 @@ export default function Cart() {
   const [marquee, setMarquee] = useState([])
   const member = {member_id:'wayz', count:null, pid:null }
   const [dataFromChild, setDataFromChild] = useState(member)
+  const [idFromChild, setIdFromChild] = useState(1)
   
   useEffect(() => {
-    const reqData = dataFromChild
+    const reqData = {...dataFromChild,id:1}
     fetch(process.env.API_SERVER + '/shop/cart', {
       method: 'POST',
       body: JSON.stringify({ requestData: reqData }),
@@ -90,7 +91,7 @@ export default function Cart() {
       {/* 購物車、下次再買、一鍵清空 */}
       <Row className={`${styles.row} nowrap mt100px`}>
         <Col className={`${styles.top}`}>
-            <CartCategory />
+            <CartCategory idFromChild={idFromChild} setIdFromChild={setIdFromChild}/>
             <button className={`${styles.button} fs18px mb10px`}
             onClick={()=>{
               setDataFromChild({member_id:'wayz', count:null, pid:pid_array})

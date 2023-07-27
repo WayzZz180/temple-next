@@ -31,7 +31,6 @@ export default function ShopCartContentCard({
     const [childData, setChildData] = useState(initial)
 
     useEffect(() => {
-      // console.log(childData)
       setDataFromChild(childData)
     }, [childData])
     
@@ -39,14 +38,31 @@ export default function ShopCartContentCard({
     const updateCount = (count,pid)=>{
         const updatedData = { member_id: 'wayz', count: count, pid: pid };
         setChildData(updatedData); // 更新 childData
-        // console.log(childData)
       }
       
-      // 刪除s
-      const deleteFromCart = (pid)=>{
-        const deletedData = {member_id:'wayz',count:null, pid: pid}
-        setChildData(deletedData); // 更新 childData
-      }
+    // 刪除個別商品
+    const deleteFromCart = (pid)=>{
+      const deletedData = {member_id:'wayz',count:null, pid: pid}
+      setChildData(deletedData); // 更新 childData
+    }
+
+    // 加入下次再買
+    const addToWannaBuy = (pid)=>{
+      const reqData = {member_id:'wayz', pid: pid}
+      fetch(`${process.env.API_SERVER}/shop/wannaBuy`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: reqData }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          console.log('data:', data)
+        })
+    }
+
+
  
  
     return (
@@ -131,7 +147,7 @@ export default function ShopCartContentCard({
                   </div>
                   {/* 剩餘庫存 */}
                   <div className={`${styles.stock} fwLighter fs14px`}
-                  style={{color: stock_num<=10 ? variables['hot_pink']:"" ,opacity: stock_num<=10 ? 1 : 0.5} }>剩餘：{stock_num} /件</div>
+                  style={{color: stock_num<=10 ? variables['hot_pink']:"" ,opacity: stock_num<=10 ? 1 : 0} }>剩餘：{stock_num} /件</div>
                 </div>
                 {/* 小計 */}
                 <div className={`${styles.total}`}>${price*count}</div>
@@ -143,7 +159,7 @@ export default function ShopCartContentCard({
                       width = '150px'
                       padding = '15px 0px'
                       fontSize = '16px'
-                      link = {()=>{}}
+                      link = {()=>{addToWannaBuy(pid)}}
                    />
                 </div>
                 <div className={`${styles.delete}`}>
