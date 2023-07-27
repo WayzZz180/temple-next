@@ -3,13 +3,16 @@ import styles from './cart.module.sass'
 //hooks
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+
 // bootstrap
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+
 // components
 import ShopStepBar from '@/components/common/bar/ShopStepBar'
 import ShopCartContentCard from '@/components/common/cards/ShopCartContentCard'
+import ShopWannaBuyCard from '@/components/common/cards/ShopWannaBuyCard'
 import CartCategory from '@/components/common/button/CartCategory'
 import Button from '@/components/common/button'
 import Marquee from '@/components/common/marquee'
@@ -30,7 +33,7 @@ export default function Cart() {
   const [idFromChild, setIdFromChild] = useState(1)
   
   useEffect(() => {
-    const reqData = {...dataFromChild,id:1}
+    const reqData = {...dataFromChild, id:idFromChild}
     fetch(process.env.API_SERVER + '/shop/cart', {
       method: 'POST',
       body: JSON.stringify({ requestData: reqData }),
@@ -42,7 +45,7 @@ export default function Cart() {
       .then((data) => {
         setData(data)
       })
-  }, [dataFromChild, router.query])
+  }, [dataFromChild, idFromChild, router.query])
 
 
   // 瀏覽紀錄
@@ -112,9 +115,9 @@ export default function Cart() {
         </Col>
       </Row>
       {/* 購物車內容 */}
-      { 
-        (data?.length === 0) ? 
-        (
+      {
+        
+        data?.length === 0 ? (
           <Row className='nowrap'>
             <Col className={`${styles.insertInfo} mt100px fs24px`}>
               快去新增幾筆商品吧！
@@ -122,22 +125,41 @@ export default function Cart() {
             </Col>
           </Row>
         ) : (
-          data?.map((v,i) => (
-            <ShopCartContentCard
-              key={i}
-              src={`/${v.image}`}
-              name={`${v.product_name}`}
-              price={`${v.product_price}`}
-              quantity={`${v.quantity}`}
-              stock_num={`${v.stock_num}`}
-              pid={`${v.pid}`}
-              cid={`${v.cid}`}
-              setDataFromChild={setDataFromChild}
-            />
-          ))
+          idFromChild === 1 ? (
+            data?.map((v, i) => (
+              <ShopCartContentCard
+                key={i}
+                src={`/${v.image}`}
+                name={`${v.product_name}`}
+                price={`${v.product_price}`}
+                quantity={`${v.quantity}`}
+                stock_num={`${v.stock_num}`}
+                pid={`${v.pid}`}
+                cid={`${v.cid}`}
+                setDataFromChild={setDataFromChild}
+              />
+            ))
+          ) : (
+            data?.map((v, i) => (
+              <ShopWannaBuyCard
+                key={i}
+                src={`/${v.image}`}
+                name={`${v.product_name}`}
+                price={`${v.product_price}`}
+                quantity={`${v.quantity}`}
+                stock_num={`${v.stock_num}`}
+                pid={`${v.pid}`}
+                cid={`${v.cid}`}
+                setDataFromChild={setDataFromChild}
+              />
+            ))
+          )
         )
       }
+
       {/* 明細 */}
+      { 
+        (idFromChild === 1) ? (
       <Row className='nowrap'>
         <Col className={`${styles.col} mt50px fs18px`}>
           <div className={`${styles.detailsContainer}`}>
@@ -171,6 +193,7 @@ export default function Cart() {
             </div>
         </Col>
       </Row>
+        ):("")}
       <Row>
         <Marquee data={marquee} text="瀏覽紀錄" text2='browse history' lineColor='green'/>
       </Row>

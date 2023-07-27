@@ -11,8 +11,6 @@ import Col from 'react-bootstrap/Col'
 // components
 import NoButton from '@/components/common/button/noButton'
 // svg
-import add from '@/assets/add.svg'
-import minus from '@/assets/minus.svg'
 import TitleData from '@/components/mydata/productsTitleData'
 
 export default function ShopWannaBuyCard({
@@ -21,97 +19,101 @@ export default function ShopWannaBuyCard({
     price=60,
     quantity = 3,
     stock_num=30,
-    date='2023-08-16'
-
+    pid=2,
+    cid=1,
+    setDataFromChild = ()=>{},
 }) {
     const [count, setCount] = useState(Number(quantity))
     const category = TitleData[cid].id
     
     const initial = {member_id:'wayz', count:count, pid:pid }
-    // const [childData, setChildData] = useState(initial)
+    const [childData, setChildData] = useState(initial)
 
-    // useEffect(() => {
-    //   setDataFromChild(childData)
-    // }, [childData])
+    useEffect(() => {
+      setDataFromChild(childData)
+    }, [childData])
     
     // 更新數量
-    // const updateCount = (count,pid)=>{
-    //     const updatedData = { member_id: 'wayz', count: count, pid: pid };
-    //     setChildData(updatedData); // 更新 childData
-    //   }
+    const updateCount = (count,pid)=>{
+        const updatedData = { member_id: 'wayz', count: count, pid: pid };
+        setChildData(updatedData); // 更新 childData
+      }
       
     // 刪除個別商品
-    // const deleteFromCart = (pid)=>{
-    //   const deletedData = {member_id:'wayz',count:null, pid: pid}
-    //   setChildData(deletedData); // 更新 childData
-    // }
+    const deleteFromWannaBuy = (pid)=>{
+      const deletedData = {member_id:'wayz', pid: pid, }
+      setChildData(deletedData); // 更新 childData
+    }
 
     // 加入下次再買
-    // const addToWannaBuy = (pid)=>{
-    //   const reqData = {member_id:'wayz', pid: pid}
-    //   fetch(`${process.env.API_SERVER}/shop/wannaBuy`, {
-    //     method: 'POST',
-    //     body: JSON.stringify({ requestData: reqData }),
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //   })
-    //     .then((r) => r.json())
-    //     .then((data) => {
-    //       console.log('data:', data)
-    //     })
-    // }
+    const addToWannaBuy = (pid)=>{
+      const reqData = {member_id:'wayz', pid: pid}
+      fetch(`${process.env.API_SERVER}/shop/wannaBuy`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: reqData }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          console.log('data:', data)
+        })
+    }
 
 
  
  
     return (
     <Row className={`${styles.row} nowrap fwBold`}>
-    <Col>
+        <Col>
             <div className={`${styles.container} pt30px pb30px fs18px`}>
                 {/* 商品圖 */}
                 <div className={`${styles.image}`}>    
-                <Link href={`/shop/${category}/${pid}`}>
-                    <Image
-                    src={src} 
-                    alt="product" 
-                    width={200} 
-                    height={200} 
-                    /> 
-                </Link> 
+                  <Link href={`/shop/${category}/${pid}`}>
+                      <Image
+                      src={src} 
+                      alt="product" 
+                      width={200} 
+                      height={200} 
+                      /> 
+                  </Link> 
                 </div>
                 {/* 商品名稱 */}
                 <div className={`${styles.name}`}>{name}</div>
                 {/* 商品價格 */}
                 <div className={`${styles.price}`}>${price}</div>
-                {/* 有無數量 */}
+                {/* 有無庫存 */}
                 <div className={`${styles.quantity}`}>
-                { stock_num > 0?"有":"無"}</div>
-            {/* 刪除 */}
-            <div className={`${styles.wannaBuy}`}>
-                <NoButton   
-                    text = '加入購物車'
-                    btnColor = 'brown'
-                    width = '150px'
-                    padding = '15px 0px'
-                    fontSize = '16px'
-                    link = {()=>{addToWannaBuy(pid)}}
-                />
-            </div>
-            <div className={`${styles.delete}`}>
-                <NoButton   
-                    text = '刪除'
-                    btnColor = 'brown'
-                    width = '100px'
-                    padding = '15px 0px'
-                    fontSize = '16px'
-                    link = {()=>{deleteFromCart(pid)}}
-                />
-            </div>
+                     {stock_num > 0 ? "有" : "無"}
+                </div>
+                {/* 放入時間 */}
+                <div className={`${styles.date}`}>2023-08-16</div>
+               
+                {/* 放入購物車 */}
+                <div className={`${styles.addToCart}`}>
+                  <NoButton   
+                      text = '加入購物車'
+                      btnColor = 'brown'
+                      width = '150px'
+                      padding = '15px 0px'
+                      fontSize = '16px'
+                      link = {()=>{addToWannaBuy(pid)}}
+                   />
+                </div>
+                <div className={`${styles.delete}`}>
+                  <NoButton   
+                      text = '刪除'
+                      btnColor = 'brown'
+                      width = '100px'
+                      padding = '15px 0px'
+                      fontSize = '16px'
+                      link = {()=>{deleteFromWannaBuy(pid)}}
+                   />
+                </div>
             </div>
             {/* 分隔線 */}
             <div className={`${styles.line}`}></div>
-
         </Col>
     </Row>
   )

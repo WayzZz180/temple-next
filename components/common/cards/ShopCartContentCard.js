@@ -27,7 +27,7 @@ export default function ShopCartContentCard({
     const [count, setCount] = useState(Number(quantity))
     const category = TitleData[cid].id
     
-    const initial = {member_id:'wayz', count:count, pid:pid }
+    const initial = {member_id:'wayz', count:count, pid:pid, wannaBuy:false }
     const [childData, setChildData] = useState(initial)
 
     useEffect(() => {
@@ -36,20 +36,20 @@ export default function ShopCartContentCard({
     
     // 更新數量
     const updateCount = (count,pid)=>{
-        const updatedData = { member_id: 'wayz', count: count, pid: pid };
+        const updatedData = { member_id: 'wayz', count: count, pid: pid, wannaBuy:false };
         setChildData(updatedData); // 更新 childData
       }
       
     // 刪除個別商品
     const deleteFromCart = (pid)=>{
-      const deletedData = {member_id:'wayz',count:null, pid: pid}
+      const deletedData = {member_id:'wayz',count:null, pid: pid, wannaBuy:false}
       setChildData(deletedData); // 更新 childData
     }
 
     // 加入下次再買
     const addToWannaBuy = (pid)=>{
-      const reqData = {member_id:'wayz', pid: pid}
-      fetch(`${process.env.API_SERVER}/shop/wannaBuy`, {
+      const reqData = {member_id:'wayz', pid: pid, id:1, wannaBuy:true}
+      fetch(`${process.env.API_SERVER}/shop/cart`, {
         method: 'POST',
         body: JSON.stringify({ requestData: reqData }),
         headers: {
@@ -58,12 +58,12 @@ export default function ShopCartContentCard({
       })
         .then((r) => r.json())
         .then((data) => {
-          console.log('data:', data)
+          location.reload()
         })
     }
 
 
- 
+    // if(isNaN(quantity)) return <p>Loading</p>
  
     return (
     <Row className={`${styles.row} nowrap fwBold`}>
