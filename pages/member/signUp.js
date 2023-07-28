@@ -17,15 +17,10 @@ export default function SignUp() {
   const router = useRouter()
   const [user, setUser] = useState('')
   const [invalidFields, setInvalidFields] = useState([])
+  // const [isError, setIsError] = useState('')
 
-  // const [error, setError] = useState(null) // Define a state variable to store the error message
+  const [errorMessage, setErrorMessage] = useState('') // Define a state variable to store the error message
 
-  const changeUser = (e) => {
-    setUser((old) => ({
-      ...old,
-      [e.target.id]: e.target.value,
-    }))
-  }
   // 定義驗證規則
   const validationRules = {
     member_name: {
@@ -61,6 +56,13 @@ export default function SignUp() {
       regex: /^[\u4e00-\u9fa5\d]+$/,
       message: '地址請輸入中文(和數字)',
     },
+  }
+
+  const changeUser = (e) => {
+    setUser((old) => ({
+      ...old,
+      [e.target.id]: e.target.value,
+    }))
   }
 
   // Collect all the invalid fields and set the state
@@ -130,29 +132,6 @@ export default function SignUp() {
       return
     }
 
-    // const doSignUp = (e) => {
-    //   e.preventDefault()
-
-    //   const validateResult = validateForm()
-    //   if (validateResult) {
-    //     // Collect all the invalid fields and set the state
-    //     const invalidFieldsArray = Object.keys(validationRules).map((field) => {
-    //       const rule = validationRules[field]
-    //       return rule.required && (!user[field] || user[field].trim() === '')
-    //         ? field
-    //         : rule.regex && !rule.regex.test(user[field])
-    //         ? field
-    //         : field === 'confirm_password' && !rule.custom(user[field], user)
-    //         ? field
-    //         : null
-    //     })
-    //     setInvalidFields(invalidFieldsArray.filter((field) => field !== null))
-
-    //     alert('資料有誤，請檢查一下喔!')
-
-    //     return
-    //   }
-
     // 驗證通過，繼續進行表單提交
     // 取得或提交表單資料
 
@@ -165,6 +144,15 @@ export default function SignUp() {
     })
       .then((r) => r.json())
       .then((data) => {
+        // 存儲後端的錯誤訊息
+        if (data.error) {
+          console.log(data.error)
+          alert(data.error) // 顯示 email 已被使用的錯誤訊息
+          setInvalidFields('member_account') //讓isError變true
+          setErrorMessage(data.error)
+          return // 終止後續的處理
+        }
+
         console.log(data)
 
         if (data) {
@@ -243,8 +231,12 @@ export default function SignUp() {
                 onChange={changeUser}
                 validationRules={validationRules}
                 value={user.member_account}
+                // isError={invalidFields.includes('member_account')}
+                // errorMessage={getErrorForField('member_account')}
                 isError={invalidFields.includes('member_account')}
-                errorMessage={getErrorForField('member_account')}
+                errorMessage={
+                  getErrorForField('member_account') || errorMessage
+                } // 顯示來自後端的錯誤訊息
               />
             </Col>
           </Row>

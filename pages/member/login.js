@@ -51,7 +51,7 @@ export default function Login() {
           localStorage.setItem('auth', JSON.stringify(obj))
           setAuth(obj)
           alert('登入成功')
-          router.push('/')
+          router.push('/member/profile')
         } else {
           alert(data.error || '帳密錯誤')
         }
