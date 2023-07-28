@@ -11,8 +11,25 @@ import BookmarkAddedSharpIcon from '@mui/icons-material/BookmarkAddedSharp'
 import FigureExample from '@/components/common/forumlogo/forumperpic'
 
 export default function Forumper() {
+  const [data, setData] = useState({
+    redirect: '',
+    totalRows: 0,
+    perPage: 6,
+    totalPages: 0,
+    page: 1,
+    rows: [],
+  })
+  useEffect(() => {
+    fetch(`${process.env.API_SERVER}/forum`)
+      .then((r) => r.json())
+      .then((data) => {
+        console.log(data)
+        setData(data)
+      })
+  }, [])
   return (
     <>
+      <p>{JSON.stringify(data)}</p>
       <div>
         <div>
           <div>
