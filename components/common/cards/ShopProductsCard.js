@@ -9,10 +9,11 @@ import cart_outline from '@/assets/cart_outline.svg'
 import cart_noStock from '@/assets/cart_noStock.svg'
 
 //hooks
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import { useClick } from '@/hooks/useClick.js'
 import { css, keyframes } from '@emotion/css'
+import CartContext from '@/contexts/CartContext'
 
 //components
 import Stars from '@/components/common/stars'
@@ -26,6 +27,8 @@ export default function ShopProductsCard({
   stars = 5,
   stock_num = 10,
 }) {
+  const { cartCount, setCartCount, getCartCount } = useContext(CartContext);
+
   //判斷hover
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-1)
   const isHeartHovered = hoveredIndex === 1
@@ -67,7 +70,7 @@ export default function ShopProductsCard({
   };
 
   const addToCart = (count)=>{
-    const reqData = count
+    const reqData = {quantity:count}
     fetch(`${process.env.API_SERVER}/shop/${category}/${pid}`, {
       method: 'POST',
       body: JSON.stringify({ requestData: reqData }),
@@ -77,7 +80,8 @@ export default function ShopProductsCard({
     })
       .then((r) => r.json())
       .then((data) => {
-        console.log('data:', data)
+        getCartCount()
+        // console.log('data:', data)
       })
   }
 

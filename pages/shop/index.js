@@ -25,7 +25,7 @@ export default function Shop() {
       {data.map((v, i) => {
         return (
           i != 0 && (
-            <ProductsCarousel key={i} text={v.text} color={v.color} i={i} />
+            <ProductsCarousel key={i} text={v.text} color={v.color} i={i} id={v.id}/>
           )
         )
       })}

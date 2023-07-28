@@ -45,7 +45,7 @@ export default function Category() {
     <Container className={`${styles.container}`}>
       <ShopTop />
       {/* Title */}
-      <ShopTitle text={categoryData?.text} lineColor="green" />
+      <ShopTitle text={categoryData?.text} lineColor="green"  link={`/shop/cookies`}/>
       {/* 商品 */}
       {imgChunks?.map((chunk, rowIndex) => (
         <Row key={rowIndex} className={`${styles.row}`}>

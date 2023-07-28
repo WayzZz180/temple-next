@@ -8,7 +8,6 @@ export default function InputBox({
   prompt = '',
   placeholder = '',
   onChange,
-  value,
   id,
   width = ' 453px',
   value='',
@@ -36,8 +35,8 @@ export default function InputBox({
   }
 
   return (
-    <>
-      <div className="mb6px"> {prompt}</div>
+    <div>
+      <div className="mb10px fs20px"> {prompt}</div>
       <div>
         <input
           type={type}
@@ -53,6 +52,6 @@ export default function InputBox({
           className={`${isFocus ? styles.focus : ''} ${styles.standard_input}`}
         />
       </div>
-    </>
+    </div>
   )
 }

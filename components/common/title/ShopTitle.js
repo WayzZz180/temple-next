@@ -1,6 +1,7 @@
 import styles from './ShopTitle.module.sass'
 import variables from '@/styles/_variables.module.sass'
 
+
 //text = 大標
 // lineColor = black, green, hot_pink, brown
 export default function ShopTitle({
