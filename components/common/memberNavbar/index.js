@@ -10,7 +10,7 @@ export default function MemberNavbar() {
     <Row className={styles.flex_space_around}>
       {data.map((v, i) => (
         <Col key={i}>
-          <Link href="" className="link">
+          <Link href={`/member/${v.id}`} className="link">
             {v.text}
           </Link>
         </Col>

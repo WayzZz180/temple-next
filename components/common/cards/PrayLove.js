@@ -7,11 +7,20 @@ import Button from '@/components/common/button'
 import star from '@/assets/Heart_pink.svg'
 import shadow from '@/assets/GodShadow.svg'
 import name from '@/assets/GodName.svg'
+import { useRouter } from 'next/router'
 
 export default function PrayLove() {
+  const Router = useRouter()
+
+  const loveA = () => {
+    Router.push('/Pray/loveA-1')
+  }
+  const loveB = () => {
+    Router.push('/Pray/loveB-1')
+  }
   return (
     <>
-      <div className={`${styles.flex_row} mt180px`}>
+      <div className={`${styles.flex_row} mt150px`}>
         <div className={`${styles.god}`}>
           <div className={`${styles.starsA}`}>
             <Image
@@ -30,7 +39,7 @@ export default function PrayLove() {
           <Image
             src={love}
             alt=""
-            width="460"
+            width="550"
             height="670"
             className={`${styles.love}`}
           ></Image>
@@ -76,9 +85,9 @@ export default function PrayLove() {
             首先要有一棵真誠的心態，閉上眼睛請求指點的愛情。先合手默唸自己姓名、出生日期，年齡、現在居住地址。請求指點事情，如：婚姻、愛情，戀人，流年，婚配，桃花運勢……等。點下面的選項開始！
           </div>
           <div className={`${styles.btn} mt90px`}>
-            <Button text="求籤" btnColor="hot_pink" />
+            <Button text="求紅線" btnColor="hot_pink" link={loveA}/>
             <span className={`${styles.btn2}`}>
-              <Button text="點姻緣燈" btnColor="hot_pink" />
+              <Button text="點姻緣燈" btnColor="hot_pink" link={loveB}/>
             </span>
           </div>
         </div>

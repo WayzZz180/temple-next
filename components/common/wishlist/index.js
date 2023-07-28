@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import { Fragment } from 'react'
+
 import { Container, Row, Col } from 'react-bootstrap'
 
 import variables from '@/styles/_variables.module.sass'
@@ -40,9 +42,15 @@ export default function Wishlist() {
   )
 
   const combinedRows = []
-  const numberOfRows = 3 // 資料的比數
+  const numberOfRows = 5 // 資料的比數
   for (let i = 0; i < numberOfRows; i++) {
-    combinedRows.push(i % 2 === 0 ? wishlistRow : lineRow)
+    combinedRows.push(
+      i % 2 === 0 ? (
+        <Fragment key={i}>{wishlistRow}</Fragment>
+      ) : (
+        <Fragment key={i}>{lineRow}</Fragment>
+      )
+    )
   }
   return <> {combinedRows}</>
 }

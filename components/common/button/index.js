@@ -9,9 +9,10 @@ export default function Button({
   text = 'text',
   btnColor = 'btn',
   width = '',
+  height = '',
   padding = '15px 60px',
   fontSize = '24px',
-  link = '',
+  link = ()=>{},
 }) {
   const var_color = variables[btnColor]
   return (
@@ -22,6 +23,7 @@ export default function Button({
         style={{
           backgroundColor: var_color,
           width: `${width}`,
+          height: `${height}`,
           padding: `${padding}`,
           fontSize: `${fontSize}`,
         }}

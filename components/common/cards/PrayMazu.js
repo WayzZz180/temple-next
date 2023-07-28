@@ -18,7 +18,7 @@ export default function PrayMazu() {
 
   return (
     <>
-      <div className={`${styles.flex_row} mt180px`}>
+      <div className={`${styles.flex_row} mt150px`}>
         <div className={`${styles.god}`}>
           <div className={`${styles.starsA}`}>
             <Image
@@ -37,8 +37,8 @@ export default function PrayMazu() {
           <Image
             src={mazu}
             alt=""
-            width="460"
-            height="670"
+            width="550"
+            height="700"
             className={`${styles.mazu}`}
           ></Image>
           <Image

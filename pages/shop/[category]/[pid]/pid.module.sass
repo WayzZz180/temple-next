@@ -16,10 +16,12 @@
     display: flex
     flex-direction: column
     justify-content: center
+    align-items: center    
 
 .detailsContainer
     display: flex
     flex-direction: column
+    width: 450px
 
 .imgContainer
     width: 550px
@@ -28,8 +30,7 @@
     justify-content: center
 
 .line
-    height:3px
-    width: 550px
+    width: 100%
     background: $brown
 
 .inlineBlock
@@ -37,11 +38,13 @@
     cursor: pointer
 
 .add
-    width: 43%
+    width: 325px
     border: 1px $black solid
     display: flex
     justify-content: space-between
     align-items: center
+    padding: 10px 5px
+    border-radius: 7px
 
 .addValue
     border: 0
@@ -58,28 +61,18 @@
     background: $bgColor
     font-size: 30px
 
-.button:hover
-    color: $hot_pink
 
 .detailsData
     display: flex
     flex-direction: column
 
+.stars
+    display: flex
+    align-items: center
+    justify-content: center
 
 .commentLine
     height:3px
     width: 60%
     background: $brown
     margin: auto
-
-// .addComment
-//     width:60%
-//     margin: auto
-
-// .inputComment
-//     width:100%
-//     background: $bgColor
-//     border:0
-
-// .inputComment:focus
-//     outline: none

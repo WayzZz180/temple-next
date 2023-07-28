@@ -1,32 +1,27 @@
 import React from 'react'
-import styles from '@/pages/W/W-PrayingRecord.module.sass'
+import styles from '@/pages/member/amulet.module.sass'
 
 // components
-import InputBox from '@/components/common/inputBox/index.js'
 import Title from '@/components/common/title/index.js'
 import Button from '@/components/common/button/index.js'
 import MemberNavbar from '@/components/common/memberNavbar'
-import Coupons from '@/components/common/coupons/index.js'
+import Amulet from '@/components/common/amuletDetails/index.js'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 
-export default function PrayingRecord() {
+export default function MyAccount() {
   return (
     <div className={styles.flex}>
       <Container>
         <Row>
           <Col>
-            <Title
-              text="我的優惠券"
-              text2="COUPONS"
-              lineColor="green"
-              width={860}
-            />
+            <Title text="護身符" text2="AMULET" lineColor="green" width={860} />
           </Col>
         </Row>
         <MemberNavbar />
-        <Coupons />
+
+        <Amulet />
       </Container>
     </div>
   )

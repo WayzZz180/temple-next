@@ -14,10 +14,12 @@ import Title from '@/components/common/title'
 import DetailsRoute from '@/components/common/shopTop/detailsRoute'
 import Button from '@/components/common/button'
 import Comment from '@/components/common/cards/ShopCommentCard'
+import Stars from '@/components/common/stars'
 
 // svg
 import cart_fill from '@/assets/cart_fill.svg'
 import cart_outline from '@/assets/cart_outline.svg'
+import cart_noStock from '@/assets/cart_noStock.svg'
 import heart_fill from '@/assets/heart_fill.svg'
 import heart_outline from '@/assets/heart_outline.svg'
 import add from '@/assets/add.svg'
@@ -26,7 +28,6 @@ import monkey from '@/assets/monkey.svg'
 import buy from '@/assets/buy.svg'
 import inStock from '@/assets/inStock.svg'
 import emptyStock from '@/assets/emptyStock.svg'
-
 
 // Bootstrap
 import Container from 'react-bootstrap/Container'
@@ -46,12 +47,12 @@ export default function Pid() {
   const isHeartHovered = hoveredIndex === 1
   const isCartHovered = hoveredIndex === 2
   useClick(false)
-  
+
   //判斷有無點擊收藏和購物車
   const { clickState: heartClickState, handleClick: handleHeartClick } =
-  useClick(false)
+    useClick(false)
   const { clickState: cartClickState, handleClick: handleCartClick } =
-  useClick(false)
+    useClick(false)
 
   // 抓資料
   useEffect(() => {
@@ -60,10 +61,8 @@ export default function Pid() {
       .then((data) => {
         // 單筆pid資料
         setData(data.data[0])
-        // console.log(data.data[0])
         // 相關推薦
         setRows(data.rows)
-        // console.log(data.rows)
       })
   }, [currentPath])
 
@@ -94,10 +93,12 @@ export default function Pid() {
       .replace(/＊必吃原因＊/g, '<br /><br />＊必吃原因＊<br />')
     return result
   }
+
+  // 購物車彈跳動畫
   const y = 0
-  const y2 = y-30
-  const y3 = y-15
-  const y4 = y-4
+  const y2 = y - 30
+  const y3 = y - 15
+  const y4 = y - 4
   const x = 0
   const bounce = keyframes({
     'from, 20%, 53%, 80%, to': {
@@ -113,12 +114,28 @@ export default function Pid() {
       transform: `translate3d(${x}px, ${y4}px, 0)`,
     },
   })
+  
   const handleAnimationEnd = () => {
     setAnimationEnd(true)
     setTimeout(() => {
-      setAnimationEnd(false);
-    }, 1200);
-  };
+      setAnimationEnd(false)
+    }, 1200)
+  }
+
+  const addToCart = (count)=>{
+    const reqData = count
+    fetch(`${process.env.API_SERVER}${currentPath}`, {
+      method: 'POST',
+      body: JSON.stringify({ requestData: reqData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        console.log('data:', data)
+      })
+  }
 
   return (
     <>
@@ -128,18 +145,18 @@ export default function Pid() {
           category={data?.category_name}
           product_name={data?.product_name}
         />
-        <Row className="nowrap ">
+        <Row className="nowrap">
           {/* Left */}
           <Col className={` ${styles.container} ${styles.flex_col}`}>
             <div className={`${styles.detailsContainer}`}>
               {/* 商品名稱 */}
               <div className="fwBold fs27px mb30px">{data?.product_name}</div>
               {/* 商品價格 */}
-              <div className="fwBold fs27px mb30px">${data?.product_price}</div>
+              <div className="fwBold fs27px">${data?.product_price}</div>
               {/* 分隔線 */}
-              <div className={`${styles.line}`}></div>
+              <div className={`${styles.line} mt30px pt3px mb30px`}></div>
               {/* 商品描述 */}
-              <div className="fs20px mt30px">
+              <div className="fs20px">
                 <div
                   dangerouslySetInnerHTML={{
                     __html: replaceWhiteSpace(data.product_details),
@@ -164,128 +181,137 @@ export default function Pid() {
           {/* Right */}
           <Col className={`${styles.container} ${styles.flex_col} `}>
             <div className={``}>
-            {/* 選擇數量 */}
-            <div className={`${styles.add} fs24px mb50px `}>
-              {/* － */}
-              <Image
-                src={minus}
-                width={30}
-                alt="minus"
-                className={`${styles.button}`}
-                style={{
-                  cursor: data?.stock_num !== 0 ? 'pointer' : 'default',
-                }}
-                onClick={() => {
-                  if (count <= 1) {
-                    setCount(1)
-                  } else {
-                    setCount(count - 1)
-                  }
-                }}
-              />
-              {/* 數量 */}
-              <input
-                type="text"
-                inputmode="numeric"
-                value={data?.stock_num ? count : 0}
-                className={`${styles.addValue} fs16px `}
-                onChange={(e) => {
-                  if (!isNaN(e.target.value) && e.target.value != 0) {
-                    if (Number(e.target.value) > data?.stock_num) {
-                      setCount(Number(data?.stock_num))
+              {/* 選擇數量 */}
+              <div className={`${styles.add} fs24px mb35px `}>
+                {/* － */}
+                <Image
+                  src={minus} 
+                  width={30}
+                  alt="minus"
+                  className={`${styles.button}`}
+                  style={{
+                    cursor: data?.stock_num !== 0 ? 'pointer' : 'default',
+                  }}
+                  onClick={() => {
+                    if (count <= 1) {
+                      setCount(1)
                     } else {
-                      setCount(Number(e.target.value))
+                      setCount(count - 1)
                     }
-                  } else {
-                    setCount(Number(count))
-                  }
-                }}
-                readOnly={data?.stock_num === 0}
-              ></input>
-              <Image
-                src={add}
-                width={30}
-                alt="add"
-                className={`${styles.button}`}
-                style={{
-                  cursor: data?.stock_num !== 0 ? 'pointer' : 'default',
-                }}
-                onClick={() => {
-                  if (count >= data?.stock_num) {
-                    setCount(data?.stock_num)
-                  } else {
-                    setCount(count + 1)
-                  }
-                }}
-              />
-            </div>
-                {/* 加入購物車 & 收藏 */}
-                <div className={`${styles.flex_row} mb50px `}
-                    onClick={()=>{
-                      cartClickState ? "" : handleCartClick()
-                      handleAnimationEnd()
-                    }}
-                  onMouseEnter={() => handleMouseEnter(2)}
-                  onMouseLeave={handleMouseLeave}>
-              <Button
-                text="加入購物車"
-                btnColor="black"
-                width="100%"
-                padding="15px 60px"
-                fontSize="20px"
-                hoverColor='hot_pink'
-              />
+                  }}
+                />
+                {/* 數量 */}
+                <input
+                  type="text"
+                  inputmode="numeric"
+                  value={data?.stock_num ? count : 0}
+                  className={`${styles.addValue} fs16px `}
+                  onChange={(e) => {
+                    if (!isNaN(e.target.value) && e.target.value != 0) {
+                      if (Number(e.target.value) > data?.stock_num) {
+                        setCount(Number(data?.stock_num))
+                      } else {
+                        setCount(Number(e.target.value))
+                      }
+                    } else {
+                      setCount(Number(count))
+                    }
+                  }}
+                  readOnly={data?.stock_num === 0}
+                ></input>
+                <Image
+                  src={add}
+                  width={30}
+                  alt="add"
+                  className={`${styles.button}`}
+                  style={{
+                    cursor: data?.stock_num !== 0 ? 'pointer' : 'default',
+                  }}
+                  onClick={() => {
+                    if (count >= data?.stock_num) {
+                      setCount(data?.stock_num)
+                    } else {
+                      setCount(count + 1)
+                    }
+                  }}
+                />
+              </div>
+              {/* 加入購物車 & 收藏 */}
               {/* 購物車 */}
-              <span
-                onClick={()=>{
-                  cartClickState ? "" : handleCartClick()
-                  handleAnimationEnd()
+              <div
+                className={`${styles.flex_row} mb35px `}
+                onClick={() => {
+                  if(data?.stock_num != 0){
+                    cartClickState ? '' : handleCartClick()
+                    handleAnimationEnd()
+                  }
                 }}
                 onMouseEnter={() => handleMouseEnter(2)}
                 onMouseLeave={handleMouseLeave}
-                className={`${styles.inlineBlock} ms30px`}
               >
-                <Image
-                  src={
-                    isCartHovered || cartClickState
-                      ? cart_fill
-                      : cart_outline
-                  }
-                  alt="cart"
-                  width={38}
+                <Button
+                  text="加入購物車"
+                  btnColor="black"
+                  width="275px"
+                  padding="15px 60px"
+                  fontSize="20px"
+                  hoverColor="hot_pink"
+                  link={()=>{addToCart(count)}}
                 />
-              </span>
-              {/* 數量alert */}
-              <span  className={css({
-                  display: animationEnd ? 'block':'none',
-                  width: 60,
-                  height: 0,
-                  position: 'relative',
-                  bottom: 15,
-                  left:5,
-                  color: '#363636',
-                  animation: `${bounce} 1s ease-out 1`,
-                  transformOrigin: 'center bottom',
-                })}
-              >+ {count}</span>
-           </div>
-                <div className={`${styles.flex_row} mb50px `}
-                  onClick={handleHeartClick}
-                  onMouseEnter={() => handleMouseEnter(1)}
-                  onMouseLeave={handleMouseLeave}>
-                  
+                {/* 購物車 */}
+                <span
+                  onClick={() => {
+                  if(data?.stock_num != 0){
+                    cartClickState ? '' : handleCartClick()
+                    handleAnimationEnd()
+                  }
+                  }}
+                  onMouseEnter={() => handleMouseEnter(2)}
+                  onMouseLeave={handleMouseLeave}
+                  className={`${styles.inlineBlock} ms25px`}
+                >
+                  <Image
+                    src={data?.stock_num === 0 ? cart_noStock : (isCartHovered || cartClickState ? cart_fill : cart_outline)}
+                    alt="cart"
+                    width={38}
+                  />
+                </span>
+                {/* 數量alert */}
+                <span
+                  className={css({
+                    display: animationEnd ? 'block' : 'none',
+                    width: 60,
+                    height: 10,
+                    position: 'absolute',
+                    top: 527,
+                    right: 145,
+                    color: '#363636',
+                    animation: `${bounce} 1s ease-out 1`,
+                    transformOrigin: 'center bottom',
+                  })}
+                >
+                  + {count}
+                </span>
+              </div>
+              {/* 收藏 */}
+              <div
+                className={`${styles.flex_row} mb35px `}
+                onClick={handleHeartClick}
+                onMouseEnter={() => handleMouseEnter(1)}
+                onMouseLeave={handleMouseLeave}
+              >
                 <Button
                   text="加入收藏"
                   btnColor="black"
-                  width="100%"
+                  width="275px"
                   padding="15px 60px"
                   fontSize="20px"
-                 
+                  link={()=>{
+                  console.log('surprise~!')
+                  }}
                 />
                 {/* 愛心 */}
-                <span
-                  className={`${styles.inlineBlock} ms30px`}
-                >
+                <span className={`${styles.inlineBlock} ms30px`}>
                   <Image
                     src={
                       isHeartHovered || heartClickState
@@ -296,31 +322,30 @@ export default function Pid() {
                     width={30}
                   />
                 </span>
-            </div>
-            {/* 其他描述 */}
-           <div className={`${styles.detailsData}`}>
-              <div className={`${styles.flex_row} fs20px  pb15px`}>
-                <Image src={monkey} width={50} height={50} alt="browse"/>
-                　瀏覽量　{data?.browse_num} /次
               </div>
+              {/* 其他描述 */}
+              <div className={`${styles.detailsData}`}>
+                <div className={`${styles.flex_row} fs20px  pb10px`}>
+                  <Image src={monkey} width={50} height={50} alt="browse" />
+                  　瀏覽量　{data?.browse_num} /次
+                </div>
 
-              <div className={`${styles.flex_row} fs20px pb15px`}>
-                <Image src={buy} width={50} height={50} alt='sales'/>
-                　銷售量　{data?.purchase_num} /件
-              </div>
+                <div className={`${styles.flex_row} fs20px pb10px`}>
+                  <Image src={buy} width={50} height={50} alt="sales" />
+                  　銷售量　{data?.purchase_num} /件
+                </div>
 
-              <div className={`${styles.flex_row} fs20px`}>
-                <Image
-                  src={data?.stock_num ? inStock : emptyStock}
-                  width={50}
-                  height={50}
-                  alt='stock'
-                />
-                　庫存　{data?.stock_num} /件
+                <div className={`${styles.flex_row} fs20px`}>
+                  <Image
+                    src={data?.stock_num ? inStock : emptyStock}
+                    width={50}
+                    height={50}
+                    alt="stock"
+                  />
+                  　庫存　{data?.stock_num} /件
+                </div>
               </div>
             </div>
-            </div>
-            
           </Col>
         </Row>
         {/* 跑馬燈 */}
@@ -328,16 +353,22 @@ export default function Pid() {
           <Marquee data={rows ? rows : []} />
         </Row>
         {/* 商品評價 */}
-        <Row >
-        <Col>
-          <Title text="商品評價" text2="products rewiews" />
-        </Col>
-        <Col  className={`mt50px`}>
+        <Row>
+          <Col>
+            <Title text="商品評價" text2="products rewiews" />
+            <div className={`${styles.stars} mt25px mb30px`}>
+              <Stars stars={data?.stars} width={30}/>
+            </div>
+          </Col>
+          <Col className={`mt50px`}>
             <div className={`${styles.commentLine}`}></div>
-            
             {/* 評價內容 */}
             <Comment />
-            <Comment name="森上梅岱前" content="好吃！CP值高！" date="2023-07-18 12:12"/>
+            <Comment
+              name="森上梅岱前"
+              content="好吃！CP值高！"
+              date="2023-07-18 12:12"
+            />
             <Comment />
 
             {/* 新增評論 */}
@@ -346,7 +377,7 @@ export default function Pid() {
               className={`${styles.inputComment} fs20px`} ></input>
             </div>
             <div className={`${styles.commentLine}`}></div> */}
-        </Col>
+          </Col>
         </Row>
       </Container>
     </>

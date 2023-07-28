@@ -9,5 +9,6 @@ export function useClick(initialValue = false) {
   return {
     clickState,
     handleClick,
+    setClickState,
   }
 }

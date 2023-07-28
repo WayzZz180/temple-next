@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import styles from './header.module.sass'
 import Logo from './logo'
-import headerBg from '@/assets/header2.svg'
+import headerBg from '@/assets/header.svg'
 import NavbarItem from './navbaritem'
 import { useRouter } from 'next/router'
 import variables from '@/styles/_variables.module.sass'
@@ -27,7 +27,7 @@ export default function Header() {
       title2: '線上拜拜',
       links: [
         { label: '商城首頁', url: '/shop' },
-        { label: '服務客戶', url: '/test/emotionTest' },
+        { label: '購物車', url: '/shop/cart' },
         { label: '服務地區', url: '#' },
         { label: '徵才資訊', url: '#' },
       ],
