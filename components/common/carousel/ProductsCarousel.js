@@ -18,7 +18,7 @@ import arrowL_fill from '@/assets/arrowL_fill.svg'
 //data
 import TitleData from '@/components/mydata/productsTitleData'
 
-export default function ProductsCarousel({ text, color, i }) {
+export default function ProductsCarousel({ text, color, i ,id}) {
   const reqData = TitleData.filter((v) => {
     return text === v.text
   })
@@ -59,7 +59,7 @@ export default function ProductsCarousel({ text, color, i }) {
     // 一個類別
     <Fragment key={i}>
       {/* 類別標題 */}
-      <ShopCategory text={text} color={color} />
+      <ShopCategory text={text} color={color} link={`/shop/${id}`}/>
       {/* 第一層row */}
       <Row className={`${styles.row} `}>
         {/* 左箭頭 */}
@@ -90,6 +90,8 @@ export default function ProductsCarousel({ text, color, i }) {
                   price={data[i].product_price}
                   pid={data[i].pid}
                   category={reqData[0].id}
+                  stars={data[i].stars}
+                  stock_num={data[i].stock_num}
                 />
               </Col>
             ))}

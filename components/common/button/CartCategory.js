@@ -1,40 +1,54 @@
 import styles from './CartCategory.module.sass'
+import variables from '@/styles/_variables.module.sass'
+
+//hooks
+import { useState,useEffect } from 'react'
 import { useRouter } from 'next/router'
-import NoButton from '@/components/common/button/noButton'
-export default function CartCategory() {
+
+export default function CartCategory({setIdFromChild , idFromChild=1}) {
     const category = [
         { 
-          path:'/shop/cart',
           text:'購物車',
+          id:1,
         },
         { 
-          path:'/shop/wannaBuy',
           text:'下次再買',
-        }
+          id:2,
+        },
       ]
 
     const router = useRouter();
-    console.log(router.asPath)
-  return (
-    <div className={`${styles.flex_row}`}>
+    const [id, setId]= useState(1)
 
+    useEffect(() => {
+      setIdFromChild(id)
+    }, [id])
+
+  return (
+    <>
+    <div className={`${styles.flex_row}`}>
         {
             category.map((v,i)=>{
             return (
-            <div style={{opacity: v.path === router.asPath ? 1 : 0.6}}>
-                <NoButton  
-                text = {v.text}
-                btnColor = 'brown' 
-                width = ''
-                padding = '15px 60px'
-                fontSize = '24px'
-                borderRadius='0px'
-                />
+            <div className={`${styles.position} me15px`}>
+                <button s
+                  className={`${styles.button} fwBold fs20px`} 
+                  style={{
+                    background: v.id === idFromChild ? variables['brown'] : variables['bgColor'],
+                    color:  v.id === idFromChild ? 'white' : variables['fontColor'],
+                    opacity: v.id === idFromChild ? 1 : 0.5,
+                    letterSpacing: '3px'
+                   }}
+                   onClick={()=>{
+                    setId(v.id)
+                   }}
+                >{v.text}</button>
             </div>
             )
             
         })
         }
     </div>
+    </>
   )
 }

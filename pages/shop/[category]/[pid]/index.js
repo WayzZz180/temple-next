@@ -4,15 +4,17 @@ import styles from './pid.module.sass'
 // hooks
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import { useClick } from '@/hooks/useClick.js'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import { css, keyframes } from '@emotion/css'
+import CartContext from '@/contexts/CartContext'
 
 // components
 import Marquee from '@/components/common/marquee'
 import Title from '@/components/common/title'
 import DetailsRoute from '@/components/common/shopTop/detailsRoute'
 import Button from '@/components/common/button'
+import NoButton from '@/components/common/button/noButton'
 import Comment from '@/components/common/cards/ShopCommentCard'
 import Stars from '@/components/common/stars'
 
@@ -35,6 +37,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 export default function Pid() {
+  const { cartCount, setCartCount, getCartCount } = useContext(CartContext);
   const router = useRouter()
   const currentPath = router.asPath
   const [data, setData] = useState()
@@ -63,6 +66,8 @@ export default function Pid() {
         setData(data.data[0])
         // 相關推薦
         setRows(data.rows)
+        // 重置數量
+        setCount(1)
       })
   }, [currentPath])
 
@@ -122,8 +127,9 @@ export default function Pid() {
     }, 1200)
   }
 
+  // 加入購物車
   const addToCart = (count)=>{
-    const reqData = count
+    const reqData = {quantity: count}
     fetch(`${process.env.API_SERVER}${currentPath}`, {
       method: 'POST',
       body: JSON.stringify({ requestData: reqData }),
@@ -133,9 +139,27 @@ export default function Pid() {
     })
       .then((r) => r.json())
       .then((data) => {
-        console.log('data:', data)
+        // setCartCount(cartCount+1)
+        getCartCount()
       })
   }
+
+  // 加入瀏覽紀錄
+  const insertHistory = ()=>{
+    const reqData = false
+    fetch(`${process.env.API_SERVER}${currentPath}`, {
+      method: 'POST',
+      body: JSON.stringify({ requestData: reqData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((data) => {
+      })
+  }
+  insertHistory()
+
 
   return (
     <>
@@ -249,21 +273,38 @@ export default function Pid() {
                 onMouseEnter={() => handleMouseEnter(2)}
                 onMouseLeave={handleMouseLeave}
               >
-                <Button
-                  text="加入購物車"
-                  btnColor="black"
-                  width="275px"
-                  padding="15px 60px"
-                  fontSize="20px"
-                  hoverColor="hot_pink"
-                  link={()=>{addToCart(count)}}
-                />
+               {
+                  data?.stock_num === 0 ? (
+                    <NoButton
+                      text="加入購物車"
+                      btnColor="black"
+                      width="275px"
+                      padding="15px 60px"
+                      fontSize="20px"
+                      hoverColor="hot_pink"
+                    />
+                  ) : (
+                    <Button
+                      text="加入購物車"
+                      btnColor="black"
+                      width="275px"
+                      padding="15px 60px"
+                      fontSize="20px"
+                      hoverColor="hot_pink"
+                      link={() => {
+                          addToCart(count);
+                          
+                      }}
+                    />
+                  )
+                }
                 {/* 購物車 */}
                 <span
                   onClick={() => {
                   if(data?.stock_num != 0){
                     cartClickState ? '' : handleCartClick()
                     handleAnimationEnd()
+                    addToCart(count);
                   }
                   }}
                   onMouseEnter={() => handleMouseEnter(2)}

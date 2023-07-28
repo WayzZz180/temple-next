@@ -1,66 +1,85 @@
-import React, { Component } from 'react'
-import { Carousel } from 'react-bootstrap'
+import { useState,useEffect } from 'react'
+import styles from './HomeCarousel.module.sass'
+
+// components
 import HomeSet from '../cards/HomeSet'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import ArrowRight from '@/components/common/arrow/arrowRight'
 import ArrowLeft from '@/components/common/arrow/arrowLeft'
 
-class CarouselMain extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      index: 1, //index which u want to display first
-      direction: null, //direction of the carousel..u need to set it to either 'next' or 'prev' based on user click
-      nextIcon: (
-        <span>
-          <ArrowRight />
-        </span>
-      ),
-      prevIcon: (
-        <span>
-          <ArrowLeft />
-        </span>
-      ),
-    }
-  }
+export default function HomeCarousel(){
+    const [position, setPosition] = useState(24)
+    const [index, setIndex] = useState(0)
+    const slide = [
+      {
+        text1: "吉祥如意",
+        text2: "媽祖基本款",
+        pic1: "MazuSet"
+      },
+      {
+        text1: "花好月圓",
+        text2: "月老基本款",
+        pic1: "loveSet"
+      },
+      {
+        text1: "金榜題名",
+        text2: "文昌基本款",
+        pic1: "studySet"
+      },
+    ]
+    
 
-  handleCarouselSelect = (selectedIndex, e) => {
-    this.setState({
-      index: selectedIndex,
-      direction: e.direction,
-    })
-  }
+    useEffect(() => {
+      const handleAutoCarousel = () => {
+        setPosition(position+1)
+        if(position>=(2+3*index)){
+          setIndex(index+1)
+          }
+        };
+      
+      const interval = setInterval(handleAutoCarousel, 4500);
+  
+      return () => clearInterval(interval);
+    }, [position]); 
 
-  render() {
-    const { nextIcon, prevIcon } = this.state
-    return (
-      <>
-        <style>
-          {`body{
-          background-color: #EEECE0
-        }`}
-        </style>
-        <Carousel
-          indicators={false}
-          nextIcon={nextIcon}
-          prevIcon={prevIcon}
-          index={this.state.index}
-          direction={this.state.direction}
-          onSelect={this.handleSelect}
-          interval={3000}
+    return(
+      <div className={`${styles.flex} mt50px `}>
+        <button className={`${styles.button} ps45px`}
+        onClick={()=>{
+          setPosition(position-1)
+          // if(position<=0){
+          // }
+        }}
         >
-          <Carousel.Item >
-            <HomeSet text1="吉祥如意" text2="媽祖基本款" pic1="MazuSet" />
-          </Carousel.Item>
-          <Carousel.Item>
-            <HomeSet text1="花好月圓" text2="月老基本款" pic1="loveSet" />
-          </Carousel.Item>
-          <Carousel.Item>
-            <HomeSet text1="金榜題名" text2="文昌基本款" pic1="studySet" />
-          </Carousel.Item>
-        </Carousel>
-      </>
+        <ArrowLeft />
+        </button>
+          <div className={`${styles.homeSetContainer}`}>
+            
+            { 
+              Array.from({ length: index+50}).map((_, i) => (
+              slide.map((v,i)=>{
+              return(
+                <div  key={v.text1} className={`${styles.homeSet}`}
+                style={{right: `${position*1490}px`}}
+                >
+                  <HomeSet text1={v.text1} text2={v.text2} pic1={v.pic1} />
+                </div>
+              )
+              })
+              ))
+            }
+          </div>
+        <button className={`${styles.button} pe45px`}
+        onClick={()=>{
+          setPosition(position+1)
+          if(position>=(2+3*index)){
+            setIndex(index+1)
+            }
+          console.log(position)
+        }}
+        >
+        <ArrowRight />
+        </button>
+      </div>
     )
-  }
+
 }
-export default CarouselMain
