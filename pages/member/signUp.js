@@ -21,6 +21,9 @@ export default function SignUp() {
 
   const [errorMessage, setErrorMessage] = useState('') // Define a state variable to store the error message
 
+
+
+  
   // 定義驗證規則
   const validationRules = {
     member_name: {

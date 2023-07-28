@@ -24,8 +24,10 @@ export const AuthContextProvider = function ({ children }) {
       try {
         const obj = JSON.parse(str)
         setAuth(obj)
+        console.log(`authcontext測試 看有沒有setAuth obj? `, obj)
       } catch (ex) {}
     }
+
   }, [])
 
   return (
