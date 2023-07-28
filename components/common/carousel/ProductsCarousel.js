@@ -90,6 +90,8 @@ export default function ProductsCarousel({ text, color, i }) {
                   price={data[i].product_price}
                   pid={data[i].pid}
                   category={reqData[0].id}
+                  stars={data[i].stars}
+                  stock_num={data[i].stock_num}
                 />
               </Col>
             ))}

@@ -47,6 +47,7 @@
         transform: rotate(0deg)
 .open
     height: 100%
+    transform-origin: top
     animation: open 2s 1
 
 .close
@@ -56,9 +57,9 @@
 
 @keyframes open
     0%
-        height: 100%
+        transform: scaleY(0)
     100%
-        height: 0px
+        transform: scaleY(1)
 
 @keyframes close
     0%
