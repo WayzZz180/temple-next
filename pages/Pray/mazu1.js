@@ -8,9 +8,39 @@ import star from '@/assets/Star_pink.svg'
 import handLeft from '@/assets/handLeft.svg'
 import handRight from '@/assets/handRight.svg'
 import Input from '@/components/common/inputBox'
+import axios from 'axios'
 
 export default function Mazu1() {
+  const [name, setName] = useState('')
+  const [birthday, setBirthday] = useState('')
+  const [address, setAddress] = useState('')
   const [isVisible, setIsVisible] = useState(false)
+  const [sumbit, setSumbit] = useState(false)
+
+  const handleSumbit = (event) => {
+    event.preventDefault()
+    setSumbit(true)
+
+    // const requestData = {
+    //   name: name,
+    //   birthday: birthday,
+    //   address: address,
+    // }
+
+    axios
+      .post('http://localhost:3000/Pray/mazu1',{
+        name:'name'
+        birthday:'birthday'
+        address:'address'
+      })
+      .then((response) => {
+        console.log('Data sent successfully!')
+      })
+      .catch((error) => {
+        // Handle errors here
+        console.error('Error sending data:', error)
+      })
+  }
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -86,21 +116,36 @@ export default function Mazu1() {
             </div>
           </div>
         </div>
-        <div className={`${styles.inputAn} ${isVisible ? styles.show : ''}`}>
-          <div className={`${styles.input} `}>
-            <Input width="230px" placeholder="姓名" />
-            <Input
-              width="260px"
-              type="date"
-              placeholder="出生年月日"
-              inputValue="出生年月日"
-            />
-            <Input width="485px" placeholder="現居地址" />
+        <form id="personal" onSumbit={handleSumbit}>
+          <div className={`${styles.inputAn} ${isVisible ? styles.show : ''}`}>
+            <div className={`${styles.input} `}>
+              <Input
+                name="name"
+                width="230px"
+                placeholder="姓名"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <Input
+                name="birthday"
+                width="260px"
+                type="date"
+                value={birthday}
+                onChange={(e) => setBirthday(e.target.value)}
+              />
+              <Input
+                name="address"
+                width="485px"
+                placeholder="現居地址"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </div>
           </div>
-        </div>
-        <div className={`${styles.btn} ${isVisible ? styles.show : ''}`}>
-          <Button text="擲筊" btnColor="brown" />
-        </div>
+          <div className={`${styles.btn} ${isVisible ? styles.show : ''}`}>
+            <Button text="擲筊" btnColor="brown" type="submit" />
+          </div>
+        </form>
       </div>
     </>
   )

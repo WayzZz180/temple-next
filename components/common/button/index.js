@@ -12,6 +12,7 @@ export default function Button({
   padding = '15px 60px',
   fontSize = '24px',
   link = '',
+  type = '',
 }) {
   const var_color = variables[btnColor]
   return (
@@ -24,6 +25,7 @@ export default function Button({
           width: `${width}`,
           padding: `${padding}`,
           fontSize: `${fontSize}`,
+          type:`${type}`,
         }}
       >
         <span className={`${styles.IconContainer} `}>

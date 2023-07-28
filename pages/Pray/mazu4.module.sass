@@ -36,8 +36,9 @@
     font-size: 55px
     font-weight: 900
     line-height: 160%
-    letter-spacing: 13px
+    letter-spacing: 7px
     padding-left:20px
+    flex-wrap: nowrap
 
 .nemberTitle
     color: $hot_pink
@@ -86,11 +87,29 @@
     width:655px
     height:150px
 
-
-.poem
-    position: absolute
+.poem_container
+    width: 300px
+    height: 768px
     filter: drop-shadow(1.4rem 1.4rem 0rem $hot_pink)
-    left:400px
+    left:-500px
+    position: relative
+
+.box
+    position: relative
+    width: 100%
+    height: 100%
+    perspective: 1000px
+    transform-style: preserve-3d
+    transition: 1s ease
+
+.card
+    display: block
+    position: absolute
+    width: 100%
+    height: 100%
+
+.flipped
+    transform: rotateY(-180deg)
 
 .line
    border-bottom: 12px solid 
