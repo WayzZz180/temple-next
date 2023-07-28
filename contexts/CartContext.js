@@ -8,7 +8,7 @@ export const CartContextProvider = function ({ children }) {
   const [cartCount, setCartCount] = useState(0)
   const router = useRouter();
   const getCartCount = ()=>{
-    fetch(`${process.env.API_SERVER}/shop`)
+    fetch(`${process.env.API_SERVER}/shop/count`)
       .then((r) => r.json())
       .then((data) => {
         console.log('data:',data)

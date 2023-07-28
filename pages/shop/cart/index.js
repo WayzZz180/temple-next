@@ -61,14 +61,7 @@ export default function Cart() {
 
   // 瀏覽紀錄
   useEffect(()=>{
-    const reqData = false
-    fetch(`${process.env.API_SERVER}/shop/cart`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: reqData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+    fetch(`${process.env.API_SERVER}/shop/history`)
     .then((r) => r.json())
     .then((data) => {
       setMarquee(data)
