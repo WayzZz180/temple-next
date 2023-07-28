@@ -1,9 +1,14 @@
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap'
+import styles from './addnewpost.module.sass'
 
-function LaunchForum({ showModal, handleCloseModal }) {
+function AddNewPost({ showModal, handleCloseModal }) {
   return (
-    <Modal show={showModal} onHide={handleCloseModal}>
+    <Modal
+      show={showModal}
+      onHide={handleCloseModal}
+      dialogClassName={`${styles.customdialog}`}
+    >
       <Modal.Header closeButton>
         <Modal.Title>Modal heading</Modal.Title>
       </Modal.Header>
@@ -20,4 +25,4 @@ function LaunchForum({ showModal, handleCloseModal }) {
   )
 }
 
-export default LaunchForum
+export default AddNewPost
