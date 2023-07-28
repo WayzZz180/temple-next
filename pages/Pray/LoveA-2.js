@@ -15,29 +15,25 @@ export default function Mazu2() {
           <div className={`${styles.circle}`}></div>
           <div className={`${styles.circle2}`}></div>
           <Image
-                src={left}
-                alt=""
-                width="500"
-                className={`${styles.left}`}
-              ></Image>
+            src={left}
+            alt=""
+            width="500"
+            className={`${styles.left}`}
+          ></Image>
           <div className={`${styles.flex_col}`}>
             <div className={`${styles.flex_title}`}>
-              <Image
-                src={name}
-                alt=""
-                width="290"
-              ></Image>
+              <Image src={name} alt="" width="290"></Image>
               <div className={`${styles.title} mb60px`}>聖筊</div>
             </div>
             <Image src={ba} alt="" width="430"></Image>
-            <Button text="再擲一次" btnColor="hot_pink"/>
+            <Button text="再擲一次" btnColor="hot_pink" />
           </div>
           <Image
-                src={right}
-                alt=""
-                width="500"
-                className={`${styles.right}`}
-              ></Image>
+            src={right}
+            alt=""
+            width="500"
+            className={`${styles.right}`}
+          ></Image>
         </div>
       </div>
     </>

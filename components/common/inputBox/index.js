@@ -15,6 +15,7 @@ export default function InputBox({
   // 487 - 15*2 空白 -2*2border = 453
   height = '45px',
   // 49 -2*2 border = 45
+  name = '',
 }) {
   // const [inputValue, setInputValue] = useState('')
   const [isFocus, setIsFocus] = useState(false)
@@ -48,6 +49,7 @@ export default function InputBox({
           onBlur={handleBlur}
           placeholder={placeholder}
           style={{ width, height }}
+          name={name}
           className={`${isFocus ? styles.focus : ''} ${styles.standard_input}`}
         />
       </div>
