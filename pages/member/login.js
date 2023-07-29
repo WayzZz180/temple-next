@@ -44,14 +44,14 @@ export default function Login() {
     })
       .then((r) => r.json())
       .then((data) => {
-        // console.log(data)
+        console.log(data)
 
         if (data.success) {
           const obj = { ...data.data }
           localStorage.setItem('auth', JSON.stringify(obj))
           setAuth(obj)
           alert('登入成功')
-          router.push('/')
+          router.push('/member/profile')
         } else {
           alert(data.error || '帳密錯誤')
         }
@@ -87,7 +87,7 @@ export default function Login() {
               <InputBox
                 prompt="測試用~Email"
                 type="email"
-                className="form-control"
+                // className="form-control"
                 id="member_account"
                 placeholder="電子郵件地址"
                 value={user.member_account}
@@ -99,7 +99,7 @@ export default function Login() {
             <Col>
               <InputBox
                 type="text"
-                className="form-control"
+                // className="form-control"
                 id="member_password"
                 placeholder="密碼"
                 value={user.member_password}

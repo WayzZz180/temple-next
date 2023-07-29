@@ -11,7 +11,7 @@ import OrderDetails from '@/components/common/orderDetails'
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 
-export default function MyAccount() {
+export default function Orders() {
   return (
     <div className={styles.flex}>
       <Container>
