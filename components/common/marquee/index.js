@@ -1,4 +1,9 @@
 import styles from './marquee.module.sass'
+//Swiper JS
+import Swiper from 'swiper';
+//Swiper styles
+import 'swiper/css';
+
 // hooks
 import { useState } from 'react'
 // emotion
