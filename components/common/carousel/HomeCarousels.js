@@ -42,8 +42,6 @@ export default function HomeCarousels() {
         slidesPerView={1}
         spaceBetween={30}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
-        // centeredSlides='true'
-        autoplayDisableOnInteraction='false'
         loop={true}
         modules={[Autoplay, Pagination, Navigation]}
         speed={600} 
