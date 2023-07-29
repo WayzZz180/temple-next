@@ -20,43 +20,53 @@ import Marquee from '@/components/common/marquee'
 
 export default function Cart() {
   const router = useRouter();
+
+  // 購物車標題
   const title_cart = [
     {width:"16%",text:"商品圖片"},
     {width:"16.8%",text:"商品名稱"},
     {width:"11.3%",text:"單價"},
     {width:"11.1%",text:"數量"},
-    {width:"17%",text:"小計"}]
+    {width:"17%",text:"小計"}
+  ]
 
+  // 下次再買標題
   const title_wannaBuy = [
     {width:"19%",text:"商品圖片"},
     {width:"21%",text:"商品名稱"},
     {width:"6%",text:"單價"},
     {width:"5.5%",text:"庫存"},
-    {width:"17%",text:"加入時間"}]
-
+    {width:"17%",text:"加入時間"}
+  ]
+  
+  // 回傳的資料（購物車或下次再買）
   const [data, setData] = useState([])
+
+  // 瀏覽紀錄資料
   const [marquee, setMarquee] = useState([])
-  const member = {member_id:'wayz', count:null, pid:null }
-  const [dataFromChild, setDataFromChild] = useState(member)
+
+  // reqData
+  const [dataFromChild, setDataFromChild] = useState({})
+
+  // 即時更新資料的狀態
   const [state, setState] = useState(false)
+
+  // id = 1 (購物車) , id = 2 (下次再買)
   const [idFromChild, setIdFromChild] = useState(1)
+
+  // for navbar購物車數量
   const { cartCount, setCartCount, getCartCount } = useContext(CartContext);
   
+  // 抓購物車或下次再買的資料
   useEffect(() => {
-    const reqData = {...dataFromChild, id:idFromChild}
-    fetch(process.env.API_SERVER + '/shop/cart', {
-      method: 'POST',
-      body: JSON.stringify({ requestData: reqData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+    const path = idFromChild ===1 ? '/shop/cart' : '/shop/wannaBuy'
+    fetch(`${process.env.API_SERVER}${path}`)
       .then((r) => r.json())
       .then((data) => {
         setData(data)
         getCartCount()
         })
-  }, [dataFromChild, idFromChild, state, router.query])
+  }, [state, idFromChild])
 
 
   // 瀏覽紀錄
@@ -70,11 +80,28 @@ export default function Cart() {
 
   if(!data) return <p>Loading...</p>
 
-  // for 一鍵清空
+  // for 清空購物車
   const pid_array = data?.map((v,i)=>{
     return v.pid
   })
 
+  // 清空購物車(需要pid＿array)
+  const deleteFromCart = (pid_array)=>{
+    setState(!state) // 會從購物車刪除因此要即時更新狀態
+    const deletedData = {pid: pid_array}
+    // setChildData(deletedData); // 更新childData
+    fetch(`${process.env.API_SERVER}/shop/cart`, {
+      method: 'DELETE',
+      body: JSON.stringify({ requestData: deletedData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((r) => r.json())
+    .then((data) => {
+        getCartCount()
+      })
+  }
   // 小計
   const total = data?.reduce((result, v) => {
     return result + v.product_price * v.quantity;
@@ -111,11 +138,14 @@ export default function Cart() {
               >{v.text}</span>
             })
           }
+          {/* 下次再買不顯示清空購物車 */}
           {
             idFromChild === 1 ? (
             <button className={`${styles.button} fwBold fs18px`}
             onClick={()=>{
-              setDataFromChild({member_id:'wayz', count:null, pid:pid_array})
+              // setDataFromChild({count:null, pid:pid_array})
+              deleteFromCart(pid_array)
+
             }}
             >清空購物車</button>
             ) : ("")
@@ -146,7 +176,6 @@ export default function Cart() {
                 stock_num={`${v.stock_num}`}
                 pid={`${v.pid}`}
                 cid={`${v.cid}`}
-                setDataFromChild={setDataFromChild}
                 setState={setState}
                 state={state}
               />
@@ -159,12 +188,10 @@ export default function Cart() {
                 src={`/${v.image}`}
                 name={`${v.product_name}`}
                 price={`${v.product_price}`}
-                quantity={`${v.quantity}`}
-                stock_num={`${v.stock_num}`}
+                stock_num={`${Number(v.stock_num)}`}
                 pid={`${v.pid}`}
                 cid={`${v.cid}`}
                 date={`${v.created_at}`}
-                setDataFromChild={setDataFromChild}
                 setState={setState}
                 state={state}
               />

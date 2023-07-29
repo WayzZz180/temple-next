@@ -28,7 +28,7 @@ export default function Header() {
       links: [
         { label: '商城首頁', url: '/shop' },
         { label: '購物車', url: '/shop/cart' },
-        { label: '訂單紀錄', url: '/shop/order' },
+        { label: '訂單紀錄', url: '#' },
       ],
     },
     {

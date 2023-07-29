@@ -41,7 +41,7 @@ export default function Pid() {
   const router = useRouter()
   const currentPath = router.asPath
   const [data, setData] = useState()
-  const [rows, setRows] = useState()
+  const [related, setRelated] = useState()
   const [count, setCount] = useState(1)
   const [animationEnd, setAnimationEnd] = useState(false)
 
@@ -57,7 +57,7 @@ export default function Pid() {
   const { clickState: cartClickState, handleClick: handleCartClick } =
     useClick(false)
 
-  // 抓資料
+  // 商品資料
   useEffect(() => {
     fetch(`${process.env.API_SERVER}${currentPath}`)
       .then((r) => r.json())
@@ -65,11 +65,12 @@ export default function Pid() {
         // 單筆pid資料
         setData(data.data[0])
         // 相關推薦
-        setRows(data.rows)
+        setRelated(data.related)
         // 重置數量
         setCount(1)
       })
   }, [currentPath])
+
 
   // 防呆
   if (!data || !data.product_details) {
@@ -129,8 +130,8 @@ export default function Pid() {
 
   // 加入購物車
   const addToCart = (count)=>{
-    const reqData = {quantity: count}
-    fetch(`${process.env.API_SERVER}${currentPath}`, {
+    const reqData = {count: count, pid: router.query.pid}
+    fetch(`${process.env.API_SERVER}/shop/cart`, {
       method: 'POST',
       body: JSON.stringify({ requestData: reqData }),
       headers: {
@@ -139,17 +140,16 @@ export default function Pid() {
     })
       .then((r) => r.json())
       .then((data) => {
-        // setCartCount(cartCount+1)
         getCartCount()
       })
   }
 
   // 加入瀏覽紀錄
   const insertHistory = ()=>{
-    const reqData = false
-    fetch(`${process.env.API_SERVER}${currentPath}`, {
+    const addData = {pid: router.query.pid}
+    fetch(`${process.env.API_SERVER}/shop/history`, {
       method: 'POST',
-      body: JSON.stringify({ requestData: reqData }),
+      body: JSON.stringify({ requestData: addData }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -391,7 +391,7 @@ export default function Pid() {
         </Row>
         {/* 跑馬燈 */}
         <Row>
-          <Marquee data={rows ? rows : []} />
+          <Marquee data={related ? related : []} />
         </Row>
         {/* 商品評價 */}
         <Row>

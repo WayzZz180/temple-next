@@ -2,9 +2,10 @@ import styles from './order.module.sass'
 import Image from 'next/image'
 
 // hooks
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import { useClick } from '@/hooks/useClick.js'
+import CartContext from '@/contexts/CartContext'
 
 // components
 import ShopStepBar from "@/components/common/bar/ShopStepBar"
@@ -22,29 +23,25 @@ import Col from 'react-bootstrap/Col'
 import Arrow from '@/assets/orderArrow.svg'
 
 export default function Order() {
+    const router = useRouter()
     const [data, setData] = useState([])
     const [init, setInit] = useState(false)
     //判斷有無點擊收藏和購物車
     const { clickState: openClickState, handleClick: handleOpenClick } =
     useClick(true)
     
-    const router = useRouter()
-
-    useEffect(() => {
-        // const member_id = 'wayz'
-        const reqData = { member_id: 'wayz', id:1 }
-        fetch(process.env.API_SERVER + '/shop/cart', {
-            method: 'POST',
-            body: JSON.stringify({ requestData: reqData }),
-            headers: {
-            'Content-Type': 'application/json',
-            },
-        })
-            .then((r) => r.json())
-            .then((data) => {
-            setData(data)
-            })
-    }, [router.query])
+  // for navbar購物車數量
+  const { cartCount, setCartCount, getCartCount } = useContext(CartContext);
+  
+  // 訂單內容(同購物車)
+  useEffect(() => {
+    fetch(`${process.env.API_SERVER}/shop/cart`)
+    .then((r) => r.json())
+    .then((data) => {
+    setData(data)
+    getCartCount()
+    })
+  }, [router.query])
 
   // 小計
   const total = data?.reduce((result, v) => {

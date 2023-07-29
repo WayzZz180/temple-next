@@ -1,7 +1,6 @@
 import styles from './ShopWannaBuyCard.module.sass'
 import Image from 'next/image'
 import Link from 'next/link'
-import variables from '@/styles/_variables.module.sass'
  
 // hooks
 import { useState,useEffect,useContext } from 'react'
@@ -10,49 +9,55 @@ import CartContext from '@/contexts/CartContext'
 // bootstrap
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+
 // components
 import NoButton from '@/components/common/button/noButton'
-// svg
+
+// data
 import TitleData from '@/components/mydata/productsTitleData'
 
 export default function ShopWannaBuyCard({
     src="/img/cookies/chips/chips (2).png",
     name="樂事洋芋片派對分享包-經典原味(119g/包)",
     price=60,
-    quantity = 3,
     stock_num=30,
     pid=2,
     cid=1,
     date='2023-08-16',
-    setDataFromChild = ()=>{},
     setState=()=>{},
     state=false
 }) {
-  const { cartCount, setCartCount, getCartCount } = useContext(CartContext);
-    const [count, setCount] = useState(Number(quantity))
-    const category = TitleData[cid].id
-    
-    const initial = {member_id:'wayz', count:count, pid:pid }
-    const [childData, setChildData] = useState(initial)
 
-    useEffect(() => {
-      setDataFromChild(childData)
-    }, [childData])
+    // for navbar購物車數量
+    const { cartCount, setCartCount, getCartCount } = useContext(CartContext);
+    
+    // 商品類別
+    const category = TitleData[cid].id
  
-    // 刪除個別商品
+    // 從下次再買刪除個別商品
     const deleteFromWannaBuy = (pid)=>{
-      const deletedData = {member_id:'wayz', pid: pid, wannaBuy:true }
-      setChildData(deletedData); // 更新 childData
+      const deletedData = {pid: pid}
+      fetch(`${process.env.API_SERVER}/shop/wannaBuy`, {
+        method: 'DELETE',
+        body: JSON.stringify({ requestData: deletedData }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((r) => r.json())
+      .then((data) => {
+          setState(!state)
+          getCartCount()
+        })
     }
 
-    // 加入購物車
+    // 從下次再買加入購物車
     const addToCart = ()=>{
-      setState(!state)
-      const reqData = {quantity: 1, wannaBuy: true}
-      const currentPath =`/shop/${category}/${pid}`
-      fetch(`${process.env.API_SERVER}${currentPath}`, {
+      setState(!state) // for即時更新畫面
+      const addData = {count: 1, pid: pid, wannaBuy: true}
+      fetch(`${process.env.API_SERVER}/shop/cart`, {
         method: 'POST',
-        body: JSON.stringify({ requestData: reqData }),
+        body: JSON.stringify({ requestData: addData }),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -63,7 +68,9 @@ export default function ShopWannaBuyCard({
         })
     }
     
+    // 日期
     const date_slice = date.slice(0,10)
+    
     return (
     <Row className={`${styles.row} nowrap fwBold`}>
         <Col>

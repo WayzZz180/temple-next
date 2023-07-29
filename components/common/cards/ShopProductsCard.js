@@ -69,11 +69,12 @@ export default function ShopProductsCard({
     }, 1200);
   };
 
+  // 加入購物車
   const addToCart = (count)=>{
-    const reqData = {quantity:count}
-    fetch(`${process.env.API_SERVER}/shop/${category}/${pid}`, {
+    const addData = {count: count, pid: pid}
+    fetch(`${process.env.API_SERVER}/shop/cart`, {
       method: 'POST',
-      body: JSON.stringify({ requestData: reqData }),
+      body: JSON.stringify({ requestData: addData }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -81,7 +82,6 @@ export default function ShopProductsCard({
       .then((r) => r.json())
       .then((data) => {
         getCartCount()
-        // console.log('data:', data)
       })
   }
 

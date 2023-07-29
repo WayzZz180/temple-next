@@ -11,7 +11,6 @@ export const CartContextProvider = function ({ children }) {
     fetch(`${process.env.API_SERVER}/shop/count`)
       .then((r) => r.json())
       .then((data) => {
-        console.log('data:',data)
         setCartCount(data)
       })
   }

@@ -24,46 +24,66 @@ export default function ShopCartContentCard({
     stock_num=30,
     pid=2,
     cid=1,
-    setDataFromChild = ()=>{},
     setState= ()=>{},
     state=false
 }) {
     if(isNaN(quantity)) return <p>Loading</p>
-    const { cartCount, setCartCount, getCartCount } = useContext(CartContext);
-    const [count, setCount] = useState(Number(quantity))
-    const category = TitleData[cid].id
-    const initial = {member_id:'wayz', count:count, pid:pid, wannaBuy:false }
-    const [childData, setChildData] = useState(initial)
 
-    useEffect(() => {
-      setDataFromChild(childData)
-    }, [childData])
-    
-    // 更新數量
+    // for navbar購物車數量
+    const { cartCount, setCartCount, getCartCount } = useContext(CartContext);
+    // for 更新數量
+    const [count, setCount] = useState(Number(quantity))
+    // 商品類別 for url
+    const category = TitleData[cid].id
+
+    // 更新數量(需要數量和pid)
     const updateCount = (count,pid)=>{
-        const updatedData = { member_id: 'wayz', count: count, pid: pid, wannaBuy:false };
-        setChildData(updatedData); // 更新 childData
+        console.log('count:',count);
+        const updatedData = {count: count, pid: pid};
+        fetch(`${process.env.API_SERVER}/shop/cart`, {
+          method: 'PUT',
+          body: JSON.stringify({ requestData: updatedData }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((r) => r.json())
+        .then((data) => {
+            getCartCount()
+          })
       }
       
-    // 刪除個別商品
+    // 刪除個別商品(需要pid)
     const deleteFromCart = (pid)=>{
-      const deletedData = {member_id:'wayz',count:null, pid: pid, wannaBuy:false}
-      setChildData(deletedData); // 更新 childData
-    }
-
-    // 加入下次再買
-    const addToWannaBuy = (pid)=>{
-      setState(!state)
-      const reqData = {member_id:'wayz', pid: pid, id:1, wannaBuy:true}
+      setState(!state) // 會從購物車刪除因此要即時更新狀態
+      console.log(state);
+      const deletedData = {pid: pid}
       fetch(`${process.env.API_SERVER}/shop/cart`, {
-        method: 'POST',
-        body: JSON.stringify({ requestData: reqData }),
+        method: 'DELETE',
+        body: JSON.stringify({ requestData: deletedData }),
         headers: {
           'Content-Type': 'application/json',
         },
       })
-        .then((r) => r.json())
-        .then((data) => {
+      .then((r) => r.json())
+      .then((data) => {
+          getCartCount()
+        })
+    }
+    
+    // 加入下次再買(需要pid)
+    const addToWannaBuy = (pid)=>{
+      setState(!state) // 會從購物車刪除因此要即時更新狀態
+      const addData = {pid: pid}
+      fetch(`${process.env.API_SERVER}/shop/wannaBuy`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: addData }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((r) => r.json())
+      .then((data) => {
           getCartCount()
         })
     }
@@ -106,8 +126,8 @@ export default function ShopCartContentCard({
                         setCount(1)
                       } else {
                         setCount(count - 1)
-                        updateCount(count-1,pid)
                       }
+                        updateCount(count-1,pid)
                     }}
                   />
                   {/* 數量 */}
@@ -127,6 +147,9 @@ export default function ShopCartContentCard({
                         setCount(Number(count))
                       }
                     }}
+                    onBlur={
+                      updateCount(count,pid)
+                    }
                     readOnly={stock_num === 0}
                   ></input>
                   {/* + */}
@@ -143,10 +166,8 @@ export default function ShopCartContentCard({
                         setCount(stock_num)
                       } else {
                         setCount(count + 1)
-                        updateCount(count+1,pid);
                       }
-
-
+                      updateCount(count+1,pid);
                     }}
                   />
                   </div>
