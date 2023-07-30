@@ -4,9 +4,9 @@ import Link from 'next/link'
 import { useContext } from 'react'
 import CartContext from '@/contexts/CartContext'
 
-export default function NavbarItem({ title, title2, links }) {
-  const { cartCount } = useContext(CartContext);
-  
+export default function NavbarItem({ title = '', title2, links }) {
+  const { cartCount } = useContext(CartContext)
+
   return (
     <li className={`mt10px`}>
       <div className={`${styles.title} fs14px ps30px `}>{title}</div>
@@ -18,7 +18,11 @@ export default function NavbarItem({ title, title2, links }) {
           <li key={index} className={`mt10px mb20px`}>
             <Link href={link.url} className={`fs14px`}>
               {link.label}
-              {link.label === "購物車" ? <span className={styles.count}>（{cartCount}）</span>:""}  
+              {link.label === '購物車' ? (
+                <span className={styles.count}>（{cartCount}）</span>
+              ) : (
+                ''
+              )}
             </Link>
           </li>
         ))}

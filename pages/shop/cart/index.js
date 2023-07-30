@@ -19,26 +19,26 @@ import Button from '@/components/common/button'
 import Marquee from '@/components/common/marquee'
 
 export default function Cart() {
-  const router = useRouter();
+  const router = useRouter()
 
   // 購物車標題
   const title_cart = [
-    {width:"16%",text:"商品圖片"},
-    {width:"16.8%",text:"商品名稱"},
-    {width:"11.3%",text:"單價"},
-    {width:"11.1%",text:"數量"},
-    {width:"17%",text:"小計"}
+    { width: '16%', text: '商品圖片' },
+    { width: '16.8%', text: '商品名稱' },
+    { width: '11.3%', text: '單價' },
+    { width: '11.1%', text: '數量' },
+    { width: '17%', text: '小計' },
   ]
 
   // 下次再買標題
   const title_wannaBuy = [
-    {width:"19%",text:"商品圖片"},
-    {width:"21%",text:"商品名稱"},
-    {width:"6%",text:"單價"},
-    {width:"5.5%",text:"庫存"},
-    {width:"17%",text:"加入時間"}
+    { width: '19%', text: '商品圖片' },
+    { width: '21%', text: '商品名稱' },
+    { width: '6%', text: '單價' },
+    { width: '5.5%', text: '庫存' },
+    { width: '17%', text: '加入時間' },
   ]
-  
+
   // 回傳的資料（購物車或下次再買）
   const [data, setData] = useState([])
 
@@ -55,40 +55,39 @@ export default function Cart() {
   const [idFromChild, setIdFromChild] = useState(1)
 
   // for navbar購物車數量
-  const { cartCount, setCartCount, getCartCount } = useContext(CartContext);
-  
+  const { cartCount, setCartCount, getCartCount } = useContext(CartContext)
+
   // 抓購物車或下次再買的資料
   useEffect(() => {
-    const path = idFromChild ===1 ? '/shop/cart' : '/shop/wannaBuy'
+    const path = idFromChild === 1 ? '/shop/cart' : '/shop/wannaBuy'
     fetch(`${process.env.API_SERVER}${path}`)
       .then((r) => r.json())
       .then((data) => {
         setData(data)
         getCartCount()
-        })
+      })
   }, [state, idFromChild])
 
-
   // 瀏覽紀錄
-  useEffect(()=>{
+  useEffect(() => {
     fetch(`${process.env.API_SERVER}/shop/history`)
-    .then((r) => r.json())
-    .then((data) => {
-      setMarquee(data)
-    })
-  },[router.query])
+      .then((r) => r.json())
+      .then((data) => {
+        setMarquee(data)
+      })
+  }, [router.query])
 
-  if(!data) return <p>Loading...</p>
+  if (!data) return <p>Loading...</p>
 
   // for 清空購物車
-  const pid_array = data?.map((v,i)=>{
+  const pid_array = data?.map((v, i) => {
     return v.pid
   })
 
   // 清空購物車(需要pid＿array)
-  const deleteFromCart = (pid_array)=>{
+  const deleteFromCart = (pid_array) => {
     setState(!state) // 會從購物車刪除因此要即時更新狀態
-    const deletedData = {pid: pid_array}
+    const deletedData = { pid: pid_array }
     // setChildData(deletedData); // 更新childData
     fetch(`${process.env.API_SERVER}/shop/cart`, {
       method: 'DELETE',
@@ -97,76 +96,85 @@ export default function Cart() {
         'Content-Type': 'application/json',
       },
     })
-    .then((r) => r.json())
-    .then((data) => {
+      .then((r) => r.json())
+      .then((data) => {
         getCartCount()
       })
   }
   // 小計
   const total = data?.reduce((result, v) => {
-    return result + v.product_price * v.quantity;
-  }, 0);
+    return result + v.product_price * v.quantity
+  }, 0)
 
   // 優惠券
   const coupon = 100
 
+  if (!marquee) return <p>Loading...</p>
 
-  if(!marquee) return <p>Loading...</p>
+  // localStorage.setItem('id',idFromChild)
 
   return (
     <>
-    <Container>
-      {/* Step */}
-      <Row>
-        <Col>
-          <ShopStepBar />
-        </Col>
-      </Row>
-      {/* 購物車、下次再買、一鍵清空 */}
-      <Row className={`${styles.row} nowrap mt100px`}>
-        <Col className={`${styles.top}`}>
-            <CartCategory idFromChild={idFromChild} setIdFromChild={setIdFromChild}/>
-        </Col>
-      </Row>
-      {/* 標題列 */}
-      <Row className='nowrap'>
-        <Col className={`${styles.container} `}>
-          {
-            (idFromChild===1?title_cart:title_wannaBuy).map((v,i)=>{
-              return <span key={i} className={`${styles.title} ${ i===0 ? 'ps65px':''} fs20px p15px`}
-              style={{width:v.width}}
-              >{v.text}</span>
-            })
-          }
-          {/* 下次再買不顯示清空購物車 */}
-          {
-            idFromChild === 1 ? (
-            <button className={`${styles.button} fwBold fs18px`}
-            onClick={()=>{
-              // setDataFromChild({count:null, pid:pid_array})
-              deleteFromCart(pid_array)
-
-            }}
-            >清空購物車</button>
-            ) : ("")
-            }
-        </Col>
-      </Row>
-      {/* 購物車內容 */}
-      {
-        
-        data?.length === 0 ? (
-          <Row className='nowrap'>
+      <Container>
+        {/* Step */}
+        <Row>
+          <Col>
+            <ShopStepBar />
+          </Col>
+        </Row>
+        {/* 購物車、下次再買、一鍵清空 */}
+        <Row className={`${styles.row} nowrap mt100px`}>
+          <Col className={`${styles.top}`}>
+            <CartCategory
+              idFromChild={idFromChild}
+              setIdFromChild={setIdFromChild}
+            />
+          </Col>
+        </Row>
+        {/* 標題列 */}
+        <Row className="nowrap">
+          <Col className={`${styles.container} `}>
+            {(idFromChild === 1 ? title_cart : title_wannaBuy).map((v, i) => {
+              return (
+                <span
+                  key={i}
+                  className={`${styles.title} ${
+                    i === 0 ? 'ps65px' : ''
+                  } fs20px p15px`}
+                  style={{ width: v.width }}
+                >
+                  {v.text}
+                </span>
+              )
+            })}
+            {/* 下次再買不顯示清空購物車 */}
+            {idFromChild === 1 ? (
+              <button
+                className={`${styles.button} fwBold fs18px`}
+                onClick={() => {
+                  // setDataFromChild({count:null, pid:pid_array})
+                  deleteFromCart(pid_array)
+                }}
+              >
+                清空購物車
+              </button>
+            ) : (
+              ''
+            )}
+          </Col>
+        </Row>
+        {/* 購物車內容 */}
+        {data?.length === 0 ? (
+          <Row className="nowrap">
             <Col className={`${styles.insertInfo} mt100px fs24px`}>
               {/* 快去新增幾筆商品吧！ */}
               物即是空，空即是物
               <div className={`${styles.line} mt100px`}></div>
             </Col>
           </Row>
-        ) : (
-          idFromChild === 1 ? (
-            data?.map((v, i) => (
-              <>
+        ) : idFromChild === 1 ? (
+          data?.map((v, i) => (
+            <>
               <ShopCartContentCard
                 key={v.pid}
                 src={`/${v.image}`}
@@ -179,68 +187,72 @@ export default function Cart() {
                 setState={setState}
                 state={state}
               />
-              </>
-            ))
-          ) : (
-            data?.map((v, i) => (
-              <ShopWannaBuyCard
-                key={`${v.pid}`}
-                src={`/${v.image}`}
-                name={`${v.product_name}`}
-                price={`${v.product_price}`}
-                stock_num={`${Number(v.stock_num)}`}
-                pid={`${v.pid}`}
-                cid={`${v.cid}`}
-                date={`${v.created_at}`}
-                setState={setState}
-                state={state}
-              />
-            ))
-          )
-        )
-      }
+            </>
+          ))
+        ) : (
+          data?.map((v, i) => (
+            <ShopWannaBuyCard
+              key={`${v.pid}`}
+              src={`/${v.image}`}
+              name={`${v.product_name}`}
+              price={`${v.product_price}`}
+              stock_num={`${Number(v.stock_num)}`}
+              pid={`${v.pid}`}
+              cid={`${v.cid}`}
+              date={`${v.created_at}`}
+              setState={setState}
+              state={state}
+            />
+          ))
+        )}
 
-      {/* 明細 */}
-      { 
-        (idFromChild === 1) ? (
-      <Row className='nowrap'>
-        <Col className={`${styles.col} mt50px fs18px`}>
-          <div className={`${styles.detailsContainer}`}>
-            <div className={`${styles.detailsCategory}`}>
-              <span className={`${styles.details}`}>小計：</span>
-              <span className={`${styles.details}`}>${total}</span>
-            </div>
-            <div className={`${styles.detailsCategory}`}>
-              <span className={`${styles.details}`}>使用優惠券：</span>
-              <span className={`${styles.details}`}>-${coupon}</span>
-            </div>
-            <div className={`${styles.detailsCategory} mt30px`}>
-              <span className={`${styles.details}`}>合計：</span>
-              <span className={`${styles.details}`}>${total-coupon}</span>
-            </div>
-          </div>
-            <div className={`${styles.detailsButton} mt30px`}>
-              <Button 
-                  text = '前往結帳'
-                  btnColor = 'hot_pink'
-                  width = '100%'
-                  height = ''
-                  padding = '15px 60px'
-                  fontSize = '18px'
-                  link={()=>{
-                    if(data?.length!=0){
-                    router.push('/shop/order')
+        {/* 明細 */}
+        {idFromChild === 1 ? (
+          <Row className="nowrap">
+            <Col className={`${styles.col} mt50px fs18px`}>
+              <div className={`${styles.detailsContainer}`}>
+                <div className={`${styles.detailsCategory}`}>
+                  <span className={`${styles.details}`}>小計：</span>
+                  <span className={`${styles.details}`}>${total}</span>
+                </div>
+                <div className={`${styles.detailsCategory}`}>
+                  <span className={`${styles.details}`}>使用優惠券：</span>
+                  <span className={`${styles.details}`}>-${coupon}</span>
+                </div>
+                <div className={`${styles.detailsCategory} mt30px`}>
+                  <span className={`${styles.details}`}>合計：</span>
+                  <span className={`${styles.details}`}>${total - coupon}</span>
+                </div>
+              </div>
+              <div className={`${styles.detailsButton} mt30px`}>
+                <Button
+                  text="前往結帳"
+                  btnColor="hot_pink"
+                  width="100%"
+                  height=""
+                  padding="15px 60px"
+                  fontSize="18px"
+                  link={() => {
+                    if (data?.length != 0) {
+                      router.push('/shop/order')
                     }
                   }}
-               />
-            </div>
-        </Col>
-      </Row>
-        ):("")}
-      <Row>
-        <Marquee data={marquee} text="瀏覽紀錄" text2='browse history' lineColor='green'/>
-      </Row>
-    </Container>
+                />
+              </div>
+            </Col>
+          </Row>
+        ) : (
+          ''
+        )}
+        <Row>
+          <Marquee
+            data={marquee}
+            text="瀏覽紀錄"
+            text2="browse history"
+            lineColor="green"
+          />
+        </Row>
+      </Container>
     </>
   )
 }

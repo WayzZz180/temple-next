@@ -134,7 +134,9 @@ export default function Order() {
                 height = ''
                 padding = '15px 60px'
                 fontSize = '24px'
-                link = {()=>{}}
+                link = {()=>{
+                    router.push('/shop/order/complete')
+                }}
                 />
             </Row>
         </Container>
