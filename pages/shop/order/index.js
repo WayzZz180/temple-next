@@ -79,8 +79,11 @@ export default function Order() {
         {/* 商品內容 */}
         <Row
         // style={{display: openClickState ? '' : 'none'}}
-        >   <div  className={`${openClickState ? styles.open : styles.close}
-        `} >
+        > 
+        <div className={`${openClickState ? styles.open : styles.close}`} style={{overflow: 'hidden', maxHeight: openClickState? '100%' : 0}}>
+         <div  className={`${styles.trans} ${openClickState ? styles.floatIn :''}`}
+         style={{bottom: openClickState ? '': `${260*data?.length+20}px`}}
+          >
         {/* ${openClickState ? '' : styles.hidden} */}
             {data?.map((v,i) => (
                 <ShopOrderContentCard
@@ -93,6 +96,8 @@ export default function Order() {
             ))
           }
           </div>
+        </div>
+
         </Row>
         {/* 表單 */}
         <Container className='mt50px'>
