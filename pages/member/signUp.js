@@ -160,7 +160,7 @@ export default function SignUp() {
 
         if (data) {
           alert('註冊成功，請重新登入')
-          // router.push('/member/login');
+          router.push('/member/login');
         }
       })
       .catch((error) => {
