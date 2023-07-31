@@ -32,23 +32,7 @@ export default function Category() {
 
   useEffect(() => {
     if (!category) return
-    const reqPage = { page: false }
-    // fetch(`${process.env.API_SERVER}/shop/${category}?${pageParams}}` , {
-    //   method: 'POST',
-    //   body: JSON.stringify({ requestData: reqPage }),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // })
-    // .then((r) => r.json())
-    // .then((data) => {
-    //   if (data.redirect) {
-    //     router.push(data.redirect)
-    //   } else {
-    //     setData(data.data)
-    //     setPagination(data.pagination)
-    //   }
-    // })
+
     fetch(`${process.env.API_SERVER}/shop/${category}?${pageParams}}`)
     .then((r) => r.json())
     .then((data) => {

@@ -64,27 +64,16 @@ export default function Pagination({
     setValue(1)
   }
 
-  // const sendPage = (value) => {
-  //   const reqPage = { page: value }
-  //   fetch(`${process.env.API_SERVER}${api}`, {
-  //     method: 'POST',
-  //     body: JSON.stringify({ requestData: reqPage }),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   })
-  //     .then((r) => r.json())
-  //     .then((data) => {
-        
-  //     })
-  // }
+  const sendPage = (value) => {
+    router.push(`${path}${value}`)
+  }
 
   return (
     <Row className={`${styles.flex} mt50px`}>
       <Col className={`${styles.pageContainer}`}>
         {/* 分頁 */}
         <div className={`${styles.pagination} fwBolder fs18px`}>
-          {/* 上一頁 */}
+          {/* 上一頁箭頭 */}
           <Image
             src={Arrow}
             alt="arrow_left"
@@ -151,6 +140,7 @@ export default function Pagination({
               {totalPages}
             </button>
           </Link>
+          {/* 下一頁箭頭 */}
           <Image
             src={Arrow}
             alt="arrow_right"
@@ -175,13 +165,17 @@ export default function Pagination({
               className={`${styles.inputBox}`}
               value={value}
               placeholder="1"
-              onChange={(e) => {
-                // 送出
-                if (e.key === 'Enter' && e.target.value) {
-                    // sendPage(value)
-                }
+              // 不能打非數字
+              onChange={(e) => {                    
                 if (!isNaN(e.target.value)) {
                   setValue(e.target.value)
+                }
+              }}
+              // Enter送出
+              onKeyDown={(e)=>{
+                if (e.key === 'Enter' && e.target.value) {
+                  sendPage(value)
+                  setValue(1)
                 }
               }}
             ></input>
@@ -189,13 +183,16 @@ export default function Pagination({
           <span className={`${styles.inputTitle} ms10px fs18px me30px `}>
             頁
           </span>
+          <div onClick={()=>{
+              sendPage(value)
+          }}>
           <Button
             text="跳轉"
             btnColor="brown"
             padding="5px 10px"
             fontSize="16px"
-            // link={sendPage(value)}
           />
+          </div>
         </div>
       </Col>
     </Row>

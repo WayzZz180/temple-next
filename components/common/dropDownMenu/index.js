@@ -34,7 +34,7 @@ export default function DropDownMenu({ text = '篩選｜排列', info }) {
         </div>
         <ul onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           {info.map((v, i) => (
-            <>
+            
               <li
                 key={i}
                 className={`${
@@ -45,7 +45,7 @@ export default function DropDownMenu({ text = '篩選｜排列', info }) {
                   {v.content}
                 </Link>
               </li>
-            </>
+            
           ))}
         </ul>
       </li>

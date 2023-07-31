@@ -112,7 +112,7 @@ export default function Header() {
             if (i > 2) {
               return (
                 <NavbarItem
-                  key={i}
+                  key={v.title}
                   title={v.title}
                   title2={v.title2}
                   links={v.links}
