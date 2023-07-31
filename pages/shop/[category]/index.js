@@ -27,6 +27,7 @@ export default function Category() {
   // const [keyword, setKeyword] = useState('')
   const [data, setData] = useState([])
   const [pagination, setPagination] = useState([])
+  const [stateFromChild, setStateFromChild] = useState(false)
 
   useEffect(() => {
     if (!category) return
@@ -48,7 +49,7 @@ export default function Category() {
       }
     })
    
-  }, [router.query])
+  }, [stateFromChild,router.query])
 
   // 商品圖片
   const { imgSrc } = usePath(data)
@@ -108,7 +109,7 @@ export default function Category() {
         />
         {/* 篩選｜排列 */}
         <span className={`${styles.menu}`}>
-          <DropDownMenu info={info} category={category}/>
+          <DropDownMenu text=" 篩選｜排列 " info={info} category={category} stateFromChild={stateFromChild} setStateFromChild={setStateFromChild}/>
         </span>
       </div>
       {/* 商品 */}
