@@ -10,11 +10,25 @@ import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import Triangle_fill from '@/assets/triangle_fill.svg'
 import Triangle_outline from '@/assets/triangle_outline.svg'
 
-export default function DropDownMenu({ text = '篩選｜排列', info }) {
+export default function DropDownMenu({ text = '篩選｜排列', info, category}) {
  
 
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } =
     useHoverIndex(false)
+
+  const selectPage=(perPage)=>{
+    const reqData = {perPage: perPage}
+    fetch(`${process.env.API_SERVER}/shop/${category}`, {
+      method: 'POST',
+      body: JSON.stringify({ requestData: reqData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((data) => {
+      })
+  }
 
   return (
     <ul className={`${styles.drop_down_menu}`}>
@@ -41,9 +55,14 @@ export default function DropDownMenu({ text = '篩選｜排列', info }) {
                   v.title ? styles.liTitle : styles.li
                 } mt10px mb20px`}
               >
-                <Link href="#" className={`fs16px link`}>
+                <div href="#" className={`${styles.link} fs16px`}
+                style={{cursor: v.title ? 'default':'pointer'}}
+                onClick={()=>{
+                  selectPage(v.perPage)
+                }}
+                >
                   {v.content}
-                </Link>
+                </div>
               </li>
             
           ))}

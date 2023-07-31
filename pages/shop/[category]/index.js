@@ -1,6 +1,4 @@
 import styles from './category.module.sass'
-import Link from 'next/link'
-import Image from 'next/image'
 
 // hooks
 import { useRouter } from 'next/router'
@@ -32,8 +30,14 @@ export default function Category() {
 
   useEffect(() => {
     if (!category) return
-
-    fetch(`${process.env.API_SERVER}/shop/${category}?${pageParams}}`)
+    const reqData = null
+    fetch(`${process.env.API_SERVER}/shop/${category}?${pageParams}}`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: reqData }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
     .then((r) => r.json())
     .then((data) => {
       if (data.redirect) {
@@ -64,13 +68,16 @@ export default function Category() {
       content: '每頁顯示/',
     },
     {
-      content: '25筆',
+      content: '20筆',
+      perPage: 20,
     },
     {
       content: '50筆',
+      perPage: 50,
     },
     {
       content: '100筆',
+      perPage: 100,
     },
     {
       title: true,
@@ -101,7 +108,7 @@ export default function Category() {
         />
         {/* 篩選｜排列 */}
         <span className={`${styles.menu}`}>
-          <DropDownMenu info={info} />
+          <DropDownMenu info={info} category={category}/>
         </span>
       </div>
       {/* 商品 */}
