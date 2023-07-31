@@ -10,14 +10,14 @@ import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import Triangle_fill from '@/assets/triangle_fill.svg'
 import Triangle_outline from '@/assets/triangle_outline.svg'
 
-export default function DropDownMenu({ text = '篩選｜排列', info, category, setStateFromChild, stateFromChild}) {
+export default function DropDownMenu({ text = '篩選｜排列', info, category, setDataFromChild}) {
  
 
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } =
     useHoverIndex(false)
 
-  const [state, setState] = useState(stateFromChild)
-
+  const [data, setData] = useState([])
+  
   const selectPage=(perPage)=>{
     const reqData = {perPage: perPage}
     fetch(`${process.env.API_SERVER}/shop/${category}`, {
@@ -29,13 +29,13 @@ export default function DropDownMenu({ text = '篩選｜排列', info, category,
     })
       .then((r) => r.json())
       .then((data) => {
-        setState(!state)
+        setData(data)
       })
   }
   
   useEffect(()=>{
-    setStateFromChild(state)
-  },[state])
+    setDataFromChild(data)
+  },[data])
 
   return (
     <ul className={`${styles.drop_down_menu}`}>

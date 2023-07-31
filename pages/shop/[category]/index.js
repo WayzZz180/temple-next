@@ -27,30 +27,34 @@ export default function Category() {
   // const [keyword, setKeyword] = useState('')
   const [data, setData] = useState([])
   const [pagination, setPagination] = useState([])
-  const [stateFromChild, setStateFromChild] = useState(false)
-
+  const [dataFromChild, setDataFromChild] = useState([])
+  
   useEffect(() => {
-    if (!category) return
     const reqData = null
-    fetch(`${process.env.API_SERVER}/shop/${category}?${pageParams}}`, {
+    if(dataFromChild.data?.length >20) {
+      setData(dataFromChild.data)
+      setPagination(dataFromChild.pagination)
+      return
+    }
+      fetch(`${process.env.API_SERVER}/shop/${category}?${pageParams}}`, {
         method: 'POST',
         body: JSON.stringify({ requestData: reqData }),
         headers: {
           'Content-Type': 'application/json',
         },
       })
-    .then((r) => r.json())
-    .then((data) => {
-      if (data.redirect) {
-        router.push(data.redirect)
-      } else {
-        setData(data.data)
-        setPagination(data.pagination)
-      }
-    })
-   
-  }, [stateFromChild,router.query])
-
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.redirect) {
+          router.push(data.redirect)
+        } else {
+            setData(data.data)
+            setPagination(data.pagination)
+          }
+        
+      })
+    
+  }, [dataFromChild,router.query])
   // 商品圖片
   const { imgSrc } = usePath(data)
   const chunkArray = (arr, size) => {
@@ -109,7 +113,7 @@ export default function Category() {
         />
         {/* 篩選｜排列 */}
         <span className={`${styles.menu}`}>
-          <DropDownMenu text=" 篩選｜排列 " info={info} category={category} stateFromChild={stateFromChild} setStateFromChild={setStateFromChild}/>
+          <DropDownMenu text=" 篩選｜排列 " info={info} category={category}  setDataFromChild={setDataFromChild}/>
         </span>
       </div>
       {/* 商品 */}
