@@ -3,19 +3,13 @@ import styles from './style.module.sass'
 //hooks
 import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
-import CartContext from '@/contexts/CartContext'
 
 // bootstrap
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 // components
-import ShopStepBar from '@/components/common/bar/ShopStepBar'
-import ShopCartContentCard from '@/components/common/cards/ShopCartContentCard'
 import ShopWannaBuyCard from '@/components/common/cards/ShopWannaBuyCard'
-import CartCategory from '@/components/common/button/CartCategory'
-import Button from '@/components/common/button'
-import Marquee from '@/components/common/marquee'
 
 export default function wannaBuy({data}) {
   const router = useRouter()

@@ -4,7 +4,8 @@ import Link from 'next/link'
  
 // hooks
 import { useState,useEffect,useContext } from 'react'
-import CartContext from '@/contexts/CartContext'
+import CartCountContext from '@/contexts/CartCountContext'
+import WannaBuyDataContext from '@/contexts/WannaBuyDataContext'
 
 // bootstrap
 import Row from 'react-bootstrap/Row'
@@ -24,13 +25,14 @@ export default function ShopWannaBuyCard({
     pid=2,
     cid=1,
     date='2023-08-16',
-    setState=()=>{},
-    state=false
 }) {
 
     // for navbar購物車數量
-    const { cartCount, setCartCount, getCartCount } = useContext(CartContext);
-    
+    const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext);
+
+    // for 更新下次再買資料
+    const { wannaBuyData, setWannaBuyData, getWannaBuyData } = useContext(WannaBuyDataContext)
+      
     // 商品類別
     const category = TitleData[cid].id
  
@@ -46,14 +48,13 @@ export default function ShopWannaBuyCard({
       })
       .then((r) => r.json())
       .then((data) => {
-          setState(!state)
+          getWannaBuyData()
           getCartCount()
         })
     }
 
     // 從下次再買加入購物車
     const addToCart = ()=>{
-      setState(!state) // for即時更新畫面
       const addData = {count: 1, pid: pid, wannaBuy: true}
       fetch(`${process.env.API_SERVER}/shop/cart`, {
         method: 'POST',
@@ -64,6 +65,7 @@ export default function ShopWannaBuyCard({
       })
         .then((r) => r.json())
         .then((data) => {
+          getWannaBuyData()
           getCartCount()
         })
     }

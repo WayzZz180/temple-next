@@ -4,8 +4,9 @@ import Link from 'next/link'
 import variables from '@/styles/_variables.module.sass'
 
 // hooks
-import { useState, useEffect, useContext } from 'react'
-import CartContext from '@/contexts/CartContext'
+import { useState, useContext } from 'react'
+import CartContext from '@/contexts/CartCountContext'
+import CartDataContext from '@/contexts/CartDataContext'
 
 // bootstrap
 import Row from 'react-bootstrap/Row'
@@ -24,13 +25,13 @@ export default function ShopCartContentCard({
   stock_num = 30,
   pid = 2,
   cid = 1,
-  setState = () => {},
-  state = false,
 }) {
   if (isNaN(quantity)) return <p></p>
 
   // for navbar購物車數量
   const { cartCount, setCartCount, getCartCount } = useContext(CartContext)
+
+  const { cartData, setCartData, getCartData } = useContext(CartDataContext)
   // for 更新數量
   const [count, setCount] = useState(Number(quantity))
   // 商品類別 for url
@@ -38,7 +39,6 @@ export default function ShopCartContentCard({
 
   // 更新數量(需要數量和pid)
   const updateCount = (count, pid) => {
-    console.log('count:', count)
     const updatedData = { count: count, pid: pid }
     fetch(`${process.env.API_SERVER}/shop/cart`, {
       method: 'PUT',
@@ -49,14 +49,11 @@ export default function ShopCartContentCard({
     })
       .then((r) => r.json())
       .then((data) => {
-        getCartCount()
       })
   }
 
   // 刪除個別商品(需要pid)
   const deleteFromCart = (pid) => {
-    setState(!state) // 會從購物車刪除因此要即時更新狀態
-    console.log(state)
     const deletedData = { pid: pid }
     fetch(`${process.env.API_SERVER}/shop/cart`, {
       method: 'DELETE',
@@ -67,13 +64,13 @@ export default function ShopCartContentCard({
     })
       .then((r) => r.json())
       .then((data) => {
+        getCartData()
         getCartCount()
       })
   }
 
   // 加入下次再買(需要pid)
   const addToWannaBuy = (pid) => {
-    setState(!state) // 會從購物車刪除因此要即時更新狀態
     const addData = { pid: pid }
     fetch(`${process.env.API_SERVER}/shop/wannaBuy`, {
       method: 'POST',
@@ -84,6 +81,7 @@ export default function ShopCartContentCard({
     })
       .then((r) => r.json())
       .then((data) => {
+        getCartData()
         getCartCount()
       })
   }

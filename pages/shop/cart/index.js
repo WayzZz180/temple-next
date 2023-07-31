@@ -280,8 +280,10 @@ import styles from './cart.module.sass'
 //hooks
 import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
-import CartContext from '@/contexts/CartContext'
-
+// import { CartDataContextProvider } from '@/contexts/CartCountContext'
+import CartCountContext from '@/contexts/CartCountContext'
+import CartDataContext from '@/contexts/CartDataContext'
+import WannaBuyDataContext from '@/contexts/WannaBuyDataContext'
 // bootstrap
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -291,92 +293,49 @@ import Col from 'react-bootstrap/Col'
 import ShopStepBar from '@/components/common/bar/ShopStepBar'
 import Cart from '@/components/common/cart/cart'
 import WannaBuy from '@/components/common/cart/wannaBuy'
-import ShopCartContentCard from '@/components/common/cards/ShopCartContentCard'
-import ShopWannaBuyCard from '@/components/common/cards/ShopWannaBuyCard'
 import CartCategory from '@/components/common/button/CartCategory'
-import Button from '@/components/common/button'
 import Marquee from '@/components/common/marquee'
 
 export default function IndexCart() {
   const router = useRouter()
 
-  // 購物車標題
-  const title_cart = [
-    { width: '16%', text: '商品圖片' },
-    { width: '16.8%', text: '商品名稱' },
-    { width: '11.3%', text: '單價' },
-    { width: '11.1%', text: '數量' },
-    { width: '17%', text: '小計' },
-  ]
-
-  // 下次再買標題
-  const title_wannaBuy = [
-    { width: '19%', text: '商品圖片' },
-    { width: '21%', text: '商品名稱' },
-    { width: '6%', text: '單價' },
-    { width: '5.5%', text: '庫存' },
-    { width: '17%', text: '加入時間' },
-  ]
-
-  // 回傳的資料（購物車或下次再買）
-  const [cartData, setCartData] = useState([])
-  const [wannaBuyData, setWannaBuyData] = useState([])
-
   // 瀏覽紀錄資料
   const [marquee, setMarquee] = useState([])
 
-  // 即時更新資料的狀態
-  const [stateFromChild, setStateFromChild] = useState(false)
-  const {tab} = router.query
   // id = 1 (購物車) , id = 2 (下次再買)
+  const {tab} = router.query
   const [idFromChild, setIdFromChild] = useState(tab ? parseInt(tab) : 1);
 
-  // for navbar購物車數量
-  const { cartCount, setCartCount, getCartCount } = useContext(CartContext)
+  // for 購物車資料更新
+  const { cartData, setCartData, getCartData } = useContext(CartDataContext)
 
-  
+  // for 下次再買資料更新
+  const { wannaBuyData, setWannaBuyData, getWannaBuyData } = useContext(WannaBuyDataContext)
+
   // 抓購物車或下次再買的資料
   useEffect(() => {
       if(tab){
         setIdFromChild(parseInt(tab))
       }
-
-      fetch(`${process.env.API_SERVER}/shop/cart`)
-      .then((r) => r.json())
-      .then((data) => {
-        setCartData(data)
-        getCartCount()
-      })
-
-      fetch(`${process.env.API_SERVER}/shop/wannaBuy`)
-      .then((r) => r.json())
-      .then((data) => {
-        setWannaBuyData(data)
-        getCartCount()
-      })
-  }, [stateFromChild, router.query])
+      getCartData()
+      getWannaBuyData()
+  }, [router.query])
 
   // 瀏覽紀錄
   useEffect(() => {
     fetch(`${process.env.API_SERVER}/shop/history`)
       .then((r) => r.json())
       .then((data) => {
+        console.log('hehe')
         setMarquee(data)
       })
-  }, [router.query])
+  }, [])
 
   if (!cartData) return <p>Loading...</p>
   if (!wannaBuyData) return <p>Loading...</p>
-
- 
   if (!marquee) return <p>Loading...</p>
 
-  // ////derrick
-  // if tab===1 && return <Cart {...data}/>
-  // if tab ===2 && return <WannaBuy {...wannaBuydata}/>
-  //////
 
-  // console.log(tab);
   return (
     <>
       <Container>
@@ -395,8 +354,8 @@ export default function IndexCart() {
             />
           </Col>
         </Row>
-       {idFromChild===1 ? 
-       <Cart data={cartData} setStateFromChild={setStateFromChild}/> : <WannaBuy data={wannaBuyData} setStateFromChild={setStateFromChild} /> }
+            {idFromChild===1 ? 
+            <Cart data={cartData}/> : <WannaBuy data={wannaBuyData} /> }
         <Row>
           <Marquee
             data={marquee}

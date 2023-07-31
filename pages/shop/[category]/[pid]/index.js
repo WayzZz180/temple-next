@@ -7,7 +7,7 @@ import { useClick } from '@/hooks/useClick.js'
 import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import { css, keyframes } from '@emotion/css'
-import CartContext from '@/contexts/CartContext'
+import CartContext from '@/contexts/CartCountContext'
 
 // components
 import Marquee from '@/components/common/marquee'

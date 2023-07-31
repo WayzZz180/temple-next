@@ -12,8 +12,9 @@ import cart_noStock from '@/assets/cart_noStock.svg'
 import { useState, useContext } from 'react'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import { useClick } from '@/hooks/useClick.js'
+// import { AddToCart } from '@/hooks/addToCart.js'
 import { css, keyframes } from '@emotion/css'
-import CartContext from '@/contexts/CartContext'
+import CartCountContext from '@/contexts/CartCountContext'
 
 //components
 import Stars from '@/components/common/stars'
@@ -27,7 +28,7 @@ export default function ShopProductsCard({
   stars = 5,
   stock_num = 10,
 }) {
-  const { cartCount, setCartCount, getCartCount } = useContext(CartContext)
+  const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
 
   //判斷hover
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-1)
@@ -37,6 +38,7 @@ export default function ShopProductsCard({
   //判斷有無點擊收藏和購物車
   const { clickState: heartClickState, handleClick: handleHeartClick } =
     useClick(false)
+  
   const {
     clickState: cartClickState,
     handleClick: handleCartClick,

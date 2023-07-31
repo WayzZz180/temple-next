@@ -26,19 +26,19 @@ export default function Header() {
       title: '02',
       title2: '線上拜拜',
       links: [
-        { label: '商城首頁', url: '/shop' },
-        { label: '購物車', url: '/shop/cart' },
-        { label: '訂單紀錄', url: '#' },
+        { label: '服務據點', url: '#' },
+        { label: '服務客戶', url: '#' },
+        { label: '服務地區', url: '#' },
+        { label: '徵才資訊', url: '#' },
       ],
     },
     {
       title: '03',
       title2: '供品商城',
       links: [
-        { label: '服務據點', url: '#' },
-        { label: '服務客戶', url: '#' },
-        { label: '服務地區', url: '#' },
-        { label: '徵才資訊', url: '#' },
+        { label: '商城首頁', url: '/shop' },
+        { label: '購物車', url: '/shop/cart?tab=1' },
+        { label: '訂單紀錄', url: '#' },
       ],
     },
     {

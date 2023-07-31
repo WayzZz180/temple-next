@@ -1,8 +1,10 @@
 import styles from './style.module.sass'
 
 //hooks
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { useRouter } from 'next/router'
+import CartCountContext from '@/contexts/CartCountContext'
+import CartDataContext from '@/contexts/CartDataContext'
 
 // bootstrap
 import Row from 'react-bootstrap/Row'
@@ -14,7 +16,9 @@ import Button from '@/components/common/button'
 
 export default function Cart({data, setStateFromChild}) {
   const router = useRouter()
-
+  const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
+  const { cartData, setCartData, getCartData } = useContext(CartDataContext)
+  
   // 購物車標題
   const title_cart = [
     { width: '16%', text: '商品圖片' },
@@ -27,9 +31,6 @@ export default function Cart({data, setStateFromChild}) {
   // 即時更新資料的狀態
   const [state, setState] = useState(false)
 
-//   useEffect(()=>{
-    
-//   })
  // for 清空購物車
  const pid_array = data?.map((v, i) => {
     return v.pid
@@ -48,6 +49,7 @@ export default function Cart({data, setStateFromChild}) {
     })
       .then((r) => r.json())
       .then((data) => {
+        getCartData()
         getCartCount()
       })
   }

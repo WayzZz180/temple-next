@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './header.module.sass'
 import Link from 'next/link'
 import { useContext } from 'react'
-import CartContext from '@/contexts/CartContext'
+import CartContext from '@/contexts/CartCountContext'
 
 export default function NavbarItem({ title = '', title2, links }) {
   const { cartCount } = useContext(CartContext)

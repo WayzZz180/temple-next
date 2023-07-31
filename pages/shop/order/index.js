@@ -5,7 +5,8 @@ import Image from 'next/image'
 import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import { useClick } from '@/hooks/useClick.js'
-import CartContext from '@/contexts/CartContext'
+import CartCountContext from '@/contexts/CartCountContext'
+import CartDataContext from '@/contexts/CartDataContext'
 
 // components
 import ShopStepBar from "@/components/common/bar/ShopStepBar"
@@ -24,27 +25,22 @@ import Arrow from '@/assets/orderArrow.svg'
 
 export default function Order() {
     const router = useRouter()
-    const [data, setData] = useState([])
+
     const [init, setInit] = useState(false)
     //判斷有無點擊收藏和購物車
     const { clickState: openClickState, handleClick: handleOpenClick } =
     useClick(true)
     
-  // for navbar購物車數量
-  const { cartCount, setCartCount, getCartCount } = useContext(CartContext);
+    // for 訂單資料
+    const { cartData, setCartData, getCartData } = useContext(CartDataContext);
   
-  // 訂單內容(同購物車)
-  useEffect(() => {
-    fetch(`${process.env.API_SERVER}/shop/cart`)
-    .then((r) => r.json())
-    .then((data) => {
-    setData(data)
-    getCartCount()
-    })
-  }, [router.query])
+    // 訂單內容(同購物車)
+    useEffect(() => {
+        getCartData()
+    }, [router.query])
 
   // 小計
-  const total = data?.reduce((result, v) => {
+  const total = cartData?.reduce((result, v) => {
     return result + v.product_price * v.quantity;
   }, 0);
 
@@ -66,7 +62,7 @@ export default function Order() {
                     <div className={` fs28px fwBolder`}>合計：NT${total}</div>
                     <div className={`${styles.flex_row} fs24px`}>
                         <div>
-                            購物車：{data?.length}件&nbsp;
+                            購物車：{cartData?.length}件&nbsp;
                         </div>
                         <div className={`${openClickState ? (init ? styles.arrowDown:"") : styles.arrowUp } pt5px`}
                         > 
@@ -82,10 +78,9 @@ export default function Order() {
         > 
         <div className={`${openClickState ? styles.open : styles.close}`} style={{overflow: 'hidden', maxHeight: openClickState? '100%' : 0}}>
          <div  className={`${styles.trans} ${openClickState ? styles.floatIn :''}`}
-         style={{bottom: openClickState ? '': `${260*data?.length+20}px`}}
+         style={{bottom: openClickState ? '': `${260*cartData?.length+20}px`}}
           >
-        {/* ${openClickState ? '' : styles.hidden} */}
-            {data?.map((v,i) => (
+            {cartData?.map((v,i) => (
                 <ShopOrderContentCard
                 key={i}
                 src={`/${v.image}`}
