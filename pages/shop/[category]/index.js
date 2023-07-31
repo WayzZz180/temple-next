@@ -20,10 +20,6 @@ import TitleData from '@/components/mydata/productsTitleData'
 import DropDownMenu from '@/components/common/dropDownMenu'
 import Pagination from '@/components/common/pagination'
 
-// svg
-import dots from '@/assets/dots.svg'
-import Arrow from '@/assets/arrow_page.svg'
-
 export default function Category() {
   const router = useRouter()
   const { category } = router.query //抓出類別
@@ -36,16 +32,34 @@ export default function Category() {
 
   useEffect(() => {
     if (!category) return
+    const reqPage = { page: false }
+    // fetch(`${process.env.API_SERVER}/shop/${category}?${pageParams}}` , {
+    //   method: 'POST',
+    //   body: JSON.stringify({ requestData: reqPage }),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    // })
+    // .then((r) => r.json())
+    // .then((data) => {
+    //   if (data.redirect) {
+    //     router.push(data.redirect)
+    //   } else {
+    //     setData(data.data)
+    //     setPagination(data.pagination)
+    //   }
+    // })
     fetch(`${process.env.API_SERVER}/shop/${category}?${pageParams}}`)
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.redirect) {
-          router.push(data.redirect)
-        } else {
-          setData(data.data)
-          setPagination(data.pagination)
-        }
-      })
+    .then((r) => r.json())
+    .then((data) => {
+      if (data.redirect) {
+        router.push(data.redirect)
+      } else {
+        setData(data.data)
+        setPagination(data.pagination)
+      }
+    })
+   
   }, [router.query])
 
   // 商品圖片
@@ -127,7 +141,7 @@ export default function Category() {
           })}
         </Row>
       ))}
-      <Pagination pagination={pagination} path={`/shop/${category}?page=`} />
+      <Pagination pagination={pagination} path={`/shop/${category}?page=`} api={`/shop/${category}`}/>
     </Container>
   )
 }

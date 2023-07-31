@@ -48,8 +48,7 @@ export default function ShopCartContentCard({
       },
     })
       .then((r) => r.json())
-      .then((data) => {
-      })
+      .then((data) => {})
   }
 
   // 刪除個別商品(需要pid)

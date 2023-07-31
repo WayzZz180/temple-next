@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 //hooks
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 
 // Bootstrap
@@ -13,11 +14,15 @@ import Col from 'react-bootstrap/Col'
 import dots from '@/assets/dots.svg'
 import Arrow from '@/assets/arrow_page.svg'
 
+//components
+import Button from '@/components/common/button/noButton'
+
 // pagination includes page(當前頁面) / totalPages
 // path = 導向頁面
 export default function Pagination({
   pagination,
   path = '/shop/cookies?page=',
+  api
 }) {
   const router = useRouter()
   // 解構 pagination
@@ -51,8 +56,31 @@ export default function Pagination({
     ]
   }
 
+  const [value, setValue] = useState(1)
+
+  if (value > totalPages) {
+    setValue(totalPages)
+  } else if (value < 1) {
+    setValue(1)
+  }
+
+  // const sendPage = (value) => {
+  //   const reqPage = { page: value }
+  //   fetch(`${process.env.API_SERVER}${api}`, {
+  //     method: 'POST',
+  //     body: JSON.stringify({ requestData: reqPage }),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then((r) => r.json())
+  //     .then((data) => {
+        
+  //     })
+  // }
+
   return (
-    <Row className="mt50px">
+    <Row className={`${styles.flex} mt50px`}>
       <Col className={`${styles.pageContainer}`}>
         {/* 分頁 */}
         <div className={`${styles.pagination} fwBolder fs18px`}>
@@ -138,7 +166,37 @@ export default function Pagination({
         </div>
       </Col>
       <Col>
-        <div>跳轉至</div>
+        <div className={`${styles.inputContainer} mt50px `}>
+          <span className={`${styles.inputTitle} me10px fs18px `}>
+            跳轉至第
+          </span>
+          <span className={`${styles.inlineBlock} `}>
+            <input
+              className={`${styles.inputBox}`}
+              value={value}
+              placeholder="1"
+              onChange={(e) => {
+                // 送出
+                if (e.key === 'Enter' && e.target.value) {
+                    // sendPage(value)
+                }
+                if (!isNaN(e.target.value)) {
+                  setValue(e.target.value)
+                }
+              }}
+            ></input>
+          </span>
+          <span className={`${styles.inputTitle} ms10px fs18px me30px `}>
+            頁
+          </span>
+          <Button
+            text="跳轉"
+            btnColor="brown"
+            padding="5px 10px"
+            fontSize="16px"
+            // link={sendPage(value)}
+          />
+        </div>
       </Col>
     </Row>
   )

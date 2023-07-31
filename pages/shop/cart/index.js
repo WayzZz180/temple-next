@@ -1,4 +1,3 @@
-
 import styles from './cart.module.sass'
 
 //hooks
@@ -26,22 +25,23 @@ export default function IndexCart() {
   const [marquee, setMarquee] = useState([])
 
   // id = 1 (購物車) , id = 2 (下次再買)
-  const {tab} = router.query
-  const [idFromChild, setIdFromChild] = useState(tab ? parseInt(tab) : 1);
+  const { tab } = router.query
+  const [idFromChild, setIdFromChild] = useState(tab ? parseInt(tab) : 1)
 
   // for 購物車資料更新
   const { cartData, setCartData, getCartData } = useContext(CartDataContext)
 
   // for 下次再買資料更新
-  const { wannaBuyData, setWannaBuyData, getWannaBuyData } = useContext(WannaBuyDataContext)
+  const { wannaBuyData, setWannaBuyData, getWannaBuyData } =
+    useContext(WannaBuyDataContext)
 
   // 抓購物車或下次再買的資料
   useEffect(() => {
-      if(tab){
-        setIdFromChild(parseInt(tab))
-      }
-      getCartData()
-      getWannaBuyData()
+    if (tab) {
+      setIdFromChild(parseInt(tab))
+    }
+    getCartData()
+    getWannaBuyData()
   }, [router.query])
 
   // 瀏覽紀錄
@@ -57,7 +57,6 @@ export default function IndexCart() {
   if (!cartData) return <p>Loading...</p>
   if (!wannaBuyData) return <p>Loading...</p>
   if (!marquee) return <p>Loading...</p>
-
 
   return (
     <>
@@ -77,8 +76,11 @@ export default function IndexCart() {
             />
           </Col>
         </Row>
-            {idFromChild===1 ? 
-            <Cart data={cartData}/> : <WannaBuy data={wannaBuyData} /> }
+        {idFromChild === 1 ? (
+          <Cart data={cartData} />
+        ) : (
+          <WannaBuy data={wannaBuyData} />
+        )}
         <Row>
           <Marquee
             data={marquee}
