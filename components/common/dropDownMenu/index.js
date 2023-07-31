@@ -10,32 +10,8 @@ import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import Triangle_fill from '@/assets/triangle_fill.svg'
 import Triangle_outline from '@/assets/triangle_outline.svg'
 
-export default function DropDownMenu({ text = '篩選｜排列' }) {
-  const info = [
-    {
-      title: true,
-      content: '每頁顯示/',
-    },
-    {
-      content: '25筆',
-    },
-    {
-      content: '50筆',
-    },
-    {
-      content: '100筆',
-    },
-    {
-      title: true,
-      content: '依照/',
-    },
-    {
-      content: '熱門程度排序',
-    },
-    {
-      content: '價錢排序',
-    },
-  ]
+export default function DropDownMenu({ text = '篩選｜排列', info }) {
+ 
 
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } =
     useHoverIndex(false)
@@ -48,7 +24,7 @@ export default function DropDownMenu({ text = '篩選｜排列' }) {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <div className={`${styles.title} fs16px mt5px pb15px`}>{text}</div>
+          <div className={`${styles.title} fs18px mt5px pb15px fwBold`}>{text}</div>
           <Image
             src={hoveredIndex ? Triangle_fill : Triangle_outline}
             alt="arrow"

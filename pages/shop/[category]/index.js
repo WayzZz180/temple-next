@@ -18,6 +18,7 @@ import ShopProductsCard from '@/components/common/cards/ShopProductsCard'
 import ShopTitle from '@/components/common/title/ShopTitle'
 import TitleData from '@/components/mydata/productsTitleData'
 import DropDownMenu from '@/components/common/dropDownMenu'
+import Pagination from '@/components/common/pagination'
 
 // svg
 import dots from '@/assets/dots.svg'
@@ -26,23 +27,28 @@ import Arrow from '@/assets/arrow_page.svg'
 export default function Category() {
   const router = useRouter()
   const { category } = router.query //抓出類別
-  console.log(router.query)
-  const query = new URLSearchParams(router.asPath.split('?')[1])
+  const usp = new URLSearchParams(router.asPath.split('?')[1])
+  const pageParams = usp.toString()
   const categoryData = TitleData.find((item) => item.id === category)
-
   // const [keyword, setKeyword] = useState('')
-  const [data, setData] = useState()
+  const [data, setData] = useState([])
+  const [pagination, setPagination] = useState([])
 
   useEffect(() => {
     if (!category) return
-    const usp = new URLSearchParams(router.query)
-    fetch(`${process.env.API_SERVER}/shop/${category}?${usp.toString()}`)
+    fetch(`${process.env.API_SERVER}/shop/${category}?${pageParams}}`)
       .then((r) => r.json())
       .then((data) => {
-        setData(data)
+        if (data.redirect) {
+          router.push(data.redirect)
+        } else {
+          setData(data.data)
+          setPagination(data.pagination)
+        }
       })
   }, [router.query])
 
+  // 商品圖片
   const { imgSrc } = usePath(data)
   const chunkArray = (arr, size) => {
     const chunks = []
@@ -52,6 +58,36 @@ export default function Category() {
     return chunks
   }
   const imgChunks = chunkArray(imgSrc, 5)
+
+  //要篩選的資料
+  const info = [
+    {
+      title: true,
+      content: '每頁顯示/',
+    },
+    {
+      content: '25筆',
+    },
+    {
+      content: '50筆',
+    },
+    {
+      content: '100筆',
+    },
+    {
+      title: true,
+      content: '依照/',
+    },
+    {
+      content: '熱門程度排序',
+    },
+    {
+      content: '價錢排序',
+    },
+    {
+      content: '星星排序',
+    },
+  ]
 
   if (!data) return <p>Loading...</p>
 
@@ -67,7 +103,7 @@ export default function Category() {
         />
         {/* 篩選｜排列 */}
         <span className={`${styles.menu}`}>
-          <DropDownMenu />
+          <DropDownMenu info={info} />
         </span>
       </div>
       {/* 商品 */}
@@ -91,74 +127,7 @@ export default function Category() {
           })}
         </Row>
       ))}
-      <Row className="nowrap mt50px">
-        <Col className={`pageContainer`}>
-          {/* 分頁 */}
-          <div className={`${styles.pagination} fwBolder fs18px`}>
-            <Image
-              src={Arrow}
-              alt="arrow_left"
-              className={`${styles.arrowLeft}`}
-              width={30}
-            />
-            {/* 第一頁 */}
-            <Link
-              className="link"
-              href={`/shop/${router.query.category}?page=1`}
-            >
-              <button className={`${styles.button}`} onClick={() => {}}>
-                1
-              </button>
-            </Link>
-            {/* 點點 */}
-            <Image
-              src={dots}
-              alt="dots"
-              className={`${styles.dots}`}
-              width={30}
-            />
-
-            {/* 頁碼 */}
-            {Array.from({ length: 5 }, (_, index) => (
-              <Link
-                key={index}
-                className="link"
-                href={'?' + new URLSearchParams(query).toString()}
-              >
-                <button className={`${styles.button}`} onClick={() => {}}>
-                  {index + 5}
-                </button>
-              </Link>
-            ))}
-
-            {/* 點點 */}
-            <Image
-              src={dots}
-              alt="dots"
-              className={`${styles.dots}`}
-              width={30}
-            />
-
-            {/* 最後一頁 */}
-            <Link
-              className="link"
-              href={`/shop/${router.query.category}?page=20`}
-            >
-              <button className={`${styles.button}`} onClick={() => {}}>
-                20
-              </button>
-            </Link>
-            <Image
-              src={Arrow}
-              alt="arrow_right"
-              className={`${styles.arrowRight}`}
-              width={30}
-            />
-          </div>
-        </Col>
-      </Row>
+      <Pagination pagination={pagination} path={`/shop/${category}?page=`} />
     </Container>
   )
 }
-
-// for ($i = $page - ($totalPages - 1); $i <=  $page + ($totalPages - 1); $i++) {}

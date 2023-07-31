@@ -58,7 +58,7 @@ export default function Shop() {
                   ></Image>
                 </span>
                 {/* 文字 */}
-                <span className={`${styles.link} $ pb15px`}>{v.text}</span>
+                <span className={`${styles.link} fwBold pb15px`}>{v.text}</span>
               </Link>
             </Col>
           )
