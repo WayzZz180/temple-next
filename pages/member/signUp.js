@@ -130,7 +130,8 @@ export default function SignUp() {
       })
       setInvalidFields(invalidFieldsArray.filter((field) => field !== null))
 
-      alert('資料有誤，請檢查一下喔!')
+      alert('請檢查以下項目：\n' + invalidFieldsArray.join('\n'));
+      // alert('資料有誤，請檢查一下喔!')
 
       return
     }
