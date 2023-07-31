@@ -15,6 +15,7 @@ import { useClick } from '@/hooks/useClick.js'
 // import { AddToCart } from '@/hooks/addToCart.js'
 import { css, keyframes } from '@emotion/css'
 import CartCountContext from '@/contexts/CartCountContext'
+import CartDataContext from '@/contexts/CartDataContext'
 
 //components
 import Stars from '@/components/common/stars'
@@ -29,6 +30,7 @@ export default function ShopProductsCard({
   stock_num = 10,
 }) {
   const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
+  const { cartData, setCartData, getCartData } = useContext(CartDataContext)
 
   //判斷hover
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-1)
@@ -75,8 +77,8 @@ export default function ShopProductsCard({
   }
 
   // 加入購物車
-  const addToCart = (count) => {
-    const addData = { count: count, pid: pid }
+  const addToCart = () => {
+    const addData = { count: 1, pid: pid }
     fetch(`${process.env.API_SERVER}/shop/cart`, {
       method: 'POST',
       body: JSON.stringify({ requestData: addData }),
@@ -86,6 +88,7 @@ export default function ShopProductsCard({
     })
       .then((r) => r.json())
       .then((data) => {
+        getCartData()
         getCartCount()
       })
   }
@@ -158,7 +161,7 @@ export default function ShopProductsCard({
               if (stock_num != 0) {
                 handleCartClick()
                 handleAnimationEnd()
-                addToCart(1)
+                addToCart()
               } else {
                 alert(`無庫存`)
               }

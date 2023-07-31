@@ -1,9 +1,12 @@
 import { useContext } from 'react'
 import CartContext from '@/contexts/CartCountContext'
-export default function AddToCart(count,pid,getCartCount) {
+
+export default function useCart(count,pid,getCartCount) {
+    
     const addData = { count: count, pid: pid }
+    
     const addToCart=()=>{
-        fetch(`${process.env.API_SERVER}/shop/cart`, {
+    fetch(`${process.env.API_SERVER}/shop/cart`, {
             method: 'POST',
             body: JSON.stringify({ requestData: addData }),
       headers: {

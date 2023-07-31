@@ -7,7 +7,8 @@ import { useClick } from '@/hooks/useClick.js'
 import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import { css, keyframes } from '@emotion/css'
-import CartContext from '@/contexts/CartCountContext'
+import CartCountContext from '@/contexts/CartCountContext'
+import CartDataContext from '@/contexts/CartDataContext'
 
 // components
 import Marquee from '@/components/common/marquee'
@@ -37,7 +38,8 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 export default function Pid() {
-  const { cartCount, setCartCount, getCartCount } = useContext(CartContext);
+  const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext);
+  const { cartData, setCartData, getCartData } = useContext(CartDataContext);
   const router = useRouter()
   const currentPath = router.asPath
   const [data, setData] = useState()
@@ -140,6 +142,7 @@ export default function Pid() {
     })
       .then((r) => r.json())
       .then((data) => {
+        getCartData()
         getCartCount()
       })
   }

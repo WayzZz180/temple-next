@@ -3,7 +3,7 @@ import styles from './cart.module.sass'
 //hooks
 import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
-// import { CartDataContextProvider } from '@/contexts/CartCountContext'
+import { CartDataContextProvider } from '@/contexts/CartCountContext'
 import CartDataContext from '@/contexts/CartDataContext'
 import WannaBuyDataContext from '@/contexts/WannaBuyDataContext'
 // bootstrap
@@ -89,7 +89,7 @@ export default function IndexCart() {
             lineColor="green"
           />
         </Row>
-      </Container>
+      </Container>    
     </>
   )
 }
