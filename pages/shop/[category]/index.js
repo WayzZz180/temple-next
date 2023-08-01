@@ -33,7 +33,7 @@ export default function Category() {
   let info = [
     {
       title: true,
-      content: '每頁顯示/',
+      content: '• 每頁顯示 •',
     },
     {
       content: '20筆',
@@ -52,7 +52,7 @@ export default function Category() {
     },
     {
       title: true,
-      content: '依照/',
+      content: '• 依照 •',
     },
     {
       content: '熱門程度排序',
