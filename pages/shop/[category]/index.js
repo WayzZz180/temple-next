@@ -54,12 +54,12 @@ export default function Category() {
       content: '• 依照 •',
     },
     {
-      content: '熱門程度排序',
+      content: '熱銷排序',
       orderBy: 'purchase_num',
       status: false,
     },
     {
-      content: '詳細類別排序',
+      content: '類別排序',
       orderBy: 'recommend',
       status: false,
     },
