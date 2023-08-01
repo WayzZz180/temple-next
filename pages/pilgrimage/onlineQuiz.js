@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react'
 import styles from './quiz.module.sass'
 import Image from 'next/image'
 import fairyL from '@/assets/fairyL.svg'
@@ -6,10 +7,32 @@ import fairyText from '@/assets/fairyText.svg'
 import circle_1 from '@/assets/circle_1.svg'
 import sun from '@/assets/sun.svg'
 import roof from '@/assets/roof.svg'
-import house from '@/assets/house.svg'
 import c1 from '@/assets/littleC1.svg'
+import House from '@/components/common/temple/house'
 
 export default function Quiz() {
+  const [data, setData] = useState({
+    redirect: '',
+    totalRows: 0,
+    perPage: 8,
+    totalPages: 0,
+    page: 1,
+    rows: [],
+  })
+  useEffect(() => {
+    fetch(process.env.API_SERVER + '/pilgrimage/onlineQuiz', {
+      method: 'GET',
+    //   body: JSON.stringify({ requestData: 'Question_ID' }),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        console.log(data)
+        setData(data)
+      })
+  }, [])
   return (
     <>
       <Image
@@ -72,54 +95,16 @@ export default function Quiz() {
         </div>
       </div>
       <div className={`${styles.flex_col2} mt80px`}>
-        <Image
-          src={house}
-          alt=""
-          width="1540"
-          className={`${styles.house}`}
-        ></Image>
-        <Image
-          src={house}
-          alt=""
-          width="1540"
-          className={`${styles.house}`}
-        ></Image>
-        <Image
-          src={house}
-          alt=""
-          width="1540"
-          className={`${styles.house}`}
-        ></Image>
-        <Image
-          src={house}
-          alt=""
-          width="1540"
-          className={`${styles.house}`}
-        ></Image>
-        <Image
-          src={house}
-          alt=""
-          width="1540"
-          className={`${styles.house}`}
-        ></Image>
-        <Image
-          src={house}
-          alt=""
-          width="1540"
-          className={`${styles.house}`}
-        ></Image>
-        <Image
-          src={house}
-          alt=""
-          width="1540"
-          className={`${styles.house}`}
-        ></Image>
-        <Image
-          src={house}
-          alt=""
-          width="1540"
-          className={`${styles.house}`}
-        ></Image>
+        {data.rows.map((i) => (
+          <House
+            key={i.Question_ID}
+            number={i.Question_ID}
+            q={i.Question}
+            a={i.option1}
+            b={i.option2}
+            c={i.option3}
+          />
+        ))}
       </div>
     </>
   )
