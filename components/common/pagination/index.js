@@ -29,7 +29,7 @@ export default function Pagination({
   const { page, perPage, totalPages } = pagination
 
   // 頁碼需要
-  let index = page
+  let index = Number(page)
 
   // for map
   let page_arr = []
