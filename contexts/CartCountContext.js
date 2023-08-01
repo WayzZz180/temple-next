@@ -1,17 +1,16 @@
 import { createContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-const CartContext = createContext({})
-export default CartContext
+const CartCountContext = createContext({})
+export default CartCountContext
 
 
-export const CartContextProvider = function ({ children }) {
+export const CartCountContextProvider = function ({ children }) {
   const [cartCount, setCartCount] = useState(0)
   const router = useRouter();
   const getCartCount = ()=>{
-    fetch(`${process.env.API_SERVER}/shop`)
+    fetch(`${process.env.API_SERVER}/shop/count`)
       .then((r) => r.json())
       .then((data) => {
-        console.log('data:',data)
         setCartCount(data)
       })
   }
@@ -20,8 +19,8 @@ export const CartContextProvider = function ({ children }) {
   }, [router.query])
 
   return (
-    <CartContext.Provider value={{ cartCount, setCartCount, getCartCount}}>
+    <CartCountContext.Provider value={{ cartCount, setCartCount, getCartCount}}>
       {children}
-    </CartContext.Provider>
+    </CartCountContext.Provider>
   )
 }

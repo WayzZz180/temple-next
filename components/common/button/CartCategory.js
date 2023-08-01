@@ -1,11 +1,13 @@
 import styles from './CartCategory.module.sass'
 import variables from '@/styles/_variables.module.sass'
+import Link from 'next/link'
 
 //hooks
 import { useState,useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-export default function CartCategory({setIdFromChild , idFromChild=1}) {
+export default function CartCategory({setIdFromChild , idFromChild}) {
+    
     const category = [
         { 
           text:'購物車',
@@ -18,7 +20,8 @@ export default function CartCategory({setIdFromChild , idFromChild=1}) {
       ]
 
     const router = useRouter();
-    const [id, setId]= useState(1)
+    if(idFromChild!=router.query.tab) return
+    const [id, setId]= useState(idFromChild)
 
     useEffect(() => {
       setIdFromChild(id)
@@ -30,20 +33,22 @@ export default function CartCategory({setIdFromChild , idFromChild=1}) {
         {
             category.map((v,i)=>{
             return (
-            <div className={`${styles.position} me15px`}>
-                <button s
-                  className={`${styles.button} fwBold fs20px`} 
-                  style={{
-                    background: v.id === idFromChild ? variables['brown'] : variables['bgColor'],
-                    color:  v.id === idFromChild ? 'white' : variables['fontColor'],
-                    opacity: v.id === idFromChild ? 1 : 0.5,
-                    letterSpacing: '3px'
-                   }}
-                   onClick={()=>{
-                    setId(v.id)
-                   }}
-                >{v.text}</button>
-            </div>
+            <Link key={i} href={`?tab=${v.id}`}>
+              <div className={`${styles.position} me15px`}>
+                  <button
+                    className={`${styles.button} fwBold fs20px`} 
+                    style={{
+                      background: v.id === idFromChild ? variables['brown'] : variables['bgColor'],
+                      color:  v.id === idFromChild ? 'white' : variables['fontColor'],
+                      opacity: v.id === idFromChild ? 1 : 0.5,
+                      letterSpacing: '3px'
+                    }}
+                    onClick={()=>{
+                      setId(v.id)
+                    }}
+                  >{v.text}</button>
+              </div>
+            </Link>
             )
             
         })

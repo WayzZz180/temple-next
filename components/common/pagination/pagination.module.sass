@@ -1,0 +1,82 @@
+@import @/styles/_variables.module.sass
+
+.pageContainer
+    display: flex
+    align-items: center
+
+.pagination
+    display: flex
+    justify-content: center
+    align-items: flex-start
+    margin: auto
+    top: 50%
+    height: 50px
+    overflow: hidden
+
+.button
+    border: 0
+    padding-bottom: 50px 
+    text-align: center
+    background: white
+    margin: 0px 10px
+    width: 35px
+    height: 100px
+    float: left
+    border-radius: 20px
+    cursor: pointer
+    transition: 0.3s ease width
+
+.button:hover
+    background: $hot_pink
+    color: white
+
+.active
+    background: $hot_pink
+    color: white
+    cursor: default
+
+.dots
+    rotate: (18deg)
+    position: relative
+    top: 10px
+
+.arrowRight
+    cursor: pointer
+    position: relative
+    top: 10px
+
+.arrowLeft
+    cursor: pointer
+    position: relative
+    top: 10px
+    rotate: (180deg)
+
+.flex
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: center    
+
+.inputContainer
+    display: flex
+    align-items: center
+    justify-content: center
+
+.inputTitle
+    display: inline-block
+    color: $brown
+    
+.inputBox
+    border-radius: 7px
+    background: $bgColor
+    border: 1px solid $brown
+    padding:5px 10px
+    width: 50%
+        
+.inputBox:focus
+    outline: none
+    
+
+.inlineBlock
+    display: inline-block
+    width:12%

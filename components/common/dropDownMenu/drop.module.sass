@@ -1,0 +1,121 @@
+@import '@/styles/_variables.module.sass'
+
+.container
+  display: flex
+  justify-content: center
+  align-items: center
+
+.arrow
+    display: flex
+    align-items: center
+    justify-content: center
+    cursor: pointer
+
+.titleContainer
+    cursor: pointer
+    display: flex
+    align-items: center
+
+.title
+    color: $fontColor
+    text-decoration: none
+
+.triangle
+    position: relative
+    bottom: 3px
+
+ul.drop_down_menu
+    margin: 0
+    padding: 0
+    list-style: none
+    display: inline-block
+
+ul.drop_down_menu li
+    position: relative
+    white-space: nowrap
+
+ul.drop_down_menu>li:last-child 
+    border-right: none
+
+ul.drop_down_menu>li 
+    float: left
+
+.link
+    display: block
+    padding: 0 30px
+    text-decoration: none
+    line-height: 35px
+
+.li
+    background: transparent
+    border: none
+    padding: 3px 2px
+    color: $fontColor
+    text-transform: uppercase
+    position: relative
+    transition: .2s ease
+
+.select::before
+    width: 70%
+
+.notSelect::before
+    width: 0   
+
+.li::before
+    content: ''
+    position: absolute
+    left: 23px
+    bottom: 0
+    height: 3px
+    background-color: #14d2bf
+    transition: .2s ease
+
+.li:hover
+    transition-delay: .2s
+
+.li:hover::before
+    width: 70%
+
+.liTitle
+    font-weight: 700
+    cursor: default
+    color: $deep_black
+    // color: #14d2bf
+    
+ul.drop_down_menu ul
+    margin: 0
+    padding: 0
+    list-style: none
+    background-color: white
+    position: absolute
+    z-index: 99
+    left: -1px
+    top: 100%
+    min-width: 80px
+
+ul.drop_down_menu ul
+    display: none
+
+ul.drop_down_menu li:hover>ul
+    display: block
+
+
+.arrowUp
+    transform: rotate(180deg)
+    animation: rotate .5s 1
+
+.arrowDown
+    transform: rotate(0deg)
+    animation: rotateBack .5s 1
+
+@keyframes rotate 
+    0%
+        transform: rotate(0deg)
+    100%
+        transform: rotate(180deg)
+
+@keyframes rotateBack
+    0%
+        transform: rotate(180deg)
+    100%
+        transform: rotate(0deg)

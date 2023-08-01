@@ -11,7 +11,7 @@ export default function ShopTitle({
   const var_color = variables[lineColor]
   return (
     <div className={`${styles.flex} mt120px`}>
-      <div className={`${styles.title} mb30px`}>{text}</div>
+      <div className={`${styles.title} mb10px`}>{text}</div>
       <div
         className={`${styles.line}`}
         style={{ backgroundColor: var_color }}

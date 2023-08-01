@@ -8,9 +8,10 @@
 
 .container
   position: relative
-  width: 1920px
+  width: 100%
   height:860px
   overflow: hidden
+  margin: auto
 
 .place
   padding-top:5px
@@ -29,12 +30,12 @@
 
 .dog
     position: absolute
-    left: 465px
-    bottom:14px
+    left:-995px
+    bottom:9px
 
 .lighting
     position: absolute
-    left: 620px
+    left: -850px
     bottom:250px
     animation-name: light1
     animation-duration: 1s      
@@ -44,7 +45,7 @@
 .light_div
     transform: rotate(-35deg)
     position: absolute
-    left: 610px
+    left: -870px
     bottom:225px
 
 .lighting2
@@ -63,27 +64,30 @@
           opacity: 0
         @else 
           opacity: 1
+.position
+  position: relative
+
 .signInBlock
-  left:1183px
-  bottom:100px
+  position: absolute
+  left: 1175px
+  bottom: 90px
   display: flex
   flex-direction: column
   align-items: center
   justify-content: center
-  position: absolute
   width:140px
   height:203px
   border-radius:75px 75px 0 0
   border: none
 
 .signIn
-    position: relative
+    // position: absolure
 
 .pinkStar
     padding-bottom: 20px
     display: inline-block
     transform: translateZ(1px)
-    position: relative
+    // position: relative
 
 .signInBlock:hover > .pinkStar
   animation: pinkStar 3s linear infinite alternate
@@ -97,91 +101,6 @@
   100% 
     transform: rotateY(2500deg)
 
-
-ul.drop_down_menu 
-  margin: 0
-  padding: 0
-  list-style: none
-  display: inline-block
-  font-size: 13px
-
-
-ul.drop_down_menu li 
-  position: relative
-  white-space: nowrap
-
-
-ul.drop_down_menu>li:last-child 
-  border-right: none
-
-
-ul.drop_down_menu>li 
-  float: left
-  /* 只有第一層是靠左對齊*/
-
-ul.drop_down_menu a 
-  color: #000
-  display: block
-  padding: 0 30px
-  text-decoration: none
-  line-height: 35px
-
-ul.drop_down_menu ul li
-  background: transparent
-  border: none
-  padding: 3px 2px
-  color: #000
-  text-transform: uppercase
-  position: relative
-  transition: .2s ease
-
-
-ul.drop_down_menu ul li::before 
-  content: ''
-  position: absolute
-  left: 23px
-  bottom: 0
-  height: 3px
-  width: 0
-  background-color: #14d2bf
-  transition: .2s ease
-
-
-ul.drop_down_menu ul li:hover 
-  transition-delay: .2s
-
-
-ul.drop_down_menu ul li:hover::before 
-  width: 60%
-
-
-ul.drop_down_menu ul li::after 
-  content: ''
-  position: absolute
-  left: 0
-  bottom: 0
-  height: 0
-  width: 60%
-  background-color: #14d2bf
-  transition: .2s ease
-  z-index: -1
-
-
-ul.drop_down_menu ul 
-  margin: 0
-  padding: 0
-  list-style: none
-  background-color: #ffffff
-  position: absolute
-  z-index: 99
-  left: -1px
-  top: 100%
-  min-width: 80px
-
-
-ul.drop_down_menu ul 
-  /*隱藏次選單*/
-  display: none
 .flex_row
     width:100%
     display: flex
@@ -227,8 +146,8 @@ ul.drop_down_menu ul
     visibility: hidden
 
 .signInDoor
-  left:1182px
-  bottom:103px
+  left:1175px
+  bottom:96px
   position: absolute
   width:140px
   height:200px

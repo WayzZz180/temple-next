@@ -40,7 +40,7 @@ export default function Shop() {
               onMouseLeave={handleMouseLeaveStar}
             >
               <Link
-                href={`/shop/${v.id}`}
+                href={`/shop/${v.id}?page=1`}
                 className={`${styles.category} ${
                   hoveredIndexStar === i ? styles.hovered : ''
                 } m15px`}
@@ -58,7 +58,7 @@ export default function Shop() {
                   ></Image>
                 </span>
                 {/* 文字 */}
-                <span className={`${styles.link} $ pb15px`}>{v.text}</span>
+                <span className={`${styles.link} fwBold pb15px`}>{v.text}</span>
               </Link>
             </Col>
           )
