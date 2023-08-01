@@ -90,7 +90,7 @@ export default function Mazu1() {
             </div>
           </div>
         </div>
-        <form id="personal" onSumbit={handleSumbit}>
+        {/* <form id="personal" onSumbit={handleSumbit}> */}
           <div className={`${styles.inputAn} ${isVisible ? styles.show : ''}`}>
             <div className={`${styles.input} `}>
               <Input
@@ -119,7 +119,7 @@ export default function Mazu1() {
           <div className={`${styles.btn} ${isVisible ? styles.show : ''}`}>
             <Button text="擲筊" btnColor="brown" type="submit" />
           </div>
-        </form>
+        {/* </form> */}
       </div>
     </>
   )

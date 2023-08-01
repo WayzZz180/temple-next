@@ -9,12 +9,19 @@ import love from '@/assets/loveGod.svg'
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 export default function Love2() {
-  const [data, setData] = useState({})
+  const [data, setData] = useState({
+    redirect : '',
+    totalRows :0, 
+    perPage :8, 
+    totalPages :0, 
+    page :1 , 
+    rows :[]
+  })
   const [selectedLetters, setSelectedLetters] = useState({})
   const [requestData, setRequestData] = useState(null) 
 
   useEffect(() => {
-    fetch(process.env.API_SERVER + '/Pray/loveB-2', {
+    fetch(process.env.API_SERVER + '/pray/loveB-2', {
       method: 'POST',
       body: JSON.stringify({ requestData: 'Datetime' }),
       headers: {

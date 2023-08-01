@@ -13,7 +13,7 @@ export default function PrayMazu() {
   const Router = useRouter()
 
   const ButtonClick = () => {
-    Router.push('/Pray/mazu1')
+    Router.push('/pray/mazu1')
   }
 
   return (

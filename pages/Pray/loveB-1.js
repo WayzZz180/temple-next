@@ -7,7 +7,7 @@ import godlight from '@/assets/GodLight.svg'
 import shadow from '@/assets/GodShadow.svg'
 import tower from '@/assets/lovetower.svg'
 
-export default function Mazu4() {
+export default function loveB_1() {
   return (
     <>
       <div className={styles.parent_container}>
@@ -80,4 +80,4 @@ export default function Mazu4() {
   )
 }
 
-Mazu4.getLayout = (page) => <>{page}</>
+loveB_1.getLayout = (page) => <>{page}</>
