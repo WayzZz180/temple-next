@@ -1,5 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styles from '@/pages/member/profile.module.sass'
+import { useEffect } from 'react'
+import { AuthContextProvider } from '@/contexts/AuthContext'
+import AuthContext from '@/contexts/AuthContext'
 
 // components
 import InputBox from '@/components/common/inputBox/index.js'
@@ -10,7 +13,29 @@ import MemberNavbar from '@/components/common/memberNavbar/index.js'
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 
-export default function MyAccount() {
+export default function Profile() {
+  const { auth, setAuth, logout } = useContext(AuthContext);
+
+
+  useEffect(() => {
+    if (auth.token) {
+      fetch(`${process.env.API_SERVER}/member/profile`, {
+        headers: {
+          Authorization: "Bearer " + auth.token,
+        },
+      })
+      
+      .then((r) => r.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }else {
+    // Handle the case when auth.token is not available or user is not logged in
+    // You can add any additional logic here
+    console.log("User is not logged in.");
+  }
+}, [auth.token]);
+
   return (
     <div className={styles.flex}>
       <Container>

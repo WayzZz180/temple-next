@@ -14,7 +14,7 @@ import coupon from '@/assets/coupon.svg'
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 
-export default function MyAccount() {
+export default function Praying() {
   return (
     <div className={styles.flex}>
       <Container>
