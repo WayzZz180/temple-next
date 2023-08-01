@@ -98,3 +98,24 @@ ul.drop_down_menu ul
 
 ul.drop_down_menu li:hover>ul
     display: block
+
+
+.arrowUp
+    transform: rotate(180deg)
+    animation: rotate .5s 1
+
+.arrowDown
+    transform: rotate(0deg)
+    animation: rotateBack .5s 1
+
+@keyframes rotate 
+    0%
+        transform: rotate(0deg)
+    100%
+        transform: rotate(180deg)
+
+@keyframes rotateBack
+    0%
+        transform: rotate(180deg)
+    100%
+        transform: rotate(0deg)

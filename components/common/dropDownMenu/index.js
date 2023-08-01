@@ -13,11 +13,12 @@ import Triangle_fill from '@/assets/triangle_fill.svg'
 import Triangle_outline from '@/assets/triangle_outline.svg'
 import DESC from '@/assets/desc.svg'
 import ASC from '@/assets/asc.svg'
+import Arrow from '@/assets/arrow_sort.svg'
 
 
 export default function DropDownMenu({ text = '顯示｜排列', info, setDataFromChild}) {
   const router = useRouter()
-
+  const [init, setInit] = useState(false)
   // 三角形hover
   const { hoveredIndex: triHoveredIndex, handleMouseEnter: triHandleMouseEnter, handleMouseLeave: triHandleMouseLeave } =
     useHoverIndex(false)
@@ -53,66 +54,78 @@ export default function DropDownMenu({ text = '顯示｜排列', info, setDataFr
   return (
     <>
     <div className={`${styles.container}`}>
-         {/* asc/desc */}
-         <div className={`${styles.arrow} me30px`}
-        onClick={()=>{
-          changeSort(sort)
-        }}
-        onMouseEnter={sortHandleMouseEnter}
-        onMouseLeave={sortHandleMouseLeave}
-      >
-        <div className='fs18px fwBold me10px'>排序方向</div>
-        <Image src={sort } alt='sort' width={25}/>
-      </div>
-    {/* 篩選排列ul */}
-    <ul className={`${styles.drop_down_menu}`}>
-      <li className={`mt10px`}>
-        <div
-          className={`${styles.titleContainer}`}
-          onMouseEnter={triHandleMouseEnter}
-          onMouseLeave={triHandleMouseLeave}
+      {/* asc/desc */}
+      <div className={`${styles.arrow} me30px`}
+          onClick={()=>{
+            if (!init) {
+                  setInit(true)
+                }
+            changeSort(sort)
+          }}
         >
-          {/* 篩選排列ul */}
-          <div className={`${styles.title} fs18px pb15px fwBold`}>{text}</div>
-          {/* 三角形 */}
-          <Image
-            src={triHoveredIndex ? Triangle_fill : Triangle_outline}
-            alt="arrow"
-            width={10}
-            className={`${styles.triangle} mb5px ms10px`}
-          />
-        </div>
-        {/* 展開的內容 */}
-        <ul onMouseEnter={triHandleMouseEnter} onMouseLeave={triHandleMouseLeave}>
-          {info.map((v, i) => (
-              <li
-                key={i}
-                className={`${
-                  v.title ? styles.liTitle : styles.li
-                } mt10px mb20px
-                ${
-                  v.status ? styles.select : styles.notSelect }
-                `}
-              >
-                <div href="#" className={`${styles.link} fs16px`}
-                style={{cursor: v.title ? 'default':'pointer'}}
-                onClick={()=>{
-                  if(v.perPage){
-                  selectPage(v.perPage)
-                  }else if(v.orderBy){
-                    order(v.orderBy)
-                  }
-                }}
+          <div className='fs18px fwBold me5px'>排序方向</div>
+          {/* 排序箭頭 */}
+          <div
+              className={`${
+                sort === ASC
+                  ? init
+                    ? styles.arrowDown
+                    : ''
+                  : styles.arrowUp
+              } pt5px`}
+            >
+              <Image src={Arrow} alt="open" width={20} />
+          </div>
+      </div>
+      {/* 篩選排列ul */}
+      <ul className={`${styles.drop_down_menu}`}>
+        <li className={`mt10px`}>
+          <div
+            className={`${styles.titleContainer}`}
+            onMouseEnter={triHandleMouseEnter}
+            onMouseLeave={triHandleMouseLeave}
+          >
+            {/* 篩選排列ul */}
+            <div className={`${styles.title} fs18px pb10px fwBold`}>{text}</div>
+            {/* 三角形 */}
+            <Image
+              src={triHoveredIndex ? Triangle_fill : Triangle_outline}
+              alt="arrow"
+              width={10}
+              className={`${styles.triangle} ms10px`}
+            />
+          </div>
+          {/* 展開的內容 */}
+          <ul onMouseEnter={triHandleMouseEnter} onMouseLeave={triHandleMouseLeave}>
+            {info.map((v, i) => (
+                <li
+                  key={i}
+                  className={`${
+                    v.title ? styles.liTitle : styles.li
+                  } mt10px mb20px
+                  ${
+                    v.status ? styles.select : styles.notSelect }
+                  `}
                 >
-                  {v.content}
-                </div>
-              </li>
-            
-          ))}
-        </ul>
-      </li>
-    </ul>
- 
+                  <div href="#" className={`${styles.link} fs16px`}
+                  style={{cursor: v.title ? 'default':'pointer'}}
+                  onClick={()=>{
+                    if(v.perPage){
+                    selectPage(v.perPage)
+                    }else if(v.orderBy){
+                      order(v.orderBy)
+                    }
+                  }}
+                  >
+                    {v.content}
+                  </div>
+                </li>
+              
+            ))}
+          </ul>
+        </li>
+      </ul>
+
     </div>
 
     </>
