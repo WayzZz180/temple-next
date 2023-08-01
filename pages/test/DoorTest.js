@@ -11,10 +11,7 @@ import Love from '@/components/common/pray_light/light_row'
 export default function About() {
   return (
     <>
-      <Love text="A"/>
-      <Love text="B"/>
-      <Love text="C"/>
-      <Love text="D"/>
+      <Love />
     </>
   )
 }

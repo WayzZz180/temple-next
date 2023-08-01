@@ -8,7 +8,6 @@ import star from '@/assets/Star_pink.svg'
 import handLeft from '@/assets/handLeft.svg'
 import handRight from '@/assets/handRight.svg'
 import Input from '@/components/common/inputBox'
-import axios from 'axios'
 
 export default function Mazu1() {
   const [name, setName] = useState('')
@@ -16,31 +15,6 @@ export default function Mazu1() {
   const [address, setAddress] = useState('')
   const [isVisible, setIsVisible] = useState(false)
   const [sumbit, setSumbit] = useState(false)
-
-  const handleSumbit = (event) => {
-    event.preventDefault()
-    setSumbit(true)
-
-    // const requestData = {
-    //   name: name,
-    //   birthday: birthday,
-    //   address: address,
-    // }
-
-    axios
-      .post('http://localhost:3000/Pray/mazu1',{
-        name:'name'
-        birthday:'birthday'
-        address:'address'
-      })
-      .then((response) => {
-        console.log('Data sent successfully!')
-      })
-      .catch((error) => {
-        // Handle errors here
-        console.error('Error sending data:', error)
-      })
-  }
 
   useEffect(() => {
     const timer = setTimeout(() => {
