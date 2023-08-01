@@ -15,10 +15,13 @@ export default function ShopSearchBar() {
   const [placeholder, setPlaceholder] = useState('搜尋商品')
 
   const router = useRouter()
-  
-  // useEffect(()=>{
-  //   localStorage.removeItem('keyword')
-  // },[router.query])
+
+  useEffect(()=>{
+    if(!(localStorage.getItem('keyword'))){
+      setValue('')
+      setPlaceholder('搜尋商品')
+    }
+  },[router.query])
 
   const handleBlur = () => {
     if (value === '') {
@@ -43,8 +46,6 @@ export default function ShopSearchBar() {
       router.push(newURL);
     }
   }
-  
-
 
   return (
     <div className={`${styles.container}`}>

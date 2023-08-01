@@ -13,7 +13,7 @@ import Col from 'react-bootstrap/Col'
 
 import data from '@/components/mydata/productsTitleData'
 
-export default function Shop() {
+export default function ShopTop() {
   // 類別hover
   const {
     hoveredIndex: hoveredIndexStar,
