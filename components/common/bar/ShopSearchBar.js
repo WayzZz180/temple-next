@@ -1,12 +1,19 @@
-import { useState } from 'react'
-import Image from 'next/image'
 import styles from './ShopSearchBar.module.sass'
+import Image from 'next/image'
+// hooks
+import { useState } from 'react'
+import { useRouter } from 'next/router'
+
+// svg
 import search from '@/assets/search.svg'
+
 
 export default function ShopSearchBar() {
   const [content, setContent] = useState('')
   const [placeholder, setPlaceholder] = useState('搜尋商品')
 
+  const router = useRouter()
+  
   const handleBlur = () => {
     if (content === '') {
       setPlaceholder('搜尋商品')

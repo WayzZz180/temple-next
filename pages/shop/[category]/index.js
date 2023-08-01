@@ -119,6 +119,7 @@ export default function Category() {
   if (!data) return <p>Loading...</p>
 
 
+  // 把選取的顯示和排序status改為true
   info = info.map((v) => {
     if (v.perPage === (dataFromChild?.perPage ? dataFromChild.perPage :20) || v.orderBy === (dataFromChild?.orderBy ? dataFromChild.orderBy : 'purchase_num')) {
       return { ...v, status: true };
@@ -130,6 +131,7 @@ export default function Category() {
 
   return (
     <Container className={`${styles.container}`}>
+      {/* 類別&搜尋 */}
       <ShopTop />
       {/* Title */}
       <div className={`${styles.menuContainer}`}>
@@ -164,7 +166,7 @@ export default function Category() {
           })}
         </Row>
       ))}
-      <Pagination pagination={pagination} path={`/shop/${category}?page=`} api={`/shop/${category}`}/>
+      <Pagination pagination={pagination} path={`/shop/${category}?page=`} />
     </Container>
   )
 }

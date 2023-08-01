@@ -44,7 +44,7 @@ export default function HomeCarousels() {
         autoplay={{ delay: 3000, disableOnInteraction: false }}
         loop={true}
         modules={[Autoplay, Pagination, Navigation]}
-        speed={600} 
+        speed={1000} 
         className="mySwiper"
       >
       {

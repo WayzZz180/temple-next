@@ -1,12 +1,9 @@
 import styles from './drop.module.sass'
-import Link from 'next/link'
 import Image from 'next/image'
 
 // hooks
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
-import { useClick } from '@/hooks/useClick.js'
 
 // svg
 import Triangle_fill from '@/assets/triangle_fill.svg'
@@ -16,15 +13,10 @@ import ASC from '@/assets/asc.svg'
 import Arrow from '@/assets/arrow_sort.svg'
 
 
-export default function DropDownMenu({ text = '顯示｜排列', info, setDataFromChild}) {
-  const router = useRouter()
+export default function DropDownMenu({ text = '顯示 ｜ 排列', info, setDataFromChild}) {
   const [init, setInit] = useState(false)
   // 三角形hover
   const { hoveredIndex: triHoveredIndex, handleMouseEnter: triHandleMouseEnter, handleMouseLeave: triHandleMouseLeave } =
-    useHoverIndex(false)
-  
-  // 排列箭頭 hover
-  const { hoveredIndex: sortHoveredIndex, handleMouseEnter: sortHandleMouseEnter, handleMouseLeave: sortHandleMouseLeave } =
     useHoverIndex(false)
     
   const [data, setData] = useState([])
@@ -46,7 +38,8 @@ export default function DropDownMenu({ text = '顯示｜排列', info, setDataFr
     const order = (orderBy)=>{
     setData({...data, orderBy: orderBy})
   }
-
+  
+  // 傳資料回父層
   useEffect(()=>{
     setDataFromChild(data)
   },[data])

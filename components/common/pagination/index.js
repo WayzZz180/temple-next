@@ -22,11 +22,10 @@ import Button from '@/components/common/button/noButton'
 export default function Pagination({
   pagination,
   path = '/shop/cookies?page=',
-  api
 }) {
   const router = useRouter()
   // 解構 pagination
-  const { page, perPage, totalPages } = pagination
+  const { page, totalPages } = pagination
 
   // 頁碼需要
   let index = Number(page)
