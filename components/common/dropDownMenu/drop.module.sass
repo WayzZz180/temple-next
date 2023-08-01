@@ -1,23 +1,15 @@
 @import '@/styles/_variables.module.sass'
 
-.navbarContainer 
+.container
   display: flex
-  justify-content: space-around
+  justify-content: center
   align-items: center
 
-.header
-    position: relative
-
-.bgContainer
-    position: absolute
-    top: -1px
-    left: 0
-    right: 0
-    z-index: -1
-    
-.bg
-    object-fit: cover
-    width: 100%
+.arrow
+    display: flex
+    align-items: center
+    justify-content: center
+    cursor: pointer
 
 .titleContainer
     cursor: pointer
@@ -25,7 +17,7 @@
     align-items: center
 
 .title
-    color: $deep_black
+    color: $fontColor
     text-decoration: none
 
 .triangle
@@ -58,7 +50,7 @@ ul.drop_down_menu>li
     background: transparent
     border: none
     padding: 3px 2px
-    color: $deep_black
+    color: $fontColor
     text-transform: uppercase
     position: relative
     transition: .2s ease
@@ -87,6 +79,7 @@ ul.drop_down_menu>li
 .liTitle
     font-weight: 700
     cursor: default
+    color: $deep_black
     // color: #14d2bf
     
 ul.drop_down_menu ul

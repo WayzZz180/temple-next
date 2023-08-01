@@ -6,47 +6,85 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
+import { useClick } from '@/hooks/useClick.js'
 
 // svg
 import Triangle_fill from '@/assets/triangle_fill.svg'
 import Triangle_outline from '@/assets/triangle_outline.svg'
+import DESC from '@/assets/desc.svg'
+import ASC from '@/assets/asc.svg'
 
-export default function DropDownMenu({ text = '篩選｜排列', info, category, setDataFromChild}) {
+
+export default function DropDownMenu({ text = '顯示｜排列', info, setDataFromChild}) {
   const router = useRouter()
-  const { hoveredIndex, handleMouseEnter, handleMouseLeave } =
+
+  // 三角形hover
+  const { hoveredIndex: triHoveredIndex, handleMouseEnter: triHandleMouseEnter, handleMouseLeave: triHandleMouseLeave } =
     useHoverIndex(false)
-
-  const [data, setData] = useState([])
-  const usp = new URLSearchParams(router.asPath.split('?')[1])
-  const pageParams = usp.toString()
-
-  const selectPage=(perPage)=>{
-      setData({perPage:perPage})
-  }
   
+  // 排列箭頭 hover
+  const { hoveredIndex: sortHoveredIndex, handleMouseEnter: sortHandleMouseEnter, handleMouseLeave: sortHandleMouseLeave } =
+    useHoverIndex(false)
+    
+  const [data, setData] = useState([])
+  const [sort, setSort] = useState(DESC)
+  
+  // 顯示頁數
+  const selectPage=(perPage)=>{
+      setData({...data, perPage:perPage})
+    }
+  
+  // 排序 asc/desc
+  const changeSort=(sort)=>{
+    sort === DESC ? setSort(ASC) : setSort(DESC)
+    const strSort = sort === DESC ? 'ASC':'DESC';
+      setData({...data, order: strSort})
+    }
+    
+    // 依照...排序
+    const order = (orderBy)=>{
+    setData({...data, orderBy: orderBy})
+  }
+
   useEffect(()=>{
     setDataFromChild(data)
   },[data])
-  
+
   return (
+    <>
+    <div className={`${styles.container}`}>
+         {/* asc/desc */}
+         <div className={`${styles.arrow} me30px`}
+        onClick={()=>{
+          changeSort(sort)
+        }}
+        onMouseEnter={sortHandleMouseEnter}
+        onMouseLeave={sortHandleMouseLeave}
+      >
+        <div className='fs18px fwBold me10px'>排序方向</div>
+        <Image src={sort } alt='sort' width={25}/>
+      </div>
+    {/* 篩選排列ul */}
     <ul className={`${styles.drop_down_menu}`}>
       <li className={`mt10px`}>
         <div
           className={`${styles.titleContainer}`}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          onMouseEnter={triHandleMouseEnter}
+          onMouseLeave={triHandleMouseLeave}
         >
-          <div className={`${styles.title} fs18px mt5px pb15px fwBold`}>{text}</div>
+          {/* 篩選排列ul */}
+          <div className={`${styles.title} fs18px pb15px fwBold`}>{text}</div>
+          {/* 三角形 */}
           <Image
-            src={hoveredIndex ? Triangle_fill : Triangle_outline}
+            src={triHoveredIndex ? Triangle_fill : Triangle_outline}
             alt="arrow"
             width={10}
-            className={`${styles.triangle} ms10px`}
+            className={`${styles.triangle} mb5px ms10px`}
           />
         </div>
-        <ul onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        {/* 展開的內容 */}
+        <ul onMouseEnter={triHandleMouseEnter} onMouseLeave={triHandleMouseLeave}>
           {info.map((v, i) => (
-           
               <li
                 key={i}
                 className={`${
@@ -59,7 +97,11 @@ export default function DropDownMenu({ text = '篩選｜排列', info, category,
                 <div href="#" className={`${styles.link} fs16px`}
                 style={{cursor: v.title ? 'default':'pointer'}}
                 onClick={()=>{
+                  if(v.perPage){
                   selectPage(v.perPage)
+                  }else if(v.orderBy){
+                    order(v.orderBy)
+                  }
                 }}
                 >
                   {v.content}
@@ -70,5 +112,10 @@ export default function DropDownMenu({ text = '篩選｜排列', info, category,
         </ul>
       </li>
     </ul>
+ 
+    </div>
+
+    </>
+
   )
 }

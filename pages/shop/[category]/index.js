@@ -21,7 +21,6 @@ import Pagination from '@/components/common/pagination'
 export default function Category() {
   const router = useRouter()
   const { category, page } = router.query //抓出類別
-  // console.log(page);
   const usp = new URLSearchParams(router.asPath.split('?')[1])
   const pageParams = usp.toString()
   const categoryData = TitleData.find((item) => item.id === category)
@@ -56,19 +55,34 @@ export default function Category() {
     },
     {
       content: '熱門程度排序',
+      orderBy: 'purchase_num',
+      status: false,
+    },
+    {
+      content: '詳細類別排序',
+      orderBy: 'recommend',
+      status: false,
     },
     {
       content: '價錢排序',
+      orderBy: 'product_price',
+      status: false,
     },
     {
       content: '星星排序',
+      orderBy: 'stars',
+      status: false,
     },
   ]
   
   useEffect(() => {
     if(!category) return
-    const reqData = {page: page, perPage: dataFromChild?.perPage ? dataFromChild.perPage : 20}
-  
+    const reqData = {
+      page: page, 
+      perPage: dataFromChild?.perPage ? dataFromChild.perPage : 20,
+      sort: dataFromChild?.order ? dataFromChild.order :'DESC',
+      orderBy: dataFromChild?.orderBy ? dataFromChild.orderBy :'purchase_num',
+    }
 
     fetch(`${process.env.API_SERVER}/shop/${category}`, {
         method: 'POST',
@@ -106,7 +120,7 @@ export default function Category() {
 
 
   info = info.map((v) => {
-    if (v.perPage === (dataFromChild?.perPage ? dataFromChild.perPage :20)) {
+    if (v.perPage === (dataFromChild?.perPage ? dataFromChild.perPage :20) || v.orderBy === (dataFromChild?.orderBy ? dataFromChild.orderBy : 'purchase_num')) {
       return { ...v, status: true };
     } else {
       return v;
@@ -126,7 +140,7 @@ export default function Category() {
         />
         {/* 篩選｜排列 */}
         <span className={`${styles.menu}`}>
-          <DropDownMenu text=" 篩選｜排列 " info={info} category={category}  setDataFromChild={setDataFromChild}/>
+          <DropDownMenu text=" 顯示 ｜ 排列 " info={info}  setDataFromChild={setDataFromChild}/>
         </span>
       </div>
       {/* 商品 */}

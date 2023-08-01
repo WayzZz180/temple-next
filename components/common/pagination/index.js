@@ -35,26 +35,29 @@ export default function Pagination({
   let page_arr = []
 
   // 顯示前n筆
-
-  if (index <= 4) {
-    //顯示前五筆
-    page_arr = [2, 3, 4, 5]
-  } else if (index > 4 && index <= 6) {
-    //從第六筆開始置中
-    page_arr = [4, 5, 6, 7, 8]
-  } else if (index >= 7 && index <= totalPages - 5) {
-    //置中
-    page_arr = [index - 2, index - 1, index, index + 1, index + 2]
-  } else if (index >= totalPages - 4) {
-    //最後幾筆
-    page_arr = [
-      totalPages - 5,
-      totalPages - 4,
-      totalPages - 3,
-      totalPages - 2,
-      totalPages - 1,
-    ]
-  }
+  if (totalPages <= 7) {
+    page_arr = Array.from({length: totalPages - 2}, (_, i) => i + 2);
+  }else{
+    if (index <= 4) {
+      //顯示前五筆
+      page_arr = [2, 3, 4, 5]
+    } else if (index > 4 && index <= 6) {
+      //從第六筆開始置中
+      page_arr = [4, 5, 6, 7, 8]
+    } else if (index >= 7 && index <= totalPages - 5) {
+      //置中
+      page_arr = [index - 2, index - 1, index, index + 1, index + 2]
+    } else if (index >= totalPages - 4) {
+      //最後幾筆
+      page_arr = [
+        totalPages - 5,
+        totalPages - 4,
+        totalPages - 3,
+        totalPages - 2,
+        totalPages - 1,
+      ]
+    }
+}
 
   const [value, setValue] = useState(1)
 
@@ -102,7 +105,7 @@ export default function Pagination({
             alt="dots"
             className={`${styles.dots}`}
             // 前4筆時不顯示
-            style={{ display: page < 5 ? 'none' : '' }}
+            style={{ display: page < 5 || totalPages<=7 ? 'none' : '' }}
             width={30}
           />
 
@@ -127,7 +130,7 @@ export default function Pagination({
             alt="dots"
             className={`${styles.dots}`}
             // 後4筆時不顯示
-            style={{ display: page >= totalPages - 4 ? 'none' : '' }}
+            style={{ display: page >= totalPages - 4 || totalPages<=7 ? 'none' : '' }}
             width={30}
           />
           {/* 最後一頁 */}
