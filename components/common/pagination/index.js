@@ -26,7 +26,7 @@ export default function Pagination({
 }) {
   const router = useRouter()
   // 解構 pagination
-  const { page, totalPages } = pagination
+  const { page, perPage, totalPages } = pagination
 
   // 頁碼需要
   let index = page

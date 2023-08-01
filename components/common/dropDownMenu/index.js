@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
 import styles from './drop.module.sass'
 import Link from 'next/link'
 import Image from 'next/image'
 
 // hooks
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 
 // svg
@@ -11,32 +12,22 @@ import Triangle_fill from '@/assets/triangle_fill.svg'
 import Triangle_outline from '@/assets/triangle_outline.svg'
 
 export default function DropDownMenu({ text = '篩選｜排列', info, category, setDataFromChild}) {
- 
-
+  const router = useRouter()
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } =
     useHoverIndex(false)
 
   const [data, setData] = useState([])
-  
+  const usp = new URLSearchParams(router.asPath.split('?')[1])
+  const pageParams = usp.toString()
+
   const selectPage=(perPage)=>{
-    const reqData = {perPage: perPage}
-    fetch(`${process.env.API_SERVER}/shop/${category}`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: reqData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        setData(data)
-      })
+      setData({perPage:perPage})
   }
   
   useEffect(()=>{
     setDataFromChild(data)
   },[data])
-
+  
   return (
     <ul className={`${styles.drop_down_menu}`}>
       <li className={`mt10px`}>
@@ -55,12 +46,15 @@ export default function DropDownMenu({ text = '篩選｜排列', info, category,
         </div>
         <ul onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           {info.map((v, i) => (
-            
+           
               <li
                 key={i}
                 className={`${
                   v.title ? styles.liTitle : styles.li
-                } mt10px mb20px`}
+                } mt10px mb20px
+                ${
+                  v.status ? styles.select : styles.notSelect }
+                `}
               >
                 <div href="#" className={`${styles.link} fs16px`}
                 style={{cursor: v.title ? 'default':'pointer'}}

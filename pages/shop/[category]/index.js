@@ -20,7 +20,8 @@ import Pagination from '@/components/common/pagination'
 
 export default function Category() {
   const router = useRouter()
-  const { category } = router.query //抓出類別
+  const { category, page } = router.query //抓出類別
+  // console.log(page);
   const usp = new URLSearchParams(router.asPath.split('?')[1])
   const pageParams = usp.toString()
   const categoryData = TitleData.find((item) => item.id === category)
@@ -28,15 +29,48 @@ export default function Category() {
   const [data, setData] = useState([])
   const [pagination, setPagination] = useState([])
   const [dataFromChild, setDataFromChild] = useState([])
+  //要篩選的資料
+  let info = [
+    {
+      title: true,
+      content: '每頁顯示/',
+    },
+    {
+      content: '20筆',
+      perPage: 20,
+      status: false,
+    },
+    {
+      content: '50筆',
+      perPage: 50,
+      status: false,
+    },
+    {
+      content: '100筆',
+      perPage: 100,
+      status: false,
+    },
+    {
+      title: true,
+      content: '依照/',
+    },
+    {
+      content: '熱門程度排序',
+    },
+    {
+      content: '價錢排序',
+    },
+    {
+      content: '星星排序',
+    },
+  ]
   
   useEffect(() => {
-    const reqData = null
-    if(dataFromChild.data?.length >20) {
-      setData(dataFromChild.data)
-      setPagination(dataFromChild.pagination)
-      return
-    }
-      fetch(`${process.env.API_SERVER}/shop/${category}?${pageParams}}`, {
+    if(!category) return
+    const reqData = {page: page, perPage: dataFromChild?.perPage ? dataFromChild.perPage : 20}
+  
+
+    fetch(`${process.env.API_SERVER}/shop/${category}`, {
         method: 'POST',
         body: JSON.stringify({ requestData: reqData }),
         headers: {
@@ -55,6 +89,7 @@ export default function Category() {
       })
     
   }, [dataFromChild,router.query])
+
   // 商品圖片
   const { imgSrc } = usePath(data)
   const chunkArray = (arr, size) => {
@@ -66,40 +101,18 @@ export default function Category() {
   }
   const imgChunks = chunkArray(imgSrc, 5)
 
-  //要篩選的資料
-  const info = [
-    {
-      title: true,
-      content: '每頁顯示/',
-    },
-    {
-      content: '20筆',
-      perPage: 20,
-    },
-    {
-      content: '50筆',
-      perPage: 50,
-    },
-    {
-      content: '100筆',
-      perPage: 100,
-    },
-    {
-      title: true,
-      content: '依照/',
-    },
-    {
-      content: '熱門程度排序',
-    },
-    {
-      content: '價錢排序',
-    },
-    {
-      content: '星星排序',
-    },
-  ]
 
   if (!data) return <p>Loading...</p>
+
+
+  info = info.map((v) => {
+    if (v.perPage === (dataFromChild?.perPage ? dataFromChild.perPage :20)) {
+      return { ...v, status: true };
+    } else {
+      return v;
+    }
+  });
+
 
   return (
     <Container className={`${styles.container}`}>

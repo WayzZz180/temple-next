@@ -82,13 +82,18 @@ ul.drop_down_menu>li
     position: relative
     transition: .2s ease
 
+.select::before
+    width: 70%
+
+.notSelect::before
+    width: 0   
+
 .li::before
     content: ''
     position: absolute
     left: 23px
     bottom: 0
     height: 3px
-    width: 0
     background-color: #14d2bf
     transition: .2s ease
 
@@ -96,8 +101,10 @@ ul.drop_down_menu>li
     transition-delay: .2s
 
 .li:hover::before
-    width: 60%
+    width: 70%
 
+
+    
 .liTitle
     cursor: default
     
