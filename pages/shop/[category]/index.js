@@ -106,30 +106,13 @@ export default function Category() {
           setPagination(data.pagination)
         }else{
           console.log('hi');
-          setShouldReload((prev)=>{prev+1})
-          // window.location.reload()
-          // router.replace(router.asPath)
+          setData([])
         }  
       })
     
   }, [dataFromChild,router.query])
 
-  // if(shouldReload){
-
-  // }
-  console.log(shouldReload);
-
-  useEffect(() => {
-    console.log(shouldReload);
-    if (shouldReload) {
-      console.log(2);
-      window.location.reload()
-      setShouldReload(0); 
-    }
-  }, [shouldReload]);
-
   if (!data) return <p>Loading...</p>
-
  
   return (
     <Container className={`${styles.container}`}>
