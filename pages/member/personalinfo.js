@@ -22,7 +22,7 @@ export default function Personalinfo() {
   const [errorMessage, setErrorMessage] = useState('') // Define a state variable to store the error message
 
   useEffect(() => {
-    console.log(`profile頁面 有沒有auth.token?1`, auth.token)
+    console.log(`personalinfo頁面 有沒有auth.token?1`, auth.token)
     if (auth.token) {
       fetch(process.env.API_SERVER + '/member/personalinfo', {
         headers: {
@@ -33,7 +33,7 @@ export default function Personalinfo() {
       
       .then((r) => r.json())
       .then((data) => {
-        console.log(`profile頁面 有沒有auth.token?2`, auth.token, data);
+        console.log(`personalinfo頁面 有沒有auth.token?2`, auth.token, data);
         console.log( data);
         // 進入頁面把資料抓出來
         setUser (data)

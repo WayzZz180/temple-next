@@ -7,7 +7,7 @@ import variables from '@/styles/_variables.module.sass'
 import styles from '@/components/common/coupons/coupons.module.sass'
 import coupon from '@/assets/coupon.svg'
 
-export default function Coupons() {
+export default function Coupon() {
   const couponRow = (
     <Row className={styles.flex}>
       <Col>
