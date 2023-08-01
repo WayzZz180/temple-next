@@ -3,20 +3,17 @@ import styles from './category.module.sass'
 // hooks
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
-import usePath from '@/hooks/usePath.js'
 
 // Bootstrap
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 // components
 import ShopTop from '@/components/common/shopTop'
-import ShopProductsCard from '@/components/common/cards/ShopProductsCard'
 import ShopTitle from '@/components/common/title/ShopTitle'
 import TitleData from '@/components/mydata/productsTitleData'
 import DropDownMenu from '@/components/common/dropDownMenu'
-import Pagination from '@/components/common/pagination'
+import GetData from '@/components/common/category/getData'
+import NoData from '@/components/common/category/noData'
 
 export default function Category() {
   const router = useRouter()
@@ -24,7 +21,10 @@ export default function Category() {
   const categoryData = TitleData.find((item) => item.id === category)
   const [data, setData] = useState([])
   const [pagination, setPagination] = useState([])
-  const [dataFromChild, setDataFromChild] = useState([])
+  const [dataFromChild, setDataFromChild] = useState([]) 
+  const [shouldReload, setShouldReload] = useState(0)
+   
+  
   //要篩選的資料
   let info = [
     {
@@ -71,9 +71,9 @@ export default function Category() {
       status: false,
     },
   ]
-  
   useEffect(() => {
     if(!category) return
+
     if(localStorage.getItem('keyword') && !keyword){
       const currentParams = new URLSearchParams(window.location.search);
       currentParams.set('keyword',localStorage.getItem('keyword'));
@@ -99,41 +99,38 @@ export default function Category() {
       })
       .then((r) => r.json())
       .then((data) => {
-        if (data.redirect) {
-          router.push(data.redirect)
-        } else {
+        data.redirect && router.push(data.redirect)
+ 
+        if(data.success){
           setData(data.data)
           setPagination(data.pagination)
-          }
-        
+        }else{
+          console.log('hi');
+          setShouldReload((prev)=>{prev+1})
+          // window.location.reload()
+          // router.replace(router.asPath)
+        }  
       })
     
   }, [dataFromChild,router.query])
 
-  // 商品圖片
-  const { imgSrc } = usePath(data)
-  const chunkArray = (arr, size) => {
-    const chunks = []
-    for (let i = 0; i < arr.length; i += size) {
-      chunks.push(arr.slice(i, i + size))
-    }
-    return chunks
-  }
-  const imgChunks = chunkArray(imgSrc, 5)
+  // if(shouldReload){
 
+  // }
+  console.log(shouldReload);
+
+  useEffect(() => {
+    console.log(shouldReload);
+    if (shouldReload) {
+      console.log(2);
+      window.location.reload()
+      setShouldReload(0); 
+    }
+  }, [shouldReload]);
 
   if (!data) return <p>Loading...</p>
 
-  // 把選取的顯示和排序status改為true
-  info = info.map((v) => {
-    if (v.perPage === (dataFromChild?.perPage ? dataFromChild.perPage :20) || v.orderBy === (dataFromChild?.orderBy ? dataFromChild.orderBy : 'purchase_num')) {
-      return { ...v, status: true };
-    } else {
-      return v;
-    }
-  });
-
-
+ 
   return (
     <Container className={`${styles.container}`}>
       {/* 類別&搜尋 */}
@@ -146,32 +143,16 @@ export default function Category() {
           link={`/shop/cookies`}
         />
         {/* 篩選｜排列 */}
-        <span className={`${styles.menu}`}>
+        <span className={`${styles.menu}`} style={{display: data?.length > 0 ? '' : 'none'}}>
           <DropDownMenu text=" 顯示 ｜ 排列 " info={info}  setDataFromChild={setDataFromChild} keyword={keyword}/>
         </span>
       </div>
       {/* 商品 */}
-      {imgChunks?.map((chunk, rowIndex) => (
-        <Row key={rowIndex} className={`${styles.row}`}>
-          {chunk.map((src, colIndex) => {
-            const products = data[colIndex + rowIndex * 5]
-            return (
-              <Col key={colIndex}>
-                <ShopProductsCard
-                  src={src}
-                  text={products?.product_name}
-                  price={products?.product_price}
-                  category={category}
-                  pid={products?.pid}
-                  stars={products?.stars}
-                  stock_num={products?.stock_num}
-                />
-              </Col>
-            )
-          })}
-        </Row>
-      ))}
-      <Pagination pagination={pagination} path={`/shop/${category}?page=`} keyword={keyword}/>
+      {
+        data?.length>0 ? <GetData data={data} pagination={pagination} dataFromChild={dataFromChild} info={info}/> :<NoData />
+      }
+     
+
     </Container>
   )
 }

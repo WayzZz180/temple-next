@@ -15,8 +15,10 @@ export default function ShopSearchBar() {
   const [placeholder, setPlaceholder] = useState('搜尋商品')
 
   const router = useRouter()
-
   useEffect(()=>{
+    if(router.query.keyword){
+      setValue(router.query.keyword)
+    }
     if(!(localStorage.getItem('keyword'))){
       setValue('')
       setPlaceholder('搜尋商品')

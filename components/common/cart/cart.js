@@ -13,6 +13,7 @@ import Col from 'react-bootstrap/Col'
 // components
 import ShopCartContentCard from '@/components/common/cards/ShopCartContentCard'
 import Button from '@/components/common/button'
+import NoData from '../category/noData'
 
 export default function Cart({ data, setStateFromChild }) {
   const router = useRouter()
@@ -92,13 +93,7 @@ export default function Cart({ data, setStateFromChild }) {
       </Row>
       {/* 購物車內容 */}
       {data?.length === 0 ? (
-        <Row className="nowrap">
-          <Col className={`${styles.insertInfo} mt100px fs24px`}>
-            {/* 快去新增幾筆商品吧！ */}
-            物即是空，空即是物
-            <div className={`${styles.line} mt100px`}></div>
-          </Col>
-        </Row>
+        <NoData />
       ) : (
         data?.map((v, i) => (
           <>

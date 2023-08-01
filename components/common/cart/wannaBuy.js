@@ -10,6 +10,7 @@ import Col from 'react-bootstrap/Col'
 
 // components
 import ShopWannaBuyCard from '@/components/common/cards/ShopWannaBuyCard'
+import NoData from '../category/noData'
 
 export default function wannaBuy({data}) {
   const router = useRouter()
@@ -48,13 +49,7 @@ export default function wannaBuy({data}) {
         </Row>
         {/* 購物車內容 */}
         {data?.length === 0 ? (
-          <Row className="nowrap">
-            <Col className={`${styles.insertInfo} mt100px fs24px`}>
-              {/* 快去新增幾筆商品吧！ */}
-              物即是空，空即是物
-              <div className={`${styles.line} mt100px`}></div>
-            </Col>
-          </Row>
+          <NoData />
         ) : 
           data?.map((v, i) => (
             <ShopWannaBuyCard

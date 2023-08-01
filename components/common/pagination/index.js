@@ -19,8 +19,7 @@ import Button from '@/components/common/button/noButton'
 
 // pagination includes page(當前頁面) / totalPages
 export default function Pagination({
-  pagination,
-  keyword
+  pagination={page:1, totalPages:1},
 }) {
   const router = useRouter()
   // 解構 pagination
@@ -97,7 +96,9 @@ export default function Pagination({
           {/* 第一頁 */}
             <button
               className={`${styles.button} ${page == 1 ? styles.active : ''}`}
-              onClick={()=>{sendPage(1)}}
+              onClick={()=>{
+                router.query.page!=1 && sendPage(1)
+                }}
             >
               1
             </button>
@@ -121,7 +122,7 @@ export default function Pagination({
                     page == v ? styles.active : ''
                   }`}
                   onClick={()=>{
-                    sendPage(v)
+                    router.query.page!=v && sendPage(v)
                   }}
                 >
                   {v}
@@ -146,7 +147,7 @@ export default function Pagination({
               }
               style={{ display: totalPages===1 ? 'none' : '' }}
               onClick={()=>{
-                sendPage(totalPages)
+                router.query.page!=totalPages && sendPage(totalPages)
               }}
             >
               {totalPages}

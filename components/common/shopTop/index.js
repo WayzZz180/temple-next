@@ -21,7 +21,7 @@ export default function ShopTop() {
     handleMouseLeave: handleMouseLeaveStar,
   } = useHoverIndex(-1)
 
-
+  // 換分類時清空keyword
   const clearLocal=()=>{
     if(localStorage.getItem('keyword')){
       localStorage.removeItem('keyword')
