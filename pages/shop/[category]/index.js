@@ -20,11 +20,8 @@ import Pagination from '@/components/common/pagination'
 
 export default function Category() {
   const router = useRouter()
-  const { category, page } = router.query //抓出類別
-  const usp = new URLSearchParams(router.asPath.split('?')[1])
-  const pageParams = usp.toString()
+  const { category, page, keyword } = router.query //抓出類別
   const categoryData = TitleData.find((item) => item.id === category)
-  // const [keyword, setKeyword] = useState('')
   const [data, setData] = useState([])
   const [pagination, setPagination] = useState([])
   const [dataFromChild, setDataFromChild] = useState([])
@@ -77,13 +74,22 @@ export default function Category() {
   
   useEffect(() => {
     if(!category) return
-    const reqData = {
+    if(localStorage.getItem('keyword') && !keyword){
+      const currentParams = new URLSearchParams(window.location.search);
+      currentParams.set('keyword',localStorage.getItem('keyword'));
+      const currentPath = window.location.pathname;
+      const newURL = `${currentPath}?${currentParams.toString()}`;
+      router.push(newURL);
+    }
+    let reqData = {
       page: page, 
       perPage: dataFromChild?.perPage ? dataFromChild.perPage : 20,
       sort: dataFromChild?.order ? dataFromChild.order :'DESC',
       orderBy: dataFromChild?.orderBy ? dataFromChild.orderBy :'purchase_num',
     }
-
+    if(keyword){
+      reqData = {...reqData, keyword: keyword}
+    }
     fetch(`${process.env.API_SERVER}/shop/${category}`, {
         method: 'POST',
         body: JSON.stringify({ requestData: reqData }),
@@ -96,8 +102,8 @@ export default function Category() {
         if (data.redirect) {
           router.push(data.redirect)
         } else {
-            setData(data.data)
-            setPagination(data.pagination)
+          setData(data.data)
+          setPagination(data.pagination)
           }
         
       })
@@ -117,7 +123,6 @@ export default function Category() {
 
 
   if (!data) return <p>Loading...</p>
-
 
   // 把選取的顯示和排序status改為true
   info = info.map((v) => {
@@ -142,7 +147,7 @@ export default function Category() {
         />
         {/* 篩選｜排列 */}
         <span className={`${styles.menu}`}>
-          <DropDownMenu text=" 顯示 ｜ 排列 " info={info}  setDataFromChild={setDataFromChild}/>
+          <DropDownMenu text=" 顯示 ｜ 排列 " info={info}  setDataFromChild={setDataFromChild} keyword={keyword}/>
         </span>
       </div>
       {/* 商品 */}
@@ -166,7 +171,7 @@ export default function Category() {
           })}
         </Row>
       ))}
-      <Pagination pagination={pagination} path={`/shop/${category}?page=`} />
+      <Pagination pagination={pagination} path={`/shop/${category}?page=`} keyword={keyword}/>
     </Container>
   )
 }

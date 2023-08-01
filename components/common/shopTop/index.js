@@ -21,6 +21,12 @@ export default function Shop() {
     handleMouseLeave: handleMouseLeaveStar,
   } = useHoverIndex(-1)
 
+
+  const clearLocal=()=>{
+    if(localStorage.getItem('keyword')){
+      localStorage.removeItem('keyword')
+    }
+  }
   return (
     <>
       {/* 類別 */}
@@ -38,6 +44,9 @@ export default function Shop() {
               key={i}
               onMouseEnter={() => handleMouseEnterStar(i)}
               onMouseLeave={handleMouseLeaveStar}
+              onClick={()=>{
+                clearLocal()
+              }}
             >
               <Link
                 href={`/shop/${v.id}?page=1`}

@@ -18,10 +18,9 @@ import Arrow from '@/assets/arrow_page.svg'
 import Button from '@/components/common/button/noButton'
 
 // pagination includes page(當前頁面) / totalPages
-// path = 導向頁面
 export default function Pagination({
   pagination,
-  path = '/shop/cookies?page=',
+  keyword
 }) {
   const router = useRouter()
   // 解構 pagination
@@ -33,8 +32,10 @@ export default function Pagination({
   // for map
   let page_arr = []
 
-  // 顯示前n筆
-  if (totalPages <= 7) {
+  if(totalPages===1){
+    page_arr=[]
+  }
+  else if (totalPages <= 7) {
     page_arr = Array.from({length: totalPages - 2}, (_, i) => i + 2);
   }else{
     if (index <= 4) {
@@ -67,7 +68,11 @@ export default function Pagination({
   }
 
   const sendPage = (value) => {
-    router.push(`${path}${value}`)
+    const currentParams = new URLSearchParams(window.location.search);
+    currentParams.set('page', value);
+    const currentPath = window.location.pathname;
+    const newURL = `${currentPath}?${currentParams.toString()}`;
+    router.push(newURL);
   }
 
   return (
@@ -83,21 +88,20 @@ export default function Pagination({
             width={30}
             onClick={() => {
               if (page - 1 > 0) {
-                router.push(`${path}${page - 1}`)
+                sendPage(page-1)
               }
             }}
             style={{ cursor: page === 1 ? 'default' : 'pointer' }}
           />
 
           {/* 第一頁 */}
-          <Link className="link" href={`${path}1`}>
             <button
               className={`${styles.button} ${page == 1 ? styles.active : ''}`}
+              onClick={()=>{sendPage(1)}}
             >
               1
             </button>
-          </Link>
-
+    
           {/* 前面點點 */}
           <Image
             src={dots}
@@ -111,15 +115,17 @@ export default function Pagination({
           {/* 頁碼 */}
           {page_arr.map((v, i) => {
             return (
-              <Link key={v} className="link" href={`${path}${v}`}>
                 <button
+                  key={v}
                   className={`${styles.button} ${
                     page == v ? styles.active : ''
                   }`}
+                  onClick={()=>{
+                    sendPage(v)
+                  }}
                 >
                   {v}
                 </button>
-              </Link>
             )
           })}
 
@@ -133,15 +139,18 @@ export default function Pagination({
             width={30}
           />
           {/* 最後一頁 */}
-          <Link className="link" href={`${path}${totalPages}`}>
             <button
               className={`${styles.button} ${
                 page == totalPages ? styles.active : ''
-              }`}
+              }`
+              }
+              style={{ display: totalPages===1 ? 'none' : '' }}
+              onClick={()=>{
+                sendPage(totalPages)
+              }}
             >
               {totalPages}
             </button>
-          </Link>
           {/* 下一頁箭頭 */}
           <Image
             src={Arrow}
@@ -150,7 +159,7 @@ export default function Pagination({
             width={30}
             onClick={() => {
               if (page + 1 < totalPages) {
-                router.push(`${path}${page + 1}`)
+                sendPage(page+1)
               }
             }}
             style={{ cursor: page === totalPages ? 'default' : 'pointer' }}

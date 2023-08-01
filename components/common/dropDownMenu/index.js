@@ -4,6 +4,7 @@ import Image from 'next/image'
 // hooks
 import { useEffect, useState } from 'react'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
+import { useRouter } from 'next/router'
 
 // svg
 import Triangle_fill from '@/assets/triangle_fill.svg'
@@ -13,7 +14,7 @@ import ASC from '@/assets/asc.svg'
 import Arrow from '@/assets/arrow_sort.svg'
 
 
-export default function DropDownMenu({ text = '顯示 ｜ 排列', info, setDataFromChild}) {
+export default function DropDownMenu({ text = '顯示 ｜ 排列', info, setDataFromChild, keyword}) {
   const [init, setInit] = useState(false)
   // 三角形hover
   const { hoveredIndex: triHoveredIndex, handleMouseEnter: triHandleMouseEnter, handleMouseLeave: triHandleMouseLeave } =
@@ -21,22 +22,26 @@ export default function DropDownMenu({ text = '顯示 ｜ 排列', info, setData
     
   const [data, setData] = useState([])
   const [sort, setSort] = useState(DESC)
-  
+
   // 顯示頁數
   const selectPage=(perPage)=>{
-      setData({...data, perPage:perPage})
+      keyword && setData({...data, keyword:keyword})
+      setData({...data, perPage:perPage, })
     }
+    
+    // 排序 asc/desc
+    const changeSort=(sort)=>{
   
-  // 排序 asc/desc
-  const changeSort=(sort)=>{
-    sort === DESC ? setSort(ASC) : setSort(DESC)
-    const strSort = sort === DESC ? 'ASC':'DESC';
+      keyword && setData({...data, keyword:keyword})
+      sort === DESC ? setSort(ASC) : setSort(DESC)
+      const strSort = sort === DESC ? 'ASC':'DESC';
       setData({...data, order: strSort})
     }
     
     // 依照...排序
     const order = (orderBy)=>{
-    setData({...data, orderBy: orderBy})
+      keyword && setData({...data, keyword:keyword})
+      setData({...data, orderBy: orderBy})
   }
   
   // 傳資料回父層
