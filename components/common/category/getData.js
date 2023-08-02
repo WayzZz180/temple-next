@@ -12,11 +12,10 @@ import Col from 'react-bootstrap/Col'
 import ShopProductsCard from '@/components/common/cards/ShopProductsCard'
 import Pagination from '@/components/common/pagination'
 
-export default function GetData({data=[], pagination=[], dataFromChild=[], info=[]}) {
+export default function GetData({data=[], pagination=[]}) {
   const router = useRouter()
   const { category, page, keyword } = router.query //抓出類別
 
-  
     // 商品圖片
     const { imgSrc } = usePath(data)
     const chunkArray = (arr, size) => {
@@ -28,15 +27,7 @@ export default function GetData({data=[], pagination=[], dataFromChild=[], info=
     }
     const imgChunks = chunkArray(imgSrc, 5)
 
-  // 把選取的顯示和排序status改為true
-  info = info.map((v) => {
-    if (v.perPage === (dataFromChild?.perPage ? dataFromChild.perPage :20) || v.orderBy === (dataFromChild?.orderBy ? dataFromChild.orderBy : 'purchase_num')) {
-      return { ...v, status: true };
-    } else {
-      return v;
-    }
-  });
-
+  
 
   return (
      <>

@@ -10,6 +10,7 @@ import cart_noStock from '@/assets/cart_noStock.svg'
 
 //hooks
 import { useState, useEffect, useContext } from 'react'
+import { useRouter } from 'next/router'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import { useClick } from '@/hooks/useClick.js'
 import { css, keyframes } from '@emotion/css'
@@ -28,6 +29,7 @@ export default function ShopProductsCard({
   stars = 5,
   stock_num = 10,
 }) {
+  const router =useRouter()
   const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
   const { cartData, setCartData, getCartData } = useContext(CartDataContext)
 
@@ -95,42 +97,19 @@ export default function ShopProductsCard({
   const [keyword, setKeyword] = useState('')
 
   useEffect(()=>{
-    localStorage.getItem('keyword') && setKeyword( localStorage.getItem('keyword'))
-  },[])
-  
-  // const regex = new RegExp(keyword, "gi");
-  const regex = new RegExp(keyword, "gi");
-  const result = text.replace(regex, `<span className={\`${styles.highlighted}\`}>${keyword}</span>`);
-  // const parts = text.split(regex);
-  // console.log(parts);
-  // const result = parts.map((part, index) => {
-  //   if (index < parts.length - 1) {
-  //     // 如果 part 是關鍵字，為其添加自定義的class
-  //     return (
-  //       <span key={index} className={styles.highlighted}>
-  //         {part}
-  //       </span>
-  //     );
-  //   } else {
-  //     // 如果 part 不是關鍵字，直接返回原文本
-  //     return <span key={index}>{part}</span>;
-  //   }
-  // });
-  
+    if( localStorage.getItem('keyword')){
+      setKeyword( localStorage.getItem('keyword'))
+    }else{
+      setKeyword('')
+    }
+  },[router.query])
 
-  // const result = text
-  //     .replace(/\?/g, '')
-  //     .replace(`\\r\\n`, lineBreakReplacement)
-  //     .replace(/\r\n(?=★)/g, lineBreakReplacement)
-  //     .replace(/★([^★]+)★/g, (match, group) => {
-  //       const withoutLineBreak = group.replace(`\\r\\n`, '<br />')
-  //       return `${withoutLineBreak}`
-  //     })
-  //     .replace(/[●★◆]/g, `<br />★　`)
-  //     .replace(/[。]/g, (match) => `${match}<br /><br />`)
-  //     .replace(/＊必買原因＊/g, '<br /><br />＊必買原因＊<br />')
-  //     .replace(/＊必吃原因＊/g, '<br /><br />＊必吃原因＊<br />')
-  // }
+  const regex = new RegExp(keyword, "gi");
+  const hightlight = `<span style="background:#F4E62A
+  ">${keyword}</span>`
+  const result = text.replace(regex, hightlight);
+
+
 
   return (
     <div className={`${styles.container}  p30px`}>
@@ -149,11 +128,8 @@ export default function ShopProductsCard({
       {/* 標題 */}
       <Link href={`/shop/${category}/${pid}`} className="link">
         <div className={`${styles.flexStart} mt15px fwBold fs18px`}>
-          <div className={`${styles.textContainer} w180px h55px`}
-                  dangerouslySetInnerHTML={{
-                    __html: result,
-                  }} 
-          ></div>
+          <div className={`${styles.textContainer} w180px h55px`} id='text'
+           dangerouslySetInnerHTML={{ __html: result }}></div>
         </div>
       </Link>
       {/* 星星 */}

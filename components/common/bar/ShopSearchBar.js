@@ -28,13 +28,18 @@ export default function ShopSearchBar() {
   const handleBlur = () => {
     if (value === '') {
       setPlaceholder('搜尋商品')
-      const currentParams = new URLSearchParams(window.location.search);
-      currentParams.set('page', 1);
-      currentParams.delete('keyword');
-      localStorage.removeItem('keyword')
-      const currentPath = window.location.pathname;
-      const newURL = `${currentPath}?${currentParams.toString()}`;
-      router.push(newURL);
+      if(router.asPath !== '/shop'){
+        const currentParams = new URLSearchParams(window.location.search);
+        currentParams.set('page', 1);
+        currentParams.delete('keyword');
+        localStorage.removeItem('keyword')
+        const currentPath = window.location.pathname;
+        const newURL = `${currentPath}?${currentParams.toString()}`;
+        router.push(newURL);
+      }else{
+        localStorage.removeItem('keyword')
+      }
+
     }
   }
   const sendKeyword = (value) => {
@@ -44,7 +49,8 @@ export default function ShopSearchBar() {
       currentParams.set('keyword', value);
       localStorage.setItem('keyword',value)
       const currentPath = window.location.pathname;
-      const newURL = `${currentPath}?${currentParams.toString()}`;
+      const category = router.query.category ? router.query.category : 'all'
+      const newURL = `/shop/${category}?${currentParams.toString()}`;
       router.push(newURL);
     }
   }

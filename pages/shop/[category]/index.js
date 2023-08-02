@@ -71,6 +71,7 @@ export default function Category() {
       status: false,
     },
   ]
+
   useEffect(() => {
     if(!category) return
 
@@ -100,7 +101,6 @@ export default function Category() {
       .then((r) => r.json())
       .then((data) => {
         data.redirect && router.push(data.redirect)
- 
         if(data.success){
           setData(data.data)
           setPagination(data.pagination)
@@ -113,7 +113,16 @@ export default function Category() {
   }, [dataFromChild,router.query])
 
   if (!data) return <p>Loading...</p>
- 
+
+   // 把選取的顯示和排序status改為true
+   info = info.map((v) => {
+    if (v.perPage === (dataFromChild?.perPage ? dataFromChild.perPage :20) || v.orderBy === (dataFromChild?.orderBy ? dataFromChild.orderBy : 'purchase_num')) {
+      return { ...v, status: true };
+    } else {
+      return v;
+    }
+  });
+
   return (
     <Container className={`${styles.container}`}>
       {/* 類別&搜尋 */}
@@ -132,7 +141,7 @@ export default function Category() {
       </div>
       {/* 商品 */}
       {
-        data?.length>0 ? <GetData data={data} pagination={pagination} dataFromChild={dataFromChild} info={info}/> :<NoData />
+        data?.length>0 ? <GetData data={data} pagination={pagination}/> :<NoData />
       }
      
 
