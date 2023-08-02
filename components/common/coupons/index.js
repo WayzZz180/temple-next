@@ -7,23 +7,33 @@ import variables from '@/styles/_variables.module.sass'
 import styles from '@/components/common/coupons/coupons.module.sass'
 import coupon from '@/assets/coupon.svg'
 
-export default function Coupon() {
+export default function Coupon(
+
+{couponName='',
+couponValue='',
+expDate='',
+usageStatus=''
+}
+
+
+
+) {
   const couponRow = (
     <Row className={styles.flex}>
       <Col>
         <Image src={coupon} alt="coupon" height={89} width={143} />
       </Col>
       <Col>
-        <div>有效期限至2023/08/16</div>
+        <div>{`有效期限至${expDate}`}</div>
         <div>
-          <b>會員專屬優惠券</b>
+          <b>{couponName}</b>
         </div>
       </Col>
       <Col className={styles.valid}>
-        <div>$150</div>
+        <div>{couponValue}</div>
       </Col>
       <Col>
-        <div className={styles.validSquare}>未使用</div>
+        <div className={styles.validSquare}>{usageStatus}</div>
       </Col>
     </Row>
   )

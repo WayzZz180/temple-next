@@ -18,7 +18,7 @@ export default function Coupons() {
   const { auth, setAuth, logout } = useContext(AuthContext);
   const router = useRouter()
   const { id } = router.query;
-  const [user, setUser] = useState('');
+  const [coupon, setCoupon] = useState('');
 
   useEffect(() => {
     console.log(`coupons頁面 有沒有auth.token?1`, auth.token)
@@ -33,7 +33,7 @@ export default function Coupons() {
         console.log(`coupons頁面 有沒有auth.token?2`, auth.token);
         console.log(`coupons頁面 data:`, data);
         // 進入頁面把資料抓出來
-        setUser (data)
+        setCoupon (data)
       
       });
   }else {
@@ -53,13 +53,16 @@ export default function Coupons() {
               text2="COUPONS"
               lineColor="green"
               width={860}
-              
             />
           </Col>
         </Row>
         <MemberNavbar />
 
-        <Coupon />
+        <Coupon
+        couponName={coupon.coupon_name}
+        couponValue={`$${coupon.coupon_value}`}
+        expDate={coupon.expiration_date}
+        usageStatus={coupon.usage_status} />
       </Container>
     </div>
   )
