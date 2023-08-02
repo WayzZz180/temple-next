@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 02, 2023 at 07:02 AM
+-- Generation Time: Aug 02, 2023 at 07:09 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -167,22 +167,6 @@ INSERT INTO `categories` (`cid`, `category_name`, `parent_id`) VALUES
 (36, '媽祖', 35),
 (37, '文昌', 35),
 (38, '月老', 35);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `comment`
---
-
-CREATE TABLE `comment` (
-  `cid` int(11) NOT NULL,
-  `oid` int(11) NOT NULL,
-  `pid` int(11) NOT NULL,
-  `content` varchar(255) DEFAULT NULL,
-  `stars` int(5) NOT NULL,
-  `member_id` int(255) NOT NULL,
-  `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2364,6 +2348,22 @@ INSERT INTO `products` (`pid`, `product_name`, `product_price`, `product_details
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `shop_comment`
+--
+
+CREATE TABLE `shop_comment` (
+  `cid` int(11) NOT NULL,
+  `oid` int(11) NOT NULL,
+  `pid` int(11) NOT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `stars` int(5) NOT NULL,
+  `member_id` int(255) NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `top10`
 --
 
@@ -2408,12 +2408,6 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`cid`);
 
 --
--- Indexes for table `comment`
---
-ALTER TABLE `comment`
-  ADD PRIMARY KEY (`cid`);
-
---
 -- Indexes for table `like_products`
 --
 ALTER TABLE `like_products`
@@ -2436,6 +2430,12 @@ ALTER TABLE `order_summary`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`pid`);
+
+--
+-- Indexes for table `shop_comment`
+--
+ALTER TABLE `shop_comment`
+  ADD PRIMARY KEY (`cid`);
 
 --
 -- Indexes for table `top10`
@@ -2466,12 +2466,6 @@ ALTER TABLE `cart`
   MODIFY `sid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=305;
 
 --
--- AUTO_INCREMENT for table `comment`
---
-ALTER TABLE `comment`
-  MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `like_products`
 --
 ALTER TABLE `like_products`
@@ -2488,6 +2482,12 @@ ALTER TABLE `order_details`
 --
 ALTER TABLE `products`
   MODIFY `pid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2086;
+
+--
+-- AUTO_INCREMENT for table `shop_comment`
+--
+ALTER TABLE `shop_comment`
+  MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `top10`
