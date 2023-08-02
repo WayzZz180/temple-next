@@ -112,6 +112,32 @@ export default function SignUp() {
     return null // 代表表單通過驗證，沒有錯誤 //有回傳代表有錯誤
   }
 
+// 上傳照片測試
+const changeImg = (e) => {
+  e.preventDefault();
+  const fd = new FormData();
+  fd.append('preImg', e.target.files[0]);
+}
+
+const str = localStorage.getItem('auth');
+if(str){
+  const obj = JSON.parse(str)
+  const Authorization = "Bearer " + obj.token;
+  fetch(process.env.API_SERVER+ '/member/changeImage', {
+    method:'POST',
+    body: fd,
+    headers:{
+      Authorization,
+    },
+  })
+  .then((res) => res.json())
+  .then((data)=>{
+    setGetImg(data.filename);
+    SettingsInputAntennaSharp({...Authorization,photo: data.filename});
+  })
+}
+// 上傳照片測試
+
   const doSignUp = (e) => {
     e.preventDefault()
 

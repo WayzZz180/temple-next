@@ -26,8 +26,8 @@ export default function Forumgossip() {
               />
             </Col>
           </Row>
-
           <MemberNavbar />
+          
           <Forumper />
         </Container>
       </div>
