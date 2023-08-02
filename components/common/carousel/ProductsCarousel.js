@@ -22,9 +22,10 @@ export default function ProductsCarousel({ text, color, i ,id}) {
   const reqData = TitleData.filter((v) => {
     return text === v.text
   })
-  // console.log(reqData)
   const [data, setData] = useState()
   useEffect(() => {
+    localStorage.getItem('keyword') && localStorage.removeItem('keyword')
+    
     fetch(process.env.API_SERVER + '/shop', {
       method: 'POST',
       body: JSON.stringify({ requestData: reqData }),
@@ -35,7 +36,6 @@ export default function ProductsCarousel({ text, color, i ,id}) {
       .then((r) => r.json())
       .then((data) => {
         setData(data)
-        // console.log('data:', data)
       })
   }, [])
 

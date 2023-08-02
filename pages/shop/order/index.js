@@ -22,7 +22,6 @@ export default function Order() {
 
   // for 訂單資料
   const { cartData, setCartData, getCartData } = useContext(CartDataContext)
-  console.log(cartData);
   // 小計
   const total = cartData?.reduce((result, v) => {
     return result + v.product_price * v.quantity
@@ -34,7 +33,7 @@ export default function Order() {
     
       customer_phone:"0912345678",
     
-      customer_address:"南京復興民生社區嘻嘻",
+      customer_address:"南京復興民生社區",
     
       payment:"現金",
     
@@ -45,7 +44,7 @@ export default function Order() {
 })
   // customer_name, customer_phone, customer_address, payment, delivery, coupon,
   const sendOrder=()=>{
-    const orderData = { cartData: cartData, customerData: customerData, total: total, status:'true'}
+    const orderData = { cartData: cartData, customerData: customerData, total: total, status:'未出貨'}
     fetch(`${process.env.API_SERVER}/shop/order`, {
       method: 'POST',
       body: JSON.stringify({ requestData: orderData }),

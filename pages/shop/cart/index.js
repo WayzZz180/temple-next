@@ -49,7 +49,6 @@ export default function IndexCart() {
     fetch(`${process.env.API_SERVER}/shop/history`)
       .then((r) => r.json())
       .then((data) => {
-        console.log('hehe')
         setMarquee(data)
       })
   }, [])
