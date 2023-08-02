@@ -21,6 +21,9 @@ export default function SignUp() {
 
   const [errorMessage, setErrorMessage] = useState('') // Define a state variable to store the error message
 
+
+
+  
   // 定義驗證規則
   const validationRules = {
     member_name: {
@@ -127,7 +130,8 @@ export default function SignUp() {
       })
       setInvalidFields(invalidFieldsArray.filter((field) => field !== null))
 
-      alert('資料有誤，請檢查一下喔!')
+      alert('請檢查以下項目：\n' + invalidFieldsArray.join('\n'));
+      // alert('資料有誤，請檢查一下喔!')
 
       return
     }
@@ -157,7 +161,7 @@ export default function SignUp() {
 
         if (data) {
           alert('註冊成功，請重新登入')
-          // router.push('/member/login');
+          router.push('/member/login');
         }
       })
       .catch((error) => {

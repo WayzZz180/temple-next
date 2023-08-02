@@ -10,11 +10,13 @@ export default function InputBox({
   width = '453px',
   value = '',
   height = '45px',
-
   isError,
   showError, // 新增一個 showError 屬性來控制錯誤訊息的顯示
   errorMessage,
 }) {
+
+
+  
   const [isFocus, setIsFocus] = useState(false)
 
   const handleFocus = () => {
@@ -27,7 +29,7 @@ export default function InputBox({
 
   return (
     <div className={styles.input_box_container}>
-      <div className={styles.prompt}>{prompt}</div>
+      <div className={`${styles.prompt} mb10px fwBold fs18px`}>{prompt}</div>
       <div className={styles.input_box_wrapper}>
         <input
           type={type}

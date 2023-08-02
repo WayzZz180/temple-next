@@ -65,3 +65,21 @@
 .detailsButton
     position: relative
     right:0
+
+.close
+    animation: close .6s 1 
+
+.open
+    animation: open .6s 1 
+
+@keyframes close
+  0%
+    max-height: 9999px
+  100%
+    max-height: 0
+
+@keyframes open
+  0%
+    max-height: 0
+  100%
+    max-height: 9999px

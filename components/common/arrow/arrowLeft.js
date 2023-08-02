@@ -1,9 +1,11 @@
 import styles from './arrow.module.sass'
+import { useSwiper } from 'swiper/react'
 
 export default function Arrow() {
+  const swiper = useSwiper()
   return (
     <>
-      <div className={`${styles.arrowleft}`}>
+      <div className={`${styles.arrowleft}`} onClick={()=>swiper.slidePrev()}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"

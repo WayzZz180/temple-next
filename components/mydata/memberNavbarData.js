@@ -1,5 +1,5 @@
 const data = [
-  { id: 'profile', text: '變更資料' },
+  { id: 'personalinfo', text: '變更資料' },
   { id: 'praying', text: '拜拜紀錄' },
   { id: 'orders', text: '訂單紀錄' },
   { id: 'wishlist', text: '收藏清單' },

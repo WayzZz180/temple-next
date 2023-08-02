@@ -1,8 +1,10 @@
+import React, { useRef, useState, useEffect } from "react";
 import styles from './marquee.module.sass'
-// hooks
-import { useState } from 'react'
-// emotion
-import styled from '@emotion/styled'
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+// Import Swiper styles
+import "swiper/css";
+
 // components
 import Title from '@/components/common/title'
 import ShopMarqueeCard from '@/components/common/cards/ShopMarqueeCard'
@@ -10,70 +12,61 @@ import ShopMarqueeCard from '@/components/common/cards/ShopMarqueeCard'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 
-const Cards = styled.div`
-  @keyframes CardsRun {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-  }
-  animation: ${(props) =>
-    props.isRunning ? 'CardsRun 5s steps(1000) infinite' : 'none'};
-`
+import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 
-const AnimatedCard = styled(ShopMarqueeCard)`
-  animation: ${(props) =>
-    props.isRunning ? 'CardsRun 5s steps(1000) infinite' : 'none'};
-`
+
 export default function Marquee({ 
   data, 
   text = '相關選擇',
   text2="Related Choice" ,
   lineColor="hot_pink"
    }) {
-  const [isRunning, setIsRunning] = useState(true)
-
-  const handleMouseEnter = () => {
-    setIsRunning(false)
-  }
-
-  const handleMouseLeave = () => {
-    setIsRunning(true)
-  }
 
   return (
-    <>
+    <> 
       <Container className={`${styles.marqueeContainer}`}>
       <Title text={text} text2={text2} lineColor={lineColor}/>
+
+        <Swiper
+        loop={true}
+        autoplay={{delay:2000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+        // waitForTransition:false
+        }}
+        // watchSlidesProgress={true} 
+        slidesPerView={10} 
+        className="mySwiper"
+        grabCursor='false'
+        modules={[Autoplay, Pagination, Navigation]}
+        speed={1000} 
+        >
+      
         <div className={`${styles.marqueeContent} mt30px`}>
           <Row
             className="nowrap"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+
           >
+         <div className={`${styles.animation}`
+         }
+         >
             {data.map((v, i) => {
               return (
-                <Cards
-                  key={i}
-                  style={{ width: '100%' }}
-                  isRunning={isRunning}
-                  className={`${styles.marquee}`}
-                >
-                  <AnimatedCard
-                    isRunning={isRunning}
+                <SwiperSlide key={i}>
+                  <ShopMarqueeCard 
                     name={v.product_name}
                     price={v.product_price}
                     src={`/${v.image}`}
                     pid={v.pid}
                   />
-                </Cards>
+                </SwiperSlide>
               )
             })}
+         </div>
           </Row>
         </div>
+      </Swiper>
       </Container>
     </>
-  )
+  );
 }

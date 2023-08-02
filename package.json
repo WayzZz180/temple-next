@@ -41,6 +41,8 @@
     "slick-carousel": "^1.8.1",
     "stats.js": "^0.17.0",
     "three": "^0.155.0",
+    "swiper": "^10.0.4",
+    "swiper-react": "^1.0.0",
     "validator": "^13.9.0"
   },
   "devDependencies": {

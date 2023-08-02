@@ -7,7 +7,8 @@ import { useClick } from '@/hooks/useClick.js'
 import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import { css, keyframes } from '@emotion/css'
-import CartContext from '@/contexts/CartContext'
+import CartCountContext from '@/contexts/CartCountContext'
+import CartDataContext from '@/contexts/CartDataContext'
 
 // components
 import Marquee from '@/components/common/marquee'
@@ -37,11 +38,12 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 export default function Pid() {
-  const { cartCount, setCartCount, getCartCount } = useContext(CartContext);
+  const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext);
+  const { cartData, setCartData, getCartData } = useContext(CartDataContext);
   const router = useRouter()
   const currentPath = router.asPath
   const [data, setData] = useState()
-  const [rows, setRows] = useState()
+  const [related, setRelated] = useState()
   const [count, setCount] = useState(1)
   const [animationEnd, setAnimationEnd] = useState(false)
 
@@ -57,7 +59,7 @@ export default function Pid() {
   const { clickState: cartClickState, handleClick: handleCartClick } =
     useClick(false)
 
-  // 抓資料
+  // 商品資料
   useEffect(() => {
     fetch(`${process.env.API_SERVER}${currentPath}`)
       .then((r) => r.json())
@@ -65,11 +67,12 @@ export default function Pid() {
         // 單筆pid資料
         setData(data.data[0])
         // 相關推薦
-        setRows(data.rows)
+        setRelated(data.related)
         // 重置數量
         setCount(1)
       })
   }, [currentPath])
+
 
   // 防呆
   if (!data || !data.product_details) {
@@ -84,6 +87,7 @@ export default function Pid() {
     const lineBreakReplacement = hasSymbols ? '<br /><br />' : '<br /><br />'
 
     const result = productDetails
+      .replace(/\?/g, '')
       .replace(`\\r\\n`, lineBreakReplacement)
       .replace(/\r\n(?=★)/g, lineBreakReplacement)
       .replace(/★([^★]+)★/g, (match, group) => {
@@ -91,8 +95,6 @@ export default function Pid() {
         return `${withoutLineBreak}`
       })
       .replace(/[●★◆]/g, `<br />★　`)
-      // .replace(/(\d+)\./g, '<br />★')
-
       .replace(/[。]/g, (match) => `${match}<br /><br />`)
       .replace(/＊必買原因＊/g, '<br /><br />＊必買原因＊<br />')
       .replace(/＊必吃原因＊/g, '<br /><br />＊必吃原因＊<br />')
@@ -129,8 +131,8 @@ export default function Pid() {
 
   // 加入購物車
   const addToCart = (count)=>{
-    const reqData = {quantity: count}
-    fetch(`${process.env.API_SERVER}${currentPath}`, {
+    const reqData = {count: count, pid: router.query.pid}
+    fetch(`${process.env.API_SERVER}/shop/cart`, {
       method: 'POST',
       body: JSON.stringify({ requestData: reqData }),
       headers: {
@@ -139,17 +141,17 @@ export default function Pid() {
     })
       .then((r) => r.json())
       .then((data) => {
-        // setCartCount(cartCount+1)
+        getCartData()
         getCartCount()
       })
   }
 
   // 加入瀏覽紀錄
   const insertHistory = ()=>{
-    const reqData = false
-    fetch(`${process.env.API_SERVER}${currentPath}`, {
+    const addData = {pid: router.query.pid}
+    fetch(`${process.env.API_SERVER}/shop/history`, {
       method: 'POST',
-      body: JSON.stringify({ requestData: reqData }),
+      body: JSON.stringify({ requestData: addData }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -391,7 +393,7 @@ export default function Pid() {
         </Row>
         {/* 跑馬燈 */}
         <Row>
-          <Marquee data={rows ? rows : []} />
+          <Marquee data={related ? related : []} />
         </Row>
         {/* 商品評價 */}
         <Row>
