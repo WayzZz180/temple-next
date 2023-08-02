@@ -9,7 +9,8 @@ import cart_outline from '@/assets/cart_outline.svg'
 import cart_noStock from '@/assets/cart_noStock.svg'
 
 //hooks
-import { useState, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { useRouter } from 'next/router'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import { useClick } from '@/hooks/useClick.js'
 import { css, keyframes } from '@emotion/css'
@@ -28,6 +29,7 @@ export default function ShopProductsCard({
   stars = 5,
   stock_num = 10,
 }) {
+  const router =useRouter()
   const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
   const { cartData, setCartData, getCartData } = useContext(CartDataContext)
 
@@ -92,6 +94,23 @@ export default function ShopProductsCard({
       })
   }
 
+  const [keyword, setKeyword] = useState('')
+
+  useEffect(()=>{
+    if( localStorage.getItem('keyword')){
+      setKeyword( localStorage.getItem('keyword'))
+    }else{
+      setKeyword('')
+    }
+  },[router.query])
+
+  const regex = new RegExp(keyword, "gi");
+  const hightlight = `<span style="background:#F4E62A
+  ">${keyword}</span>`
+  const result = text.replace(regex, hightlight);
+
+
+
   return (
     <div className={`${styles.container}  p30px`}>
       {/* 產品圖 */}
@@ -109,7 +128,8 @@ export default function ShopProductsCard({
       {/* 標題 */}
       <Link href={`/shop/${category}/${pid}`} className="link">
         <div className={`${styles.flexStart} mt15px fwBold fs18px`}>
-          <div className={`${styles.textContainer} w180px h55px`}>{text}</div>
+          <div className={`${styles.textContainer} w180px h55px`} id='text'
+           dangerouslySetInnerHTML={{ __html: result }}></div>
         </div>
       </Link>
       {/* 星星 */}

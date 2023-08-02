@@ -87,6 +87,7 @@ export default function Pid() {
     const lineBreakReplacement = hasSymbols ? '<br /><br />' : '<br /><br />'
 
     const result = productDetails
+      .replace(/\?/g, '')
       .replace(`\\r\\n`, lineBreakReplacement)
       .replace(/\r\n(?=★)/g, lineBreakReplacement)
       .replace(/★([^★]+)★/g, (match, group) => {
@@ -94,8 +95,6 @@ export default function Pid() {
         return `${withoutLineBreak}`
       })
       .replace(/[●★◆]/g, `<br />★　`)
-      // .replace(/(\d+)\./g, '<br />★')
-
       .replace(/[。]/g, (match) => `${match}<br /><br />`)
       .replace(/＊必買原因＊/g, '<br /><br />＊必買原因＊<br />')
       .replace(/＊必吃原因＊/g, '<br /><br />＊必吃原因＊<br />')
