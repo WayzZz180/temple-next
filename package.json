@@ -31,6 +31,8 @@
     "sass": "^1.63.6",
     "scss": "^0.2.4",
     "slick-carousel": "^1.8.1",
+    "swiper": "^10.0.4",
+    "swiper-react": "^1.0.0",
     "validator": "^13.9.0"
   },
   "devDependencies": {

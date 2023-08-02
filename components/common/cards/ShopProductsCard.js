@@ -9,11 +9,13 @@ import cart_outline from '@/assets/cart_outline.svg'
 import cart_noStock from '@/assets/cart_noStock.svg'
 
 //hooks
-import { useState, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { useRouter } from 'next/router'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import { useClick } from '@/hooks/useClick.js'
 import { css, keyframes } from '@emotion/css'
-import CartContext from '@/contexts/CartContext'
+import CartCountContext from '@/contexts/CartCountContext'
+import CartDataContext from '@/contexts/CartDataContext'
 
 //components
 import Stars from '@/components/common/stars'
@@ -27,7 +29,9 @@ export default function ShopProductsCard({
   stars = 5,
   stock_num = 10,
 }) {
-  const { cartCount, setCartCount, getCartCount } = useContext(CartContext);
+  const router =useRouter()
+  const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
+  const { cartData, setCartData, getCartData } = useContext(CartDataContext)
 
   //判斷hover
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-1)
@@ -37,15 +41,19 @@ export default function ShopProductsCard({
   //判斷有無點擊收藏和購物車
   const { clickState: heartClickState, handleClick: handleHeartClick } =
     useClick(false)
-  const { clickState: cartClickState, handleClick: handleCartClick, setClickState: setClickState } =
-    useClick(false)
   
+  const {
+    clickState: cartClickState,
+    handleClick: handleCartClick,
+    setClickState: setClickState,
+  } = useClick(false)
+
   //購物車彈跳＋1動畫
   const [animationEnd, setAnimationEnd] = useState(false)
   const y = 0
-  const y2 = y-25
-  const y3 = y-10
-  const y4 = y-4
+  const y2 = y - 25
+  const y3 = y - 10
+  const y4 = y - 4
   const x = 0
   const bounce = keyframes({
     'from, 20%, 53%, 80%, to': {
@@ -64,26 +72,44 @@ export default function ShopProductsCard({
   const handleAnimationEnd = () => {
     setAnimationEnd(true)
     setTimeout(() => {
-      setAnimationEnd(false);
+      setAnimationEnd(false)
       setClickState(false)
-    }, 1200);
-  };
+    }, 1200)
+  }
 
-  const addToCart = (count)=>{
-    const reqData = {quantity:count}
-    fetch(`${process.env.API_SERVER}/shop/${category}/${pid}`, {
+  // 加入購物車
+  const addToCart = () => {
+    const addData = { count: 1, pid: pid }
+    fetch(`${process.env.API_SERVER}/shop/cart`, {
       method: 'POST',
-      body: JSON.stringify({ requestData: reqData }),
+      body: JSON.stringify({ requestData: addData }),
       headers: {
         'Content-Type': 'application/json',
       },
     })
       .then((r) => r.json())
       .then((data) => {
+        getCartData()
         getCartCount()
-        // console.log('data:', data)
       })
   }
+
+  const [keyword, setKeyword] = useState('')
+
+  useEffect(()=>{
+    if( localStorage.getItem('keyword')){
+      setKeyword( localStorage.getItem('keyword'))
+    }else{
+      setKeyword('')
+    }
+  },[router.query])
+
+  const regex = new RegExp(keyword, "gi");
+  const hightlight = `<span style="background:#F4E62A
+  ">${keyword}</span>`
+  const result = text.replace(regex, hightlight);
+
+
 
   return (
     <div className={`${styles.container}  p30px`}>
@@ -102,28 +128,32 @@ export default function ShopProductsCard({
       {/* 標題 */}
       <Link href={`/shop/${category}/${pid}`} className="link">
         <div className={`${styles.flexStart} mt15px fwBold fs18px`}>
-          <div className={`${styles.textContainer} w180px h55px`}>{text}</div>
+          <div className={`${styles.textContainer} w180px h55px`} id='text'
+           dangerouslySetInnerHTML={{ __html: result }}></div>
         </div>
       </Link>
       {/* 星星 */}
-     <div className={`${styles.flexStart} mt15px`}>
-      <Stars width={20}  stars ={stars}/>
-    </div>
+      <div className={`${styles.flexStart} mt15px`}>
+        <Stars width={20} stars={stars} />
+      </div>
       {/* 價格+icons */}
       <div className={`${styles.alert}`}>
-        <div className={css({
-                    display: animationEnd && cartClickState ? '':'none',
-                    width: 180,
-                    height: 30,
-                    position: 'absolute',
-                    marginLeft:160,
-                    color: '#363636',
-                    animation: `${bounce} 1s ease-out 1`,
-                    transformOrigin: 'center bottom',
-                    fontSize: 14,
-                    letterSpacing: 2 
-                  })}
-          >+1</div>
+        <div
+          className={css({
+            display: animationEnd && cartClickState ? '' : 'none',
+            width: 180,
+            height: 30,
+            position: 'absolute',
+            marginLeft: 160,
+            color: '#363636',
+            animation: `${bounce} 1s ease-out 1`,
+            transformOrigin: 'center bottom',
+            fontSize: 14,
+            letterSpacing: 2,
+          })}
+        >
+          +1
+        </div>
       </div>
       <div className={`${styles.flexBetween}`}>
         {/* 價格 */}
@@ -146,28 +176,30 @@ export default function ShopProductsCard({
           </span>
           {/* 購物車 */}
           <span
-            onClick={()=>{
-              if(stock_num!=0){
+            onClick={() => {
+              if (stock_num != 0) {
                 handleCartClick()
                 handleAnimationEnd()
-                addToCart(1)
-              }else{
+                addToCart()
+              } else {
                 alert(`無庫存`)
               }
-              }}
+            }}
             onMouseEnter={() => handleMouseEnter(2)}
             onMouseLeave={handleMouseLeave}
             className={`${styles.inlineBlock}`}
           >
-          
-            
-          <Image
-              src={stock_num === 0 ? cart_noStock : (isCartHovered || cartClickState ? cart_fill : cart_outline)}
+            <Image
+              src={
+                stock_num === 0
+                  ? cart_noStock
+                  : isCartHovered || cartClickState
+                  ? cart_fill
+                  : cart_outline
+              }
               alt="cart"
               width={25}
             />
-
-          
           </span>
         </span>
       </div>

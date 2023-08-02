@@ -20,13 +20,13 @@ export default function ShopMarqueeCard({
             <Image
               src={src}
               alt=""
-              width={160}
-              height={160}
-              className="shadow"
+              width={140}
+              height={140}
+              className={`${styles.image} shadow`}
             ></Image>
           </div>
           <div
-            className={`${styles.textContainer} p10px mt30px fs18px fwBolder`}
+            className={`${styles.textContainer} p10px mt40px fs18px fwBolder`}
           >
             {name}
           </div>

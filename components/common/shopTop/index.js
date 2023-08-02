@@ -13,7 +13,7 @@ import Col from 'react-bootstrap/Col'
 
 import data from '@/components/mydata/productsTitleData'
 
-export default function Shop() {
+export default function ShopTop() {
   // 類別hover
   const {
     hoveredIndex: hoveredIndexStar,
@@ -21,6 +21,12 @@ export default function Shop() {
     handleMouseLeave: handleMouseLeaveStar,
   } = useHoverIndex(-1)
 
+  // 換分類時清空keyword
+  const clearLocal=()=>{
+    if(localStorage.getItem('keyword')){
+      localStorage.removeItem('keyword')
+    }
+  }
   return (
     <>
       {/* 類別 */}
@@ -38,9 +44,12 @@ export default function Shop() {
               key={i}
               onMouseEnter={() => handleMouseEnterStar(i)}
               onMouseLeave={handleMouseLeaveStar}
+              onClick={()=>{
+                clearLocal()
+              }}
             >
               <Link
-                href={`/shop/${v.id}`}
+                href={`/shop/${v.id}?page=1`}
                 className={`${styles.category} ${
                   hoveredIndexStar === i ? styles.hovered : ''
                 } m15px`}
@@ -58,7 +67,7 @@ export default function Shop() {
                   ></Image>
                 </span>
                 {/* 文字 */}
-                <span className={`${styles.link} $ pb15px`}>{v.text}</span>
+                <span className={`${styles.link} fwBold pb15px`}>{v.text}</span>
               </Link>
             </Col>
           )

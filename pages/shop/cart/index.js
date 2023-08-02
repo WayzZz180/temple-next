@@ -3,8 +3,9 @@ import styles from './cart.module.sass'
 //hooks
 import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
-import CartContext from '@/contexts/CartContext'
-
+import { CartDataContextProvider } from '@/contexts/CartCountContext'
+import CartDataContext from '@/contexts/CartDataContext'
+import WannaBuyDataContext from '@/contexts/WannaBuyDataContext'
 // bootstrap
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -12,215 +13,83 @@ import Col from 'react-bootstrap/Col'
 
 // components
 import ShopStepBar from '@/components/common/bar/ShopStepBar'
-import ShopCartContentCard from '@/components/common/cards/ShopCartContentCard'
-import ShopWannaBuyCard from '@/components/common/cards/ShopWannaBuyCard'
+import Cart from '@/components/common/cart/cart'
+import WannaBuy from '@/components/common/cart/wannaBuy'
 import CartCategory from '@/components/common/button/CartCategory'
-import Button from '@/components/common/button'
 import Marquee from '@/components/common/marquee'
 
-export default function Cart() {
-  const router = useRouter();
-  const title_cart = [
-    {width:"16%",text:"商品圖片"},
-    {width:"16.8%",text:"商品名稱"},
-    {width:"11.3%",text:"單價"},
-    {width:"11.1%",text:"數量"},
-    {width:"17%",text:"小計"}]
+export default function IndexCart() {
+  const router = useRouter()
 
-  const title_wannaBuy = [
-    {width:"19%",text:"商品圖片"},
-    {width:"21%",text:"商品名稱"},
-    {width:"6%",text:"單價"},
-    {width:"5.5%",text:"庫存"},
-    {width:"17%",text:"加入時間"}]
-
-  const [data, setData] = useState([])
+  // 瀏覽紀錄資料
   const [marquee, setMarquee] = useState([])
-  const member = {member_id:'wayz', count:null, pid:null }
-  const [dataFromChild, setDataFromChild] = useState(member)
-  const [state, setState] = useState(false)
-  const [idFromChild, setIdFromChild] = useState(1)
-  const { cartCount, setCartCount, getCartCount } = useContext(CartContext);
-  
-  useEffect(() => {
-    const reqData = {...dataFromChild, id:idFromChild}
-    fetch(process.env.API_SERVER + '/shop/cart', {
-      method: 'POST',
-      body: JSON.stringify({ requestData: reqData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        setData(data)
-        getCartCount()
-        })
-  }, [dataFromChild, idFromChild, state, router.query])
 
+  // id = 1 (購物車) , id = 2 (下次再買)
+  const { tab } = router.query
+  const [idFromChild, setIdFromChild] = useState(tab ? parseInt(tab) : 1)
+
+  // for 購物車資料更新
+  const { cartData, setCartData, getCartData } = useContext(CartDataContext)
+
+  // for 下次再買資料更新
+  const { wannaBuyData, setWannaBuyData, getWannaBuyData } =
+    useContext(WannaBuyDataContext)
+
+  // 抓購物車或下次再買的資料
+  useEffect(() => {
+    if (tab) {
+      setIdFromChild(parseInt(tab))
+    }
+    getCartData()
+    getWannaBuyData()
+  }, [router.query])
 
   // 瀏覽紀錄
-  useEffect(()=>{
-    const reqData = false
-    fetch(`${process.env.API_SERVER}/shop/cart`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: reqData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    .then((r) => r.json())
-    .then((data) => {
-      setMarquee(data)
-    })
-  },[router.query])
+  useEffect(() => {
+    fetch(`${process.env.API_SERVER}/shop/history`)
+      .then((r) => r.json())
+      .then((data) => {
+        console.log('hehe')
+        setMarquee(data)
+      })
+  }, [])
 
-  if(!data) return <p>Loading...</p>
-
-  // for 一鍵清空
-  const pid_array = data?.map((v,i)=>{
-    return v.pid
-  })
-
-  // 小計
-  const total = data?.reduce((result, v) => {
-    return result + v.product_price * v.quantity;
-  }, 0);
-
-  // 優惠券
-  const coupon = 100
-
-
-  if(!marquee) return <p>Loading...</p>
+  if (!cartData) return <p>Loading...</p>
+  if (!wannaBuyData) return <p>Loading...</p>
+  if (!marquee) return <p>Loading...</p>
 
   return (
     <>
-    <Container>
-      {/* Step */}
-      <Row>
-        <Col>
-          <ShopStepBar />
-        </Col>
-      </Row>
-      {/* 購物車、下次再買、一鍵清空 */}
-      <Row className={`${styles.row} nowrap mt100px`}>
-        <Col className={`${styles.top}`}>
-            <CartCategory idFromChild={idFromChild} setIdFromChild={setIdFromChild}/>
-        </Col>
-      </Row>
-      {/* 標題列 */}
-      <Row className='nowrap'>
-        <Col className={`${styles.container} `}>
-          {
-            (idFromChild===1?title_cart:title_wannaBuy).map((v,i)=>{
-              return <span key={i} className={`${styles.title} ${ i===0 ? 'ps65px':''} fs20px p15px`}
-              style={{width:v.width}}
-              >{v.text}</span>
-            })
-          }
-          {
-            idFromChild === 1 ? (
-            <button className={`${styles.button} fwBold fs18px`}
-            onClick={()=>{
-              setDataFromChild({member_id:'wayz', count:null, pid:pid_array})
-            }}
-            >清空購物車</button>
-            ) : ("")
-            }
-        </Col>
-      </Row>
-      {/* 購物車內容 */}
-      {
-        
-        data?.length === 0 ? (
-          <Row className='nowrap'>
-            <Col className={`${styles.insertInfo} mt100px fs24px`}>
-              {/* 快去新增幾筆商品吧！ */}
-              物即是空，空即是物
-              <div className={`${styles.line} mt100px`}></div>
-            </Col>
-          </Row>
+      <Container>
+        {/* Step */}
+        <Row>
+          <Col>
+            <ShopStepBar />
+          </Col>
+        </Row>
+        {/* 購物車、下次再買、一鍵清空 */}
+        <Row className={`${styles.row} nowrap mt100px`}>
+          <Col className={`${styles.top}`}>
+            <CartCategory
+              idFromChild={idFromChild}
+              setIdFromChild={setIdFromChild}
+            />
+          </Col>
+        </Row>
+        {idFromChild === 1 ? (
+          <Cart data={cartData} />
         ) : (
-          idFromChild === 1 ? (
-            data?.map((v, i) => (
-              <>
-              <ShopCartContentCard
-                key={v.pid}
-                src={`/${v.image}`}
-                name={`${v.product_name}`}
-                price={`${v.product_price}`}
-                quantity={`${Number(v.quantity)}`}
-                stock_num={`${v.stock_num}`}
-                pid={`${v.pid}`}
-                cid={`${v.cid}`}
-                setDataFromChild={setDataFromChild}
-                setState={setState}
-                state={state}
-              />
-              </>
-            ))
-          ) : (
-            data?.map((v, i) => (
-              <ShopWannaBuyCard
-                key={`${v.pid}`}
-                src={`/${v.image}`}
-                name={`${v.product_name}`}
-                price={`${v.product_price}`}
-                quantity={`${v.quantity}`}
-                stock_num={`${v.stock_num}`}
-                pid={`${v.pid}`}
-                cid={`${v.cid}`}
-                date={`${v.created_at}`}
-                setDataFromChild={setDataFromChild}
-                setState={setState}
-                state={state}
-              />
-            ))
-          )
-        )
-      }
-
-      {/* 明細 */}
-      { 
-        (idFromChild === 1) ? (
-      <Row className='nowrap'>
-        <Col className={`${styles.col} mt50px fs18px`}>
-          <div className={`${styles.detailsContainer}`}>
-            <div className={`${styles.detailsCategory}`}>
-              <span className={`${styles.details}`}>小計：</span>
-              <span className={`${styles.details}`}>${total}</span>
-            </div>
-            <div className={`${styles.detailsCategory}`}>
-              <span className={`${styles.details}`}>使用優惠券：</span>
-              <span className={`${styles.details}`}>-${coupon}</span>
-            </div>
-            <div className={`${styles.detailsCategory} mt30px`}>
-              <span className={`${styles.details}`}>合計：</span>
-              <span className={`${styles.details}`}>${total-coupon}</span>
-            </div>
-          </div>
-            <div className={`${styles.detailsButton} mt30px`}>
-              <Button 
-                  text = '前往結帳'
-                  btnColor = 'hot_pink'
-                  width = '100%'
-                  height = ''
-                  padding = '15px 60px'
-                  fontSize = '18px'
-                  link={()=>{
-                    if(data?.length!=0){
-                    router.push('/shop/order')
-                    }
-                  }}
-               />
-            </div>
-        </Col>
-      </Row>
-        ):("")}
-      <Row>
-        <Marquee data={marquee} text="瀏覽紀錄" text2='browse history' lineColor='green'/>
-      </Row>
-    </Container>
+          <WannaBuy data={wannaBuyData} />
+        )}
+        <Row>
+          <Marquee
+            data={marquee}
+            text="瀏覽紀錄"
+            text2="browse history"
+            lineColor="green"
+          />
+        </Row>
+      </Container>    
     </>
   )
 }
