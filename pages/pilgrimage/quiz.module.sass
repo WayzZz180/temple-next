@@ -1,0 +1,169 @@
+@import '@/styles/_variables.module.sass'
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;900&display=swap')
+
+.container
+    display: flex
+    position: relative
+    align-items: center
+    justify-content: center
+    width: 1920px
+    height:930px
+    overflow: hidden
+
+.flex_row 
+  display: flex
+  width: 100%
+  align-items: center
+  justify-content: center
+
+.fairyText
+    display: flex
+    position: absolute
+    top:120px
+
+.fairyL
+    display: flex
+    position: relative
+    top:-80px
+    left:115px
+    animation: fairyL 1s ease-in-out infinite alternate
+
+@keyframes fairyL
+  0% 
+    transform: translate(0px, -15px)
+
+  100% 
+    transform: translate(0px, 15px)
+
+.fairyL2
+    animation: fairyL2 5s ease-in-out 1
+
+@keyframes fairyL2
+  0% 
+    transform: translate(1800px, -1500px)rotate(120deg)
+    opacity: 0
+  50%
+    opacity: 0
+  100% 
+    transform: translate(0px, 0px)
+    opacity: 1
+
+.fairyR
+    display: flex
+    position: relative
+    top:-80px
+    right:115px
+    animation: fairyR 1s ease-in-out infinite alternate
+
+@keyframes fairyR
+  0% 
+    transform: translate(0px, -15px)
+
+  100% 
+    transform: translate(0px, 15px)
+
+.fairyR2
+    animation: fairyR2 5s ease-in-out 1
+
+@keyframes fairyR2
+  0% 
+    transform: translate(-1800px, -1500px)rotate(-120deg)
+    opacity: 0
+  50%
+    opacity: 0
+  100% 
+    transform: translate(0px, 0px)
+    opacity: 1
+
+.circle_1
+    display: flex
+    position: absolute
+    z-index: -2
+    top:245px
+    animation: circle 18s linear infinite 
+
+@keyframes circle
+  0% 
+    transform: rotate(0deg)
+  100% 
+    transform: rotate(360deg)
+
+.sun
+    display: flex
+    position: absolute
+    z-index: -2
+    top: -1870px
+    animation: sun 130s linear infinite 
+
+@keyframes sun
+  0% 
+    transform: rotate(0deg)
+  100% 
+    transform: rotate(360deg)
+
+.flex_col
+    display: flex
+    position: relative
+    flex-direction: column
+    align-items: center
+    justify-content: center
+
+.title
+   color: $title
+   ont-family:"Noto Sans TC", sans-serif
+   font-size: 40px
+   font-weight: 900
+   letter-spacing: 10px
+    
+.line
+   height: 10px
+   width: 240px
+   margin-top:10px
+   margin-bottom: 30px
+   border: 1px solid #E4007E
+   background-color: #E4007E
+
+.roof
+    display: flex
+    position: absolute
+    top:720px
+    left:110px
+    z-index: 3
+
+.flex_col2
+    display: flex
+    position: relative
+    width:100%
+    flex-direction: column
+    align-items: center
+    justify-content: center
+
+.c1
+    position: absolute
+    z-index: -1
+    top:700px
+    left:-300px
+    animation: float2 6s linear infinite alternate
+
+@keyframes float2
+  0% 
+     transform: translate(0px,0px)
+  100% 
+     transform: translate(250px,0px)
+
+.c1_2
+    position: absolute
+    z-index: -1
+    top:700px
+    right:-50px
+    animation: float3 6s linear infinite alternate-reverse
+
+@keyframes float3
+  0% 
+     transform: translate(0px,0px)
+  100% 
+     transform: translate(250px,0px)
+
+.c1_3
+    transform: rotateY(-180deg)
+
