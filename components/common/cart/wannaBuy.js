@@ -1,9 +1,5 @@
 import styles from './style.module.sass'
 
-//hooks
-import { useState, useEffect, useContext } from 'react'
-import { useRouter } from 'next/router'
-
 // bootstrap
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -13,7 +9,6 @@ import ShopWannaBuyCard from '@/components/common/cards/ShopWannaBuyCard'
 import NoData from '../category/noData'
 
 export default function wannaBuy({data}) {
-  const router = useRouter()
 
   // 下次再買標題
   const title_wannaBuy = [
@@ -23,9 +18,6 @@ export default function wannaBuy({data}) {
     { width: '5.5%', text: '庫存' },
     { width: '17%', text: '加入時間' },
   ]
-
-  // 即時更新資料的狀態
-  const [state, setState] = useState(false)
   
   return (
     <>
@@ -61,8 +53,6 @@ export default function wannaBuy({data}) {
               pid={`${v.pid}`}
               cid={`${v.cid}`}
               date={`${v.created_at}`}
-              setState={setState}
-              state={state}
             />
           ))}
     </>

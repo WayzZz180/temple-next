@@ -15,7 +15,7 @@ import ShopCartContentCard from '@/components/common/cards/ShopCartContentCard'
 import Button from '@/components/common/button'
 import NoData from '../category/noData'
 
-export default function Cart({ data, setStateFromChild }) {
+export default function Cart({data=[],total=1000}) {
   const router = useRouter()
   const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
   const { cartData, setCartData, getCartData } = useContext(CartDataContext)
@@ -28,10 +28,6 @@ export default function Cart({ data, setStateFromChild }) {
     { width: '11.1%', text: '數量' },
     { width: '17%', text: '小計' },
   ]
-
-  // 即時更新資料的狀態
-  const [state, setState] = useState(false)
-
   // for 清空購物車
   const pid_array = data?.map((v, i) => {
     return v.pid
@@ -39,7 +35,6 @@ export default function Cart({ data, setStateFromChild }) {
 
   // 清空購物車(需要pid＿array)
   const deleteFromCart = (pid_array) => {
-    setState(!state) // 會從購物車刪除因此要即時更新狀態
     const deletedData = { pid: pid_array }
     fetch(`${process.env.API_SERVER}/shop/cart`, {
       method: 'DELETE',
@@ -54,10 +49,6 @@ export default function Cart({ data, setStateFromChild }) {
         getCartCount()
       })
   }
-  // 小計
-  const total = data?.reduce((result, v) => {
-    return result + v.product_price * v.quantity
-  }, 0)
 
   // 優惠券
   const coupon = 100
@@ -96,7 +87,6 @@ export default function Cart({ data, setStateFromChild }) {
         <NoData />
       ) : (
         data?.map((v, i) => (
-          <>
             <ShopCartContentCard
               key={v.pid}
               src={`/${v.image}`}
@@ -106,10 +96,7 @@ export default function Cart({ data, setStateFromChild }) {
               stock_num={`${v.stock_num}`}
               pid={`${v.pid}`}
               cid={`${v.cid}`}
-              setState={setState}
-              state={state}
             />
-          </>
         ))
       )}
 
