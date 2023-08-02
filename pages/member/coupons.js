@@ -18,7 +18,7 @@ export default function Coupons() {
   const { auth, setAuth, logout } = useContext(AuthContext);
   const router = useRouter()
   const { id } = router.query;
-  const [coupon, setCoupon] = useState('');
+  const [coupon, setCoupon] = useState([]);
 
   useEffect(() => {
     console.log(`coupons頁面 有沒有auth.token?1`, auth.token)
@@ -57,12 +57,19 @@ export default function Coupons() {
           </Col>
         </Row>
         <MemberNavbar />
-
-        <Coupon
-        couponName={coupon.coupon_name}
-        couponValue={`$${coupon.coupon_value}`}
-        expDate={coupon.expiration_date}
-        usageStatus={coupon.usage_status} />
+      {
+        coupon?.map((v,i)=>{
+          return(
+          <div key={v.coupon_status_id}>
+            <Coupon
+              couponName={v.coupon_name}
+              couponValue={`$${v.coupon_value}`}
+              expDate={v.expiration_date}
+              usageStatus={v.usage_status} />
+          </div>
+          )
+        })
+      }
       </Container>
     </div>
   )

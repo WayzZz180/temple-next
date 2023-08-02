@@ -9,15 +9,31 @@ import coupon from '@/assets/coupon.svg'
 
 export default function Coupon(
 
-{couponName='',
+{ couponName='',
 couponValue='',
 expDate='',
 usageStatus=''
 }
 
+) {let couponColor;
 
+// 使用 switch 敘述根據 usageStatus 設定適當的 CSS 類名
+switch (usageStatus) {
+  case '未使用':
+    couponColor = {color: variables['hot_pink']};
+    break;
+    case '已使用':
+      couponColor = {color: variables['green']};
+      // couponColor = {$hot_pink};
+    break;
+    case '已過期':
+    couponColor = {color: variables['orderGray']};
+    // couponColor = {$hot_pink};
+    break;
+  default:
+    couponColor = ''; // 預設的 CSS 類名
+}
 
-) {
   const couponRow = (
     <Row className={styles.flex}>
       <Col>
@@ -29,10 +45,11 @@ usageStatus=''
           <b>{couponName}</b>
         </div>
       </Col>
-      <Col className={styles.valid}>
-        <div>{couponValue}</div>
+      <Col style={couponColor}>
+        <div className={styles.valid}>{couponValue}</div>
       </Col>
-      <Col>
+      <Col style={couponColor}>
+        {/* 使用 className 變數來設定 CSS 類名 */}
         <div className={styles.validSquare}>{usageStatus}</div>
       </Col>
     </Row>
@@ -46,11 +63,11 @@ usageStatus=''
     </Row>
   )
 
-  const combinedRows = []
-  const numberOfRows = 3 // 資料的比數
+  // const combinedRows = []
+  // const numberOfRows = 3 // 資料的比數
 
-  for (let i = 0; i < numberOfRows; i++) {
-    combinedRows.push(i % 2 === 0 ? couponRow : lineRow)
-  }
-  return <>{combinedRows}</>
+  // for (let i = 0; i < numberOfRows; i++) {
+  //   combinedRows.push(i % 2 === 0 ? couponRow : lineRow)
+  // }
+  return <>{couponRow}{lineRow}</>
 }
