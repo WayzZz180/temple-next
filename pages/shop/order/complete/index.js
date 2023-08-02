@@ -1,7 +1,8 @@
-import syles from './complete.module.sass'
+import styles from './complete.module.sass'
 // components
 import ShopStepBar from "@/components/common/bar/ShopStepBar"
 import OrderSummaryCard from '@/components/common/cards/orderSummaryCard'
+import BuyContent from '@/components/common/orderDetails/buyContent'
 
 // bootstrap
 import Container from 'react-bootstrap/Container'
@@ -22,6 +23,9 @@ export default function OrderComplete() {
       <Row className="mt134px">
         <OrderSummaryCard />
       </Row>
+      <div className={`${styles.contentContainer}`}>
+      <BuyContent />
+      </div>
     </Container>
     </>
   )

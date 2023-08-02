@@ -1,7 +1,7 @@
 import styles from './order.module.sass'
 
 // hooks
-import { useEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import CartDataContext from '@/contexts/CartDataContext'
 
@@ -28,8 +28,24 @@ export default function Order() {
     return result + v.product_price * v.quantity
   }, 0)
 
+  const[customerData, setCustomerData]= useState({
+   
+      customer_name:"沈子威",
+    
+      customer_phone:"0912345678",
+    
+      customer_address:"南京復興民生社區嘻嘻",
+    
+      payment:"現金",
+    
+      delivery:"超商取貨",
+    
+      coupon:null,
+    
+})
+  // customer_name, customer_phone, customer_address, payment, delivery, coupon,
   const sendOrder=()=>{
-    const orderData = { cartData: cartData, total: total, status:'true'}
+    const orderData = { cartData: cartData, customerData: customerData, total: total, status:'true'}
     fetch(`${process.env.API_SERVER}/shop/order`, {
       method: 'POST',
       body: JSON.stringify({ requestData: orderData }),
