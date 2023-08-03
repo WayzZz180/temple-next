@@ -9,16 +9,18 @@ import Navbar from '@/components/common/forumlogo/navbar'
 import Forumper from '@/components/common/forumlogo/forumper'
 import AdvancedExample from '@/components/common/forumlogo/pagination'
 import MemberNavbar from '@/components/common/memberNavbar'
-import Title from '@/components/common/title/'
+import MemberTitle from '@/components/common/title/memberTitle'
+import ProfilePhoto from '@/components/common/profilePhoto'
 
 export default function Forumgossip() {
   return (
     <>
       <div className={styles.flex}>
         <Container>
+          <ProfilePhoto/>
           <Row>
             <Col>
-              <Title
+              <MemberTitle
                 text="我的文章"
                 text2="ARTICLES"
                 lineColor="green"

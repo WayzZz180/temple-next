@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import variables from '@/styles/_variables.module.sass'
 
 //components
-import styles from '@/components/common/coupons/coupons.module.sass'
+import styles from '@/components/common/coupon/coupon.module.sass'
 import coupon from '@/assets/coupon.svg'
 
 export default function Coupon(

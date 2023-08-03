@@ -6,8 +6,13 @@ import headerBg from '@/assets/header.svg'
 import NavbarItem from './navbaritem'
 import { useRouter } from 'next/router'
 import variables from '@/styles/_variables.module.sass'
+import { useContext } from 'react'
+import AuthContext from "@/contexts/AuthContext";
+
 
 export default function Header() {
+const { auth, setAuth, logout } = useContext(AuthContext);
+
   const info = [
     {
       title: '01',
@@ -21,6 +26,8 @@ export default function Header() {
         { label: '我的文章', url: '/member/articles' },
         { label: '護身符', url: '/member/amulet' },
         { label: '每日簽到', url: '/member/dailySign' },
+        
+       auth.id === 0 ? { label: '登入', url: '/member/login' } : { label: '登出', url: '/member/logout' },
       ],
     },
     {

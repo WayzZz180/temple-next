@@ -6,13 +6,15 @@ import { useRouter } from 'next/router'
 
 // components
 import InputBox from '@/components/common/inputBox/index.js'
-import Title from '@/components/common/title/index.js'
+import MemberTitle from '@/components/common/title/memberTitle';
+
 import Button from '@/components/common/button/index.js'
 import MemberNavbar from '@/components/common/memberNavbar'
-import Coupon from '@/components/common/coupons/index.js'
+import Coupon from '@/components/common/coupon/index.js'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
+import ProfilePhoto from '@/components/common/profilePhoto';
 
 export default function Coupons() {
   const { auth, setAuth, logout } = useContext(AuthContext);
@@ -45,10 +47,12 @@ export default function Coupons() {
 
   return (
     <div className={styles.flex}>
-      <Container>
+      <Container>  
+        
+       <ProfilePhoto/>
         <Row>
           <Col>
-            <Title
+            <MemberTitle
               text="我的優惠券"
               text2="COUPONS"
               lineColor="green"
@@ -56,6 +60,7 @@ export default function Coupons() {
             />
           </Col>
         </Row>
+    
         <MemberNavbar />
       {
         coupon?.map((v,i)=>{

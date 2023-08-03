@@ -5,11 +5,16 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
+
+//components
 import InputBox from '@/components/common/inputBox/index.js'
-import Title from '@/components/common/title/index.js'
+import MemberTitle from '@/components/common/title/memberTitle'
+
 import Button from '@/components/common/button/index.js'
 import doorGodLeft from '@/assets/doorGodLeft.svg'
 import doorGodRight from '@/assets/doorGodRight.svg'
+
+//bt
 
 import { Container, Row, Col } from 'react-bootstrap'
 
@@ -219,7 +224,8 @@ if(str){
         <form onSubmit={doSignUp}>
           <Row>
             <Col>
-              <Title text="加入會員" text2="SIGN UP" lineColor="green" />
+            <ProfilePhoto/>
+              <MemberTitle text="加入會員" text2="SIGN UP" lineColor="green" />
             </Col>
           </Row>
           <Row className={styles.flex_space_between}>

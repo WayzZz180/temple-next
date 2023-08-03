@@ -9,7 +9,8 @@ import { useRouter } from 'next/router'
 
 // components
 import InputBox from '@/components/common/inputBox/index.js'
-import Title from '@/components/common/title/index.js'
+import MemberTitle from '@/components/common/title/memberTitle'
+
 import Button from '@/components/common/button/index.js'
 import doorGodLeft from '@/assets/doorGodLeft.svg'
 import doorGodRight from '@/assets/doorGodRight.svg'
@@ -79,7 +80,7 @@ export default function Login() {
         <form onSubmit={doLogin}>
           <Row>
             <Col>
-              <Title text="登入會員" text2="LOGIN" lineColor="green" />
+              <MemberTitle text="登入會員" text2="LOGIN" lineColor="green" />
             </Col>
           </Row>
           <Row className={styles.flex_centre}>
