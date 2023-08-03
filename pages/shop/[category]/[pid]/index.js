@@ -410,7 +410,11 @@ export default function Pid() {
                   }}
                 />
                 {/* 愛心 */}
-                <span className={`${styles.inlineBlock} ms30px`}>
+                <span className={`${styles.inlineBlock} ms30px`} 
+                onClick={()=>{
+                  heartClickState ? deleteFromFav() : addToFav()
+                }}
+                >
                   <Image
                     src={
                       isHeartHovered || heartClickState
