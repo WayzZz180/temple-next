@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col'
 import Title from '@/components/common/title/orderTitle'
 import Button from '@/components/common/button'
 
-export default function OrderSummary({data}) {
+export default function OrderSummary({data=[], text1="訂單詳情", text2="留下評論", link1=()=>{}, link2=()=>{}}) {  
   return (
     <>
         <Col className={`${styles.container}`}>
@@ -16,11 +16,11 @@ export default function OrderSummary({data}) {
                 <Title data={data}/>
             </div>
             <div className={`${styles.button}`}>
-                <div className =''>
-                    <Button text='訂單詳情' btnColor='brown' fontSize='20px' padding='10px 60px'/>
+                <div className='details'>
+                    <Button text={text1} btnColor='brown' fontSize='20px' padding='10px 60px' link={link1}/>
                 </div>
                 <div className=''>
-                    <Button text='留下評論' btnColor='brown' fontSize='20px' padding='10px 60px'/>
+                    <Button text={text2} btnColor='brown' fontSize='20px' padding='10px 60px' link={link2}/>
                 </div>
                 <div className={`${styles.total}`}>
                     <div className={`${styles.totalTitle} fwBold fs20px`}>訂單金額</div>

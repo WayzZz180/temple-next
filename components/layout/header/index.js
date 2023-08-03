@@ -26,10 +26,8 @@ export default function Header() {
       title: '02',
       title2: '線上拜拜',
       links: [
-        { label: '服務據點', url: '#' },
-        { label: '服務客戶', url: '#' },
-        { label: '服務地區', url: '#' },
-        { label: '徵才資訊', url: '#' },
+        { label: '預約拜拜', url: '#' },
+        { label: '供品套組', url: '#' },
       ],
     },
     {
@@ -38,7 +36,9 @@ export default function Header() {
       links: [
         { label: '商城首頁', url: '/shop' },
         { label: '購物車', url: '/shop/cart?tab=1' },
-        { label: '訂單紀錄', url: '#' },
+        { label: '訂單紀錄', url: '/member/orders' },
+        { label: '喜好商品', url: '/member/wishlist' },
+        { label: '優惠券', url: '/member/coupons' },
       ],
     },
     {
@@ -78,7 +78,7 @@ export default function Header() {
 
   const router = useRouter()
   const currentPath = router.asPath
-  // console.log(currentPath)
+
   return (
     <header className={`${styles.header}`}>
       <div

@@ -17,7 +17,7 @@ export default function Button({
 }) {
   const var_color = variables[btnColor]
   return (
-    <div>
+    <>
       <button
         onClick={link}
         className={`${styles.btn}`}
@@ -48,6 +48,6 @@ export default function Button({
           ></Image>
         </span>
       </button>
-    </div>
+    </>
   )
 }

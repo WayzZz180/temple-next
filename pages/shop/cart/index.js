@@ -57,6 +57,7 @@ export default function IndexCart() {
   if (!wannaBuyData) return <p>Loading...</p>
   if (!marquee) return <p>Loading...</p>
 
+ 
   return (
     <>
       <Container>
@@ -76,7 +77,7 @@ export default function IndexCart() {
           </Col>
         </Row>
         {idFromChild === 1 ? (
-          <Cart data={cartData} />
+          <Cart data={cartData}/>
         ) : (
           <WannaBuy data={wannaBuyData} />
         )}

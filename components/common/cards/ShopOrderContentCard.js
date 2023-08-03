@@ -12,11 +12,10 @@ export default function ShopOrderContentCard({
     quantity = 3,
 }) {
     
- 
     return (
     <Row className={`${styles.row} nowrap fwBold`}>
         <Col>
-            <div className={`${styles.container} pt30px pb30px fs18px`}>
+            <div className={`${styles.container} pt30px pb30px fs20px`}>
                 {/* 商品圖 */}
                 <div className={`${styles.image}`}>    
                   <Image
@@ -35,7 +34,6 @@ export default function ShopOrderContentCard({
                 <div className={`${styles.quantity}`}><span className={`${styles.quantityWord}`}>{quantity}</span><span>&nbsp;/件</span></div>     
                 {/* 小計 */}
                 <div className={`${styles.total}`}>${price*Number(quantity)}</div>
-                          
             </div>
             {/* 分隔線 */}
             <div className={`${styles.line}`}></div>

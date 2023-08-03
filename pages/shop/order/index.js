@@ -32,12 +32,16 @@ export default function Order() {
       customer_name:"沈子威",
     
       customer_phone:"0912345678",
+
+      customer_email:"wayz180@gmail.com",
     
       customer_address:"南京復興民生社區",
     
       payment:"現金",
     
       delivery:"超商取貨",
+      
+      invoice: "/CHILD1215",
     
       coupon:null,
     
@@ -61,10 +65,12 @@ export default function Order() {
     <Container className={`${styles.container}`}>
       {/* step */}
       <ShopStepBar path="/shop/order" />
-      <BuyContent data={cartData} total={total}/>
+      <div className='mt100px'>
+      <BuyContent data={cartData}/>
+      </div>
       {/* 表單 */}
       <Container className="mt50px">
-        <Title text="訂單資訊" text2="information" />
+        <Title text="訂單資訊" text2="information"  />
         <Row className={`${styles.flex_space_between}`}>
           <InputBox
             type="text"
