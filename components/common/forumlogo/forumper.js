@@ -9,6 +9,7 @@ import ChatBubbleOutlineSharpIcon from '@mui/icons-material/ChatBubbleOutlineSha
 import BookmarkBorderSharpIcon from '@mui/icons-material/BookmarkBorderSharp'
 import BookmarkAddedSharpIcon from '@mui/icons-material/BookmarkAddedSharp'
 import FigureExample from '@/components/common/forumlogo/forumperpic'
+import Button from '@mui/material/Button'
 
 export default function Forumper() {
   const [data, setData] = useState({
@@ -42,8 +43,10 @@ export default function Forumper() {
                 <div className={`${styles.flex}`}>
                   <div className={`${styles.flex_row}`}>
                     <div className={`${styles.flex_col2}`}>
-                      <div className={`${styles.title}`}>{i.title}</div>
-                      <div className={`${styles.content}`}>{i.content}</div>
+                      <Link href="#" className={`${styles.link_sass}`}>
+                        <div className={`${styles.title}`}>{i.title}</div>
+                        <div className={`${styles.content}`}>{i.content}</div>
+                      </Link>
                     </div>
                     <div className={`${styles.flex_row3}`}>
                       <div className={`${styles.setmid}`}>
