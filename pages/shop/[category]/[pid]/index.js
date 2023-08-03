@@ -46,18 +46,13 @@ export default function Pid() {
   const [related, setRelated] = useState()
   const [count, setCount] = useState(1)
   const [animationEnd, setAnimationEnd] = useState(false)
+  const [pidArr, setPidArr] = useState([])
 
   //判斷有無 Hover
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-1)
   const isHeartHovered = hoveredIndex === 1
   const isCartHovered = hoveredIndex === 2
   useClick(false)
-
-  //判斷有無點擊收藏和購物車
-  const { clickState: heartClickState, handleClick: handleHeartClick } =
-    useClick(false)
-  const { clickState: cartClickState, handleClick: handleCartClick } =
-    useClick(false)
 
   // 商品資料
   useEffect(() => {
@@ -71,8 +66,32 @@ export default function Pid() {
         // 重置數量
         setCount(1)
       })
-  }, [currentPath])
 
+    
+    fetch(`${process.env.API_SERVER}/shop/favoriteMatch`)
+    .then((r) => r.json())
+    .then((data) => {
+      setPidArr(data)
+      
+    })
+  }, [router.query])
+  
+  const foundItem = pidArr?.some((v) => v.pid === Number(router.query.pid));
+
+  //判斷有無點擊收藏和購物車
+  const { clickState: heartClickState, handleClick: handleHeartClick, setClickState: setHeartClickState } =
+    useClick(foundItem)
+
+  const { clickState: cartClickState, handleClick: handleCartClick } =
+    useClick(false)
+
+
+  useEffect(()=>{
+    if(foundItem!=heartClickState){
+      setHeartClickState(foundItem)
+    }
+  },[foundItem])
+  
 
   // 防呆
   if (!data || !data.product_details) {
@@ -162,6 +181,37 @@ export default function Pid() {
   }
   insertHistory()
 
+
+  // 加入喜好商品
+  const addToFav = () => {
+    const addData = { pid: router.query.pid }
+    fetch(`${process.env.API_SERVER}/shop/favorite`, {
+      method: 'POST',
+      body: JSON.stringify({ requestData: addData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((data) => {
+      })
+  }
+
+  // 刪除喜好商品
+  const deleteFromFav = () => {
+    const deletedData = { pid: router.query.pid }
+
+    fetch(`${process.env.API_SERVER}/shop/favorite`, {
+      method: 'DELETE',
+      body: JSON.stringify({ requestData: deletedData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((r) => r.json())
+    .then((data) => {
+    })
+  }
 
   return (
     <>
@@ -344,13 +394,13 @@ export default function Pid() {
                 onMouseLeave={handleMouseLeave}
               >
                 <Button
-                  text="加入收藏"
+                  text={heartClickState ? '取消收藏':'加入收藏'}
                   btnColor="black"
                   width="275px"
                   padding="15px 60px"
                   fontSize="20px"
                   link={()=>{
-                  console.log('surprise~!')
+                    heartClickState ? deleteFromFav() : addToFav()
                   }}
                 />
                 {/* 愛心 */}

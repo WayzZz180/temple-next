@@ -28,6 +28,8 @@ export default function ShopProductsCard({
   pid = 1,
   stars = 5,
   stock_num = 10,
+  keyword="",
+  state,
 }) {
   const router =useRouter()
   const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
@@ -35,13 +37,19 @@ export default function ShopProductsCard({
 
   //判斷hover
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-1)
-  const isHeartHovered = hoveredIndex === 1
+  const   isHeartHovered = hoveredIndex === 1
   const isCartHovered = hoveredIndex === 2
 
   //判斷有無點擊收藏和購物車
-  const { clickState: heartClickState, handleClick: handleHeartClick } =
-    useClick(false)
-  
+  const { clickState: heartClickState, handleClick: handleHeartClick, setClickState: setHeartClickState } =
+  useClick({state})
+
+  useEffect(()=>{
+    if(heartClickState != state){
+      setHeartClickState(state)
+    }
+  },[state])
+
   const {
     clickState: cartClickState,
     handleClick: handleCartClick,
@@ -94,23 +102,44 @@ export default function ShopProductsCard({
       })
   }
 
-  const [keyword, setKeyword] = useState('')
+  // 加入喜好商品
+  const addToFav = () => {
+    const addData = { pid: pid }
+    fetch(`${process.env.API_SERVER}/shop/favorite`, {
+      method: 'POST',
+      body: JSON.stringify({ requestData: addData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((data) => {
+      })
+  }
 
-  useEffect(()=>{
-    if( localStorage.getItem('keyword')){
-      setKeyword( localStorage.getItem('keyword'))
-    }else{
-      setKeyword('')
-    }
-  },[router.query])
+  // 刪除喜好商品
+  const deleteFromFav = () => {
+    const deletedData = { pid: pid }
+
+    fetch(`${process.env.API_SERVER}/shop/favorite`, {
+      method: 'DELETE',
+      body: JSON.stringify({ requestData: deletedData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((r) => r.json())
+    .then((data) => {
+    })
+  }
 
   const regex = new RegExp(keyword, "gi");
   const hightlight = `<span style="background:#F4E62A
   ">${keyword}</span>`
   const result = text.replace(regex, hightlight);
 
-
-
+  // console.log(pid,heartClickState,state)
+ 
   return (
     <div className={`${styles.container}  p30px`}>
       {/* 產品圖 */}
@@ -161,14 +190,17 @@ export default function ShopProductsCard({
         <span className={`${styles.inlineBlock} ${styles.icons}`}>
           {/* 愛心 */}
           <span
-            onClick={handleHeartClick}
+            onClick={()=>{
+              heartClickState ? deleteFromFav() : addToFav()
+              handleHeartClick()
+              }}
             onMouseEnter={() => handleMouseEnter(1)}
             onMouseLeave={handleMouseLeave}
             className={`${styles.inlineBlock} me5px`}
           >
             <Image
               src={
-                isHeartHovered || heartClickState ? heart_fill : heart_outline
+                 heartClickState || isHeartHovered? heart_fill : heart_outline
               }
               alt=""
               width={20}
