@@ -66,8 +66,7 @@ export default function Pid() {
         // 重置數量
         setCount(1)
       })
-
-    
+      
     fetch(`${process.env.API_SERVER}/shop/favoriteMatch`)
     .then((r) => r.json())
     .then((data) => {
@@ -76,21 +75,30 @@ export default function Pid() {
     })
   }, [router.query])
   
-  const foundItem = pidArr?.some((v) => v.pid === Number(router.query.pid));
+  // 查看有無喜好商品
+  const foundFav = pidArr?.some((v) => v.pid === Number(router.query.pid));
+  const foundCart = cartData.some((v)=> v.pid === Number(router.query.pid));
+  // console.log(foundCart);
 
   //判斷有無點擊收藏和購物車
   const { clickState: heartClickState, handleClick: handleHeartClick, setClickState: setHeartClickState } =
-    useClick(foundItem)
+    useClick(foundFav)
+  const { clickState: cartClickState, handleClick: handleCartClick, setClickState: setCartClickState } =
+    useClick(foundCart)
 
-  const { clickState: cartClickState, handleClick: handleCartClick } =
-    useClick(false)
-
-
+  // 確定喜好商品狀態
   useEffect(()=>{
-    if(foundItem!=heartClickState){
-      setHeartClickState(foundItem)
+    if(foundFav!=heartClickState){
+      setHeartClickState(foundFav)
     }
-  },[foundItem])
+  },[foundFav])
+
+  // 確定購物車狀態
+  useEffect(()=>{
+    if(foundCart!=cartClickState){
+      setCartClickState(foundCart)
+    }
+  },[foundCart])
   
 
   // 防呆
@@ -117,8 +125,7 @@ export default function Pid() {
       .replace(/[。]/g, (match) => `${match}<br /><br />`)
       .replace(/＊必買原因＊/g, '<br /><br />＊必買原因＊<br />')
       .replace(/＊必吃原因＊/g, '<br /><br />＊必吃原因＊<br />')
-    return result
-  }
+    return result}
 
   // 購物車彈跳動畫
   const y = 0
@@ -180,7 +187,6 @@ export default function Pid() {
       })
   }
   insertHistory()
-
 
   // 加入喜好商品
   const addToFav = () => {
