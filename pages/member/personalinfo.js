@@ -20,6 +20,9 @@ export default function Personalinfo() {
   const [user, setUser] = useState('');
   const [invalidFields, setInvalidFields] = useState([])
   const [errorMessage, setErrorMessage] = useState('') // Define a state variable to store the error message
+  const [getImg, setGetImg] = useState('')
+
+
 
   useEffect(() => {
     console.log(`personalinfo頁面 有沒有auth.token?1`, auth.token)
@@ -46,7 +49,39 @@ export default function Personalinfo() {
   }
 }, [auth.token]);
 
-// Convert the date format to "yyyy-MM-dd"
+
+
+
+
+useEffect(() => {
+  if (auth.token) {
+    fetch(process.env.API_SERVER + '/member/changeImage', {
+      headers: {
+        "Authorization": "Bearer " + auth.token,
+      },
+    })
+    .then((r) => r.json())
+    .then((data) => {
+      console.log(data);
+      if (data && data.member_profile) {
+        // 從後端獲取到圖片資料，現在您可以將其顯示在前端
+        const imageURL = process.env.API_SERVER + '/img/' + data.member_profile;
+        setGetImg(imageURL);
+
+      } 
+      console.log(data.member_profile);
+    
+    });
+}else {
+  // Handle the case when auth.token is not available or user is not logged in
+  // You can add any additional logic here
+  console.log("用戶尚未註冊");
+}
+}, [auth.token]);
+
+
+
+
 // Convert the date format to "YYYY-MM-DD"
   useEffect(() => {
     if (user.member_birthday) {
@@ -54,6 +89,61 @@ export default function Personalinfo() {
       setUser((prevUser) => ({ ...prevUser, member_birthday: formattedBirthday }));
     }
   }, [user.member_birthday]);
+
+  
+
+// 上傳照片測試
+// const changeImg = (e) => {
+//   e.preventDefault();
+//   const fd = new FormData();
+//   fd.append('preImg', e.target.files[0]);
+
+// const str = localStorage.getItem('auth');
+// if(str){
+//   const obj = JSON.parse(str)
+//   const Authorization = "Bearer " + obj.token;
+//   fetch(process.env.API_SERVER+ '/member/changeImage', {
+//     method:'POST',
+//     body: fd,
+//     headers:{
+//       Authorization,
+//     },
+//   })
+//   .then((res) => res.json())
+//   .then((data)=>{
+//     setGetImg(data.filename);
+//     // SettingsInputAntennaSharp({...Authorization,photo: data.filename});
+//   })
+// }
+// }
+const changeImg = (e) => {
+  e.preventDefault();
+  const fd = new FormData();
+  fd.append('preImg', e.target.files[0]);
+
+  const str = localStorage.getItem('auth');
+  if (str) {
+    const obj = JSON.parse(str);
+    const Authorization = "Bearer " + obj.token;
+    fetch(process.env.API_SERVER + '/member/changeImage', {
+      method: 'POST',
+      body: fd,
+      headers: {
+        Authorization,
+      },
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      setGetImg(process.env.API_SERVER + '/img/' + data.filename); // Set the image URL with the server URL and filename
+    })
+    
+    .catch((error) => {
+      console.error('Error uploading image:', error);
+    });
+  }
+};
+// 上傳照片測試
+
 
 
 // 定義驗證規則
@@ -226,7 +316,9 @@ const fetchJWT = async () => {
       alert('資料有誤，請確認修改欄位' + error);
     }
 };
-
+// if (loading) {
+//   return <div>Loading...</div>; // 等待取得使用者的 member_profile
+// }
   return (
     <div className={styles.flex}>
       <Container>
@@ -239,7 +331,28 @@ const fetchJWT = async () => {
               width={860}
             />
           </Col>
+   
         </Row>
+       {/* Add the upload image button */}
+          <Row className={styles.flex_centre}>
+          <Col>
+          {/* <img src={getImg} alt="Uploaded" height={200} />*/}
+          <img src='http://localhost:3002/img/a6b1976d-0085-4ca8-98b8-9617dac3c342.jpg' alt="Uploaded" height={200} />
+          <img src={getImg} height={200} />
+
+          
+          
+          </Col>
+        </Row>
+
+      <Row className={styles.flex_centre}>
+        <Col>
+          <form>
+            <input type="file" onChange={changeImg} />
+          </form>
+        </Col>
+      </Row>
+       {/* Add the upload image button */}
 
         <MemberNavbar />
         <form onSubmit={edit}>

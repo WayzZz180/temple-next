@@ -212,6 +212,9 @@ if(str){
         </Row>
       </Container>
 
+
+  
+
       <Container>
         <form onSubmit={doSignUp}>
           <Row>
