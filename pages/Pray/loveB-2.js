@@ -5,87 +5,62 @@ import Button from '@/components/common/button'
 import Light from '@/components/common/pray_light/light_row'
 import Light2 from '@/components/common/pray_light/light_row2'
 import love from '@/assets/loveGod.svg'
+import { Route, useRouter } from 'next/router'
 
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+
 
 export default function Love2() {
-  const [data, setData] = useState({})
-  const [selectedLetters, setSelectedLetters] = useState({})
-  const [requestData, setRequestData] = useState(null) 
+  const Router = useRouter()
+  const [user, setUser] = useState({
+    Member_ID: '',
+    Tower_ID: '',
+    All_Light: '',
+    LocationX: '',
+    LocationY: '',
+    Datetime:'',
+  })
+  console.log(user)
+//   const [index,setIndex]=useState({})
+// console.log(index)
+  // const changeUser = (e) => {
+  //   setUser((old) => ({ ...old, LocationX: text , LocationY: indexY}))
+  // }
 
-  useEffect(() => {
-    fetch(process.env.API_SERVER + '/Pray/loveB-2', {
+  const handleSumbit = (e) => {
+    e.preventDefault()
+
+    fetch(process.env.API_SERVER + '/pray/loveB-2', {
       method: 'POST',
-      body: JSON.stringify({ requestData: 'Datetime' }),
+      body: JSON.stringify(user),
       headers: {
         'Content-Type': 'application/json',
       },
     })
       .then((r) => r.json())
-      .then((data) => {
-        setData(data)
+      .then((result) => {
+        console.log(result)
       })
-  }, [])
-
-  const handleLetterClick = (letter) => {
-    setSelectedLetters((prevSelected) => ({
-      ...prevSelected,
-      [letter]: true,
-    }))
+    setTimeout(() => {
+      Router.push('/pray/loveB-3')
+    }, 2000)
   }
-
-  const handleSelectDone = () => {
-    // 將已點選的字母組成陣列，準備傳送到後端
-    const selectedLettersArray = Object.keys(selectedLetters).filter(
-      (letter) => selectedLetters[letter]
-    )
-
-    // 準備要傳送的資料
-    const requestData = { selectedLetters: selectedLettersArray }
-
-    // 呼叫後端 API 儲存資料
-    fetch(process.env.API_SERVER + '/Pray/loveB-2/saveSelectedLetters', {
-      method: 'POST',
-      body: JSON.stringify(requestData),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        console.log('資料已儲存至資料庫:', data)
-        // 可以在此處更新資料或顯示訊息等
-      })
-  }
-
-  const shouldUseHotPink = (letter) => {
-    if (data[letter] !== null && selectedLetters[letter]) {
-      return true
-    }
-    return false
-  }
-
   return (
     <>
       <div className={styles.parent_container}>
         <div className={styles.flex_row}>
           <div className={styles.flex_col}>
-            {letters.split('').map((letter) => (
-              <Light
-                key={letter}
-                text={letter}
-                className={shouldUseHotPink(letter) ? 'hot_pink' : ''}
-                onClick={() => handleLetterClick(letter)}
-              />
+          {letters.map((letter,i) => (
+              <Light key={letter} text={letter} indexY={letters[i]} setUser={setUser}/>
             ))}
             <div className={`${styles.text2}`}>正面</div>
-            <div className={`${styles.line}`}></div>
-          </div>
-          <div className={`${styles.flex_col}`}>
+            <div  className={`${styles.line}`}></div>
+            </div>
+            <div className={`${styles.flex_col}`}>
             <div className={`${styles.flex_col2}`}>
-              <div>姻</div>
-              <div>緣</div>
-              <div>燈</div>
+            <div>姻</div>
+            <div>緣</div>
+            <div>燈</div>
             </div>
             <Image
               src={love}
@@ -93,27 +68,17 @@ export default function Love2() {
               width="340"
               className={`${styles.love}`}
             ></Image>
-            <div className={`${styles.text}`}>
-              點選欲點燈的位子，桃色為不可選
-            </div>
-            {/* 按下按鈕時呼叫 handleSelectDone 函式 */}
-            <Button
-              text="選好了"
-              btnColor="hot_pink"
-              onClick={handleSelectDone}
-            />
+            <div className={`${styles.text}`}>點選欲點燈的位子，桃色為不可選</div>
+            <Button text="選好了" btnColor="hot_pink" link={(e) => {
+                handleSumbit(e)
+              }}/>
           </div>
-          <div className={styles.flex_col}>
-            {letters.split('').map((letter) => (
-              <Light2
-                key={letter}
-                text={letter}
-                className={shouldUseHotPink(letter) ? 'hot_pink' : ''}
-                onClick={() => handleLetterClick(letter)}
-              />
+            <div className={styles.flex_col}>
+            {letters.map((letter,i) => (
+              <Light2 key={letter} text={letter} indexY={letters[i]}  setUser={setUser}/>
             ))}
             <div className={`${styles.text2}`}>背面</div>
-            <div className={`${styles.line}`}></div>
+            <div  className={`${styles.line}`}></div>
           </div>
         </div>
       </div>

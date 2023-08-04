@@ -107,6 +107,18 @@
     top:200px
     left:270px
     z-index:1 
+    visibility: hidden
+    animation: name 5s ease
+
+@keyframes name
+  0% 
+    opacity: 0
+  40% 
+    opacity: 0
+
+  100% 
+    opacity: 1
+    
 
 .title
    position: absolute
@@ -122,6 +134,18 @@
    left:255px
    top:230px
    z-index:2
+   visibility: hidden
+   animation: title 5s ease
+
+
+@keyframes title
+  0% 
+    opacity: 0
+  40% 
+    opacity: 0
+
+  100% 
+    opacity: 1
 
 .nemberGroup
     position: absolute
@@ -151,3 +175,50 @@
     left:8px
     z-index:1 
 
+.leftmove
+    z-index:2 
+    animation: leftmove 1s ease-out 
+
+@keyframes leftmove 
+  0% 
+    transform: translateY(350px)
+    opacity: 0
+
+  100% 
+    transform: translateY(0px)
+    opacity: 1
+
+.rightmove
+    z-index:1
+    visibility: hidden
+    animation: rightmove 3s ease-out 
+
+@keyframes rightmove 
+  0% 
+    transform: translate(-350px,200px)
+    opacity: 0
+  30% 
+    transform: translate(-350px,200px)
+    opacity: 0
+
+  100% 
+    transform: translate(0px,0px)
+    opacity: 1
+
+.btns
+  z-index: 4
+  visibility: hidden
+  position: relative
+  animation: btn 5s ease
+
+@keyframes btn
+  0% 
+    opacity: 0
+  40% 
+    opacity: 0
+
+  100% 
+    opacity: 1
+
+.show
+    visibility: visible

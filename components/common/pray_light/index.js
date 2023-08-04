@@ -4,11 +4,12 @@ import styles from './light.module.sass'
 import on from '@/assets/light_pink.svg'
 import off from '@/assets/light_off.svg'
 
-export default function lightButton({ text = '1' }) {
+export default function lightButton({ text = '1', indexY, setUser, user }) {
   const [isOn, setIsOn] = useState(false)
 
   const toggleLight = () => {
     setIsOn((prevIsOn) => !prevIsOn)
+    setUser({ ...user, LocationX: text, LocationY: indexY })
   }
   return (
     <>
@@ -20,7 +21,7 @@ export default function lightButton({ text = '1' }) {
           height="33"
           className={`${styles.button}`}
         />
-        <div className={`${styles.text}`} onClick={toggleLight} >
+        <div className={`${styles.text}`} onClick={toggleLight}>
           {text}
         </div>
       </div>

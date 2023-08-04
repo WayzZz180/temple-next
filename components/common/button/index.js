@@ -20,6 +20,7 @@ export default function Button({
     <>
       <button
         onClick={link}
+        type={type}
         className={`${styles.btn}`}
         style={{
           backgroundColor: var_color,
@@ -27,7 +28,6 @@ export default function Button({
           height: `${height}`,
           padding: `${padding}`,
           fontSize: `${fontSize}`,
-          type:`${type}`,
         }}
       >
         <span className={`${styles.IconContainer} `}>

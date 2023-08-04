@@ -8,8 +8,39 @@ import star from '@/assets/Star_pink.svg'
 import handLeft from '@/assets/handLeft.svg'
 import handRight from '@/assets/handRight.svg'
 import Input from '@/components/common/inputBox'
+import { Route, useRouter } from 'next/router'
 
-export default function Mazu1() {
+export default function LoveA1() {
+  const Router = useRouter()
+  const [user, setUser] = useState({
+    Member_ID: '',
+    Name: '',
+    Birthday: '',
+    Address: '',
+    Datetime:'',
+  })
+  const changeUser = (e) => {
+    setUser((old) => ({ ...old, [e.target.id]: e.target.value }))
+  }
+
+  const handleSumbit = (e) => {
+    e.preventDefault()
+    const postData = user
+    fetch(process.env.API_SERVER + '/pray/loveA-1', {
+      method: 'POST',
+      body: JSON.stringify({ requestData: postData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((result) => {
+        console.log(result)
+      })
+    setTimeout(() => {
+      Router.push('/pray/loveA-2')
+    }, 2000)
+  }
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
@@ -86,24 +117,49 @@ export default function Mazu1() {
             </div>
           </div>
         </div>
-        <div className={`${styles.inputAn} ${isVisible ? styles.show : ''}`}>
-          <div className={`${styles.input} `}>
-            <Input width="230px" placeholder="姓名" />
-            <Input
-              width="260px"
-              type="date"
-              placeholder="出生年月日"
-              inputValue="出生年月日"
-            />
-            <Input width="485px" placeholder="現居地址" />
+        <form className={`${styles.form}`}>
+          <div className={`${styles.inputAn} ${isVisible ? styles.show : ''}`}>
+            <div className={`${styles.input} `}>
+              <Input
+                id="Name"
+                name="Name"
+                width="230px"
+                placeholder="姓名"
+                value={user.Name}
+                onChange={changeUser}
+              />
+              <Input
+                id="Birthday"
+                name="Birthday"
+                width="260px"
+                type="date"
+                value={user.Birthday}
+                onChange={changeUser}
+              />
+              <Input
+                id="Address"
+                name="Address"
+                width="485px"
+                placeholder="現居地址"
+                value={user.Address}
+                onChange={changeUser}
+              />
+            </div>
           </div>
-        </div>
-        <div className={`${styles.btn} ${isVisible ? styles.show : ''}`}>
-          <Button text="擲筊" btnColor="hot_pink" />
-        </div>
+          <div className={`${styles.btn} ${isVisible ? styles.show : ''}`}>
+            <Button
+              text="擲筊"
+              btnColor="brown"
+              type="submit"
+              link={(e) => {
+                handleSumbit(e)
+              }}
+            />
+          </div>
+        </form>
       </div>
     </>
   )
 }
 
-Mazu1.getLayout = (page) => <>{page}</>
+LoveA1.getLayout = (page) => <>{page}</>
