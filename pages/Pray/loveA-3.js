@@ -10,7 +10,7 @@ import downcould from '@/assets/CCouldD.svg'
 import redline from '@/assets/redline.svg'
 import star from '@/assets/Star_pink.svg'
 
-export default function Mazu3() {
+export default function LoveA3() {
   return (
     <>
       <div className={styles.parent_container}>
@@ -92,4 +92,4 @@ export default function Mazu3() {
   )
 }
 
-Mazu3.getLayout = (page) => <>{page}</>
+LoveA3.getLayout = (page) => <>{page}</>

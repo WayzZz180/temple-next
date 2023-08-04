@@ -1,6 +1,5 @@
 @import '@/styles/_variables.module.sass'
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;900&display=swap')
-
 .container
     display: flex
     position: relative
@@ -36,13 +35,13 @@
     transform: translate(0px, 15px)
 
 .fairyL2
-    animation: fairyL2 5s ease-in-out 1
+    animation: fairyL2 2s ease-in-out 1
 
 @keyframes fairyL2
   0% 
-    transform: translate(1800px, -1500px)rotate(120deg)
+    transform: translate(400px, -250px)rotate(20deg)
     opacity: 0
-  50%
+  20%
     opacity: 0
   100% 
     transform: translate(0px, 0px)
@@ -63,13 +62,13 @@
     transform: translate(0px, 15px)
 
 .fairyR2
-    animation: fairyR2 5s ease-in-out 1
+    animation: fairyR2 2s ease-in-out 1
 
 @keyframes fairyR2
   0% 
-    transform: translate(-1800px, -1500px)rotate(-120deg)
+    transform: translate(-400px, -250px)rotate(-20deg)
     opacity: 0
-  50%
+  20%
     opacity: 0
   100% 
     transform: translate(0px, 0px)
@@ -126,17 +125,19 @@
 .roof
     display: flex
     position: absolute
-    top:720px
+    top:600px
     left:110px
     z-index: 3
 
 .flex_col2
     display: flex
     position: relative
-    width:100%
+    width:1920px
     flex-direction: column
     align-items: center
     justify-content: center
+    overflow: hidden
+
 
 .c1
     position: absolute
@@ -167,3 +168,93 @@
 .c1_3
     transform: rotateY(-180deg)
 
+.scoreL
+  position: absolute
+  left:768px
+  bottom: 0px
+  z-index: 4
+  transform-origin: left
+  animation: scoreL 4s linear 1 forwards
+
+@keyframes scoreL
+  0% 
+     transform: rotateY(0deg)
+  100% 
+     transform: rotateY(-180deg)
+
+.scoreR
+  position: absolute
+  right:773px
+  bottom: 0px
+  z-index: 4
+  transform-origin: right
+  animation: scoreR 4s linear 1 forwards
+
+@keyframes scoreR
+  0% 
+     transform: rotateY(0deg)
+  100% 
+     transform: rotateY(-180deg)
+
+.coupontext
+  position: absolute
+  color: #FFF
+  font-family:"Noto Sans TC", sans-serif
+  font-size: 30px
+  font-weight: 900
+  letter-spacing: 10px
+  bottom:90px
+
+.coupon
+  position: absolute
+  bottom:180px
+  filter: drop-shadow(0.5rem 0.5rem 0.5rem #F4E62A)drop-shadow(-0.5rem -0.5rem 0.5rem #F4E62A)
+  cursor: pointer
+  animation: coupon 1s ease-in-out infinite alternate
+
+@keyframes coupon
+  0% 
+    transform: translate(0px, -15px)
+
+  100% 
+    transform: translate(0px, 15px)
+
+.scoretext1
+  position: absolute
+  color: #FFF
+  font-family:'Noto Serif TC', serif
+  font-size: 100px
+  font-weight: 900
+  bottom:655px
+  left:522px
+
+.scoretext2
+  position: absolute
+  color: #FFF
+  font-family:'Noto Serif TC', serif
+  font-size: 100px
+  font-weight: 900
+  bottom:655px
+  left:782px
+
+.scoretext3
+  position: absolute
+  color: #FFF
+  font-family:'Noto Serif TC', serif
+  font-size: 100px
+  font-weight: 900
+  bottom:655px
+  right:805px
+
+.scoretext4
+  position: absolute
+  color: #FFF
+  font-family:'Noto Serif TC', serif
+  font-size: 100px
+  font-weight: 900
+  bottom:655px
+  right:526px
+
+.score
+  position: relative
+  left:-2.5px

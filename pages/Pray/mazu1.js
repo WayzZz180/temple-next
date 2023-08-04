@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
+import { Link } from 'react-router-dom'
 import mazu from '@/assets/mazuGod.svg'
 import godlight from '@/assets/GodLight.svg'
 import styles from './mazu1.module.sass'
@@ -8,13 +9,39 @@ import star from '@/assets/Star_pink.svg'
 import handLeft from '@/assets/handLeft.svg'
 import handRight from '@/assets/handRight.svg'
 import Input from '@/components/common/inputBox'
+import { Route, useRouter } from 'next/router'
 
 export default function Mazu1() {
-  const [name, setName] = useState('')
-  const [birthday, setBirthday] = useState('')
-  const [address, setAddress] = useState('')
+  const Router = useRouter()
+  const [user, setUser] = useState({
+    Member_ID: '',
+    Name: '',
+    Birthday: '',
+    Address: '',
+  })
+  const changeUser = (e) => {
+    setUser((old) => ({ ...old, [e.target.id]: e.target.value }))
+  }
+
+  const handleSumbit = (e) => {
+    e.preventDefault()
+    const postData = user
+    fetch(process.env.API_SERVER + '/pray/mazu1', {
+      method: 'POST',
+      body: JSON.stringify({ requestData: postData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((result) => {
+        console.log(result)
+      })
+    setTimeout(() => {
+      Router.push('/pray/mazu2')
+    }, 2000)
+  }
   const [isVisible, setIsVisible] = useState(false)
-  const [sumbit, setSumbit] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -90,36 +117,46 @@ export default function Mazu1() {
             </div>
           </div>
         </div>
-        {/* <form id="personal" onSumbit={handleSumbit}> */}
+        <form className={`${styles.form}`}>
           <div className={`${styles.inputAn} ${isVisible ? styles.show : ''}`}>
             <div className={`${styles.input} `}>
               <Input
-                name="name"
+                id="Name"
+                name="Name"
                 width="230px"
                 placeholder="姓名"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={user.Name}
+                onChange={changeUser}
               />
               <Input
-                name="birthday"
+                id="Birthday"
+                name="Birthday"
                 width="260px"
                 type="date"
-                value={birthday}
-                onChange={(e) => setBirthday(e.target.value)}
+                value={user.Birthday}
+                onChange={changeUser}
               />
               <Input
-                name="address"
+                id="Address"
+                name="Address"
                 width="485px"
                 placeholder="現居地址"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                value={user.Address}
+                onChange={changeUser}
               />
             </div>
           </div>
           <div className={`${styles.btn} ${isVisible ? styles.show : ''}`}>
-            <Button text="擲筊" btnColor="brown" type="submit" />
+            <Button
+              text="擲筊"
+              btnColor="brown"
+              type="submit"
+              link={(e) => {
+                handleSumbit(e)
+              }}
+            />
           </div>
-        {/* </form> */}
+        </form>
       </div>
     </>
   )

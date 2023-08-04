@@ -8,7 +8,13 @@ import circle_1 from '@/assets/circle_1.svg'
 import sun from '@/assets/sun.svg'
 import roof from '@/assets/roof.svg'
 import c1 from '@/assets/littleC1.svg'
+import score from '@/assets/score.svg'
+import scoreDL from '@/assets/scoreDoorL.svg'
+import scoreDR from '@/assets/scoreDoorR.svg'
+import coupon from '@/assets/coupon.svg'
 import House from '@/components/common/temple/house'
+import Footer from '@/components/layout/footer'
+import Header from '@/components/layout/header'
 
 export default function Quiz() {
   const [data, setData] = useState({
@@ -22,10 +28,6 @@ export default function Quiz() {
   useEffect(() => {
     fetch(process.env.API_SERVER + '/pilgrimage/onlineQuiz', {
       method: 'GET',
-    //   body: JSON.stringify({ requestData: 'Question_ID' }),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
     })
       .then((r) => r.json())
       .then((data) => {
@@ -105,7 +107,38 @@ export default function Quiz() {
             c={i.option3}
           />
         ))}
+        <Image
+          src={score}
+          alt=""
+          width="1860"
+          className={`${styles.score}`}
+        ></Image>
+        <Image
+          src={scoreDL}
+          alt=""
+          width="195"
+          className={`${styles.scoreL}`}
+        ></Image>
+        <Image
+          src={scoreDR}
+          alt=""
+          width="195"
+          className={`${styles.scoreR}`}
+        ></Image>
+        <Image
+          src={coupon}
+          alt=""
+          width="215"
+          className={`${styles.coupon}`}
+        ></Image>
+        <div className={`${styles.coupontext}`}>獲得折價券乙張</div>
+        <div className={`${styles.scoretext1}`}>答</div>
+        <div className={`${styles.scoretext2}`}>對</div>
+        <div className={`${styles.scoretext3}`}>5</div>
+        <div className={`${styles.scoretext4}`}>題</div>
       </div>
     </>
   )
 }
+
+Quiz.getLayout = (page) => (<>{page}</>)

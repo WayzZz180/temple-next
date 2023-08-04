@@ -73,7 +73,34 @@ const numberToChinese = (number) => {
 }
 export default function Mazu4() {
   const Router = useRouter()
+  const [user, setUser] = useState({
+    Member_ID: '',
+    Name: '',
+    Birthday: '',
+    Address: '',
+  })
+  const changeUser = (e) => {
+    setUser((old) => ({ ...old, [e.target.id]: e.target.value }))
+  }
 
+  const handleSumbit = (e) => {
+    e.preventDefault()
+    const postData = user
+    fetch(process.env.API_SERVER + '/pray/mazu4', {
+      method: 'POST',
+      body: JSON.stringify({ requestData: postData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((result) => {
+        console.log(result)
+      })
+    setTimeout(() => {
+      Router.push('/member')
+    }, 2000)
+  }
   const ButtonClick = () => {
     Router.push('/Home')
   }
@@ -84,7 +111,7 @@ export default function Mazu4() {
 
   useEffect(() => {
     const randomNum = Math.floor(Math.random() * 60) + 1
-    setRandomNumber(randomNum),setImageNumber(randomNum)
+    setRandomNumber(randomNum), setImageNumber(randomNum)
   }, [])
 
   const handleBoxClick = () => {
@@ -145,7 +172,9 @@ export default function Mazu4() {
             <div className={`${styles.nemberGroup}`}>
               <div className={`${styles.mark1}`}>[</div>
               <div className={`${styles.nemberTitle}`}>No.{imageNumber} /</div>
-              <div className={`${styles.nember}`}>
+              {/* value={user.Name} */}
+              <div className={`${styles.nember}`}  
+                onChange={changeUser}>
                 第{numberToChinese(imageNumber)}首
               </div>
               <div className={`${styles.mark2}`}>]</div>
@@ -153,7 +182,9 @@ export default function Mazu4() {
             <div className={`${styles.line}`}></div>
             <div className={`${styles.btns}`}>
               <Button text="解籤" btnColor="hot_pink" link={handleBoxClick} />
-              <Button text="分享" btnColor="hot_pink" />
+              <Button text="收藏" btnColor="hot_pink" link={(e) => {
+                handleSumbit(e)
+              }}/>
               <Button text="回首頁" btnColor="hot_pink" link={ButtonClick} />
             </div>
           </div>
