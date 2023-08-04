@@ -28,44 +28,44 @@ export default function ShopProductsCard({
   pid = 1,
   stars = 5,
   stock_num = 10,
-  keyword="",
-  state=false,
+  keyword = '',
+  state = false,
 }) {
-  const router =useRouter()
+  const router = useRouter()
   const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
   const { cartData, setCartData, getCartData } = useContext(CartDataContext)
 
   //判斷hover
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-1)
-  const   isHeartHovered = hoveredIndex === 1
+  const isHeartHovered = hoveredIndex === 1
   const isCartHovered = hoveredIndex === 2
 
   //判斷有無點擊收藏和購物車
-  const { clickState: heartClickState, handleClick: handleHeartClick, setClickState: setHeartClickState } =
-  useClick({state})
+  const {
+    clickState: heartClickState,
+    handleClick: handleHeartClick,
+    setClickState: setHeartClickState,
+  } = useClick({ state })
 
-  useEffect(()=>{
-    if(heartClickState != state){
+  useEffect(() => {
+    if (heartClickState != state) {
       setHeartClickState(state)
     }
-  },[state])
+  }, [state])
 
-  const foundCart = cartData.some((v)=> v.pid === pid);
-  
+  const foundCart = cartData.some((v) => v.pid === pid)
+
   const {
     clickState: cartClickState,
     handleClick: handleCartClick,
     setClickState: setClickState,
   } = useClick(foundCart)
 
-  useEffect(()=>{
-    if(cartClickState != foundCart){
+  useEffect(() => {
+    if (cartClickState != foundCart) {
       setHeartClickState(foundCart)
     }
-  },[foundCart])
-
-
-  
+  }, [foundCart])
 
   //購物車彈跳＋1動畫
   const [animationEnd, setAnimationEnd] = useState(false)
@@ -123,8 +123,7 @@ export default function ShopProductsCard({
       },
     })
       .then((r) => r.json())
-      .then((data) => {
-      })
+      .then((data) => {})
   }
 
   // 刪除喜好商品
@@ -138,18 +137,17 @@ export default function ShopProductsCard({
         'Content-Type': 'application/json',
       },
     })
-    .then((r) => r.json())
-    .then((data) => {
-    })
+      .then((r) => r.json())
+      .then((data) => {})
   }
 
-  const regex = new RegExp(keyword, "gi");
+  const regex = new RegExp(keyword, 'gi')
   const hightlight = `<span style="background:#F4E62A
   ">${keyword}</span>`
-  const result = text.replace(regex, hightlight);
+  const result = text.replace(regex, hightlight)
 
   // console.log(pid,heartClickState,state)
- 
+
   return (
     <div className={`${styles.container}  p30px`}>
       {/* 產品圖 */}
@@ -167,8 +165,11 @@ export default function ShopProductsCard({
       {/* 標題 */}
       <Link href={`/shop/${category}/${pid}`} className="link">
         <div className={`${styles.flexStart} mt15px fwBold fs18px`}>
-          <div className={`${styles.textContainer} w180px h55px`} id='text'
-           dangerouslySetInnerHTML={{ __html: result }}></div>
+          <div
+            className={`${styles.textContainer} w180px h55px`}
+            id="text"
+            dangerouslySetInnerHTML={{ __html: result }}
+          ></div>
         </div>
       </Link>
       {/* 星星 */}
@@ -200,17 +201,17 @@ export default function ShopProductsCard({
         <span className={`${styles.inlineBlock} ${styles.icons}`}>
           {/* 愛心 */}
           <span
-            onClick={()=>{
+            onClick={() => {
               heartClickState ? deleteFromFav() : addToFav()
               handleHeartClick()
-              }}
+            }}
             onMouseEnter={() => handleMouseEnter(1)}
             onMouseLeave={handleMouseLeave}
             className={`${styles.inlineBlock} me5px`}
           >
             <Image
               src={
-                 heartClickState || isHeartHovered? heart_fill : heart_outline
+                heartClickState || isHeartHovered ? heart_fill : heart_outline
               }
               alt=""
               width={20}

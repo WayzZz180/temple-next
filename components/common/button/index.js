@@ -7,7 +7,7 @@ import Image from 'next/image'
 // btnColor = black, green, hot_pink, brown
 export default function Button({
   text = 'text',
-  btnColor = 'btn',
+  btnColor = 'hot_pink',
   width = '',
   height = '',
   padding = '15px 60px',
