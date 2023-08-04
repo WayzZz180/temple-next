@@ -1,17 +1,23 @@
 import styles from '@/pages/member/personalinfo.module.sass'
 import { AuthContextProvider } from '@/contexts/AuthContext'
 import AuthContext from '@/contexts/AuthContext'
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useRouter } from 'next/router'
+import Modal from 'react-modal';
 
 // components
 import InputBox from '@/components/common/inputBox/index.js'
-import Title from '@/components/common/title/index.js'
+import MemberTitle from '@/components/common/title/memberTitle';
+
 import Button from '@/components/common/button/index.js'
 import MemberNavbar from '@/components/common/memberNavbar/index.js'
+import ProfilePhoto from '@/components/common/profilePhoto';
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
+
+
+
 
 export default function Personalinfo() {
   const { auth, setAuth, logout } = useContext(AuthContext);
@@ -20,7 +26,12 @@ export default function Personalinfo() {
   const [user, setUser] = useState('');
   const [invalidFields, setInvalidFields] = useState([])
   const [errorMessage, setErrorMessage] = useState('') // Define a state variable to store the error message
+  const [getImg, setGetImg] = useState('')
+  const [modalIsOpen, setModalIsOpen] = useState(false); // 跟蹤 modal 是否打開
 
+
+  
+//拿token
   useEffect(() => {
     console.log(`personalinfo頁面 有沒有auth.token?1`, auth.token)
     if (auth.token) {
@@ -30,7 +41,6 @@ export default function Personalinfo() {
         },
       })
 
-      
       .then((r) => r.json())
       .then((data) => {
         console.log(`personalinfo頁面 有沒有auth.token?2`, auth.token, data);
@@ -46,7 +56,9 @@ export default function Personalinfo() {
   }
 }, [auth.token]);
 
-// Convert the date format to "yyyy-MM-dd"
+
+
+
 // Convert the date format to "YYYY-MM-DD"
   useEffect(() => {
     if (user.member_birthday) {
@@ -54,6 +66,7 @@ export default function Personalinfo() {
       setUser((prevUser) => ({ ...prevUser, member_birthday: formattedBirthday }));
     }
   }, [user.member_birthday]);
+
 
 
 // 定義驗證規則
@@ -230,17 +243,19 @@ const fetchJWT = async () => {
   return (
     <div className={styles.flex}>
       <Container>
-        <Row>
+        
+      <ProfilePhoto/>
+      <Row>
           <Col>
-            <Title
+            <MemberTitle
               text="變更資料"
               text2="PERSONAL INFO"
               lineColor="green"
               width={860}
             />
-          </Col>
+          </Col>    
         </Row>
-
+       
         <MemberNavbar />
         <form onSubmit={edit}>
         <Row className={styles.flex_space_between}>
