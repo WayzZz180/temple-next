@@ -29,7 +29,7 @@ export default function ShopProductsCard({
   stars = 5,
   stock_num = 10,
   keyword="",
-  state,
+  state=false,
 }) {
   const router =useRouter()
   const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
@@ -50,11 +50,22 @@ export default function ShopProductsCard({
     }
   },[state])
 
+  const foundCart = cartData.some((v)=> v.pid === pid);
+  
   const {
     clickState: cartClickState,
     handleClick: handleCartClick,
     setClickState: setClickState,
-  } = useClick(false)
+  } = useClick(foundCart)
+
+  useEffect(()=>{
+    if(cartClickState != foundCart){
+      setHeartClickState(foundCart)
+    }
+  },[foundCart])
+
+
+  
 
   //購物車彈跳＋1動畫
   const [animationEnd, setAnimationEnd] = useState(false)
@@ -81,7 +92,6 @@ export default function ShopProductsCard({
     setAnimationEnd(true)
     setTimeout(() => {
       setAnimationEnd(false)
-      setClickState(false)
     }, 1200)
   }
 
@@ -210,7 +220,7 @@ export default function ShopProductsCard({
           <span
             onClick={() => {
               if (stock_num != 0) {
-                handleCartClick()
+                !foundCart && handleCartClick()
                 handleAnimationEnd()
                 addToCart()
               } else {
