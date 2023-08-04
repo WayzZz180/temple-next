@@ -1,18 +1,14 @@
 import styles from './style.module.sass'
 
-//hooks
-import { useState, useEffect, useContext } from 'react'
-import { useRouter } from 'next/router'
-
 // bootstrap
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 // components
 import ShopWannaBuyCard from '@/components/common/cards/ShopWannaBuyCard'
+import NoData from '../category/noData'
 
 export default function wannaBuy({data}) {
-  const router = useRouter()
 
   // 下次再買標題
   const title_wannaBuy = [
@@ -22,9 +18,6 @@ export default function wannaBuy({data}) {
     { width: '5.5%', text: '庫存' },
     { width: '17%', text: '加入時間' },
   ]
-
-  // 即時更新資料的狀態
-  const [state, setState] = useState(false)
   
   return (
     <>
@@ -48,13 +41,7 @@ export default function wannaBuy({data}) {
         </Row>
         {/* 購物車內容 */}
         {data?.length === 0 ? (
-          <Row className="nowrap">
-            <Col className={`${styles.insertInfo} mt100px fs24px`}>
-              {/* 快去新增幾筆商品吧！ */}
-              物即是空，空即是物
-              <div className={`${styles.line} mt100px`}></div>
-            </Col>
-          </Row>
+          <NoData />
         ) : 
           data?.map((v, i) => (
             <ShopWannaBuyCard
@@ -66,8 +53,6 @@ export default function wannaBuy({data}) {
               pid={`${v.pid}`}
               cid={`${v.cid}`}
               date={`${v.created_at}`}
-              setState={setState}
-              state={state}
             />
           ))}
     </>

@@ -7,11 +7,15 @@ import Leftgod from '@/assets/leftgod.svg'
 import ForumLogo from '@/components/common/forumlogo'
 import Title from '@/components/common/title'
 import Forumcard from '@/components/common/cards/forumcard'
+import Head from 'next/head'
 // import gossiplogo from '@/assets/gossiplogo.svg'
 
 export default function Forum() {
   return (
     <>
+      <Head>
+        <title>民俗論壇</title>
+      </Head>
       <div className={`${styles.background}`}>
         <div className={`${styles.place}`}>
           <div className={`${styles.flex_row}`}>

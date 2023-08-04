@@ -9,10 +9,10 @@ import cart_outline from '@/assets/cart_outline.svg'
 import cart_noStock from '@/assets/cart_noStock.svg'
 
 //hooks
-import { useState, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { useRouter } from 'next/router'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import { useClick } from '@/hooks/useClick.js'
-// import { AddToCart } from '@/hooks/addToCart.js'
 import { css, keyframes } from '@emotion/css'
 import CartCountContext from '@/contexts/CartCountContext'
 import CartDataContext from '@/contexts/CartDataContext'
@@ -28,7 +28,10 @@ export default function ShopProductsCard({
   pid = 1,
   stars = 5,
   stock_num = 10,
+  keyword = '',
+  state = false,
 }) {
+  const router = useRouter()
   const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
   const { cartData, setCartData, getCartData } = useContext(CartDataContext)
 
@@ -38,14 +41,31 @@ export default function ShopProductsCard({
   const isCartHovered = hoveredIndex === 2
 
   //判斷有無點擊收藏和購物車
-  const { clickState: heartClickState, handleClick: handleHeartClick } =
-    useClick(false)
-  
+  const {
+    clickState: heartClickState,
+    handleClick: handleHeartClick,
+    setClickState: setHeartClickState,
+  } = useClick({ state })
+
+  useEffect(() => {
+    if (heartClickState != state) {
+      setHeartClickState(state)
+    }
+  }, [state])
+
+  const foundCart = cartData.some((v) => v.pid === pid)
+
   const {
     clickState: cartClickState,
     handleClick: handleCartClick,
     setClickState: setClickState,
-  } = useClick(false)
+  } = useClick(foundCart)
+
+  useEffect(() => {
+    if (cartClickState != foundCart) {
+      setHeartClickState(foundCart)
+    }
+  }, [foundCart])
 
   //購物車彈跳＋1動畫
   const [animationEnd, setAnimationEnd] = useState(false)
@@ -72,7 +92,6 @@ export default function ShopProductsCard({
     setAnimationEnd(true)
     setTimeout(() => {
       setAnimationEnd(false)
-      setClickState(false)
     }, 1200)
   }
 
@@ -93,6 +112,42 @@ export default function ShopProductsCard({
       })
   }
 
+  // 加入喜好商品
+  const addToFav = () => {
+    const addData = { pid: pid }
+    fetch(`${process.env.API_SERVER}/shop/favorite`, {
+      method: 'POST',
+      body: JSON.stringify({ requestData: addData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((data) => {})
+  }
+
+  // 刪除喜好商品
+  const deleteFromFav = () => {
+    const deletedData = { pid: pid }
+
+    fetch(`${process.env.API_SERVER}/shop/favorite`, {
+      method: 'DELETE',
+      body: JSON.stringify({ requestData: deletedData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((data) => {})
+  }
+
+  const regex = new RegExp(keyword, 'gi')
+  const hightlight = `<span style="background:#F4E62A
+  ">${keyword}</span>`
+  const result = text.replace(regex, hightlight)
+
+  // console.log(pid,heartClickState,state)
+
   return (
     <div className={`${styles.container}  p30px`}>
       {/* 產品圖 */}
@@ -110,7 +165,11 @@ export default function ShopProductsCard({
       {/* 標題 */}
       <Link href={`/shop/${category}/${pid}`} className="link">
         <div className={`${styles.flexStart} mt15px fwBold fs18px`}>
-          <div className={`${styles.textContainer} w180px h55px`}>{text}</div>
+          <div
+            className={`${styles.textContainer} w180px h55px`}
+            id="text"
+            dangerouslySetInnerHTML={{ __html: result }}
+          ></div>
         </div>
       </Link>
       {/* 星星 */}
@@ -142,14 +201,17 @@ export default function ShopProductsCard({
         <span className={`${styles.inlineBlock} ${styles.icons}`}>
           {/* 愛心 */}
           <span
-            onClick={handleHeartClick}
+            onClick={() => {
+              heartClickState ? deleteFromFav() : addToFav()
+              handleHeartClick()
+            }}
             onMouseEnter={() => handleMouseEnter(1)}
             onMouseLeave={handleMouseLeave}
             className={`${styles.inlineBlock} me5px`}
           >
             <Image
               src={
-                isHeartHovered || heartClickState ? heart_fill : heart_outline
+                heartClickState || isHeartHovered ? heart_fill : heart_outline
               }
               alt=""
               width={20}
@@ -159,7 +221,7 @@ export default function ShopProductsCard({
           <span
             onClick={() => {
               if (stock_num != 0) {
-                handleCartClick()
+                !foundCart && handleCartClick()
                 handleAnimationEnd()
                 addToCart()
               } else {

@@ -21,55 +21,6 @@ export default function Marquee({
   text2="Related Choice" ,
   lineColor="hot_pink"
    }) {
-    
-    // const mySwiper = new Swiper('.swiper-container', {
-    //   loop:true,
-    //   autoplay:{ delay:0,
-    //   disableOnInteraction: false,
-    //   },
-    //   watchSlidesProgress:true,
-    //   slidesPerView:10,
-    //   className:"mySwiper",
-    //   grabCursor:'false',
-    //   modules:[Autoplay, Pagination, Navigation],
-    //   speed:1000,
-    // });
-    
-    // // 監聽滑鼠進入和離開幻燈片的事件
-    // const mySwiper = document.querySelector('.mySwiper')
-
-    // mySwiper.on('mouseenter', function () {
-    //   mySwiper.autoplay.stop();
-    // });
-    
-    // mySwiper.on('mouseleave', function () {
-    //   mySwiper.autoplay.start();
-    // });
-    const swiperRef = useRef(null);
-
-    useEffect(() => {
-      const swiperInstance = swiperRef.current && swiperRef.current.swiper;
-      if (swiperInstance) {
-        swiperInstance.el.addEventListener('mouseenter', function () {
-          swiperInstance.autoplay.stop();
-        });
-
-        swiperInstance.el.addEventListener('mouseleave', function () {
-          swiperInstance.autoplay.start();
-        });
-      }
-      // const mySwiper = document.querySelector('.mySwiper')
-      // if(mySwiper){
-
-      //   mySwiper.addEventListener('mouseenter', function () {
-      //     mySwiper.autoplay.stop();
-      //   });
-        
-      //   mySwiper.addEventListener('mouseleave', function () {
-      //     mySwiper.autoplay.start();
-      //   });
-      // }
-    }, []);
 
   return (
     <> 
@@ -78,16 +29,17 @@ export default function Marquee({
 
         <Swiper
         loop={true}
-        autoplay={{delay:0,
+        autoplay={{delay:2000,
         disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+        // waitForTransition:false
         }}
-        watchSlidesProgress={true} 
+        // watchSlidesProgress={true} 
         slidesPerView={10} 
         className="mySwiper"
         grabCursor='false'
         modules={[Autoplay, Pagination, Navigation]}
         speed={1000} 
-        onSwiper={swiper => (swiperRef.current = swiper)}
         >
       
         <div className={`${styles.marqueeContent} mt30px`}>

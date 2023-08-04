@@ -3,32 +3,27 @@ import styles from './category.module.sass'
 // hooks
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
-import usePath from '@/hooks/usePath.js'
 
 // Bootstrap
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 // components
 import ShopTop from '@/components/common/shopTop'
-import ShopProductsCard from '@/components/common/cards/ShopProductsCard'
 import ShopTitle from '@/components/common/title/ShopTitle'
 import TitleData from '@/components/mydata/productsTitleData'
 import DropDownMenu from '@/components/common/dropDownMenu'
-import Pagination from '@/components/common/pagination'
+import GetData from '@/components/common/category/getData'
+import NoData from '@/components/common/category/noData'
 
 export default function Category() {
   const router = useRouter()
-  const { category, page } = router.query //抓出類別
-  // console.log(page);
-  const usp = new URLSearchParams(router.asPath.split('?')[1])
-  const pageParams = usp.toString()
+  const { category, page, keyword } = router.query //抓出類別
   const categoryData = TitleData.find((item) => item.id === category)
-  // const [keyword, setKeyword] = useState('')
   const [data, setData] = useState([])
   const [pagination, setPagination] = useState([])
-  const [dataFromChild, setDataFromChild] = useState([])
+  const [dataFromChild, setDataFromChild] = useState([]) 
+   
+  
   //要篩選的資料
   let info = [
     {
@@ -55,21 +50,45 @@ export default function Category() {
       content: '• 依照 •',
     },
     {
-      content: '熱門程度排序',
+      content: '熱銷排序',
+      orderBy: 'purchase_num',
+      status: false,
+    },
+    {
+      content: '類別排序',
+      orderBy: 'recommend',
+      status: false,
     },
     {
       content: '價錢排序',
+      orderBy: 'product_price',
+      status: false,
     },
     {
       content: '星星排序',
+      orderBy: 'stars',
+      status: false,
     },
   ]
-  
   useEffect(() => {
     if(!category) return
-    const reqData = {page: page, perPage: dataFromChild?.perPage ? dataFromChild.perPage : 20}
-  
 
+    if(localStorage.getItem('keyword') && !keyword){
+      const currentParams = new URLSearchParams(window.location.search);
+      currentParams.set('keyword',localStorage.getItem('keyword'));
+      const currentPath = window.location.pathname;
+      const newURL = `${currentPath}?${currentParams.toString()}`;
+      router.push(newURL);
+    }
+    let reqData = {
+      page: page, 
+      perPage: dataFromChild?.perPage ? dataFromChild.perPage : 20,
+      sort: dataFromChild?.order ? dataFromChild.order :'DESC',
+      orderBy: dataFromChild?.orderBy ? dataFromChild.orderBy :'purchase_num',
+    }
+    if(keyword){
+      reqData = {...reqData, keyword: keyword}
+    }
     fetch(`${process.env.API_SERVER}/shop/${category}`, {
         method: 'POST',
         body: JSON.stringify({ requestData: reqData }),
@@ -79,43 +98,23 @@ export default function Category() {
       })
       .then((r) => r.json())
       .then((data) => {
-        if (data.redirect) {
-          router.push(data.redirect)
-        } else {
-            setData(data.data)
-            setPagination(data.pagination)
-          }
-        
+        data.redirect && router.push(data.redirect)
+ 
+        if(data.success){
+          setData(data.data)
+          setPagination(data.pagination)
+        }else{
+          setData([])
+        }  
       })
     
   }, [dataFromChild,router.query])
 
-  // 商品圖片
-  const { imgSrc } = usePath(data)
-  const chunkArray = (arr, size) => {
-    const chunks = []
-    for (let i = 0; i < arr.length; i += size) {
-      chunks.push(arr.slice(i, i + size))
-    }
-    return chunks
-  }
-  const imgChunks = chunkArray(imgSrc, 5)
-
-
   if (!data) return <p>Loading...</p>
-
-
-  info = info.map((v) => {
-    if (v.perPage === (dataFromChild?.perPage ? dataFromChild.perPage :20)) {
-      return { ...v, status: true };
-    } else {
-      return v;
-    }
-  });
-
-
+ 
   return (
     <Container className={`${styles.container}`}>
+      {/* 類別&搜尋 */}
       <ShopTop />
       {/* Title */}
       <div className={`${styles.menuContainer}`}>
@@ -125,32 +124,16 @@ export default function Category() {
           link={`/shop/cookies`}
         />
         {/* 篩選｜排列 */}
-        <span className={`${styles.menu}`}>
-          <DropDownMenu text=" 篩選｜排列 " info={info} category={category}  setDataFromChild={setDataFromChild}/>
+        <span className={`${styles.menu}`} style={{display: data?.length > 0 ? '' : 'none'}}>
+          <DropDownMenu text=" 顯示 ｜ 排列 " info={info}  setDataFromChild={setDataFromChild} keyword={keyword}/>
         </span>
       </div>
       {/* 商品 */}
-      {imgChunks?.map((chunk, rowIndex) => (
-        <Row key={rowIndex} className={`${styles.row}`}>
-          {chunk.map((src, colIndex) => {
-            const products = data[colIndex + rowIndex * 5]
-            return (
-              <Col key={colIndex}>
-                <ShopProductsCard
-                  src={src}
-                  text={products?.product_name}
-                  price={products?.product_price}
-                  category={category}
-                  pid={products?.pid}
-                  stars={products?.stars}
-                  stock_num={products?.stock_num}
-                />
-              </Col>
-            )
-          })}
-        </Row>
-      ))}
-      <Pagination pagination={pagination} path={`/shop/${category}?page=`} api={`/shop/${category}`}/>
+      {
+        data?.length>0 ? <GetData data={data} pagination={pagination} dataFromChild={dataFromChild} info={info}/> :<NoData />
+      }
+     
+
     </Container>
   )
 }

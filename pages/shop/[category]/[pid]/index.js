@@ -46,18 +46,13 @@ export default function Pid() {
   const [related, setRelated] = useState()
   const [count, setCount] = useState(1)
   const [animationEnd, setAnimationEnd] = useState(false)
+  const [pidArr, setPidArr] = useState([])
 
   //判斷有無 Hover
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-1)
   const isHeartHovered = hoveredIndex === 1
   const isCartHovered = hoveredIndex === 2
   useClick(false)
-
-  //判斷有無點擊收藏和購物車
-  const { clickState: heartClickState, handleClick: handleHeartClick } =
-    useClick(false)
-  const { clickState: cartClickState, handleClick: handleCartClick } =
-    useClick(false)
 
   // 商品資料
   useEffect(() => {
@@ -71,8 +66,40 @@ export default function Pid() {
         // 重置數量
         setCount(1)
       })
-  }, [currentPath])
+      
+    fetch(`${process.env.API_SERVER}/shop/favoriteMatch`)
+    .then((r) => r.json())
+    .then((data) => {
+      setPidArr(data)
+      
+    })
+  }, [router.query])
+  
+  // 查看有無喜好商品
+  const foundFav = pidArr?.some((v) => v.pid === Number(router.query.pid));
+  const foundCart = cartData.some((v)=> v.pid === Number(router.query.pid));
+  // console.log(foundCart);
 
+  //判斷有無點擊收藏和購物車
+  const { clickState: heartClickState, handleClick: handleHeartClick, setClickState: setHeartClickState } =
+    useClick(foundFav)
+  const { clickState: cartClickState, handleClick: handleCartClick, setClickState: setCartClickState } =
+    useClick(foundCart)
+
+  // 確定喜好商品狀態
+  useEffect(()=>{
+    if(foundFav!=heartClickState){
+      setHeartClickState(foundFav)
+    }
+  },[foundFav])
+
+  // 確定購物車狀態
+  useEffect(()=>{
+    if(foundCart!=cartClickState){
+      setCartClickState(foundCart)
+    }
+  },[foundCart])
+  
 
   // 防呆
   if (!data || !data.product_details) {
@@ -87,6 +114,7 @@ export default function Pid() {
     const lineBreakReplacement = hasSymbols ? '<br /><br />' : '<br /><br />'
 
     const result = productDetails
+      .replace(/\?/g, '')
       .replace(`\\r\\n`, lineBreakReplacement)
       .replace(/\r\n(?=★)/g, lineBreakReplacement)
       .replace(/★([^★]+)★/g, (match, group) => {
@@ -94,13 +122,10 @@ export default function Pid() {
         return `${withoutLineBreak}`
       })
       .replace(/[●★◆]/g, `<br />★　`)
-      // .replace(/(\d+)\./g, '<br />★')
-
       .replace(/[。]/g, (match) => `${match}<br /><br />`)
       .replace(/＊必買原因＊/g, '<br /><br />＊必買原因＊<br />')
       .replace(/＊必吃原因＊/g, '<br /><br />＊必吃原因＊<br />')
-    return result
-  }
+    return result}
 
   // 購物車彈跳動畫
   const y = 0
@@ -163,6 +188,36 @@ export default function Pid() {
   }
   insertHistory()
 
+  // 加入喜好商品
+  const addToFav = () => {
+    const addData = { pid: router.query.pid }
+    fetch(`${process.env.API_SERVER}/shop/favorite`, {
+      method: 'POST',
+      body: JSON.stringify({ requestData: addData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((data) => {
+      })
+  }
+
+  // 刪除喜好商品
+  const deleteFromFav = () => {
+    const deletedData = { pid: router.query.pid }
+
+    fetch(`${process.env.API_SERVER}/shop/favorite`, {
+      method: 'DELETE',
+      body: JSON.stringify({ requestData: deletedData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((r) => r.json())
+    .then((data) => {
+    })
+  }
 
   return (
     <>
@@ -345,17 +400,21 @@ export default function Pid() {
                 onMouseLeave={handleMouseLeave}
               >
                 <Button
-                  text="加入收藏"
+                  text={heartClickState ? '取消收藏':'加入收藏'}
                   btnColor="black"
                   width="275px"
                   padding="15px 60px"
                   fontSize="20px"
                   link={()=>{
-                  console.log('surprise~!')
+                    heartClickState ? deleteFromFav() : addToFav()
                   }}
                 />
                 {/* 愛心 */}
-                <span className={`${styles.inlineBlock} ms30px`}>
+                <span className={`${styles.inlineBlock} ms30px`} 
+                onClick={()=>{
+                  heartClickState ? deleteFromFav() : addToFav()
+                }}
+                >
                   <Image
                     src={
                       isHeartHovered || heartClickState

@@ -4,9 +4,9 @@ const AuthContext = createContext({})
 export default AuthContext
 
 export const noLoginState = {
-  member_id: 0,
+  id: 0,
   // member_account: '',
-  member_name: '',
+  name: '',
   token: '',
 }
 
@@ -24,8 +24,10 @@ export const AuthContextProvider = function ({ children }) {
       try {
         const obj = JSON.parse(str)
         setAuth(obj)
+        console.log(`authcontext測試 看有沒有setAuth obj? `, obj)
       } catch (ex) {}
     }
+
   }, [])
 
   return (

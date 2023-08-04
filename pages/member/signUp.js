@@ -5,11 +5,16 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
+
+//components
 import InputBox from '@/components/common/inputBox/index.js'
-import Title from '@/components/common/title/index.js'
+import MemberTitle from '@/components/common/title/memberTitle'
+
 import Button from '@/components/common/button/index.js'
 import doorGodLeft from '@/assets/doorGodLeft.svg'
 import doorGodRight from '@/assets/doorGodRight.svg'
+
+//bt
 
 import { Container, Row, Col } from 'react-bootstrap'
 
@@ -21,6 +26,9 @@ export default function SignUp() {
 
   const [errorMessage, setErrorMessage] = useState('') // Define a state variable to store the error message
 
+
+
+  
   // 定義驗證規則
   const validationRules = {
     member_name: {
@@ -109,6 +117,7 @@ export default function SignUp() {
     return null // 代表表單通過驗證，沒有錯誤 //有回傳代表有錯誤
   }
 
+
   const doSignUp = (e) => {
     e.preventDefault()
 
@@ -127,7 +136,8 @@ export default function SignUp() {
       })
       setInvalidFields(invalidFieldsArray.filter((field) => field !== null))
 
-      alert('資料有誤，請檢查一下喔!')
+      alert('請檢查以下項目：\n' + invalidFieldsArray.join('\n'));
+      // alert('資料有誤，請檢查一下喔!')
 
       return
     }
@@ -157,7 +167,7 @@ export default function SignUp() {
 
         if (data) {
           alert('註冊成功，請重新登入')
-          // router.push('/member/login');
+          router.push('/member/login');
         }
       })
       .catch((error) => {
@@ -182,11 +192,15 @@ export default function SignUp() {
         </Row>
       </Container>
 
+
+  
+
       <Container>
         <form onSubmit={doSignUp}>
           <Row>
             <Col>
-              <Title text="加入會員" text2="SIGN UP" lineColor="green" />
+    
+              <MemberTitle text="加入會員" text2="SIGN UP" lineColor="green" />
             </Col>
           </Row>
           <Row className={styles.flex_space_between}>

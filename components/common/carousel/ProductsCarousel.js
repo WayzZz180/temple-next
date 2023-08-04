@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 // hooks
 import { useState, useEffect, Fragment } from 'react'
+import { useRouter } from 'next/router'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import usePath from '@/hooks/usePath.js'
 //components
@@ -18,13 +19,17 @@ import arrowL_fill from '@/assets/arrowL_fill.svg'
 //data
 import TitleData from '@/components/mydata/productsTitleData'
 
-export default function ProductsCarousel({ text, color, i ,id}) {
+export default function ProductsCarousel({ text, color, i ,id }) {
+  const router = useRouter()
   const reqData = TitleData.filter((v) => {
     return text === v.text
   })
-  // console.log(reqData)
   const [data, setData] = useState()
+  const [pidArr, setPidArr] = useState([])
+
   useEffect(() => {
+    localStorage.getItem('keyword') && localStorage.removeItem('keyword')
+    
     fetch(process.env.API_SERVER + '/shop', {
       method: 'POST',
       body: JSON.stringify({ requestData: reqData }),
@@ -35,9 +40,17 @@ export default function ProductsCarousel({ text, color, i ,id}) {
       .then((r) => r.json())
       .then((data) => {
         setData(data)
-        // console.log('data:', data)
       })
   }, [])
+
+  useEffect(()=>{
+
+    fetch(`${process.env.API_SERVER}/shop/favoriteMatch`)
+    .then((r) => r.json())
+    .then((data) => {
+      setPidArr(data)
+    })
+  },[router.query])
 
   const { imgSrc } = usePath(data)
 
@@ -82,19 +95,25 @@ export default function ProductsCarousel({ text, color, i ,id}) {
             style={{ right: `${240 * position}px` }}
           >
             {/*個別商品類別 */}
-            {imgSrc.map((src, i) => (
+
+            {imgSrc.map((src, i) => {
+            const foundItem = pidArr.some((v) => v.pid === data[i].pid);
+            return (
               <Col key={i} className={`${styles.flex_start}`}>
-                <ShopProductsCard
-                  src={src}
-                  text={data[i].product_name}
-                  price={data[i].product_price}
-                  pid={data[i].pid}
-                  category={reqData[0].id}
-                  stars={data[i].stars}
-                  stock_num={data[i].stock_num}
-                />
-              </Col>
-            ))}
+                  <ShopProductsCard
+                    src={src}
+                    text={data[i].product_name}
+                    price={data[i].product_price}
+                    pid={data[i].pid}
+                    category={reqData[0].id}
+                    stars={data[i].stars}
+                    stock_num={data[i].stock_num}
+                    state={foundItem}
+                  />
+                </Col>
+            )
+          })
+          }
           </div>
         </div>
         {/* 右箭頭 */}
