@@ -3,6 +3,7 @@ import { AuthContextProvider } from '@/contexts/AuthContext'
 import AuthContext from '@/contexts/AuthContext'
 import React, { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router'
+import Modal from 'react-modal';
 
 // components
 import InputBox from '@/components/common/inputBox/index.js'
@@ -23,6 +24,15 @@ export default function dailySignIn() {
   const [coupon, setCoupon] = useState([]);
   const [user, setUser] = useState('');
   const [si, setSi] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false); // 跟蹤 modal 是否打開
+
+  const handleModalCloseReload = () => {
+    // 當點擊取消或按下 Esc 時，關閉小視窗
+    setModalIsOpen(false);
+    window.location.reload()
+
+    
+  };
 
 //   useEffect(() => {
 //     console.log(`coupons頁面 有沒有auth.token?1`, auth.token)
@@ -78,32 +88,6 @@ useEffect(() => {
 const signIn = (e) => {
   e.preventDefault()
 
-  // 改成測試一天一次!!!!!
-
-  // const validateResult = validateForm()
-  // if (validateResult) {
-  //   // Collect all the invalid fields and set the state
-  //   const invalidFieldsArray = Object.keys(validationRules).map((field) => {
-  //     const rule = validationRules[field]
-  //     return rule.required && (!user[field] || user[field].trim() === '')
-  //       ? field
-  //       : rule.regex && !rule.regex.test(user[field])
-  //       ? field
-  //       : field === 'confirm_password' && !rule.custom(user[field], user)
-  //       ? field
-  //       : null
-  //   })
-  //   setInvalidFields(invalidFieldsArray.filter((field) => field !== null))
-
-  //   alert('請檢查以下項目：\n' + invalidFieldsArray.join('\n'));
-  //   // alert('資料有誤，請檢查一下喔!')
-
-  //   return
-  // }
-
-  // 驗證通過，繼續進行表單提交
-  // 取得或提交表單資料
-
   fetch(process.env.API_SERVER + '/member/dailySignIn', {
     method: 'POST',
     body: JSON.stringify(user),
@@ -125,7 +109,8 @@ const signIn = (e) => {
       console.log(data)
 
       if (data) {
-        alert('簽到成功')
+        // alert('簽到成功')
+        setModalIsOpen(true)
         // router.push('/member/login');
         // window.location.reload()
       }
@@ -197,7 +182,24 @@ const signIn = (e) => {
         </Row>
 
       </Container>
-      
+      {/* 小視窗 */}
+  <Modal
+    isOpen={modalIsOpen}
+    contentLabel="簽到成功!"
+    style={{
+      overlay: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', // 背景顏色透明度
+      },
+      content: {
+        maxWidth: '300px', // 調整最大寬度
+        maxHeight:'200px', // 調整最大高度
+        margin: 'auto', // 水平居中
+      },
+    }}
+  >
+    <h2>恭喜獲得XXX折價券</h2>
+    <div><button onClick={handleModalCloseReload}>確認</button></div>
+  </Modal>
     </div>
   )
 }
