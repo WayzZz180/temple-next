@@ -25,7 +25,7 @@ const { auth, setAuth, logout } = useContext(AuthContext);
         { label: '我的優惠券', url: '/member/coupons' },
         { label: '我的文章', url: '/member/articles' },
         { label: '護身符', url: '/member/amulet' },
-        { label: '每日簽到', url: '/member/dailySign' },
+        { label: '每日簽到', url: '/member/dailySignIn' },
         
        auth.id === 0 ? { label: '登入', url: '/member/login' } : { label: '登出', url: '/member/logout' },
       ],

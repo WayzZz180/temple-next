@@ -141,7 +141,7 @@ export default function Login() {
             <Col>
               <div>
                 不是會員?{' '}
-                <Link href="#" className="link">
+                <Link href="/member/signUp" className="link">
                   加入我們
                 </Link>
               </div>

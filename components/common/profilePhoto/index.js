@@ -4,6 +4,7 @@ import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useRouter } from 'next/router'
 import Modal from 'react-modal';
 import styles from '@/components/common/profilePhoto/profilePhoto.module.sass'
+import variables from '@/styles/_variables.module.sass'
 
 // components
 import InputBox from '@/components/common/inputBox/index.js'
