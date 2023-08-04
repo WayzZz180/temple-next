@@ -49,7 +49,6 @@ export default function IndexCart() {
     fetch(`${process.env.API_SERVER}/shop/history`)
       .then((r) => r.json())
       .then((data) => {
-        console.log('hehe')
         setMarquee(data)
       })
   }, [])
@@ -58,6 +57,7 @@ export default function IndexCart() {
   if (!wannaBuyData) return <p>Loading...</p>
   if (!marquee) return <p>Loading...</p>
 
+ 
   return (
     <>
       <Container>
@@ -77,7 +77,7 @@ export default function IndexCart() {
           </Col>
         </Row>
         {idFromChild === 1 ? (
-          <Cart data={cartData} />
+          <Cart data={cartData}/>
         ) : (
           <WannaBuy data={wannaBuyData} />
         )}

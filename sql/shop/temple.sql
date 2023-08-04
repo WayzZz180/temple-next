@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 02, 2023 at 07:09 AM
+-- Generation Time: Aug 02, 2023 at 12:44 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -31,7 +31,7 @@ CREATE TABLE `browse_history` (
   `bid` int(11) NOT NULL,
   `member_id` varchar(255) NOT NULL,
   `pid` int(255) NOT NULL,
-  `created_at` datetime DEFAULT NULL
+  `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -67,7 +67,6 @@ INSERT INTO `browse_history` (`bid`, `member_id`, `pid`, `created_at`) VALUES
 (1859, 'wayz', 50, '2023-08-01 18:40:45'),
 (1860, 'wayz', 534, '2023-08-01 19:09:49'),
 (1864, 'wayz', 12, '2023-08-01 20:07:16'),
-(1865, 'wayz', 17, '2023-08-01 20:13:36'),
 (1882, 'wayz', 27, '2023-08-01 20:31:01'),
 (1883, 'wayz', 1020, '2023-08-02 10:45:49'),
 (1884, 'wayz', 987, '2023-08-02 10:46:45'),
@@ -88,7 +87,8 @@ INSERT INTO `browse_history` (`bid`, `member_id`, `pid`, `created_at`) VALUES
 (2018, 'wayz', 1997, '2023-08-02 11:09:33'),
 (2019, 'wayz', 2068, '2023-08-02 11:10:24'),
 (2027, 'wayz', 1936, '2023-08-02 11:11:00'),
-(2028, 'wayz', 1983, '2023-08-02 11:55:24');
+(2028, 'wayz', 1983, '2023-08-02 11:55:24'),
+(2031, 'wayz', 17, '2023-08-02 20:06:32');
 
 -- --------------------------------------------------------
 
@@ -103,14 +103,6 @@ CREATE TABLE `cart` (
   `created_at` datetime DEFAULT NULL,
   `member_id` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`sid`, `pid`, `quantity`, `created_at`, `member_id`) VALUES
-(303, 17, 1, '2023-08-02 14:58:17', 'wayz'),
-(304, 12, 1, '2023-08-02 14:58:17', 'wayz');
 
 -- --------------------------------------------------------
 
@@ -171,17 +163,6 @@ INSERT INTO `categories` (`cid`, `category_name`, `parent_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `invoice`
---
-
-CREATE TABLE `invoice` (
-  `iid` varchar(255) NOT NULL,
-  `member_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `like_products`
 --
 
@@ -200,18 +181,33 @@ CREATE TABLE `like_products` (
 
 CREATE TABLE `order_details` (
   `odid` int(11) NOT NULL,
-  `oid` int(11) NOT NULL,
+  `oid` varchar(255) NOT NULL,
   `quantity` int(11) NOT NULL,
   `pid` int(11) NOT NULL,
-  `price` int(11) NOT NULL,
-  `customer_name` varchar(255) NOT NULL,
-  `customer_phone` int(11) NOT NULL,
-  `customer_address` varchar(255) NOT NULL,
-  `payment` varchar(255) NOT NULL,
-  `delivery` varchar(255) NOT NULL,
-  `coupon` varchar(255) DEFAULT NULL,
-  `created_at` date NOT NULL
+  `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`odid`, `oid`, `quantity`, `pid`, `price`) VALUES
+(1, '1690979389927', 4, 43, 115),
+(2, '1690979389927', 41, 56, 239),
+(3, '1690979389927', 3, 283, 62),
+(4, '1690979389927', 60, 14, 72),
+(5, '1690979389927', 1, 20, 239),
+(6, '1690979389927', 1, 81, 350),
+(7, '1690979389927', 7, 27, 50),
+(8, '1690979389927', 1, 534, 95),
+(9, '1690979776455', 4, 43, 115),
+(10, '1690979776455', 3, 283, 62),
+(11, '1690979776455', 41, 56, 239),
+(12, '1690979776455', 60, 14, 72),
+(13, '1690979776455', 1, 20, 239),
+(14, '1690979776455', 1, 81, 350),
+(15, '1690979776455', 7, 27, 50),
+(16, '1690979776455', 1, 534, 95);
 
 -- --------------------------------------------------------
 
@@ -223,6 +219,13 @@ CREATE TABLE `order_summary` (
   `oid` varchar(255) NOT NULL,
   `member_id` varchar(255) NOT NULL,
   `total` int(255) NOT NULL,
+  `customer_name` varchar(255) NOT NULL,
+  `customer_phone` varchar(255) NOT NULL,
+  `customer_address` varchar(255) NOT NULL,
+  `payment` varchar(255) NOT NULL,
+  `delivery` varchar(255) NOT NULL,
+  `coupon` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
   `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -230,15 +233,9 @@ CREATE TABLE `order_summary` (
 -- Dumping data for table `order_summary`
 --
 
-INSERT INTO `order_summary` (`oid`, `member_id`, `total`, `status`) VALUES
-('1690956036545', 'wayz', 205, 'true'),
-('1690958762910', 'wayz', 205, 'true'),
-('1690958936128', 'wayz', 350, 'true'),
-('1690959117296', 'wayz', 350, 'true'),
-('1690959157175', 'wayz', 350, 'true'),
-('1690959170762', 'wayz', 350, 'true'),
-('1690959193646', 'wayz', 350, 'true'),
-('1690959212341', 'wayz', 350, 'true');
+INSERT INTO `order_summary` (`oid`, `member_id`, `total`, `customer_name`, `customer_phone`, `customer_address`, `payment`, `delivery`, `coupon`, `created_at`, `status`) VALUES
+('1690979389927', 'wayz', 15799, '沈子威', '0912345678', '南京復興民生社區', '現金', '超商取貨', NULL, '2023-08-02 20:29:49', '未出貨'),
+('1690979776455', 'wayz', 15799, '沈子威', '0912345678', '南京復興民生社區', '現金', '超商取貨', NULL, '2023-08-02 20:36:16', '未出貨');
 
 -- --------------------------------------------------------
 
@@ -2386,6 +2383,14 @@ CREATE TABLE `wanna_buy` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Dumping data for table `wanna_buy`
+--
+
+INSERT INTO `wanna_buy` (`wid`, `member_id`, `pid`, `created_at`) VALUES
+(66, 'wayz', 732, '2023-08-02'),
+(67, 'wayz', 890, '2023-08-02');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -2457,13 +2462,13 @@ ALTER TABLE `wanna_buy`
 -- AUTO_INCREMENT for table `browse_history`
 --
 ALTER TABLE `browse_history`
-  MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2029;
+  MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2032;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `sid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=305;
+  MODIFY `sid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=321;
 
 --
 -- AUTO_INCREMENT for table `like_products`
@@ -2475,7 +2480,7 @@ ALTER TABLE `like_products`
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `odid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `odid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -2499,7 +2504,7 @@ ALTER TABLE `top10`
 -- AUTO_INCREMENT for table `wanna_buy`
 --
 ALTER TABLE `wanna_buy`
-  MODIFY `wid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `wid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

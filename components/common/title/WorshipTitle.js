@@ -1,4 +1,4 @@
-import styles from './title.module.sass'
+import styles from './WorshipTitle.module.sass'
 import variables from '@/styles/_variables.module.sass'
 
 //text = 大標
@@ -14,8 +14,8 @@ export default function Title({
   const var_color = variables[lineColor]
   return (
     <div className={`${styles.flex}`} style={{marginTop:`${marginTop}px`}}>
-      <div className={`${styles.title}`}>{text}</div>
-      <div className={`${styles.title2}`}>{text2}</div>
+      <div className={`${styles.title} pb10px`}>{text}</div>
+      <div className={`${styles.title} pb10px`}>{text2}</div>
       <div
         className={`${styles.line}`}
         style={{ backgroundColor: var_color, width: width }}

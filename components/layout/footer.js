@@ -16,15 +16,15 @@ export default function Footer() {
         {/* logo */}
         <div className={`${styles.flex_col}`}>
           <Link href="/Home">
-            <Image src={logoChi} width={85} alt="logo" />
+            <Image src={logoChi} width={105} alt="logo" />
           </Link>
           <Link href="/Home">
-            <Image src={logoEng} width={100} alt="logo" />
+            <Image src={logoEng} width={118} alt="logo" />
           </Link>
         </div>
 
         {/* 第二排內容 */}
-        <div className={`${styles.flex_row} fs15px fwBolder`}>
+        <div className={`${styles.flex_row} fs16px fwBolder`}>
           <Image src={stars} width={150} alt="stars" />
           <span>
             {info.map((v, i) => (
@@ -40,7 +40,7 @@ export default function Footer() {
         </div>
 
         {/* copyright */}
-        <div className={`${styles.flex_row} fs12px`}>
+        <div className={`${styles.flex_row} fs14px`}>
           copyright © 2023 Temple Round Jing Co.,Ltd
         </div>
       </div>

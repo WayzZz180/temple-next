@@ -15,7 +15,7 @@ import ShopCartContentCard from '@/components/common/cards/ShopCartContentCard'
 import Button from '@/components/common/button'
 import NoData from '../category/noData'
 
-export default function Cart({data=[],total=1000}) {
+export default function Cart({data=[]}) {
   const router = useRouter()
   const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
   const { cartData, setCartData, getCartData } = useContext(CartDataContext)
@@ -32,6 +32,7 @@ export default function Cart({data=[],total=1000}) {
   const pid_array = data?.map((v, i) => {
     return v.pid
   })
+
 
   // 清空購物車(需要pid＿array)
   const deleteFromCart = (pid_array) => {
@@ -52,6 +53,11 @@ export default function Cart({data=[],total=1000}) {
 
   // 優惠券
   const coupon = 100
+
+
+  const total = data?.reduce((result, v) => {
+    return result + v.product_price * v.quantity
+    }, 0)
 
   return (
     <>
