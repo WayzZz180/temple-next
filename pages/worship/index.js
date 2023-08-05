@@ -80,7 +80,8 @@ export default function Worship() {
     '12',
   ] //全部月份
 
-  const [days, setDays] = useState()
+  const [calendar, setCalendar] = useState([])
+  const [days, setDays] = useState([])
   const [month, setMonth] = useState()
   const [year, setYear] = useState()
 
@@ -88,6 +89,7 @@ export default function Worship() {
   const [myDay, setMyDay] = useState(myDate.getDate())
   const [myMonth, setMyMonth] = useState(myDate.getMonth())
   const [myYear, setMyYear] = useState(myDate.getFullYear())
+
   // 某年某月某一天是星期幾
   const dayStart = (month, year) => {
     const tmpDate = new Date(year, month, 2)
@@ -106,38 +108,48 @@ export default function Worship() {
 
   // 刷新日曆
   const refreshDate = () => {
-    let str = ''
+    setCalendar([])
+    setDays([])
     const totalDay = getDay(myMonth, myYear) // 獲取該月總天數
     const firstDay = dayStart(myMonth, myYear) // 獲取該月第一天是星期幾
 
     let myclass
 
+    // for (let i = 1; i < firstDay; i++) {
+    //   // str += '<li></li>' // 為起始日之前創造空白節點
+    //   calendar.push('')
+    //   console.log('cal:', calendar)
+    // }
+    // for (let i = 1; i <= totalDay; i++) {
+    // if (
+    //   (i < myDay &&
+    //     myYear == myDate.getFullYear() &&
+    //     myMonth == myDate.getMonth()) ||
+    //   myYear < myDate.getFullYear() ||
+    //   (myYear == myDate.getFullYear() && myMonth < myDate.getMonth())
+    // ) {
+    //   myclass = " class='lightgrey'" // 以前的日期以灰色顯示
+    // } else if (
+    //   i == myDay &&
+    //   myYear == myDate.getFullYear() &&
+    //   myMonth == myDate.getMonth()
+    // ) {
+    //   myclass = " class='pink pinkbox'" // 當天日期以選取顏色顯示
+    // } else {
+    //   myclass = " class='day'" // 未來日期以正常顯示
+    // }
+    // str += '<li' + myclass + '>' + i + '</li>' //创建日期节点
+    // str += '<li>' + i + '</li>' //创建日期节点
+    // calendar.push(i)
+    // }
     for (let i = 1; i < firstDay; i++) {
-      str += '<li></li>' // 為起始日之前創造空白節點
+      calendar.push('')
     }
-
     for (let i = 1; i <= totalDay; i++) {
-      if (
-        (i < myDay &&
-          myYear == myDate.getFullYear() &&
-          myMonth == myDate.getMonth()) ||
-        myYear < myDate.getFullYear() ||
-        (myYear == myDate.getFullYear() && myMonth < myDate.getMonth())
-      ) {
-        myclass = " class='lightgrey'" // 以前的日期以灰色顯示
-      } else if (
-        i == myDay &&
-        myYear == myDate.getFullYear() &&
-        myMonth == myDate.getMonth()
-      ) {
-        myclass = " class='pink pinkbox'" // 當天日期以選取顏色顯示
-      } else {
-        myclass = " class='day'" // 未來日期以正常顯示
-      }
-      str += '<li' + myclass + '>' + i + '</li>' //创建日期节点
+      calendar.push(i)
     }
     // 日曆顯示
-    setDays(str)
+    setDays(calendar)
     // 月份顯示
     setMonth(month_name[myMonth])
     // 年份顯示
@@ -145,6 +157,8 @@ export default function Worship() {
   }
 
   useEffect(() => {
+    console.log(calendar)
+
     refreshDate() //执行该函数
   }, [router.query, myMonth, myYear])
 
@@ -333,12 +347,22 @@ export default function Worship() {
                   </ul>
                 </div>
                 <div className={`${styles.day} ${styles.body_list}`}>
-                  <ul
-                    id="days"
-                    dangerouslySetInnerHTML={{
-                      __html: days,
-                    }}
-                  ></ul>
+                  <ul>
+                    {days.map((v, i) => {
+                      return v ? (
+                        <li
+                          key={`${v}-${myYear}-${myMonth}`}
+                          className={`${v ? styles.day : ''}`}
+                        >
+                          {v}
+                        </li>
+                      ) : (
+                        <li key={`empty-${i}`}></li>
+                      )
+                    })}
+
+                    {/* {days} */}
+                  </ul>
                 </div>
               </div>
             </div>
