@@ -61,6 +61,7 @@ export default function Worship() {
     },
   ]
   const [god, setGod] = useState('')
+  // const [choose, setChoose] = useState(false)
 
   // 月曆
   const month_normal = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] // 一般
@@ -116,9 +117,8 @@ export default function Worship() {
     let myclass
 
     // for (let i = 1; i < firstDay; i++) {
-    //   // str += '<li></li>' // 為起始日之前創造空白節點
+    //   // str += '<li></li>'
     //   calendar.push('')
-    //   console.log('cal:', calendar)
     // }
     // for (let i = 1; i <= totalDay; i++) {
     // if (
@@ -142,6 +142,8 @@ export default function Worship() {
     // str += '<li>' + i + '</li>' //创建日期节点
     // calendar.push(i)
     // }
+
+    // 為起始日之前創造空白節點
     for (let i = 1; i < firstDay; i++) {
       calendar.push('')
     }
@@ -157,9 +159,7 @@ export default function Worship() {
   }
 
   useEffect(() => {
-    console.log(calendar)
-
-    refreshDate() //执行该函数
+    refreshDate() // 刷新日曆
   }, [router.query, myMonth, myYear])
 
   return (
@@ -235,8 +235,8 @@ export default function Worship() {
           </div>
         </Col>
         <Col>
-          <div className={`${styles.chose} fs28px fwBold`}>
-            已選擇： <span className={`${styles.god}`}>{god}</span>
+          <div className={`${styles.choseGod} fs28px fwBold`}>
+            已選擇： <span className={`${styles.pink}`}>{god}</span>
           </div>
         </Col>
         <Col></Col>
@@ -247,7 +247,7 @@ export default function Worship() {
         <Col>
           <Title text="2." text2="挑選日期" />
         </Col>
-        <Col>
+        <Col className="mt100px mb100px">
           {/* 月曆 */}
           <div className={`${styles.calendarContainer}`}>
             <div className={`${styles.calendar}`}>
@@ -258,7 +258,7 @@ export default function Worship() {
                   <Image
                     src={Arrow}
                     alt="prevMonth"
-                    width={30}
+                    width={45}
                     className={`${styles.arrow} ${styles.prev}`}
                     onClick={(e) => {
                       e.preventDefault()
@@ -276,14 +276,14 @@ export default function Worship() {
                       }
                     }}
                   />
-                  <div className={`${styles.pink}`} id="month">
+                  <div className={`${styles.pink} p30px fs72px`} id="month">
                     {month}
                   </div>
                   {/* 下個月 */}
                   <Image
                     src={Arrow}
                     alt="NextMonth"
-                    width={30}
+                    width={45}
                     className={`${styles.arrow}`}
                     onClick={(e) => {
                       e.preventDefault()
@@ -301,7 +301,7 @@ export default function Worship() {
                   <Image
                     src={Arrow}
                     alt="prevYear"
-                    width={30}
+                    width={45}
                     className={`${styles.arrow} ${styles.prev}`}
                     onClick={(e) => {
                       e.preventDefault()
@@ -317,14 +317,14 @@ export default function Worship() {
                       }
                     }}
                   />
-                  <div className={`${styles.pink} `} id="year">
+                  <div className={`${styles.pink} p30px fs56px`} id="year">
                     {year}
                   </div>
                   {/* 下一年 */}
                   <Image
                     src={Arrow}
                     alt="NextYear"
-                    width={30}
+                    width={45}
                     className={`${styles.arrow}`}
                     id="nextYear"
                     onClick={(e) => {
@@ -335,7 +335,9 @@ export default function Worship() {
                 </div>
               </div>
               <div className={`${styles.body}`}>
-                <div className={`${styles.week} ${styles.lightgrey}`}>
+                <div
+                  className={`${styles.week} ${styles.lightgrey} fwBold fs20px`}
+                >
                   <ul>
                     <li>SUN</li>
                     <li>MON</li>
@@ -346,13 +348,41 @@ export default function Worship() {
                     <li>SAT</li>
                   </ul>
                 </div>
-                <div className={`${styles.day} ${styles.body_list}`}>
+                <div className={`${styles.body_list}`}>
                   <ul>
                     {days.map((v, i) => {
+                      let state = false
+                      let pastDay = false
+                      const firstDay = dayStart(myMonth, myYear)
+                      //當天
+                      if (
+                        i + 1 - (firstDay - 1) == myDay &&
+                        myYear == myDate.getFullYear() &&
+                        myMonth == myDate.getMonth()
+                      ) {
+                        state = true
+                      } else if (
+                        (i + 1 < myDay &&
+                          myYear == myDate.getFullYear() &&
+                          myMonth == myDate.getMonth()) ||
+                        myYear < myDate.getFullYear() ||
+                        (myYear == myDate.getFullYear() &&
+                          myMonth < myDate.getMonth())
+                      ) {
+                        pastDay = true
+                      }
                       return v ? (
                         <li
                           key={`${v}-${myYear}-${myMonth}`}
-                          className={`${v ? styles.day : ''}`}
+                          className={`${
+                            v
+                              ? pastDay
+                                ? styles.pastDay
+                                : state
+                                ? styles.chooseDay
+                                : styles.day
+                              : ''
+                          } fs20px`}
                         >
                           {v}
                         </li>
@@ -360,10 +390,11 @@ export default function Worship() {
                         <li key={`empty-${i}`}></li>
                       )
                     })}
-
-                    {/* {days} */}
                   </ul>
                 </div>
+              </div>
+              <div className={`${styles.choseDay} fs28px fwBold`}>
+                已選擇： <span className={`${styles.pink}`}>{god}</span>
               </div>
             </div>
           </div>
