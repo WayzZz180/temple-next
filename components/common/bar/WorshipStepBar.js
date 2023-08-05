@@ -1,7 +1,7 @@
 import styles from './WorshipStepBar.module.sass'
 import { Fragment, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-
+import { useInView } from 'react-intersection-observer'
 // Bootstrap
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -9,15 +9,19 @@ import Col from 'react-bootstrap/Col'
 export default function WorshipStepBar({ id = 'chooseGod' }) {
   const [currentId, setCurrentId] = useState(id)
   const [temp, setTemp] = useState(currentId)
+  const [click, setClick] = useState(false)
+  console.log('id:', id)
+  console.log('current:', currentId)
+  console.log('temp:', temp)
+  // if (temp != currentId) {
+  //   setCurrentId(temp)
+  // }
   useEffect(() => {
     if (currentId != id) {
       setCurrentId(id)
     }
+    console.log('----')
   }, [id])
-
-  if (temp != currentId) {
-    setCurrentId(temp)
-  }
 
   const steps = [
     {
@@ -72,14 +76,28 @@ export default function WorshipStepBar({ id = 'chooseGod' }) {
                   {/* 數字 */}
                   <div
                     className={`${styles.circle} ${styles.active} fs24px`}
-                    style={{ opacity: v.id === currentId ? 1 : 0.5 }}
+                    style={{
+                      opacity:
+                        v.id === currentId
+                          ? // ? temp === currentId
+                            1
+                          : // : 0.5
+                            0.5,
+                    }}
                   >
                     {i + 1}
                   </div>
                   {/* 文字 */}
                   <div
                     className={`${styles.text} fwBold ms10px fs18px`}
-                    style={{ opacity: v.id === currentId ? 1 : 0.5 }}
+                    style={{
+                      opacity:
+                        v.id === currentId
+                          ? // ? temp === currentId
+                            1
+                          : // : 0.5
+                            0.5,
+                    }}
                   >
                     {v.text}
                   </div>
