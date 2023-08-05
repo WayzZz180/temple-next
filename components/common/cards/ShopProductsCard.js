@@ -201,6 +201,7 @@ export default function ShopProductsCard({
         <span className={`${styles.inlineBlock} ${styles.icons}`}>
           {/* 愛心 */}
           <span
+            role="presentation"
             onClick={() => {
               heartClickState ? deleteFromFav() : addToFav()
               handleHeartClick()
@@ -219,6 +220,7 @@ export default function ShopProductsCard({
           </span>
           {/* 購物車 */}
           <span
+            role="presentation"
             onClick={() => {
               if (stock_num != 0) {
                 !foundCart && handleCartClick()

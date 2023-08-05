@@ -6,6 +6,8 @@ import Head from 'next/head'
 // hooks
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { useHoverIndex } from '@/hooks/useHoverIndex.js'
+
 // svg
 import nav from '@/assets/nav.svg'
 import Rightgod from '@/assets/worshipRGod.svg'
@@ -13,7 +15,8 @@ import Leftgod from '@/assets/worshipLGod.svg'
 import Cloud from '@/assets/worshipCloud.svg'
 import WorshipLogo from '@/assets/worshipLogo.svg'
 import Time from '@/assets/worshipTime.svg'
-import selectedTime from '@/assets/selectedTime.svg'
+// import selectedTime from '@/assets/selectedTime.svg'
+import SelectedTime from '@/components/common/cards/timeCard'
 import Arrow from '@/assets/arrow_calendar.svg'
 // components
 import Title from '@/components/common/title/WorshipTitle'
@@ -34,67 +37,91 @@ import { EffectFade, Navigation, Pagination } from 'swiper/modules'
 
 export default function Worship() {
   const router = useRouter()
+  const [hoveredIndex, setHoveredIndex] = useState(-2)
 
+  const handleMouseEnter = (index) => {
+    setHoveredIndex(index)
+  }
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(-2)
+  }
+
+  // const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-2)
+  // const isHeartHovered = hoveredIndex === 1
+  // const isCartHovered = hoveredIndex === 2
   const stylesTime = {
     selectedTime_1: {
       transform: 'rotate(0deg)',
       top: '146px',
       left: '258px',
+      zIndex: 12,
     },
     selectedTime_2: {
       transform: 'rotate(30deg)',
       top: '121px',
       left: '390px',
+      zIndex: 11,
     },
     selectedTime_3: {
       transform: 'rotate(60deg)',
       top: '165.5px',
       left: '518px',
+      zIndex: 10,
     },
     selectedTime_4: {
       transform: 'rotate(90deg)',
       top: '268px',
       left: '607.5px',
+      zIndex: 9,
     },
     selectedTime_5: {
       transform: 'rotate(120deg)',
       top: '400px',
       left: '633px',
+      zIndex: 8,
     },
     selectedTime_6: {
       transform: 'rotate(150deg)',
       top: '528px',
       left: '589px',
+      zIndex: 7,
     },
     selectedTime_7: {
       transform: 'rotate(180deg)',
       top: '617.5px',
       left: '486.1px',
+      zIndex: 6,
     },
     selectedTime_8: {
       transform: 'rotate(210deg)',
       top: '643px',
       left: '354px',
+      zIndex: 5,
     },
     selectedTime_9: {
       transform: 'rotate(240deg)',
       top: '599px',
       left: '226px',
+      zIndex: 4,
     },
     selectedTime_10: {
       transform: 'rotate(270deg)',
       top: '497px',
       left: '137px',
+      zIndex: 3,
     },
     selectedTime_11: {
       transform: 'rotate(300deg)',
       top: '364px',
       left: '111px',
+      zIndex: 2,
     },
     selectedTime_12: {
       transform: 'rotate(330deg)',
       top: '235px',
       left: '155px',
+      zIndex: 1,
     },
   }
 
@@ -462,14 +489,14 @@ export default function Worship() {
               .map((v, i) => {
                 const key = i
                 return (
-                  <Image
+                  <div
                     key={i}
-                    src={selectedTime}
-                    alt="choose time"
-                    className={`${styles.timePieces}`}
-                    onMouseEnter={() => {}}
+                    className={`${styles.timePieces} border
+                    `}
                     style={stylesTime[`selectedTime_${i + 1}`]}
-                  />
+                  >
+                    <SelectedTime />
+                  </div>
                 )
               })}
           </div>
@@ -479,6 +506,23 @@ export default function Worship() {
         </Col>
       </Row>
 
+      {/* <Image
+                    key={i + 1}
+                    src={selectedTime}
+                    alt="choose time"
+                    // onMouseEnter={() => {
+                    //   console.log('i:', i)
+                    //   console.log('hover:', hoveredIndex)
+                    //   handleMouseEnter(i - 1)
+                    // }}
+                    // onMouseLeave={() => {
+                    //   handleMouseLeave()
+                    // }}
+                    // ${hoveredIndex === i ? styles.isHovered : styles.notHovered}
+                    className={`${styles.timePieces} border
+                    `}
+                    style={stylesTime[`selectedTime_${i + 1}`]}
+                  /> */}
       {/* section5: 下一步 */}
       <Row>
         <Col>
