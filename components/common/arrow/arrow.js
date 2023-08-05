@@ -1,6 +1,6 @@
 import styles from './arrow.module.sass'
 
-export default function Arrow({}) {
+export default function Arrow() {
   return (
     <>
       <div className={`${styles.arrowleft}`}>

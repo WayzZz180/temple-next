@@ -4,8 +4,8 @@ import { Container, Row, Col } from 'react-bootstrap'
 import Head from 'next/head'
 
 // hooks
-import React, { useEffect, useRef, useState } from 'react'
-
+import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 // svg
 import nav from '@/assets/nav.svg'
 import Rightgod from '@/assets/worshipRGod.svg'
@@ -14,12 +14,11 @@ import Cloud from '@/assets/worshipCloud.svg'
 import WorshipLogo from '@/assets/worshipLogo.svg'
 import Time from '@/assets/worshipTime.svg'
 import selectedTime from '@/assets/selectedTime.svg'
-
+import Arrow from '@/assets/arrow_calendar.svg'
 // components
 import Title from '@/components/common/title/WorshipTitle'
 import God from '@/components/common/cards/WorshipGod'
 import Button from '@/components/common/button'
-import Arrow from '@/components/common/arrow/arrow'
 import ArrowRight from '@/components/common/arrow/arrowRight'
 import ArrowLeft from '@/components/common/arrow/arrowLeft'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -34,6 +33,7 @@ import 'swiper/css/pagination'
 import { EffectFade, Navigation, Pagination } from 'swiper/modules'
 
 export default function Worship() {
+  const router = useRouter()
   const stylesTime = {
     selectedTime_1: { transform: 'rotate(-45deg)', left: '100px' },
     selectedTime_2: { transform: 'rotate(0deg)', left: '100px' },
@@ -62,8 +62,9 @@ export default function Worship() {
   ]
   const [god, setGod] = useState('')
 
-  const month_olympic = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-  const month_normal = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+  // 月曆
+  const month_normal = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] // 一般
+  const month_olympic = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] // 閏年
   const month_name = [
     '01',
     '02',
@@ -77,24 +78,24 @@ export default function Worship() {
     '10',
     '11',
     '12',
-  ]
-  const [holder, setHolder] = useState('')
-  const [cmonth, setCMonth] = useState('')
-  const [cyear, setCYear] = useState('')
+  ] //全部月份
 
-  const my_date = new Date()
-  let my_year = my_date.getFullYear()
-  let my_month = my_date.getMonth()
-  let my_day = my_date.getDate()
+  const [days, setDays] = useState()
+  const [month, setMonth] = useState()
+  const [year, setYear] = useState()
 
-  //获取某年某月第一天是星期几
+  const myDate = new Date() // 今天 (Sat Aug 05 2023 13:47:47 GMT+0800 (台北標準時間))
+  const [myDay, setMyDay] = useState(myDate.getDate())
+  const [myMonth, setMyMonth] = useState(myDate.getMonth())
+  const [myYear, setMyYear] = useState(myDate.getFullYear())
+  // 某年某月某一天是星期幾
   const dayStart = (month, year) => {
-    const tmpDate = new Date(year, month, 1)
+    const tmpDate = new Date(year, month, 2)
     return tmpDate.getDay()
   }
 
-  //計算是否為閏年
-  const daysMonth = (month, year) => {
+  // 判斷是否為閏年並獲得總天數
+  const getDay = (month, year) => {
     const tmp = year % 4
     if (tmp == 0) {
       return month_olympic[month]
@@ -103,61 +104,49 @@ export default function Worship() {
     }
   }
 
+  // 刷新日曆
   const refreshDate = () => {
     let str = ''
-    const totalDay = daysMonth(my_month, my_year) //获取该月总天数
-    const firstDay = dayStart(my_month, my_year) //获取该月第一天是星期几
+    const totalDay = getDay(myMonth, myYear) // 獲取該月總天數
+    const firstDay = dayStart(myMonth, myYear) // 獲取該月第一天是星期幾
+
     let myclass
+
     for (let i = 1; i < firstDay; i++) {
-      str += '<li></li>' //为起始日之前的日期创建空白节点
+      str += '<li></li>' // 為起始日之前創造空白節點
     }
+
     for (let i = 1; i <= totalDay; i++) {
       if (
-        (i < my_day &&
-          my_year == my_date.getFullYear() &&
-          my_month == my_date.getMonth()) ||
-        my_year < my_date.getFullYear() ||
-        (my_year == my_date.getFullYear() && my_month < my_date.getMonth())
+        (i < myDay &&
+          myYear == myDate.getFullYear() &&
+          myMonth == myDate.getMonth()) ||
+        myYear < myDate.getFullYear() ||
+        (myYear == myDate.getFullYear() && myMonth < myDate.getMonth())
       ) {
-        myclass = " class='lightgrey'" //当该日期在今天之前时，以浅灰色字体显示
+        myclass = " class='lightgrey'" // 以前的日期以灰色顯示
       } else if (
-        i == my_day &&
-        my_year == my_date.getFullYear() &&
-        my_month == my_date.getMonth()
+        i == myDay &&
+        myYear == myDate.getFullYear() &&
+        myMonth == myDate.getMonth()
       ) {
-        myclass = " class='green greenbox'" //当天日期以绿色背景突出显示
+        myclass = " class='pink pinkbox'" // 當天日期以選取顏色顯示
       } else {
-        myclass = " class='darkgrey'" //当该日期在今天之后时，以深灰字体显示
+        myclass = " class='day'" // 未來日期以正常顯示
       }
       str += '<li' + myclass + '>' + i + '</li>' //创建日期节点
     }
-
-    setHolder(str)
-    setCMonth(month_name[my_month])
-    setCYear(my_year)
+    // 日曆顯示
+    setDays(str)
+    // 月份顯示
+    setMonth(month_name[myMonth])
+    // 年份顯示
+    setYear(myYear)
   }
+
   useEffect(() => {
     refreshDate() //执行该函数
-  }, [])
-
-  // prev.onclick = function (e) {
-  //   e.preventDefault()
-  //   my_month--
-  //   if (my_month < 0) {
-  //     my_year--
-  //     my_month = 11
-  //   }
-  //   refreshDate()
-  // }
-  // next.onclick = function (e) {
-  //   e.preventDefault()
-  //   my_month++
-  //   if (my_month > 11) {
-  //     my_year++
-  //     my_month = 0
-  //   }
-  //   refreshDate()
-  // }
+  }, [router.query, myMonth, myYear])
 
   return (
     <Container>
@@ -191,7 +180,7 @@ export default function Worship() {
         </Col>
       </Row>
 
-      {/* section2 */}
+      {/* section2: 選擇神明 */}
       <Row>
         <Col>
           <Title text="1." text2="選擇神明" />
@@ -233,13 +222,13 @@ export default function Worship() {
         </Col>
         <Col>
           <div className={`${styles.chose} fs28px fwBold`}>
-            已選擇：<span className={`${styles.god}`}>{god}</span>
+            已選擇： <span className={`${styles.god}`}>{god}</span>
           </div>
         </Col>
         <Col></Col>
       </Row>
 
-      {/* section3 */}
+      {/* section3: 挑選日期 */}
       <Row>
         <Col>
           <Title text="2." text2="挑選日期" />
@@ -248,66 +237,108 @@ export default function Worship() {
           {/* 月曆 */}
           <div className={`${styles.calendarContainer}`}>
             <div className={`${styles.calendar}`}>
-              {/* 月份 */}
-              <div className={`${styles.month}`}>
-              {/*  */}
-              <Image
-                  src={Arrow}
-                  id="prev"
-                  onClick={() => {
-                    my_month--
-                    if (my_month < 0) {
-                      my_year--
-                      my_month = 11
-                    }
-                    refreshDate()
-                  }}
-                >
-                </Image>
-                <h1 className={`${styles.pink}`} id="calendar-title">
-                  {cmonth}
-                </h1>
-                <Image
-                  id="next"
-                  onClick={() => {
-                    my_month++
-                    if (my_month > 11) {
-                      my_year++
-                      my_month = 0
-                    }
-                    refreshDate()
-                  }}
-                >
-                </Image>
-               
-                <h2
-                  className={`${styles.pink} ${styles.small}`}
-                  id="calendar-year"
-                >
-                  {cyear}
-                </h2>
+              <div className={`${styles.titleContainer} fwBold`}>
+                {/* 月份 */}
+                <div className={`${styles.title}`}>
+                  {/* 上個月 */}
+                  <Image
+                    src={Arrow}
+                    alt="prevMonth"
+                    width={30}
+                    className={`${styles.arrow} ${styles.prev}`}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      // 從這個月開始不能往前選 (今年這個月以後)||(未來)
+                      if (
+                        (myYear === myDate.getFullYear() &&
+                          myMonth - 1 >= myDate.getMonth()) ||
+                        myYear > myDate.getFullYear()
+                      ) {
+                        setMyMonth(myMonth - 1)
+                        if (myMonth < 1) {
+                          setMyYear(myYear - 1)
+                          setMyMonth(11)
+                        }
+                      }
+                    }}
+                  />
+                  <div className={`${styles.pink}`} id="month">
+                    {month}
+                  </div>
+                  {/* 下個月 */}
+                  <Image
+                    src={Arrow}
+                    alt="NextMonth"
+                    width={30}
+                    className={`${styles.arrow}`}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setMyMonth(myMonth + 1)
+                      if (myMonth > 10) {
+                        setMyYear(myYear + 1)
+                        setMyMonth(0)
+                      }
+                    }}
+                  />
+                </div>
+                {/* 年份 */}
+                <div className={`${styles.title}`}>
+                  {/* 上一年 */}
+                  <Image
+                    src={Arrow}
+                    alt="prevYear"
+                    width={30}
+                    className={`${styles.arrow} ${styles.prev}`}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      // 只能選到今年
+                      if (myYear - 1 >= myDate.getFullYear()) {
+                        if (
+                          myYear - 1 === myDate.getFullYear() &&
+                          myMonth < myDate.getMonth()
+                        ) {
+                          setMyMonth(myDate.getMonth())
+                        }
+                        setMyYear(myYear - 1)
+                      }
+                    }}
+                  />
+                  <div className={`${styles.pink} `} id="year">
+                    {year}
+                  </div>
+                  {/* 下一年 */}
+                  <Image
+                    src={Arrow}
+                    alt="NextYear"
+                    width={30}
+                    className={`${styles.arrow}`}
+                    id="nextYear"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setMyYear(myYear + 1)
+                    }}
+                  />
+                </div>
               </div>
               <div className={`${styles.body}`}>
-                <div className={`${styles.pink} ${styles.body_list}`}>
-                  {/* 星期 */}
-                  <ul className={`${styles.ul}`}>
+                <div className={`${styles.week} ${styles.lightgrey}`}>
+                  <ul>
+                    <li>SUN</li>
                     <li>MON</li>
                     <li>TUE</li>
                     <li>WED</li>
                     <li>THU</li>
                     <li>FRI</li>
                     <li>SAT</li>
-                    <li>SUN</li>
                   </ul>
                 </div>
-                <div className={`${styles.darkgrey} ${styles.body_list}`}>
-                  <ul className={`${styles.ul}`} id="days">
-                    <li className={`${styles.li}`}
-                      dangerouslySetInnerHTML={{
-                        __html: holder,
-                      }}
-                    ></li>
-                  </ul>
+                <div className={`${styles.day} ${styles.body_list}`}>
+                  <ul
+                    id="days"
+                    dangerouslySetInnerHTML={{
+                      __html: days,
+                    }}
+                  ></ul>
                 </div>
               </div>
             </div>
