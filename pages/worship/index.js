@@ -7,6 +7,7 @@ import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
+import { useInView } from 'react-intersection-observer' // Import react-intersection-observer
 
 // svg
 import nav from '@/assets/nav.svg'
@@ -15,15 +16,17 @@ import Leftgod from '@/assets/worshipLGod.svg'
 import Cloud from '@/assets/worshipCloud.svg'
 import WorshipLogo from '@/assets/worshipLogo.svg'
 import Time from '@/assets/worshipTime.svg'
-// import selectedTime from '@/assets/selectedTime.svg'
-import SelectedTime from '@/components/common/cards/timeCard'
+import selectedTime from '@/assets/selectedTime.svg'
+// import SelectedTime from '@/components/common/cards/timeCard'
 import Arrow from '@/assets/arrow_calendar.svg'
+
 // components
 import Title from '@/components/common/title/WorshipTitle'
 import God from '@/components/common/cards/WorshipGod'
 import Button from '@/components/common/button'
 import ArrowRight from '@/components/common/arrow/arrowRight'
 import ArrowLeft from '@/components/common/arrow/arrowLeft'
+import WorshipStepBar from '@/components/common/bar/WorshipStepBar'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 // Import Swiper styles
@@ -50,6 +53,7 @@ export default function Worship() {
   // const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-2)
   // const isHeartHovered = hoveredIndex === 1
   // const isCartHovered = hoveredIndex === 2
+
   const stylesTime = {
     selectedTime_1: {
       transform: 'rotate(0deg)',
@@ -228,9 +232,24 @@ export default function Worship() {
   const handleDayClick = (date) => {
     setDay(date)
   }
+  const [id, setId] = useState('chooseGod')
+
+  const [chooseGodRef, chooseGodInView] = useInView()
+  const [chooseDateRef, chooseDateInView] = useInView()
+  const [chooseTimeRef, chooseTimeInView] = useInView()
+  const [nextStepRef, nextStepInView] = useInView()
+
+  useEffect(() => {
+    chooseGodInView && setId('chooseGod')
+    chooseDateInView && setId('chooseDate')
+    chooseTimeInView && setId('chooseTime')
+    nextStepInView && setId('nextStep')
+  }, [chooseGodInView, chooseDateInView, chooseTimeInView, nextStepInView])
 
   return (
     <Container className={`${styles.worship}`}>
+      <WorshipStepBar id={id} />
+
       {/* <Head>
         <title>民俗論壇</title>
       </Head> */}
@@ -260,9 +279,8 @@ export default function Worship() {
           </div>
         </Col>
       </Row>
-
       {/* section2: 選擇神明 */}
-      <Row>
+      <Row id="chooseGod" ref={chooseGodRef}>
         <Col>
           <Title text="1." text2="選擇神明" />
         </Col>
@@ -310,11 +328,11 @@ export default function Worship() {
       </Row>
 
       {/* section3: 挑選日期 */}
-      <Row>
+      <Row id="chooseDate" ref={chooseDateRef}>
         <Col>
           <Title text="2." text2="挑選日期" />
         </Col>
-        <Col className="mt100px mb100px">
+        <Col className="mt100px mb150px">
           {/* 月曆 */}
           <div className={`${styles.calendarContainer}`}>
             <div className={`${styles.calendar}`}>
@@ -478,9 +496,9 @@ export default function Worship() {
       </Row>
 
       {/* section4: 預約時辰 */}
-      <Row className={`${styles.flex_col}`}>
+      <Row id="chooseTime" className={`${styles.flex_col}`} ref={chooseTimeRef}>
         <Col>
-          <Title text="3." text2="預約時辰" />
+          <Title text="3." text2="預約時辰" marginTop={'0'} />
         </Col>
         <Col className={`${styles.timeContainer}`}>
           <div className={`${styles.selectedTime}`}>
@@ -489,24 +507,7 @@ export default function Worship() {
               .map((v, i) => {
                 const key = i
                 return (
-                  <div
-                    key={i}
-                    className={`${styles.timePieces} border
-                    `}
-                    style={stylesTime[`selectedTime_${i + 1}`]}
-                  >
-                    <SelectedTime />
-                  </div>
-                )
-              })}
-          </div>
-          <div>
-            <Image src={Time} alt="choose time" />
-          </div>
-        </Col>
-      </Row>
-
-      {/* <Image
+                  <Image
                     key={i + 1}
                     src={selectedTime}
                     alt="choose time"
@@ -522,9 +523,25 @@ export default function Worship() {
                     className={`${styles.timePieces} border
                     `}
                     style={stylesTime[`selectedTime_${i + 1}`]}
-                  /> */}
+                  />
+                )
+              })}
+          </div>
+          <div>
+            <Image src={Time} alt="choose time" />
+          </div>
+        </Col>
+      </Row>
+      {/* <div
+                    key={i}
+                    className={`${styles.timePieces} border
+                    `}
+                    style={stylesTime[`selectedTime_${i + 1}`]}
+                  >
+                    <SelectedTime />
+                  </div> */}
       {/* section5: 下一步 */}
-      <Row>
+      <Row id="nextStep" ref={nextStepRef}>
         <Col>
           <div className={`${styles.button}`}>
             <Button
