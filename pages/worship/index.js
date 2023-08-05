@@ -34,10 +34,68 @@ import { EffectFade, Navigation, Pagination } from 'swiper/modules'
 
 export default function Worship() {
   const router = useRouter()
+
   const stylesTime = {
-    selectedTime_1: { transform: 'rotate(-45deg)', left: '100px' },
-    selectedTime_2: { transform: 'rotate(0deg)', left: '100px' },
-    selectedTime_3: { transform: 'rotate(35deg)', left: '100px' },
+    selectedTime_1: {
+      transform: 'rotate(0deg)',
+      top: '146px',
+      left: '258px',
+    },
+    selectedTime_2: {
+      transform: 'rotate(30deg)',
+      top: '121px',
+      left: '390px',
+    },
+    selectedTime_3: {
+      transform: 'rotate(60deg)',
+      top: '165.5px',
+      left: '518px',
+    },
+    selectedTime_4: {
+      transform: 'rotate(90deg)',
+      top: '268px',
+      left: '607.5px',
+    },
+    selectedTime_5: {
+      transform: 'rotate(120deg)',
+      top: '400px',
+      left: '633px',
+    },
+    selectedTime_6: {
+      transform: 'rotate(150deg)',
+      top: '528px',
+      left: '589px',
+    },
+    selectedTime_7: {
+      transform: 'rotate(180deg)',
+      top: '617.5px',
+      left: '486.1px',
+    },
+    selectedTime_8: {
+      transform: 'rotate(210deg)',
+      top: '643px',
+      left: '354px',
+    },
+    selectedTime_9: {
+      transform: 'rotate(240deg)',
+      top: '599px',
+      left: '226px',
+    },
+    selectedTime_10: {
+      transform: 'rotate(270deg)',
+      top: '497px',
+      left: '137px',
+    },
+    selectedTime_11: {
+      transform: 'rotate(300deg)',
+      top: '364px',
+      left: '111px',
+    },
+    selectedTime_12: {
+      transform: 'rotate(330deg)',
+      top: '235px',
+      left: '155px',
+    },
   }
 
   const godInfo = [
@@ -60,8 +118,9 @@ export default function Worship() {
       wordRight: '學道有成展宏願',
     },
   ]
+
+  // 選擇的神明
   const [god, setGod] = useState('')
-  // const [choose, setChoose] = useState(false)
 
   // 月曆
   const month_normal = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] // 一般
@@ -91,6 +150,12 @@ export default function Worship() {
   const [myMonth, setMyMonth] = useState(myDate.getMonth())
   const [myYear, setMyYear] = useState(myDate.getFullYear())
 
+  const [day, setDay] = useState(
+    `${myYear}/${myMonth + 1 < 10 ? '0' : ''}${myMonth + 1}/${
+      myDay < 10 ? '0' : ''
+    }${myDay}`
+  )
+
   // 某年某月某一天是星期幾
   const dayStart = (month, year) => {
     const tmpDate = new Date(year, month, 2)
@@ -114,35 +179,6 @@ export default function Worship() {
     const totalDay = getDay(myMonth, myYear) // 獲取該月總天數
     const firstDay = dayStart(myMonth, myYear) // 獲取該月第一天是星期幾
 
-    let myclass
-
-    // for (let i = 1; i < firstDay; i++) {
-    //   // str += '<li></li>'
-    //   calendar.push('')
-    // }
-    // for (let i = 1; i <= totalDay; i++) {
-    // if (
-    //   (i < myDay &&
-    //     myYear == myDate.getFullYear() &&
-    //     myMonth == myDate.getMonth()) ||
-    //   myYear < myDate.getFullYear() ||
-    //   (myYear == myDate.getFullYear() && myMonth < myDate.getMonth())
-    // ) {
-    //   myclass = " class='lightgrey'" // 以前的日期以灰色顯示
-    // } else if (
-    //   i == myDay &&
-    //   myYear == myDate.getFullYear() &&
-    //   myMonth == myDate.getMonth()
-    // ) {
-    //   myclass = " class='pink pinkbox'" // 當天日期以選取顏色顯示
-    // } else {
-    //   myclass = " class='day'" // 未來日期以正常顯示
-    // }
-    // str += '<li' + myclass + '>' + i + '</li>' //创建日期节点
-    // str += '<li>' + i + '</li>' //创建日期节点
-    // calendar.push(i)
-    // }
-
     // 為起始日之前創造空白節點
     for (let i = 1; i < firstDay; i++) {
       calendar.push('')
@@ -162,8 +198,12 @@ export default function Worship() {
     refreshDate() // 刷新日曆
   }, [router.query, myMonth, myYear])
 
+  const handleDayClick = (date) => {
+    setDay(date)
+  }
+
   return (
-    <Container>
+    <Container className={`${styles.worship}`}>
       {/* <Head>
         <title>民俗論壇</title>
       </Head> */}
@@ -260,6 +300,10 @@ export default function Worship() {
                     alt="prevMonth"
                     width={45}
                     className={`${styles.arrow} ${styles.prev}`}
+                    style={{
+                      cursor:
+                        myMonth === myDate.getMonth() ? 'default' : 'pointer',
+                    }}
                     onClick={(e) => {
                       e.preventDefault()
                       // 從這個月開始不能往前選 (今年這個月以後)||(未來)
@@ -303,6 +347,10 @@ export default function Worship() {
                     alt="prevYear"
                     width={45}
                     className={`${styles.arrow} ${styles.prev}`}
+                    style={{
+                      cursor:
+                        myYear === myDate.getFullYear() ? 'default' : 'pointer',
+                    }}
                     onClick={(e) => {
                       e.preventDefault()
                       // 只能選到今年
@@ -339,13 +387,13 @@ export default function Worship() {
                   className={`${styles.week} ${styles.lightgrey} fwBold fs20px`}
                 >
                   <ul>
-                    <li>SUN</li>
-                    <li>MON</li>
-                    <li>TUE</li>
-                    <li>WED</li>
-                    <li>THU</li>
-                    <li>FRI</li>
-                    <li>SAT</li>
+                    <li>日</li>
+                    <li>一</li>
+                    <li>二</li>
+                    <li>三</li>
+                    <li>四</li>
+                    <li>五</li>
+                    <li>六</li>
                   </ul>
                 </div>
                 <div className={`${styles.body_list}`}>
@@ -353,27 +401,25 @@ export default function Worship() {
                     {days.map((v, i) => {
                       let state = false
                       let pastDay = false
-                      const firstDay = dayStart(myMonth, myYear)
-                      //當天
+
+                      // 以前的
                       if (
-                        i + 1 - (firstDay - 1) == myDay &&
+                        v < myDay &&
                         myYear == myDate.getFullYear() &&
                         myMonth == myDate.getMonth()
                       ) {
-                        state = true
-                      } else if (
-                        (i + 1 < myDay &&
-                          myYear == myDate.getFullYear() &&
-                          myMonth == myDate.getMonth()) ||
-                        myYear < myDate.getFullYear() ||
-                        (myYear == myDate.getFullYear() &&
-                          myMonth < myDate.getMonth())
-                      ) {
                         pastDay = true
+                      }
+                      const key = `${myYear}/${myMonth + 1 < 10 ? '0' : ''}${
+                        myMonth + 1
+                      }/${v < 10 ? '0' : ''}${v}`
+                      if (day === key) {
+                        state = true
                       }
                       return v ? (
                         <li
-                          key={`${v}-${myYear}-${myMonth}`}
+                          role="presentation"
+                          key={`${myYear}/${myMonth + 1}/${v}`}
                           className={`${
                             v
                               ? pastDay
@@ -383,6 +429,9 @@ export default function Worship() {
                                 : styles.day
                               : ''
                           } fs20px`}
+                          onClick={() => {
+                            handleDayClick(key)
+                          }}
                         >
                           {v}
                         </li>
@@ -394,14 +443,14 @@ export default function Worship() {
                 </div>
               </div>
               <div className={`${styles.choseDay} fs28px fwBold`}>
-                已選擇： <span className={`${styles.pink}`}>{god}</span>
+                已選擇： <span className={`${styles.pink}`}>{day}</span>
               </div>
             </div>
           </div>
         </Col>
       </Row>
 
-      {/* section4 */}
+      {/* section4: 預約時辰 */}
       <Row className={`${styles.flex_col}`}>
         <Col>
           <Title text="3." text2="預約時辰" />
@@ -411,11 +460,14 @@ export default function Worship() {
             {Array(12)
               .fill(1)
               .map((v, i) => {
+                const key = i
                 return (
                   <Image
                     key={i}
                     src={selectedTime}
                     alt="choose time"
+                    className={`${styles.timePieces}`}
+                    onMouseEnter={() => {}}
                     style={stylesTime[`selectedTime_${i + 1}`]}
                   />
                 )
@@ -427,7 +479,7 @@ export default function Worship() {
         </Col>
       </Row>
 
-      {/* section5 */}
+      {/* section5: 下一步 */}
       <Row>
         <Col>
           <div className={`${styles.button}`}>

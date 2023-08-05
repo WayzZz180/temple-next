@@ -109,17 +109,6 @@
 .god
   color: $hot_pink
 
-.flex_col
-  display: flex
-  flex-direction: column
-  align-items: center
-
-.timeContainer
-  position: relative
-
-.selectedTime
-  position: absolute
-
 .calendar
     width: 100% 
     height:350px
@@ -134,11 +123,11 @@
     justify-content: center
     align-items: center
     position: relative
-    left: 200px
+    left: 50px
 
 .body
   position: relative
-  left: 390px
+  left: 35px
   bottom: 80px
 
 .title
@@ -153,9 +142,10 @@
 
 .week ul
     width: 650px
+    color: #431D31
 
 .week ul li
-    width: 56px
+    width: 56.5px
     margin-right: 21px
     height: 51px
     line-height:51px
@@ -167,8 +157,7 @@
 
 .body_list ul
     width: 600px
-    font-weight:bold
-
+    
 .body_list ul li
     width: 65px
     height: 65px
@@ -188,6 +177,19 @@
     background: #431D31
     border-radius: 50px
     color: white
+    position: relative
+    // animation: dayIn .7s 1
+
+// @keyframes dayIn
+//   0%
+//     background: $bgColor
+//     // opacity: 0
+//     // top: 100px
+//   100%
+//     background: #431D31
+//     // opacity: 1
+//     // top: 0px
+    
 
 .pastDay
   opacity: 0.5
@@ -205,13 +207,32 @@
     color:$hot_pink 
 
 .choseDay
-    width: 1000px
     display: flex
     position: relative
-    left: 500px
+    right: 80px
     top: 125px
 
-.pinkbox
-    background: $hot_pink
-    border-radius: 50px
-    color: white
+.flex_col
+  display: flex
+  flex-direction: column
+  align-items: center
+
+.timeContainer
+  position: relative
+  bottom: 50px
+
+.selectedTime
+  width: 1130px
+  height: 1130px
+  position: absolute
+  display: flex
+  align-items: center
+  justify-content: center
+
+.timePieces
+  position: absolute
+  cursor: pointer
+  opacity: 0
+
+.timePieces:hover
+  opacity: 0.5
