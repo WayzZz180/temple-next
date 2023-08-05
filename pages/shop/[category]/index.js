@@ -22,10 +22,9 @@ export default function Category() {
   const [data, setData] = useState([])
   const [pagination, setPagination] = useState([])
   const [dataFromChild, setDataFromChild] = useState([]) 
-   
   
   //要篩選的資料
-  let info = [
+  const [info,setInfo]= useState([
     {
       title: true,
       content: '• 每頁顯示 •',
@@ -69,7 +68,8 @@ export default function Category() {
       orderBy: 'stars',
       status: false,
     },
-  ]
+  ])
+
   useEffect(() => {
     if(!category) return
 
@@ -89,6 +89,16 @@ export default function Category() {
     if(keyword){
       reqData = {...reqData, keyword: keyword}
     }
+
+    const updatedInfo = info.map((v) => {
+      if (v.perPage === reqData.perPage || v.orderBy === reqData.orderBy){
+        return { ...v, status: true };
+      } else {
+        return {...v, status: false};
+      }
+     });
+     setInfo(updatedInfo)
+    
     fetch(`${process.env.API_SERVER}/shop/${category}`, {
         method: 'POST',
         body: JSON.stringify({ requestData: reqData }),
@@ -107,11 +117,12 @@ export default function Category() {
           setData([])
         }  
       })
+      console.log(updatedInfo);
     
   }, [dataFromChild,router.query])
 
   if (!data) return <p>Loading...</p>
- 
+
   return (
     <Container className={`${styles.container}`}>
       {/* 類別&搜尋 */}
@@ -132,8 +143,6 @@ export default function Category() {
       {
         data?.length>0 ? <GetData data={data} pagination={pagination} dataFromChild={dataFromChild} info={info}/> :<NoData />
       }
-     
-
     </Container>
   )
 }

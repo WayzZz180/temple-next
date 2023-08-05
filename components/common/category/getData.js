@@ -52,7 +52,7 @@ export default function GetData({data=[], pagination=[]}) {
         <Row key={rowIndex} className={`${styles.row}`}>
           {chunk.map((src, colIndex) => {
             const products = data[colIndex + rowIndex * 5]
-            const foundItem = pidArr.some((v) => v.pid === products.pid);
+            const foundItem = pidArr.some((v) => v.pid === products?.pid);
             return (
               <Col key={products?.pid}>
                 <ShopProductsCard
