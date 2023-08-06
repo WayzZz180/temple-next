@@ -52,6 +52,7 @@ export default function ReadPost({ src = '' }) {
             height={450}
           />
         </div>
+        <Forumline />
         <div className={`${styles.col}`}>
           <div className={`${styles.row4}`}>
             <div>

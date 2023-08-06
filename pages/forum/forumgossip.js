@@ -7,7 +7,9 @@ import Navbar from '@/components/common/forumlogo/navbar'
 import Forumper from '@/components/common/forumlogo/forumper'
 import AdvancedExample from '@/components/common/forumlogo/pagination'
 import Head from 'next/head'
+import Pagination from '@/components/common/pagination/index'
 // import LaunchForum from '@/components/common/launchdemo/launchforum'
+import { useRouter } from 'next/router'
 
 export default function Forumgossip() {
   return (
@@ -22,9 +24,10 @@ export default function Forumgossip() {
         <Navbar />
         <Forumline lineColor="brown" />
         <Forumper />
-        <AdvancedExample />
       </div>
-      <div></div>
+      {/* <div> */}
+      {/* <Pagination /> */}
+      {/* </div> */}
     </>
   )
 }

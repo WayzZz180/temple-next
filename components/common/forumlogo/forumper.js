@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect, useState, useContext } from 'react'
+import { useRouter } from 'next/router'
 import styles from './forumper.module.sass'
 import Link from 'next/link'
 import Forumline from '@/components/common/forumlogo/forumline'
@@ -9,9 +10,13 @@ import ChatBubbleOutlineSharpIcon from '@mui/icons-material/ChatBubbleOutlineSha
 import BookmarkBorderSharpIcon from '@mui/icons-material/BookmarkBorderSharp'
 import BookmarkAddedSharpIcon from '@mui/icons-material/BookmarkAddedSharp'
 import FigureExample from '@/components/common/forumlogo/forumperpic'
-import Button from '@mui/material/Button'
+import Pagination from '@/components/common/pagination/index'
+// import Button from '@mui/material/Button'
 
 export default function Forumper() {
+  const router = useRouter()
+  console.log(router)
+
   const [data, setData] = useState({
     redirect: '',
     totalRows: 0,
@@ -21,13 +26,15 @@ export default function Forumper() {
     rows: [],
   })
   useEffect(() => {
-    fetch(`${process.env.API_SERVER}/forum`)
+    const usp = new URLSearchParams(router.query)
+
+    fetch(`${process.env.API_SERVER}/forum?${usp.toString()}`)
       .then((r) => r.json())
       .then((data) => {
         console.log(data)
         setData(data)
       })
-  }, [])
+  }, [router.query])
   return (
     <>
       <div>
@@ -73,6 +80,9 @@ export default function Forumper() {
             <Forumline lineColor="brown" />
           </div>
         ))}
+        {/* <Pagination
+          pagination={{ page: data.page, totalPages: data.totalPages }}
+        /> */}
       </div>
     </>
   )

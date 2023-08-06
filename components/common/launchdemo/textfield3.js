@@ -1,6 +1,8 @@
 import * as React from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
+// import { useRouter } from 'next/router'
+// import { useEffect, useState, useContext } from 'react'
 
 export default function BasicTextFields3() {
   return (
@@ -17,6 +19,8 @@ export default function BasicTextFields3() {
         label="今天想要找什麼呢～"
         variant="standard"
         autofocus
+        type="search"
+        name="keyword"
       />
     </Box>
   )
