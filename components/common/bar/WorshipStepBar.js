@@ -25,15 +25,15 @@ export default function WorshipStepBar({ id = 'chooseGod' }) {
   const steps = [
     {
       id: 'chooseGod',
-      text: '選擇神明',
+      text: '神明',
     },
     {
       id: 'chooseDate',
-      text: '挑選日期',
+      text: '日期',
     },
     {
       id: 'chooseTime',
-      text: '預約時辰',
+      text: '時辰',
     },
     {
       id: 'nextStep',

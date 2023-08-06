@@ -13,7 +13,7 @@ import { useRouter } from 'next/router'
 // components
 import ShopTitle from '@/components/common/title/ShopTitle'
 import HomeCarousels from '@/components/common/carousel/HomeCarousels'
-import ProductsCarousel from '@/components/common/carousel/ProductsCarousel'
+import WorshipProductsCard from '@/components/common/cards/worshipProductsCard'
 
 // svg
 import goldenStar_fill from '@/assets/goldenStar_fill.svg'
@@ -39,6 +39,21 @@ export default function Offerings() {
       localStorage.removeItem('keyword')
     }
   }
+
+  const scrollTo = (id) => {
+    // 取得目標元素的位置
+    const content = document.getElementById(id)
+    const contentPosition = content.getBoundingClientRect().top
+
+    // 計算捲動的距離，這裡設定為捲動至目標元素頂部距離畫面頂部的距離
+    const offset = window.pageYOffset
+    const scrollDistance = contentPosition + offset + 100
+    // 執行捲動動作
+    window.scrollTo({
+      top: scrollDistance,
+      behavior: 'smooth',
+    })
+  }
   return (
     <>
       <Container className="mt100px">
@@ -49,7 +64,7 @@ export default function Offerings() {
         <Row className="nowrap mt100px mb50px fs24px">
           {/* 標題 */}
           <Col>
-            <div className={`${styles.title}`}>神明</div>
+            <div className={`${styles.title}`}>指引</div>
           </Col>
         </Row>
         <Row className={`nowrap fs20px `}>
@@ -61,11 +76,11 @@ export default function Offerings() {
                 onMouseEnter={() => handleMouseEnterStar(i)}
                 onMouseLeave={handleMouseLeaveStar}
                 onClick={() => {
+                  scrollTo(v.id)
                   clearLocal()
                 }}
               >
-                <Link
-                  href={`#${v.id}`}
+                <div
                   className={`${styles.category} ${
                     hoveredIndexStar === i ? styles.hovered : ''
                   } m15px`}
@@ -86,7 +101,7 @@ export default function Offerings() {
                   <span className={`${styles.link} fwBold pb15px fs24px`}>
                     {v.text}
                   </span>
-                </Link>
+                </div>
               </Col>
             )
           })}
@@ -97,6 +112,35 @@ export default function Offerings() {
             <ShopTitle text="媽祖" lineColor="green" />
           </Col>
         </Row>
+        <Row className="nowrap">
+          <Col>
+            <WorshipProductsCard />
+          </Col>
+          <Col>
+            <WorshipProductsCard />
+          </Col>
+          <Col>
+            <WorshipProductsCard />
+          </Col>
+          <Col>
+            <WorshipProductsCard />
+          </Col>
+        </Row>
+        <Row className="nowrap">
+          <Col>
+            <WorshipProductsCard />
+          </Col>
+          <Col>
+            <WorshipProductsCard />
+          </Col>
+          <Col>
+            <WorshipProductsCard />
+          </Col>
+          <Col>
+            <WorshipProductsCard />
+          </Col>
+        </Row>
+
         {/* 月老*/}
         <Row id="LoveGod" className="nowrap mb50px">
           <Col>
