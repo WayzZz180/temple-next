@@ -1,4 +1,5 @@
 @import '@/styles/_variables.module.sass'
+@import '@/styles/mixins/responsive.sass'
 
 .category
   color: $fontColor
@@ -40,10 +41,20 @@
    font-weight: 700
    letter-spacing: 6px   
 
-.line
-   height: 8px
-   width: 100px
-   margin-top:10px
-   margin-bottom: 30px
-   background: $hot_pink
 
+.productsContainer
+  margin: auto
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: center
+  width: 100%
+    
+  @include desktop-m 
+      flex-wrap: wrap
+    
+
+  
+
+// .productsContainer
+  // height: 100%

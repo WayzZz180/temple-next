@@ -21,6 +21,7 @@ import goldenStar_outline from '@/assets/goldenStar_outline.svg'
 import data from '@/components/mydata/productsTitleData'
 
 export default function Offerings() {
+  const router = useRouter()
   const gods = [
     { text: '媽祖', id: 'Mazu' },
     { text: '月老', id: 'LoveGod' },
@@ -54,6 +55,15 @@ export default function Offerings() {
       behavior: 'smooth',
     })
   }
+  const [data, setData] = useState([])
+  useEffect(() => {
+    fetch(`${process.env.API_SERVER}/worship`)
+      .then((r) => r.json())
+      .then((data) => {
+        setData(data)
+      })
+  }, [router.query])
+
   return (
     <>
       <Container className="mt100px">
@@ -112,35 +122,19 @@ export default function Offerings() {
             <ShopTitle text="媽祖" lineColor="green" />
           </Col>
         </Row>
-        <Row className="nowrap">
-          <Col>
-            <WorshipProductsCard />
-          </Col>
-          <Col>
-            <WorshipProductsCard />
-          </Col>
-          <Col>
-            <WorshipProductsCard />
-          </Col>
-          <Col>
-            <WorshipProductsCard />
-          </Col>
+        <Row className={` ${styles.productsContainer}`}>
+          {data?.map((v, i) => {
+            return (
+              <Col key={i}>
+                <WorshipProductsCard
+                  src={v.image}
+                  text={v.product_name}
+                  price={v.product_price}
+                />
+              </Col>
+            )
+          })}
         </Row>
-        <Row className="nowrap">
-          <Col>
-            <WorshipProductsCard />
-          </Col>
-          <Col>
-            <WorshipProductsCard />
-          </Col>
-          <Col>
-            <WorshipProductsCard />
-          </Col>
-          <Col>
-            <WorshipProductsCard />
-          </Col>
-        </Row>
-
         {/* 月老*/}
         <Row id="LoveGod" className="nowrap mb50px">
           <Col>
