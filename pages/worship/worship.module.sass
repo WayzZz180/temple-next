@@ -216,36 +216,80 @@
   display: flex
   flex-direction: column
   align-items: center
+  height: 1200px
 
-.timeContainer
-  position: relative
-  bottom: 50px
-
-.selectedTime
-  width: 1130px
-  height: 1130px
-  position: absolute
+.zodiacContainer
   display: flex
-  align-items: center
   justify-content: center
 
-.timePieces
+.circle
+  width: 900px
+  height: 900px
+  border-radius: 50% 
+  display: flex
+  align-items: flex-end
+  justify-content: center
   position: absolute
-  display: block
+  overflow: hidden
+  border:2px solid #000
+
+.zodiac
+   position: absolute
+   z-index: 2
+
+.zodiactext
+   position: absolute
+   z-index: 3
+
+.zodiaccircle
+   position: absolute
+   z-index: 1
+
+
+.slice
+  width: 0px
+  height:0px
+  position: absolute
+  transform-origin: top
+  border-left: 120px solid transparent
+  border-right: 120px solid transparent
+  border-bottom:450px solid #000
+  opacity: 0
+  z-index: 4
   cursor: pointer
-  width: 384px
-  height: 364px
-  opacity: 0
 
+.slice1
+  transform: rotate(180deg) 
 
-  // background: red
+.slice2
+  transform: rotate(210deg) 
 
+.slice3
+  transform: rotate(240deg) 
 
-.timePieces:hover
-  opacity: 1
+.slice4
+  transform: rotate(270deg) 
 
-.isHovered
-  opacity: 0.5
+.slice5
+  transform: rotate(300deg) 
 
-.notHovered
-  opacity: 0
+.slice6
+  transform: rotate(330deg)
+
+.slice7
+  transform: rotate(0deg) 
+
+.slice8 
+  transform: rotate(30deg) 
+
+.slice9
+  transform: rotate(60deg) 
+
+.slice10
+  transform: rotate(90deg) 
+
+.slice11
+  transform: rotate(120deg) 
+
+.slice12
+  transform: rotate(150deg) 

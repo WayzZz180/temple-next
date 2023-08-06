@@ -54,80 +54,80 @@ export default function Worship() {
   // const isHeartHovered = hoveredIndex === 1
   // const isCartHovered = hoveredIndex === 2
 
-  const stylesTime = {
-    selectedTime_1: {
-      transform: 'rotate(0deg)',
-      top: '146px',
-      left: '258px',
-      zIndex: 12,
-    },
-    selectedTime_2: {
-      transform: 'rotate(30deg)',
-      top: '121px',
-      left: '390px',
-      zIndex: 11,
-    },
-    selectedTime_3: {
-      transform: 'rotate(60deg)',
-      top: '165.5px',
-      left: '518px',
-      zIndex: 10,
-    },
-    selectedTime_4: {
-      transform: 'rotate(90deg)',
-      top: '268px',
-      left: '607.5px',
-      zIndex: 9,
-    },
-    selectedTime_5: {
-      transform: 'rotate(120deg)',
-      top: '400px',
-      left: '633px',
-      zIndex: 8,
-    },
-    selectedTime_6: {
-      transform: 'rotate(150deg)',
-      top: '528px',
-      left: '589px',
-      zIndex: 7,
-    },
-    selectedTime_7: {
-      transform: 'rotate(180deg)',
-      top: '617.5px',
-      left: '486.1px',
-      zIndex: 6,
-    },
-    selectedTime_8: {
-      transform: 'rotate(210deg)',
-      top: '643px',
-      left: '354px',
-      zIndex: 5,
-    },
-    selectedTime_9: {
-      transform: 'rotate(240deg)',
-      top: '599px',
-      left: '226px',
-      zIndex: 4,
-    },
-    selectedTime_10: {
-      transform: 'rotate(270deg)',
-      top: '497px',
-      left: '137px',
-      zIndex: 3,
-    },
-    selectedTime_11: {
-      transform: 'rotate(300deg)',
-      top: '364px',
-      left: '111px',
-      zIndex: 2,
-    },
-    selectedTime_12: {
-      transform: 'rotate(330deg)',
-      top: '235px',
-      left: '155px',
-      zIndex: 1,
-    },
-  }
+  // const stylesTime = {
+  //   selectedTime_1: {
+  //     transform: 'rotate(0deg)',
+  //     top: '146px',
+  //     left: '258px',
+  //     zIndex: 12,
+  //   },
+  //   selectedTime_2: {
+  //     transform: 'rotate(30deg)',
+  //     top: '121px',
+  //     left: '390px',
+  //     zIndex: 11,
+  //   },
+  //   selectedTime_3: {
+  //     transform: 'rotate(60deg)',
+  //     top: '165.5px',
+  //     left: '518px',
+  //     zIndex: 10,
+  //   },
+  //   selectedTime_4: {
+  //     transform: 'rotate(90deg)',
+  //     top: '268px',
+  //     left: '607.5px',
+  //     zIndex: 9,
+  //   },
+  //   selectedTime_5: {
+  //     transform: 'rotate(120deg)',
+  //     top: '400px',
+  //     left: '633px',
+  //     zIndex: 8,
+  //   },
+  //   selectedTime_6: {
+  //     transform: 'rotate(150deg)',
+  //     top: '528px',
+  //     left: '589px',
+  //     zIndex: 7,
+  //   },
+  //   selectedTime_7: {
+  //     transform: 'rotate(180deg)',
+  //     top: '617.5px',
+  //     left: '486.1px',
+  //     zIndex: 6,
+  //   },
+  //   selectedTime_8: {
+  //     transform: 'rotate(210deg)',
+  //     top: '643px',
+  //     left: '354px',
+  //     zIndex: 5,
+  //   },
+  //   selectedTime_9: {
+  //     transform: 'rotate(240deg)',
+  //     top: '599px',
+  //     left: '226px',
+  //     zIndex: 4,
+  //   },
+  //   selectedTime_10: {
+  //     transform: 'rotate(270deg)',
+  //     top: '497px',
+  //     left: '137px',
+  //     zIndex: 3,
+  //   },
+  //   selectedTime_11: {
+  //     transform: 'rotate(300deg)',
+  //     top: '364px',
+  //     left: '111px',
+  //     zIndex: 2,
+  //   },
+  //   selectedTime_12: {
+  //     transform: 'rotate(330deg)',
+  //     top: '235px',
+  //     left: '155px',
+  //     zIndex: 1,
+  //   },
+  // }
 
   const godInfo = [
     {
@@ -246,6 +246,11 @@ export default function Worship() {
     nextStepInView && setId('nextStep')
   }, [chooseGodInView, chooseDateInView, chooseTimeInView, nextStepInView])
 
+  const [zodiac, setZodiac] = useState(1)
+
+  const handleHover = (zodiacNumber) => {
+    setZodiac(zodiacNumber)
+  }
   return (
     <Container className={`${styles.worship}`}>
       <WorshipStepBar id={id} />
@@ -500,35 +505,90 @@ export default function Worship() {
         <Col>
           <Title text="3." text2="預約時辰" marginTop={'0'} />
         </Col>
-        <Col className={`${styles.timeContainer}`}>
-          <div className={`${styles.selectedTime}`}>
-            {Array(12)
-              .fill(1)
-              .map((v, i) => {
-                const key = i
-                return (
-                  <Image
-                    key={i + 1}
-                    src={selectedTime}
-                    alt="choose time"
-                    // onMouseEnter={() => {
-                    //   console.log('i:', i)
-                    //   console.log('hover:', hoveredIndex)
-                    //   handleMouseEnter(i - 1)
-                    // }}
-                    // onMouseLeave={() => {
-                    //   handleMouseLeave()
-                    // }}
-                    // ${hoveredIndex === i ? styles.isHovered : styles.notHovered}
-                    className={`${styles.timePieces} border
-                    `}
-                    style={stylesTime[`selectedTime_${i + 1}`]}
-                  />
-                )
-              })}
-          </div>
-          <div>
-            <Image src={Time} alt="choose time" />
+        <Col>
+          <div className={`${styles.zodiacContainer} mt50px`}>
+            <div className={`${styles.circle}`}>
+              <Image
+                alt="zodiac"
+                src={`/zodiac/zodiac_${zodiac}.svg`}
+                width="900"
+                height="900"
+                className={`${styles.zodiac}`}
+              />
+              <Image
+                alt="circle"
+                src={`/zodiac/circle.svg`}
+                width="900"
+                height="900"
+                className={`${styles.zodiaccircle}`}
+              />
+              <Image
+                alt="text"
+                src={`/zodiac/text.svg`}
+                width="900"
+                height="900"
+                className={`${styles.zodiactext}`}
+              />
+              {Array(12)
+                .fill(1)
+                .map((v, i) => {
+                  const sliceNumber = i + 1
+                  const sliceClassName = `${styles.slice} ${
+                    styles['slice' + sliceNumber]
+                  }`
+                  return (
+                    <div
+                      key={sliceNumber}
+                      className={sliceClassName}
+                      onMouseEnter={() => handleHover(sliceNumber)}
+                    ></div>
+                  )
+                })}
+              {/* <div
+                className={`${styles.slice2}`}
+                onMouseEnter={() => handleHover(2)}
+              ></div>
+              <div
+                className={`${styles.slice3}`}
+                onMouseEnter={() => handleHover(3)}
+              ></div>
+              <div
+                className={`${styles.slice4}`}
+                onMouseEnter={() => handleHover(4)}
+              ></div>
+              <div
+                className={`${styles.slice5}`}
+                onMouseEnter={() => handleHover(5)}
+              ></div>
+              <div
+                className={`${styles.slice6}`}
+                onMouseEnter={() => handleHover(6)}
+              ></div>
+              <div
+                className={`${styles.slice7}`}
+                onMouseEnter={() => handleHover(7)}
+              ></div>
+              <div
+                className={`${styles.slice8}`}
+                onMouseEnter={() => handleHover(8)}
+              ></div>
+              <div
+                className={`${styles.slice9}`}
+                onMouseEnter={() => handleHover(9)}
+              ></div>
+              <div
+                className={`${styles.slice10}`}
+                onMouseEnter={() => handleHover(10)}
+              ></div>
+              <div
+                className={`${styles.slice11}`}
+                onMouseEnter={() => handleHover(11)}
+              ></div> */}
+              <div
+                className={`${styles.slice12}`}
+                onMouseEnter={() => handleHover(12)}
+              ></div>
+            </div>
           </div>
         </Col>
       </Row>
