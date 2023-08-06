@@ -1,0 +1,78 @@
+@import @/styles/_variables.module.sass
+
+.container
+    width: 550px
+    height: 550px
+    padding: 10px
+    display: flex
+
+.flex_row
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: flex-start
+
+.flex_col
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center    
+
+.detailsContainer
+    display: flex
+    flex-direction: column
+    width: 450px
+
+.imgContainer
+    width: 550px
+    display: flex
+    align-items: center
+    justify-content: center
+
+.line
+    width: 100%
+    background: $brown
+
+.inlineBlock
+    display: inline-block
+    cursor: pointer
+
+.add
+    width: 325px
+    border: 1px $black solid
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 10px 5px
+    border-radius: 7px
+
+.addValue
+    border: 0
+    background: $bgColor
+    width:30%
+    text-align: center
+
+.addValue:focus
+    border: 0
+    outline: none
+
+.button
+    border: 0   
+    background: $bgColor
+    font-size: 30px
+
+
+.detailsData
+    display: flex
+    flex-direction: column
+
+.stars
+    display: flex
+    align-items: center
+    justify-content: center
+
+.commentLine
+    height:3px
+    width: 60%
+    background: $brown
+    margin: auto
