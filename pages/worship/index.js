@@ -6,7 +6,6 @@ import Head from 'next/head'
 // hooks
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 import { useInView } from 'react-intersection-observer' // Import react-intersection-observer
 
 // svg
@@ -15,8 +14,7 @@ import Rightgod from '@/assets/worshipRGod.svg'
 import Leftgod from '@/assets/worshipLGod.svg'
 import Cloud from '@/assets/worshipCloud.svg'
 import WorshipLogo from '@/assets/worshipLogo.svg'
-import Time from '@/assets/worshipTime.svg'
-import selectedTime from '@/assets/selectedTime.svg'
+
 // import SelectedTime from '@/components/common/cards/timeCard'
 import Arrow from '@/assets/arrow_calendar.svg'
 
@@ -24,6 +22,9 @@ import Arrow from '@/assets/arrow_calendar.svg'
 import Title from '@/components/common/title/WorshipTitle'
 import God from '@/components/common/cards/WorshipGod'
 import Button from '@/components/common/button'
+import ArrowRight from '@/components/common/arrow/arrowRight'
+import ArrowLeft from '@/components/common/arrow/arrowLeft'
+import WorshipStepBar from '@/components/common/bar/WorshipStepBar'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 // Import Swiper styles
@@ -36,6 +37,8 @@ import 'swiper/css/pagination'
 import { EffectFade, Navigation, Pagination } from 'swiper/modules'
 
 export default function Worship() {
+  const router = useRouter()
+
   const godInfo = [
     {
       text: '媽祖',
@@ -158,13 +161,81 @@ export default function Worship() {
   const handleHover = (zodiacNumber) => {
     setZodiac(zodiacNumber)
   }
+  const [timeClick, setTimeClick] = useState('')
+  const [time, setTime] = useState('午時/11am-1pm')
+
+  const getTime = (time) => {
+    const timeInfo = [
+      {
+        id: '子時',
+        time: '11pm-1am',
+      },
+      {
+        id: '丑時',
+        time: '1am-3am',
+      },
+      {
+        id: '寅時',
+        time: '3am-5am',
+      },
+      {
+        id: '卯時',
+        time: '5am-7am',
+      },
+      {
+        id: '辰時',
+        time: '7am-9am',
+      },
+      {
+        id: '巳時',
+        time: '9am-11am',
+      },
+      {
+        id: '午時',
+        time: '11am-1pm',
+      },
+      {
+        id: '未時',
+        time: '1pm-3pm',
+      },
+      {
+        id: '申時',
+        time: '3pm-5pm',
+      },
+      {
+        id: '酉時',
+        time: '5pm-7pm',
+      },
+      {
+        id: '戌時',
+        time: '7pm-9pm',
+      },
+      {
+        id: '亥時',
+        time: '9pm-11pm',
+      },
+    ]
+    setTime(`${timeInfo[time - 1].id}/${timeInfo[time - 1].time}
+    `)
+  }
+
+  const scrollTo = (id) => {
+    // 取得目標元素的位置
+    const content = document.getElementById(id)
+    const contentPosition = content.getBoundingClientRect().top
+
+    // 計算捲動的距離，這裡設定為捲動至目標元素頂部距離畫面頂部的距離
+    const offset = window.pageYOffset
+    const scrollDistance = contentPosition + offset - 10
+    // 執行捲動動作
+    window.scrollTo({
+      top: scrollDistance,
+      behavior: 'smooth',
+    })
+  }
   return (
     <Container className={`${styles.worship}`}>
       <WorshipStepBar id={id} />
-
-      {/* <Head>
-        <title>民俗論壇</title>
-      </Head> */}
       {/* section1 */}
       <Row>
         <Col>
@@ -407,18 +478,23 @@ export default function Worship() {
         </Col>
       </Row>
 
-      {/* section4 */}
-      <Row>
+      {/* section4: 預約時辰 */}
+      <Row id="chooseTime" className={`${styles.flex_col}`} ref={chooseTimeRef}>
+        <Col>
+          <Title text="3." text2="預約時辰" marginTop={'0'} />
+        </Col>
         <Col>
           <div className={`${styles.zodiacContainer} mt50px`}>
             <div className={`${styles.circle}`}>
+              {/* HOVER */}
               <Image
                 alt="zodiac"
-                src={`/zodiac/zodiac_${zodiac}.svg`}
+                src={`/zodiac/zodiac_${timeClick ? timeClick : zodiac}.svg`}
                 width="900"
                 height="900"
                 className={`${styles.zodiac}`}
               />
+              {/* 圓盤 */}
               <Image
                 alt="circle"
                 src={`/zodiac/circle.svg`}
@@ -426,6 +502,7 @@ export default function Worship() {
                 height="900"
                 className={`${styles.zodiaccircle}`}
               />
+              {/* 生肖+字 */}
               <Image
                 alt="text"
                 src={`/zodiac/text.svg`}
@@ -442,68 +519,27 @@ export default function Worship() {
                   }`
                   return (
                     <div
+                      role="presentation"
                       key={sliceNumber}
                       className={sliceClassName}
                       onMouseEnter={() => handleHover(sliceNumber)}
+                      onMouseLeave={() => handleHover(0)}
+                      onClick={() => {
+                        setTimeClick(sliceNumber)
+                        getTime(sliceNumber)
+                      }}
                     ></div>
                   )
                 })}
-              {/* <div
-                className={`${styles.slice2}`}
-                onMouseEnter={() => handleHover(2)}
-              ></div>
-              <div
-                className={`${styles.slice3}`}
-                onMouseEnter={() => handleHover(3)}
-              ></div>
-              <div
-                className={`${styles.slice4}`}
-                onMouseEnter={() => handleHover(4)}
-              ></div>
-              <div
-                className={`${styles.slice5}`}
-                onMouseEnter={() => handleHover(5)}
-              ></div>
-              <div
-                className={`${styles.slice6}`}
-                onMouseEnter={() => handleHover(6)}
-              ></div>
-              <div
-                className={`${styles.slice7}`}
-                onMouseEnter={() => handleHover(7)}
-              ></div>
-              <div
-                className={`${styles.slice8}`}
-                onMouseEnter={() => handleHover(8)}
-              ></div>
-              <div
-                className={`${styles.slice9}`}
-                onMouseEnter={() => handleHover(9)}
-              ></div>
-              <div
-                className={`${styles.slice10}`}
-                onMouseEnter={() => handleHover(10)}
-              ></div>
-              <div
-                className={`${styles.slice11}`}
-                onMouseEnter={() => handleHover(11)}
-              ></div> */}
-              <div
-                className={`${styles.slice12}`}
-                onMouseEnter={() => handleHover(12)}
-              ></div>
+            </div>
+            <div className={`${styles.choseTime}  fs28px fwBold`}>
+              <div>
+                已選擇： <span className={`${styles.pink}`}>{time}</span>
+              </div>
             </div>
           </div>
         </Col>
       </Row>
-      {/* <div
-                    key={i}
-                    className={`${styles.timePieces} border
-                    `}
-                    style={stylesTime[`selectedTime_${i + 1}`]}
-                  >
-                    <SelectedTime />
-                  </div> */}
       {/* section5: 下一步 */}
       <Row id="nextStep" ref={nextStepRef}>
         <Col>
@@ -514,7 +550,12 @@ export default function Worship() {
               btnColor="hot_pink"
               padding="15px 60px"
               fontSize="24px"
-              link={() => {}}
+              link={() => {
+                god && day && time && router.push('/worship/offerings')
+                !god && scrollTo('chooseGod')
+                !day && scrollTo('chooseDay')
+                !time && scrollTo('chooseTime')
+              }}
             />
           </div>
         </Col>

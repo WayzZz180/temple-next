@@ -7,11 +7,10 @@ import NavbarItem from './navbaritem'
 import { useRouter } from 'next/router'
 import variables from '@/styles/_variables.module.sass'
 import { useContext } from 'react'
-import AuthContext from "@/contexts/AuthContext";
-
+import AuthContext from '@/contexts/AuthContext'
 
 export default function Header() {
-const { auth, setAuth, logout } = useContext(AuthContext);
+  const { auth, setAuth, logout } = useContext(AuthContext)
 
   const info = [
     {
@@ -26,8 +25,10 @@ const { auth, setAuth, logout } = useContext(AuthContext);
         { label: '我的文章', url: '/member/articles' },
         { label: '護身符', url: '/member/amulet' },
         { label: '每日簽到', url: '/member/dailySignIn' },
-        
-       auth.id === 0 ? { label: '登入', url: '/member/login' } : { label: '登出', url: '/member/logout' },
+
+        auth.id === 0
+          ? { label: '登入', url: '/member/login' }
+          : { label: '登出', url: '/member/logout' },
       ],
     },
     {
@@ -35,7 +36,8 @@ const { auth, setAuth, logout } = useContext(AuthContext);
       title2: '線上拜拜',
       links: [
         { label: '預約拜拜', url: '/worship' },
-        { label: '供品套組', url: '#' },
+        { label: '供品套組', url: '/worship/offerings' },
+        { label: '預約紀錄', url: '#' },
       ],
     },
     {
@@ -88,19 +90,20 @@ const { auth, setAuth, logout } = useContext(AuthContext);
   const currentPath = router.asPath
 
   // 底色要變咖啡色的路由
-  const bgChangeUrl = ['/','/Home','/forum','/worship']
+  const bgChangeUrl = ['/', '/Home', '/forum', '/worship']
 
-  const bgChange = bgChangeUrl.filter((v)=>{ return v === currentPath})
+  const bgChange = bgChangeUrl.filter((v) => {
+    return v === currentPath
+  })
 
   return (
     <header className={`${styles.header}`}>
       <div
         className={`${styles.navbarContainer} pt20px pb25px`}
-       
         style={{
-          backgroundColor: currentPath === bgChange[0]  ? variables['brown'] : '',
+          backgroundColor:
+            currentPath === bgChange[0] ? variables['brown'] : '',
         }}
-     
       >
         {/* 左半邊選單 */}
         <ul className={`${styles.drop_down_menu}`}>

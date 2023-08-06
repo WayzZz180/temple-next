@@ -33,8 +33,8 @@
   display: flex
   justify-content: space-around
   align-items: center
-
-
+  position: relative
+  
 .flex_know
   display: flex
   justify-content: center
@@ -178,18 +178,6 @@
     border-radius: 50px
     color: white
     position: relative
-    // animation: dayIn .7s 1
-
-// @keyframes dayIn
-//   0%
-//     background: $bgColor
-//     // opacity: 0
-//     // top: 100px
-//   100%
-//     background: #431D31
-//     // opacity: 1
-//     // top: 0px
-    
 
 .pastDay
   opacity: 0.5
@@ -221,6 +209,7 @@
 .zodiacContainer
   display: flex
   justify-content: center
+  position: relative
 
 .circle
   width: 900px
@@ -244,7 +233,6 @@
 .zodiaccircle
    position: absolute
    z-index: 1
-
 
 .slice
   width: 0px
@@ -293,3 +281,15 @@
 
 .slice12
   transform: rotate(150deg) 
+
+.choseTime
+  width: 800px
+  position: absolute
+  left: 550px
+  top: 400px
+  // bottom: 500px
+  // width: 1650px
+  // height: 900px
+  // display: flex
+  // align-items: center
+  // justify-content: flex-end

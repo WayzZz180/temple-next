@@ -41,7 +41,7 @@ export default function WorshipGod({
         <div className={`${styles.width}`}>
           <div className={`${styles.side}`} style={{ paddingRight: '30%' }}>
             <Image src={Lantern} alt="lantern" />
-            <div className={`${styles.couplet} mt30px`}>
+            <div className={`${styles.couplet} mt15px`}>
               <Image src={Couplet} alt="couplet" />
               <div className={`${styles.word} fwBold`}>{wordLeft}</div>
             </div>
@@ -55,6 +55,7 @@ export default function WorshipGod({
             {/* god+arched */}
 
             <div
+              role="presentation"
               className={`${styles.godContainer}`}
               onClick={() => {
                 setClickState(true)
@@ -83,7 +84,7 @@ export default function WorshipGod({
           </div>
           <div className={`${styles.side}`} style={{ paddingLeft: '30%' }}>
             <Image src={Lantern} alt="lantern" />
-            <div className={`${styles.couplet} mt30px`}>
+            <div className={`${styles.couplet} mt15px`}>
               <Image src={Couplet} alt="couplet" />
               <div className={`${styles.word} fwBold`}>{wordRight}</div>
             </div>
