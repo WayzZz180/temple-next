@@ -71,7 +71,8 @@ export default function AlertDialog() {
           >
             <DialogContentText id="alert-dialog-description">
               <BasicTextFields3
-              // name="keyword"
+                // name="keyword"
+                value={router.query.keyword || ''}
               />
             </DialogContentText>
             <DialogActions>
