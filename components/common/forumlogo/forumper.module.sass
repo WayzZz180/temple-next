@@ -31,6 +31,8 @@
     white-space: nowrap
     text-overflow: ellipsis
     overflow: hidden
+    // text-decoration: none !important
+    // color: $black
 .content
     font-size: 20px
     font-weight: bold
@@ -40,6 +42,17 @@
     white-space: nowrap
     text-overflow: ellipsis
     overflow: hidden
+    // text-decoration: none !important
+    // color: $black
+.title:hover,
+.title:active,
+.title:focus
+  color: $fontColor !important
+.content:hover,
+.content:active,
+.content:focus
+  color: $fontColor !important
+
 .flex_row3
     display: flex
     flex-direction: row
@@ -65,4 +78,7 @@
     align-items: center
     justify-content: flex-end
 .flex
-    display: flex   
+    display: flex
+.link_sass
+    text-decoration: none
+    color: $black   

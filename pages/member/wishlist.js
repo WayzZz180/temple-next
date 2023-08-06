@@ -2,10 +2,11 @@ import React from 'react'
 import styles from '@/pages/member/wishlist.module.sass'
 
 // components
-import Title from '@/components/common/title/index.js'
+import MemberTitle from '@/components/common/title/memberTitle'
 import Button from '@/components/common/button/index.js'
 import MemberNavbar from '@/components/common/memberNavbar'
 import Wishlist from '@/components/common/wishlist'
+import ProfilePhoto from '@/components/common/profilePhoto'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
@@ -14,11 +15,12 @@ export default function MyAccount() {
   return (
     <div className={styles.flex}>
       <Container>
+      <ProfilePhoto/>
         <Row>
           <Col>
-            <Title
-              text="我的優惠券"
-              text2="COUPONS"
+            <MemberTitle
+              text="收藏清單"
+              text2="WISHLIST"
               lineColor="green"
               width={860}
             />

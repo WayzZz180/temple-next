@@ -39,7 +39,22 @@ export default function Pilgrimage() {
       <Image id="" alt="" src={jump} className={`${styles.jump}`} />
       <Image id="" alt="" src={flag} className={`${styles.flag}`} />
       <Image id="" alt="" src={dog} className={`${styles.dog}`} />
-      <Teams />
+      <button
+        className={`${styles.bubble}`}>
+        <div className={`${styles.text}`}>來做測驗，拿小禮物～</div></button>
+        <button
+        className={`${styles.bubble2}`}>
+        <div className={`${styles.text}`}>好熱鬧啊，快來一起聊</div></button>
+        <button
+        className={`${styles.bubble3}`}>
+        <div className={`${styles.text}`}>汪咿～！</div></button>
+        <button
+        className={`${styles.bubble4}`}>
+        <div className={`${styles.text}`}>心誠則靈</div></button>
+        <button
+        className={`${styles.bubble5}`}>
+        <div className={`${styles.text}`}>供品底加買啦～！</div></button>
+        <Teams />
       {/* <div
         className={`${styles.teamscontainer}`}
         style={{ left: teamsPosition.x, top: teamsPosition.y }}

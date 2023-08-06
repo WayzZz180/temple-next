@@ -6,20 +6,28 @@ import headerBg from '@/assets/header.svg'
 import NavbarItem from './navbaritem'
 import { useRouter } from 'next/router'
 import variables from '@/styles/_variables.module.sass'
+import { useContext } from 'react'
+import AuthContext from "@/contexts/AuthContext";
+
 
 export default function Header() {
+const { auth, setAuth, logout } = useContext(AuthContext);
+
   const info = [
     {
       title: '01',
       title2: '會員中心',
       links: [
-        { label: '變更資料', url: '#' },
-        { label: '拜拜紀錄', url: '#' },
-        { label: '訂單記錄', url: '#' },
-        { label: '喜好商品', url: '#' },
-        { label: '我的優惠券', url: '#' },
-        { label: '護身符', url: '#' },
-        { label: '每日簽到', url: '#' },
+        { label: '變更資料', url: '/member/personalinfo' },
+        { label: '拜拜紀錄', url: '/member/praying' },
+        { label: '訂單記錄', url: '/member/orders' },
+        { label: '收藏清單', url: '/member/wishlist' },
+        { label: '我的優惠券', url: '/member/coupons' },
+        { label: '我的文章', url: '/member/articles' },
+        { label: '護身符', url: '/member/amulet' },
+        { label: '每日簽到', url: '/member/dailySignIn' },
+        
+       auth.id === 0 ? { label: '登入', url: '/member/login' } : { label: '登出', url: '/member/logout' },
       ],
     },
     {

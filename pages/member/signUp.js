@@ -5,11 +5,16 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
+
+//components
 import InputBox from '@/components/common/inputBox/index.js'
-import Title from '@/components/common/title/index.js'
+import MemberTitle from '@/components/common/title/memberTitle'
+
 import Button from '@/components/common/button/index.js'
 import doorGodLeft from '@/assets/doorGodLeft.svg'
 import doorGodRight from '@/assets/doorGodRight.svg'
+
+//bt
 
 import { Container, Row, Col } from 'react-bootstrap'
 
@@ -112,6 +117,7 @@ export default function SignUp() {
     return null // 代表表單通過驗證，沒有錯誤 //有回傳代表有錯誤
   }
 
+
   const doSignUp = (e) => {
     e.preventDefault()
 
@@ -186,11 +192,15 @@ export default function SignUp() {
         </Row>
       </Container>
 
+
+  
+
       <Container>
         <form onSubmit={doSignUp}>
           <Row>
             <Col>
-              <Title text="加入會員" text2="SIGN UP" lineColor="green" />
+    
+              <MemberTitle text="加入會員" text2="SIGN UP" lineColor="green" />
             </Col>
           </Row>
           <Row className={styles.flex_space_between}>

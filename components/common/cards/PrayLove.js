@@ -13,10 +13,10 @@ export default function PrayLove() {
   const Router = useRouter()
 
   const loveA = () => {
-    Router.push('/Pray/loveA-1')
+    Router.push('/pray/loveA-1')
   }
   const loveB = () => {
-    Router.push('/Pray/loveB-1')
+    Router.push('/pray/loveB-1')
   }
   return (
     <>

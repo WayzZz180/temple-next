@@ -4,9 +4,9 @@ const AuthContext = createContext({})
 export default AuthContext
 
 export const noLoginState = {
-  member_id: 0,
+  id: 0,
   // member_account: '',
-  member_name: '',
+  name: '',
   token: '',
 }
 

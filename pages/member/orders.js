@@ -36,8 +36,8 @@ export default function Orders() {
         <Row>
           <Col>
             <Title
-              text="我的優惠券"
-              text2="COUPONS"
+              text="訂單外包H"
+              text2="ORDERS"
               lineColor="green"
               width={860}
             />

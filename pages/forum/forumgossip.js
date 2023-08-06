@@ -24,6 +24,7 @@ export default function Forumgossip() {
         <Forumper />
         <AdvancedExample />
       </div>
+      <div></div>
     </>
   )
 }
