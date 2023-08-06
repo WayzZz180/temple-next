@@ -27,11 +27,14 @@ export default function dailySignIn() {
   const [si, setSi] = useState([])
   const [modalIsOpen, setModalIsOpen] = useState(false) // 跟蹤 modal 是否打開
   // 優惠券資訊的狀態
-  const [couponInfo, setCouponInfo] = useState({ type: '', value: '' })
+  const [couponInfo, setCouponInfo] = useState({
+    coupon_type: '',
+    coupon_value: '',
+  })
 
   // 回呼函式，用來接收優惠券資訊並顯示在modal
-  const handleCouponGenerated = (type, value) => {
-    setCouponInfo({ type, value })
+  const handleCouponGenerated = (coupon_type, coupon_value) => {
+    setCouponInfo({ coupon_type, coupon_value })
   }
 
   const handleModalCloseReload = () => {
@@ -39,8 +42,6 @@ export default function dailySignIn() {
     setModalIsOpen(false)
     // window.location.reload()
   }
-
-  console.log('render次數')
 
   //拿token 跟資料
   useEffect(() => {
@@ -65,12 +66,17 @@ export default function dailySignIn() {
     }
   }, [auth.token, modalIsOpen])
 
+  // 使用 fetch API 發送 POST 請求到後端
   const signIn = (e) => {
     e.preventDefault()
 
     fetch(process.env.API_SERVER + '/member/dailySignIn', {
       method: 'POST',
-      body: JSON.stringify(user),
+      body: JSON.stringify({
+        coupon_value: couponInfo.coupon_value,
+        coupon_type: couponInfo.coupon_type,
+      }),
+
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + auth.token,
@@ -92,7 +98,7 @@ export default function dailySignIn() {
           // alert('簽到成功')
           setTimeout(() => {
             setModalIsOpen(true)
-          }, 4500)
+          }, 1200)
           // router.push('/member/login');
           // window.location.reload()
         }
@@ -180,7 +186,8 @@ export default function dailySignIn() {
       >
         <h2>遷到成功</h2>
         <h2>
-          恭喜獲得 {couponInfo.type} 折價券，價值 {couponInfo.value}
+          恭喜獲得 {couponInfo.coupon_type} 折價券，價值
+          {couponInfo.coupon_value}
         </h2>
         <div>
           <button onClick={handleModalCloseReload}>確認</button>

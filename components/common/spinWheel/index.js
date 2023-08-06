@@ -23,9 +23,11 @@ export default function SpinWheel({ onCouponGenerated }) {
   const [rotationDegree, setRotationDegree] = useState(0)
 
   const handleSpin = () => {
-    // const randomDegree = 3600 + Math.ceil(Math.random() * 3600)
     const randomDegree = 7200 + Math.ceil(Math.random() * 3600)
+
     setRotationDegree(rotationDegree + randomDegree)
+    // 將 coupon_type 和 coupon_value 傳遞給 onCouponGenerated
+    onCouponGenerated(coupon_type, coupon_value)
   }
   // useState 的狀態更新是同步的 React 更新狀態後才會 render
   // useCallback 同步函式
@@ -119,7 +121,7 @@ export default function SpinWheel({ onCouponGenerated }) {
               className={styles.wheel}
               style={{
                 transform: `rotate(${rotationDegree}deg)`,
-                transition: 'transform 4.5s cubic-bezier(0,.7,0,1.02)',
+                transition: 'transform 1s cubic-bezier(0,.7,0,1.02)',
               }}
             >
               {RainbowCoupon.map(({ color, value }, index) => (
