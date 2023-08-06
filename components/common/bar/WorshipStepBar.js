@@ -14,17 +14,12 @@ export default function WorshipStepBar({ id = 'chooseGod' }) {
   // console.log('current:', currentId)
   // console.log('temp:', temp)
 
-  console.log(click)
+  // console.log(click)
 
   useEffect(() => {
-    if (currentId != id && !click) {
+    if (currentId != id) {
       setCurrentId(id)
-    } else {
-      if (temp != currentId) {
-        setCurrentId(temp)
-      }
     }
-    console.log('----')
   }, [id])
 
   const steps = [
@@ -47,7 +42,7 @@ export default function WorshipStepBar({ id = 'chooseGod' }) {
   ]
 
   const scrollTo = (id) => {
-    setClick(true)
+    // setClick(true)
     setCurrentId(id)
     // 取得目標元素的位置
     const content = document.getElementById(id)
@@ -57,13 +52,13 @@ export default function WorshipStepBar({ id = 'chooseGod' }) {
     const offset = window.pageYOffset
     const scrollDistance = contentPosition + offset - 10
     // 執行捲動動作
-    if (click) {
-      window.scrollTo({
-        top: scrollDistance,
-        behavior: 'smooth',
-      })
-      // setClick(false)
-    }
+    // if (click) {
+    window.scrollTo({
+      top: scrollDistance,
+      behavior: 'smooth',
+    })
+    // setClick(false)
+    // }
   }
 
   return (
