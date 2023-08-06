@@ -9,16 +9,20 @@ import Col from 'react-bootstrap/Col'
 export default function WorshipStepBar({ id = 'chooseGod' }) {
   const [currentId, setCurrentId] = useState(id)
   const [temp, setTemp] = useState(currentId)
-  const [click, setClick] = useState(false)
-  console.log('id:', id)
-  console.log('current:', currentId)
-  console.log('temp:', temp)
-  // if (temp != currentId) {
-  //   setCurrentId(temp)
-  // }
+  const [click, setClick] = useState(true)
+  // console.log('id:', id)
+  // console.log('current:', currentId)
+  // console.log('temp:', temp)
+
+  console.log(click)
+
   useEffect(() => {
-    if (currentId != id) {
+    if (currentId != id && !click) {
       setCurrentId(id)
+    } else {
+      if (temp != currentId) {
+        setCurrentId(temp)
+      }
     }
     console.log('----')
   }, [id])
@@ -43,6 +47,7 @@ export default function WorshipStepBar({ id = 'chooseGod' }) {
   ]
 
   const scrollTo = (id) => {
+    setClick(true)
     setCurrentId(id)
     // 取得目標元素的位置
     const content = document.getElementById(id)
@@ -51,13 +56,16 @@ export default function WorshipStepBar({ id = 'chooseGod' }) {
     // 計算捲動的距離，這裡設定為捲動至目標元素頂部距離畫面頂部的距離
     const offset = window.pageYOffset
     const scrollDistance = contentPosition + offset - 10
-
     // 執行捲動動作
-    window.scrollTo({
-      top: scrollDistance,
-      behavior: 'smooth', // 使用平滑滾動效果
-    })
+    if (click) {
+      window.scrollTo({
+        top: scrollDistance,
+        behavior: 'smooth',
+      })
+      // setClick(false)
+    }
   }
+
   return (
     <Row className={`${styles.container} ms30px mt10px`}>
       <Col>
@@ -69,6 +77,7 @@ export default function WorshipStepBar({ id = 'chooseGod' }) {
                   role="presentation"
                   className={`${styles.align}`}
                   onClick={() => {
+                    setClick(true)
                     setTemp(v.id)
                     scrollTo(v.id)
                   }}
