@@ -11,84 +11,28 @@ import InputBox from '@/components/common/inputBox/index.js'
 import Title from '@/components/common/title/index.js'
 import Button from '@/components/common/button/index.js'
 import MemberNavbar from '@/components/common/memberNavbar/index.js'
+import {
+  Rainbow,
+  RainbowCoupon,
+} from '@/components/mydata/memberSpinWheelColor_Coupon.js'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 
-const Rainbow = {
-  sw_Violet: '#7D3C98',
-  sw_Indigo: '#3B4B9B',
-  sw_Blue: '#3498DB',
-  sw_Green: '#47B990',
-  sw_YellowGreen: '#9ACD32',
-  sw_Yellow: '#F1C40F',
-  sw_Orange: '#E67E22',
-  sw_Red: '#EE3835',
-  sw_Pink: '#E91E63',
-  sw_Magenta: '#E4007E',
-  //   sw_Magenta: 'black',
-}
-
-const colorMap = {
-  purple: 'rgb(197, 176, 213)',
-  blue: 'rgb(31, 119, 180)',
-  light_blue: 'rgb(174, 199, 232)',
-  orange: 'rgb(255, 127, 14)',
-  light_orange: 'rgb(255, 187, 120)',
-  green: 'rgb(44, 160, 44)',
-  light_green: 'rgb(152, 223, 138)',
-  red: 'rgb(214, 39, 40)',
-  light_red: 'rgb(255, 152, 150)',
-  violet: 'rgb(148, 103, 189)',
-}
-
-const coupon = {
-  a: '10',
-  b: '20',
-  c: '30',
-  d: '40',
-  e: '50',
-  f: '60',
-  g: '70',
-  h: '80',
-  i: '90',
-  j: '100',
-  x: '1000',
-}
-// const colorMapCoupon = [
-//   { color: 'purple', value: '10' },
-//   { color: 'blue', value: '20' },
-//   { color: 'light_blue', value: '30' },
-//   { color: 'orange', value: '40' },
-//   { color: 'light_orange', value: '50' },
-//   { color: 'green', value: '60' },
-//   { color: 'light_green', value: '70' },
-//   { color: 'red', value: '80' },
-//   { color: 'light_red', value: '90' },
-//   { color: 'violet', value: '100' },
-// ]
-
-const RainbowCoupon = [
-  { color: 'sw_Violet', value: '10' },
-  { color: 'sw_Indigo', value: '20' },
-  { color: 'sw_Blue', value: '30' },
-  { color: 'sw_Green', value: '40' },
-  { color: 'sw_YellowGreen', value: '50' },
-  { color: 'sw_Yellow', value: '60' },
-  { color: 'sw_Orange', value: '70' },
-  { color: 'sw_Red', value: '80' },
-  { color: 'sw_Pink', value: '90' },
-  { color: 'sw_Magenta', value: '100' },
-]
-
-export default function SpinWheel() {
+export default function SpinWheel({ onCouponGenerated }) {
   const [rotationDegree, setRotationDegree] = useState(0)
 
   const handleSpin = () => {
     // const randomDegree = 3600 + Math.ceil(Math.random() * 3600)
-    const randomDegree = 3600 + Math.ceil(Math.random() * 3600)
+    const randomDegree = 7200 + Math.ceil(Math.random() * 3600)
     setRotationDegree(rotationDegree + randomDegree)
   }
+  // useState 的狀態更新是同步的 React 更新狀態後才會 render
+  // useCallback 同步函式
+  useEffect(() => {
+    onCouponGenerated(coupon_type, coupon_value)
+    console.log('onCouponGenerated到了')
+  }, [rotationDegree])
 
   // 將 x 減去 3600，再對 360 取餘數，得到的結果會是 5 到 364 之間的值
   const result = rotationDegree % 360
@@ -175,7 +119,7 @@ export default function SpinWheel() {
               className={styles.wheel}
               style={{
                 transform: `rotate(${rotationDegree}deg)`,
-                transition: 'transform 4s cubic-bezier(0,.7,0,1.02)',
+                transition: 'transform 4.5s cubic-bezier(0,.7,0,1.02)',
               }}
             >
               {RainbowCoupon.map(({ color, value }, index) => (
@@ -249,9 +193,6 @@ export default function SpinWheel() {
             </div> */}
           </div>
         </div>
-        {/* <button id="spin-btn" onclick="spinWheel()">
-          GPT Spin
-        </button> */}
       </Col>
     </Row>
   )

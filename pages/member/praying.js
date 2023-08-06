@@ -20,12 +20,12 @@ export default function Praying() {
   return (
     <div className={styles.flex}>
       <Container>
-          <ProfilePhoto/>
+        <ProfilePhoto />
         <Row>
           <Col>
             <MemberTitle
-              text="我的優惠券"
-              text2="COUPONS"
+              text="拜拜紀錄"
+              text2="PRAYING"
               lineColor="green"
               width={860}
             />

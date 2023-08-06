@@ -1,7 +1,7 @@
 import styles from '@/pages/member/dailySignIn.module.sass'
 import { AuthContextProvider } from '@/contexts/AuthContext'
 import AuthContext from '@/contexts/AuthContext'
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import Modal from 'react-modal'
 
@@ -26,6 +26,13 @@ export default function dailySignIn() {
   const [user, setUser] = useState('')
   const [si, setSi] = useState([])
   const [modalIsOpen, setModalIsOpen] = useState(false) // 跟蹤 modal 是否打開
+  // 優惠券資訊的狀態
+  const [couponInfo, setCouponInfo] = useState({ type: '', value: '' })
+
+  // 回呼函式，用來接收優惠券資訊並顯示在modal
+  const handleCouponGenerated = (type, value) => {
+    setCouponInfo({ type, value })
+  }
 
   const handleModalCloseReload = () => {
     // 當點擊取消或按下 Esc 時，關閉小視窗
@@ -85,7 +92,7 @@ export default function dailySignIn() {
           // alert('簽到成功')
           setTimeout(() => {
             setModalIsOpen(true)
-          }, 4200)
+          }, 4500)
           // router.push('/member/login');
           // window.location.reload()
         }
@@ -111,19 +118,23 @@ export default function dailySignIn() {
         </Row>
 
         <MemberNavbar />
+
+        {/* 轉盤 */}
         <Row className={styles.flex_centre}>
           <form onSubmit={signIn}>
             <Col>
-              <SpinWheel />
+              <SpinWheel onCouponGenerated={handleCouponGenerated} />
             </Col>
           </form>
         </Row>
 
+        {/* 簽到標題 */}
         <Row className={styles.flex_centre}>
           <Col>
             <div>{si.signin_date}</div>
           </Col>
         </Row>
+        {/* 簽到記錄 */}
         <Row className={styles.flex_centre}>
           <Col>
             <div className={styles.text_align}>近10筆簽到記錄:</div>
@@ -167,7 +178,10 @@ export default function dailySignIn() {
           },
         }}
       >
-        <h2>恭喜獲得XXX折價券</h2>
+        <h2>遷到成功</h2>
+        <h2>
+          恭喜獲得 {couponInfo.type} 折價券，價值 {couponInfo.value}
+        </h2>
         <div>
           <button onClick={handleModalCloseReload}>確認</button>
         </div>
