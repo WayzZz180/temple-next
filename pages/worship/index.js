@@ -162,63 +162,148 @@ export default function Worship() {
     setZodiac(zodiacNumber)
   }
   const [timeClick, setTimeClick] = useState('')
-  const [time, setTime] = useState('午時/11am-1pm')
+  const timeInfo = [
+    {
+      id: '子時',
+      time: '11pm-1am',
+    },
+    {
+      id: '丑時',
+      time: '1am-3am',
+    },
+    {
+      id: '寅時',
+      time: '3am-5am',
+    },
+    {
+      id: '卯時',
+      time: '5am-7am',
+    },
+    {
+      id: '辰時',
+      time: '7am-9am',
+    },
+    {
+      id: '巳時',
+      time: '9am-11am',
+    },
+    {
+      id: '午時',
+      time: '11am-1pm',
+    },
+    {
+      id: '未時',
+      time: '1pm-3pm',
+    },
+    {
+      id: '申時',
+      time: '3pm-5pm',
+    },
+    {
+      id: '酉時',
+      time: '5pm-7pm',
+    },
+    {
+      id: '戌時',
+      time: '7pm-9pm',
+    },
+    {
+      id: '亥時',
+      time: '9pm-11pm',
+    },
+  ]
+  const [time, setTime] = useState('')
+
+  useEffect(() => {
+    const getNow = () => {
+      const hours = myDate.getHours()
+      // 現在的時間轉成12小時制
+      let end = ''
+      let time = ''
+
+      if (hours - 12 > 0) {
+        end = 'pm'
+        time = hours - 12 + end
+      } else {
+        end = 'am'
+        time = hours + end
+      }
+
+      // 中間的時間
+      const mid = timeInfo.map((v, i) => {
+        const [startHour, endHour] = v.time
+          .split('-')
+          .map((time) => parseInt(time))
+        const tmp = Number(endHour - 1) === 0 ? 12 : Number(endHour - 1)
+        const mid = tmp + v.time.slice(-2)
+        return mid
+      })
+
+      // 看看有沒有和中間的時間相等
+      let index = mid.findIndex((v, i) => v === time)
+      let result = index != -1 ? timeInfo[index] : ''
+      // 沒有的話和頭相比
+      if (!result) {
+        const start = timeInfo.map((v, i) => {
+          return v.time.split('-')[0]
+        })
+        index = start.findIndex((v, i) => v === time)
+        result = index != -1 ? timeInfo[index] : ''
+      }
+      const now = `${timeInfo[index].id}/${timeInfo[index].time}`
+      setZodiac(index + 1)
+      return now
+    }
+    const now = getNow()
+    setTime(now)
+  }, [router.query])
 
   const getTime = (time) => {
-    const timeInfo = [
-      {
-        id: '子時',
-        time: '11pm-1am',
-      },
-      {
-        id: '丑時',
-        time: '1am-3am',
-      },
-      {
-        id: '寅時',
-        time: '3am-5am',
-      },
-      {
-        id: '卯時',
-        time: '5am-7am',
-      },
-      {
-        id: '辰時',
-        time: '7am-9am',
-      },
-      {
-        id: '巳時',
-        time: '9am-11am',
-      },
-      {
-        id: '午時',
-        time: '11am-1pm',
-      },
-      {
-        id: '未時',
-        time: '1pm-3pm',
-      },
-      {
-        id: '申時',
-        time: '3pm-5pm',
-      },
-      {
-        id: '酉時',
-        time: '5pm-7pm',
-      },
-      {
-        id: '戌時',
-        time: '7pm-9pm',
-      },
-      {
-        id: '亥時',
-        time: '9pm-11pm',
-      },
-    ]
     setTime(`${timeInfo[time - 1].id}/${timeInfo[time - 1].time}
     `)
   }
+  // 判斷選擇的時間有無超過
+  const passedTime = (hours, choseTimeIndex) => {
+    // 現在的時間轉成12小時制
+    let end = ''
+    let time = ''
 
+    if (hours - 12 > 0) {
+      end = 'pm'
+      time = hours - 12 + end
+    } else {
+      end = 'am'
+      time = hours + end
+    }
+
+    // 中間的時間
+    const mid = timeInfo.map((v, i) => {
+      const [startHour, endHour] = v.time
+        .split('-')
+        .map((time) => parseInt(time))
+      const tmp = Number(endHour - 1) === 0 ? 12 : Number(endHour - 1)
+      const mid = tmp + v.time.slice(-2)
+      return mid
+    })
+
+    // 看看有沒有和中間的時間相等
+    let index = mid.findIndex((v, i) => v === time)
+    let result = index != -1 ? timeInfo[index] : ''
+    // 沒有的話和頭相比
+    if (!result) {
+      const start = timeInfo.map((v, i) => {
+        return v.time.split('-')[0]
+      })
+      index = start.findIndex((v, i) => v === time)
+      result = index != -1 ? timeInfo[index] : ''
+    }
+    if (choseTimeIndex != 0 && choseTimeIndex < index) {
+      setTimeClick('')
+      setZodiac(index + 1)
+      setTime(`${timeInfo[index].id}/${timeInfo[index].time}
+      `)
+    }
+  }
   const scrollTo = (id) => {
     // 取得目標元素的位置
     const content = document.getElementById(id)
@@ -236,7 +321,7 @@ export default function Worship() {
   return (
     <Container className={`${styles.worship}`}>
       <WorshipStepBar id={id} />
-      {/* section1 */}
+      {/* section1 */}s
       <Row>
         <Col>
           <div className={`${styles.background}`}>
@@ -309,7 +394,6 @@ export default function Worship() {
         </Col>
         <Col></Col>
       </Row>
-
       {/* section3: 挑選日期 */}
       <Row id="chooseDate" ref={chooseDateRef}>
         <Col>
@@ -477,7 +561,6 @@ export default function Worship() {
           </div>
         </Col>
       </Row>
-
       {/* section4: 預約時辰 */}
       <Row id="chooseTime" className={`${styles.flex_col}`} ref={chooseTimeRef}>
         <Col>
@@ -551,10 +634,19 @@ export default function Worship() {
               padding="15px 60px"
               fontSize="24px"
               link={() => {
-                god && day && time && router.push('/worship/offerings')
                 !god && scrollTo('chooseGod')
                 !day && scrollTo('chooseDay')
                 !time && scrollTo('chooseTime')
+                // 判斷當天時間超過了沒
+                if (
+                  `${myYear}/${myMonth < 10 ? '0' : ''}${myMonth + 1}/${
+                    myDay < 10 ? '0' : ''
+                  }${myDay}` === day
+                ) {
+                  const hours = myDate.getHours()
+                  passedTime(hours, timeClick - 1)
+                }
+                god && day && time && router.push('/worship/offerings')
               }}
             />
           </div>
