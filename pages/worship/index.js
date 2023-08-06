@@ -12,13 +12,15 @@ import Rightgod from '@/assets/worshipRGod.svg'
 import Leftgod from '@/assets/worshipLGod.svg'
 import Cloud from '@/assets/worshipCloud.svg'
 import WorshipLogo from '@/assets/worshipLogo.svg'
-import ArrowRight from '@/components/common/arrow/arrowRight'
-import ArrowLeft from '@/components/common/arrow/arrowLeft'
+import Time from '@/assets/worshipTime.svg'
+import selectedTime from '@/assets/selectedTime.svg'
 
 // components
 import Title from '@/components/common/title/WorshipTitle'
 import God from '@/components/common/cards/WorshipGod'
 import Button from '@/components/common/button'
+import ArrowRight from '@/components/common/arrow/arrowRight'
+import ArrowLeft from '@/components/common/arrow/arrowLeft'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 // Import Swiper styles
@@ -31,6 +33,12 @@ import 'swiper/css/pagination'
 import { EffectFade, Navigation, Pagination } from 'swiper/modules'
 
 export default function Worship() {
+  const stylesTime = {
+    selectedTime_1: { transform: 'rotate(-45deg)', left: '100px' },
+    selectedTime_2: { transform: 'rotate(0deg)', left: '100px' },
+    selectedTime_3: { transform: 'rotate(35deg)', left: '100px' },
+  }
+
   const godInfo = [
     {
       text: '媽祖',
@@ -86,7 +94,7 @@ export default function Worship() {
       </Row>
 
       {/* section2 */}
-      <Row className={`${styles.flex_col}`}>
+      <Row>
         <Col>
           <Title text="1." text2="選擇神明" />
         </Col>
@@ -142,11 +150,29 @@ export default function Worship() {
       </Row>
 
       {/* section4 */}
-      <Row>
+      <Row className={`${styles.flex_col}`}>
         <Col>
           <Title text="3." text2="預約時辰" />
         </Col>
-        <Col></Col>
+        <Col className={`${styles.timeContainer}`}>
+          <div className={`${styles.selectedTime}`}>
+            {Array(12)
+              .fill(1)
+              .map((v, i) => {
+                return (
+                  <Image
+                    key={i}
+                    src={selectedTime}
+                    alt="choose time"
+                    style={stylesTime[`selectedTime_${i + 1}`]}
+                  />
+                )
+              })}
+          </div>
+          <div>
+            <Image src={Time} alt="choose time" />
+          </div>
+        </Col>
       </Row>
 
       {/* section5 */}
