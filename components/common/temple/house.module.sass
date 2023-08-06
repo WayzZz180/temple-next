@@ -57,10 +57,33 @@
     font-weight: 900
     font-family:"Noto Sans TC", sans-serif
     letter-spacing:3.2px 
-    background-color: $hot_pink
+    background-color: $brown
     color:#fff
     border: none
     justify-content: center
+    transform-style: preserve-3d
+    transition: transform 1s ease
 
-.greenButton 
+.button.greenButton 
   background-color: $green
+  pointer-events: none
+
+.button.hotPinkButton
+  background-color: $hot_pink
+  pointer-events: none
+
+.button.selectedButton
+    animation: rotateXAnimation .5s forwards
+
+@keyframes rotateXAnimation 
+  0% 
+    transform: rotateX(0deg)
+  
+  100% 
+    transform: rotateX(360deg)
+   
+.yesorno
+    position: absolute
+
+.hidden
+    display: none

@@ -13,8 +13,6 @@ import scoreDL from '@/assets/scoreDoorL.svg'
 import scoreDR from '@/assets/scoreDoorR.svg'
 import coupon from '@/assets/coupon.svg'
 import House from '@/components/common/temple/house'
-import Footer from '@/components/layout/footer'
-import Header from '@/components/layout/header'
 
 export default function Quiz() {
   const [data, setData] = useState({
@@ -25,6 +23,7 @@ export default function Quiz() {
     page: 1,
     rows: [],
   })
+  const [totalScore, setTotalScore] = useState(0);
   useEffect(() => {
     fetch(process.env.API_SERVER + '/pilgrimage/onlineQuiz', {
       method: 'GET',
@@ -35,6 +34,9 @@ export default function Quiz() {
         setData(data)
       })
   }, [])
+  const updateTotalScore = () => {
+    setTotalScore((prevScore) => prevScore + 1);
+  };
   return (
     <>
       <Image
@@ -105,6 +107,8 @@ export default function Quiz() {
             a={i.option1}
             b={i.option2}
             c={i.option3}
+            correctOption={i.Answer}
+            updateTotalScore={updateTotalScore}
           />
         ))}
         <Image
@@ -134,7 +138,7 @@ export default function Quiz() {
         <div className={`${styles.coupontext}`}>獲得折價券乙張</div>
         <div className={`${styles.scoretext1}`}>答</div>
         <div className={`${styles.scoretext2}`}>對</div>
-        <div className={`${styles.scoretext3}`}>5</div>
+        <div className={`${styles.scoretext3}`}>{totalScore}</div>
         <div className={`${styles.scoretext4}`}>題</div>
       </div>
     </>
