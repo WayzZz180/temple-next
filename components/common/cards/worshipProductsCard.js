@@ -18,7 +18,7 @@ export default function WorshipProductsCard({
         />
       </div>
       <div className={`${styles.detailContainer}`}>
-        <div className={`${styles.text} fs18px p5px`}> {text}</div>
+        <div className={`${styles.text} fwBold fs18px p5px`}> {text}</div>
         <div className={`${styles.price} fwBold fs16px p5px`}>${price}</div>
       </div>
     </div>

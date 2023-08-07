@@ -1,14 +1,51 @@
 @import '@/styles/_variables.module.sass'
 
 .container
-    border-radius: 15px
+    position: relative
+    // border-radius: 20px
+
+.container 
+  &::before,
+  &::after 
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    transition: opacity .5s ease-in, transform .6s ease-in-out
+    content: ''
+    opacity: 0
+    pointer-events: none
+  
+
+  &::before 
+    transform: scale3d(0, 1, 1)
+    transform-origin: left top
+    border-top: 2px solid $brown
+    border-bottom: 2px solid $brown
+  
+
+  &::after 
+    transform: scale3d(1, 0, 1)
+    transform-origin: right top
+    border-right: 2px solid $brown
+    border-left: 2px solid $brown
+  
+
+  &:hover,
+  &:focus 
+    &::before,
+    &::after 
+      transform: scale3d(1, 1, 1)
+      opacity: 1
+    
+  
+
 
 .container:hover
     cursor: pointer
-    background: #dfccb7
-    transition: all .6s ease
-    // border: 1px solid $brown
-    // opacity: 0.5
+    background: #dacab9
+    transition: all .8s ease-in
 
 .image
     display: flex

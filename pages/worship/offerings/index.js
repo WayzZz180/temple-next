@@ -55,12 +55,16 @@ export default function Offerings() {
       behavior: 'smooth',
     })
   }
-  const [data, setData] = useState([])
+  const [mazuData, setMazuData] = useState([])
+  const [loveData, setLoveData] = useState([])
+  const [studyData, setStudyData] = useState([])
   useEffect(() => {
     fetch(`${process.env.API_SERVER}/worship`)
       .then((r) => r.json())
       .then((data) => {
-        setData(data)
+        setMazuData(data[0])
+        setLoveData(data[1])
+        setStudyData(data[2])
       })
   }, [router.query])
 
@@ -123,7 +127,7 @@ export default function Offerings() {
           </Col>
         </Row>
         <Row className={` ${styles.productsContainer}`}>
-          {data?.map((v, i) => {
+          {mazuData?.map((v, i) => {
             return (
               <Col key={i}>
                 <WorshipProductsCard
@@ -141,27 +145,38 @@ export default function Offerings() {
             <ShopTitle text="月老" lineColor="hot_pink" />
           </Col>
         </Row>
+        <Row className={` ${styles.productsContainer}`}>
+          {loveData?.map((v, i) => {
+            return (
+              <Col key={i}>
+                <WorshipProductsCard
+                  src={v.image}
+                  text={v.product_name}
+                  price={v.product_price}
+                />
+              </Col>
+            )
+          })}
+        </Row>
         {/* 文昌*/}
         <Row id="StudyGod" className="nowrap mb50px">
           <Col>
             <ShopTitle text="文昌" lineColor="green" />
           </Col>
         </Row>
-
-        {/* Products */}
-        {/* {data.map((v, i) => {
-          return (
-            i != 0 && (
-              <ProductsCarousel
-                key={i}
-                text={v.text}
-                color={v.color}
-                i={i}
-                id={v.id}
-              />
+        <Row className={` ${styles.productsContainer}`}>
+          {studyData?.map((v, i) => {
+            return (
+              <Col key={i}>
+                <WorshipProductsCard
+                  src={v.image}
+                  text={v.product_name}
+                  price={v.product_price}
+                />
+              </Col>
             )
-          )
-        })} */}
+          })}
+        </Row>
       </Container>
     </>
   )
