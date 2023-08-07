@@ -1,6 +1,7 @@
 import styles from './worshipProductsCard.module.sass'
 import Image from 'next/image'
 import { useClick } from '@/hooks/useClick'
+import { useHoverIndex } from '@/hooks/useHoverIndex'
 
 export default function WorshipProductsCard({
   src = 'worship/mazu (4).png',
@@ -8,12 +9,19 @@ export default function WorshipProductsCard({
   price = '45',
 }) {
   const { clickState, handleClick, setClickState } = useClick(false)
+  const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-1)
   return (
     <div
       role="presentation"
-      className={`${styles.container} ${
+      className={`${hoveredIndex && !clickState ? styles.animation : ''} ${
         clickState ? styles.chose : ''
-      } m15px p10px`}
+      } ${styles.container} m15px p10px`}
+      onMouseEnter={() => {
+        handleMouseEnter(1)
+      }}
+      onMouseLeave={() => {
+        handleMouseLeave()
+      }}
       onClick={() => {
         handleClick()
       }}

@@ -1,10 +1,13 @@
 @import '@/styles/_variables.module.sass'
 
 .container
+    cursor: pointer
+    
+.animation
     position: relative
-    // border-radius: 20px
+    flex: 1 1 100%
 
-.container 
+.animation 
   &::before,
   &::after 
     position: absolute
@@ -39,12 +42,11 @@
       transform: scale3d(1, 1, 1)
       opacity: 1
     
-  
 .chose
-    border: 2px solid $brown
+    box-shadow: 0 0 0 2px $brown
     background: #e7d9cb
 
-.container:hover
+.animation:hover
     cursor: pointer
     background: #e7d9cb
     transition: all .8s ease-in

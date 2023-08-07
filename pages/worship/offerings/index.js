@@ -142,6 +142,15 @@ export default function Offerings() {
             <span className={`${styles.pink}`}>{reservation?.time}</span>
           </div>
         </Row>
+        <Row className="nowrap mt100px">
+          <Button
+            text="更改預約資訊"
+            btnColor="brown"
+            link={() => {
+              router.push('/worship')
+            }}
+          />
+        </Row>
 
         {/* 媽祖*/}
         <Row id="Mazu" className="nowrap mb50px">
