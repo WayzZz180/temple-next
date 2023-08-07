@@ -12,7 +12,7 @@ import MemberTitle from '@/components/common/title/memberTitle'
 import Button from '@/components/common/button/index.js'
 import MemberNavbar from '@/components/common/memberNavbar'
 import Coupon from '@/components/common/coupons/index.js'
-import SpinWheel from '@/components/common/spinWheel'
+import SpinWheel from '@/components/common/spinWheel/index2.js'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
@@ -31,16 +31,12 @@ export default function dailySignIn() {
     coupon_type: '',
     coupon_value: '',
   })
+  // 狀態變數，用於觸發重新渲染
+  const [spinWheelUpdated, setSpinWheelUpdated] = useState(false)
 
-  // 回呼函式，用來接收優惠券資訊並顯示在modal
-  const handleCouponGenerated = (coupon_type, coupon_value) => {
-    setCouponInfo({ coupon_type, coupon_value })
-  }
-
-  const handleModalCloseReload = () => {
-    // 當點擊取消或按下 Esc 時，關閉小視窗
-    setModalIsOpen(false)
-    // window.location.reload()
+  // 函式，用於觸發重新渲染
+  const updateSpinWheel = () => {
+    setSpinWheelUpdated(!spinWheelUpdated)
   }
 
   //拿token 跟資料
@@ -57,56 +53,14 @@ export default function dailySignIn() {
           console.log(`daileySignIn頁面 有沒有auth.token?2`, auth.token, data)
           // 進入頁面把資料抓出來
           setSi(data)
-          setUser(data.member_id)
+          // setUser(data.member_id)
         })
     } else {
       // Handle the case when auth.token is not available or user is not logged in
       // You can add any additional logic here
       console.log('用戶尚未註冊')
     }
-  }, [auth.token, modalIsOpen])
-
-  // 使用 fetch API 發送 POST 請求到後端
-  const signIn = (e) => {
-    e.preventDefault()
-
-    fetch(process.env.API_SERVER + '/member/dailySignIn', {
-      method: 'POST',
-      body: JSON.stringify({
-        coupon_value: couponInfo.coupon_value,
-        coupon_type: couponInfo.coupon_type,
-      }),
-
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + auth.token,
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        // 存儲後端的錯誤訊息
-        if (data.error) {
-          console.log(data.error)
-          alert(data.error) // 顯示 email 已被使用的錯誤訊息
-
-          return // 終止後續的處理
-        }
-
-        console.log(data)
-
-        if (data) {
-          // alert('簽到成功')
-          setTimeout(() => {
-            setModalIsOpen(true)
-          }, 1200)
-          // router.push('/member/login');
-          // window.location.reload()
-        }
-      })
-      .catch((error) => {
-        alert('簽到失敗', error)
-      })
-  }
+  }, [auth.token, spinWheelUpdated])
 
   return (
     <div className={styles.flex_centre}>
@@ -126,11 +80,12 @@ export default function dailySignIn() {
 
         {/* 轉盤 */}
         <Row className={styles.flex_centre}>
-          <form onSubmit={signIn}>
-            <Col>
-              <SpinWheel onCouponGenerated={handleCouponGenerated} />
-            </Col>
-          </form>
+          {/* <form onSubmit={signIn}> */}
+          <Col>
+            {/* 將 updateSpinWheel 函式傳遞給 SpinWheel 元件 */}
+            <SpinWheel updateSpinWheel={updateSpinWheel} />
+          </Col>
+          {/* </form> */}
         </Row>
 
         {/* 簽到標題 */}
@@ -168,30 +123,6 @@ export default function dailySignIn() {
         </Row>
       </Container>
       {/* 小視窗 */}
-      <Modal
-        isOpen={modalIsOpen}
-        contentLabel="簽到成功!"
-        style={{
-          overlay: {
-            backgroundColor: 'rgba(0, 0, 0, 0.5)', // 背景顏色透明度
-            zIndex: 2, //1 為spin pointer
-          },
-          content: {
-            maxWidth: '300px', // 調整最大寬度
-            maxHeight: '200px', // 調整最大高度
-            margin: 'auto', // 水平居中
-          },
-        }}
-      >
-        <h2>遷到成功</h2>
-        <h2>
-          恭喜獲得 {couponInfo.coupon_type} 折價券，價值
-          {couponInfo.coupon_value}
-        </h2>
-        <div>
-          <button onClick={handleModalCloseReload}>確認</button>
-        </div>
-      </Modal>
     </div>
   )
 }
