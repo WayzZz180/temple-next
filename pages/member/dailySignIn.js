@@ -11,7 +11,7 @@ import MemberTitle from '@/components/common/title/memberTitle'
 
 import Button from '@/components/common/button/index.js'
 import MemberNavbar from '@/components/common/memberNavbar'
-import Coupon from '@/components/common/coupon/index.js'
+import Coupon from '@/components/common/coupons/index.js'
 import SpinWheel from '@/components/common/spinWheel'
 
 //bootstrap
@@ -118,7 +118,6 @@ export default function dailySignIn() {
               text="每日簽到"
               text2="DAILY SIGN IN"
               lineColor="green"
-              width={860}
             />
           </Col>
         </Row>

@@ -4,35 +4,33 @@ import { Container, Row, Col } from 'react-bootstrap'
 import variables from '@/styles/_variables.module.sass'
 
 //components
-import styles from '@/components/common/coupon/coupon.module.sass'
+import styles from '@/components/common/coupons/coupon.module.sass'
 import coupon from '@/assets/coupon.svg'
 
-export default function Coupon(
+export default function Coupon({
+  couponName = '',
+  couponValue = '',
+  expDate = '',
+  usageStatus = '',
+}) {
+  let couponColor
 
-{ couponName='',
-couponValue='',
-expDate='',
-usageStatus=''
-}
-
-) {let couponColor;
-
-// 使用 switch 敘述根據 usageStatus 設定適當的 CSS 類名
-switch (usageStatus) {
-  case '未使用':
-    couponColor = {color: variables['hot_pink']};
-    break;
+  // 使用 switch 敘述根據 usageStatus 設定適當的 CSS 類名
+  switch (usageStatus) {
+    case '未使用':
+      couponColor = { color: variables['hot_pink'] }
+      break
     case '已使用':
-      couponColor = {color: variables['green']};
+      couponColor = { color: variables['green'] }
       // couponColor = {$hot_pink};
-    break;
+      break
     case '已過期':
-    couponColor = {color: variables['orderGray']};
-    // couponColor = {$hot_pink};
-    break;
-  default:
-    couponColor = ''; // 預設的 CSS 類名
-}
+      couponColor = { color: variables['orderGray'] }
+      // couponColor = {$hot_pink};
+      break
+    default:
+      couponColor = '' // 預設的 CSS 類名
+  }
 
   const couponRow = (
     <Row className={styles.flex}>
@@ -69,5 +67,10 @@ switch (usageStatus) {
   // for (let i = 0; i < numberOfRows; i++) {
   //   combinedRows.push(i % 2 === 0 ? couponRow : lineRow)
   // }
-  return <>{couponRow}{lineRow}</>
+  return (
+    <>
+      {couponRow}
+      {lineRow}
+    </>
+  )
 }

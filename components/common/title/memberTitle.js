@@ -8,7 +8,7 @@ export default function MemberTitle({
   text = 'text',
   text2 = 'text',
   lineColor = 'green',
-  width = '',
+  width = '100%',
 }) {
   const var_color = variables[lineColor]
   return (

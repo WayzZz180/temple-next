@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 04, 2023 at 03:57 PM
+-- Generation Time: Aug 07, 2023 at 08:57 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -41,10 +41,17 @@ CREATE TABLE `coupons` (
 
 INSERT INTO `coupons` (`coupon_id`, `coupon_type`, `coupon_name`, `coupon_value`, `conditions`) VALUES
 (1, 'TRJ10', '10元折價券', 10, 99),
-(2, 'TRJ25', '30元折價券', 30, 199),
-(3, 'TRJ50', '80元折價券', 80, 399),
-(4, 'TRJ100', '150元折價券', 150, 599),
-(5, 'TRJ500', '300元折價券', 300, 999);
+(2, 'TRJ20', '20元折價券', 20, 199),
+(3, 'TRJ30', '30元折價券', 30, 299),
+(4, 'TRJ40', '40元折價券', 40, 399),
+(5, 'TRJ50', '50元折價券', 50, 499),
+(6, 'TRJ60', '60折價券', 60, 599),
+(7, 'TRJ70', '70折價券', 70, 699),
+(8, 'TRJ80', '80折價券', 80, 799),
+(9, 'TRJ90', '90折價券', 90, 899),
+(10, 'TRJ100', '100折價券', 100, 999),
+(11, 'TRJ1000', '1000折價券', 1000, 1001),
+(12, 'TRJ200', '註冊好禮', 200, 0);
 
 -- --------------------------------------------------------
 
@@ -59,7 +66,7 @@ CREATE TABLE `coupons_status` (
   `usage_status` enum('未使用','已使用','已過期') NOT NULL,
   `start_date` date NOT NULL,
   `expiration_date` date NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -67,13 +74,16 @@ CREATE TABLE `coupons_status` (
 --
 
 INSERT INTO `coupons_status` (`coupon_status_id`, `coupon_id`, `member_id`, `usage_status`, `start_date`, `expiration_date`, `created_at`) VALUES
-(1, 1, 1, '未使用', '2023-08-02', '2023-09-01', '2023-08-04 16:30:24'),
-(2, 2, 1, '已使用', '2023-08-02', '2023-08-15', '2023-08-04 16:30:24'),
-(3, 3, 1, '已過期', '2023-07-26', '2023-08-01', '2023-08-04 16:30:24'),
-(4, 1, 1, '未使用', '2023-08-04', '2023-09-03', '2023-08-04 16:45:43'),
-(5, 1, 1, '未使用', '2023-08-04', '2023-09-03', '2023-08-04 16:46:36'),
-(6, 1, 1, '未使用', '2023-08-04', '2023-09-03', '2023-08-04 16:46:38'),
-(9, 1, 1, '未使用', '2023-08-04', '2023-09-03', '2023-08-04 23:48:03');
+(1, 10, 1, '未使用', '2023-08-09', '2023-09-08', '2023-08-07 17:15:17'),
+(2, 1, 1, '未使用', '2023-07-26', '2023-08-25', '2023-08-07 17:15:17'),
+(3, 7, 1, '未使用', '2023-07-20', '2023-08-19', '2023-08-07 17:15:17'),
+(4, 9, 1, '未使用', '2023-07-16', '2023-08-15', '2023-08-07 17:15:17'),
+(5, 2, 1, '未使用', '2023-07-15', '2023-08-14', '2023-08-07 17:15:17'),
+(6, 8, 1, '未使用', '2023-07-13', '2023-08-12', '2023-08-07 17:15:17'),
+(7, 6, 1, '未使用', '2023-07-11', '2023-08-10', '2023-08-07 17:15:17'),
+(8, 4, 1, '已使用', '2023-07-08', '2023-08-07', '2023-08-07 17:15:17'),
+(9, 3, 1, '已過期', '2023-07-04', '2023-08-03', '2023-08-07 17:15:17'),
+(10, 5, 1, '已過期', '2023-06-15', '2023-07-15', '2023-08-07 17:15:17');
 
 -- --------------------------------------------------------
 
@@ -93,7 +103,8 @@ CREATE TABLE `daily_signins` (
 --
 
 INSERT INTO `daily_signins` (`signin_id`, `member_id`, `signin_date`, `created_at`) VALUES
-(3, 1, '2023-08-04 23:48:03', '2023-08-04 23:48:03');
+(1, 1, '2023-08-07 10:42:24', '2023-08-07 10:42:24'),
+(99, 1, '2023-08-07 16:06:27', '2023-08-07 16:06:27');
 
 -- --------------------------------------------------------
 
@@ -119,7 +130,7 @@ CREATE TABLE `members` (
 --
 
 INSERT INTO `members` (`member_id`, `member_account`, `member_password`, `member_name`, `member_address`, `member_phone`, `member_birthday`, `member_forum_name`, `member_profile`, `member_invoice`) VALUES
-(1, 'swiftie1202@gmail.com', '$2a$10$BfFRZxSTwgIrBKtyW25gxepy9jtPqt48KUrdmxunj7ArYL.bQZ2Ce', '黃琪涵', '台北市中正區信義路4段15巷8弄3號3樓', '0923003763', '1999-12-02', 'HannahOuO', '5a90c269-851e-4458-bf76-8609e2830aa8.jpg', NULL),
+(1, 'swiftie1202@gmail.com', '$2a$10$BfFRZxSTwgIrBKtyW25gxepy9jtPqt48KUrdmxunj7ArYL.bQZ2Ce', '黃琪涵', '台北市中正區信義路4段15巷8弄3號3樓', '0912151214', '1999-11-30', 'HannahOuO', 'deeeed70-aece-4661-9d75-0ffd492e8c01.jpg', NULL),
 (2, 'mjboyz399757@gmail.com', '$2b$10$w./CS5R3g7Vfrc/E3sf31uupWKm11WhrhbK5DNl.dpYVrubSf2Hey', '金牧賢', '新北市土城區土城北街4段125巷7弄11號11樓', '0941850649', '1992-01-29', NULL, NULL, NULL),
 (3, 'seanthephysicist@gmail.com', '$2b$10$XgxTEBV9dmue3iXHP2Or7eauMr8TSoxrOLcuVvVj6ECbHtMPPXdV2', '南于翔', '新北市土城區三峽大道2段78巷4弄7號7樓', '0936197274', '1982-09-01', NULL, NULL, NULL),
 (4, 'hao6han@gmail.com', '$2b$10$ZFL8y81rGWCrmUWWU.pqle/kia7wPDmV95EDhpkdYMvO7hb0X.H72', '朴顥瀚', '台北市萬華區延平北路3段30巷7弄19號19樓', '0906375680', '1984-05-23', NULL, NULL, NULL),
@@ -241,19 +252,19 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT for table `coupons`
 --
 ALTER TABLE `coupons`
-  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `coupons_status`
 --
 ALTER TABLE `coupons_status`
-  MODIFY `coupon_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `coupon_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `daily_signins`
 --
 ALTER TABLE `daily_signins`
-  MODIFY `signin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `signin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT for table `members`

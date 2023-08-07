@@ -15,10 +15,10 @@ export default function MyAccount() {
   return (
     <div className={styles.flex}>
       <Container>
-        <ProfilePhoto/>
+        <ProfilePhoto />
         <Row>
           <Col>
-            <MemberTitle text="護身符" text2="AMULET" lineColor="green" width={860} />
+            <MemberTitle text="護身符" text2="AMULET" lineColor="green" />
           </Col>
         </Row>
         <MemberNavbar />

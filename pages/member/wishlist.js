@@ -15,15 +15,10 @@ export default function MyAccount() {
   return (
     <div className={styles.flex}>
       <Container>
-      <ProfilePhoto/>
+        <ProfilePhoto />
         <Row>
           <Col>
-            <MemberTitle
-              text="收藏清單"
-              text2="WISHLIST"
-              lineColor="green"
-              width={860}
-            />
+            <MemberTitle text="收藏清單" text2="WISHLIST" lineColor="green" />
           </Col>
         </Row>
         <MemberNavbar />

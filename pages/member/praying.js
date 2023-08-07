@@ -23,12 +23,7 @@ export default function Praying() {
         <ProfilePhoto />
         <Row>
           <Col>
-            <MemberTitle
-              text="拜拜紀錄"
-              text2="PRAYING"
-              lineColor="green"
-              width={860}
-            />
+            <MemberTitle text="拜拜紀錄" text2="PRAYING" lineColor="green" />
           </Col>
         </Row>
 
