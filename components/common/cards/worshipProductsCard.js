@@ -1,12 +1,23 @@
 import styles from './worshipProductsCard.module.sass'
 import Image from 'next/image'
+import { useClick } from '@/hooks/useClick'
+
 export default function WorshipProductsCard({
   src = 'worship/mazu (4).png',
   text = '紅湯圓',
   price = '45',
 }) {
+  const { clickState, handleClick, setClickState } = useClick(false)
   return (
-    <div className={`${styles.container} m15px p10px`}>
+    <div
+      role="presentation"
+      className={`${styles.container} ${
+        clickState ? styles.chose : ''
+      } m15px p10px`}
+      onClick={() => {
+        handleClick()
+      }}
+    >
       {/* 圖片 */}
       <div className={`${styles.image} mb10px`}>
         <Image

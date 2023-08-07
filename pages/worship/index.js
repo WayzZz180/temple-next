@@ -297,13 +297,23 @@ export default function Worship() {
       index = start.findIndex((v, i) => v === time)
       result = index != -1 ? timeInfo[index] : ''
     }
+
+    if (choseTimeIndex == -1) {
+      return true
+    }
     if (choseTimeIndex != 0 && choseTimeIndex < index) {
       setTimeClick('')
       setZodiac(index + 1)
       setTime(`${timeInfo[index].id}/${timeInfo[index].time}
       `)
+      console.log('choseIndex:', choseTimeIndex)
+      console.log('index:', index)
+      return false
+    } else {
+      return true
     }
   }
+
   const scrollTo = (id) => {
     // 取得目標元素的位置
     const content = document.getElementById(id)
@@ -318,6 +328,12 @@ export default function Worship() {
       behavior: 'smooth',
     })
   }
+
+  const setItem = () => {
+    const data = { god: god, day: day, time: time }
+    localStorage.setItem('reservation', JSON.stringify(data))
+  }
+
   return (
     <Container>
       <WorshipStepBar id={id} />
@@ -634,19 +650,28 @@ export default function Worship() {
               padding="15px 60px"
               fontSize="24px"
               link={() => {
-                !god && scrollTo('chooseGod')
-                !day && scrollTo('chooseDay')
-                !time && scrollTo('chooseTime')
-                // 判斷當天時間超過了沒
-                if (
+                if (!god) {
+                  scrollTo('chooseGod')
+                } else if (!day) {
+                  scrollTo('chooseDay')
+                } else if (!time) {
+                  scrollTo('chooseTime')
+                } else if (
+                  // 判斷當天時間超過了沒
                   `${myYear}/${myMonth < 10 ? '0' : ''}${myMonth + 1}/${
                     myDay < 10 ? '0' : ''
                   }${myDay}` === day
                 ) {
                   const hours = myDate.getHours()
-                  passedTime(hours, timeClick - 1)
+                  const state = passedTime(hours, timeClick - 1)
+                  if (state) {
+                    setItem()
+                    router.push('/worship/offerings')
+                  }
+                } else {
+                  setItem()
+                  router.push('/worship/offerings')
                 }
-                god && day && time && router.push('/worship/offerings')
               }}
             />
           </div>

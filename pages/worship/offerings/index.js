@@ -7,13 +7,14 @@ import { Container, Row, Col } from 'react-bootstrap'
 
 // hooks
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 import { useRouter } from 'next/router'
 
 // components
 import ShopTitle from '@/components/common/title/ShopTitle'
 import HomeCarousels from '@/components/common/carousel/HomeCarousels'
 import WorshipProductsCard from '@/components/common/cards/worshipProductsCard'
+import Button from '@/components/common/button'
 
 // svg
 import goldenStar_fill from '@/assets/goldenStar_fill.svg'
@@ -58,7 +59,9 @@ export default function Offerings() {
   const [mazuData, setMazuData] = useState([])
   const [loveData, setLoveData] = useState([])
   const [studyData, setStudyData] = useState([])
+  const [reservation, setReservation] = useState([])
   useEffect(() => {
+    setReservation(JSON.parse(localStorage.getItem('reservation')))
     fetch(`${process.env.API_SERVER}/worship`)
       .then((r) => r.json())
       .then((data) => {
@@ -67,7 +70,7 @@ export default function Offerings() {
         setStudyData(data[2])
       })
   }, [router.query])
-
+  // console.log()
   return (
     <>
       <Container className="mt100px">
@@ -75,7 +78,23 @@ export default function Offerings() {
       </Container>
       <Container className={'shopContainer'}>
         {/* <Top /> */}
-        <Row className="nowrap mt100px mb50px fs24px">
+        <Row className={`${styles.choseContainer} fs24px fwBold mt150px`}>
+          <div className={`${styles.chose}`}>
+            選擇的神明：
+            <span className={`${styles.pink}`}>{reservation?.god}</span>
+          </div>
+          <div className="">/</div>
+          <div className={`${styles.chose}`}>
+            挑選的日期：
+            <span className={`${styles.pink}`}>{reservation?.day}</span>
+          </div>
+          <div className="">/</div>
+          <div className={`${styles.chose}`}>
+            預約的時辰：
+            <span className={`${styles.pink}`}>{reservation?.time}</span>
+          </div>
+        </Row>
+        <Row className="nowrap mt150px mb50px fs24px">
           {/* 標題 */}
           <Col>
             <div className={`${styles.title}`}>指引</div>
@@ -129,7 +148,7 @@ export default function Offerings() {
         <Row className={` ${styles.productsContainer}`}>
           {mazuData?.map((v, i) => {
             return (
-              <Col key={i}>
+              <Col key={v.pid}>
                 <WorshipProductsCard
                   src={v.image}
                   text={v.product_name}
@@ -148,7 +167,7 @@ export default function Offerings() {
         <Row className={` ${styles.productsContainer}`}>
           {loveData?.map((v, i) => {
             return (
-              <Col key={i}>
+              <Col key={v.pid}>
                 <WorshipProductsCard
                   src={v.image}
                   text={v.product_name}
@@ -167,7 +186,7 @@ export default function Offerings() {
         <Row className={` ${styles.productsContainer}`}>
           {studyData?.map((v, i) => {
             return (
-              <Col key={i}>
+              <Col key={v.pid}>
                 <WorshipProductsCard
                   src={v.image}
                   text={v.product_name}
@@ -176,6 +195,9 @@ export default function Offerings() {
               </Col>
             )
           })}
+        </Row>
+        <Row className="nowrap mt100px">
+          <Button text="確認供品" btnColor="hot_pink" />
         </Row>
       </Container>
     </>
