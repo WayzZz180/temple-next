@@ -49,6 +49,7 @@ export default function WorshipStepBar({ id = 'chooseGod', setStop }) {
     window.scrollTo({
       top: scrollDistance,
       behavior: 'smooth',
+      once: true,
     })
   }
 
