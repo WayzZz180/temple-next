@@ -6,15 +6,9 @@ import { useInView } from 'react-intersection-observer'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-export default function WorshipStepBar({ id = 'chooseGod' }) {
+export default function WorshipStepBar({ id = 'chooseGod', setStop }) {
   const [currentId, setCurrentId] = useState(id)
   const [temp, setTemp] = useState(currentId)
-  const [click, setClick] = useState(true)
-  // console.log('id:', id)
-  // console.log('current:', currentId)
-  // console.log('temp:', temp)
-
-  // console.log(click)
 
   useEffect(() => {
     if (currentId != id) {
@@ -42,7 +36,7 @@ export default function WorshipStepBar({ id = 'chooseGod' }) {
   ]
 
   const scrollTo = (id) => {
-    // setClick(true)
+    window.addEventListener('scrollend', () => setStop(false))
     setCurrentId(id)
     // 取得目標元素的位置
     const content = document.getElementById(id)
@@ -52,13 +46,10 @@ export default function WorshipStepBar({ id = 'chooseGod' }) {
     const offset = window.pageYOffset
     const scrollDistance = contentPosition + offset - 10
     // 執行捲動動作
-    // if (click) {
     window.scrollTo({
       top: scrollDistance,
       behavior: 'smooth',
     })
-    // setClick(false)
-    // }
   }
 
   return (
@@ -72,7 +63,7 @@ export default function WorshipStepBar({ id = 'chooseGod' }) {
                   role="presentation"
                   className={`${styles.align}`}
                   onClick={() => {
-                    setClick(true)
+                    setStop(true)
                     setTemp(v.id)
                     scrollTo(v.id)
                   }}
@@ -81,12 +72,7 @@ export default function WorshipStepBar({ id = 'chooseGod' }) {
                   <div
                     className={`${styles.circle} ${styles.active} fs24px`}
                     style={{
-                      opacity:
-                        v.id === currentId
-                          ? // ? temp === currentId
-                            1
-                          : // : 0.5
-                            0.5,
+                      opacity: v.id === currentId ? 1 : 0.5,
                     }}
                   >
                     {i + 1}
@@ -95,12 +81,7 @@ export default function WorshipStepBar({ id = 'chooseGod' }) {
                   <div
                     className={`${styles.text} fwBold ms10px fs18px`}
                     style={{
-                      opacity:
-                        v.id === currentId
-                          ? // ? temp === currentId
-                            1
-                          : // : 0.5
-                            0.5,
+                      opacity: v.id === currentId ? 1 : 0.5,
                     }}
                   >
                     {v.text}

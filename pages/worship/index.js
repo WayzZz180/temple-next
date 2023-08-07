@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import Head from 'next/head'
 
 // hooks
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useInView } from 'react-intersection-observer' // Import react-intersection-observer
 
@@ -61,7 +61,7 @@ export default function Worship() {
   ]
 
   // 選擇的神明
-  const [god, setGod] = useState('')
+  const [god, setGod] = useState()
 
   // 月曆
   const month_normal = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] // 一般
@@ -144,12 +144,15 @@ export default function Worship() {
   }
   const [id, setId] = useState('chooseGod')
 
+  const [stop, setStop] = useState(false)
+
   const [chooseGodRef, chooseGodInView] = useInView()
   const [chooseDateRef, chooseDateInView] = useInView()
   const [chooseTimeRef, chooseTimeInView] = useInView()
   const [nextStepRef, nextStepInView] = useInView()
 
   useEffect(() => {
+    if (stop) return
     chooseGodInView && setId('chooseGod')
     chooseDateInView && setId('chooseDate')
     chooseTimeInView && setId('chooseTime')
@@ -161,7 +164,9 @@ export default function Worship() {
   const handleHover = (zodiacNumber) => {
     setZodiac(zodiacNumber)
   }
+
   const [timeClick, setTimeClick] = useState('')
+
   const timeInfo = [
     {
       id: '子時',
@@ -213,6 +218,8 @@ export default function Worship() {
     },
   ]
   const [time, setTime] = useState('')
+  const [godIndex, setGodIndex] = useState(-1)
+  const [godState, setGodState] = useState(false)
 
   useEffect(() => {
     const getNow = () => {
@@ -256,12 +263,27 @@ export default function Worship() {
     }
     const now = getNow()
     setTime(now)
+
+    if (localStorage.getItem('reservation')) {
+      const str = JSON.parse(localStorage.getItem('reservation'))
+      setGod(str.god)
+      setDay(str.day)
+      setTime(str.time)
+      const index = godInfo.findIndex((v) => v.text === str.god)
+      setGodIndex(index ? index : 0)
+
+      const zodiac_index = timeInfo.findIndex(
+        (v) => v.id === str.time.split('/')[0]
+      )
+      setTimeClick(zodiac_index + 1)
+    }
   }, [router.query])
 
   const getTime = (time) => {
     setTime(`${timeInfo[time - 1].id}/${timeInfo[time - 1].time}
     `)
   }
+
   // 判斷選擇的時間有無超過
   const passedTime = (hours, choseTimeIndex) => {
     // 現在的時間轉成12小時制
@@ -333,10 +355,11 @@ export default function Worship() {
     const data = { god: god, day: day, time: time }
     localStorage.setItem('reservation', JSON.stringify(data))
   }
-
+  // console.log(godIndex)
+  if (godIndex === -1) return
   return (
     <Container>
-      <WorshipStepBar id={id} />
+      <WorshipStepBar id={id} setStop={setStop} />
       {/* section1 */}
       <Row className={`${styles.worship}`}>
         <Col>
@@ -375,10 +398,16 @@ export default function Worship() {
               spaceBetween={30}
               effect={'fade'}
               modules={[EffectFade, Navigation, Pagination]}
+              initialSlide={godIndex}
               className="mySwiper"
             >
               {godInfo.map((v, i) => {
                 const foundGod = v.text === god
+                let godState = false
+                if (i === godIndex) {
+                  godState = true
+                }
+
                 return (
                   <SwiperSlide key={i}>
                     <God
@@ -388,6 +417,7 @@ export default function Worship() {
                       wordRight={v.wordRight}
                       setGod={setGod}
                       foundGod={foundGod}
+                      godState={godState}
                     />
                   </SwiperSlide>
                 )

@@ -12,22 +12,46 @@ import { useRouter } from 'next/router'
 
 // components
 import ShopTitle from '@/components/common/title/ShopTitle'
-import HomeCarousels from '@/components/common/carousel/HomeCarousels'
 import WorshipProductsCard from '@/components/common/cards/worshipProductsCard'
 import Button from '@/components/common/button'
-
-// svg
-import goldenStar_fill from '@/assets/goldenStar_fill.svg'
-import goldenStar_outline from '@/assets/goldenStar_outline.svg'
-import data from '@/components/mydata/productsTitleData'
+import HomeSet from '@/components/common/cards/HomeSet'
 
 export default function Offerings() {
   const router = useRouter()
+
   const gods = [
     { text: '媽祖', id: 'Mazu' },
     { text: '月老', id: 'LoveGod' },
     { text: '文昌', id: 'StudyGod' },
   ]
+
+  const slide = [
+    {
+      text1: '吉祥如意',
+      text2: '媽祖基本款',
+      text3:
+        '在香燭的映照下，仿佛是一場紅龜粿般的信仰盛宴，象徵著對媽祖的虔誠。這些美味的祭品猶如是一種祈願的延伸，希望媽祖的神靈能像糕點一樣，為人們帶來幸運與吉祥。在早期的儀式中，飲食的素葷之別並不是主要焦點，更重要的是心誠則靈，唯有真摯的虔敬，才能引得媽祖的保佑與庇佑。',
+      pic1: 'MazuSet',
+      id: 'Mazu',
+    },
+    {
+      text1: '花好月圓',
+      text2: '月老基本款',
+      text3:
+        '月老的祭祀，猶如一場甜蜜的文化糖漿，在香燭花卉的映襯下，甜點的芬芳四溢。除了擺放鮮花香燭，供品也包括湯圓、水果等美味。這些美味的祭品彷彿是心靈的滋養，象徵著愛情的美好滋味，更重要的是誠摯的祈願，只有充滿甜蜜的誠意，才能引來月老的青睞與祝福。',
+      pic1: 'loveSet',
+      id: 'LoveGod',
+    },
+    {
+      text1: '金榜題名',
+      text2: '文昌基本款',
+      text3:
+        '拜文昌猶如一道滋補的文化佳餚，香燭的火焰映照出蔥的青翠，象徵著好彩頭的美好前景。這些美味的祭品宛如心靈的滋養，象徵著知識的滋長，就像蔥的層層生長。唯有心意的凝聚，方能引得文昌神的加持。',
+      pic1: 'studySet',
+      id: 'StudyGod',
+    },
+  ]
+
   // 類別hover
   const {
     hoveredIndex: hoveredIndexStar,
@@ -56,29 +80,53 @@ export default function Offerings() {
       behavior: 'smooth',
     })
   }
-  const [mazuData, setMazuData] = useState([])
-  const [loveData, setLoveData] = useState([])
-  const [studyData, setStudyData] = useState([])
+
+  const [data, setData] = useState([])
   const [reservation, setReservation] = useState([])
   useEffect(() => {
     setReservation(JSON.parse(localStorage.getItem('reservation')))
-    fetch(`${process.env.API_SERVER}/worship`)
-      .then((r) => r.json())
-      .then((data) => {
-        setMazuData(data[0])
-        setLoveData(data[1])
-        setStudyData(data[2])
-      })
   }, [router.query])
-  // console.log()
+
+  useEffect(() => {
+    const god = { god: reservation?.god }
+    if (god.god) {
+      console.log('god:', god)
+      fetch(`${process.env.API_SERVER}/worship`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: god }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          setData(data)
+        })
+    }
+  }, [reservation])
+
+  const index = gods.findIndex((v) => v.text === reservation?.god)
+  const slide_slice = slide[index]
+
   return (
     <>
       <Container className="mt100px">
-        <HomeCarousels />
+        <HomeSet
+          text1={slide_slice?.text1}
+          text2={slide_slice?.text2}
+          text3={slide_slice?.text3}
+          pic1={slide_slice?.pic1}
+          id={slide_slice?.id}
+        />
       </Container>
       <Container className={'shopContainer'}>
         {/* <Top /> */}
-        <Row className={`${styles.choseContainer} fs24px fwBold mt150px`}>
+        <Row className=" mt150px mb50px">
+          <Col>
+            <ShopTitle text="預約" lineColor="green" />
+          </Col>
+        </Row>
+        <Row className={`${styles.choseContainer} fs24px fwBold`}>
           <div className={`${styles.chose}`}>
             選擇的神明：
             <span className={`${styles.pink}`}>{reservation?.god}</span>
@@ -94,59 +142,15 @@ export default function Offerings() {
             <span className={`${styles.pink}`}>{reservation?.time}</span>
           </div>
         </Row>
-        <Row className="nowrap mt150px mb50px fs24px">
-          {/* 標題 */}
-          <Col>
-            <div className={`${styles.title}`}>指引</div>
-          </Col>
-        </Row>
-        <Row className={`nowrap fs20px `}>
-          {/* 類別詳細 */}
-          {gods.map((v, i) => {
-            return (
-              <Col
-                key={i}
-                onMouseEnter={() => handleMouseEnterStar(i)}
-                onMouseLeave={handleMouseLeaveStar}
-                onClick={() => {
-                  scrollTo(v.id)
-                  clearLocal()
-                }}
-              >
-                <div
-                  className={`${styles.category} ${
-                    hoveredIndexStar === i ? styles.hovered : ''
-                  } m15px`}
-                >
-                  {/* 星星 */}
-                  <span className={`${styles.star} pe15px `}>
-                    <Image
-                      src={
-                        hoveredIndexStar === i
-                          ? goldenStar_fill
-                          : goldenStar_outline
-                      }
-                      alt="stars"
-                      width={20}
-                    ></Image>
-                  </span>
-                  {/* 文字 */}
-                  <span className={`${styles.link} fwBold pb15px fs24px`}>
-                    {v.text}
-                  </span>
-                </div>
-              </Col>
-            )
-          })}
-        </Row>
+
         {/* 媽祖*/}
         <Row id="Mazu" className="nowrap mb50px">
           <Col>
-            <ShopTitle text="媽祖" lineColor="green" />
+            <ShopTitle text={reservation?.god} lineColor="green" />
           </Col>
         </Row>
         <Row className={` ${styles.productsContainer}`}>
-          {mazuData?.map((v, i) => {
+          {data?.map((v, i) => {
             return (
               <Col key={v.pid}>
                 <WorshipProductsCard
@@ -158,44 +162,7 @@ export default function Offerings() {
             )
           })}
         </Row>
-        {/* 月老*/}
-        <Row id="LoveGod" className="nowrap mb50px">
-          <Col>
-            <ShopTitle text="月老" lineColor="hot_pink" />
-          </Col>
-        </Row>
-        <Row className={` ${styles.productsContainer}`}>
-          {loveData?.map((v, i) => {
-            return (
-              <Col key={v.pid}>
-                <WorshipProductsCard
-                  src={v.image}
-                  text={v.product_name}
-                  price={v.product_price}
-                />
-              </Col>
-            )
-          })}
-        </Row>
-        {/* 文昌*/}
-        <Row id="StudyGod" className="nowrap mb50px">
-          <Col>
-            <ShopTitle text="文昌" lineColor="green" />
-          </Col>
-        </Row>
-        <Row className={` ${styles.productsContainer}`}>
-          {studyData?.map((v, i) => {
-            return (
-              <Col key={v.pid}>
-                <WorshipProductsCard
-                  src={v.image}
-                  text={v.product_name}
-                  price={v.product_price}
-                />
-              </Col>
-            )
-          })}
-        </Row>
+
         <Row className="nowrap mt100px">
           <Button text="確認供品" btnColor="hot_pink" />
         </Row>
