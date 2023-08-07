@@ -59,18 +59,17 @@ export default function Pagination({
 
   const [value, setValue] = useState(1)
 
+  if (value > totalPages) {
+    setValue(totalPages)
+  } else if (value < 1) {
+    setValue(1)
+  }
   const sendPage = (value) => {
-    if (value > totalPages) {
-      setValue(totalPages)
-    } else if (value < 1) {
-      setValue(1)
-    } else {
-      const currentParams = new URLSearchParams(window.location.search)
-      currentParams.set('page', value)
-      const currentPath = window.location.pathname
-      const newURL = `${currentPath}?${currentParams.toString()}`
-      router.push(newURL)
-    }
+    const currentParams = new URLSearchParams(window.location.search)
+    currentParams.set('page', value)
+    const currentPath = window.location.pathname
+    const newURL = `${currentPath}?${currentParams.toString()}`
+    router.push(newURL)
   }
 
   return (

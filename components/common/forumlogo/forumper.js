@@ -50,7 +50,10 @@ export default function Forumper() {
                 <div className={`${styles.flex}`}>
                   <div className={`${styles.flex_row}`}>
                     <div className={`${styles.flex_col2}`}>
-                      <Link href="#" className={`${styles.link_sass}`}>
+                      <Link
+                        href={'/post/' + i.sid}
+                        className={`${styles.link_sass}`}
+                      >
                         <div className={`${styles.title}`}>{i.title}</div>
                         <div className={`${styles.content}`}>{i.content}</div>
                       </Link>
@@ -81,7 +84,7 @@ export default function Forumper() {
           </div>
         ))}
         <Pagination
-          pagination={{ page: data.page, totalPages: data.totalPages }}
+          pagination={{ page: router.query.page, totalPages: data?.totalPages }}
         />
       </div>
     </>

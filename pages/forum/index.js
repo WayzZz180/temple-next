@@ -32,7 +32,12 @@ export default function Forum() {
       </div>
       <Title text="主題看板" text2="TOPIC BOARD" />
       <div className={`${styles.flex_row2}`}>
-        <Forumcard text1="八卦版" text2="湊一腳" pic="gossiplogo" />
+        <Forumcard
+          text1="八卦版"
+          text2="湊一腳"
+          pic="gossiplogo"
+          href="/forum/forumgossip?page=1"
+        />
         <Forumcard text1="鬼故事版" text2="涼一下" pic="marvellogo" />
         <Forumcard text1="愛情版" text2="男人嘴" pic="lovelogo" />
         <Forumcard text1="籤詩版" text2="抽一根" pic="godtellyoulogo" />
