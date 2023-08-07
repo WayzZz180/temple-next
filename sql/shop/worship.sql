@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.2
 -- https://www.phpmyadmin.net/
 --
--- 主機： localhost:8889
--- 產生時間： 2023 年 08 月 07 日 02:11
--- 伺服器版本： 5.7.39
--- PHP 版本： 8.2.0
+-- Host: localhost:3306
+-- Generation Time: Aug 07, 2023 at 06:14 AM
+-- Server version: 5.7.24
+-- PHP Version: 8.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 資料庫： `temple`
+-- Database: `temple`
 --
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `worship`
+-- Table structure for table `worship`
 --
 
 CREATE TABLE `worship` (
@@ -36,38 +36,54 @@ CREATE TABLE `worship` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 傾印資料表的資料 `worship`
+-- Dumping data for table `worship`
 --
 
 INSERT INTO `worship` (`pid`, `product_name`, `product_price`, `cid`, `image`) VALUES
 (1, '紅龜粿', 30, 36, 'worship/mazu (1).png'),
 (2, '發糕', 20, 36, 'worship/mazu (2).png'),
-(3, '水果', 666, 36, 'worship/mazu (3).png'),
+(3, '柑橘', 390, 36, 'worship/mazu (3).png'),
 (4, '紅湯圓', 99, 36, 'worship/mazu (4).png'),
 (5, '素三牲', 120, 36, 'worship/mazu (5).png'),
 (6, '見麵平安', 45, 36, 'worship/mazu (6).png'),
 (7, '手採紅蜜烏龍', 60, 36, 'worship/mazu (7).png'),
-(8, '各式菜碗', 120, 36, 'worship/mazu (8).png');
+(8, '各式菜碗', 120, 36, 'worship/mazu (8).png'),
+(9, '湯圓', 60, 37, 'worship/love (1).png'),
+(10, '桂圓', 50, 37, 'worship/love (2).png'),
+(11, '紅棗', 120, 37, 'worship/love (3).png'),
+(12, '姻緣糕', 120, 37, 'worship/love (4).png'),
+(13, '花生', 60, 37, 'worship/love (5).png'),
+(14, '金沙巧克力', 139, 37, 'worship/love (6).png'),
+(15, '黑糖麻糬', 30, 37, 'worship/love (7).png'),
+(16, '水果盤', 390, 37, 'worship/love (8).png'),
+(17, '粽子', 350, 38, 'worship/study (1).png'),
+(18, '蔥', 50, 38, 'worship/study (2).png'),
+(19, '芹菜', 79, 38, 'worship/study (3).png'),
+(20, '蒜', 30, 38, 'worship/study (4).png'),
+(21, '菜頭', 80, 38, 'worship/study (5).png'),
+(22, '竹筍', 180, 38, 'worship/study (6).png'),
+(23, '狀元糕', 60, 38, 'worship/study (7).png'),
+(24, '礦泉水', 36, 38, 'worship/study (8).png');
 
 --
--- 已傾印資料表的索引
+-- Indexes for dumped tables
 --
 
 --
--- 資料表索引 `worship`
+-- Indexes for table `worship`
 --
 ALTER TABLE `worship`
   ADD PRIMARY KEY (`pid`);
 
 --
--- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `worship`
+-- AUTO_INCREMENT for table `worship`
 --
 ALTER TABLE `worship`
-  MODIFY `pid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `pid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
