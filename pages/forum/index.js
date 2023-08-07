@@ -36,7 +36,7 @@ export default function Forum() {
           text1="八卦版"
           text2="湊一腳"
           pic="gossiplogo"
-          href="/forum/forumgossip?page=1"
+          href="/forum/post_category=1?page=1"
         />
         <Forumcard text1="鬼故事版" text2="涼一下" pic="marvellogo" href="/" />
         <Forumcard text1="愛情版" text2="男人嘴" pic="lovelogo" href="/" />

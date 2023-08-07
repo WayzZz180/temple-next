@@ -85,7 +85,9 @@ export default function Forumper() {
             <Forumline lineColor="brown" />
           </div>
         ))}
-        <Pagination pagination={pagination} />
+        <Pagination
+          pagination={{ page: data.page, totalPages: data.totalPages }}
+        />
       </div>
     </>
   )
