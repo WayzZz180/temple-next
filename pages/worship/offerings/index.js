@@ -25,6 +25,7 @@ export default function Offerings() {
     { text: '文昌', id: 'StudyGod' },
   ]
 
+  // 根據神明確定切換哪張圖
   const slide = [
     {
       text1: '吉祥如意',
@@ -51,13 +52,6 @@ export default function Offerings() {
       id: 'StudyGod',
     },
   ]
-
-  // 類別hover
-  const {
-    hoveredIndex: hoveredIndexStar,
-    handleMouseEnter: handleMouseEnterStar,
-    handleMouseLeave: handleMouseLeaveStar,
-  } = useHoverIndex(-1)
 
   // 換分類時清空keyword
   const clearLocal = () => {
@@ -152,10 +146,15 @@ export default function Offerings() {
           />
         </Row>
 
-        {/* 媽祖*/}
-        <Row id="Mazu" className="nowrap mb50px">
+        <Row className="nowrap mb50px">
           <Col>
-            <ShopTitle text={reservation?.god} lineColor="green" />
+            <div className={`${styles.flex} mt120px`}>
+              <div className={`${styles.title} mb10px`}>
+                請選擇三樣
+                <br />（{reservation?.god}基本款）
+              </div>
+              <div className={`${styles.line}`}></div>
+            </div>
           </Col>
         </Row>
         <Row className={` ${styles.productsContainer}`}>
