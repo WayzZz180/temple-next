@@ -86,7 +86,7 @@ export default function Forumper() {
           </div>
         ))}
         <Pagination
-          pagination={{ page: data.page, totalPages: data.totalPages }}
+          pagination={{ page: data.page, totalPages: data?.totalPages }}
         />
       </div>
     </>

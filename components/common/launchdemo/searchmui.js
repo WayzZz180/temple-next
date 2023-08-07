@@ -23,7 +23,7 @@ export default function AlertDialog() {
     setOpen(false)
   }
   const router = useRouter()
-  console.log(router)
+  // console.log(router)
 
   const [data, setData] = useState({
     redirect: '',
