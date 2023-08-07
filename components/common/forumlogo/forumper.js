@@ -35,6 +35,8 @@ export default function Forumper() {
         setData(data)
       })
   }, [router.query])
+
+  const pagination = { page: router.query.page, totalPages: data?.totalPages }
   return (
     <>
       <div>
@@ -83,9 +85,7 @@ export default function Forumper() {
             <Forumline lineColor="brown" />
           </div>
         ))}
-        <Pagination
-          pagination={{ page: router.query.page, totalPages: data?.totalPages }}
-        />
+        <Pagination pagination={pagination} />
       </div>
     </>
   )

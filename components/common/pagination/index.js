@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 //hooks
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 // Bootstrap
@@ -58,12 +58,13 @@ export default function Pagination({
   }
 
   const [value, setValue] = useState(1)
-
-  if (value > totalPages) {
-    setValue(totalPages)
-  } else if (value < 1) {
-    setValue(1)
-  }
+  useEffect(() => {
+    if (value > totalPages) {
+      setValue(totalPages)
+    } else if (value < 1) {
+      setValue(1)
+    }
+  }, [value])
   const sendPage = (value) => {
     const currentParams = new URLSearchParams(window.location.search)
     currentParams.set('page', value)
