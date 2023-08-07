@@ -224,11 +224,17 @@ export default function Worship() {
   useEffect(() => {
     const getNow = () => {
       const hours = myDate.getHours()
+
       // 現在的時間轉成12小時制
       let end = ''
       let time = ''
-
-      if (hours - 12 > 0) {
+      if (hours === 0) {
+        end = 'am'
+        time = 12 + end
+      } else if (hours === 12) {
+        end = 'pm'
+        time = 12 + end
+      } else if (hours - 12 > 0) {
         end = 'pm'
         time = hours - 12 + end
       } else {
@@ -249,6 +255,7 @@ export default function Worship() {
       // 看看有沒有和中間的時間相等
       let index = mid.findIndex((v, i) => v === time)
       let result = index != -1 ? timeInfo[index] : ''
+
       // 沒有的話和頭相比
       if (!result) {
         const start = timeInfo.map((v, i) => {
@@ -328,8 +335,6 @@ export default function Worship() {
       setZodiac(index + 1)
       setTime(`${timeInfo[index].id}/${timeInfo[index].time}
       `)
-      console.log('choseIndex:', choseTimeIndex)
-      console.log('index:', index)
       return false
     } else {
       return true
@@ -355,7 +360,6 @@ export default function Worship() {
     const data = { god: god, day: day, time: time }
     localStorage.setItem('reservation', JSON.stringify(data))
   }
-  // console.log(godIndex)
   if (godIndex === -1) return
   return (
     <Container>
