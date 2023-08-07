@@ -102,7 +102,7 @@ export default function Header() {
         className={`${styles.navbarContainer} pt20px pb25px`}
         style={{
           backgroundColor:
-            currentPath === bgChange[0] ? variables['brown'] : '',
+            currentPath === String(bgChange[0]) ? variables['brown'] : '',
         }}
       >
         {/* 左半邊選單 */}

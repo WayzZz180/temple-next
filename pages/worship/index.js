@@ -319,10 +319,10 @@ export default function Worship() {
     })
   }
   return (
-    <Container className={`${styles.worship}`}>
+    <Container>
       <WorshipStepBar id={id} />
-      {/* section1 */}s
-      <Row>
+      {/* section1 */}
+      <Row className={`${styles.worship}`}>
         <Col>
           <div className={`${styles.background}`}>
             <div className={`${styles.place}`}>
