@@ -1,6 +1,7 @@
 import styles from './style.module.sass'
 
 // hooks
+import { useState,useEffect } from 'react'
 import { useRouter } from 'next/router'
 import usePath from '@/hooks/usePath.js'
 
@@ -14,7 +15,9 @@ import Pagination from '@/components/common/pagination'
 
 export default function GetData({data=[], pagination=[]}) {
   const router = useRouter()
-  const { category, page, keyword } = router.query //抓出類別
+  const { category } = router.query //抓出類別
+  const [keyword, setKeyword] = useState('')
+  const [pidArr, setPidArr] = useState([])
 
     // 商品圖片
     const { imgSrc } = usePath(data)
@@ -27,7 +30,19 @@ export default function GetData({data=[], pagination=[]}) {
     }
     const imgChunks = chunkArray(imgSrc, 5)
 
-  
+  useEffect(()=>{
+    if(localStorage.getItem('keyword')){
+      setKeyword(localStorage.getItem('keyword'))
+    }else{
+      setKeyword('')
+    }
+
+    fetch(`${process.env.API_SERVER}/shop/favoriteMatch`)
+    .then((r) => r.json())
+    .then((data) => {
+      setPidArr(data)
+    })
+  },[router.query])
 
   return (
      <>
@@ -37,8 +52,9 @@ export default function GetData({data=[], pagination=[]}) {
         <Row key={rowIndex} className={`${styles.row}`}>
           {chunk.map((src, colIndex) => {
             const products = data[colIndex + rowIndex * 5]
+            const foundItem = pidArr.some((v) => v.pid === products.pid);
             return (
-              <Col key={colIndex}>
+              <Col key={products?.pid}>
                 <ShopProductsCard
                   src={src}
                   text={products?.product_name}
@@ -47,6 +63,8 @@ export default function GetData({data=[], pagination=[]}) {
                   pid={products?.pid}
                   stars={products?.stars}
                   stock_num={products?.stock_num}
+                  keyword={keyword}
+                  state={foundItem}
                 />
               </Col>
             )

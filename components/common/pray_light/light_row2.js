@@ -3,19 +3,19 @@ import Image from 'next/image'
 import styles from './light_row.module.sass'
 import Btn from './index'
 
-const buttons = []
+export default function lightRow({ indexY = 'A' , user, setUser}) {
+  const buttons = []
 
-for (let i = 16; i <= 30; i++) {
-  buttons.push(<Btn key={i} text={i.toString()} />)
-}
+  for (let i = 16; i <= 30; i++) {
+    buttons.push(<Btn key={i} text={i.toString()} indexY={indexY}  setUser={setUser}/>)
+  }
 
-export default function lightRow({ text = 'A' }) {
   return (
     <>
       <div className={`${styles.flex_row}`}>
-        <div className={`${styles.title}`}>{text}</div>
+        <div className={`${styles.title}`}>{indexY}</div>
         {buttons}
-        <div className={`${styles.title}`}>{text}</div>
+        <div className={`${styles.title}`}>{indexY}</div>
       </div>
     </>
   )

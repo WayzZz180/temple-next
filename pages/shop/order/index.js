@@ -1,7 +1,7 @@
 import styles from './order.module.sass'
 
 // hooks
-import { useEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import CartDataContext from '@/contexts/CartDataContext'
 
@@ -22,14 +22,33 @@ export default function Order() {
 
   // for 訂單資料
   const { cartData, setCartData, getCartData } = useContext(CartDataContext)
-  console.log(cartData);
   // 小計
   const total = cartData?.reduce((result, v) => {
     return result + v.product_price * v.quantity
   }, 0)
 
+  const[customerData, setCustomerData]= useState({
+   
+      customer_name:"沈子威",
+    
+      customer_phone:"0912345678",
+
+      customer_email:"wayz180@gmail.com",
+    
+      customer_address:"南京復興民生社區",
+    
+      payment:"現金",
+    
+      delivery:"超商取貨",
+      
+      invoice: "/CHILD1215",
+    
+      coupon:null,
+    
+})
+  // customer_name, customer_phone, customer_address, payment, delivery, coupon,
   const sendOrder=()=>{
-    const orderData = { cartData: cartData, total: total, status:'true'}
+    const orderData = { cartData: cartData, customerData: customerData, total: total, status:'未出貨'}
     fetch(`${process.env.API_SERVER}/shop/order`, {
       method: 'POST',
       body: JSON.stringify({ requestData: orderData }),
@@ -46,10 +65,12 @@ export default function Order() {
     <Container className={`${styles.container}`}>
       {/* step */}
       <ShopStepBar path="/shop/order" />
-      <BuyContent data={cartData} total={total}/>
+      <div className='mt100px'>
+      <BuyContent data={cartData}/>
+      </div>
       {/* 表單 */}
       <Container className="mt50px">
-        <Title text="訂單資訊" text2="information" />
+        <Title text="訂單資訊" text2="information"  />
         <Row className={`${styles.flex_space_between}`}>
           <InputBox
             type="text"

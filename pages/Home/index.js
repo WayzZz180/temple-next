@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './head.module.sass'
 import Image from 'next/image'
+// svg
 import nav from '@/assets/nav.svg'
 import foo_dog_left from '@/assets/foo_dog_left.svg'
 import foo_dog_right from '@/assets/foo_dog_right.svg'
@@ -9,6 +10,8 @@ import dog from '@/assets/dog_in.gif'
 import pink_star from '@/assets/Pink_Star.svg'
 import lighting from '@/assets/green_lighting.svg'
 import signIn from '@/assets/sing_in.svg'
+
+// components
 import Title from '@/components/common/title'
 import God from '@/components/common/cards/HomeGod'
 import Online from '@/components/common/cards/HomeOnline'

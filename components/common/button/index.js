@@ -7,7 +7,7 @@ import Image from 'next/image'
 // btnColor = black, green, hot_pink, brown
 export default function Button({
   text = 'text',
-  btnColor = 'btn',
+  btnColor = 'hot_pink',
   width = '',
   height = '',
   padding = '15px 60px',
@@ -17,9 +17,10 @@ export default function Button({
 }) {
   const var_color = variables[btnColor]
   return (
-    <div>
+    <>
       <button
         onClick={link}
+        type={type}
         className={`${styles.btn}`}
         style={{
           backgroundColor: var_color,
@@ -27,7 +28,6 @@ export default function Button({
           height: `${height}`,
           padding: `${padding}`,
           fontSize: `${fontSize}`,
-          type:`${type}`,
         }}
       >
         <span className={`${styles.IconContainer} `}>
@@ -48,6 +48,6 @@ export default function Button({
           ></Image>
         </span>
       </button>
-    </div>
+    </>
   )
 }

@@ -6,19 +6,21 @@ import { useRouter } from 'next/router'
 
 // components
 import InputBox from '@/components/common/inputBox/index.js'
-import Title from '@/components/common/title/index.js'
+import MemberTitle from '@/components/common/title/memberTitle';
+
 import Button from '@/components/common/button/index.js'
 import MemberNavbar from '@/components/common/memberNavbar'
-import Coupon from '@/components/common/coupons/index.js'
+import Coupon from '@/components/common/coupon/index.js'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
+import ProfilePhoto from '@/components/common/profilePhoto';
 
 export default function Coupons() {
   const { auth, setAuth, logout } = useContext(AuthContext);
   const router = useRouter()
   const { id } = router.query;
-  const [user, setUser] = useState('');
+  const [coupon, setCoupon] = useState([]);
 
   useEffect(() => {
     console.log(`coupons頁面 有沒有auth.token?1`, auth.token)
@@ -33,7 +35,7 @@ export default function Coupons() {
         console.log(`coupons頁面 有沒有auth.token?2`, auth.token);
         console.log(`coupons頁面 data:`, data);
         // 進入頁面把資料抓出來
-        setUser (data)
+        setCoupon (data)
       
       });
   }else {
@@ -45,21 +47,34 @@ export default function Coupons() {
 
   return (
     <div className={styles.flex}>
-      <Container>
+      <Container>  
+        
+       <ProfilePhoto/>
         <Row>
           <Col>
-            <Title
+            <MemberTitle
               text="我的優惠券"
               text2="COUPONS"
               lineColor="green"
               width={860}
-              
             />
           </Col>
         </Row>
+    
         <MemberNavbar />
-
-        <Coupon />
+      {
+        coupon?.map((v,i)=>{
+          return(
+          <div key={v.coupon_status_id}>
+            <Coupon
+              couponName={v.coupon_name}
+              couponValue={`$${v.coupon_value}`}
+              expDate={v.expiration_date}
+              usageStatus={v.usage_status} />
+          </div>
+          )
+        })
+      }
       </Container>
     </div>
   )

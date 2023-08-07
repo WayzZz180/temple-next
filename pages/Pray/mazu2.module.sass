@@ -51,6 +51,17 @@
    text-align: center
    margin:0
    padding-left:60px
+   top:-100px
+   animation: name 1s ease
+
+@keyframes name
+  0% 
+    opacity: 0
+  40% 
+    opacity: 0
+
+  100% 
+    opacity: 1
 
 .flex_title
     width:100%
@@ -62,6 +73,7 @@
 .right
     position: relative
     bottom:-180px
+    z-index: 2
     transform-origin: bottom
     animation: right 2s ease-in-out infinite alternate-reverse
 
@@ -74,6 +86,7 @@
 
 .left
     position: relative
+    z-index: 2
     bottom:-180px
     transform-origin: bottom
     animation: left 2s ease-in-out infinite alternate
@@ -84,3 +97,35 @@
 
   100% 
     transform: translate(0px, 15px)rotate(10deg)
+
+.name1
+  position: absolute
+  top:-130px
+  animation: name 1s ease
+
+@keyframes name
+  0% 
+    opacity: 0
+  40% 
+    opacity: 0
+
+  100% 
+    opacity: 1
+
+.name2
+  position: absolute
+
+.name3
+  position: relative
+  bottom:-80px
+
+.hidden
+  visibility: hidden
+
+
+@keyframes fadeAnimation 
+  0% 
+    opacity: 0
+  
+  100% 
+    opacity: 1

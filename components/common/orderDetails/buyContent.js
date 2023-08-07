@@ -16,23 +16,22 @@ import Col from 'react-bootstrap/Col'
 //svg
 import Arrow from '@/assets/orderArrow.svg'
 
-export default function BuyContent({data}) {
+export default function BuyContent({data=[]}) {
 
   const [init, setInit] = useState(false)
+  
   //判斷有無點擊收藏和購物車
   const { clickState: openClickState, handleClick: handleOpenClick } =
     useClick(true)
 
-
-  // 小計
-  const total = data?.reduce((result, v) => {
+    const total = data?.reduce((result, v) => {
     return result + v.product_price * v.quantity
-  }, 0)
-
+    }, 0)
+    
   return (
         <>  
             {/* 合計 */}
-            <Row className="nowrap mt100px">
+            <Row className="nowrap">
                 <Col className="w100">
                 <div
                     className={`${styles.totalBox} pt30px pb30px`}
@@ -43,7 +42,7 @@ export default function BuyContent({data}) {
                     }
                     }}
                 >
-                    <div className={` fs28px fwBolder`}>合計：NT${total}</div>
+                    <div className={`fs28px fwBolder`}>合計：NT${total}</div>
                     <div className={`${styles.flex_row} fs24px`}>
                     <div>總共 {data?.length} 件&nbsp;</div>
                     <div

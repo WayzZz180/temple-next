@@ -22,7 +22,6 @@ export default function DetailsRoute({
   const data = TitleData.filter((v) => {
     return v.id === category
   })
-  // console.log(data)
   let category_name = ''
   {
     data.length > 0 ? (category_name = data[0].text) : (category_name = 'test')

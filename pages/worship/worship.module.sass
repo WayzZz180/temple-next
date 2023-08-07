@@ -1,0 +1,122 @@
+@import '@/styles/_variables.module.sass'
+
+.background
+  position: relative
+  background-color: $brown
+  z-index: -2
+  
+.place
+  padding-top:5px
+  position: relative
+  top:5px
+  height: 730px
+  overflow: hidden 
+
+.floor
+    width: 100%
+    display: flex
+    justify-content: center
+    align-items: flex-end
+    bottom: 0px
+    position: absolute
+    z-index: 3
+
+.flex_row
+  bottom:10px
+  width: 100%
+  position: absolute
+  display: flex
+  justify-content: center
+
+.swiper
+  width:100%
+  display: flex
+  justify-content: space-around
+  align-items: center
+
+
+.flex_know
+  display: flex
+  justify-content: center
+  align-items: center
+  margin-top: 120px
+
+.gods
+  width: 100%
+  height:800px
+  display: flex
+  justify-content: space-around
+  align-items: flex-end
+  overflow: hidden 
+
+.flex
+    display: flex
+    justify-content: center
+    align-items: center
+
+.cloud
+    position: absolute
+    z-index: -1
+    top: 350px
+    animation: float 5s ease-in-out infinite alternate
+
+
+@keyframes float 
+  0% 
+     transform: translate(0px ,-50px)
+  100% 
+     transform: translate(0px ,50px)
+  
+.logo
+    position: absolute
+    top: 150px
+    z-index: 3
+
+.button
+  margin: auto
+  width: 20%
+
+.slide
+  width: 70%
+
+
+.arrowContainer
+    width: 100%
+    display: flex
+    justify-content: space-around
+    align-items: center
+    position: relative
+    bottom: 390px
+    --swiper-navigation-size:0
+
+.arrowLeft
+    width: 100%
+    display: flex
+    justify-content: flex-start
+    margin-left: 50px
+ 
+.arrowRight
+    width: 100%
+    display: flex
+    justify-content: flex-end
+    margin-right: 50px
+
+
+.chose
+  width: 100%
+  margin: auto
+  text-align: center
+
+.god
+  color: $hot_pink
+
+.flex_col
+  display: flex
+  flex-direction: column
+  align-items: center
+
+.timeContainer
+  position: relative
+
+.selectedTime
+  position: absolute
