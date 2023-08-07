@@ -176,7 +176,7 @@ export default function Pagination({
           />
         </div>
       </Col>
-      <Col>
+      <Col style={{ display: totalPages <= 7 ? 'none' : '' }}>
         <div className={`${styles.inputContainer} mt50px `}>
           <span className={`${styles.inputTitle} me10px fs18px `}>
             跳轉至第

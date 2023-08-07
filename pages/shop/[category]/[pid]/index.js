@@ -67,6 +67,7 @@ export default function Pid() {
         setCount(1)
       })
 
+    // 判斷有沒有加入收藏
     fetch(`${process.env.API_SERVER}/shop/favoriteMatch`)
       .then((r) => r.json())
       .then((data) => {
@@ -323,6 +324,7 @@ export default function Pid() {
               {/* 加入購物車 & 收藏 */}
               {/* 購物車 */}
               <div
+                role="presentation"
                 className={`${styles.flex_row} mb35px `}
                 onClick={() => {
                   if (data?.stock_num != 0) {
@@ -357,6 +359,7 @@ export default function Pid() {
                 )}
                 {/* 購物車 */}
                 <span
+                  role="presentation"
                   onClick={() => {
                     if (data?.stock_num != 0) {
                       cartClickState ? '' : handleCartClick()
@@ -399,6 +402,7 @@ export default function Pid() {
               </div>
               {/* 收藏 */}
               <div
+                role="presentation"
                 className={`${styles.flex_row} mb35px `}
                 onClick={handleHeartClick}
                 onMouseEnter={() => handleMouseEnter(1)}
@@ -416,6 +420,7 @@ export default function Pid() {
                 />
                 {/* 愛心 */}
                 <span
+                  role="presentation"
                   className={`${styles.inlineBlock} ms30px`}
                   onClick={() => {
                     heartClickState ? deleteFromFav() : addToFav()
@@ -436,12 +441,12 @@ export default function Pid() {
               <div className={`${styles.detailsData}`}>
                 <div className={`${styles.flex_row} fs20px  pb10px`}>
                   <Image src={monkey} width={50} height={50} alt="browse" />
-                  　瀏覽量　{data?.browse_num} /次
+                  &ensp;瀏覽量 &ensp;{data?.browse_num} /次
                 </div>
 
                 <div className={`${styles.flex_row} fs20px pb10px`}>
                   <Image src={buy} width={50} height={50} alt="sales" />
-                  　銷售量　{data?.purchase_num} /件
+                  &ensp;銷售量&ensp;{data?.purchase_num} /件
                 </div>
 
                 <div className={`${styles.flex_row} fs20px`}>
@@ -451,7 +456,7 @@ export default function Pid() {
                     height={50}
                     alt="stock"
                   />
-                  　庫存　{data?.stock_num} /件
+                  &ensp;庫存&ensp;{data?.stock_num} /件
                 </div>
               </div>
             </div>

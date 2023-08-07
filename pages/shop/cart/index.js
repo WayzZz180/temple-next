@@ -3,7 +3,6 @@ import styles from './cart.module.sass'
 //hooks
 import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
-import { CartDataContextProvider } from '@/contexts/CartCountContext'
 import CartDataContext from '@/contexts/CartDataContext'
 import WannaBuyDataContext from '@/contexts/WannaBuyDataContext'
 // bootstrap
@@ -57,7 +56,6 @@ export default function IndexCart() {
   if (!wannaBuyData) return <p>Loading...</p>
   if (!marquee) return <p>Loading...</p>
 
- 
   return (
     <>
       <Container>
@@ -77,7 +75,7 @@ export default function IndexCart() {
           </Col>
         </Row>
         {idFromChild === 1 ? (
-          <Cart data={cartData}/>
+          <Cart data={cartData} />
         ) : (
           <WannaBuy data={wannaBuyData} />
         )}
@@ -89,7 +87,7 @@ export default function IndexCart() {
             lineColor="green"
           />
         </Row>
-      </Container>    
+      </Container>
     </>
   )
 }

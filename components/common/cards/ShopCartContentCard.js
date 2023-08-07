@@ -85,12 +85,29 @@ export default function ShopCartContentCard({
       })
   }
 
+  // 瀏覽量加一
+  const browse = () => {
+    fetch(`${process.env.API_SERVER}/shop/${category}/${pid}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((data) => {})
+  }
   return (
     <Row className={`${styles.row} nowrap fwBold`}>
       <Col>
         <div className={`${styles.container} pt30px pb30px fs18px`}>
           {/* 商品圖 */}
-          <div className={`${styles.image}`}>
+          <div
+            role="presentation"
+            className={`${styles.image}`}
+            onClick={() => {
+              browse()
+            }}
+          >
             <Link href={`/shop/${category}/${pid}`}>
               <Image src={src} alt="product" width={200} height={200} />
             </Link>
