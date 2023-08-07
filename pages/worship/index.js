@@ -61,7 +61,7 @@ export default function Worship() {
   ]
 
   // 選擇的神明
-  const [god, setGod] = useState()
+  const [god, setGod] = useState('媽祖')
 
   // 月曆
   const month_normal = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] // 一般
@@ -283,6 +283,8 @@ export default function Worship() {
         (v) => v.id === str.time.split('/')[0]
       )
       setTimeClick(zodiac_index + 1)
+    } else {
+      setGodIndex(0)
     }
   }, [router.query])
 
@@ -360,7 +362,9 @@ export default function Worship() {
     const data = { god: god, day: day, time: time }
     localStorage.setItem('reservation', JSON.stringify(data))
   }
+
   if (godIndex === -1) return
+
   return (
     <Container>
       <WorshipStepBar id={id} setStop={setStop} />
