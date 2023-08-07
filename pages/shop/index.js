@@ -12,7 +12,6 @@ import Col from 'react-bootstrap/Col'
 import data from '@/components/mydata/productsTitleData'
 
 export default function Shop() {
-
   return (
     <Container className={'shopContainer'}>
       <ShopTop />

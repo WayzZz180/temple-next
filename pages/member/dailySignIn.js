@@ -12,7 +12,7 @@ import MemberTitle from '@/components/common/title/memberTitle'
 import Button from '@/components/common/button/index.js'
 import MemberNavbar from '@/components/common/memberNavbar'
 import Coupon from '@/components/common/coupons/index.js'
-import SpinWheel from '@/components/common/spinWheel/index2.js'
+import SpinWheel from '@/components/common/spinWheel/index.js'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
@@ -79,14 +79,9 @@ export default function dailySignIn() {
         <MemberNavbar />
 
         {/* 轉盤 */}
-        <Row className={styles.flex_centre}>
-          {/* <form onSubmit={signIn}> */}
-          <Col>
-            {/* 將 updateSpinWheel 函式傳遞給 SpinWheel 元件 */}
-            <SpinWheel updateSpinWheel={updateSpinWheel} />
-          </Col>
-          {/* </form> */}
-        </Row>
+
+        {/* 將 updateSpinWheel 函式傳遞給 SpinWheel 元件 */}
+        <SpinWheel updateSpinWheel={updateSpinWheel} />
 
         {/* 簽到標題 */}
         <Row className={styles.flex_centre}>

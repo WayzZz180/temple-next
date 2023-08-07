@@ -85,10 +85,25 @@
 .container .wheel .slice span
     position: relative
     transform: rotate(-45deg)  //文字方向
-    font-size: 20px
+    font-size: 25px
     font-weight: 500
     color: white
     text-shadow: 3px 5px 3px black
+    animation: animate 10s linear infinite
+
+@keyframes animate
+    0%,18%,20%,50.1%,60%,65.1%,80%,90.1%,92%
+    
+        color: #0e3742
+        text-shadow: none
+        
+    
+    18.1%,20.1%,50%,60.1%,65%,80.1%,90%,92.1%,100%
+        color:#fff
+        text-shadow: 0 0 10px #03bcf4, 0 0 20px #03bcf4, 0 0 40px #03bcf4, 0 0 80px #03bcf4, 0 0 160px #03bcf4, 0 0 200px #03bcf4
+
+
+    
 .container .wheel .slice span::before
     content:'$'
     // position: absolute
@@ -122,6 +137,7 @@
     color: white
     text-shadow: 3px 5px 3px black
     writing-mode: vertical-rl
+   
 .container .wheel .slice1 span::before
     content:'$'
     // position: absolute

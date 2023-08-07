@@ -1,4 +1,4 @@
-import styles from '@/pages/member/coupons.module.sass'
+import styles from '@/pages/member/myCoupons.module.sass'
 
 //hooks
 import { useState, useEffect, useContext } from 'react'
