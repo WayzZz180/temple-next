@@ -1,10 +1,10 @@
-import styles from './WorshipProductsCard.module.sass'
+import styles from './WorshipConfirmCard.module.sass'
 import Image from 'next/image'
 import { useClick } from '@/hooks/useClick'
 import { useHoverIndex } from '@/hooks/useHoverIndex'
 import { useEffect, useState } from 'react'
 
-export default function WorshipProductsCard({
+export default function WorshipConfirmCard({
   pid = 21,
   src = 'worship/mazu (4).png',
   text = '紅湯圓',

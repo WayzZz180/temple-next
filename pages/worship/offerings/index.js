@@ -6,13 +6,12 @@ import Link from 'next/link'
 import { Container, Row, Col } from 'react-bootstrap'
 
 // hooks
-import { useHoverIndex } from '@/hooks/useHoverIndex.js'
-import { useState, useEffect, use } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 // components
 import ShopTitle from '@/components/common/title/ShopTitle'
-import WorshipProductsCard from '@/components/common/cards/worshipProductsCard'
+import WorshipProductsCard from '@/components/common/cards/WorshipProductsCard'
 import Button from '@/components/common/button'
 import HomeSet from '@/components/common/cards/HomeSet'
 
@@ -54,26 +53,11 @@ export default function Offerings() {
   ]
 
   // 換分類時清空keyword
-  const clearLocal = () => {
-    if (localStorage.getItem('keyword')) {
-      localStorage.removeItem('keyword')
-    }
-  }
-
-  const scrollTo = (id) => {
-    // 取得目標元素的位置
-    const content = document.getElementById(id)
-    const contentPosition = content.getBoundingClientRect().top
-
-    // 計算捲動的距離，這裡設定為捲動至目標元素頂部距離畫面頂部的距離
-    const offset = window.pageYOffset
-    const scrollDistance = contentPosition + offset + 100
-    // 執行捲動動作
-    window.scrollTo({
-      top: scrollDistance,
-      behavior: 'smooth',
-    })
-  }
+  // const clearLocal = () => {
+  //   if (localStorage.getItem('keyword')) {
+  //     localStorage.removeItem('keyword')
+  //   }
+  // }
 
   const [data, setData] = useState([])
   const [reservation, setReservation] = useState([])
@@ -101,21 +85,14 @@ export default function Offerings() {
   const index = gods.findIndex((v) => v.text === reservation?.god)
   const slide_slice = slide[index]
   const [pidArr, setPidArr] = useState([])
-  const [pidArrState, setPidArrState] = useState(true)
+  useEffect(() => {
+    const value = JSON.parse(localStorage.getItem('reservation'))
+    const insert = { ...value, pidArr: pidArr }
 
-  // const updatePidArr = (pid) => {
-  //   // if (pidArr.length >= 3) {
-  //   //   setPidArrState(false)
-  //   // } else {
-  //   //   pidArr.push(pid)
-  //   // }
+    localStorage.setItem('reservation', JSON.stringify(insert))
 
-  //   pidArr.length < 3 && pidArr.push(pid)
-  //   console.log('arr:', pidArr)
-  //   //   console.log('length:', pidArr.length)
-  //   //   console.log('pidArrState:', pidArrState)
-  // }
-  console.log('arr:', pidArr)
+    setReservation(JSON.parse(localStorage.getItem('reservation')))
+  }, [pidArr])
 
   return (
     <>
@@ -164,8 +141,8 @@ export default function Offerings() {
         <Row className="nowrap mb50px">
           <Col>
             <div className={`${styles.flex} mt120px`}>
-              <div className={`${styles.title} mb10px`}>
-                請選擇三樣
+              <div className={`${styles.title} fs24px mb10px`}>
+                請選擇供品
                 <br />（{reservation?.god}基本款）
               </div>
               <div className={`${styles.line}`}></div>
@@ -175,18 +152,12 @@ export default function Offerings() {
         <Row className={` ${styles.productsContainer}`}>
           {data?.map((v, i) => {
             return (
-              <Col
-                key={v.pid}
-                // onClick={() => {
-                //   updatePidArr(v.pid)
-                // }}
-              >
+              <Col key={v.pid}>
                 <WorshipProductsCard
                   pid={v.pid}
                   src={v.image}
                   text={v.product_name}
                   price={v.product_price}
-                  // state={pidArrState}
                   setPidArr={setPidArr}
                   pidArr={pidArr}
                 />
@@ -194,9 +165,23 @@ export default function Offerings() {
             )
           })}
         </Row>
-
-        <Row className="nowrap mt100px">
-          <Button text={`確認供品`} btnColor="hot_pink" />
+        <Row>
+          <div className={`${styles.title} mt100px fs18px mb30px`}>
+            最多選擇三樣，如不需供品即開始祭拜
+          </div>
+        </Row>
+        <Row className="nowrap">
+          <Button
+            text={reservation.pidArr?.length === 0 ? `開始祭拜` : `確認供品`}
+            btnColor="hot_pink"
+            link={() => {
+              router.push(
+                reservation.pidArr?.length === 0
+                  ? `/worship/process`
+                  : '/worship/offerings/confirm'
+              )
+            }}
+          />
         </Row>
       </Container>
     </>
