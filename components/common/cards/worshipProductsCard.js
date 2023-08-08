@@ -7,23 +7,25 @@ export default function WorshipProductsCard({
   src = 'worship/mazu (4).png',
   text = '紅湯圓',
   price = '45',
+  state = false,
 }) {
   const { clickState, handleClick, setClickState } = useClick(false)
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-1)
+  console.log('state-in:', state)
   return (
     <div
       role="presentation"
-      className={`${hoveredIndex && !clickState ? styles.animation : ''} ${
-        clickState ? styles.chose : ''
-      } ${styles.container} m15px p10px`}
+      className={`${
+        hoveredIndex && !clickState && state ? styles.animation : styles.noHover
+      } ${clickState ? styles.chose : ''} ${styles.container} m15px p10px`}
       onMouseEnter={() => {
-        handleMouseEnter(1)
+        state && handleMouseEnter(1)
       }}
       onMouseLeave={() => {
-        handleMouseLeave()
+        state && handleMouseLeave()
       }}
       onClick={() => {
-        handleClick()
+        state && handleClick()
       }}
     >
       {/* 圖片 */}

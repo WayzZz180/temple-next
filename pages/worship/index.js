@@ -219,7 +219,6 @@ export default function Worship() {
   ]
   const [time, setTime] = useState('')
   const [godIndex, setGodIndex] = useState(-1)
-  const [godState, setGodState] = useState(false)
 
   useEffect(() => {
     const getNow = () => {
@@ -359,7 +358,17 @@ export default function Worship() {
   }
 
   const setItem = () => {
-    const data = { god: god, day: day, time: time }
+    const data = {
+      god: god,
+      day: day,
+      time: time,
+      today:
+        `${myYear}/${myMonth + 1 < 10 ? '0' : ''}${myMonth + 1}/${
+          myDay < 10 ? '0' : ''
+        }${myDay}` === day
+          ? true
+          : false,
+    }
     localStorage.setItem('reservation', JSON.stringify(data))
   }
 

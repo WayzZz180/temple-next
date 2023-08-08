@@ -84,7 +84,6 @@ export default function Offerings() {
   useEffect(() => {
     const god = { god: reservation?.god }
     if (god.god) {
-      console.log('god:', god)
       fetch(`${process.env.API_SERVER}/worship`, {
         method: 'POST',
         body: JSON.stringify({ requestData: god }),
@@ -101,6 +100,19 @@ export default function Offerings() {
 
   const index = gods.findIndex((v) => v.text === reservation?.god)
   const slide_slice = slide[index]
+  const pidArr = []
+  const [pidArrState, setPidArrState] = useState(true)
+  const updatePidArr = (pid) => {
+    if (pidArr.length >= 3) {
+      setPidArrState(false)
+    } else {
+      pidArr.push(pid)
+    }
+
+    console.log('arr:', pidArr)
+    console.log('length:', pidArr.length)
+    console.log('pidArrState:', pidArrState)
+  }
 
   return (
     <>
@@ -160,11 +172,17 @@ export default function Offerings() {
         <Row className={` ${styles.productsContainer}`}>
           {data?.map((v, i) => {
             return (
-              <Col key={v.pid}>
+              <Col
+                key={v.pid}
+                onClick={() => {
+                  updatePidArr(v.pid)
+                }}
+              >
                 <WorshipProductsCard
                   src={v.image}
                   text={v.product_name}
                   price={v.product_price}
+                  state={pidArrState}
                 />
               </Col>
             )
@@ -172,7 +190,7 @@ export default function Offerings() {
         </Row>
 
         <Row className="nowrap mt100px">
-          <Button text="確認供品" btnColor="hot_pink" />
+          <Button text={`確認供品`} btnColor="hot_pink" />
         </Row>
       </Container>
     </>
