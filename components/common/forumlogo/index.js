@@ -9,10 +9,10 @@ export default function ForumLogo() {
     <>
       <div className={`${styles.flex}`}>
         <div className={`${styles.logo}`}>
-          <Image src={Forumlogo} alt="forumlogo" height={160} />
+          <Image src={Forumlogo} alt="forumlogo" height={300} />
         </div>
         <div className={`${styles.cloud2}`}>
-          <Image src={Cloud2} alt="cloud2" width={1450} />
+          <Image src={Cloud2} alt="cloud2" width={2100} />
         </div>
       </div>
     </>

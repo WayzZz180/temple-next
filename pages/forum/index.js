@@ -7,22 +7,19 @@ import Leftgod from '@/assets/leftgod.svg'
 import ForumLogo from '@/components/common/forumlogo'
 import Title from '@/components/common/title'
 import Forumcard from '@/components/common/cards/forumcard'
-import Head from 'next/head'
+import CountdownTimer from '@/components/common/cards/countdownTimer'
 // import gossiplogo from '@/assets/gossiplogo.svg'
 
 export default function Forum() {
   return (
     <>
-      <Head>
-        <title>民俗論壇</title>
-      </Head>
       <div className={`${styles.background}`}>
         <div className={`${styles.place}`}>
           <div className={`${styles.flex_row}`}>
             <div className={`${styles.gods}`}>
-              <Image src={Leftgod} alt="leftgod" height={1150} />
+              <Image src={Leftgod} alt="leftgod" height={1450} />
               <ForumLogo />
-              <Image src={Rightgod} alt="rightgod" height={1150} />
+              <Image src={Rightgod} alt="rightgod" height={1450} />
             </div>
           </div>
           <div className={`${styles.floor}`}>
@@ -52,6 +49,9 @@ export default function Forum() {
           text2="GHOST GATE COUNTDOWN TIMER"
           lineColor="hot_pink"
         />
+      </div>
+      <div className="mt100px">
+      <CountdownTimer />
       </div>
     </>
   )

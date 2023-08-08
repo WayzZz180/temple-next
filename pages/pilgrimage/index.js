@@ -40,7 +40,7 @@ export default function Pilgrimage() {
       <Image id="" alt="" src={flag} className={`${styles.flag}`} />
       <Image id="" alt="" src={dog} className={`${styles.dog}`} />
       <button
-        className={`${styles.bubble}`}>
+        className={`${styles.bubble}`} >
         <div className={`${styles.text}`}>來做測驗，拿小禮物～</div></button>
         <button
         className={`${styles.bubble2}`}>

@@ -6,8 +6,21 @@ import love from '@/assets/loveGod.svg'
 import godlight from '@/assets/GodLight.svg'
 import shadow from '@/assets/GodShadow.svg'
 import tower from '@/assets/lovetower.svg'
+import { Route, useRouter } from 'next/router'
 
-export default function loveB_1() {
+export default function love1() {
+  const [activeImage, setActiveImage] = useState(null);
+  const Router = useRouter()
+  const handleImageClick = (alt) => {
+    setActiveImage(alt === activeImage ? null : alt);
+  };
+
+  const handleButtonClick = () => {
+    Router.push({
+      pathname: '/pray/loveB-2',
+      query: { towerId: activeImage }, 
+    })
+  }
   return (
     <>
       <div className={styles.parent_container}>
@@ -15,22 +28,30 @@ export default function loveB_1() {
           <div className={`${styles.flex_row2}`}>
             <Image
               src={tower}
-              alt=""
+              alt="A"
               width="170"
-              className={`${styles.tower}`}
+              className={`${styles.tower} ${activeImage === 'A' ? styles.towerhover : ''}`}
+        onClick={() => handleImageClick('A')}
             ></Image>
             <Image
               src={tower}
-              alt=""
+              alt="B"
               width="170"
-              className={`${styles.tower}`}
+              className={`${styles.tower} ${activeImage === 'B' ? styles.towerhover : ''}`}
+        onClick={() => handleImageClick('B')}
             ></Image>
             <Image
               src={tower}
-              alt=""
+              alt="C"
               width="170"
-              className={`${styles.tower}`}
+              className={`${styles.tower} ${activeImage === 'C' ? styles.towerhover : ''}`}
+        onClick={() => handleImageClick('C')}
             ></Image>
+            <div className={`${styles.flex_row3}`}>
+              <div className={`${styles.title}`}>A</div>
+              <div className={`${styles.title}`}>B</div>
+              <div className={`${styles.title}`}>C</div>
+            </div>
           </div>
           <div className={`${styles.flex_col}`}>
             <Image
@@ -52,27 +73,35 @@ export default function loveB_1() {
               className={`${styles.shadow}`}
             ></Image>
             <div className={`${styles.text}`}>點選想要的燈塔位置</div>
-            <Button text="選好了" btnColor="hot_pink" />
+            <Button text="選好了" btnColor="hot_pink" link={handleButtonClick}/>
           </div>
           <div className={`${styles.flex_row2}`}>
             <Image
               src={tower}
-              alt=""
+              alt="D"
               width="170"
-              className={`${styles.tower}`}
+              className={`${styles.tower} ${activeImage === 'D' ? styles.towerhover : ''}`}
+        onClick={() => handleImageClick('D')}
             ></Image>
             <Image
               src={tower}
-              alt=""
+              alt="E"
               width="170"
-              className={`${styles.tower}`}
+              className={`${styles.tower} ${activeImage === 'E' ? styles.towerhover : ''}`}
+        onClick={() => handleImageClick('E')}
             ></Image>
             <Image
               src={tower}
-              alt=""
+              alt="F"
               width="170"
-              className={`${styles.tower}`}
+              className={`${styles.tower} ${activeImage === 'F' ? styles.towerhover : ''}`}
+        onClick={() => handleImageClick('F')}
             ></Image>
+            <div className={`${styles.flex_row3}`}>
+              <div className={`${styles.title}`}>D</div>
+              <div className={`${styles.title}`}>E</div>
+              <div className={`${styles.title}`}>F</div>
+            </div>
           </div>
         </div>
       </div>
@@ -80,4 +109,4 @@ export default function loveB_1() {
   )
 }
 
-loveB_1.getLayout = (page) => <>{page}</>
+love1.getLayout = (page) => <>{page}</>

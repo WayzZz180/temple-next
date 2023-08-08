@@ -21,6 +21,13 @@ export default function Love2() {
     Datetime:'',
   })
   console.log(user)
+  useEffect(() => {
+    const towerId = Router.query.towerId;
+    console.log('towerId:', towerId); 
+    if (towerId) {
+      setUser((prevUser) => ({ ...prevUser, Tower_ID: towerId }));
+    }
+  }, [Router.query.towerId]);
 //   const [index,setIndex]=useState({})
 // console.log(index)
   // const changeUser = (e) => {
