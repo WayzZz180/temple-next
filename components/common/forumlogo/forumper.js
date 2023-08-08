@@ -15,28 +15,6 @@ import Pagination from '@/components/common/pagination/index'
 
 export default function Forumper({ postCategory, data = [], totalPages = 1 }) {
   const router = useRouter()
-  // console.log(router)
-
-  // const [data, setData] = useState({
-  //   redirect: '',
-  //   totalRows: 0,
-  //   perPage: 6,
-  //   totalPages: 0,
-  //   page: 1,
-  //   rows: [],
-  // })
-
-  // useEffect(() => {
-  //   const usp = new URLSearchParams(router.query)
-  //   usp.append('postcategory_sid', postCategory) // 將 post_category 添加到查詢參數
-
-  //   fetch(`${process.env.API_SERVER}/forum?${usp.toString()}`)
-  //     .then((r) => r.json())
-  //     .then((data) => {
-  //       console.log(data)
-  //       setData(data)
-  //     })
-  // }, [router.query, postCategory])
 
   const pagination = {
     page: router.query.page,

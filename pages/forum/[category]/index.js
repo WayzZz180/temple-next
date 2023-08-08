@@ -18,11 +18,18 @@ function Forumgossip() {
   useEffect(() => {
     // const usp = new URLSearchParams(router.query)
     // usp.append('postcategory_sid', postCategory) // 將 post_category 添加到查詢參數
-
-    fetch(`${process.env.API_SERVER}/forum/${category}`)
+    // console.log('page:', router.query.page)
+    const page = router.query.page
+    fetch(`${process.env.API_SERVER}/forum/${category}`, {
+      method: 'POST',
+      body: JSON.stringify({ page: page }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
       .then((r) => r.json())
       .then((data) => {
-        console.log('data:', data)
+        // console.log('data:', data)
         setData(data[0])
         setTotalPages(data[1])
       })

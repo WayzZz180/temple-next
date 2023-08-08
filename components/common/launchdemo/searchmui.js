@@ -23,27 +23,30 @@ export default function AlertDialog() {
     setOpen(false)
   }
   const router = useRouter()
-  // console.log(router)
+  const { category } = router.query
+  const [data, setData] = useState([])
+  const [totalPages, setTotalPages] = useState(1)
+  // console.log('router.query:', router.query)
+  const [keyword, setKeyword] = useState('')
 
-  const [data, setData] = useState({
-    redirect: '',
-    totalRows: 0,
-    perPage: 6,
-    totalPages: 0,
-    page: 1,
-    rows: [],
-  })
   useEffect(() => {
+    setKeyword(router.query.keyword || '')
     const usp = new URLSearchParams(router.query)
 
-    fetch(`${process.env.API_SERVER}/forum?${usp.toString()}`)
+    fetch(
+      `${process.env.API_SERVER}/forum/${router.query.category}/${
+        router.query.post_sid
+      }?${usp.toString()}`
+    )
       .then((r) => r.json())
-      .then((data) => {
-        console.log(data)
-        setData(data)
+      .then((result) => {
+        if (result.success) {
+          setData(result.data)
+        } else {
+          // console.log('沒有資料!')
+        }
       })
   }, [router.query])
-
   return (
     <div>
       <Button
