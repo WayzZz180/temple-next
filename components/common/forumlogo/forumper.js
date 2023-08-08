@@ -13,39 +13,45 @@ import FigureExample from '@/components/common/forumlogo/forumperpic'
 import Pagination from '@/components/common/pagination/index'
 // import Button from '@mui/material/Button'
 
-export default function Forumper() {
+export default function Forumper({ postCategory, data = [], totalPages = 1 }) {
   const router = useRouter()
-  console.log(router)
+  // console.log(router)
 
-  const [data, setData] = useState({
-    redirect: '',
-    totalRows: 0,
-    perPage: 6,
-    totalPages: 0,
-    page: 1,
-    rows: [],
-  })
-  useEffect(() => {
-    const usp = new URLSearchParams(router.query)
+  // const [data, setData] = useState({
+  //   redirect: '',
+  //   totalRows: 0,
+  //   perPage: 6,
+  //   totalPages: 0,
+  //   page: 1,
+  //   rows: [],
+  // })
 
-    fetch(`${process.env.API_SERVER}/forum?${usp.toString()}`)
-      .then((r) => r.json())
-      .then((data) => {
-        console.log(data)
-        setData(data)
-      })
-  }, [router.query])
+  // useEffect(() => {
+  //   const usp = new URLSearchParams(router.query)
+  //   usp.append('postcategory_sid', postCategory) // 將 post_category 添加到查詢參數
 
-  const pagination = { page: router.query.page, totalPages: data?.totalPages }
+  //   fetch(`${process.env.API_SERVER}/forum?${usp.toString()}`)
+  //     .then((r) => r.json())
+  //     .then((data) => {
+  //       console.log(data)
+  //       setData(data)
+  //     })
+  // }, [router.query, postCategory])
+
+  const pagination = {
+    page: router.query.page,
+    totalPages: totalPages,
+  }
+
   return (
     <>
       <div>
-        {data.rows.map((i) => (
+        {data?.map((i) => (
           <div key={i.sid}>
             <div>
               <div>
                 <div className={`${styles.flex_row1}`}>
-                  <li>吸貓是快樂泉源</li>
+                  <li>{i.member_forum_name}</li>
                   <li>·</li>
                   <li>{i.publish_time}</li>
                 </div>
@@ -53,7 +59,7 @@ export default function Forumper() {
                   <div className={`${styles.flex_row}`}>
                     <div className={`${styles.flex_col2}`}>
                       <Link
-                        href={'/post/' + i.sid}
+                        href={`/forum/${router.query.category}/${i.sid}`}
                         className={`${styles.link_sass}`}
                       >
                         <div className={`${styles.title}`}>{i.title}</div>
@@ -85,9 +91,7 @@ export default function Forumper() {
             <Forumline lineColor="brown" />
           </div>
         ))}
-        <Pagination
-          pagination={{ page: data.page, totalPages: data?.totalPages }}
-        />
+        <Pagination pagination={pagination} />
       </div>
     </>
   )
