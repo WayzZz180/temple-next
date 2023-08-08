@@ -5,6 +5,7 @@ import AuthContext from '@/contexts/AuthContext'
 import { useRouter } from 'next/router'
 import Modal from 'react-modal'
 import variables from '@/styles/_variables.module.sass'
+import Image from 'next/image'
 
 // components
 import InputBox from '@/components/common/inputBox/index.js'
@@ -15,6 +16,9 @@ import {
   Rainbow,
   RainbowCoupon,
 } from '@/components/mydata/memberSpinWheelColor_Coupon.js'
+import coupon_red from '@/assets/coupon_red.svg'
+import wheel from '@/assets/wheel.svg'
+import spin_button from '@/assets/spin_button.svg'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
@@ -169,9 +173,26 @@ export default function SpinWheel({ updateSpinWheel }) {
         <Col>
           <div className={styles.flex_center}>
             <div className={styles.container}>
-              <button className={styles.spin_button} onClick={handleSpin}>
+              <Image
+                src={spin_button}
+                className={styles.spin_button}
+                onClick={handleSpin}
+                // width={60}
+                // height={60}
+              />
+              {/* <button className={styles.spin_button} onClick={handleSpin}>
                 簽!
-              </button>
+              </button> */}
+              {/* <Image
+                className={styles.newWheel}
+                src={wheel}
+                weight={600}
+                height={600}
+                style={{
+                  transform: `rotate(${rotationDegree}deg)`,
+                  transition: 'transform 1s cubic-bezier(0,.7,0,1.02)',
+                }}
+              ></Image> */}
               <div
                 className={styles.wheel}
                 style={{
@@ -261,19 +282,22 @@ export default function SpinWheel({ updateSpinWheel }) {
             zIndex: 2, //1 為spin pointer
           },
           content: {
-            maxWidth: '300px', // 調整最大寬度
-            maxHeight: '200px', // 調整最大高度
+            maxWidth: '370px', // 調整最大寬度
+            maxHeight: '270px', // 調整最大高度
             margin: 'auto', // 水平居中
           },
         }}
       >
-        <h2>遷到成功</h2>
-        <h2>
-          恭喜獲得 {coupon_type} 折價券，價值
-          {coupon_value}
-        </h2>
-        <div>
-          <button onClick={handleModalCloseReload}>確認</button>
+        <div className={styles.flex_center2}>
+          <Image src={coupon_red} alt="coupon" />
+          <h2>簽到成功</h2>
+          <h2>
+            恭喜獲得 {coupon_type} 折價券，價值
+            {coupon_value}
+          </h2>
+          <button onClick={handleModalCloseReload} className="w100">
+            確認
+          </button>
         </div>
       </Modal>
     </>

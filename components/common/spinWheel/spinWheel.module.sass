@@ -9,6 +9,12 @@
     // margin: 100px 0px 0px 0px
     // Q1
   
+.flex_center2
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+ 
 .container
     position: relative
     width:600px
@@ -18,40 +24,42 @@
     align-items: center
     
 .container .spin_button
-    position: absolute
-    width:60px
-    height:60px
-    background: #F7F7F7
+    // position: absolute
+    width:600px
+    height:600px
+    // background: #F7F7F7
     border-radius:50%
-    z-index: 1 //2 為 彈跳modeal
-    display: flex
-    flex-direction: row
-    justify-content: center
-    align-items: center
-    text-transform: uppercase
-    font-weight: 600
-    color: $hot_pink
-    letter-spacing:1px
-    border: 3px solid $black
-    cursor: pointer
-    user-select: none
-    margin-top: 50%
-    margin-left: 50%
-    // 移動物件到中心
-    transform: translate(-50%, -50%)
-    // 讓物件中心點真正在中間
+    z-index: 1 //2 為 彈跳modal
+//     display: flex
+//     flex-direction: row
+//     justify-content: center
+//     align-items: center
+//     text-transform: uppercase
+//     font-weight: 600
+//     color: $hot_pink
+//     letter-spacing:1px
+//     border: 3px solid $black
+//     cursor: pointer
+//     user-select: none
+//     margin-top: 50%
+//     margin-left: 50%
+//     // 移動物件到中心
+//     transform: translate(-50%, -50%)
+//     // 讓物件中心點真正在中間
+  
+     
 
-    // spin pointer
-.container .spin_button::before
-    content: ''
-    position: absolute
-    top: -25px
-    // right:58px
-    width: 30px
-    height: 30px
-    background: #F7F7F7
-    clip-path: polygon(50% 0%, 10% 100%, 90% 100%)
-    // rotate: -90deg
+//     // 這個是spin pointer
+// .container .spin_button::before
+//     content: ''
+//     position: absolute
+//     top: -25px
+//     // right:58px
+//     width: 30px
+//     height: 30px
+//     background: #F7F7F7
+//     clip-path: polygon(50% 0%, 10% 100%, 90% 100%)
+//     // rotate: -90deg
 
 .container .wheel
     position: absolute
@@ -65,6 +73,21 @@
     // box-shadow: 0 0 0 5px #333, 0 0 0 15px #fff, 0 0 0 18px #111,
     box-shadow: 0 0 0 5px #DFC378, 0 0 0 15px #431D31, 0 0 0 18px #B29C60,    
     rotate:32deg //轉盤調正
+    z-index:-1
+
+.newWheel
+    position: absolute
+    top:0
+    left:0
+    width:100%
+    height:100%
+    background: DFC378 // 輪盤背景
+    overflow: hidden
+    border-radius: 50%
+    // box-shadow: 0 0 0 5px #333, 0 0 0 15px #fff, 0 0 0 18px #111,
+    box-shadow: 0 0 0 5px #DFC378, 0 0 0 15px #431D31, 0 0 0 18px #B29C60,    
+    // rotate:32deg //轉盤調正
+
 
 .container .wheel .slice
     position: absolute
@@ -99,10 +122,11 @@
     
     18.1%,20.1%,50%,60.1%,65%,80.1%,90%,92.1%,100%
         color:#fff
-        text-shadow: 0 0 10px #03bcf4, 0 0 20px #03bcf4, 0 0 40px #03bcf4, 0 0 80px #03bcf4, 0 0 160px #03bcf4, 0 0 200px #03bcf4
+        // text-shadow: 0 0 10px #03bcf4, 0 0 20px #03bcf4, 0 0 40px #03bcf4, 0 0 80px #03bcf4, 0 0 160px #03bcf4, 0 0 200px #03bcf4
+        // text-shadow: 0 0 10px #FF0066, 0 0 20px #FF0066, 0 0 40px #FF0066, 0 0 80px #FF0066, 0 0 160px #FF0066, 0 0 200px #FF0066
 
 
-    
+
 .container .wheel .slice span::before
     content:'$'
     // position: absolute
@@ -136,9 +160,23 @@
     color: white
     text-shadow: 3px 5px 3px black
     writing-mode: vertical-rl
+    animation: animate 5s linear infinite
+
+@keyframes animate
+    0%,18%,20%,50.1%,60%,65.1%,80%,90.1%,92%
+    
+        color: #0e3742
+        text-shadow: none
+        
+    
+    18.1%,20.1%,50%,60.1%,65%,80.1%,90%,92.1%,100%
+        color:#fff
+        // text-shadow: 0 0 10px #03bcf4, 0 0 20px #03bcf4, 0 0 40px #03bcf4, 0 0 80px #03bcf4, 0 0 160px #03bcf4, 0 0 200px #03bcf4
+        text-shadow: 0 0 10px #FF0066, 0 0 20px #FF0066, 0 0 40px #FF0066, 0 0 80px #FF0066, 0 0 160px #FF0066, 0 0 200px #FF0066
+
    
 .container .wheel .slice1 span::before
-    content:'$'
+    // content:'$'
     // position: absolute
     
 

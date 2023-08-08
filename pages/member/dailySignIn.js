@@ -63,61 +63,60 @@ export default function dailySignIn() {
   }, [auth.token, spinWheelUpdated])
 
   return (
-    <div className={styles.flex_centre}>
-      <Container>
-        <ProfilePhoto />
-        <Row>
-          <Col>
-            <MemberTitle
-              text="每日簽到"
-              text2="DAILY SIGN IN"
-              lineColor="green"
-            />
-          </Col>
-        </Row>
+    // <div className={styles.flex_centre}>
+    <Container className="shopContainer">
+      <ProfilePhoto />
+      <Row>
+        <Col>
+          <MemberTitle
+            text="每日簽到"
+            text2="DAILY SIGN IN"
+            lineColor="green"
+          />
+        </Col>
+      </Row>
 
-        <MemberNavbar />
+      <MemberNavbar />
 
-        {/* 轉盤 */}
+      {/* 轉盤 */}
 
-        {/* 將 updateSpinWheel 函式傳遞給 SpinWheel 元件 */}
-        <SpinWheel updateSpinWheel={updateSpinWheel} />
+      {/* 將 updateSpinWheel 函式傳遞給 SpinWheel 元件 */}
+      <SpinWheel updateSpinWheel={updateSpinWheel} />
 
-        {/* 簽到標題 */}
-        <Row className={styles.flex_centre}>
-          <Col>
-            <div>{si.signin_date}</div>
-          </Col>
-        </Row>
-        {/* 簽到記錄 */}
-        <Row className={styles.flex_centre}>
-          <Col>
-            <div className={styles.text_align}>近10筆簽到記錄:</div>
-            {si.length > 0 ? (
-              si.map((v, i) => {
-                // Date formatting code here
-                const dateObject = new Date(v.signin_date)
-                const formattedDateTime = dateObject.toLocaleString('zh-TW', {
-                  year: 'numeric',
-                  month: '2-digit',
-                  day: '2-digit',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })
-
-                return (
-                  <div key={i}>
-                    <div>{formattedDateTime}</div>
-                  </div>
-                )
+      {/* 簽到標題 */}
+      <Row className={styles.flex_centre}>
+        <Col>
+          <div>{si.signin_date}</div>
+        </Col>
+      </Row>
+      {/* 簽到記錄 */}
+      <Row className={styles.flex_centre}>
+        <Col>
+          <div className={styles.text_align}>近10筆簽到記錄:</div>
+          {si.length > 0 ? (
+            si.map((v, i) => {
+              // Date formatting code here
+              const dateObject = new Date(v.signin_date)
+              const formattedDateTime = dateObject.toLocaleString('zh-TW', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
               })
-            ) : (
-              <div>還沒有簽到記錄!!!</div>
-            )}
-          </Col>
-        </Row>
-      </Container>
-      {/* 小視窗 */}
-    </div>
+
+              return (
+                <div key={i}>
+                  <div>{formattedDateTime}</div>
+                </div>
+              )
+            })
+          ) : (
+            <div>還沒有簽到記錄!!!</div>
+          )}
+        </Col>
+      </Row>
+    </Container>
+    // </div>
   )
 }

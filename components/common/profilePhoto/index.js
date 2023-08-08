@@ -23,7 +23,7 @@ export default function ProfilePhoto() {
   const [invalidFields, setInvalidFields] = useState([])
   const [errorMessage, setErrorMessage] = useState('') // Define a state variable to store the error message
   const [getImg, setGetImg] = useState('')
-  const [modalIsOpen, setModalIsOpen] = useState(false) // 跟蹤 modal 是否打開
+  const [modalIsOpen, setModalIsOpen] = useState(false) // 設定 modal 是否打開
 
   useEffect(() => {
     Modal.setAppElement('#__next') // 設置 appElement 為 #__next
@@ -63,6 +63,7 @@ export default function ProfilePhoto() {
     // 當點擊照片時，此函數將被觸發
     // 在此，您可以打開小視窗
     console.log('點擊照片')
+
     // 觸發文件輸入框的點擊事件
     inputRef.current.click()
   }
@@ -146,7 +147,9 @@ export default function ProfilePhoto() {
           {/* 使用點擊事件觸發小視窗 */}
           <div className={styles.photoFrame}>
             <img
-              src={getImg ? getImg : 'http://localhost:3002/img/babyDory.jpg'}
+              src={
+                getImg ? getImg : process.env.API_SERVER + '/img/babyDory.jpg'
+              }
               alt="已上傳的圖片"
               width={200}
               height={200}
@@ -157,6 +160,7 @@ export default function ProfilePhoto() {
       </Row>
 
       {/* 小視窗 */}
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={handleModalClose}
@@ -167,26 +171,33 @@ export default function ProfilePhoto() {
           },
           content: {
             maxWidth: '300px', // 調整最大寬度
-            maxHeight: '200px', // 調整最大高度
+            maxHeight: '250px', // 調整最大高度
             margin: 'auto', // 水平居中
           },
         }}
       >
-        <h2>更換大頭貼</h2>
-        <p>選擇您想要進行的操作：</p>
+        <div className={styles.flex_centre2}>
+          <h2>更換大頭貼</h2>
+          <p>選擇您想要進行的操作：</p>
+        </div>
         <div>
           <button
             onClick={handleImageClick}
             style={{ color: variables['green'] }}
+            className="w100"
           >
             上傳大頭貼
           </button>
         </div>
         <div>
-          <button onClick={handleRemoveImage}>移除大頭貼</button>
+          <button onClick={handleRemoveImage} className="w100">
+            移除大頭貼
+          </button>
         </div>
         <div>
-          <button onClick={handleModalClose}>取消</button>
+          <button onClick={handleModalClose} className="w100">
+            取消
+          </button>
         </div>
 
         {/* 文件輸入框初始時被隱藏 */}

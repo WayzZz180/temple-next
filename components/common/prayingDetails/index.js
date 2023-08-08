@@ -7,7 +7,6 @@ import styles from '@/components/common/prayingDetails/prayingDetails.module.sas
 import Button from '@/components/common/button/index.js'
 import DetailsText from '@/components/common/detailsText/index.js'
 import mazuGod from '@/assets/mazuGod.svg'
-import coupon from '@/assets/coupon.svg'
 
 export default function PrayingDetails({ text = '' }) {
   return (
@@ -21,9 +20,9 @@ export default function PrayingDetails({ text = '' }) {
             <DetailsText /> <div className={styles.shortLine}></div>
           </div>
           <div>
-            <Image src={coupon} alt="mazuGod" width={160} height={160}></Image>
-            <Image src={coupon} alt="mazuGod" width={160} height={160}></Image>
-            <Image src={coupon} alt="mazuGod" width={160} height={160}></Image>
+            <Image src={mazuGod} alt="mazuGod" width={160} height={160}></Image>
+            <Image src={mazuGod} alt="mazuGod" width={160} height={160}></Image>
+            <Image src={mazuGod} alt="mazuGod" width={160} height={160}></Image>
           </div>
           <div className={styles.flex}>
             <div>

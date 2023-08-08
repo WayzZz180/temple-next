@@ -10,7 +10,7 @@ import MemberNavbar from '@/components/common/memberNavbar'
 import Wishlist from '@/components/common/wishlist'
 import PrayingDetails from '@/components/common/prayingDetails/index.js'
 import mazuGod from '@/assets/mazuGod.svg'
-import coupon from '@/assets/coupon.svg'
+// import coupon from '@/assets/coupon.svg'
 import ProfilePhoto from '@/components/common/profilePhoto'
 
 //bootstrap

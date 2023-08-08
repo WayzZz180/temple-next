@@ -7,14 +7,14 @@ import variables from '@/styles/_variables.module.sass'
 
 //components
 import styles from '@/components/common/wishlist/wishlist.module.sass'
-import coupon from '@/assets/coupon.svg'
+import coupon_red from '@/assets/coupon_red.svg'
 import Button from '@/components/common/button/index.js'
 
 export default function Wishlist() {
   const wishlistRow = (
     <Row className={styles.flex}>
       <Col>
-        <Image src={coupon} alt="product" height={121} width={121} />
+        <Image src={coupon_red} alt="product" height={121} width={121} />
       </Col>
       <Col>
         <div>
