@@ -8,7 +8,8 @@ import MemberTitle from '@/components/common/title/memberTitle'
 import Button from '@/components/common/button/index.js'
 import MemberNavbar from '@/components/common/memberNavbar'
 import Wishlist from '@/components/common/wishlist'
-import PrayingDetails from '@/components/common/prayingDetails/index.js'
+import PrayingDetails from '@/components/common/praying/prayingDetails'
+import PrayingSummary from '@/components/common/praying/prayingSummary'
 import mazuGod from '@/assets/mazuGod.svg'
 import coupon from '@/assets/coupon.svg'
 import ProfilePhoto from '@/components/common/profilePhoto'
@@ -20,7 +21,7 @@ export default function Praying() {
   return (
     <div className={styles.flex}>
       <Container>
-          <ProfilePhoto/>
+        <ProfilePhoto />
         <Row>
           <Col>
             <MemberTitle
@@ -33,8 +34,7 @@ export default function Praying() {
         </Row>
 
         <MemberNavbar />
-
-        <PrayingDetails />
+        <PrayingSummary />
       </Container>
     </div>
   )

@@ -4,7 +4,7 @@ import styles from './orderSummaryCard.module.sass'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-//ccomponents
+//components
 import Title from '@/components/common/title/orderTitle'
 import Button from '@/components/common/button'
 
@@ -15,11 +15,35 @@ export default function OrderSummary({
   link1 = () => {},
   link2 = () => {},
 }) {
+  const info = [
+    {
+      title: '訂單編號',
+      content: data?.oid,
+    },
+    {
+      title: '訂單日期',
+      content: data?.created_at
+        ? data?.created_at.slice(0, 10).replace(/\-/g, '/')
+        : data?.created_at,
+    },
+    {
+      title: '配送方式',
+      content: `${data?.delivery}｜`,
+    },
+    {
+      title: '付款方式',
+      content: data?.payment,
+    },
+    {
+      title: '收件資訊',
+      content: data?.customer_address,
+    },
+  ]
   return (
     <>
       <Col className={`${styles.container}`}>
         <div>
-          <Title data={data} />
+          <Title data={data} info={info} />
         </div>
         <div className={`${styles.button}`}>
           <div className="details">

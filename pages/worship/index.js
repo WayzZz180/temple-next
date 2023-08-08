@@ -220,53 +220,54 @@ export default function Worship() {
   const [time, setTime] = useState('')
   const [godIndex, setGodIndex] = useState(-1)
 
-  useEffect(() => {
-    const getNow = () => {
-      const hours = myDate.getHours()
+  const getNow = () => {
+    const hours = myDate.getHours()
 
-      // 現在的時間轉成12小時制
-      let end = ''
-      let time = ''
-      if (hours === 0) {
-        end = 'am'
-        time = 12 + end
-      } else if (hours === 12) {
-        end = 'pm'
-        time = 12 + end
-      } else if (hours - 12 > 0) {
-        end = 'pm'
-        time = hours - 12 + end
-      } else {
-        end = 'am'
-        time = hours + end
-      }
-
-      // 中間的時間
-      const mid = timeInfo.map((v, i) => {
-        const [startHour, endHour] = v.time
-          .split('-')
-          .map((time) => parseInt(time))
-        const tmp = Number(endHour - 1) === 0 ? 12 : Number(endHour - 1)
-        const mid = tmp + v.time.slice(-2)
-        return mid
-      })
-
-      // 看看有沒有和中間的時間相等
-      let index = mid.findIndex((v, i) => v === time)
-      let result = index != -1 ? timeInfo[index] : ''
-
-      // 沒有的話和頭相比
-      if (!result) {
-        const start = timeInfo.map((v, i) => {
-          return v.time.split('-')[0]
-        })
-        index = start.findIndex((v, i) => v === time)
-        result = index != -1 ? timeInfo[index] : ''
-      }
-      const now = `${timeInfo[index].id}/${timeInfo[index].time}`
-      setZodiac(index + 1)
-      return now
+    // 現在的時間轉成12小時制
+    let end = ''
+    let time = ''
+    if (hours === 0) {
+      end = 'am'
+      time = 12 + end
+    } else if (hours === 12) {
+      end = 'pm'
+      time = 12 + end
+    } else if (hours - 12 > 0) {
+      end = 'pm'
+      time = hours - 12 + end
+    } else {
+      end = 'am'
+      time = hours + end
     }
+
+    // 中間的時間
+    const mid = timeInfo.map((v, i) => {
+      const [startHour, endHour] = v.time
+        .split('-')
+        .map((time) => parseInt(time))
+      const tmp = Number(endHour - 1) === 0 ? 12 : Number(endHour - 1)
+      const mid = tmp + v.time.slice(-2)
+      return mid
+    })
+
+    // 看看有沒有和中間的時間相等
+    let index = mid.findIndex((v, i) => v === time)
+    let result = index != -1 ? timeInfo[index] : ''
+
+    // 沒有的話和頭相比
+    if (!result) {
+      const start = timeInfo.map((v, i) => {
+        return v.time.split('-')[0]
+      })
+      index = start.findIndex((v, i) => v === time)
+      result = index != -1 ? timeInfo[index] : ''
+    }
+    const now = `${timeInfo[index].id}/${timeInfo[index].time}`
+    setZodiac(index + 1)
+    return now
+  }
+
+  useEffect(() => {
     const now = getNow()
     setTime(now)
 
@@ -288,8 +289,7 @@ export default function Worship() {
   }, [router.query])
 
   const getTime = (time) => {
-    setTime(`${timeInfo[time - 1].id}/${timeInfo[time - 1].time}
-    `)
+    setTime(`${timeInfo[time - 1].id}/${timeInfo[time - 1].time}`)
   }
 
   // 判斷選擇的時間有無超過
@@ -334,8 +334,7 @@ export default function Worship() {
     if (choseTimeIndex != 0 && choseTimeIndex < index) {
       setTimeClick('')
       setZodiac(index + 1)
-      setTime(`${timeInfo[index].id}/${timeInfo[index].time}
-      `)
+      setTime(`${timeInfo[index].id}/${timeInfo[index].time}`)
       return false
     } else {
       return true
@@ -358,6 +357,7 @@ export default function Worship() {
   }
 
   const setItem = () => {
+    const now = getNow()
     const data = {
       god: god,
       day: day,
@@ -368,6 +368,7 @@ export default function Worship() {
         }${myDay}` === day
           ? true
           : false,
+      now: now,
     }
     localStorage.setItem('reservation', JSON.stringify(data))
   }

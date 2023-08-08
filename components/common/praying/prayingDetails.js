@@ -1,9 +1,8 @@
 import Image from 'next/image'
 import { Container, Row, Col } from 'react-bootstrap'
+import styles from './prayingDetails.module.sass'
 
 //components
-import styles from '@/components/common/prayingDetails/prayingDetails.module.sass'
-
 import Button from '@/components/common/button/index.js'
 import DetailsText from '@/components/common/detailsText/index.js'
 import mazuGod from '@/assets/mazuGod.svg'

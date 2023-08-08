@@ -39,25 +39,7 @@ export default function WorshipConfirmCard({
     <div
       role="presentation"
       className={`
-      ${!foundPid && pidArr.length === 3 ? styles.noEvents : ''}
-      ${hoveredIndex && !clickState ? styles.animation : styles.noHover} ${
-        clickState ? styles.chose : ''
-      } ${styles.container} m15px p10px`}
-      onMouseEnter={() => {
-        foundPid ? handleMouseEnter(-1) : handleMouseEnter(1)
-      }}
-      onMouseLeave={() => {
-        handleMouseLeave()
-      }}
-      onClick={() => {
-        handleClick()
-
-        if (foundPid) {
-          removePid(pid)
-        } else if (pidArr.length < 3) {
-          pushPid(pid)
-        }
-      }}
+      ${styles.container} ${styles.bg} m15px p10px`}
     >
       {/* 圖片 */}
       <div className={`${styles.image} mb10px`}>

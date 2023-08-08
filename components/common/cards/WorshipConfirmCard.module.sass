@@ -1,59 +1,151 @@
 @import '@/styles/_variables.module.sass'
 
-.container
-    cursor: pointer
 
-.noEvents
-  pointer-events: none
+.container 
+  position: relative
+  border: 2px solid transparent
+  box-sizing: border-box
+  animation: opacity 2.5s ease infinite
 
-.animation
-    position: relative
-    flex: 1 1 100%
+@keyframes opacity
+  0%
+    background:  rgba(231,217,203,0.5)
+  50%
+    background:  rgba(231,217,203,1)
+  100%
+    background:  rgba(231,217,203,0.5)
 
-.animation 
-  &::before,
-  &::after 
-    position: absolute
-    top: 0
-    right: 0
-    bottom: 0
-    left: 0
-    transition: opacity .5s ease-in, transform .6s ease-in-out
-    content: ''
-    opacity: 0
-    pointer-events: none
+.container::after 
+  content: ""
+  position: absolute
+  width: 0
+  height: 0
+  top: -4px
+  left: -4px
+  box-sizing: border-box
+  animation: draw-borders-top-right 1.5s forwards
 
-  
 
-  &::before 
-    transform: scale3d(0, 1, 1)
-    transform-origin: left top
+.container::before 
+  content: ""
+  position: absolute
+  width: 0
+  height: 0
+  bottom: -4px
+  right: -4px
+  box-sizing: border-box
+  animation: draw-borders-bottom-left 1.5s forwards
+
+
+@keyframes draw-borders-top-right 
+  0% 
+    width: 0
+    height: 0
     border-top: 2px solid $brown
-    border-bottom: 2px solid $brown
+  
+  25% 
+    width: calc(100% + 8px)
+    height: 0
+    border-top: 2px solid $brown
+    border-right: 2px solid $brown
+  
+  50% 
+    width: calc(100% + 8px)
+    height: calc(100% + 8px)
+    border-top: 2px solid $brown
+    border-right: 2px solid $brown
+  
+  
+  100% 
+    width: calc(100% + 8px)
+    height: calc(100% + 8px)
+    width: calc(100% + 8px)
+    border-top: 2px solid $brown
+    border-right: 2px solid $brown
   
 
-  &::after 
-    transform: scale3d(1, 0, 1)
-    transform-origin: right top
-    border-right: 2px solid $brown
+
+@keyframes draw-borders-bottom-left 
+  0% 
+    width: 0
+    height: 0
+    opacity: 0
+  
+  
+  50% 
+    width: 0
+    height: 0
+    border-bottom: 2px solid $brown
+    opacity: 0
+  
+  50.1% 
+    opacity: 1
+  
+  75% 
+    width: calc(100% + 8px)
+    height: 0
+    border-bottom: 2px solid $brown
+    border-left: 2px solid $brown
+  
+  
+  100% 
+    height: calc(100% + 8px)
+    width: calc(100% + 8px)
+    border-bottom: 2px solid $brown
     border-left: 2px solid $brown
   
 
-  &:hover,
-  &:focus 
-    &::before,
-    &::after 
-      transform: scale3d(1, 1, 1)
-      opacity: 1
-    
-.chose
-    box-shadow: 0 0 0 2px $brown
-    background: #e7d9cb
+// .noEvents
+//   pointer-events: none
 
-.animation:hover
-    cursor: pointer
-    background: #e7d9cb
-    transition: all .8s ease-in
+// .animation
+//     position: relative
+//     flex: 1 1 100%
+
+// .animation 
+//   &::before,
+//   &::after 
+//     position: absolute
+//     top: 0
+//     right: 0
+//     bottom: 0
+//     left: 0
+//     transition: opacity .5s ease-in, transform .6s ease-in-out
+//     content: ''
+//     opacity: 0
+//     pointer-events: none
+
+  
+
+//   &::before 
+//     transform: scale3d(0, 1, 1)
+//     transform-origin: left top
+//     border-top: 2px solid $brown
+//     border-bottom: 2px solid $brown
+  
+
+//   &::after 
+//     transform: scale3d(1, 0, 1)
+//     transform-origin: right top
+//     border-right: 2px solid $brown
+//     border-left: 2px solid $brown
+  
+
+//   &:hover,
+//   &:focus 
+//     &::before,
+//     &::after 
+//       transform: scale3d(1, 1, 1)
+//       opacity: 1
+    
+// .chose
+//     box-shadow: 0 0 0 2px $brown
+//     background: #e7d9cb
+
+// .animation:hover
+//     cursor: pointer
+//     background: #e7d9cb
+//     transition: all .8s ease-in
 
 .image
     display: flex
