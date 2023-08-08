@@ -19,14 +19,14 @@ export default function Orders() {
   const router = useRouter()
   const [data, setData] = useState([])
 
-  useEffect(() => {
-    // 訂單大綱資料
-    fetch(`${process.env.API_SERVER}/shop/order`)
-      .then((r) => r.json())
-      .then((data) => {
-        setData(data)
-      })
-  }, [router.query])
+  // useEffect(() => {
+  //   // 訂單大綱資料
+  //   fetch(`${process.env.API_SERVER}/shop/order`)
+  //     .then((r) => r.json())
+  //     .then((data) => {
+  //       setData(data)
+  //     })
+  // }, [router.query])
 
   return (
     <div className={styles.flex}>

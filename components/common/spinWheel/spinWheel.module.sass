@@ -24,12 +24,23 @@
     align-items: center
     
 .container .spin_button
-    // position: absolute
     width:600px
     height:600px
-    // background: #F7F7F7
     border-radius:50%
+    // background: #F7F7F7
     z-index: 1 //2 為 彈跳modal
+    transition: transform 1s ease-in-out
+    transform: translateY(1px)
+
+     
+// 原始 spin_button
+// .container .spin_button
+    // position: absolute
+    // width:30px
+    // height:30px
+    // background: #F7F7F7
+    // border-radius:50%
+    // z-index: 1 //2 為 彈跳modal
 //     display: flex
 //     flex-direction: row
 //     justify-content: center
@@ -46,10 +57,10 @@
 //     // 移動物件到中心
 //     transform: translate(-50%, -50%)
 //     // 讓物件中心點真正在中間
-  
-     
 
-//     // 這個是spin pointer
+
+
+//     原始 spin_buttonspin pointer
 // .container .spin_button::before
 //     content: ''
 //     position: absolute
@@ -67,7 +78,6 @@
     left:0
     width:100%
     height:100%
-    background: DFC378 // 輪盤背景
     overflow: hidden
     border-radius: 50%
     // box-shadow: 0 0 0 5px #333, 0 0 0 15px #fff, 0 0 0 18px #111,
@@ -180,8 +190,14 @@
     // position: absolute
     
 
-.alert 
-  background-color: #ff0000
-  color: #ffffff
-  padding: 10px
-  border-radius: 5px
+// .alert
+
+//   max-width:  370px, // 調整最大寬度
+//   max-height: 270px, // 調整最大高度
+//   margin: auto, // 水平居中
+//   background-color: ''
+//   color: #ffffff
+//   padding: 10px
+//   border-radius: 5px
+//   border: ''
+  

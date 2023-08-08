@@ -276,6 +276,7 @@ export default function SpinWheel({ updateSpinWheel }) {
       <Modal
         isOpen={modalIsOpen}
         contentLabel="簽到成功!"
+        className={styles.alert}
         style={{
           overlay: {
             backgroundColor: 'rgba(0, 0, 0, 0.5)', // 背景顏色透明度
@@ -285,6 +286,9 @@ export default function SpinWheel({ updateSpinWheel }) {
             maxWidth: '370px', // 調整最大寬度
             maxHeight: '270px', // 調整最大高度
             margin: 'auto', // 水平居中
+            //   // backgroundColor: '',
+            //   // border: '',
+            //   // color: 'white',
           },
         }}
       >

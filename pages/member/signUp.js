@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
-
 //components
 import InputBox from '@/components/common/inputBox/index.js'
 import MemberTitle from '@/components/common/title/memberTitle'
@@ -26,9 +25,6 @@ export default function SignUp() {
 
   const [errorMessage, setErrorMessage] = useState('') // Define a state variable to store the error message
 
-
-
-  
   // 定義驗證規則
   const validationRules = {
     member_name: {
@@ -37,7 +33,7 @@ export default function SignUp() {
       message: '請輸入中文姓名，最多10個字',
     },
     member_forum_name: {
-      regex: /^[\u4e00-\u9fa5a-zA-Z0-9]{1,20}$/,
+      regex: /^[\u4e00-\u9fa5a-zA-Z0-9]{0,20}$/,
       message: '暱稱過長，請重新輸入',
     },
     member_account: {
@@ -64,6 +60,10 @@ export default function SignUp() {
       regex: /^[\u4e00-\u9fa5\d]+$/,
       message: '地址請輸入中文(和數字)',
     },
+    // member_carrier: {
+    //   regex: /^\/[a-zA-Z0-9]{7}$/,
+    //   message: '載具格式不正確，請檢查',
+    // },
   }
 
   const changeUser = (e) => {
@@ -117,7 +117,6 @@ export default function SignUp() {
     return null // 代表表單通過驗證，沒有錯誤 //有回傳代表有錯誤
   }
 
-
   const doSignUp = (e) => {
     e.preventDefault()
 
@@ -136,7 +135,7 @@ export default function SignUp() {
       })
       setInvalidFields(invalidFieldsArray.filter((field) => field !== null))
 
-      alert('請檢查以下項目：\n' + invalidFieldsArray.join('\n'));
+      alert('請檢查以下項目：\n' + invalidFieldsArray.join('\n'))
       // alert('資料有誤，請檢查一下喔!')
 
       return
@@ -167,7 +166,7 @@ export default function SignUp() {
 
         if (data) {
           alert('註冊成功，請重新登入')
-          router.push('/member/login');
+          router.push('/member/login')
         }
       })
       .catch((error) => {
@@ -192,14 +191,10 @@ export default function SignUp() {
         </Row>
       </Container>
 
-
-  
-
       <Container>
         <form onSubmit={doSignUp}>
           <Row>
             <Col>
-    
               <MemberTitle text="加入會員" text2="SIGN UP" lineColor="green" />
             </Col>
           </Row>
