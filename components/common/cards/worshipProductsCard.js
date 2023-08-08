@@ -2,30 +2,61 @@ import styles from './worshipProductsCard.module.sass'
 import Image from 'next/image'
 import { useClick } from '@/hooks/useClick'
 import { useHoverIndex } from '@/hooks/useHoverIndex'
+import { useEffect, useState } from 'react'
 
 export default function WorshipProductsCard({
+  pid = 21,
   src = 'worship/mazu (4).png',
   text = '紅湯圓',
   price = '45',
-  state = false,
+  pidArr = [],
+  setPidArr = () => {},
 }) {
   const { clickState, handleClick, setClickState } = useClick(false)
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-1)
-  console.log('state-in:', state)
+
+  const [myPidArr, setMyPidArr] = useState(pidArr)
+
+  const foundPid = myPidArr.some((v) => Number(v) === pid)
+
+  const removePid = (pid) => {
+    const newPidArr = [...pidArr]
+    const filter = newPidArr.filter((v) => {
+      return v != pid
+    })
+    setMyPidArr(filter)
+  }
+  const pushPid = (pid) => {
+    const newPidArr = [...pidArr, pid]
+    setMyPidArr(newPidArr)
+  }
+
+  useEffect(() => {
+    setPidArr(myPidArr)
+  }, [myPidArr])
+
   return (
     <div
       role="presentation"
-      className={`${
-        hoveredIndex && !clickState && state ? styles.animation : styles.noHover
-      } ${clickState ? styles.chose : ''} ${styles.container} m15px p10px`}
+      className={`
+      ${!foundPid && pidArr.length === 3 ? styles.noEvents : ''}
+      ${hoveredIndex && !clickState ? styles.animation : styles.noHover} ${
+        clickState ? styles.chose : ''
+      } ${styles.container} m15px p10px`}
       onMouseEnter={() => {
-        state && handleMouseEnter(1)
+        foundPid ? handleMouseEnter(-1) : handleMouseEnter(1)
       }}
       onMouseLeave={() => {
-        state && handleMouseLeave()
+        handleMouseLeave()
       }}
       onClick={() => {
-        state && handleClick()
+        handleClick()
+
+        if (foundPid) {
+          removePid(pid)
+        } else if (pidArr.length < 3) {
+          pushPid(pid)
+        }
       }}
     >
       {/* 圖片 */}

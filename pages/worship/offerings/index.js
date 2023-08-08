@@ -100,19 +100,22 @@ export default function Offerings() {
 
   const index = gods.findIndex((v) => v.text === reservation?.god)
   const slide_slice = slide[index]
-  const pidArr = []
+  const [pidArr, setPidArr] = useState([])
   const [pidArrState, setPidArrState] = useState(true)
-  const updatePidArr = (pid) => {
-    if (pidArr.length >= 3) {
-      setPidArrState(false)
-    } else {
-      pidArr.push(pid)
-    }
 
-    console.log('arr:', pidArr)
-    console.log('length:', pidArr.length)
-    console.log('pidArrState:', pidArrState)
-  }
+  // const updatePidArr = (pid) => {
+  //   // if (pidArr.length >= 3) {
+  //   //   setPidArrState(false)
+  //   // } else {
+  //   //   pidArr.push(pid)
+  //   // }
+
+  //   pidArr.length < 3 && pidArr.push(pid)
+  //   console.log('arr:', pidArr)
+  //   //   console.log('length:', pidArr.length)
+  //   //   console.log('pidArrState:', pidArrState)
+  // }
+  console.log('arr:', pidArr)
 
   return (
     <>
@@ -174,15 +177,18 @@ export default function Offerings() {
             return (
               <Col
                 key={v.pid}
-                onClick={() => {
-                  updatePidArr(v.pid)
-                }}
+                // onClick={() => {
+                //   updatePidArr(v.pid)
+                // }}
               >
                 <WorshipProductsCard
+                  pid={v.pid}
                   src={v.image}
                   text={v.product_name}
                   price={v.product_price}
-                  state={pidArrState}
+                  // state={pidArrState}
+                  setPidArr={setPidArr}
+                  pidArr={pidArr}
                 />
               </Col>
             )
