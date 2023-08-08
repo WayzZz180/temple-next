@@ -27,20 +27,23 @@ export default function Check() {
 
   useEffect(() => {
     // 抓選取的商品資料
-    const reqData = { pidArr: reservation?.pidArr }
-    fetch(`${process.env.API_SERVER}/worship/confirm`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: reqData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        setData(data)
+    if (reservation) {
+      const reqData = { pidArr: reservation?.pidArr }
+      fetch(`${process.env.API_SERVER}/worship/confirm`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: reqData }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          setData(data)
+        })
+    }
   }, [reservation])
 
+  // 預約完成時清空reservation
   const clearLocal = () => {
     if (localStorage.getItem('reservation')) {
       localStorage.removeItem('reservation')
@@ -49,13 +52,21 @@ export default function Check() {
 
   if (!data) return <p>Loading...</p>
 
+  // 總計
   const total = data?.reduce((result, v) => {
     return (result += Number(v.product_price))
   }, 0)
 
-  // 預約
+  // 訂單資訊
+  const [user, setUser] = useState({
+    delivery: '宅配',
+    payment: '信用卡',
+    status: '未出貨',
+  })
+
+  // 預約資訊
   const insert = () => {
-    const reqData = { ...reservation, total: total, status: false }
+    const reqData = { ...reservation, total: total, complete: false, ...user }
     // 加入worship_summary & details
     fetch(`${process.env.API_SERVER}/worship/details`, {
       method: 'POST',
@@ -65,11 +76,8 @@ export default function Check() {
       },
     })
       .then((r) => r.json())
-      .then((data) => {
-        setData(data)
-      })
+      .then((data) => {})
   }
-
   return (
     <Container className={`${styles.container}`}>
       <div className={`${styles.cloudLeft}`}>

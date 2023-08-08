@@ -1,7 +1,8 @@
 import React from 'react'
 import styles from '@/pages/member/praying.module.sass'
 import Image from 'next/image'
-
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 // components
 import MemberTitle from '@/components/common/title/memberTitle'
 
@@ -18,6 +19,20 @@ import ProfilePhoto from '@/components/common/profilePhoto'
 import { Container, Row, Col } from 'react-bootstrap'
 
 export default function Praying() {
+  const router = useRouter()
+  const [data, setData] = useState([])
+
+  // 參拜資料(worship_summary, worship_details)
+  useEffect(() => {
+    fetch(`${process.env.API_SERVER}/worship/summary`)
+      .then((r) => r.json())
+      .then((data) => {
+        setData(data)
+      })
+  }, [router.query])
+
+  if (!data) return <p>Loading...</p>
+
   return (
     <div className={styles.flex}>
       <Container>
@@ -32,9 +47,14 @@ export default function Praying() {
             />
           </Col>
         </Row>
-
         <MemberNavbar />
-        <PrayingSummary />
+        {data?.map((v, i) => {
+          return (
+            <div key={v.wid}>
+              <PrayingSummary data={v} />
+            </div>
+          )
+        })}
       </Container>
     </div>
   )
