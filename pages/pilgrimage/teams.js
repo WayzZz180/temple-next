@@ -68,13 +68,13 @@ export default function Teams() {
   }, [])
   useEffect(() => {
     if (isMoving) {
-      setIsIdle(false);
-      setSonaSrc(direction === 'left' ? sonaL : sonaR);
+      setIsIdle(false)
+      setSonaSrc(direction === 'left' ? sonaL : sonaR)
     } else {
-      setIsIdle(true);
-      setSonaSrc(direction === 'left' ? sonaLIdle : sonaRIdle);
+      setIsIdle(true)
+      setSonaSrc(direction === 'left' ? sonaLIdle : sonaRIdle)
     }
-  }, [isMoving, direction]);
+  }, [isMoving, direction])
 
   useEffect(() => {
     if (isMoving) {
