@@ -12,6 +12,25 @@ export const Rainbow = {
   //   sw_Magenta: 'black',
 }
 
+// export const Rainbow = {
+//   sw_Violet: '#B43C8E',
+//   sw_Indigo: '#E4007E',
+//   sw_Blue: '#F2779D',
+//   sw_Green: '#FC6931',
+//   sw_YellowGreen: '#B43C8E',
+//   sw_Yellow: '#E4007E',
+//   sw_Orange: '#F2779D',
+//   sw_Red: '#FC6931',
+//   sw_Pink: '#B43C8E',
+//   sw_Magenta: '#E4007E',
+//   //   sw_Magenta: 'black',
+// }
+
+// #B43C8E
+// #E4007E
+// #F2779D
+// #FC6931
+
 export const colorMap = {
   purple: 'rgb(197, 176, 213)',
   blue: 'rgb(31, 119, 180)',
@@ -39,18 +58,18 @@ export const colorMap = {
 //   x: '1000',
 // }
 
-// export const colorMapCoupon = [
-//   { color: 'purple', value: '10' },
-//   { color: 'blue', value: '20' },
-//   { color: 'light_blue', value: '30' },
-//   { color: 'orange', value: '40' },
-//   { color: 'light_orange', value: '50' },
-//   { color: 'green', value: '60' },
-//   { color: 'light_green', value: '70' },
-//   { color: 'red', value: '80' },
-//   { color: 'light_red', value: '90' },
-//   { color: 'violet', value: '100' },
-// ]
+export const colorMapCoupon = [
+  { color: 'purple', value: '10' },
+  { color: 'blue', value: '20' },
+  { color: 'light_blue', value: '30' },
+  { color: 'orange', value: '40' },
+  { color: 'light_orange', value: '50' },
+  { color: 'green', value: '60' },
+  { color: 'light_green', value: '70' },
+  { color: 'red', value: '80' },
+  { color: 'light_red', value: '90' },
+  { color: 'violet', value: '100' },
+]
 
 export const RainbowCoupon = [
   { color: 'sw_Violet', value: '10' },

@@ -43,14 +43,14 @@ export default function Coupon({
       <Col>
         <Image src={coupon} alt="coupon" height={89} width={143} />
       </Col>
-      <Col className="ls3px">
+      <Col className="ls3px w250px">
         <div>{`有效期限至${expDate}`}</div>
         <div>
           <b>{couponName}</b>
         </div>
       </Col>
       <Col style={couponColor}>
-        <div className={styles.valid}>{couponValue}</div>
+        <div className={`${styles.valid} ${styles.w70px}`}>{couponValue}</div>
       </Col>
       <Col style={couponColor}>
         {/* 使用 className 變數來設定 CSS 類名 */}

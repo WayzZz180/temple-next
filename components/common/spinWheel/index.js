@@ -14,7 +14,9 @@ import Button from '@/components/common/button/index.js'
 import MemberNavbar from '@/components/common/memberNavbar/index.js'
 import {
   Rainbow,
+  colorMap,
   RainbowCoupon,
+  colorMapCoupon,
 } from '@/components/mydata/memberSpinWheelColor_Coupon.js'
 import coupon_red from '@/assets/coupon_red.svg'
 import wheel from '@/assets/wheel.svg'
@@ -286,7 +288,7 @@ export default function SpinWheel({ updateSpinWheel }) {
             maxWidth: '370px', // 調整最大寬度
             maxHeight: '270px', // 調整最大高度
             margin: 'auto', // 水平居中
-            backgroundColor: 'variables[bgColor]',
+            background: variables['bgColor'],
             //   // border: '',
             //   // color: 'white',
           },

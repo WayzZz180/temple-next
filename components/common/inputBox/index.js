@@ -14,9 +14,6 @@ export default function InputBox({
   showError, // 新增一個 showError 屬性來控制錯誤訊息的顯示
   errorMessage,
 }) {
-
-
-  
   const [isFocus, setIsFocus] = useState(false)
 
   const handleFocus = () => {
