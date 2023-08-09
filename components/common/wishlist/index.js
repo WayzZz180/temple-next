@@ -9,6 +9,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import styles from '@/components/common/wishlist/wishlist.module.sass'
 import coupon_red from '@/assets/coupon_red.svg'
 import Button from '@/components/common/button/index.js'
+import NoButton from '@/components/common/button/noButton.js'
 
 export default function Wishlist({
   WLimage = '',
@@ -24,11 +25,11 @@ export default function Wishlist({
       <Col>
         <Link href={`/shop/${cat[WLcid]}/${WLpid}`}>
           {/* 記得改成shop */}
-          <Image src={`/${WLimage}`} alt="product" height={121} width={121} />
+          <Image src={`/${WLimage}`} alt="product" height={150} width={150} />
         </Link>
       </Col>
       <Col>
-        <div className={`${styles.textContainer} w200px`}>
+        <div className={`${styles.textContainer} fs18px w200px`}>
           <b>{WLname}</b>
         </div>
       </Col>
@@ -37,10 +38,10 @@ export default function Wishlist({
       </Col>
       <Col className={styles.btnflex}>
         <div>
-          <Button text="加入購物車" btnColor="brown" width={147} />
+          <Button text="加入購物車" btnColor="brown" fontSize="20px" />
         </div>
         <div>
-          <Button text="刪除" btnColor="brown" width={107} />
+          <NoButton text="刪除" btnColor="brown" fontSize="20px" />
         </div>
       </Col>
     </Row>
