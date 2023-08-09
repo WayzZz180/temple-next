@@ -285,7 +285,7 @@ export default function ShopProductsCard({
                 isOpen={isOpen}
                 text={'沒有庫存了！'}
                 status="wrong"
-                // setIsOpen={setIsOpen}
+                setIsOpen={setIsOpen}
               />
             ) : (
               ''

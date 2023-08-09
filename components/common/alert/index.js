@@ -15,10 +15,15 @@ export default function Alert({
   setIsOpen = () => {},
 }) {
   const [timeout, setTimeOut] = useState(false)
+  const [isOpenChild, setIsOpenChild] = useState(isOpen)
+  // const [gifSrc, setGifSrc] = useState(status === 'correct' ? correct : wrong)
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setTimeOut(true)
+      // setGifSrc(status === 'correct' ? correct : wrong)
+
+      setIsOpenChild(false)
     }, 1500) // 3000毫秒 = 3秒
 
     return () => {
@@ -26,9 +31,13 @@ export default function Alert({
     }
   }, [])
 
+  useEffect(() => {
+    setIsOpen(isOpenChild)
+  }, [isOpenChild])
+
   return (
     <Modal
-      isOpen={!timeout ? isOpen : !timeout}
+      isOpen={!timeout ? isOpenChild : !timeout}
       contentLabel="correct"
       style={{
         overlay: {
@@ -54,6 +63,7 @@ export default function Alert({
 
       <div className={`${styles.icon} mt50px`}>
         <Image
+          key={new Date().getTime().toString()}
           src={status === 'correct' ? correct : wrong}
           alt="alert"
           width={300}
