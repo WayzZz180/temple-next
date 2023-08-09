@@ -31,6 +31,7 @@ import monkey from '@/assets/monkey.svg'
 import buy from '@/assets/buy.svg'
 import inStock from '@/assets/inStock.svg'
 import emptyStock from '@/assets/emptyStock.svg'
+import Loading from '@/components/common/loading'
 
 // Bootstrap
 import Container from 'react-bootstrap/Container'
@@ -107,9 +108,7 @@ export default function Pid() {
   }, [foundCart])
 
   // 防呆
-  if (!data || !data.product_details) {
-    return <div>product details Not found</div>
-  }
+  if (!data) return <Loading />
 
   // 商品描述格式調整
   const replaceWhiteSpace = (productDetails) => {

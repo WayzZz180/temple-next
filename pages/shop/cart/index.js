@@ -16,6 +16,7 @@ import Cart from '@/components/common/cart/cart'
 import WannaBuy from '@/components/common/cart/wannaBuy'
 import CartCategory from '@/components/common/button/CartCategory'
 import Marquee from '@/components/common/marquee'
+import Loading from '@/components/common/loading'
 
 export default function IndexCart() {
   const router = useRouter()
@@ -52,9 +53,7 @@ export default function IndexCart() {
       })
   }, [])
 
-  if (!cartData) return <p>Loading...</p>
-  if (!wannaBuyData) return <p>Loading...</p>
-  if (!marquee) return <p>Loading...</p>
+  if (!cartData || !wannaBuyData || !marquee) return <Loading />
 
   return (
     <>

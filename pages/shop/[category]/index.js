@@ -14,6 +14,7 @@ import TitleData from '@/components/mydata/productsTitleData'
 import DropDownMenu from '@/components/common/dropDownMenu'
 import GetData from '@/components/common/category/getData'
 import NoData from '@/components/common/category/noData'
+import Loading from '@/components/common/loading'
 
 export default function Category() {
   const router = useRouter()
@@ -120,8 +121,7 @@ export default function Category() {
     console.log(updatedInfo)
   }, [dataFromChild, router.query])
 
-  if (!data) return <p>Loading...</p>
-
+  if (!data) return <Loading />
   return (
     <Container className={`${styles.container}`}>
       {/* 類別&搜尋 */}

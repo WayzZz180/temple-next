@@ -15,6 +15,7 @@ import WorshipConfirmCard from '@/components/common/cards/WorshipConfirmCard'
 import Button from '@/components/common/button'
 import CloudLeft from '@/components/common/cloud/cloudL'
 import CloudRight from '@/components/common/cloud/cloudR'
+import Loading from '@/components/common/loading'
 
 export default function Check() {
   const router = useRouter()
@@ -50,7 +51,7 @@ export default function Check() {
     }
   }
 
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loading />
 
   // 總計
   const total = data?.reduce((result, v) => {

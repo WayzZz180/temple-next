@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
 // components
 import ShopTop from '@/components/common/shopTop'
 import ShopTitle from '@/components/common/title/ShopTitle'

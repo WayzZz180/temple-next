@@ -52,13 +52,6 @@ export default function Offerings() {
     },
   ]
 
-  // 換分類時清空keyword
-  // const clearLocal = () => {
-  //   if (localStorage.getItem('keyword')) {
-  //     localStorage.removeItem('keyword')
-  //   }
-  // }
-
   const [data, setData] = useState([])
   const [reservation, setReservation] = useState([])
   useEffect(() => {
