@@ -18,7 +18,7 @@ import {
 } from '@/components/mydata/memberSpinWheelColor_Coupon.js'
 import coupon_red from '@/assets/coupon_red.svg'
 import wheel from '@/assets/wheel.svg'
-import spin_button from '@/assets/spin_button.svg'
+import spin_button2 from '@/assets/spin_button2.svg'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
@@ -174,7 +174,7 @@ export default function SpinWheel({ updateSpinWheel }) {
           <div className={styles.flex_center}>
             <div className={styles.container}>
               <Image
-                src={spin_button}
+                src={spin_button2}
                 className={styles.spin_button}
                 onClick={handleSpin}
                 // width={60}
@@ -286,7 +286,7 @@ export default function SpinWheel({ updateSpinWheel }) {
             maxWidth: '370px', // 調整最大寬度
             maxHeight: '270px', // 調整最大高度
             margin: 'auto', // 水平居中
-            //   // backgroundColor: '',
+            backgroundColor: 'variables[bgColor]',
             //   // border: '',
             //   // color: 'white',
           },

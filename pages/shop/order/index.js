@@ -177,7 +177,7 @@ export default function Order() {
           <InputBox
             type="text"
             prompt="物流方式"
-            placeholder="宅配"
+            placeholder="Hannah"
             onChange
             width={600}
             height={60}
@@ -222,33 +222,19 @@ export default function Order() {
           />
           <InputBox
             type="text"
-            id="member_carrier"
-            prompt="載具"
-            placeholder="/ChildHannah1202"
-            onChange={changeUser}
-            validationRules={validationRules}
-            value={user.member_carrier}
-            width={600}
-            height={60}
-            isError={invalidFields.includes('member_carrier')}
-            errorMessage={getErrorForField('member_carrier')}
-          />
-        </Row>
-        <Row>
-          <InputBox
-            type="text"
             id="member_address"
             prompt="收件人地址"
             placeholder="無家日ToT"
             onChange={changeUser}
             validationRules={validationRules}
             value={user.member_address}
-            width={'97%'}
+            width={600}
             height={60}
             isError={invalidFields.includes('member_address')}
             errorMessage={getErrorForField('member_address')}
           />
         </Row>
+
         <Row className={`${styles.flex_space_between} pt80px `}>
           <Button
             text="返回購物車"

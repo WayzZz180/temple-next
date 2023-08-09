@@ -1,28 +1,27 @@
 import Image from 'next/image'
-import { Fragment } from 'react'
 
 import { Container, Row, Col } from 'react-bootstrap'
 
-import variables from '@/styles/_variables.module.sass'
+import React, { useState, useEffect, useContext } from 'react'
 
 //components
 import styles from '@/components/common/wishlist/wishlist.module.sass'
 import coupon_red from '@/assets/coupon_red.svg'
 import Button from '@/components/common/button/index.js'
 
-export default function Wishlist() {
+export default function Wishlist({ WLimage = '', WLname = '', WLprice = '' }) {
   const wishlistRow = (
     <Row className={styles.flex}>
       <Col>
-        <Image src={coupon_red} alt="product" height={121} width={121} />
+        <Image src={`/${WLimage}`} alt="product" height={121} width={121} />
       </Col>
       <Col>
-        <div>
-          <b>杏仁巧克力棒</b>
+        <div className={`${styles.textContainer} w200px`}>
+          <b>{WLname}</b>
         </div>
       </Col>
       <Col className={styles.valid}>
-        <div>$150</div>
+        <div>${WLprice}</div>
       </Col>
       <Col className={styles.btnflex}>
         <div>
@@ -41,16 +40,20 @@ export default function Wishlist() {
     </Row>
   )
 
-  const combinedRows = []
-  const numberOfRows = 5 // 資料的比數
-  for (let i = 0; i < numberOfRows; i++) {
-    combinedRows.push(
-      i % 2 === 0 ? (
-        <Fragment key={i}>{wishlistRow}</Fragment>
-      ) : (
-        <Fragment key={i}>{lineRow}</Fragment>
-      )
-    )
-  }
-  return <> {combinedRows}</>
+  // const combinedRows = []
+  // const numberOfRows = 5 // 資料的比數
+  // for (let i = 0; i < numberOfRows; i++) {
+  //   combinedRows.push(
+  //     i % 2 === 0 ? (
+  //       <Fragment key={i}>{wishlistRow}</Fragment>
+  //     ) : (
+  //       <Fragment key={i}>{lineRow}</Fragment>
+  //     )
+  //   )
+  // }
+  return (
+    <>
+      {wishlistRow} {lineRow}
+    </>
+  )
 }

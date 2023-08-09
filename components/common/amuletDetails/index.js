@@ -55,7 +55,7 @@ export default function Amulet({ amuletName = '' }) {
             <Button text="查看准考證" btnColor="brown" fontSize="20px" />
           </div>
         ) : null} */}
-        {['粽子', '青蔥'].includes(amuletName) && (
+        {['粽子'].includes(amuletName) && (
           <div>
             <Button text="查看准考證" btnColor="brown" fontSize="20px" />
           </div>

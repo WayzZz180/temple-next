@@ -11,7 +11,7 @@ import Coupon from '@/components/common/coupons/index.js'
 export default function AllCoupons() {
   const { auth, setAuth, logout } = useContext(AuthContext)
   const router = useRouter()
-  const { id } = router.query
+
   const [coupon, setCoupon] = useState([])
 
   useEffect(() => {

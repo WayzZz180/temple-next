@@ -70,7 +70,7 @@ export default function Personalinfo() {
       message: '請輸入中文姓名，最多10個字',
     },
     member_forum_name: {
-      regex: /^[\u4e00-\u9fa5a-zA-Z0-9]{1,20}$/,
+      regex: /^[\u4e00-\u9fa5a-zA-Z0-9]{0,20}$/,
       message: '暱稱過長，請重新輸入',
     },
     member_account: {
@@ -177,7 +177,9 @@ export default function Personalinfo() {
       })
       setInvalidFields(invalidFieldsArray.filter((field) => field !== null))
 
-      alert('請檢查以下項目：\n' + invalidFieldsArray.join('\n'))
+      const hintModal = invalidFieldsArray.filter((field) => field !== null)
+
+      alert('請檢查以下項目：\n' + hintModal.join('\n'))
       return
     }
 
@@ -299,7 +301,7 @@ export default function Personalinfo() {
               />
             </Col>
           </Row>
-          <Row className={styles.flex_centre}>
+          {/* <Row className={styles.flex_centre}>
             <Col>
               <InputBox
                 prompt="密碼"
@@ -314,7 +316,7 @@ export default function Personalinfo() {
                 errorMessage={getErrorForField('member_password')}
               />
             </Col>
-          </Row>
+          </Row> */}
           <Row className={styles.flex_centre}>
             <Col>
               <InputBox
@@ -365,6 +367,7 @@ export default function Personalinfo() {
               />
             </Col>
           </Row>
+
           <Row className={styles.flex_end}>
             <Col>
               <Button text="儲存變更" btnColor="black" width={229} />
