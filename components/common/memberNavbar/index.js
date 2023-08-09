@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from '@/components/common/memberNavbar/memberNavbar.module.sass'
 import Link from 'next/link'
+import variables from '@/styles/_variables.module.sass'
 import { useRouter } from 'next/router'
 
 //Components
@@ -16,10 +17,10 @@ export default function MemberNavbar() {
         <Col key={i}>
           <Link href={`/member/${v.id}`} className="link">
             <span
-              className={`${styles.text}
-                ${router.pathname.includes(v.id) ? styles.currentPage : ''}
-                fs20px fwBold 
-              `}
+              className={`${styles.text} fs20px fwBold`}
+              style={{
+                color: router.pathname.includes(v.id) ? variables['green'] : '',
+              }}
             >
               {v.text}
             </span>
