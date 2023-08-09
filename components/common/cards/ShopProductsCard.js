@@ -146,32 +146,56 @@ export default function ShopProductsCard({
   ">${keyword}</span>`
   const result = text.replace(regex, hightlight)
 
-  // console.log(pid,heartClickState,state)
+  const browse = () => {
+    // 瀏覽量加一
+    fetch(`${process.env.API_SERVER}/shop/${category}/${pid}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((data) => {})
+  }
 
   return (
     <div className={`${styles.container}  p30px`}>
       {/* 產品圖 */}
-      <Link href={`/shop/${category}/${pid}`}>
-        <Image
-          src={src}
-          alt="product"
-          width={150}
-          height={150}
-          className="shadow mb20px"
-        ></Image>
-      </Link>
+      <div
+        role="presentation"
+        onClick={() => {
+          browse()
+        }}
+      >
+        <Link href={`/shop/${category}/${pid}`}>
+          <Image
+            src={src}
+            alt="product"
+            width={150}
+            height={150}
+            className="shadow mb20px"
+          ></Image>
+        </Link>
+      </div>
       {/* 分隔線 */}
       <div className={`${styles.line} w180px h3px`}></div>
       {/* 標題 */}
-      <Link href={`/shop/${category}/${pid}`} className="link">
-        <div className={`${styles.flexStart} mt15px fwBold fs18px`}>
-          <div
-            className={`${styles.textContainer} w180px h55px`}
-            id="text"
-            dangerouslySetInnerHTML={{ __html: result }}
-          ></div>
-        </div>
-      </Link>
+      <div
+        role="presentation"
+        onClick={() => {
+          browse()
+        }}
+      >
+        <Link href={`/shop/${category}/${pid}`} className="link">
+          <div className={`${styles.flexStart} mt15px fwBold fs18px`}>
+            <div
+              className={`${styles.textContainer} w180px h55px`}
+              id="text"
+              dangerouslySetInnerHTML={{ __html: result }}
+            ></div>
+          </div>
+        </Link>
+      </div>
       {/* 星星 */}
       <div className={`${styles.flexStart} mt15px`}>
         <Stars width={20} stars={stars} />
@@ -201,6 +225,7 @@ export default function ShopProductsCard({
         <span className={`${styles.inlineBlock} ${styles.icons}`}>
           {/* 愛心 */}
           <span
+            role="presentation"
             onClick={() => {
               heartClickState ? deleteFromFav() : addToFav()
               handleHeartClick()
@@ -219,6 +244,7 @@ export default function ShopProductsCard({
           </span>
           {/* 購物車 */}
           <span
+            role="presentation"
             onClick={() => {
               if (stock_num != 0) {
                 !foundCart && handleCartClick()

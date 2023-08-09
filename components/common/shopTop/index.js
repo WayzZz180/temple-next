@@ -22,8 +22,8 @@ export default function ShopTop() {
   } = useHoverIndex(-1)
 
   // 換分類時清空keyword
-  const clearLocal=()=>{
-    if(localStorage.getItem('keyword')){
+  const clearLocal = () => {
+    if (localStorage.getItem('keyword')) {
       localStorage.removeItem('keyword')
     }
   }
@@ -44,7 +44,7 @@ export default function ShopTop() {
               key={i}
               onMouseEnter={() => handleMouseEnterStar(i)}
               onMouseLeave={handleMouseLeaveStar}
-              onClick={()=>{
+              onClick={() => {
                 clearLocal()
               }}
             >

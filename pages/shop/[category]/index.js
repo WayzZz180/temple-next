@@ -14,6 +14,7 @@ import TitleData from '@/components/mydata/productsTitleData'
 import DropDownMenu from '@/components/common/dropDownMenu'
 import GetData from '@/components/common/category/getData'
 import NoData from '@/components/common/category/noData'
+import Loading from '@/components/common/loading'
 
 export default function Category() {
   const router = useRouter()
@@ -21,11 +22,10 @@ export default function Category() {
   const categoryData = TitleData.find((item) => item.id === category)
   const [data, setData] = useState([])
   const [pagination, setPagination] = useState([])
-  const [dataFromChild, setDataFromChild] = useState([]) 
-   
-  
+  const [dataFromChild, setDataFromChild] = useState([])
+
   //要篩選的資料
-  let info = [
+  const [info, setInfo] = useState([
     {
       title: true,
       content: '• 每頁顯示 •',
@@ -69,49 +69,59 @@ export default function Category() {
       orderBy: 'stars',
       status: false,
     },
-  ]
-  useEffect(() => {
-    if(!category) return
+  ])
 
-    if(localStorage.getItem('keyword') && !keyword){
-      const currentParams = new URLSearchParams(window.location.search);
-      currentParams.set('keyword',localStorage.getItem('keyword'));
-      const currentPath = window.location.pathname;
-      const newURL = `${currentPath}?${currentParams.toString()}`;
-      router.push(newURL);
+  useEffect(() => {
+    if (!category) return
+
+    if (localStorage.getItem('keyword') && !keyword) {
+      const currentParams = new URLSearchParams(window.location.search)
+      currentParams.set('keyword', localStorage.getItem('keyword'))
+      const currentPath = window.location.pathname
+      const newURL = `${currentPath}?${currentParams.toString()}`
+      router.push(newURL)
     }
     let reqData = {
-      page: page, 
+      page: page,
       perPage: dataFromChild?.perPage ? dataFromChild.perPage : 20,
-      sort: dataFromChild?.order ? dataFromChild.order :'DESC',
-      orderBy: dataFromChild?.orderBy ? dataFromChild.orderBy :'purchase_num',
+      sort: dataFromChild?.order ? dataFromChild.order : 'DESC',
+      orderBy: dataFromChild?.orderBy ? dataFromChild.orderBy : 'purchase_num',
     }
-    if(keyword){
-      reqData = {...reqData, keyword: keyword}
+    if (keyword) {
+      reqData = { ...reqData, keyword: keyword }
     }
+
+    const updatedInfo = info.map((v) => {
+      if (v.perPage === reqData.perPage || v.orderBy === reqData.orderBy) {
+        return { ...v, status: true }
+      } else {
+        return { ...v, status: false }
+      }
+    })
+    setInfo(updatedInfo)
+
     fetch(`${process.env.API_SERVER}/shop/${category}`, {
-        method: 'POST',
-        body: JSON.stringify({ requestData: reqData }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+      method: 'POST',
+      body: JSON.stringify({ requestData: reqData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
       .then((r) => r.json())
       .then((data) => {
         data.redirect && router.push(data.redirect)
- 
-        if(data.success){
+
+        if (data.success) {
           setData(data.data)
           setPagination(data.pagination)
-        }else{
+        } else {
           setData([])
-        }  
+        }
       })
-    
-  }, [dataFromChild,router.query])
+    console.log(updatedInfo)
+  }, [dataFromChild, router.query])
 
-  if (!data) return <p>Loading...</p>
- 
+  if (!data) return <Loading />
   return (
     <Container className={`${styles.container}`}>
       {/* 類別&搜尋 */}
@@ -124,16 +134,29 @@ export default function Category() {
           link={`/shop/cookies`}
         />
         {/* 篩選｜排列 */}
-        <span className={`${styles.menu}`} style={{display: data?.length > 0 ? '' : 'none'}}>
-          <DropDownMenu text=" 顯示 ｜ 排列 " info={info}  setDataFromChild={setDataFromChild} keyword={keyword}/>
+        <span
+          className={`${styles.menu}`}
+          style={{ display: data?.length > 0 ? '' : 'none' }}
+        >
+          <DropDownMenu
+            text=" 顯示 ｜ 排列 "
+            info={info}
+            setDataFromChild={setDataFromChild}
+            keyword={keyword}
+          />
         </span>
       </div>
       {/* 商品 */}
-      {
-        data?.length>0 ? <GetData data={data} pagination={pagination} dataFromChild={dataFromChild} info={info}/> :<NoData />
-      }
-     
-
+      {data?.length > 0 ? (
+        <GetData
+          data={data}
+          pagination={pagination}
+          dataFromChild={dataFromChild}
+          info={info}
+        />
+      ) : (
+        <NoData />
+      )}
     </Container>
   )
 }

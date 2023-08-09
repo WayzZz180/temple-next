@@ -1,0 +1,49 @@
+@import '@/styles/_variables.module.sass'
+
+.tableContainer
+    display: flex
+    align-items: center
+    justify-content: center
+    position: relative
+
+.relative
+    position: relative
+
+.god
+    position: absolute
+    bottom: -235px 
+    
+.back
+    position: absolute
+    top: 35.5vh
+
+.front
+    position: absolute
+    top: 60.5vh
+
+.incenseHidden
+    position: absolute
+    top: -15vh
+
+.incense
+    position: absolute
+    top: 77.5vh
+    z-index: 3
+    animation: down 2s ease-out 1
+
+@keyframes down
+    0%
+        top: -15vh    
+    100%
+        top: 77.5vh
+    
+
+.burner
+    position: absolute
+    top: 85vh
+    z-index: 4
+
+.button
+    position: absolute
+    top: 93vh
+

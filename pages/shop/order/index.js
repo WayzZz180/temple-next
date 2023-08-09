@@ -149,7 +149,20 @@ export default function Order() {
       .then((r) => r.json())
       .then((data) => {})
   }
-
+  const updateData = () => {
+    const orderData = {
+      cartData: cartData,
+    }
+    fetch(`${process.env.API_SERVER}/shop/order`, {
+      method: 'PUT',
+      body: JSON.stringify({ requestData: orderData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((data) => {})
+  }
   return (
     <Container className={`${styles.container}`}>
       {/* step */}
@@ -256,6 +269,7 @@ export default function Order() {
             fontSize="24px"
             link={() => {
               sendOrder()
+              updateData()
               router.push('/shop/order/complete')
             }}
           />

@@ -5,20 +5,19 @@ import { useRouter } from 'next/router'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-export default function ShopStepBar({path="/shop/cart"}) {
-
+export default function ShopStepBar({ path = '/shop/cart' }) {
   const steps = [
-    { 
-      path:'/shop/cart',
-      text:'購 物 車',
+    {
+      path: '/shop/cart',
+      text: '購 物 車',
     },
-    { 
-      path:'/shop/order',
-      text:'填 寫 資 料',
+    {
+      path: '/shop/order',
+      text: '填 寫 資 料',
     },
-    { 
-      path:'/shop/order/complete',
-      text:'訂 單 確 認',
+    {
+      path: '/shop/order/complete',
+      text: '訂 單 確 認',
     },
   ]
   return (
@@ -29,14 +28,24 @@ export default function ShopStepBar({path="/shop/cart"}) {
             return (
               <Fragment key={i}>
                 <div className={`${styles.align}`}>
-                  <div className={`${styles.circle} ${styles.active} fs24px`}
-                  style={{ opacity: v.path === path ? 1 : 0.5 }}
+                  <div
+                    className={`${styles.circle} ${styles.active} fs24px`}
+                    style={{ opacity: v.path === path ? 1 : 0.5 }}
                   >
                     {i + 1}
                   </div>
-                  <div className='fwBold mt10px' style={{ opacity: v.path === path ? 1 : 0.5 }}>{v.text}</div>
+                  <div
+                    className="fwBold mt10px"
+                    style={{ opacity: v.path === path ? 1 : 0.5 }}
+                  >
+                    {v.text}
+                  </div>
                 </div>
-                { i!= steps.length-1 ? <div className={`${styles.line} mb30px`}></div>:""}
+                {i != steps.length - 1 ? (
+                  <div className={`${styles.line} mb30px`}></div>
+                ) : (
+                  ''
+                )}
               </Fragment>
             )
           })}

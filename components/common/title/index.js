@@ -9,11 +9,11 @@ export default function Title({
   text2 = 'text',
   lineColor = 'green',
   width = '',
-  marginTop='120'
+  marginTop = '120',
 }) {
   const var_color = variables[lineColor]
   return (
-    <div className={`${styles.flex}`} style={{marginTop:`${marginTop}px`}}>
+    <div className={`${styles.flex}`} style={{ marginTop: `${marginTop}px` }}>
       <div className={`${styles.title}`}>{text}</div>
       <div className={`${styles.title2}`}>{text2}</div>
       <div

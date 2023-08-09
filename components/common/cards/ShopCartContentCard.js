@@ -5,14 +5,17 @@ import variables from '@/styles/_variables.module.sass'
 
 // hooks
 import { useState, useContext } from 'react'
-import CartContext from '@/contexts/CartCountContext'
+import CartCountContext from '@/contexts/CartCountContext'
 import CartDataContext from '@/contexts/CartDataContext'
 
 // bootstrap
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+
 // components
 import NoButton from '@/components/common/button/noButton'
+import Loading from '@/components/common/loading'
+
 // svg
 import add from '@/assets/add.svg'
 import minus from '@/assets/minus.svg'
@@ -26,10 +29,10 @@ export default function ShopCartContentCard({
   pid = 2,
   cid = 1,
 }) {
-  if (isNaN(quantity)) return <p></p>
+  if (isNaN(quantity)) return <Loading />
 
   // for navbar購物車數量
-  const { cartCount, setCartCount, getCartCount } = useContext(CartContext)
+  const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
 
   const { cartData, setCartData, getCartData } = useContext(CartDataContext)
   // for 更新數量
@@ -48,7 +51,9 @@ export default function ShopCartContentCard({
       },
     })
       .then((r) => r.json())
-      .then((data) => {})
+      .then((data) => {
+        getCartData()
+      })
   }
 
   // 刪除個別商品(需要pid)
@@ -85,12 +90,29 @@ export default function ShopCartContentCard({
       })
   }
 
+  // 瀏覽量加一
+  const browse = () => {
+    fetch(`${process.env.API_SERVER}/shop/${category}/${pid}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((data) => {})
+  }
   return (
     <Row className={`${styles.row} nowrap fwBold`}>
       <Col>
         <div className={`${styles.container} pt30px pb30px fs18px`}>
           {/* 商品圖 */}
-          <div className={`${styles.image}`}>
+          <div
+            role="presentation"
+            className={`${styles.image}`}
+            onClick={() => {
+              browse()
+            }}
+          >
             <Link href={`/shop/${category}/${pid}`}>
               <Image src={src} alt="product" width={200} height={200} />
             </Link>
