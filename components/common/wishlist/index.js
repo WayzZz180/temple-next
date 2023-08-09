@@ -23,6 +23,7 @@ export default function Wishlist({
     <Row className={styles.flex}>
       <Col>
         <Link href={`/shop/${cat[WLcid]}/${WLpid}`}>
+          {/* 記得改成shop */}
           <Image src={`/${WLimage}`} alt="product" height={121} width={121} />
         </Link>
       </Col>
