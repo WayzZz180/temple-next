@@ -7,7 +7,7 @@ import Title from '@/components/common/title/'
 import Forumline from '@/components/common/forumlogo/forumline'
 import Navbar from '@/components/common/forumlogo/navbar'
 import Forumper from '@/components/common/forumlogo/forumper'
-import { getForumContentByPostCategory } from '@/utils/forumper' // 替換為實際的 API 函數
+// import { getForumContentByPostCategory } from '@/utils/forumper' // 替換為實際的 API 函數
 
 function Forumgossip() {
   const router = useRouter()

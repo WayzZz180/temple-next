@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
@@ -9,24 +9,14 @@ import SearchIcon from '@mui/icons-material/Search'
 import BasicTextFields3 from '@/components/common/launchdemo/textfield3'
 import styles from '@/components/common/launchdemo/postmui.module.sass'
 import { useRouter } from 'next/router'
-import { useEffect, useState, useContext } from 'react'
+import ForumButton from '@/components/common/button/forumbutton2'
 
 export default function AlertDialog() {
-  // const router = useRouter()
-  const [open, setOpen] = React.useState(false)
-
-  const handleClickOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-  }
+  const [open, setOpen] = useState(false)
   const router = useRouter()
-  const { category } = router.query
+  const { category, post_sid } = router.query
   const [data, setData] = useState([])
   const [totalPages, setTotalPages] = useState(1)
-  // console.log('router.query:', router.query)
   const [keyword, setKeyword] = useState('')
 
   useEffect(() => {
@@ -34,9 +24,9 @@ export default function AlertDialog() {
     const usp = new URLSearchParams(router.query)
 
     fetch(
-      `${process.env.API_SERVER}/forum/${router.query.category}/${
-        router.query.post_sid
-      }?${usp.toString()}`
+      `${
+        process.env.API_SERVER
+      }/forum/${category}/${post_sid}?${usp.toString()}`
     )
       .then((r) => r.json())
       .then((result) => {
@@ -47,6 +37,15 @@ export default function AlertDialog() {
         }
       })
   }, [router.query])
+
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
+
   return (
     <div>
       <Button
@@ -68,7 +67,10 @@ export default function AlertDialog() {
           <form
             onSubmit={(e) => {
               e.preventDefault()
-              router.push(`?keyword=` + e.currentTarget.keyword.value)
+              router.push(
+                `/forum/${category}/${post_sid}?keyword=` +
+                  e.currentTarget.keyword.value
+              )
               handleClose()
             }}
           >
@@ -80,15 +82,27 @@ export default function AlertDialog() {
             </DialogContentText>
             <DialogActions>
               <div className={`${styles.row2}`}>
-                <Button onClick={handleClose} color="error">
+                <ForumButton
+                  btnColor="hot_pink"
+                  text="cancel"
+                  link={handleClose}
+                  width="30px"
+                  height="20px"
+                  fontSize="15px"
+                />
+                <ForumButton
+                  btnColor="green"
+                  text="search"
+                  // onClick={handleClose}
+                  type="submit"
+                  width="30px"
+                  height="20px"
+                  fontSize="15px"
+                />
+                {/* <Button onClick={handleClose} color="error">
                   取消
                 </Button>
-                <Button
-                  type="submit"
-                  // autoFocus
-                >
-                  搜尋
-                </Button>
+                <Button type="submit">搜尋</Button> */}
               </div>
             </DialogActions>
           </form>
