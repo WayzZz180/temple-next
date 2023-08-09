@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useRouter } from 'next/router'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
@@ -22,7 +23,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />
 })
 
-export default function AlertDialogSlide() {
+export default function AlertDialogSlide({ page = 1 }) {
+  const router = useRouter()
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
@@ -34,6 +36,29 @@ export default function AlertDialogSlide() {
   }
   const [inputTitle, setInputTitle] = React.useState('')
   const [inputContent, setInputContent] = React.useState('')
+
+  const addData = (title, content) => {
+    const reqData = {
+      title: title,
+      content: content,
+    }
+
+    fetch(`${process.env.API_SERVER}/forum/${router.query.category}/add`, {
+      method: 'POST',
+      body: JSON.stringify({ requestData: reqData }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        // console.log('data:', data)
+        // setData(data[0])
+        // setTotalPages(data[1])
+      })
+  }
+
+  // if(!data) return <Loading />
 
   return (
     <div>
@@ -134,7 +159,17 @@ export default function AlertDialogSlide() {
                   handleClose()
                 }}
               />
-              <ForumButton btnColor="green" text="發文" link={handleClose} />
+              <ForumButton
+                btnColor="green"
+                text="發文"
+                link={() => {
+                  handleClose()
+                  //               console.log('page:', page)
+                  // console.log('category:', router.query.category)
+                  router.push(`/forum/gossip?page=3`)
+                  addData(inputTitle, inputContent)
+                }}
+              />
               {/* <Button onClick={handleClose} color="error">
               取消
             </Button>

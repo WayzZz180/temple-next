@@ -35,8 +35,8 @@ function Forumgossip() {
       })
   }, [router.query])
 
-  console.log(data)
-  console.log(totalPages.totalPages)
+  // console.log(data)
+  // console.log(totalPages.totalPages)
   return (
     <>
       <Head>
