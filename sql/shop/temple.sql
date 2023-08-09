@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.2
 -- https://www.phpmyadmin.net/
 --
--- 主機： localhost:8889
--- 產生時間： 2023 年 08 月 09 日 02:26
--- 伺服器版本： 5.7.39
--- PHP 版本： 8.2.0
+-- Host: localhost:3306
+-- Generation Time: Aug 09, 2023 at 12:33 PM
+-- Server version: 5.7.24
+-- PHP Version: 8.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 資料庫： `temple`
+-- Database: `temple`
 --
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `browse_history`
+-- Table structure for table `browse_history`
 --
 
 CREATE TABLE `browse_history` (
@@ -35,12 +35,10 @@ CREATE TABLE `browse_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 傾印資料表的資料 `browse_history`
+-- Dumping data for table `browse_history`
 --
 
 INSERT INTO `browse_history` (`bid`, `member_id`, `pid`, `created_at`) VALUES
-(1699, 'wayz', 266, '2023-08-01 15:59:57'),
-(1702, 'wayz', 1232, '2023-08-01 16:24:03'),
 (1703, 'wayz', 1209, '2023-08-01 16:26:35'),
 (1722, 'wayz', 258, '2023-08-01 17:04:15'),
 (1812, 'wayz', 230, '2023-08-01 17:05:05'),
@@ -74,27 +72,28 @@ INSERT INTO `browse_history` (`bid`, `member_id`, `pid`, `created_at`) VALUES
 (2571, 'wayz', 1698, '2023-08-04 01:06:31'),
 (2572, 'wayz', 899, '2023-08-04 01:07:20'),
 (2621, 'wayz', 739, '2023-08-07 13:06:58'),
-(2631, 'wayz', 17, '2023-08-07 17:23:55'),
 (2638, 'wayz', 9, '2023-08-07 17:23:57'),
 (2662, 'wayz', 11, '2023-08-07 17:24:03'),
 (2769, 'wayz', 383, '2023-08-07 17:28:52'),
 (2806, 'wayz', 534, '2023-08-07 20:53:24'),
 (2817, 'wayz', 1229, '2023-08-07 23:15:27'),
 (2827, 'wayz', 1, '2023-08-07 23:17:00'),
-(2830, 'wayz', 12, '2023-08-07 23:20:11'),
 (2836, 'wayz', 5, '2023-08-07 23:20:30'),
 (2840, 'wayz', 10, '2023-08-07 23:20:39'),
 (2843, 'wayz', 35, '2023-08-07 23:22:06'),
 (2862, 'wayz', 34, '2023-08-07 23:22:38'),
 (2870, 'wayz', 15, '2023-08-07 23:22:40'),
 (2874, 'wayz', 582, '2023-08-07 23:26:43'),
-(2911, 'wayz', 27, '2023-08-07 23:45:35'),
-(2922, 'wayz', 1127, '2023-08-08 18:08:04');
+(2922, 'wayz', 1127, '2023-08-08 18:08:04'),
+(2923, 'wayz', 12, '2023-08-09 11:00:15'),
+(2926, 'wayz', 6, '2023-08-09 11:00:21'),
+(2937, 'wayz', 17, '2023-08-09 13:45:22'),
+(2943, 'wayz', 27, '2023-08-09 19:46:25');
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `cart`
+-- Table structure for table `cart`
 --
 
 CREATE TABLE `cart` (
@@ -105,18 +104,10 @@ CREATE TABLE `cart` (
   `member_id` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- 傾印資料表的資料 `cart`
---
-
-INSERT INTO `cart` (`sid`, `pid`, `quantity`, `created_at`, `member_id`) VALUES
-(400, 1724, 1, '2023-08-07 23:59:50', 'wayz'),
-(401, 2085, 1, '2023-08-07 23:59:52', 'wayz');
-
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `categories`
+-- Table structure for table `categories`
 --
 
 CREATE TABLE `categories` (
@@ -126,7 +117,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 傾印資料表的資料 `categories`
+-- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`cid`, `category_name`, `parent_id`) VALUES
@@ -172,7 +163,7 @@ INSERT INTO `categories` (`cid`, `category_name`, `parent_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `comment`
+-- Table structure for table `comment`
 --
 
 CREATE TABLE `comment` (
@@ -184,7 +175,7 @@ CREATE TABLE `comment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- 傾印資料表的資料 `comment`
+-- Dumping data for table `comment`
 --
 
 INSERT INTO `comment` (`sid`, `member_forum_name`, `comment`, `comment.time`, `post_sid`) VALUES
@@ -512,7 +503,7 @@ INSERT INTO `comment` (`sid`, `member_forum_name`, `comment`, `comment.time`, `p
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `like_products`
+-- Table structure for table `like_products`
 --
 
 CREATE TABLE `like_products` (
@@ -523,7 +514,7 @@ CREATE TABLE `like_products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 傾印資料表的資料 `like_products`
+-- Dumping data for table `like_products`
 --
 
 INSERT INTO `like_products` (`lid`, `member_id`, `pid`, `created_at`) VALUES
@@ -540,7 +531,7 @@ INSERT INTO `like_products` (`lid`, `member_id`, `pid`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `order_details`
+-- Table structure for table `order_details`
 --
 
 CREATE TABLE `order_details` (
@@ -552,7 +543,7 @@ CREATE TABLE `order_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 傾印資料表的資料 `order_details`
+-- Dumping data for table `order_details`
 --
 
 INSERT INTO `order_details` (`odid`, `oid`, `quantity`, `pid`, `product_price`) VALUES
@@ -596,12 +587,15 @@ INSERT INTO `order_details` (`odid`, `oid`, `quantity`, `pid`, `product_price`) 
 (71, '1691422989190', 4, 17, 50),
 (72, '1691422989190', 0, 12, 50),
 (73, '1691423049971', 1, 27, 50),
-(74, '1691423195126', 10, 27, 50);
+(74, '1691423195126', 10, 27, 50),
+(75, '1691569242627', 1, 27, 50),
+(76, '1691569242627', 1, 12, 50),
+(77, '1691569242627', 1, 17, 50);
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `order_summary`
+-- Table structure for table `order_summary`
 --
 
 CREATE TABLE `order_summary` (
@@ -621,7 +615,7 @@ CREATE TABLE `order_summary` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 傾印資料表的資料 `order_summary`
+-- Dumping data for table `order_summary`
 --
 
 INSERT INTO `order_summary` (`oid`, `member_id`, `total`, `customer_name`, `customer_email`, `customer_phone`, `customer_address`, `payment`, `delivery`, `invoice`, `coupon`, `created_at`, `status`) VALUES
@@ -639,12 +633,13 @@ INSERT INTO `order_summary` (`oid`, `member_id`, `total`, `customer_name`, `cust
 ('1691422935235', 'wayz', 550, '沈子威', 'wayz180@gmail.com', '0912345678', '南京復興民生社區', '現金', '超商取貨', '/CHILD1215', NULL, '2023-08-07 23:42:15', '未出貨'),
 ('1691422989190', 'wayz', 898, '沈子威', 'wayz180@gmail.com', '0912345678', '南京復興民生社區', '現金', '超商取貨', '/CHILD1215', NULL, '2023-08-07 23:43:09', '未出貨'),
 ('1691423049971', 'wayz', 50, '沈子威', 'wayz180@gmail.com', '0912345678', '南京復興民生社區', '現金', '超商取貨', '/CHILD1215', NULL, '2023-08-07 23:44:09', '未出貨'),
-('1691423195126', 'wayz', 500, '沈子威', 'wayz180@gmail.com', '0912345678', '南京復興民生社區', '現金', '超商取貨', '/CHILD1215', NULL, '2023-08-07 23:46:35', '未出貨');
+('1691423195126', 'wayz', 500, '沈子威', 'wayz180@gmail.com', '0912345678', '南京復興民生社區', '現金', '超商取貨', '/CHILD1215', NULL, '2023-08-07 23:46:35', '未出貨'),
+('1691569242627', 'wayz', 150, '沈子威', 'wayz180@gmail.com', '0912345678', '南京復興民生社區', '現金', '超商取貨', '/CHILD1215', NULL, '2023-08-09 16:20:42', '未出貨');
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `products`
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -662,7 +657,7 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 傾印資料表的資料 `products`
+-- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`pid`, `product_name`, `product_price`, `product_details`, `cid`, `recommend`, `browse_num`, `purchase_num`, `stock_num`, `stars`, `image`) VALUES
@@ -671,18 +666,18 @@ INSERT INTO `products` (`pid`, `product_name`, `product_price`, `product_details
 (3, '華元 波的多濃厚蚵仔煎洋芋片213g/包', 112, '華元 波的多濃厚蚵仔煎洋芋片213g/包\\r\\n熱銷20年經典零食\r\n夾鏈袋設計~封口好保存\r\n吃趣味 吃氣味 攏是吃這味\r\n經典獨門口味 越吃越涮嘴', 1, '6', 360, 31, 29, 3, 'img/cookies/chips/chips (3).png'),
 (4, '樂事頂級日曬甘味湖鹽口味洋芋片85g/包', 50, '樂事頂級日曬甘味湖鹽口味洋芋片85g/包\\r\\n樂事嚴選當令鮮切的馬鈴薯，鹹得剛剛好的自然鹽味佐上昆布的甘甜，豐富的層次感，讓你忍不住一口接一口!', 1, '6', 486, 59, 42, 3, 'img/cookies/chips/chips (4).png'),
 (5, '樂事樂連連雞汁味洋芋片(166g)', 80, '樂事樂連連雞汁味洋芋片(166g)\\r\\n風靡全球no.1洋芋片品牌，濃郁的雞汁風味   搭配誘人薯香的美味黃金薯片  讓人想一口接一口 \r\n濃郁的雞汁風味與馬鈴薯完美結合，搭配出絕妙風味', 1, '6', 55, 87, 91, 3, 'img/cookies/chips/chips (5).png'),
-(6, '華元 波的多鹽之花洋芋片-110.5g/包', 58, '華元 波的多鹽之花洋芋片-110.5g/包\\r\\n★使用法國頂級海鹽\r\n★極其珍貴的鹽中鑽石\r\n★鹹味圓潤回甘輕柔\r\n★全素者可食', 1, '6', 60, 83, 27, 3, 'img/cookies/chips/chips (6).png'),
+(6, '華元 波的多鹽之花洋芋片-110.5g/包', 58, '華元 波的多鹽之花洋芋片-110.5g/包\\r\\n★使用法國頂級海鹽\r\n★極其珍貴的鹽中鑽石\r\n★鹹味圓潤回甘輕柔\r\n★全素者可食', 1, '6', 61, 83, 27, 3, 'img/cookies/chips/chips (6).png'),
 (7, '樂事波樂純味口味洋芋片85g/包', 50, '樂事波樂純味口味洋芋片85g/包\\r\\n樂事嚴選當令鮮切的馬鈴薯，搭配波浪厚切，不添加一顆鹽，釋放完美薯香，越咬越驚豔，讓你忍不住一口接一口!', 1, '6', 255, 88, 41, 5, 'img/cookies/chips/chips (7).png'),
 (8, '樂事勁辣唐辛子口味洋芋片85g/包', 50, '樂事勁辣唐辛子口味洋芋片85g/包\\r\\n樂事嚴選當令鮮切的馬鈴薯，特選數種獨家綜合辛香料，呈現出唐辛子的豐富多層次，加上尾韻的過癮香辣，讓你忍不住一口接一口!', 1, '6', 246, 78, 60, 5, 'img/cookies/chips/chips (8).png'),
 (9, '樂事原味罐裝洋芋片163g/罐', 69, '樂事原味罐裝洋芋片163g/罐\\r\\n選用當令新鮮馬鈴薯 樂事最經典的原味洋芋片', 1, '6', 480, 80, 0, 4, 'img/cookies/chips/chips (9).png'),
 (10, '樂事樂連連海苔壽司味洋芋片(166g)', 72, '樂事樂連連海苔壽司味洋芋片(166g)\\r\\n風靡全球no.1洋芋片品牌，海苔壽司風味搭配誘人薯香的美味黃金薯片  讓人想一口接一口\r\n海苔壽司風味與馬鈴薯完美結合，搭配出絕妙風', 1, '6', 88, 88, 0, 5, 'img/cookies/chips/chips (10).png'),
 (11, '卡迪那洋芋片牛排口味(39gx4包)', 70, '獨門調味、每一口都是經典【卡迪那】洋芋片牛排口味39gx4包\\r\\n★香氣四溢的牛排風味\r\n★獨門調配的牛排調味 \r\n★以100%新鮮馬鈴薯切片 \r\n★更濃更脆、大呼過癮！ \r\n★經典牛排欲罷不能!', 1, '6', 257, 39, 17, 5, 'img/cookies/chips/chips (11).png'),
-(12, '樂事青檸享清新洋芋片85g/包', 50, '樂事青檸享清新洋芋片85g/包\\r\\n風靡全球no.1洋芋片品牌\r\n樂事只選用當令新鮮馬鈴薯，鮮切成金黃香脆洋芋片；\r\n以棕櫚油烹煮，加上剛好的調味，與天然薯香搭成完美絕配。\r\n最好吃的樂事洋芋片，隨時享受簡單的快樂！', 1, '6', 424, 99, 21, 4, 'img/cookies/chips/chips (12).png'),
+(12, '樂事青檸享清新洋芋片85g/包', 50, '樂事青檸享清新洋芋片85g/包\\r\\n風靡全球no.1洋芋片品牌\r\n樂事只選用當令新鮮馬鈴薯，鮮切成金黃香脆洋芋片；\r\n以棕櫚油烹煮，加上剛好的調味，與天然薯香搭成完美絕配。\r\n最好吃的樂事洋芋片，隨時享受簡單的快樂！', 1, '6', 425, 100, 20, 4, 'img/cookies/chips/chips (12).png'),
 (13, '樂事經典原味洋芋片(34gX12包)', 239, '樂事經典原味洋芋片(34gX12包)\\r\\n以精選新鮮天然的馬鈴薯、黃金比例切片製成\r\n佐以薄鹽調味，金黃香酥的天然原味享受片片的歡樂美味', 1, '6', 479, 54, 12, 3, 'img/cookies/chips/chips (13).png'),
 (14, '樂事樂連連原味味洋芋片(166g)', 72, '樂事樂連連原味味洋芋片(166g)\\r\\n風靡全球no.1洋芋片品牌，經典鹽味搭配誘人薯香的美味黃金薯片  讓人想一口接一口 \r\n經典鹽味與馬鈴薯完美結合，搭配出絕妙風味', 1, '6', 4, 15, 62, 5, 'img/cookies/chips/chips (14).png'),
 (15, 'SIMPLY GOOD 樂事海鹽味洋芋片70G/包', 50, 'SIMPLY GOOD 樂事海鹽味洋芋片70G/包\\r\\n選用當令新鮮馬鈴薯，鮮切成金黃香脆洋芋片。簡單海鹽調味，與天然薯香搭成完美絕配。\r\n最好吃的simply good 自然滋味，隨時享受簡單自然的快樂！', 1, '6', 266, 72, 27, 4, 'img/cookies/chips/chips (15).png'),
 (16, '卡迪那波浪洋芋片海鹽口味(141g)', 69, '★新鮮馬鈴薯切片【卡迪那】波浪洋芋片海鹽口味(141g)\\r\\n★天然純淨海鹽提味\r\n★帶出出馬鈴薯清甜風味\r\n★濃濃薯香讓人忍不住一口接一口', 1, '6', 291, 46, 95, 5, 'img/cookies/chips/chips (16).png'),
-(17, '樂事波樂東京照燒烤雞串口味洋芋片85G/包', 50, '樂事波樂東京照燒烤雞串口味洋芋片85G/包\\r\\n精選台灣人top最愛旅日本名地美食風味-東京居酒屋必點烤雞串! \r\n將佐上酸甜照燒醬的鮮甜烤雞串經典入味金黃香脆的洋芋片，一入口，先是照燒醬的香氣四溢，隨之而來的，還有多層次的燒烤美味，讓人欲罷不能。', 1, '6', 305, 103, 21, 5, 'img/cookies/chips/chips (17).png'),
+(17, '樂事波樂東京照燒烤雞串口味洋芋片85G/包', 50, '樂事波樂東京照燒烤雞串口味洋芋片85G/包\\r\\n精選台灣人top最愛旅日本名地美食風味-東京居酒屋必點烤雞串! \r\n將佐上酸甜照燒醬的鮮甜烤雞串經典入味金黃香脆的洋芋片，一入口，先是照燒醬的香氣四溢，隨之而來的，還有多層次的燒烤美味，讓人欲罷不能。', 1, '6', 306, 104, 20, 5, 'img/cookies/chips/chips (17).png'),
 (18, '樂事SIMPLY GOOD頂級黑胡椒鹽口味洋芋片(70g)', 50, '樂事SIMPLY GOOD頂級黑胡椒鹽口味洋芋(70G)\\r\\n選用當令新鮮馬鈴薯 佐以頂級黑胡椒調味\r\n濃濃薯香加上清爽薄脆的口感 每口都是層次豐富的自然滋味\r\n成分自然，美味依舊!', 1, '6', 241, 50, 63, 3, 'img/cookies/chips/chips (18).png'),
 (19, '樂事洋芋片派對分享包-經典原味(119g/包)', 60, '樂事洋芋片派對分享包-經典原味(119g/包)\\r\\n★風靡全球no.1洋芋片品牌\n★堅持選用優質新鮮馬鈴薯\n★馬鈴薯黃金比例切片，輕薄香脆', 1, '6', 447, 21, 24, 4, 'img/cookies/chips/chips (19).png'),
 (20, '樂事波樂洋芋片-香烤肋排(34gX12包)', 239, '樂事波樂洋芋片-香烤肋排(34gX12包)\\r\\n★風靡全球no.1洋芋片品牌\r\n★堅持選用優質新鮮馬鈴薯\r\n★馬鈴薯黃金比例切片，輕薄香脆', 1, '6', 287, 2, 85, 1, 'img/cookies/chips/chips (20).png'),
@@ -692,7 +687,7 @@ INSERT INTO `products` (`pid`, `product_name`, `product_price`, `product_details
 (24, '樂事波樂香烤肋排洋芋片85G/包', 50, '樂事波樂香烤肋排洋芋片85G/包\\r\\n★風靡全球no.1洋芋片品牌\r\n★堅持選用優質新鮮馬鈴薯\r\n★馬鈴薯黃金比例切片，輕薄香脆', 1, '6', 73, 87, 97, 3, 'img/cookies/chips/chips (24).png'),
 (25, '樂事波樂香酥雞腿洋芋片85G/包', 50, '樂事波樂香酥雞腿洋芋片85G/包\\r\\n樂事金黃香脆的厚切洋芋片，搭配香酥雞腿調味，一吃就停不下來!', 1, '6', 482, 67, 67, 5, 'img/cookies/chips/chips (25).png'),
 (26, '樂事九州岩燒海苔洋芋片85g/包', 50, '樂事九州岩燒海苔洋芋片85g/包\\r\\n風靡全球no.1洋芋片品牌 \r\n樂事只選用當令新鮮馬鈴薯，鮮切成金黃香脆洋芋片；以剛剛好的調味與天然薯香搭成完美絕配。最好吃的樂事洋芋片，隨時享受簡單的快樂！ \r\n樂事金黃香脆的洋芋片，搭配九州岩燒海苔，一吃就停不下來!', 1, '6', 117, 33, 97, 5, 'img/cookies/chips/chips (26).png'),
-(27, '樂事瑞士香濃起司洋芋片85G/包', 50, '樂事瑞士香濃起司洋芋片85G/包\\r\\n風靡全球no.1洋芋片品牌 \r\n樂事只選用當令新鮮馬鈴薯，鮮切成金黃香脆洋芋片；以剛剛好的調味與天然薯香搭成完美絕配。最好吃的樂事洋芋片，隨時享受簡單的快樂！ \r\n樂事金黃香脆的洋芋片，搭配瑞士香濃起司調味，一吃就停不下來!', 1, '6', 253, 117, 7, 3, 'img/cookies/chips/chips (27).png'),
+(27, '樂事瑞士香濃起司洋芋片85G/包', 50, '樂事瑞士香濃起司洋芋片85G/包\\r\\n風靡全球no.1洋芋片品牌 \r\n樂事只選用當令新鮮馬鈴薯，鮮切成金黃香脆洋芋片；以剛剛好的調味與天然薯香搭成完美絕配。最好吃的樂事洋芋片，隨時享受簡單的快樂！ \r\n樂事金黃香脆的洋芋片，搭配瑞士香濃起司調味，一吃就停不下來!', 1, '6', 254, 118, 6, 3, 'img/cookies/chips/chips (27).png'),
 (28, '樂事九州岩燒海苔洋芋片(34gX12包)', 239, '樂事九州岩燒海苔洋芋片(34gX12包)\\r\\n★風靡全球no.1洋芋片品牌\r\n★堅持選用優質新鮮馬鈴薯\r\n★馬鈴薯黃金比例切片，輕薄香脆', 1, '6', 450, 45, 73, 4, 'img/cookies/chips/chips (28).png'),
 (29, '樂事碳烤肋眼牛排佐松露洋芋片85g/包', 50, '樂事碳烤肋眼牛排佐松露洋芋片85g/包\\r\\n碳烤肋眼牛排香味，搭配濃郁松露香氣巧妙點綴，洋溢滿滿的幸福感！', 1, '6', 263, 81, 67, 4, 'img/cookies/chips/chips (29).png'),
 (30, '樂事樂連連A5和牛口味洋芋片(166g)', 80, '樂事樂連連A5和牛口味洋芋片(166g)\\r\\n風靡全球no.1洋芋片品牌，推出濃濃日本風味的a5和牛口味，越吃越涮嘴，美味不間斷。\r\n豐富濃郁的日本和牛香氣，與天然薯香完美結合，享受樂事洋芋片帶來的極致美味', 1, '6', 407, 84, 50, 3, 'img/cookies/chips/chips (30).png'),
@@ -2749,7 +2744,7 @@ INSERT INTO `products` (`pid`, `product_name`, `product_price`, `product_details
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `shop_comment`
+-- Table structure for table `shop_comment`
 --
 
 CREATE TABLE `shop_comment` (
@@ -2765,7 +2760,7 @@ CREATE TABLE `shop_comment` (
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `top10`
+-- Table structure for table `top10`
 --
 
 CREATE TABLE `top10` (
@@ -2776,7 +2771,7 @@ CREATE TABLE `top10` (
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `wanna_buy`
+-- Table structure for table `wanna_buy`
 --
 
 CREATE TABLE `wanna_buy` (
@@ -2787,16 +2782,18 @@ CREATE TABLE `wanna_buy` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 傾印資料表的資料 `wanna_buy`
+-- Dumping data for table `wanna_buy`
 --
 
 INSERT INTO `wanna_buy` (`wid`, `member_id`, `pid`, `created_at`) VALUES
-(84, 'wayz', 582, '2023-08-07');
+(86, 'wayz', 582, '2023-08-09'),
+(87, 'wayz', 2085, '2023-08-09'),
+(88, 'wayz', 1724, '2023-08-09');
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `worship`
+-- Table structure for table `worship`
 --
 
 CREATE TABLE `worship` (
@@ -2808,7 +2805,7 @@ CREATE TABLE `worship` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 傾印資料表的資料 `worship`
+-- Dumping data for table `worship`
 --
 
 INSERT INTO `worship` (`pid`, `product_name`, `product_price`, `cid`, `image`) VALUES
@@ -2840,7 +2837,7 @@ INSERT INTO `worship` (`pid`, `product_name`, `product_price`, `cid`, `image`) V
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `worship_details`
+-- Table structure for table `worship_details`
 --
 
 CREATE TABLE `worship_details` (
@@ -2848,6 +2845,7 @@ CREATE TABLE `worship_details` (
   `wid` int(11) NOT NULL,
   `delivery` varchar(255) NOT NULL,
   `payment` varchar(255) NOT NULL,
+  `receivedInfo` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL,
   `pid1` int(11) DEFAULT NULL,
   `pid2` int(11) DEFAULT NULL,
@@ -2855,23 +2853,22 @@ CREATE TABLE `worship_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 傾印資料表的資料 `worship_details`
+-- Dumping data for table `worship_details`
 --
 
-INSERT INTO `worship_details` (`did`, `wid`, `delivery`, `payment`, `status`, `pid1`, `pid2`, `pid3`) VALUES
-(1, 15, '宅配', '信用卡', '未出貨', 22, 23, 21),
-(2, 16, '宅配', '信用卡', '未出貨', 7, 6, NULL),
-(3, 17, '宅配', '信用卡', '未出貨', 5, NULL, NULL),
-(4, 18, '宅配', '信用卡', '未出貨', 4, NULL, NULL),
-(5, 19, '宅配', '信用卡', '未出貨', 6, NULL, NULL),
-(6, 20, '宅配', '信用卡', '未出貨', 15, 11, 10),
-(7, 21, '宅配', '信用卡', '未出貨', 13, NULL, NULL),
-(8, 22, '宅配', '信用卡', '未出貨', 5, 6, 7);
+INSERT INTO `worship_details` (`did`, `wid`, `delivery`, `payment`, `receivedInfo`, `status`, `pid1`, `pid2`, `pid3`) VALUES
+(9, 23, '宅配', '信用卡', '民生社區', '未出貨', 15, 14, NULL),
+(10, 24, '宅配', '信用卡', '民生社區', '未出貨', 20, 23, 21),
+(11, 25, '宅配', '信用卡', '民生社區', '未出貨', 6, 8, 7),
+(12, 26, '宅配', '信用卡', '民生社區', '未出貨', 14, NULL, NULL),
+(13, 27, '宅配', '信用卡', '民生社區', '未出貨', 4, 5, NULL),
+(14, 28, '宅配', '信用卡', '民生社區', '未出貨', 7, 4, 3),
+(15, 29, '宅配', '信用卡', '民生社區', '未出貨', 4, 5, 6);
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `worship_summary`
+-- Table structure for table `worship_summary`
 --
 
 CREATE TABLE `worship_summary` (
@@ -2886,182 +2883,181 @@ CREATE TABLE `worship_summary` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 傾印資料表的資料 `worship_summary`
+-- Dumping data for table `worship_summary`
 --
 
 INSERT INTO `worship_summary` (`wid`, `member_id`, `god`, `day`, `time`, `total`, `complete`, `created_at`) VALUES
-(15, 'wayz', '文昌', '2023/08/23', '午時/11am-1pm', 320, 0, '2023-08-08 23:52:38'),
-(16, 'wayz', '媽祖', '2023/08/16', '辰時/7am-9am', 105, 1, '2023-08-08 23:53:10'),
-(17, 'wayz', '媽祖', '2023/08/17', '午時/11am-1pm', 120, 1, '2023-08-08 23:58:41'),
-(18, 'wayz', '媽祖', '2023/08/22', '戌時/7pm-9pm', 99, 1, '2023-08-09 00:01:13'),
-(19, 'wayz', '媽祖', '2023/08/09', '巳時/9am-11am', 45, 1, '2023-08-09 00:02:24'),
-(20, 'wayz', '月老', '2023/08/31', '午時/11am-1pm', 200, 0, '2023-08-09 00:37:01'),
-(21, 'wayz', '月老', '2023/08/10', '未時/1pm-3pm', 60, 0, '2023-08-09 00:37:26'),
-(22, 'wayz', '媽祖', '2023/08/15', '亥時/9pm-11pm', 225, 0, '2023-08-09 00:42:01');
+(23, 'wayz', '月老', '2023/08/09', '戌時/7pm-9pm', 169, 0, '2023-08-09 11:22:17'),
+(24, 'wayz', '文昌', '2023/08/24', '寅時/3am-5am', 170, 0, '2023-08-09 11:22:35'),
+(25, 'wayz', '媽祖', '2023/07/31', '午時/11am-1pm', 225, 1, '2023-08-09 11:22:53'),
+(26, 'wayz', '月老', '2023/08/16', '午時/11am-1pm', 139, 0, '2023-08-09 12:47:09'),
+(27, 'wayz', '媽祖', '2023/08/09', '丑時/1am-3am', 219, 0, '2023-08-09 12:50:41'),
+(28, 'wayz', '媽祖', '2023/08/09', '申時/3pm-5pm', 549, 0, '2023-08-09 13:38:37'),
+(29, 'wayz', '媽祖', '2023/08/25', '丑時/1am-3am', 264, 0, '2023-08-09 16:08:10');
 
 --
--- 已傾印資料表的索引
+-- Indexes for dumped tables
 --
 
 --
--- 資料表索引 `browse_history`
+-- Indexes for table `browse_history`
 --
 ALTER TABLE `browse_history`
   ADD PRIMARY KEY (`bid`);
 
 --
--- 資料表索引 `cart`
+-- Indexes for table `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`sid`);
 
 --
--- 資料表索引 `categories`
+-- Indexes for table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`cid`);
 
 --
--- 資料表索引 `comment`
+-- Indexes for table `comment`
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`sid`);
 
 --
--- 資料表索引 `like_products`
+-- Indexes for table `like_products`
 --
 ALTER TABLE `like_products`
   ADD PRIMARY KEY (`lid`);
 
 --
--- 資料表索引 `order_details`
+-- Indexes for table `order_details`
 --
 ALTER TABLE `order_details`
   ADD PRIMARY KEY (`odid`);
 
 --
--- 資料表索引 `order_summary`
+-- Indexes for table `order_summary`
 --
 ALTER TABLE `order_summary`
   ADD PRIMARY KEY (`oid`);
 
 --
--- 資料表索引 `products`
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`pid`);
 
 --
--- 資料表索引 `shop_comment`
+-- Indexes for table `shop_comment`
 --
 ALTER TABLE `shop_comment`
   ADD PRIMARY KEY (`cid`);
 
 --
--- 資料表索引 `top10`
+-- Indexes for table `top10`
 --
 ALTER TABLE `top10`
   ADD PRIMARY KEY (`sid`);
 
 --
--- 資料表索引 `wanna_buy`
+-- Indexes for table `wanna_buy`
 --
 ALTER TABLE `wanna_buy`
   ADD PRIMARY KEY (`wid`);
 
 --
--- 資料表索引 `worship`
+-- Indexes for table `worship`
 --
 ALTER TABLE `worship`
   ADD PRIMARY KEY (`pid`);
 
 --
--- 資料表索引 `worship_details`
+-- Indexes for table `worship_details`
 --
 ALTER TABLE `worship_details`
   ADD PRIMARY KEY (`did`);
 
 --
--- 資料表索引 `worship_summary`
+-- Indexes for table `worship_summary`
 --
 ALTER TABLE `worship_summary`
   ADD PRIMARY KEY (`wid`);
 
 --
--- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `browse_history`
+-- AUTO_INCREMENT for table `browse_history`
 --
 ALTER TABLE `browse_history`
-  MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2923;
+  MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2944;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `cart`
+-- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `sid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=402;
+  MODIFY `sid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `comment`
+-- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT COMMENT '留言編號', AUTO_INCREMENT=321;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `like_products`
+-- AUTO_INCREMENT for table `like_products`
 --
 ALTER TABLE `like_products`
   MODIFY `lid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `order_details`
+-- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `odid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `odid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `products`
+-- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `pid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2086;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `shop_comment`
+-- AUTO_INCREMENT for table `shop_comment`
 --
 ALTER TABLE `shop_comment`
   MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `top10`
+-- AUTO_INCREMENT for table `top10`
 --
 ALTER TABLE `top10`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `wanna_buy`
+-- AUTO_INCREMENT for table `wanna_buy`
 --
 ALTER TABLE `wanna_buy`
-  MODIFY `wid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `wid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `worship`
+-- AUTO_INCREMENT for table `worship`
 --
 ALTER TABLE `worship`
   MODIFY `pid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `worship_details`
+-- AUTO_INCREMENT for table `worship_details`
 --
 ALTER TABLE `worship_details`
-  MODIFY `did` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `did` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `worship_summary`
+-- AUTO_INCREMENT for table `worship_summary`
 --
 ALTER TABLE `worship_summary`
-  MODIFY `wid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `wid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
