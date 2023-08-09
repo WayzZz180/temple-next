@@ -9,8 +9,6 @@ import jump from '@/assets/jump.gif'
 import flag from '@/assets/flag.gif'
 import dog from '@/assets/dog_in.gif'
 import Quiz from '@/pages/pilgrimage/onlineQuiz'
-import styled, { keyframes } from 'styled-components'
-import Portal from '@/components/common/Portal/Portal'
 
 export default function Pilgrimage() {
   const [teamsPosition, setTeamsPosition] = useState({ x: 0, y: 0 })
@@ -36,16 +34,29 @@ export default function Pilgrimage() {
       window.removeEventListener('resize', updateTeamsPosition)
     }
   }, [])
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = React.useState(false)
 
   function openModal() {
-    setIsOpen(true);
+    setIsOpen(true)
   }
-  
+
   function closeModal() {
-    setIsOpen(false);
+    setIsOpen(false)
   }
- 
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      maxWidth: '1150px', // 調整最大寬度
+      maxHeight: '800px', // 調整最大高度
+      margin: 'auto', // 水平居中
+      background: '#EBE9DD',
+    },
+  }
   return (
     <>
       <Bg />
@@ -54,28 +65,31 @@ export default function Pilgrimage() {
       <Image id="" alt="" src={flag} className={`${styles.flag}`} />
       <Image id="" alt="" src={dog} className={`${styles.dog}`} />
       <button className={`${styles.bubble}`} onClick={openModal}>
-        <div className={`${styles.text}`}>來做測驗，拿小禮物～</div></button>
-        <Modal
+        <div className={`${styles.text}`}>來做測驗，拿小禮物～</div>
+      </button>
+      <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        className={`${styles.modal}`}
+        style={customStyles}
         contentLabel="Example Modal"
       >
-        <div ><Quiz /></div>
+        <div>
+          <Quiz />
+        </div>
       </Modal>
-        <button
-        className={`${styles.bubble2}`}>
-        <div className={`${styles.text}`}>好熱鬧啊，快來一起聊</div></button>
-        <button
-        className={`${styles.bubble3}`}>
-        <div className={`${styles.text}`}>汪咿～！</div></button>
-        <button
-        className={`${styles.bubble4}`}>
-        <div className={`${styles.text}`}>心誠則靈</div></button>
-        <button
-        className={`${styles.bubble5}`}>
-        <div className={`${styles.text}`}>供品底加買啦～！</div></button>
-        <Teams />
+      <button className={`${styles.bubble2}`}>
+        <div className={`${styles.text}`}>好熱鬧啊，快來一起聊</div>
+      </button>
+      <button className={`${styles.bubble3}`}>
+        <div className={`${styles.text}`}>汪咿～！</div>
+      </button>
+      <button className={`${styles.bubble4}`}>
+        <div className={`${styles.text}`}>心誠則靈</div>
+      </button>
+      <button className={`${styles.bubble5}`}>
+        <div className={`${styles.text}`}>供品底加買啦～！</div>
+      </button>
+      <Teams />
       {/* <div
         className={`${styles.teamscontainer}`}
         style={{ left: teamsPosition.x, top: teamsPosition.y }}
