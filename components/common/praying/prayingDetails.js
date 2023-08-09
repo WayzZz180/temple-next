@@ -8,9 +8,6 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 //components
-import Button from '@/components/common/button/index.js'
-import DetailsText from '@/components/common/detailsText/index.js'
-import coupon from '@/assets/coupon.svg'
 import Title from '@/components/common/title/orderTitle'
 import Loading from '../loading'
 // svg
@@ -21,7 +18,7 @@ import studyGod from '@/assets/studyGod.svg'
 export default function PrayingDetails({
   wid = 1,
   info_sum = [],
-  src = 'mazuGod',
+  src = mazuGod,
   total = 100,
 }) {
   const router = useRouter()

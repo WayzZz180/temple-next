@@ -100,8 +100,8 @@ export default function PrayingSummary({ data = [] }) {
     const day = `${myDate.getFullYear()}/${
       myDate.getMonth() + 1 < 10 ? '0' : ''
     }${myDate.getMonth() + 1}/${
-      myDate.getDay() < 10 ? '0' : ''
-    }${myDate.getDay()}`
+      myDate.getDate() < 10 ? '0' : ''
+    }${myDate.getDate()}`
     const data = { day: day, time: now }
     return data
   }
@@ -188,7 +188,7 @@ export default function PrayingSummary({ data = [] }) {
             backgroundColor: 'rgba(0, 0, 0, 0.5)', // 背景顏色透明度
           },
           content: {
-            maxWidth: '1150px', // 調整最大寬度
+            maxWidth: '1050px', // 調整最大寬度
             maxHeight: '800px', // 調整最大高度
             margin: 'auto', // 水平居中
             background: variables['bgColor'],

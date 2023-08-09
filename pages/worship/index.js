@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import Head from 'next/head'
 
 // hooks
-import React, { use, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useInView } from 'react-intersection-observer' // Import react-intersection-observer
 
@@ -226,6 +226,13 @@ export default function Worship() {
 
     if (localStorage.getItem('reservation')) {
       const str = JSON.parse(localStorage.getItem('reservation'))
+
+      if (str.pidArr.length === 0) {
+        localStorage.removeItem('reservation')
+        location.reload()
+        return
+      }
+
       setGod(str.god)
       setDay(str.day)
       setTime(str.time)
