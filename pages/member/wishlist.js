@@ -61,6 +61,8 @@ export default function MyWishlist() {
                 WLimage={v.image}
                 WLname={v.product_name}
                 WLprice={v.product_price}
+                WLpid={v.pid}
+                WLcid={v.cid}
               />
             </div>
           ))

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { Container, Row, Col } from 'react-bootstrap'
 
@@ -9,11 +10,21 @@ import styles from '@/components/common/wishlist/wishlist.module.sass'
 import coupon_red from '@/assets/coupon_red.svg'
 import Button from '@/components/common/button/index.js'
 
-export default function Wishlist({ WLimage = '', WLname = '', WLprice = '' }) {
+export default function Wishlist({
+  WLimage = '',
+  WLname = '',
+  WLprice = '',
+  WLpid = '',
+  WLcid = '',
+}) {
+  const cat = ['cookies', 'candy', 'salty', 'drinks', 'gifts']
+
   const wishlistRow = (
     <Row className={styles.flex}>
       <Col>
-        <Image src={`/${WLimage}`} alt="product" height={121} width={121} />
+        <Link href={`/shop/${cat[WLcid]}/${WLpid}`}>
+          <Image src={`/${WLimage}`} alt="product" height={121} width={121} />
+        </Link>
       </Col>
       <Col>
         <div className={`${styles.textContainer} w200px`}>
