@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import Modal from 'react-modal'
 import Image from 'next/image'
 import styles from './pilgri.module.sass'
 import Teams from './teams'
@@ -7,6 +8,9 @@ import Sh from '@/assets/swingHand.gif'
 import jump from '@/assets/jump.gif'
 import flag from '@/assets/flag.gif'
 import dog from '@/assets/dog_in.gif'
+import Quiz from '@/pages/pilgrimage/onlineQuiz'
+import styled, { keyframes } from 'styled-components'
+import Portal from '@/components/common/Portal/Portal'
 
 export default function Pilgrimage() {
   const [teamsPosition, setTeamsPosition] = useState({ x: 0, y: 0 })
@@ -32,6 +36,16 @@ export default function Pilgrimage() {
       window.removeEventListener('resize', updateTeamsPosition)
     }
   }, [])
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+  
+  function closeModal() {
+    setIsOpen(false);
+  }
+ 
   return (
     <>
       <Bg />
@@ -39,9 +53,16 @@ export default function Pilgrimage() {
       <Image id="" alt="" src={jump} className={`${styles.jump}`} />
       <Image id="" alt="" src={flag} className={`${styles.flag}`} />
       <Image id="" alt="" src={dog} className={`${styles.dog}`} />
-      <button
-        className={`${styles.bubble}`} >
+      <button className={`${styles.bubble}`} onClick={openModal}>
         <div className={`${styles.text}`}>來做測驗，拿小禮物～</div></button>
+        <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        className={`${styles.modal}`}
+        contentLabel="Example Modal"
+      >
+        <div ><Quiz /></div>
+      </Modal>
         <button
         className={`${styles.bubble2}`}>
         <div className={`${styles.text}`}>好熱鬧啊，快來一起聊</div></button>
