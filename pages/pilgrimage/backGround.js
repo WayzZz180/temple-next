@@ -17,13 +17,34 @@ import C1 from '@/assets/littleC1.svg'
 import C2 from '@/assets/littleC2.svg'
 import C3 from '@/assets/OnlineCould.svg'
 import C4 from '@/assets/OnlineCould2.svg'
+import Board from '@/assets/BulletinBoard.svg'
 import fly from '@/assets/fly.gif'
+import People from './people'
 
-export default function BG({ teamsPosition }) {
+export default function Bg({ direction }) {
+  const [backgroundPosition, setBackgroundPosition] = useState(0);
+
+  const moveBackground = () => {
+    const moveAmount = 5; // 背景移动速度，根据需要调整
+
+    if (direction === 'right') {
+      setBackgroundPosition((prevPosition) => prevPosition + moveAmount);
+    } else if (direction === 'left') {
+      setBackgroundPosition((prevPosition) => prevPosition - moveAmount);
+    }
+  };
+
+  useEffect(() => {
+    if (direction === 'right' || direction === 'left') {
+      const intervalId = setInterval(moveBackground, 16); // 大约每 16 毫秒移动一次，约等于每秒 60 帧
+      return () => clearInterval(intervalId);
+    }
+  }, [direction]);
+
   return (
     <div
       className={styles.background}
-      style={{ transform: `translateX(-${teamsPosition}px)` }} // 根据位置应用反向移动效果
+      style={{ transform: `translateX(${backgroundPosition}px)` }}
     >
       <div className={styles.parent_container}>
         <div className={`${styles.flex_row2}`}>
@@ -112,10 +133,17 @@ export default function BG({ teamsPosition }) {
             width="600"
             className={`${styles.tree3}`}
           ></Image>
+          <Image
+            src={Board}
+            alt=""
+            width="600"
+            className={`${styles.Board}`}
+          ></Image>
+          <iframe className={`${styles.video}`} width="370" height="210" src="https://www.youtube.com/embed/tJWE2VitQc0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
       </div>
     </div>
   )
 }
 
-BG.getLayout = (page) => <>{page}</>
+Bg.getLayout = (page) => <>{page}</>

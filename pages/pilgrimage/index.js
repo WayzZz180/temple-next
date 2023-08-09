@@ -3,21 +3,31 @@ import Modal from '@/components/common/Modal/DialogWrapper'
 import Image from 'next/image'
 import styles from './indexP.module.sass'
 import Teams from './teams'
-import Bg from './backGround'
-import People from './people'
+import Bg from './mixbackground'
+
 
 export default function Pilgrimage() {
-  const [teamsPosition, setTeamsPosition] = useState(0)
+  const [characterDirection, setCharacterDirection] = useState('down');
+  const [bgDirection, setBgDirection] = useState('stop');
 
-  const handleTeamsMove = (position) => {
-    setTeamsPosition(position)
-  }
+  const handleSonaMove = (direction) => {
+    setCharacterDirection(direction);
+
+    // 根据角色方向计算背景移动方向
+    if (direction === 'right') {
+      setBgDirection('left');
+    } else if (direction === 'left') {
+      setBgDirection('right');
+    } else {
+      setBgDirection('stop');
+    }
+  };
+
   return (
     <>
       <div className={`${styles.parent_container}`}>
-        <Bg teamsPosition={teamsPosition} />
-        <People />
-        <Teams onMove={handleTeamsMove} />
+        <Bg direction={bgDirection} />
+        <Teams onMove={handleSonaMove} />
       </div>
     </>
   )
