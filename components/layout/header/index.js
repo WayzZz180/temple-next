@@ -21,7 +21,7 @@ export default function Header() {
         { label: '拜拜紀錄', url: '/member/praying' },
         { label: '訂單記錄', url: '/member/orders' },
         { label: '收藏清單', url: '/member/wishlist' },
-        { label: '我的優惠券', url: '/member/coupons' },
+        { label: '我的優惠券', url: '/member/myCoupons' },
         { label: '我的文章', url: '/member/articles' },
         { label: '護身符', url: '/member/amulet' },
         { label: '每日簽到', url: '/member/dailySignIn' },
