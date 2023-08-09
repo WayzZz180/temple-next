@@ -12,8 +12,10 @@ export default function Alert({
   isOpen = false,
   text = '',
   status = 'correct',
+  setIsOpen = () => {},
 }) {
   const [timeout, setTimeOut] = useState(false)
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setTimeOut(true)
@@ -23,6 +25,7 @@ export default function Alert({
       clearTimeout(timer) // 清除定时器，以防组件卸载时触发
     }
   }, [])
+
   return (
     <Modal
       isOpen={!timeout ? isOpen : !timeout}

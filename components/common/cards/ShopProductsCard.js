@@ -19,6 +19,7 @@ import CartDataContext from '@/contexts/CartDataContext'
 
 //components
 import Stars from '@/components/common/stars'
+import Alert from '@/components/common/alert'
 
 export default function ShopProductsCard({
   src,
@@ -158,6 +159,26 @@ export default function ShopProductsCard({
       .then((data) => {})
   }
 
+  // for alert
+  const [isOpen, setIsOpen] = useState(false)
+  const [reset, setReset] = useState(true)
+  // let handleReset = () => {}
+  // useEffect(() => {
+  //   handleReset = () => {
+  //     const timer = setTimeout(() => {
+  //       setReset(!reset)
+  //     }, 1500) // 3000毫秒 = 3秒
+
+  //     return () => {
+  //       clearTimeout(timer) // 清除定时器，以防组件卸载时触发
+  //     }
+  //   }
+  // }, [router.query])
+
+  useEffect(() => {
+    if (isOpen) setIsOpen(false)
+  }, [reset])
+
   return (
     <div className={`${styles.container}  p30px`}>
       {/* 產品圖 */}
@@ -251,13 +272,24 @@ export default function ShopProductsCard({
                 handleAnimationEnd()
                 addToCart()
               } else {
-                alert(`無庫存`)
+                // handleReset()
+                setIsOpen(true)
               }
             }}
             onMouseEnter={() => handleMouseEnter(2)}
             onMouseLeave={handleMouseLeave}
             className={`${styles.inlineBlock}`}
           >
+            {isOpen ? (
+              <Alert
+                isOpen={isOpen}
+                text={'沒有庫存了！'}
+                status="wrong"
+                // setIsOpen={setIsOpen}
+              />
+            ) : (
+              ''
+            )}
             <Image
               src={
                 stock_num === 0

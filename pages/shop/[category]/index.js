@@ -72,7 +72,7 @@ export default function Category() {
   ])
 
   useEffect(() => {
-    if (!category) return
+    if (!category) return <Loading />
 
     if (localStorage.getItem('keyword') && !keyword) {
       const currentParams = new URLSearchParams(window.location.search)
@@ -122,6 +122,7 @@ export default function Category() {
   }, [dataFromChild, router.query])
 
   if (!data) return <Loading />
+
   return (
     <Container className={`${styles.container}`}>
       {/* 類別&搜尋 */}
