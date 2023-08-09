@@ -63,12 +63,7 @@ export default function WorshipGod({
           {/* god */}
           <div className={`${styles.godContainer}`}>
             {/* God */}
-            <Image
-              src={loveGod}
-              alt=""
-              width={250}
-              className={`${styles.img} `}
-            />
+            <Image src={pic} alt="" width={250} className={`${styles.img} `} />
           </div>
           <div className={`${styles.title}`}>{text}</div>
           {/* god name */}

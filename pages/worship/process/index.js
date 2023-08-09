@@ -11,29 +11,106 @@ import { useRouter } from 'next/router'
 // components
 import God from '@/components/common/cards/WorshipProcessGod'
 import Button from '@/components/common/button'
+import Loading from '@/components/common/loading'
 
 // svg
 import BackTable from '@/assets/tableBack.svg'
 import FrontTable from '@/assets/tableFront.svg'
 import Burner from '@/assets/worship_burner.svg'
 import Incense from '@/assets/incense.svg'
+import mazuGod from '@/assets/mazuGod.svg'
+import loveGod from '@/assets/loveGod.svg'
+import studyGod from '@/assets/studyGod.svg'
+
+// data
+import godInfo from '@/components/mydata/godInfo'
 
 export default function Process() {
   const [active, setActive] = useState(false)
+  const router = useRouter()
+  const [data, setData] = useState([])
+  const [reservation, setReservation] = useState([])
+
+  useEffect(() => {
+    if (localStorage.getItem('reservation')) {
+      setReservation(JSON.parse(localStorage.getItem('reservation')))
+    }
+  }, [router.query])
+
+  // 參拜資料(worship_summary, worship_details)
+  useEffect(() => {
+    const pidArr = { pidArr: reservation?.pidArr }
+    if (pidArr?.pidArr) {
+      fetch(`${process.env.API_SERVER}/worship/image`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: pidArr }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          setData(data)
+        })
+    }
+  }, [reservation])
+
+  if (!data) return <Loading />
+
+  const gods = [
+    {
+      god: '媽組',
+      src: mazuGod,
+    },
+    {
+      god: '月老',
+      src: loveGod,
+    },
+    {
+      god: '文昌',
+      src: studyGod,
+    },
+  ]
+
+  if (!reservation) return <Loading />
+  const index = gods.findIndex((v, i) => v.god === reservation?.god)
 
   return (
     <main>
       <Container className={`${styles.container}`}>
         <Row className={`${styles.relative}`}>
           <Col className={`${styles.god} w100`}>
-            <God />
+            <God
+              pic={gods[index]?.src}
+              wordLeft={godInfo[index]?.wordLeft}
+              wordRight={godInfo[index]?.wordRight}
+            />
           </Col>
           <Col className={`${styles.tableContainer}`}>
             <div className={`${styles.back}`}>
               <Image src={BackTable} alt="back table" width={620} />
             </div>
             <div className={`${styles.front}`}>
-              <Image src={FrontTable} alt="front table" width={350} />
+              <Image
+                src={FrontTable}
+                alt="front table"
+                width={350}
+                height={350}
+              />
+            </div>
+            <div className={`${styles.productsContainer}`}>
+              {data?.map((v, i) => {
+                return (
+                  <div key={i} className={`border m3px ${styles.product}`}>
+                    <Image
+                      src={`/${v.image}`}
+                      alt={`product ${i}`}
+                      width={120}
+                      height={120}
+                    />
+                  </div>
+                )
+              })}
             </div>
             <div
               className={`${active ? styles.incense : styles.incenseHidden}`}
