@@ -10,13 +10,23 @@ import { useRouter } from 'next/router'
 //components
 import Button from '@/components/common/button/index.js'
 import DetailsText from '@/components/common/detailsText/index.js'
-import mazuGod from '@/assets/mazuGod.svg'
 import coupon from '@/assets/coupon.svg'
 import Title from '@/components/common/title/orderTitle'
+import Loading from '../loading'
+// svg
+import mazuGod from '@/assets/mazuGod.svg'
+import loveGod from '@/assets/loveGod.svg'
+import studyGod from '@/assets/studyGod.svg'
 
-export default function PrayingDetails({ wid = 1 }) {
+export default function PrayingDetails({
+  wid = 1,
+  info_sum = [],
+  src = 'mazuGod',
+  total = 100,
+}) {
   const router = useRouter()
   const [data, setData] = useState([])
+  const [products, setProducts] = useState([])
 
   useEffect(() => {
     const reqWid = { wid: wid }
@@ -29,23 +39,18 @@ export default function PrayingDetails({ wid = 1 }) {
     })
       .then((r) => r.json())
       .then((data) => {
-        setData(data)
+        setData(data[0])
+        setProducts(data[1])
+        console.log('data:', data)
+        console.log('data1:', data[0])
+        console.log('data2:', data[1])
       })
   }, [router.query])
 
+  if (!data || !products) return <Loading />
+
   const info = [
-    {
-      title: '參拜對象',
-      content: data?.god,
-    },
-    {
-      title: '參拜日期',
-      content: data?.day,
-    },
-    {
-      title: '預約時辰',
-      content: data?.time,
-    },
+    ...info_sum,
     {
       title: '配送方式',
       content: `${data?.delivery}｜`,
@@ -54,44 +59,53 @@ export default function PrayingDetails({ wid = 1 }) {
       title: '付款方式',
       content: data?.payment,
     },
-    // {
-    //   title: '收件資訊',
-    //   content: data?.address,
-    // },
+    {
+      title: '收件資訊',
+      content: data?.receivedInfo,
+    },
+    {
+      title: '訂單金額',
+      content: `$${total}`,
+    },
   ]
   return (
     <>
       <Row className={styles.flex}>
-        <Col>
-          <Image src={mazuGod} alt="mazuGod" width={390} height={550}></Image>
+        <Col className="p50px">
+          <Image src={src} alt="God" width={390} height={550}></Image>
         </Col>
         <Col>
           <div className={styles.flex2}>
-            <Title info={info} />
-            <div className={styles.shortLine}></div>
+            <Title info={info} data={data} />
           </div>
-          <div>
-            <Image src={coupon} alt="mazuGod" width={160} height={160}></Image>
-            <Image src={coupon} alt="mazuGod" width={160} height={160}></Image>
-            <Image src={coupon} alt="mazuGod" width={160} height={160}></Image>
+          <div className={`${styles.shortLine} mt30px`}></div>
+          <div className={`${styles.productsContainer} mt25px`}>
+            {products?.map((v, i) => {
+              return (
+                <div
+                  key={v.image}
+                  role="presentation"
+                  className={`mt10px mb10px me10px`}
+                >
+                  {/* 圖片 */}
+                  <div className={`${styles.image}`}>
+                    <Image
+                      src={`/${v.image}`}
+                      alt="product"
+                      width={160}
+                      height={160}
+                    ></Image>
+                  </div>
+                  <div className={`${styles.text} fwBold fs20px p5px`}>
+                    {v.product_name}
+                  </div>
+                  <div className={`${styles.price} fwBold fs20px p5px`}>
+                    ${v.product_price}
+                  </div>
+                </div>
+              )
+            })}
           </div>
-          <div className={styles.flex}>
-            <div>
-              訂單金額
-              <span className={`${styles.text_pink} fs30px ms5px`}>$132</span>
-            </div>
-            <Button
-              text="訂單詳細"
-              btnColor="brown"
-              width="229px"
-              height="50px"
-              fontSize="20px"
-            />
-          </div>
-        </Col>
-
-        <Col className={styles.btnflex}>
-          <div className="m5px"></div>
         </Col>
       </Row>
 

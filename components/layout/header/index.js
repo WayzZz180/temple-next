@@ -37,7 +37,7 @@ export default function Header() {
       links: [
         { label: '預約拜拜', url: '/worship' },
         { label: '供品套組', url: '/worship/offerings' },
-        { label: '預約紀錄', url: '#' },
+        { label: '預約紀錄', url: '/member/praying' },
       ],
     },
     {

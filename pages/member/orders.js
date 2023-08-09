@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import Title from '@/components/common/title/index.js'
 import MemberNavbar from '@/components/common/memberNavbar'
 import OrderSummary from '@/components/common/cards/orderSummaryCard'
+import Loading from '@/components/common/loading'
 
 // bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
@@ -24,6 +25,7 @@ export default function Orders() {
         setData(data)
       })
   }, [router.query])
+  if (!data) return <Loading />
 
   return (
     <div className={styles.flex}>

@@ -62,6 +62,7 @@ export default function Check() {
   const [user, setUser] = useState({
     delivery: '宅配',
     payment: '信用卡',
+    receivedInfo: '民生社區',
     status: '未出貨',
   })
 
@@ -125,7 +126,7 @@ export default function Check() {
             text={
               reservation?.today && reservation?.time === reservation?.now
                 ? `開始祭拜`
-                : `預約成功`
+                : `確認預約`
             }
             btnColor="hot_pink"
             link={() => {

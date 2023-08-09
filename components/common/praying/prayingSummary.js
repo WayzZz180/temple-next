@@ -3,15 +3,21 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useState } from 'react'
 import styles from './prayingSummary.module.sass'
 import variables from '@/styles/_variables.module.sass'
-
 import Modal from 'react-modal'
-//components
+
+// components
 import Title from '@/components/common/title/orderTitle'
 import Button from '@/components/common/button/index.js'
+import PrayingDetails from './prayingDetails'
+
+// svg
 import mazuGod from '@/assets/mazuGod.svg'
 import loveGod from '@/assets/loveGod.svg'
 import studyGod from '@/assets/studyGod.svg'
-import PrayingDetails from './prayingDetails'
+
+// data
+import timeInfo from '@/components/mydata/timeInfo'
+
 export default function PrayingSummary({ data = [] }) {
   const gods = [
     {
@@ -44,7 +50,74 @@ export default function PrayingSummary({ data = [] }) {
       content: data?.time,
     },
   ]
+
   const [isOpen, setIsOpen] = useState(false)
+
+  const getNow = () => {
+    const myDate = new Date()
+    const hours = myDate.getHours()
+
+    // 現在的時間轉成12小時制
+    let end = ''
+    let time = ''
+    if (hours === 0) {
+      end = 'am'
+      time = 12 + end
+    } else if (hours === 12) {
+      end = 'pm'
+      time = 12 + end
+    } else if (hours - 12 > 0) {
+      end = 'pm'
+      time = hours - 12 + end
+    } else {
+      end = 'am'
+      time = hours + end
+    }
+
+    // 中間的時間
+    const mid = timeInfo.map((v, i) => {
+      const [startHour, endHour] = v.time
+        .split('-')
+        .map((time) => parseInt(time))
+      const tmp = Number(endHour - 1) === 0 ? 12 : Number(endHour - 1)
+      const mid = tmp + v.time.slice(-2)
+      return mid
+    })
+
+    // 看看有沒有和中間的時間相等
+    let index = mid.findIndex((v, i) => v === time)
+    let result = index != -1 ? timeInfo[index] : ''
+
+    // 沒有的話和頭相比
+    if (!result) {
+      const start = timeInfo.map((v, i) => {
+        return v.time.split('-')[0]
+      })
+      index = start.findIndex((v, i) => v === time)
+      result = index != -1 ? timeInfo[index] : ''
+    }
+    const now = `${timeInfo[index].id}/${timeInfo[index].time}`
+    const day = `${myDate.getFullYear()}/${
+      myDate.getMonth() + 1 < 10 ? '0' : ''
+    }${myDate.getMonth() + 1}/${
+      myDate.getDay() < 10 ? '0' : ''
+    }${myDate.getDay()}`
+    const data = { day: day, time: now }
+    return data
+  }
+  const dayTime = getNow()
+  const day = dayTime.day
+  const time = dayTime.time
+
+  const isNow = () => {
+    if (day === data?.day && time === data?.time) {
+      return true
+    } else {
+      return false
+    }
+  }
+  const toPray = isNow()
+
   return (
     <Container>
       <Row className={styles.flex}>
@@ -68,11 +141,27 @@ export default function PrayingSummary({ data = [] }) {
               setIsOpen(true)
             }}
           />
+          {toPray ? (
+            <div className="mt20px">
+              <Button
+                text="去拜拜"
+                btnColor="hot_pink"
+                width="229px"
+                height="50px"
+                fontSize="20px"
+                link={() => {
+                  setIsOpen(true)
+                }}
+              />
+            </div>
+          ) : (
+            ''
+          )}
           <div className={`${styles.total} mt15px`}>
             <div className={`${styles.totalTitle} fwBold fs20px`}>訂單金額</div>
             <div className={` fwBold fs28px`}>${data?.total}</div>
           </div>
-          <div className={`${styles.total}`}>
+          <div className={`${styles.total} mt5px`}>
             <div className={`${styles.totalTitle} fwBold fs20px`}>完成參拜</div>
             <div
               className={`${styles.status} fwBold fs24px`}
@@ -102,18 +191,25 @@ export default function PrayingSummary({ data = [] }) {
             maxWidth: '1150px', // 調整最大寬度
             maxHeight: '800px', // 調整最大高度
             margin: 'auto', // 水平居中
+            background: variables['bgColor'],
           },
         }}
       >
         <div
           role="presentation"
+          className={`${styles.close} me25px fs28px p10px`}
           onClick={() => {
             setIsOpen(false)
           }}
         >
           X
         </div>
-        <PrayingDetails wid={data?.wid} />
+        <PrayingDetails
+          wid={data?.wid}
+          info_sum={info}
+          src={god[0].src}
+          total={data?.total}
+        />
       </Modal>
     </Container>
   )

@@ -6,6 +6,7 @@ export default CartCountContext
 export const CartCountContextProvider = function ({ children }) {
   const [cartCount, setCartCount] = useState(0)
   const router = useRouter()
+
   const getCartCount = () => {
     fetch(`${process.env.API_SERVER}/shop/count`)
       .then((r) => r.json())
@@ -13,6 +14,7 @@ export const CartCountContextProvider = function ({ children }) {
         setCartCount(data)
       })
   }
+
   useEffect(() => {
     getCartCount()
   }, [router.query])
