@@ -118,6 +118,7 @@ export default function PrayingSummary({ data = [] }) {
   }
   const toPray = isNow()
 
+  // 點下去拜拜setlocalstorage
   return (
     <Container>
       <Row className={styles.flex}>
