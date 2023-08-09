@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Aug 08, 2023 at 10:18 AM
--- Server version: 5.7.24
--- PHP Version: 8.0.1
+-- 主機： localhost:8889
+-- 產生時間： 2023 年 08 月 09 日 02:26
+-- 伺服器版本： 5.7.39
+-- PHP 版本： 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `temple`
+-- 資料庫： `temple`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `browse_history`
+-- 資料表結構 `browse_history`
 --
 
 CREATE TABLE `browse_history` (
@@ -35,7 +35,7 @@ CREATE TABLE `browse_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `browse_history`
+-- 傾印資料表的資料 `browse_history`
 --
 
 INSERT INTO `browse_history` (`bid`, `member_id`, `pid`, `created_at`) VALUES
@@ -94,7 +94,7 @@ INSERT INTO `browse_history` (`bid`, `member_id`, `pid`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cart`
+-- 資料表結構 `cart`
 --
 
 CREATE TABLE `cart` (
@@ -106,7 +106,7 @@ CREATE TABLE `cart` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `cart`
+-- 傾印資料表的資料 `cart`
 --
 
 INSERT INTO `cart` (`sid`, `pid`, `quantity`, `created_at`, `member_id`) VALUES
@@ -116,7 +116,7 @@ INSERT INTO `cart` (`sid`, `pid`, `quantity`, `created_at`, `member_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- 資料表結構 `categories`
 --
 
 CREATE TABLE `categories` (
@@ -126,7 +126,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `categories`
+-- 傾印資料表的資料 `categories`
 --
 
 INSERT INTO `categories` (`cid`, `category_name`, `parent_id`) VALUES
@@ -172,7 +172,7 @@ INSERT INTO `categories` (`cid`, `category_name`, `parent_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comment`
+-- 資料表結構 `comment`
 --
 
 CREATE TABLE `comment` (
@@ -184,7 +184,7 @@ CREATE TABLE `comment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `comment`
+-- 傾印資料表的資料 `comment`
 --
 
 INSERT INTO `comment` (`sid`, `member_forum_name`, `comment`, `comment.time`, `post_sid`) VALUES
@@ -512,7 +512,7 @@ INSERT INTO `comment` (`sid`, `member_forum_name`, `comment`, `comment.time`, `p
 -- --------------------------------------------------------
 
 --
--- Table structure for table `like_products`
+-- 資料表結構 `like_products`
 --
 
 CREATE TABLE `like_products` (
@@ -523,7 +523,7 @@ CREATE TABLE `like_products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `like_products`
+-- 傾印資料表的資料 `like_products`
 --
 
 INSERT INTO `like_products` (`lid`, `member_id`, `pid`, `created_at`) VALUES
@@ -540,7 +540,7 @@ INSERT INTO `like_products` (`lid`, `member_id`, `pid`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_details`
+-- 資料表結構 `order_details`
 --
 
 CREATE TABLE `order_details` (
@@ -552,7 +552,7 @@ CREATE TABLE `order_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `order_details`
+-- 傾印資料表的資料 `order_details`
 --
 
 INSERT INTO `order_details` (`odid`, `oid`, `quantity`, `pid`, `product_price`) VALUES
@@ -601,7 +601,7 @@ INSERT INTO `order_details` (`odid`, `oid`, `quantity`, `pid`, `product_price`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_summary`
+-- 資料表結構 `order_summary`
 --
 
 CREATE TABLE `order_summary` (
@@ -621,7 +621,7 @@ CREATE TABLE `order_summary` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `order_summary`
+-- 傾印資料表的資料 `order_summary`
 --
 
 INSERT INTO `order_summary` (`oid`, `member_id`, `total`, `customer_name`, `customer_email`, `customer_phone`, `customer_address`, `payment`, `delivery`, `invoice`, `coupon`, `created_at`, `status`) VALUES
@@ -644,7 +644,7 @@ INSERT INTO `order_summary` (`oid`, `member_id`, `total`, `customer_name`, `cust
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- 資料表結構 `products`
 --
 
 CREATE TABLE `products` (
@@ -662,7 +662,7 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `products`
+-- 傾印資料表的資料 `products`
 --
 
 INSERT INTO `products` (`pid`, `product_name`, `product_price`, `product_details`, `cid`, `recommend`, `browse_num`, `purchase_num`, `stock_num`, `stars`, `image`) VALUES
@@ -2749,7 +2749,7 @@ INSERT INTO `products` (`pid`, `product_name`, `product_price`, `product_details
 -- --------------------------------------------------------
 
 --
--- Table structure for table `shop_comment`
+-- 資料表結構 `shop_comment`
 --
 
 CREATE TABLE `shop_comment` (
@@ -2765,7 +2765,7 @@ CREATE TABLE `shop_comment` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `top10`
+-- 資料表結構 `top10`
 --
 
 CREATE TABLE `top10` (
@@ -2776,7 +2776,7 @@ CREATE TABLE `top10` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wanna_buy`
+-- 資料表結構 `wanna_buy`
 --
 
 CREATE TABLE `wanna_buy` (
@@ -2787,7 +2787,7 @@ CREATE TABLE `wanna_buy` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `wanna_buy`
+-- 傾印資料表的資料 `wanna_buy`
 --
 
 INSERT INTO `wanna_buy` (`wid`, `member_id`, `pid`, `created_at`) VALUES
@@ -2796,7 +2796,7 @@ INSERT INTO `wanna_buy` (`wid`, `member_id`, `pid`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `worship`
+-- 資料表結構 `worship`
 --
 
 CREATE TABLE `worship` (
@@ -2808,7 +2808,7 @@ CREATE TABLE `worship` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `worship`
+-- 傾印資料表的資料 `worship`
 --
 
 INSERT INTO `worship` (`pid`, `product_name`, `product_price`, `cid`, `image`) VALUES
@@ -2840,7 +2840,7 @@ INSERT INTO `worship` (`pid`, `product_name`, `product_price`, `cid`, `image`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `worship_details`
+-- 資料表結構 `worship_details`
 --
 
 CREATE TABLE `worship_details` (
@@ -2848,199 +2848,220 @@ CREATE TABLE `worship_details` (
   `wid` int(11) NOT NULL,
   `delivery` varchar(255) NOT NULL,
   `payment` varchar(255) NOT NULL,
-  `received` varchar(255) NOT NULL,
-  `delivery_status` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
   `pid1` int(11) DEFAULT NULL,
   `pid2` int(11) DEFAULT NULL,
   `pid3` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- 傾印資料表的資料 `worship_details`
+--
+
+INSERT INTO `worship_details` (`did`, `wid`, `delivery`, `payment`, `status`, `pid1`, `pid2`, `pid3`) VALUES
+(1, 15, '宅配', '信用卡', '未出貨', 22, 23, 21),
+(2, 16, '宅配', '信用卡', '未出貨', 7, 6, NULL),
+(3, 17, '宅配', '信用卡', '未出貨', 5, NULL, NULL),
+(4, 18, '宅配', '信用卡', '未出貨', 4, NULL, NULL),
+(5, 19, '宅配', '信用卡', '未出貨', 6, NULL, NULL),
+(6, 20, '宅配', '信用卡', '未出貨', 15, 11, 10),
+(7, 21, '宅配', '信用卡', '未出貨', 13, NULL, NULL),
+(8, 22, '宅配', '信用卡', '未出貨', 5, 6, 7);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `worship_summary`
+-- 資料表結構 `worship_summary`
 --
 
 CREATE TABLE `worship_summary` (
   `wid` int(11) NOT NULL,
   `member_id` varchar(255) NOT NULL,
   `god` varchar(255) NOT NULL,
-  `date_time` varchar(255) NOT NULL,
+  `day` varchar(255) NOT NULL,
+  `time` varchar(255) NOT NULL,
   `total` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL,
+  `complete` tinyint(1) NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `worship_summary`
+-- 傾印資料表的資料 `worship_summary`
 --
 
-INSERT INTO `worship_summary` (`wid`, `member_id`, `god`, `date_time`, `total`, `status`, `created_at`) VALUES
-(1, 'wayz', '媽祖', '午時/11am-1pm', 264, 0, '2023-08-08 18:17:58');
+INSERT INTO `worship_summary` (`wid`, `member_id`, `god`, `day`, `time`, `total`, `complete`, `created_at`) VALUES
+(15, 'wayz', '文昌', '2023/08/23', '午時/11am-1pm', 320, 0, '2023-08-08 23:52:38'),
+(16, 'wayz', '媽祖', '2023/08/16', '辰時/7am-9am', 105, 1, '2023-08-08 23:53:10'),
+(17, 'wayz', '媽祖', '2023/08/17', '午時/11am-1pm', 120, 1, '2023-08-08 23:58:41'),
+(18, 'wayz', '媽祖', '2023/08/22', '戌時/7pm-9pm', 99, 1, '2023-08-09 00:01:13'),
+(19, 'wayz', '媽祖', '2023/08/09', '巳時/9am-11am', 45, 1, '2023-08-09 00:02:24'),
+(20, 'wayz', '月老', '2023/08/31', '午時/11am-1pm', 200, 0, '2023-08-09 00:37:01'),
+(21, 'wayz', '月老', '2023/08/10', '未時/1pm-3pm', 60, 0, '2023-08-09 00:37:26'),
+(22, 'wayz', '媽祖', '2023/08/15', '亥時/9pm-11pm', 225, 0, '2023-08-09 00:42:01');
 
 --
--- Indexes for dumped tables
+-- 已傾印資料表的索引
 --
 
 --
--- Indexes for table `browse_history`
+-- 資料表索引 `browse_history`
 --
 ALTER TABLE `browse_history`
   ADD PRIMARY KEY (`bid`);
 
 --
--- Indexes for table `cart`
+-- 資料表索引 `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`sid`);
 
 --
--- Indexes for table `categories`
+-- 資料表索引 `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`cid`);
 
 --
--- Indexes for table `comment`
+-- 資料表索引 `comment`
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`sid`);
 
 --
--- Indexes for table `like_products`
+-- 資料表索引 `like_products`
 --
 ALTER TABLE `like_products`
   ADD PRIMARY KEY (`lid`);
 
 --
--- Indexes for table `order_details`
+-- 資料表索引 `order_details`
 --
 ALTER TABLE `order_details`
   ADD PRIMARY KEY (`odid`);
 
 --
--- Indexes for table `order_summary`
+-- 資料表索引 `order_summary`
 --
 ALTER TABLE `order_summary`
   ADD PRIMARY KEY (`oid`);
 
 --
--- Indexes for table `products`
+-- 資料表索引 `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`pid`);
 
 --
--- Indexes for table `shop_comment`
+-- 資料表索引 `shop_comment`
 --
 ALTER TABLE `shop_comment`
   ADD PRIMARY KEY (`cid`);
 
 --
--- Indexes for table `top10`
+-- 資料表索引 `top10`
 --
 ALTER TABLE `top10`
   ADD PRIMARY KEY (`sid`);
 
 --
--- Indexes for table `wanna_buy`
+-- 資料表索引 `wanna_buy`
 --
 ALTER TABLE `wanna_buy`
   ADD PRIMARY KEY (`wid`);
 
 --
--- Indexes for table `worship`
+-- 資料表索引 `worship`
 --
 ALTER TABLE `worship`
   ADD PRIMARY KEY (`pid`);
 
 --
--- Indexes for table `worship_details`
+-- 資料表索引 `worship_details`
 --
 ALTER TABLE `worship_details`
   ADD PRIMARY KEY (`did`);
 
 --
--- Indexes for table `worship_summary`
+-- 資料表索引 `worship_summary`
 --
 ALTER TABLE `worship_summary`
   ADD PRIMARY KEY (`wid`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
 --
 
 --
--- AUTO_INCREMENT for table `browse_history`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `browse_history`
 --
 ALTER TABLE `browse_history`
   MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2923;
 
 --
--- AUTO_INCREMENT for table `cart`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `cart`
 --
 ALTER TABLE `cart`
   MODIFY `sid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=402;
 
 --
--- AUTO_INCREMENT for table `comment`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `comment`
 --
 ALTER TABLE `comment`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT COMMENT '留言編號', AUTO_INCREMENT=321;
 
 --
--- AUTO_INCREMENT for table `like_products`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `like_products`
 --
 ALTER TABLE `like_products`
   MODIFY `lid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
--- AUTO_INCREMENT for table `order_details`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `order_details`
 --
 ALTER TABLE `order_details`
   MODIFY `odid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
--- AUTO_INCREMENT for table `products`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `products`
 --
 ALTER TABLE `products`
   MODIFY `pid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2086;
 
 --
--- AUTO_INCREMENT for table `shop_comment`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `shop_comment`
 --
 ALTER TABLE `shop_comment`
   MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `top10`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `top10`
 --
 ALTER TABLE `top10`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `wanna_buy`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `wanna_buy`
 --
 ALTER TABLE `wanna_buy`
   MODIFY `wid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
--- AUTO_INCREMENT for table `worship`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `worship`
 --
 ALTER TABLE `worship`
   MODIFY `pid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT for table `worship_details`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `worship_details`
 --
 ALTER TABLE `worship_details`
-  MODIFY `did` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `did` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `worship_summary`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `worship_summary`
 --
 ALTER TABLE `worship_summary`
-  MODIFY `wid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `wid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
