@@ -32,13 +32,18 @@ export default function Orders() {
       <Container>
         <Row>
           <Col>
-            <Title text="訂單外包H" text2="ORDERS" lineColor="green" />
+            <Title
+              text="訂單外包H"
+              text2="ORDERS"
+              lineColor="green"
+              width={860}
+            />
           </Col>
         </Row>
         <MemberNavbar />
 
         <Row>
-          {data?.map((v, i) => {
+          {data.map((v, i) => {
             return (
               <Col key={i} className={`${styles.detailsContainer} mt30px`}>
                 <OrderSummary data={v} text1="訂單詳情" text2="留下評論" />
