@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import Modal from 'react-modal'
+import Modal from '@/components/common/Modal/DialogWrapper'
 import Image from 'next/image'
 import styles from './pilgri.module.sass'
 import Teams from './teams'
@@ -9,6 +9,8 @@ import jump from '@/assets/jump.gif'
 import flag from '@/assets/flag.gif'
 import dog from '@/assets/dog_in.gif'
 import Quiz from '@/pages/pilgrimage/onlineQuiz'
+import styled, { keyframes } from 'styled-components'
+import Portal from '@/components/common/Portal/Portal'
 
 export default function Pilgrimage() {
   const [teamsPosition, setTeamsPosition] = useState({ x: 0, y: 0 })
