@@ -22,24 +22,24 @@ import fly from '@/assets/fly.gif'
 import People from './people'
 
 export default function Bg({ direction }) {
-  const [backgroundPosition, setBackgroundPosition] = useState(0);
+  const [backgroundPosition, setBackgroundPosition] = useState(0)
 
   const moveBackground = () => {
-    const moveAmount = 5; // 背景移动速度，根据需要调整
+    const moveAmount = 5 // 背景移动速度，根据需要调整
 
     if (direction === 'right') {
-      setBackgroundPosition((prevPosition) => prevPosition + moveAmount);
+      setBackgroundPosition((prevPosition) => prevPosition + moveAmount)
     } else if (direction === 'left') {
-      setBackgroundPosition((prevPosition) => prevPosition - moveAmount);
+      setBackgroundPosition((prevPosition) => prevPosition - moveAmount)
     }
-  };
+  }
 
   useEffect(() => {
     if (direction === 'right' || direction === 'left') {
-      const intervalId = setInterval(moveBackground, 16); // 大约每 16 毫秒移动一次，约等于每秒 60 帧
-      return () => clearInterval(intervalId);
+      const intervalId = setInterval(moveBackground, 16) // 大约每 16 毫秒移动一次，约等于每秒 60 帧
+      return () => clearInterval(intervalId)
     }
-  }, [direction]);
+  }, [direction])
 
   return (
     <div
@@ -139,7 +139,16 @@ export default function Bg({ direction }) {
             width="600"
             className={`${styles.Board}`}
           ></Image>
-          <iframe className={`${styles.video}`} width="370" height="210" src="https://www.youtube.com/embed/tJWE2VitQc0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <iframe
+            className={`${styles.video}`}
+            width="370"
+            height="210"
+            src="https://www.youtube.com/embed/tJWE2VitQc0?autoplay=1&mute=1"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
         </div>
       </div>
     </div>
