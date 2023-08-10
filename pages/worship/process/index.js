@@ -1,4 +1,4 @@
-import React, { use } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import styles from './process.module.sass'
 
@@ -147,21 +147,9 @@ export default function Process() {
                 height={350}
               />
             </div>
+            {/* 供品 */}
             <div className={`${styles.productsContainer} `}>
               <SortableList items={items} />
-              {/* 供品 */}
-              {/* {data?.map((v, i) => {
-                return (
-                  <div key={i} className={`border m3px ${styles.product}`}>
-                    <Image
-                      src={`/${v.image}`}
-                      alt={`product ${i}`}
-                      width={120}
-                      height={120}
-                    />
-                  </div>
-                )
-              })} */}
             </div>
             {/* 香 */}
             <div

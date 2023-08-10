@@ -39,6 +39,7 @@ export default function WorshipGod({
       transform: 'translate3d(0, -10px, 0)',
     },
   })
+
   return (
     <div className={`${styles.relative}`}>
       <div className={`${styles.container}`}>
