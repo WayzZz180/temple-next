@@ -15,6 +15,8 @@ import Button from '@/components/common/button/index.js'
 import doorGodLeft from '@/assets/doorGodLeft.svg'
 import doorGodRight from '@/assets/doorGodRight.svg'
 import Checkbox from '@/components/common/checkBox'
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
+import VisibilityIcon from '@mui/icons-material/Visibility'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
@@ -26,6 +28,12 @@ export default function Login() {
     member_account: '',
     member_password: '',
   })
+  const [showPassword, setShowPassword] = useState(false) // 顯示密碼
+
+  // 切換顯示密碼
+  const toggleShowPassword = () => {
+    setShowPassword((prevshowPassword) => !prevshowPassword)
+  }
 
   const changeUser = (e) => {
     setUser((old) => ({
@@ -99,13 +107,30 @@ export default function Login() {
           <Row className={styles.flex_centre}>
             <Col>
               <InputBox
-                type="text"
+                type={showPassword ? 'text' : 'password'}
                 // className="form-control"
                 id="member_password"
                 placeholder="密碼"
                 value={user.member_password}
                 onChange={changeUser}
               />
+              {showPassword ? (
+                <div className={styles.flex_start}>
+                  <VisibilityOffIcon
+                    onClick={toggleShowPassword}
+                    className="me10px"
+                  />
+                  隱藏密碼{' '}
+                </div>
+              ) : (
+                <div className={styles.flex_start}>
+                  <VisibilityIcon
+                    onClick={toggleShowPassword}
+                    className="me10px"
+                  />
+                  顯示密碼
+                </div>
+              )}
             </Col>
           </Row>
           <Row>

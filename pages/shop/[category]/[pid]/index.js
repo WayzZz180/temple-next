@@ -31,6 +31,7 @@ import monkey from '@/assets/monkey.svg'
 import buy from '@/assets/buy.svg'
 import inStock from '@/assets/inStock.svg'
 import emptyStock from '@/assets/emptyStock.svg'
+import Loading from '@/components/common/loading'
 
 // Bootstrap
 import Container from 'react-bootstrap/Container'
@@ -38,8 +39,8 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 export default function Pid() {
-  const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext);
-  const { cartData, setCartData, getCartData } = useContext(CartDataContext);
+  const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
+  const { cartData, setCartData, getCartData } = useContext(CartDataContext)
   const router = useRouter()
   const currentPath = router.asPath
   const [data, setData] = useState()
@@ -66,45 +67,48 @@ export default function Pid() {
         // 重置數量
         setCount(1)
       })
-      
+
+    // 判斷有沒有加入收藏
     fetch(`${process.env.API_SERVER}/shop/favoriteMatch`)
-    .then((r) => r.json())
-    .then((data) => {
-      setPidArr(data)
-      
-    })
+      .then((r) => r.json())
+      .then((data) => {
+        setPidArr(data)
+      })
   }, [router.query])
-  
+
   // 查看有無喜好商品
-  const foundFav = pidArr?.some((v) => v.pid === Number(router.query.pid));
-  const foundCart = cartData.some((v)=> v.pid === Number(router.query.pid));
+  const foundFav = pidArr?.some((v) => v.pid === Number(router.query.pid))
+  const foundCart = cartData.some((v) => v.pid === Number(router.query.pid))
   // console.log(foundCart);
 
   //判斷有無點擊收藏和購物車
-  const { clickState: heartClickState, handleClick: handleHeartClick, setClickState: setHeartClickState } =
-    useClick(foundFav)
-  const { clickState: cartClickState, handleClick: handleCartClick, setClickState: setCartClickState } =
-    useClick(foundCart)
+  const {
+    clickState: heartClickState,
+    handleClick: handleHeartClick,
+    setClickState: setHeartClickState,
+  } = useClick(foundFav)
+  const {
+    clickState: cartClickState,
+    handleClick: handleCartClick,
+    setClickState: setCartClickState,
+  } = useClick(foundCart)
 
   // 確定喜好商品狀態
-  useEffect(()=>{
-    if(foundFav!=heartClickState){
+  useEffect(() => {
+    if (foundFav != heartClickState) {
       setHeartClickState(foundFav)
     }
-  },[foundFav])
+  }, [foundFav])
 
   // 確定購物車狀態
-  useEffect(()=>{
-    if(foundCart!=cartClickState){
+  useEffect(() => {
+    if (foundCart != cartClickState) {
       setCartClickState(foundCart)
     }
-  },[foundCart])
-  
+  }, [foundCart])
 
   // 防呆
-  if (!data || !data.product_details) {
-    return <div>product details Not found</div>
-  }
+  if (!data) return <Loading />
 
   // 商品描述格式調整
   const replaceWhiteSpace = (productDetails) => {
@@ -125,7 +129,8 @@ export default function Pid() {
       .replace(/[。]/g, (match) => `${match}<br /><br />`)
       .replace(/＊必買原因＊/g, '<br /><br />＊必買原因＊<br />')
       .replace(/＊必吃原因＊/g, '<br /><br />＊必吃原因＊<br />')
-    return result}
+    return result
+  }
 
   // 購物車彈跳動畫
   const y = 0
@@ -147,7 +152,7 @@ export default function Pid() {
       transform: `translate3d(${x}px, ${y4}px, 0)`,
     },
   })
-  
+
   const handleAnimationEnd = () => {
     setAnimationEnd(true)
     setTimeout(() => {
@@ -156,8 +161,8 @@ export default function Pid() {
   }
 
   // 加入購物車
-  const addToCart = (count)=>{
-    const reqData = {count: count, pid: router.query.pid}
+  const addToCart = (count) => {
+    const reqData = { count: count, pid: router.query.pid }
     fetch(`${process.env.API_SERVER}/shop/cart`, {
       method: 'POST',
       body: JSON.stringify({ requestData: reqData }),
@@ -173,8 +178,8 @@ export default function Pid() {
   }
 
   // 加入瀏覽紀錄
-  const insertHistory = ()=>{
-    const addData = {pid: router.query.pid}
+  const insertHistory = () => {
+    const addData = { pid: router.query.pid }
     fetch(`${process.env.API_SERVER}/shop/history`, {
       method: 'POST',
       body: JSON.stringify({ requestData: addData }),
@@ -183,8 +188,7 @@ export default function Pid() {
       },
     })
       .then((r) => r.json())
-      .then((data) => {
-      })
+      .then((data) => {})
   }
   insertHistory()
 
@@ -199,8 +203,7 @@ export default function Pid() {
       },
     })
       .then((r) => r.json())
-      .then((data) => {
-      })
+      .then((data) => {})
   }
 
   // 刪除喜好商品
@@ -214,9 +217,8 @@ export default function Pid() {
         'Content-Type': 'application/json',
       },
     })
-    .then((r) => r.json())
-    .then((data) => {
-    })
+      .then((r) => r.json())
+      .then((data) => {})
   }
 
   return (
@@ -267,7 +269,7 @@ export default function Pid() {
               <div className={`${styles.add} fs24px mb35px `}>
                 {/* － */}
                 <Image
-                  src={minus} 
+                  src={minus}
                   width={30}
                   alt="minus"
                   className={`${styles.button}`}
@@ -321,9 +323,10 @@ export default function Pid() {
               {/* 加入購物車 & 收藏 */}
               {/* 購物車 */}
               <div
+                role="presentation"
                 className={`${styles.flex_row} mb35px `}
                 onClick={() => {
-                  if(data?.stock_num != 0){
+                  if (data?.stock_num != 0) {
                     cartClickState ? '' : handleCartClick()
                     handleAnimationEnd()
                   }
@@ -331,46 +334,50 @@ export default function Pid() {
                 onMouseEnter={() => handleMouseEnter(2)}
                 onMouseLeave={handleMouseLeave}
               >
-               {
-                  data?.stock_num === 0 ? (
-                    <NoButton
-                      text="加入購物車"
-                      btnColor="black"
-                      width="275px"
-                      padding="15px 60px"
-                      fontSize="20px"
-                      hoverColor="hot_pink"
-                    />
-                  ) : (
-                    <Button
-                      text="加入購物車"
-                      btnColor="black"
-                      width="275px"
-                      padding="15px 60px"
-                      fontSize="20px"
-                      hoverColor="hot_pink"
-                      link={() => {
-                          addToCart(count);
-                          
-                      }}
-                    />
-                  )
-                }
+                {data?.stock_num === 0 ? (
+                  <NoButton
+                    text="加入購物車"
+                    btnColor="black"
+                    width="275px"
+                    padding="15px 60px"
+                    fontSize="20px"
+                    hoverColor="hot_pink"
+                  />
+                ) : (
+                  <Button
+                    text="加入購物車"
+                    btnColor="black"
+                    width="275px"
+                    padding="15px 60px"
+                    fontSize="20px"
+                    hoverColor="hot_pink"
+                    link={() => {
+                      addToCart(count)
+                    }}
+                  />
+                )}
                 {/* 購物車 */}
                 <span
+                  role="presentation"
                   onClick={() => {
-                  if(data?.stock_num != 0){
-                    cartClickState ? '' : handleCartClick()
-                    handleAnimationEnd()
-                    addToCart(count);
-                  }
+                    if (data?.stock_num != 0) {
+                      cartClickState ? '' : handleCartClick()
+                      handleAnimationEnd()
+                      addToCart(count)
+                    }
                   }}
                   onMouseEnter={() => handleMouseEnter(2)}
                   onMouseLeave={handleMouseLeave}
                   className={`${styles.inlineBlock} ms25px`}
                 >
                   <Image
-                    src={data?.stock_num === 0 ? cart_noStock : (isCartHovered || cartClickState ? cart_fill : cart_outline)}
+                    src={
+                      data?.stock_num === 0
+                        ? cart_noStock
+                        : isCartHovered || cartClickState
+                        ? cart_fill
+                        : cart_outline
+                    }
                     alt="cart"
                     width={38}
                   />
@@ -394,26 +401,29 @@ export default function Pid() {
               </div>
               {/* 收藏 */}
               <div
+                role="presentation"
                 className={`${styles.flex_row} mb35px `}
                 onClick={handleHeartClick}
                 onMouseEnter={() => handleMouseEnter(1)}
                 onMouseLeave={handleMouseLeave}
               >
                 <Button
-                  text={heartClickState ? '取消收藏':'加入收藏'}
+                  text={heartClickState ? '取消收藏' : '加入收藏'}
                   btnColor="black"
                   width="275px"
                   padding="15px 60px"
                   fontSize="20px"
-                  link={()=>{
+                  link={() => {
                     heartClickState ? deleteFromFav() : addToFav()
                   }}
                 />
                 {/* 愛心 */}
-                <span className={`${styles.inlineBlock} ms30px`} 
-                onClick={()=>{
-                  heartClickState ? deleteFromFav() : addToFav()
-                }}
+                <span
+                  role="presentation"
+                  className={`${styles.inlineBlock} ms30px`}
+                  onClick={() => {
+                    heartClickState ? deleteFromFav() : addToFav()
+                  }}
                 >
                   <Image
                     src={
@@ -430,12 +440,12 @@ export default function Pid() {
               <div className={`${styles.detailsData}`}>
                 <div className={`${styles.flex_row} fs20px  pb10px`}>
                   <Image src={monkey} width={50} height={50} alt="browse" />
-                  　瀏覽量　{data?.browse_num} /次
+                  &ensp;瀏覽量 &ensp;{data?.browse_num} /次
                 </div>
 
                 <div className={`${styles.flex_row} fs20px pb10px`}>
                   <Image src={buy} width={50} height={50} alt="sales" />
-                  　銷售量　{data?.purchase_num} /件
+                  &ensp;銷售量&ensp;{data?.purchase_num} /件
                 </div>
 
                 <div className={`${styles.flex_row} fs20px`}>
@@ -445,7 +455,7 @@ export default function Pid() {
                     height={50}
                     alt="stock"
                   />
-                  　庫存　{data?.stock_num} /件
+                  &ensp;庫存&ensp;{data?.stock_num} /件
                 </div>
               </div>
             </div>
@@ -460,7 +470,7 @@ export default function Pid() {
           <Col>
             <Title text="商品評價" text2="products rewiews" />
             <div className={`${styles.stars} mt25px mb30px`}>
-              <Stars stars={data?.stars} width={30}/>
+              <Stars stars={data?.stars} width={30} />
             </div>
           </Col>
           <Col className={`mt50px`}>

@@ -1,0 +1,67 @@
+@import '@/styles/_variables.module.sass'
+
+.container
+    cursor: pointer
+
+.noEvents
+  pointer-events: none
+
+.animation
+    position: relative
+    flex: 1 1 100%
+
+.animation 
+  &::before,
+  &::after 
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    transition: opacity .5s ease-in, transform .6s ease-in-out
+    content: ''
+    opacity: 0
+    pointer-events: none
+
+  
+
+  &::before 
+    transform: scale3d(0, 1, 1)
+    transform-origin: left top
+    border-top: 2px solid $brown
+    border-bottom: 2px solid $brown
+  
+
+  &::after 
+    transform: scale3d(1, 0, 1)
+    transform-origin: right top
+    border-right: 2px solid $brown
+    border-left: 2px solid $brown
+  
+
+  &:hover,
+  &:focus 
+    &::before,
+    &::after 
+      transform: scale3d(1, 1, 1)
+      opacity: 1
+    
+.chose
+    box-shadow: 0 0 0 2px $brown
+    background: #e7d9cb
+
+.animation:hover
+    cursor: pointer
+    background: #e7d9cb
+    transition: all .8s ease-in
+
+.image
+    display: flex
+    justify-content: center
+    align-items: center
+
+.detailContainer
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center

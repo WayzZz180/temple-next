@@ -58,6 +58,7 @@ export default function Pagination({
   }
 
   const [value, setValue] = useState(1)
+
   useEffect(() => {
     if (value > totalPages) {
       setValue(totalPages)
@@ -65,6 +66,7 @@ export default function Pagination({
       setValue(1)
     }
   }, [value])
+
   const sendPage = (value) => {
     const currentParams = new URLSearchParams(window.location.search)
     currentParams.set('page', value)
@@ -85,16 +87,18 @@ export default function Pagination({
             className={`${styles.arrowLeft}`}
             width={30}
             onClick={() => {
-              if (page - 1 > 0) {
-                sendPage(page - 1)
+              if (Number(page) - 1 > 0) {
+                sendPage(Number(page) - 1)
               }
             }}
-            style={{ cursor: page === 1 ? 'default' : 'pointer' }}
+            style={{ cursor: Number(page) === 1 ? 'default' : 'pointer' }}
           />
 
           {/* 第一頁 */}
           <button
-            className={`${styles.button} ${page == 1 ? styles.active : ''}`}
+            className={`${styles.button} ${
+              Number(page) == 1 ? styles.active : ''
+            }`}
             onClick={() => {
               router.query.page != 1 && sendPage(1)
             }}
@@ -108,7 +112,9 @@ export default function Pagination({
             alt="dots"
             className={`${styles.dots}`}
             // 前4筆時不顯示
-            style={{ display: page < 5 || totalPages <= 7 ? 'none' : '' }}
+            style={{
+              display: Number(page) < 5 || totalPages <= 7 ? 'none' : '',
+            }}
             width={30}
           />
 
@@ -117,7 +123,9 @@ export default function Pagination({
             return (
               <button
                 key={v}
-                className={`${styles.button} ${page == v ? styles.active : ''}`}
+                className={`${styles.button} ${
+                  Number(page) == v ? styles.active : ''
+                }`}
                 onClick={() => {
                   router.query.page != v && sendPage(v)
                 }}
@@ -134,14 +142,15 @@ export default function Pagination({
             className={`${styles.dots}`}
             // 後4筆時不顯示
             style={{
-              display: page >= totalPages - 4 || totalPages <= 7 ? 'none' : '',
+              display:
+                Number(page) >= totalPages - 4 || totalPages <= 7 ? 'none' : '',
             }}
             width={30}
           />
           {/* 最後一頁 */}
           <button
             className={`${styles.button} ${
-              page == totalPages ? styles.active : ''
+              Number(page) == totalPages ? styles.active : ''
             }`}
             style={{ display: totalPages === 1 ? 'none' : '' }}
             onClick={() => {
@@ -157,15 +166,17 @@ export default function Pagination({
             className={`${styles.arrowRight}`}
             width={30}
             onClick={() => {
-              if (page + 1 < totalPages) {
-                sendPage(page + 1)
+              if (Number(page) + 1 < totalPages) {
+                sendPage(Number(page) + 1)
               }
             }}
-            style={{ cursor: page === totalPages ? 'default' : 'pointer' }}
+            style={{
+              cursor: Number(page) === totalPages ? 'default' : 'pointer',
+            }}
           />
         </div>
       </Col>
-      <Col>
+      <Col style={{ display: totalPages <= 7 ? 'none' : '' }}>
         <div className={`${styles.inputContainer} mt50px `}>
           <span className={`${styles.inputTitle} me10px fs18px `}>
             跳轉至第
@@ -194,6 +205,7 @@ export default function Pagination({
             頁
           </span>
           <div
+            role="presentation"
             onClick={() => {
               sendPage(value)
             }}

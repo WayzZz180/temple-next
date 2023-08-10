@@ -21,7 +21,7 @@ export default function Header() {
         { label: '拜拜紀錄', url: '/member/praying' },
         { label: '訂單記錄', url: '/member/orders' },
         { label: '收藏清單', url: '/member/wishlist' },
-        { label: '我的優惠券', url: '/member/coupons' },
+        { label: '我的優惠券', url: '/member/myCoupons' },
         { label: '我的文章', url: '/member/articles' },
         { label: '護身符', url: '/member/amulet' },
         { label: '每日簽到', url: '/member/dailySignIn' },
@@ -36,7 +36,8 @@ export default function Header() {
       title2: '線上拜拜',
       links: [
         { label: '預約拜拜', url: '/worship' },
-        { label: '供品套組', url: '#' },
+        { label: '供品套組', url: '/worship/offerings' },
+        { label: '預約紀錄', url: '/member/praying' },
       ],
     },
     {
@@ -102,7 +103,7 @@ export default function Header() {
         className={`${styles.navbarContainer} pt20px pb25px`}
         style={{
           backgroundColor:
-            currentPath === bgChange[0] ? variables['brown'] : '',
+            currentPath === String(bgChange[0]) ? variables['brown'] : '',
         }}
       >
         {/* 左半邊選單 */}

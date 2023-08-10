@@ -1,0 +1,21 @@
+.C1
+    position: absolute
+    z-index: -2
+    animation: floatRtoL 20s linear infinite
+
+.C2
+    position: absolute
+    z-index: -2
+    animation: floatLtoR 25s linear infinite
+
+@keyframes floatLtoR
+  0% 
+   left: -150px 
+  100% 
+   left: 2000px
+     
+@keyframes floatRtoL
+  0% 
+   right: -150px
+  100% 
+   right:2000px

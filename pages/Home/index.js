@@ -65,26 +65,28 @@ export default function Home() {
           </div>
         </div>
         <div className={`${styles.position}`}>
-          <div className={`${styles.signIn}`}>
-            <div id="change" className={`${styles.signInBlock}`}>
-              {/* signin star */}
-              <div className={`${styles.pinkStar}`}>
-                <Image src={pink_star} width={40} alt="star" />
+          <a href="/member/login">
+            <div className={`${styles.signIn}`}>
+              <div id="change" className={`${styles.signInBlock}`}>
+                {/* signin star */}
+                <div className={`${styles.pinkStar}`}>
+                  <Image src={pink_star} width={40} alt="star" />
+                </div>
+                {/* sign in word */}
+                <div className={``}>
+                  <Image src={signIn} width={30} alt="signIn" />
+                </div>
               </div>
-              {/* sign in word */}
-              <div className={``}>
-                <Image src={signIn} width={30} alt="signIn" />
+              <div className={styles.HomeDoor}>
+                <HomeDoor />
+              </div>
+              <div className={`${styles.signInDoor}`}>
+                <div className={styles.HomeDoor2}>
+                  <HomeDoor2 />
+                </div>
               </div>
             </div>
-            <div className={styles.HomeDoor}>
-              <HomeDoor />
-            </div>
-            <div className={`${styles.signInDoor}`}>
-              <div className={styles.HomeDoor2}>
-                <HomeDoor2 />
-              </div>
-            </div>
-          </div>
+          </a>
         </div>
       </div>
 

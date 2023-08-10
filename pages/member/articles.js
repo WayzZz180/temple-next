@@ -17,19 +17,14 @@ export default function Forumgossip() {
     <>
       <div className={styles.flex}>
         <Container>
-          <ProfilePhoto/>
+          <ProfilePhoto />
           <Row>
             <Col>
-              <MemberTitle
-                text="我的文章"
-                text2="ARTICLES"
-                lineColor="green"
-                width={860}
-              />
+              <MemberTitle text="我的文章" text2="ARTICLES" lineColor="green" />
             </Col>
           </Row>
           <MemberNavbar />
-          
+
           <Forumper />
         </Container>
       </div>
