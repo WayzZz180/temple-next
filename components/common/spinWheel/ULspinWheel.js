@@ -316,22 +316,22 @@ export default function SpinWheel({ updateSpinWheel }) {
             }}
             fontSize="20px"
             padding="10px 45px"
+          />{' '}
+          <Confetti
+            width={typeof window !== 'undefined' ? window.innerWidth : 0}
+            height={typeof window !== 'undefined' ? window.innerHeight : 0}
+            numberOfPieces={150}
+            confettiSource={{ x: 960, y: 250 }}
+            run={showConfetti}
+            style={{ position: 'fixed', top: 0, left: 0 }}
           />
         </div>
-        <Confetti
-          width={typeof window !== 'undefined' ? window.innerWidth : 0}
-          height={typeof window !== 'undefined' ? window.innerHeight : 0}
-          numberOfPieces={sg}
-          // confettiSource={{ x: window.innerWidth / 2, y: 50 }}
-          run={showConfetti}
-          style={{ position: 'fixed', top: 0, left: 0 }}
-        />
       </Modal>
       {showConfetti && (
         <Confetti
           width={typeof window !== 'undefined' ? window.innerWidth : 0}
           height={typeof window !== 'undefined' ? window.innerHeight : 0}
-          numberOfPieces={sg}
+          numberOfPieces={150}
           // confettiSource={{ x: window.innerWidth / 2, y: 50 }}
           run={showConfetti}
           style={{ position: 'fixed', top: 0, left: 0 }}
