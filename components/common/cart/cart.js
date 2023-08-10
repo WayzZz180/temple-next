@@ -28,6 +28,7 @@ export default function Cart({ data = [] }) {
     { width: '11.1%', text: '數量' },
     { width: '17%', text: '小計' },
   ]
+
   // for 清空購物車
   const pid_array = data?.map((v, i) => {
     return v.pid
@@ -36,18 +37,24 @@ export default function Cart({ data = [] }) {
   // 清空購物車(需要pid＿array)
   const deleteFromCart = (pid_array) => {
     const deletedData = { pid: pid_array }
-    fetch(`${process.env.API_SERVER}/shop/cart`, {
-      method: 'DELETE',
-      body: JSON.stringify({ requestData: deletedData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        getCartData()
-        getCartCount()
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/cart`, {
+        method: 'DELETE',
+        body: JSON.stringify({ requestData: deletedData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          getCartData()
+          getCartCount()
+        })
+    }
   }
 
   // 優惠券

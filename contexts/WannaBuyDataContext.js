@@ -7,20 +7,23 @@ export const WannaBuyDataContextProvider = function ({ children }) {
   const [wannaBuyData, setWannaBuyData] = useState([])
 
   const router = useRouter()
+
   const getWannaBuyData = () => {
     const auth = localStorage.getItem('auth')
-    const obj = JSON.parse(auth)
-    const Authorization = 'Bearer ' + obj.token
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
 
-    fetch(`${process.env.API_SERVER}/shop/wannaBuy`, {
-      headers: {
-        Authorization,
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        setWannaBuyData(data)
+      fetch(`${process.env.API_SERVER}/shop/wannaBuy`, {
+        headers: {
+          Authorization,
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          setWannaBuyData(data)
+        })
+    }
   }
 
   useEffect(() => {

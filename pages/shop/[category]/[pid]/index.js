@@ -69,11 +69,20 @@ export default function Pid() {
       })
 
     // 判斷有沒有加入收藏
-    fetch(`${process.env.API_SERVER}/shop/favoriteMatch`)
-      .then((r) => r.json())
-      .then((data) => {
-        setPidArr(data)
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/favoriteMatch`, {
+        headers: {
+          Authorization,
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          setPidArr(data)
+        })
+    }
   }, [router.query])
 
   // 查看有無喜好商品
@@ -163,62 +172,85 @@ export default function Pid() {
   // 加入購物車
   const addToCart = (count) => {
     const reqData = { count: count, pid: router.query.pid }
-    fetch(`${process.env.API_SERVER}/shop/cart`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: reqData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        getCartData()
-        getCartCount()
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/cart`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: reqData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          getCartData()
+          getCartCount()
+        })
+    }
   }
 
   // 加入瀏覽紀錄
   const insertHistory = () => {
     const addData = { pid: router.query.pid }
-    fetch(`${process.env.API_SERVER}/shop/history`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: addData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {})
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/history`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: addData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {})
+    }
   }
   insertHistory()
 
   // 加入喜好商品
   const addToFav = () => {
     const addData = { pid: router.query.pid }
-    fetch(`${process.env.API_SERVER}/shop/favorite`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: addData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {})
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/favorite`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: addData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {})
+    }
   }
 
   // 刪除喜好商品
   const deleteFromFav = () => {
     const deletedData = { pid: router.query.pid }
-
-    fetch(`${process.env.API_SERVER}/shop/favorite`, {
-      method: 'DELETE',
-      body: JSON.stringify({ requestData: deletedData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {})
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/favorite`, {
+        method: 'DELETE',
+        body: JSON.stringify({ requestData: deletedData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {})
+    }
   }
 
   return (

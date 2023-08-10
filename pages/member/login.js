@@ -42,8 +42,7 @@ export default function Login() {
     }))
   }
 
-  const doLogin = (e) => {
-    e.preventDefault()
+  const doLogin = () => {
     fetch(process.env.API_SERVER + '/member/login', {
       method: 'POST',
       body: JSON.stringify(user),
@@ -162,8 +161,8 @@ export default function Login() {
                 text="登入"
                 btnColor="black"
                 width={487}
-                link={(e) => {
-                  doLogin(e)
+                link={() => {
+                  doLogin()
                 }}
               />
             </Col>

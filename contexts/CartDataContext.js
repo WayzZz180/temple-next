@@ -9,17 +9,19 @@ export const CartDataContextProvider = function ({ children }) {
 
   const getCartData = () => {
     const auth = localStorage.getItem('auth')
-    const obj = JSON.parse(auth)
-    const Authorization = 'Bearer ' + obj.token
-    fetch(`${process.env.API_SERVER}/shop/cart`, {
-      headers: {
-        Authorization,
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        setCartData(data)
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/cart`, {
+        headers: {
+          Authorization,
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          setCartData(data)
+        })
+    }
   }
   useEffect(() => {
     getCartData()

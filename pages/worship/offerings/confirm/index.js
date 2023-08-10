@@ -70,15 +70,21 @@ export default function Check() {
   const insert = () => {
     const reqData = { ...reservation, total: total, complete: false, ...user }
     // 加入worship_summary & details
-    fetch(`${process.env.API_SERVER}/worship/details`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: reqData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {})
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/worship/details`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: reqData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {})
+    }
   }
   return (
     <Container className={`${styles.container}`}>

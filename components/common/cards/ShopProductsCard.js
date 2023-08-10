@@ -102,57 +102,63 @@ export default function ShopProductsCard({
   const addToCart = () => {
     const addData = { count: 1, pid: pid }
     const auth = localStorage.getItem('auth')
-    const obj = JSON.parse(auth)
-    const Authorization = 'Bearer ' + obj.token
-    fetch(`${process.env.API_SERVER}/shop/cart`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: addData }),
-      headers: {
-        Authorization,
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        getCartData()
-        getCartCount()
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/cart`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: addData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          getCartData()
+          getCartCount()
+        })
+    }
   }
 
   // 加入喜好商品
   const addToFav = () => {
     const addData = { pid: pid }
     const auth = localStorage.getItem('auth')
-    const obj = JSON.parse(auth)
-    const Authorization = 'Bearer ' + obj.token
-    fetch(`${process.env.API_SERVER}/shop/favorite`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: addData }),
-      headers: {
-        Authorization,
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {})
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/favorite`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: addData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {})
+    }
   }
 
   // 刪除喜好商品
   const deleteFromFav = () => {
     const deletedData = { pid: pid }
     const auth = localStorage.getItem('auth')
-    const obj = JSON.parse(auth)
-    const Authorization = 'Bearer ' + obj.token
-    fetch(`${process.env.API_SERVER}/shop/favorite`, {
-      method: 'DELETE',
-      body: JSON.stringify({ requestData: deletedData }),
-      headers: {
-        Authorization,
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {})
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/favorite`, {
+        method: 'DELETE',
+        body: JSON.stringify({ requestData: deletedData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {})
+    }
   }
 
   const regex = new RegExp(keyword, 'gi')

@@ -10,17 +10,19 @@ export const CartCountContextProvider = function ({ children }) {
 
   const getCartCount = () => {
     const auth = localStorage.getItem('auth')
-    const obj = JSON.parse(auth)
-    const Authorization = 'Bearer ' + obj.token
-    fetch(`${process.env.API_SERVER}/shop/count`, {
-      headers: {
-        Authorization,
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        setCartCount(data)
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/count`, {
+        headers: {
+          Authorization,
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          setCartCount(data)
+        })
+    }
   }
 
   useEffect(() => {

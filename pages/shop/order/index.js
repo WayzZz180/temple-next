@@ -139,29 +139,43 @@ export default function Order() {
       total: total,
       status: '未出貨',
     }
-    fetch(`${process.env.API_SERVER}/shop/order`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: orderData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {})
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/order`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: orderData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {})
+    }
   }
+
+  // 更新購物車資料
   const updateData = () => {
     const orderData = {
       cartData: cartData,
     }
-    fetch(`${process.env.API_SERVER}/shop/order`, {
-      method: 'PUT',
-      body: JSON.stringify({ requestData: orderData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {})
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/order`, {
+        method: 'PUT',
+        body: JSON.stringify({ requestData: orderData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {})
+    }
   }
   return (
     <Container className={`${styles.container}`}>
