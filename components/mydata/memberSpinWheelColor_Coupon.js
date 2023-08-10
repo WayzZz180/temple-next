@@ -1,30 +1,30 @@
-export const Rainbow = {
-  sw_Violet: '#7D3C98',
-  sw_Indigo: '#3B4B9B',
-  sw_Blue: '#3498DB',
-  sw_Green: '#47B990',
-  sw_YellowGreen: '#9ACD32',
-  sw_Yellow: '#F1C40F',
-  sw_Orange: '#E67E22',
-  sw_Red: '#EE3835',
-  sw_Pink: '#E91E63',
-  sw_Magenta: '#E4007E',
-  //   sw_Magenta: 'black',
-}
-
 // export const Rainbow = {
-//   sw_Violet: '#B43C8E',
-//   sw_Indigo: '#E4007E',
-//   sw_Blue: '#F2779D',
-//   sw_Green: '#FC6931',
-//   sw_YellowGreen: '#B43C8E',
-//   sw_Yellow: '#E4007E',
-//   sw_Orange: '#F2779D',
-//   sw_Red: '#FC6931',
-//   sw_Pink: '#B43C8E',
+//   sw_Violet: '#7D3C98',
+//   sw_Indigo: '#3B4B9B',
+//   sw_Blue: '#3498DB',
+//   sw_Green: '#47B990',
+//   sw_YellowGreen: '#9ACD32',
+//   sw_Yellow: '#F1C40F',
+//   sw_Orange: '#E67E22',
+//   sw_Red: '#EE3835',
+//   sw_Pink: '#E91E63',
 //   sw_Magenta: '#E4007E',
 //   //   sw_Magenta: 'black',
 // }
+
+export const Rainbow = {
+  sw_Violet: '#B43C8E',
+  sw_Indigo: '#E4007E',
+  sw_Blue: '#F2779D',
+  sw_Green: '#FC6931',
+  sw_YellowGreen: '#B43C8E',
+  sw_Yellow: '#E4007E',
+  sw_Orange: '#F2779D',
+  sw_Red: '#FC6931',
+  sw_Pink: '#B43C8E',
+  sw_Magenta: '#E4007E',
+  //   sw_Magenta: 'black',
+}
 
 // #B43C8E
 // #E4007E
