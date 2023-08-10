@@ -60,11 +60,11 @@ export default function ReadPost({ src = '', post }) {
         </div>
         <div className={`${styles.img}`}>
           <Image
-            src={src}
+            src={`/${data?.img}`}
             alt="test"
             // className={`${styles.img}`}
-            width={600}
-            height={450}
+            width={780}
+            height={500}
           />
         </div>
         <Forumline />

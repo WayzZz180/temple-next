@@ -11,7 +11,7 @@ import { useClick } from '@/hooks/useClick.js'
 
 // components
 import Forumline from '@/components/common/forumlogo/forumline'
-import FigureExample from '@/components/common/forumlogo/forumperpic'
+// import FigureExample from '@/components/common/forumlogo/forumperpic'
 
 // svg
 import heart_fill from '@/assets/heart_fill.svg'
@@ -197,8 +197,8 @@ export default function Forumper({
                 </div>
                 <Image
                   src={`/${data?.img}`}
-                  width={118}
-                  height={118}
+                  width={158}
+                  height={128}
                   className={`${styles.margin}`}
                   alt="118x118"
                 />
