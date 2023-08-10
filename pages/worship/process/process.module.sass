@@ -27,6 +27,14 @@
     align-items: center
     position: absolute
     top: 48.1vh
+    z-index: 3
+    animation: down2 2s ease-out 1
+
+@keyframes down2
+    0%
+        top: -30vh    
+    100%
+        top: 48.1vh
 
 .incenseHidden
     position: absolute
@@ -34,9 +42,9 @@
 
 .incense
     position: absolute
-    top: 77.5vh
+    top: 77vh
     z-index: 3
-    animation: down 2s ease-out 1
+    // animation: down 2s ease-out 1
 
 @keyframes down
     0%

@@ -19,7 +19,7 @@ import Loading from '@/components/common/loading'
 import BackTable from '@/assets/tableBack.svg'
 import FrontTable from '@/assets/tableFront.svg'
 import Burner from '@/assets/worship_burner.svg'
-import Incense from '@/assets/incense.svg'
+import Incense from '@/assets/incense.gif'
 import mazuGod from '@/assets/mazuGod.svg'
 import loveGod from '@/assets/loveGod.svg'
 import studyGod from '@/assets/studyGod.svg'
@@ -154,8 +154,9 @@ export default function Process() {
             {/* 香 */}
             <div
               className={`${active ? styles.incense : styles.incenseHidden}`}
+              // className={styles.incense}
             >
-              <Image src={Incense} alt="incense" width={5} />
+              <Image src={active ? Incense : ''} alt="incense" width={150} />
             </div>
             {/* 香爐 */}
             <div className={`${styles.burner}`}>

@@ -58,7 +58,7 @@ export default function WorshipGod({
         {/* whole god  */}
         <div className={`${styles.relative}`}>
           {/* 背後轉的光 */}
-          <div className={`${styles.BackLight} ms10px`}>
+          <div className={`${styles.BackLight} ms1px`}>
             <Image src={BackLight} alt="light" width={280} />
           </div>
           {/* god */}

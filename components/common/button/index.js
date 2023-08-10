@@ -12,8 +12,8 @@ export default function Button({
   height = '',
   padding = '15px 60px',
   fontSize = '24px',
-  link = ()=>{},
-  type = '',
+  link = () => {},
+  type = 'button',
 }) {
   const var_color = variables[btnColor]
   return (

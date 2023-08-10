@@ -1,12 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './ShopProductsCard.module.sass'
+
 // svg
 import heart_fill from '@/assets/heart_fill.svg'
 import heart_outline from '@/assets/heart_outline.svg'
 import cart_fill from '@/assets/cart_fill.svg'
 import cart_outline from '@/assets/cart_outline.svg'
 import cart_noStock from '@/assets/cart_noStock.svg'
+import loading from '@/assets/loading.gif'
 
 //hooks
 import { useState, useEffect, useContext } from 'react'
@@ -190,7 +192,7 @@ export default function ShopProductsCard({
       >
         <Link href={`/shop/${category}/${pid}`}>
           <Image
-            src={src}
+            src={src ? src : loading}
             alt="product"
             width={150}
             height={150}

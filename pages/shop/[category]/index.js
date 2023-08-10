@@ -72,7 +72,7 @@ export default function Category() {
   ])
 
   useEffect(() => {
-    if (!category) return <Loading />
+    if (!category) return
 
     if (localStorage.getItem('keyword') && !keyword) {
       const currentParams = new URLSearchParams(window.location.search)
