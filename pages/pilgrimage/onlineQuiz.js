@@ -60,6 +60,7 @@ export default function Quiz() {
     setIsButtonVisible(false)
   }
   const coupons = totalScore === 8 ? 12 : totalScore < 8 ? 13 : totalScore;
+  console.log(coupons)
   const Router = useRouter()
   const [user, setUser] = useState({
     coupon_status_id: '',

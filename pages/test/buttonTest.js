@@ -4,7 +4,8 @@ import Title from '@/components/common/title'
 import HomeGod from '@/components/common/cards/HomeGod'
 import HomeCarousel from '@/components/common/carousel/HomeCarousels'
 import HomeDoor from '@/components/common/cards/HomeDoor'
-import Light_Row from '@/components/common/cards/countdownTimer.js'
+import Light_Row from '@/pages/pilgrimage/calendar'
+
 
 // import DefaultLayout from '@/components/layout/default-layout'
 
