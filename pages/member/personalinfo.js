@@ -27,6 +27,7 @@ export default function Personalinfo() {
   const [getImg, setGetImg] = useState('')
   const [modalIsOpen, setModalIsOpen] = useState(false) // 跟蹤 modal 是否打開
   const [cancelEditing, setCancelEditing] = useState(false)
+  const dayjs = require('dayjs')
 
   //拿token
   useEffect(() => {
@@ -55,9 +56,7 @@ export default function Personalinfo() {
   // Convert the date format to "YYYY-MM-DD"
   useEffect(() => {
     if (user.member_birthday) {
-      const formattedBirthday = new Date(user.member_birthday)
-        .toISOString()
-        .slice(0, 10)
+      const formattedBirthday = dayjs(user.member_birthday).format('YYYY-MM-DD')
       setUser((prevUser) => ({
         ...prevUser,
         member_birthday: formattedBirthday,
@@ -81,12 +80,11 @@ export default function Personalinfo() {
       regex: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
       message: '請輸入有效的Email格式',
     },
-    member_password: {
-      required: true,
-      // regex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,20}$/,
-      message: '密碼必須包含一個大寫、一個小寫英文字母和數字，8~20碼',
-    },
-
+    // member_password: {
+    //   required: true,
+    //   // regex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,20}$/,
+    //   message: '密碼必須包含一個大寫、一個小寫英文字母和數字，8~20碼',
+    // },
     member_birthday: {
       required: true,
       message: '請選擇生日',
@@ -118,9 +116,9 @@ export default function Personalinfo() {
       ? { field, message: rule.message }
       : rule.regex && !rule.regex.test(user[field])
       ? { field, message: rule.message }
-      : field === 'confirm_password' && !rule.custom(user[field], user)
-      ? { field, message: rule.message }
-      : null
+      : // : field === 'confirm_password' && !rule.custom(user[field], user)
+        // ? { field, message: rule.message }
+        null
   })
 
   // 定義 getErrorForField 函式
@@ -143,12 +141,12 @@ export default function Personalinfo() {
         return { field, message: rule.message }
       }
 
-      if (field === 'confirm_password') {
-        // 檢查 confirm_password 的自訂規則
-        if (!rule.custom(user[field], user)) {
-          return { field, message: rule.message }
-        }
-      }
+      // if (field === 'confirm_password') {
+      //   // 檢查 confirm_password 的自訂規則
+      //   if (!rule.custom(user[field], user)) {
+      //     return { field, message: rule.message }
+      //   }
+      // }
     }
 
     return null // 代表表單通過驗證，沒有錯誤 //有回傳代表有錯誤
@@ -172,9 +170,9 @@ export default function Personalinfo() {
           ? field
           : rule.regex && !rule.regex.test(user[field])
           ? field
-          : field === 'confirm_password' && !rule.custom(user[field], user)
-          ? field
-          : null
+          : // : field === 'confirm_password' && !rule.custom(user[field], user)
+            // ? field
+            null
       })
       setInvalidFields(invalidFieldsArray.filter((field) => field !== null))
 

@@ -286,7 +286,7 @@ export default function SpinWheel({ updateSpinWheel }) {
           },
           content: {
             maxWidth: '370px', // 調整最大寬度
-            maxHeight: '270px', // 調整最大高度
+            maxHeight: '300px', // 調整最大高度
             margin: 'auto', // 水平居中
             background: variables['bgColor'],
             //   // border: '',
@@ -294,16 +294,23 @@ export default function SpinWheel({ updateSpinWheel }) {
           },
         }}
       >
-        <div className={styles.flex_center2}>
-          <Image src={coupon_red} alt="coupon" />
-          <h2>簽到成功</h2>
-          <h2>
+        <div className={`${styles.flex_center2} mt10px`}>
+          <div className="mb20px">
+            <Image src={coupon_red} alt="coupon" />
+          </div>
+          <div className="fwBold fs30px mb20px">簽到成功</div>
+          <div className="fwBold fs24px mb25px">
             恭喜獲得 {coupon_type} 折價券，價值
             {coupon_value}
-          </h2>
-          <button onClick={handleModalCloseReload} className="w100">
-            確認
-          </button>
+          </div>
+          <Button
+            text="確認"
+            link={() => {
+              handleModalCloseReload()
+            }}
+            fontSize="20px"
+            padding="10px 45px"
+          />
         </div>
       </Modal>
     </>

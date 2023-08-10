@@ -5,10 +5,11 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 // components
-import Title from '@/components/common/title/index.js'
+import MemberTitle from '@/components/common/title/memberTitle'
 import MemberNavbar from '@/components/common/memberNavbar'
 import OrderSummary from '@/components/common/cards/orderSummaryCard'
 import Loading from '@/components/common/loading'
+import ProfilePhoto from '@/components/common/profilePhoto'
 
 // bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
@@ -30,16 +31,13 @@ export default function Orders() {
   return (
     <div className={styles.flex}>
       <Container>
+        <ProfilePhoto />
         <Row>
           <Col>
-            <Title
-              text="訂單外包H"
-              text2="ORDERS"
-              lineColor="green"
-              width={860}
-            />
+            <MemberTitle text="訂單紀錄" text2="orders" lineColor="green" />
           </Col>
         </Row>
+
         <MemberNavbar />
 
         <Row>
