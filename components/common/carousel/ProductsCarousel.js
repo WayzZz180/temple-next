@@ -44,7 +44,14 @@ export default function ProductsCarousel({ text, color, i, id }) {
   }, [])
 
   useEffect(() => {
-    fetch(`${process.env.API_SERVER}/shop/favoriteMatch`)
+    const auth = localStorage.getItem('auth')
+    const obj = JSON.parse(auth)
+    const Authorization = 'Bearer ' + obj.token
+    fetch(`${process.env.API_SERVER}/shop/favoriteMatch`, {
+      headers: {
+        Authorization,
+      },
+    })
       .then((r) => r.json())
       .then((data) => {
         setPidArr(data)
