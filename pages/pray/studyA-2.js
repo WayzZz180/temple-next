@@ -12,6 +12,7 @@ export default function StudyA2() {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0]
+    // console.log('file:', file.name)
     setSelectedFile(file)
   }
   const Router = useRouter()
@@ -20,34 +21,39 @@ export default function StudyA2() {
     Name: '',
     School: '',
     Ticket_Img: '',
-    Datetime:'',
+    Datetime: '',
   })
   useEffect(() => {
-    const Name = Router.query.Name;
-    console.log('Name:', Name); 
+    const Name = Router.query.Name
+    console.log('Name:', Name)
     if (Name) {
-      setUser((prevUser) => ({ ...prevUser, Name: Name }));
+      setUser((prevUser) => ({ ...prevUser, Name: Name }))
     }
   }, [Router.query.Name])
   useEffect(() => {
-    const School = Router.query.School;
-    console.log('School:', School); 
+    const School = Router.query.School
+    console.log('School:', School)
     if (School) {
-      setUser((prevUser) => ({ ...prevUser, School: School }));
+      setUser((prevUser) => ({ ...prevUser, School: School }))
     }
-  }, [Router.query.School]);
-  
+  }, [Router.query.School])
+
   const handleSumbit = (e) => {
     e.preventDefault()
 
-    const formData = new FormData();
-    formData.append('Name', user.Name);
-    formData.append('School', user.School);
-    formData.append('image_uploads', selectedFile);
-
+    // const formData = new FormData()
+    // formData.append('Name', user.Name)
+    // formData.append('School', user.School)
+    // formData.append('image_uploads', selectedFile)
+    const formData = {
+      Name: user.Name,
+      School: user.School,
+      image_uploads: selectedFile.name,
+    }
+    console.log('data:', formData)
     fetch(process.env.API_SERVER + '/pray/studyA-2', {
       method: 'POST',
-      body: JSON.stringify(formData),
+      body: JSON.stringify({ requestData: formData }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -137,15 +143,15 @@ export default function StudyA2() {
               <div className={`${styles.context}`}>{user.Name}</div>
               <div className={`${styles.title2}`}>第一志願</div>
               <div className={`${styles.context2}`}>{user.School}</div>
-              <div  className={`${styles.btn}`}>
-              <Button
-                text="確定資訊"
-                btnColor="green"
-                type="submit"
-                link={(e) => {
-                  handleSumbit(e)
-                }}
-              />
+              <div className={`${styles.btn}`}>
+                <Button
+                  text="確定資訊"
+                  btnColor="green"
+                  type="submit"
+                  link={(e) => {
+                    handleSumbit(e)
+                  }}
+                />
               </div>
             </form>
           </div>
