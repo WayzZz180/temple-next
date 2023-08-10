@@ -16,8 +16,10 @@ import C3 from '@/assets/OnlineCould.svg'
 import C4 from '@/assets/OnlineCould2.svg'
 import House from '@/components/common/temple/house'
 import Button from '@/components/common/button'
+import { Router, useRouter } from 'next/router'
 
 export default function Quiz() {
+  
   const [data, setData] = useState({
     redirect: '',
     totalRows: 0,
@@ -57,6 +59,36 @@ export default function Quiz() {
     setPlayAnimation(true)
     setIsButtonVisible(false)
   }
+  const coupons = totalScore === 8 ? 12 : totalScore < 8 ? 13 : totalScore;
+  const Router = useRouter()
+  const [user, setUser] = useState({
+    coupon_status_id: '',
+    coupon_id: `${coupons}`,
+    member_id:'',
+    usage_status:'',
+    start_date:'',
+    expiration_date:'',
+    created_at:'',
+  })
+
+  const handleSumbit = (e) => {
+    e.preventDefault()
+    fetch(process.env.API_SERVER + '/pilgrimage/onlineQuiz', {
+      method: 'POST',
+      body: JSON.stringify(user),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((result) => {
+        console.log(result)
+      })
+  }
+
+  const handleClick = () => {
+    Router.push('/member/coupons');
+  };
   return (
     <>
       <div
@@ -184,6 +216,7 @@ export default function Quiz() {
             alt=""
             width="215"
             className={`${styles.coupon}`}
+            onClick={handleClick}
           ></Image>
           <div className={`${styles.coupontext}`}>獲得折價券乙張</div>
           <div className={`${styles.scoretext1}`}>答</div>
@@ -195,7 +228,9 @@ export default function Quiz() {
               className={`${styles.scorebtn} mt150px`}
               onClick={handleButtonClick}
             >
-              <Button text="領取獎品" btnColor="hot_pink" />
+              <Button text="領取獎品" btnColor="hot_pink" link={(e) => {
+                handleSumbit(e)
+              }}/>
             </div>
           )}
         </div>
