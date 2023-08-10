@@ -14,7 +14,6 @@ import { useRouter } from 'next/router'
 import God from '@/components/common/cards/WorshipProcessGod'
 import Button from '@/components/common/button'
 import Loading from '@/components/common/loading'
-
 // svg
 import BackTable from '@/assets/tableBack.svg'
 import FrontTable from '@/assets/tableFront.svg'
@@ -23,6 +22,7 @@ import Incense from '@/assets/incense.gif'
 import mazuGod from '@/assets/mazuGod.svg'
 import loveGod from '@/assets/loveGod.svg'
 import studyGod from '@/assets/studyGod.svg'
+import Plate from '@/assets/plate.svg'
 
 // data
 import godInfo from '@/components/mydata/godInfo'
@@ -106,7 +106,14 @@ export default function Process() {
             items={items}
             sortId={i}
           >
-            <Image src={item} alt="products" width={120} height={120} />
+            <div className={`${styles.sortableContainer}`}>
+              <div className={`${styles.product}`}>
+                <Image src={item} alt="products" width={120} height={120} />
+              </div>
+              <div className={`${styles.plate}`}>
+                <Image src={Plate} alt="plate" width={70} />
+              </div>
+            </div>
           </SortableItem>
         )
       })
@@ -168,7 +175,8 @@ export default function Process() {
                 text={active ? '祭拜' : '點香'}
                 fontSize="16px"
                 padding="10px 50px"
-                link={() => {
+                link={(e) => {
+                  e.preventDefault
                   setActive(true)
                 }}
               />

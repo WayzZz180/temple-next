@@ -26,16 +26,9 @@
     justify-content: center
     align-items: center
     position: absolute
-    top: 48.1vh
+    top: 44.5vh
     z-index: 3
-    animation: down2 2s ease-out 1
-
-@keyframes down2
-    0%
-        top: -30vh    
-    100%
-        top: 48.1vh
-
+   
 .incenseHidden
     position: absolute
     top: -15vh
@@ -67,3 +60,32 @@
     padding-left: 0px 
     gap: 5px
     cursor: grab
+
+.sortableContainer
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+.product
+    position: relative
+    top: 2.2vh
+    animation: product 4s ease-out 1
+
+@keyframes product
+    0%
+        top: -200vh
+    100%
+        top: 2.2vh
+
+.plate
+    position: relative
+    top: 0vh
+    animation: plate 2s ease-out 1
+
+@keyframes plate
+    0%
+        top: -100vh
+    100%
+        top: 0vh
+

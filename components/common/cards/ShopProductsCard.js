@@ -196,7 +196,7 @@ export default function ShopProductsCard({
             alt="product"
             width={150}
             height={150}
-            className="shadow mb20px"
+            className={`${styles.img} shadow mb20px`}
           ></Image>
         </Link>
       </div>
