@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Modal from '@/components/common/Modal/DialogWrapper'
+import Modal2 from '@/components/common/Modal/DialogWrapper2'
 import Image from 'next/image'
 import styles from './pilgri.module.sass'
 import Sh from '@/assets/swingHand.gif'
@@ -7,6 +8,7 @@ import jump from '@/assets/jump.gif'
 import flag from '@/assets/flag.gif'
 import dog from '@/assets/dog_in.gif'
 import Quiz from '@/pages/pilgrimage/onlineQuiz'
+import Gossip from '@/pages/forum/forumgossip'
 
 export default function Pilgrimage() {
   const [modalIsOpen, setIsOpen] = React.useState(false)
@@ -57,9 +59,27 @@ export default function Pilgrimage() {
           <Quiz />
         </div>
       </Modal>
-      <button className={`${styles.bubble2}`}>
+      <button className={`${styles.bubble2}`} onClick={openModal}>
         <div className={`${styles.text}`}>好熱鬧啊，快來一起聊</div>
       </button>
+      <Modal2
+        isOpen={modalIsOpen}
+        onClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <div
+          className={`${styles.modal}`}
+          style={{
+            width: '100%',
+            height: '100%',
+            overflow: 'auto',
+            transform: 'scale(1)',
+          }}
+        >
+          <Gossip />
+        </div>
+      </Modal2>
       <button className={`${styles.bubble3}`}>
         <div className={`${styles.text}`}>汪咿～！</div>
       </button>
