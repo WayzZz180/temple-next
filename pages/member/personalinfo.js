@@ -162,9 +162,7 @@ export default function Personalinfo() {
     // 在這裡執行取得最新 JWT 的相關程式碼
   }
 
-  const edit = async (e) => {
-    e.preventDefault()
-
+  const edit = async () => {
     const validateResult = validateForm()
     if (validateResult) {
       // Collect all the invalid fields and set the state
@@ -238,8 +236,7 @@ export default function Personalinfo() {
     }
   }
 
-  const handleCancelEditing = (e) => {
-    e.preventDefault
+  const handleCancelEditing = () => {
     // setUser({}) // 將使用者狀態重設為空，從而取消任何變更
     setInvalidFields([]) // 清除無效的欄位陣列
     setErrorMessage('') // 清除錯誤訊息
@@ -379,17 +376,26 @@ export default function Personalinfo() {
 
         <Row className={styles.flex_end}>
           <Col>
-            <form onSubmit={edit}>
-              <Button
-                text="確定儲存"
-                btnColor="black"
-                width={229}
-                onclick={edit}
-              />
-            </form>
+            {/* <form onSubmit={edit}> */}
+            <Button
+              text="確定儲存"
+              btnColor="black"
+              width={229}
+              link={() => {
+                edit()
+              }}
+            />
+            {/* </form> */}
           </Col>
-          <Col onClick={handleCancelEditing}>
-            <NoButton text="取消變更" btnColor="black" width={229} />
+          <Col>
+            <NoButton
+              text="取消變更"
+              btnColor="black"
+              width={229}
+              link={() => {
+                handleCancelEditing()
+              }}
+            />
           </Col>
         </Row>
       </Container>

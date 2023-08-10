@@ -42,8 +42,7 @@ export default function Login() {
     }))
   }
 
-  const doLogin = (e) => {
-    e.preventDefault()
+  const doLogin = () => {
     fetch(process.env.API_SERVER + '/member/login', {
       method: 'POST',
       body: JSON.stringify(user),
@@ -157,9 +156,14 @@ export default function Login() {
         </Row>
         <Row className={styles.flex_centre}>
           <Col>
-            <form onSubmit={doLogin}>
-              <Button text="登入" btnColor="black" width={487} />
-            </form>
+            <Button
+              text="登入"
+              btnColor="black"
+              width={487}
+              link={() => {
+                doLogin()
+              }}
+            />
           </Col>
         </Row>
 
