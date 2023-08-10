@@ -1,3 +1,4 @@
+import React, { use } from 'react'
 import Image from 'next/image'
 import styles from './process.module.sass'
 
@@ -5,6 +6,7 @@ import styles from './process.module.sass'
 import { Container, Row, Col } from 'react-bootstrap'
 
 // hooks
+import { sortable } from 'react-sortable'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
@@ -75,10 +77,56 @@ export default function Process() {
   if (!reservation) return <Loading />
   const index = gods.findIndex((v, i) => v.god === reservation?.god)
 
+  class Item extends React.Component {
+    render() {
+      return <li {...this.props}>{this.props.children}</li>
+    }
+  }
+
+  const SortableItem = sortable(Item)
+
+  class SortableList extends React.Component {
+    state = {
+      items: this.props.items,
+    }
+
+    onSortItems = (items) => {
+      this.setState({
+        items: items,
+      })
+    }
+
+    render() {
+      const { items } = this.state
+      const listItems = items.map((item, i) => {
+        return (
+          <SortableItem
+            key={i}
+            onSortItems={this.onSortItems}
+            items={items}
+            sortId={i}
+          >
+            <Image src={item} alt="products" width={120} height={120} />
+          </SortableItem>
+        )
+      })
+
+      return <ul className={`${styles.sortList}`}>{listItems}</ul>
+    }
+  }
+
+  const [items, setItems] = useState([])
+  if (items.length === 0) {
+    data?.map((v, i) => {
+      items.push(`/${v.image}`)
+    })
+  }
+
   return (
     <main>
       <Container className={`${styles.container}`}>
         <Row className={`${styles.relative}`}>
+          {/* God */}
           <Col className={`${styles.god} w100`}>
             <God
               pic={gods[index]?.src}
@@ -86,6 +134,7 @@ export default function Process() {
               wordRight={godInfo[index]?.wordRight}
             />
           </Col>
+          {/* 桌子 */}
           <Col className={`${styles.tableContainer}`}>
             <div className={`${styles.back}`}>
               <Image src={BackTable} alt="back table" width={620} />
@@ -98,8 +147,10 @@ export default function Process() {
                 height={350}
               />
             </div>
-            <div className={`${styles.productsContainer}`}>
-              {data?.map((v, i) => {
+            <div className={`${styles.productsContainer} `}>
+              <SortableList items={items} />
+              {/* 供品 */}
+              {/* {data?.map((v, i) => {
                 return (
                   <div key={i} className={`border m3px ${styles.product}`}>
                     <Image
@@ -110,16 +161,19 @@ export default function Process() {
                     />
                   </div>
                 )
-              })}
+              })} */}
             </div>
+            {/* 香 */}
             <div
               className={`${active ? styles.incense : styles.incenseHidden}`}
             >
               <Image src={Incense} alt="incense" width={5} />
             </div>
+            {/* 香爐 */}
             <div className={`${styles.burner}`}>
               <Image src={Burner} alt="burner" width={75} />
             </div>
+            {/* Button */}
             <div className={`${styles.button}`}>
               <Button
                 text={active ? '祭拜' : '點香'}

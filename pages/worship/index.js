@@ -207,11 +207,11 @@ export default function Worship() {
     if (localStorage.getItem('reservation')) {
       const str = JSON.parse(localStorage.getItem('reservation'))
 
-      if (str.pidArr.length === 0) {
-        localStorage.removeItem('reservation')
-        location.replace('/worship')
-        return
-      }
+      // if (str.pidArr.length === 0) {
+      //   localStorage.removeItem('reservation')
+      //   location.replace('/worship')
+      //   return
+      // }
 
       setGod(str.god)
       setDay(str.day)
