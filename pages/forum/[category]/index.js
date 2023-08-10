@@ -7,6 +7,7 @@ import Title from '@/components/common/title/'
 import Forumline from '@/components/common/forumlogo/forumline'
 import Navbar from '@/components/common/forumlogo/navbar'
 import Forumper from '@/components/common/forumlogo/forumper'
+import Pagination from '@/components/common/pagination/index'
 // import { getForumContentByPostCategory } from '@/utils/forumper' // 替換為實際的 API 函數
 
 function Forumgossip() {
@@ -14,6 +15,9 @@ function Forumgossip() {
   const { category } = router.query
   const [data, setData] = useState([])
   const [totalPages, setTotalPages] = useState(1)
+  const [stateHeart, setStateHeart] = useState([])
+  const [stateCollect, setStateCollect] = useState([])
+  const [heart, setHeart] = useState()
   // const forumContent = getForumContentByPostCategory(category) // 呼叫 API 函數來獲取相關內容
   useEffect(() => {
     // const usp = new URLSearchParams(router.query)
@@ -32,11 +36,15 @@ function Forumgossip() {
         // console.log('data:', data)
         setData(data[0])
         setTotalPages(data[1])
+        setStateHeart(data[2])
+        setStateCollect(data[3])
       })
-  }, [router.query])
+  }, [router.query, heart])
 
-  // console.log(data)
-  // console.log(totalPages.totalPages)
+  const pagination = {
+    page: router.query.page,
+    totalPages: totalPages.totalPages,
+  }
   return (
     <>
       <Head>
@@ -48,11 +56,21 @@ function Forumgossip() {
         </div>
         <Navbar />
         <Forumline lineColor="brown" />
-        <Forumper
-          postCategory={category}
-          data={data}
-          totalPages={totalPages.totalPages}
-        />
+        {data?.map((v, i) => {
+          const found_heart = stateHeart.some((i) => i.post_sid === v.sid)
+          const found_collect = stateCollect.some((i) => i.post_sid === v.sid)
+          return (
+            <div key={v.sid}>
+              <Forumper
+                data={v}
+                state_heart={found_heart}
+                state_collect={found_collect}
+                setHeart={setHeart}
+              />
+            </div>
+          )
+        })}
+        <Pagination pagination={pagination} />
       </div>
     </>
   )
