@@ -52,7 +52,7 @@ export default function AlertDialogSlide({ page = 1 }) {
     })
       .then((r) => r.json())
       .then((data) => {
-        // console.log('data:', data)
+        console.log('data:', data)
         // setData(data[0])
         // setTotalPages(data[1])
       })
@@ -93,9 +93,9 @@ export default function AlertDialogSlide({ page = 1 }) {
                       sx={{ width: 77, height: 77 }}
                     />
                     <div className={`${styles.column1}`}>
-                      <div className={`${styles.userid}`}>5678</div>
+                      <div className={`${styles.userid}`}>123</div>
                       <div className={`${styles.row2}`}>
-                        <div className={`${styles.forumcategory}`}>5678</div>
+                        <div className={`${styles.forumcategory}`}>123</div>
                         <div>·</div>
                         <div className={`${styles.posttime}`}>5678</div>
                       </div>
@@ -163,11 +163,11 @@ export default function AlertDialogSlide({ page = 1 }) {
                 btnColor="green"
                 text="發文"
                 link={() => {
-                  handleClose()
-                  //               console.log('page:', page)
-                  // console.log('category:', router.query.category)
                   router.push(`/forum/gossip?page=3`)
                   addData(inputTitle, inputContent)
+                  handleClose()
+                  // console.log('page:', page)
+                  // console.log('category:', router.query.category)
                 }}
               />
               {/* <Button onClick={handleClose} color="error">

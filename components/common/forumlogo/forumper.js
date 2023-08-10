@@ -29,7 +29,7 @@ export default function Forumper({ postCategory, data = [], totalPages = 1 }) {
             <div>
               <div>
                 <div className={`${styles.flex_row1}`}>
-                  <li>{i.member_forum_name}</li>
+                  <li>{i.member_id}</li>
                   <li>·</li>
                   <li>{i.publish_time}</li>
                 </div>

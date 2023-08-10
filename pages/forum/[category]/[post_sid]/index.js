@@ -12,6 +12,7 @@ export default function ReadPost({ src = '', post }) {
   // const [row, setRow] = useState(post)
   const [data, setData] = useState([])
   // const addData = [{ title: [], content: [] }]
+
   useEffect(() => {
     fetch(
       `${process.env.API_SERVER}/forum/${router.query.category}/${router.query.post_sid}`
@@ -43,7 +44,7 @@ export default function ReadPost({ src = '', post }) {
             <div key={i.sid}> */}
 
           <div className={`${styles.row5}`}>
-            <div className={`${styles.adjust}`}>{data?.member_forum_name}</div>
+            <div className={`${styles.adjust}`}>{data?.member_id}</div>
             <div>·</div>
             <div className={`${styles.adjust}`}>{data?.postcategory_sid}</div>
             <div>·</div>
