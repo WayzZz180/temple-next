@@ -8,7 +8,15 @@ export const WannaBuyDataContextProvider = function ({ children }) {
 
   const router = useRouter()
   const getWannaBuyData = () => {
-    fetch(`${process.env.API_SERVER}/shop/wannaBuy`)
+    const auth = localStorage.getItem('auth')
+    const obj = JSON.parse(auth)
+    const Authorization = 'Bearer ' + obj.token
+
+    fetch(`${process.env.API_SERVER}/shop/wannaBuy`, {
+      headers: {
+        Authorization,
+      },
+    })
       .then((r) => r.json())
       .then((data) => {
         setWannaBuyData(data)

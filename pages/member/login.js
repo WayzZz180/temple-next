@@ -158,7 +158,14 @@ export default function Login() {
           </Row>
           <Row className={styles.flex_centre}>
             <Col>
-              <Button text="登入" btnColor="black" width={487} />
+              <Button
+                text="登入"
+                btnColor="black"
+                width={487}
+                link={(e) => {
+                  doLogin(e)
+                }}
+              />
             </Col>
           </Row>
 
