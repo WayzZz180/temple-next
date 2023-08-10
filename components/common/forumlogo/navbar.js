@@ -30,17 +30,17 @@ export default function Navbar() {
           <div className={`${styles.flex_row11}`}>
             <li className="fs20px">
               <Link href="#" className={`${styles.no_underline}`}>
-                熱門文章
+                個人文章
               </Link>
             </li>
           </div>
-          <div>
+          {/* <div className={`${styles.flex_row11}`}>
             <li className="fs20px">
               <Link href="#" className={`${styles.no_underline}`}>
                 個人文章
               </Link>
             </li>
-          </div>
+          </div> */}
         </div>
         <div className={`${styles.flex_row2}`}>
           <div className={`${styles.flex_row21}`}>
