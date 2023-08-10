@@ -11,6 +11,7 @@ import { Row, Col } from 'react-bootstrap'
 // 點到該頁面會變色
 export default function MemberNavbar() {
   const router = useRouter()
+
   return (
     <Row className={styles.flex_space_around}>
       {data.map((v, i) => (
@@ -19,7 +20,9 @@ export default function MemberNavbar() {
             <span
               className={`${styles.text} fs20px fwBold`}
               style={{
-                color: router.pathname.includes(v.id) ? variables['green'] : '',
+                color: router.asPath.includes(`/member/${v.id.split('?')[0]}`)
+                  ? variables['green']
+                  : '',
               }}
             >
               {v.text}
