@@ -19,7 +19,6 @@ import Button from '@/components/common/button'
 import { Router, useRouter } from 'next/router'
 
 export default function Quiz() {
-  
   const [data, setData] = useState({
     redirect: '',
     totalRows: 0,
@@ -59,17 +58,17 @@ export default function Quiz() {
     setPlayAnimation(true)
     setIsButtonVisible(false)
   }
-  const coupons = totalScore === 8 ? 12 : totalScore < 8 ? 13 : totalScore;
+  const coupons = totalScore === 8 ? 12 : totalScore < 8 ? 13 : totalScore
   console.log(coupons)
   const Router = useRouter()
   const [user, setUser] = useState({
     coupon_status_id: '',
     coupon_id: `${coupons}`,
-    member_id:'',
-    usage_status:'',
-    start_date:'',
-    expiration_date:'',
-    created_at:'',
+    member_id: '',
+    usage_status: '',
+    start_date: '',
+    expiration_date: '',
+    created_at: '',
   })
 
   const handleSumbit = (e) => {
@@ -88,8 +87,8 @@ export default function Quiz() {
   }
 
   const handleClick = () => {
-    Router.push('/member/coupons');
-  };
+    Router.push('/member/coupons')
+  }
   return (
     <>
       <div
@@ -229,9 +228,13 @@ export default function Quiz() {
               className={`${styles.scorebtn} mt150px`}
               onClick={handleButtonClick}
             >
-              <Button text="領取獎品" btnColor="hot_pink" link={(e) => {
-                handleSumbit(e)
-              }}/>
+              <Button
+                text="領取獎品"
+                btnColor="hot_pink"
+                link={(e) => {
+                  handleSumbit(e)
+                }}
+              />
             </div>
           )}
         </div>

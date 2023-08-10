@@ -18,6 +18,8 @@ import C2 from '@/assets/littleC2.svg'
 import C3 from '@/assets/OnlineCould.svg'
 import C4 from '@/assets/OnlineCould2.svg'
 import Board from '@/assets/BulletinBoard.svg'
+import Calender from './calendar'
+import img from '@/assets/calendar.svg'
 import fly from '@/assets/fly.gif'
 import People from './people'
 
@@ -76,6 +78,15 @@ export default function Bg({ direction }) {
             alt=""
             width="535"
             className={`${styles.tree1}`}
+          ></Image>
+          <div className={`${styles.calender}`}>
+            <Calender />
+          </div>
+          <Image
+            src={img}
+            alt=""
+            width="250"
+            className={`${styles.img}`}
           ></Image>
           <Image
             src={moto}

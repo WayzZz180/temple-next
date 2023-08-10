@@ -4,8 +4,7 @@ import Title from '@/components/common/title'
 import HomeGod from '@/components/common/cards/HomeGod'
 import HomeCarousel from '@/components/common/carousel/HomeCarousels'
 import HomeDoor from '@/components/common/cards/HomeDoor'
-import Light_Row from '@/pages/pilgrimage/calendar'
-
+import Light_Row from '@/components/common/Modal/close'
 
 // import DefaultLayout from '@/components/layout/default-layout'
 
@@ -24,8 +23,6 @@ export default function About() {
       {/* <HomeGod />
       <HomeCarousel /> */}
       <Light_Row />
-      
-
     </>
   )
 }
