@@ -107,7 +107,7 @@ export default function Forumper({
       .then((r) => r.json())
       .then((data) => {})
   }
-  // 收回讚
+  // 收回收藏
   const deleteFromCollect = () => {
     const deletedData = { sid: data?.sid }
     fetch(`${process.env.API_SERVER}/forum/collect`, {
@@ -195,7 +195,14 @@ export default function Forumper({
                     </div>
                   </div>
                 </div>
-                <FigureExample />
+                <Image
+                  src={`/${data?.img}`}
+                  width={118}
+                  height={118}
+                  className={`${styles.margin}`}
+                  alt="118x118"
+                />
+                {/* <FigureExample /> */}
               </div>
             </div>
 

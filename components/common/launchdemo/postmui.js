@@ -53,6 +53,8 @@ export default function AlertDialogSlide({ page = 1 }) {
       .then((r) => r.json())
       .then((data) => {
         console.log('data:', data)
+        handleClose()
+        // router.push(`/forum/gossip?page=3`)
         // setData(data[0])
         // setTotalPages(data[1])
       })
@@ -154,6 +156,7 @@ export default function AlertDialogSlide({ page = 1 }) {
               <ForumButton
                 btnColor="hot_pink"
                 text="取消"
+                type="button"
                 link={() => {
                   console.log('Cancel button clicked')
                   handleClose()
@@ -162,10 +165,12 @@ export default function AlertDialogSlide({ page = 1 }) {
               <ForumButton
                 btnColor="green"
                 text="發文"
-                link={() => {
-                  router.push(`/forum/gossip?page=3`)
+                type="button"
+                link={(e) => {
+                  // e.preventDefault()
+
                   addData(inputTitle, inputContent)
-                  handleClose()
+
                   // console.log('page:', page)
                   // console.log('category:', router.query.category)
                 }}
