@@ -114,43 +114,46 @@ export default function Amulet({ amuletName = '' }) {
         <Col className={styles.line}></Col>
       </Row>
 
-      <Row>
-        <Col>
-          <Modal
-            isOpen={modalIsOpen}
-            contentLabel="我的准考證"
-            className={styles.alert}
-            style={{
-              overlay: {
-                backgroundColor: 'rgba(0, 0, 0, 0.5)', // 背景顏色透明度
-                // zIndex: 2, //1 為spin pointer
-              },
-              content: {
-                maxWidth: '600px', // 調整最大寬度
-                maxHeight: '600px', // 調整最大高度
-                margin: 'auto', // 水平居中
-                background: variables['bgColor'],
-                //   // border: '',
-                //   // color: 'white',
-              },
-            }}
-          >
-            <div
-              className={`${styles.close} me25px fs28px p10px`}
-              onClick={handleModalCloseReload}
-            >
-              X
-            </div>
-            <div className={`${styles.column}`}>
-              <Image src={admissionTicketTest} alt="admissionTicketTest" />
+      <Modal
+        isOpen={modalIsOpen}
+        contentLabel="我的准考證"
+        className={styles.alert}
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.5)', // 背景顏色透明度
+            // zIndex: 2, //1 為spin pointer
+          },
+          content: {
+            maxWidth: '700px', // 調整最大寬度
+            maxHeight: '700px', // 調整最大高度
+            margin: 'auto', // 水平居中
+            background: variables['bgColor'],
+            //   // border: '',
+            //   // color: 'white',
+          },
+        }}
+      >
+        <div
+          className={`${styles.close}  fs28px p10px`}
+          onClick={handleModalCloseReload}
+        >
+          X
+        </div>
 
-              <div className={`${styles.flex}`}>
-                <InputBox width={100} /> <InputBox width={100} />
-              </div>
-            </div>
-          </Modal>
-        </Col>
-      </Row>
+        <div className={`${styles.flex_center} `}>
+          <Image
+            src={admissionTicketTest}
+            alt="admissionTicketTest"
+            width={550}
+          />
+        </div>
+        <div className={`${styles.flex_center} mt40px`}>
+          <div className={`${styles.flex} w550px`}>
+            <InputBox prompt="姓名" width={200} />
+            <InputBox prompt="第一志願" width={200} />
+          </div>
+        </div>
+      </Modal>
     </>
   )
 }
