@@ -30,12 +30,12 @@ export default function Home() {
     setIsClicked(true)
     setTimeout(() => {
       setIsClicked(false)
-      Router.push('/pray/member')
+      Router.push('/Home/signOut')
     }, 6000)
 
     setTimeout(() => {
-      Router.push('/pray/member')
-    }, 4000)
+      Router.push('/Home/signOut')
+    }, 4500)
 
     // 隐藏 HomeDoor2
     setTimeout(() => {

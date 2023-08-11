@@ -6,7 +6,7 @@ import nav from '@/assets/nav.svg'
 import foo_dog_left from '@/assets/foo_dog_left.svg'
 import foo_dog_right from '@/assets/foo_dog_right.svg'
 import Temple from '@/components/common/temple'
-import dog from '@/assets/dog_in.gif'
+import dog from '@/assets/dog_out.gif'
 import pink_star from '@/assets/Green_Star.svg'
 import lighting from '@/assets/green_lighting.svg'
 import signIn from '@/assets/sing_out.svg'
@@ -30,12 +30,12 @@ export default function Home() {
     setIsClicked(true)
     setTimeout(() => {
       setIsClicked(false)
-      Router.push('/pray/member')
-    }, 6000)
+      Router.push('/Home')
+    }, 6500)
 
     setTimeout(() => {
-      Router.push('/pray/member')
-    }, 4000)
+      Router.push('/Home')
+    }, 4500)
 
     // 隐藏 HomeDoor2
     setTimeout(() => {
@@ -63,7 +63,7 @@ export default function Home() {
               <div className={`${styles.position}`}>
                 {/* dog */}
                 <div className={`${styles.dog}`}>
-                  <Image src={dog} width={400} alt="dog" />
+                  <Image src={dog} width={350} alt="dog" />
                 </div>
                 {/* lighting */}
                 <div className={`${styles.lighting}`}>
