@@ -48,7 +48,7 @@ export default function Wishlist({
     }
   }
 
-  // 從下次再買刪除個別商品
+  // 從喜好商品刪除個別商品
   const deleteFromWishList = (pid) => {
     const deletedData = { pid: pid }
     const auth = localStorage.getItem('auth')
