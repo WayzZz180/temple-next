@@ -48,7 +48,7 @@ export default function Header() {
         { label: '購物車', url: '/shop/cart?tab=1' },
         { label: '喜好商品', url: '/member/wishlist' },
         { label: '訂單紀錄', url: '/member/orders' },
-        { label: '優惠券', url: '/member/coupons' },
+        { label: '優惠券', url: '/member/myCoupons?tab=1' },
       ],
     },
     {
@@ -123,7 +123,7 @@ export default function Header() {
         </ul>
         {/* logo */}
         <div className={`${styles.logoContainer}`}>
-          <Logo />
+          <Logo link={auth.id === 0 ? '/' : '/Home/signOut'} />
         </div>
         {/* 右半邊選單 */}
         <ul className={`${styles.drop_down_menu}`}>
