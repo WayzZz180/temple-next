@@ -9,6 +9,8 @@ import flag from '@/assets/flag.gif'
 import dog from '@/assets/dog_in.gif'
 import Quiz from '@/pages/pilgrimage/onlineQuiz'
 import Gossip from '@/pages/forum/forumgossip'
+import Pray from '@/pages/pray/index'
+import Buy from '@/pages/shop/index'
 
 export default function Pilgrimage() {
   const [modalIsOpen, setIsOpen] = React.useState(false)
@@ -19,6 +21,42 @@ export default function Pilgrimage() {
 
   function closeModal() {
     setIsOpen(false)
+  }
+  const [modalIsOpen2, setIsOpen2] = React.useState(false)
+
+  function openModal2() {
+    setIsOpen2(true)
+  }
+
+  function closeModal2() {
+    setIsOpen2(false)
+  }
+  const [modalIsOpen3, setIsOpen3] = React.useState(false)
+
+  function openModal3() {
+    setIsOpen3(true)
+  }
+
+  function closeModal3() {
+    setIsOpen3(false)
+  }
+  const [modalIsOpen4, setIsOpen4] = React.useState(false)
+
+  function openModal4() {
+    setIsOpen4(true)
+  }
+
+  function closeModal4() {
+    setIsOpen4(false)
+  }
+  const [modalIsOpen5, setIsOpen5] = React.useState(false)
+
+  function openModal5() {
+    setIsOpen5(true)
+  }
+
+  function closeModal5() {
+    setIsOpen5(false)
   }
   const customStyles = {
     content: {
@@ -59,12 +97,12 @@ export default function Pilgrimage() {
           <Quiz />
         </div>
       </Modal>
-      <button className={`${styles.bubble2}`} onClick={openModal}>
+      <button className={`${styles.bubble2}`} onClick={openModal2}>
         <div className={`${styles.text}`}>好熱鬧啊，快來一起聊</div>
       </button>
       <Modal2
-        isOpen={modalIsOpen}
-        onClose={closeModal}
+        isOpen={modalIsOpen2}
+        onClose={closeModal2}
         style={customStyles}
         contentLabel="Example Modal"
       >
@@ -80,15 +118,69 @@ export default function Pilgrimage() {
           <Gossip />
         </div>
       </Modal2>
-      <button className={`${styles.bubble3}`}>
+      <button className={`${styles.bubble3}`} onClick={openModal3}>
         <div className={`${styles.text}`}>汪咿～！</div>
       </button>
-      <button className={`${styles.bubble4}`}>
+      <Modal2
+        isOpen={modalIsOpen3}
+        onClose={closeModal3}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <div
+          className={`${styles.modal}`}
+          style={{
+            width: '100%',
+            height: '100%',
+            overflow: 'auto',
+            transform: 'scale(1)',
+          }}
+        >
+          <Pray />
+        </div>
+      </Modal2>
+      <button className={`${styles.bubble4}`} onClick={openModal4}>
         <div className={`${styles.text}`}>心誠則靈</div>
       </button>
-      <button className={`${styles.bubble5}`}>
+      <Modal2
+        isOpen={modalIsOpen4}
+        onClose={closeModal4}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <div
+          className={`${styles.modal}`}
+          style={{
+            width: '100%',
+            height: '100%',
+            overflow: 'auto',
+            transform: 'scale(1)',
+          }}
+        >
+          <Buy />
+        </div>
+      </Modal2>
+      <button className={`${styles.bubble5}`} onClick={openModal5}>
         <div className={`${styles.text}`}>供品底加買啦～！</div>
       </button>
+      <Modal2
+        isOpen={modalIsOpen5}
+        onClose={closeModal5}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <div
+          className={`${styles.modal}`}
+          style={{
+            width: '100%',
+            height: '100%',
+            overflow: 'auto',
+            transform: 'scale(1)',
+          }}
+        >
+          <Buy />
+        </div>
+      </Modal2>
     </>
   )
 }

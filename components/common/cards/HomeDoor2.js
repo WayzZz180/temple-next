@@ -24,7 +24,7 @@ export default function HomeDoor() {
         <Image src={O} alt="" width="1300"></Image>
       </div>
       <div className={`${styles.b}`}>
-        <Image src={B} alt="" width="1300"></Image>
+        <Image src={B} alt="" width="1350"></Image>
       </div>
     </div>
   )
