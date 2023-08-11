@@ -1,0 +1,292 @@
+@import '@/styles/_variables.module.sass'
+
+.worship
+  background: $brown
+
+.background
+  position: relative
+  background-color: $brown
+  z-index: 4
+  
+.place
+  padding-top:5px
+  position: relative
+  top:5px
+  height: 790px
+  overflow: hidden 
+
+.floor
+  width: 100%
+  display: flex
+  justify-content: center
+  align-items: flex-end
+  bottom: 0px
+  position: absolute
+  z-index: 2
+
+.flex_row
+  bottom:10px
+  width: 100%
+  position: absolute
+  display: flex
+  justify-content: center
+
+.swiper
+  width:100%
+  display: flex
+  justify-content: space-around
+  align-items: center
+  position: relative
+  
+.flex_know
+  display: flex
+  justify-content: center
+  align-items: center
+  margin-top: 120px
+
+.gods
+  width: 100%
+  height:800px
+  display: flex
+  justify-content: space-around
+  align-items: flex-end
+  overflow: hidden 
+
+.flex
+    display: flex
+    justify-content: center
+    align-items: center
+
+.cloud
+    position: absolute
+    z-index: -1
+    top: 350px
+    animation: float 5s ease-in-out infinite alternate
+
+
+@keyframes float 
+  0% 
+     transform: translate(0px ,-50px)
+  100% 
+     transform: translate(0px ,50px)
+  
+.logo
+    position: absolute
+    top: 150px
+    z-index: 10
+
+.button
+  margin: auto
+  width: 20%
+
+.slide
+  width: 70%
+
+
+.arrowContainer
+    width: 100%
+    display: flex
+    justify-content: space-around
+    align-items: center
+    position: relative
+    bottom: 390px
+    --swiper-navigation-size:0
+
+.arrowLeft
+    width: 100%
+    display: flex
+    justify-content: flex-start
+    margin-left: 50px
+ 
+.arrowRight
+    width: 100%
+    display: flex
+    justify-content: flex-end
+    margin-right: 50px
+
+.choseGod
+  width: 100%
+  margin: auto
+  text-align: center
+
+.god
+  color: $hot_pink
+
+.calendar
+    width: 100% 
+    height:350px
+    display: flex
+    justify-content: space-around
+    align-items: flex-start
+    margin: auto
+
+.titleContainer
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    position: relative
+    left: 50px
+
+.body
+  position: relative
+  left: 35px
+  bottom: 80px
+
+.title
+    display: flex
+    align-items: center
+
+.arrow
+    cursor: pointer
+
+.prev
+    transform: rotate(180deg)
+
+.week ul
+    width: 650px
+    color: #431D31
+
+.week ul li
+    width: 56.5px
+    margin-right: 21px
+    height: 51px
+    line-height:51px
+    list-style-type: none
+    display: block
+    box-sizing: border-box
+    float: left
+    text-align: center    
+
+.body_list ul
+    width: 600px
+    
+.body_list ul li
+    width: 65px
+    height: 65px
+    margin-top: 12px
+    margin-right: 12px
+    line-height: 65px
+    list-style-type: none
+    display: block
+    box-sizing: border-box
+    float: left
+    text-align: center    
+
+.lightgrey
+    color:$orderGray
+
+.day
+    background: #431D31
+    border-radius: 50px
+    color: white
+    position: relative
+
+.pastDay
+  opacity: 0.5
+
+.chooseDay
+    background: $hot_pink
+    border-radius: 50px
+    color: white
+
+.day:hover
+    background: $hot_pink
+    cursor: pointer
+
+.pink
+    color:$hot_pink 
+
+.choseDay
+    display: flex
+    position: relative
+    right: 80px
+    top: 125px
+
+.flex_col
+  display: flex
+  flex-direction: column
+  align-items: center
+  height: 1200px
+
+.zodiacContainer
+  display: flex
+  justify-content: center
+  position: relative
+
+.circle
+  width: 900px
+  height: 900px
+  border-radius: 50% 
+  display: flex
+  align-items: flex-end
+  justify-content: center
+  position: absolute
+  overflow: hidden
+  border:2px solid #000
+
+.zodiac
+   position: absolute
+   z-index: 2
+
+.zodiactext
+   position: absolute
+   z-index: 3
+
+.zodiaccircle
+   position: absolute
+   z-index: 1
+
+.slice
+  width: 0px
+  height:0px
+  position: absolute
+  transform-origin: top
+  border-left: 120px solid transparent
+  border-right: 120px solid transparent
+  border-bottom:450px solid #000
+  opacity: 0
+  z-index: 4
+  cursor: pointer
+
+.slice1
+  transform: rotate(180deg) 
+
+.slice2
+  transform: rotate(210deg) 
+
+.slice3
+  transform: rotate(240deg) 
+
+.slice4
+  transform: rotate(270deg) 
+
+.slice5
+  transform: rotate(300deg) 
+
+.slice6
+  transform: rotate(330deg)
+
+.slice7
+  transform: rotate(0deg) 
+
+.slice8 
+  transform: rotate(30deg) 
+
+.slice9
+  transform: rotate(60deg) 
+
+.slice10
+  transform: rotate(90deg) 
+
+.slice11
+  transform: rotate(120deg) 
+
+.slice12
+  transform: rotate(150deg) 
+
+.choseTime
+  width: 400px
+  position: absolute
+  left: 550px
+  top: 400px

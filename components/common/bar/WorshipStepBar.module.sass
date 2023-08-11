@@ -1,0 +1,39 @@
+@import @/styles/_variables.module.sass
+
+.container
+    position: fixed
+    z-index:3
+
+.circleContainer
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+    justify-content: center
+    width: 100%
+    cursor: pointer
+
+.text
+    letter-spacing: 3px
+
+.align
+    display: flex
+    align-items: center
+    width: 100%
+
+.circle
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 48px
+    height: 48px
+    border-radius: 50%
+    color: white
+    background: $green  
+    transition: all .3s ease
+
+
+.line
+    width:5px
+    height:50px
+    background: $green
+    opacity: 50%

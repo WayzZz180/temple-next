@@ -1,0 +1,131 @@
+@import '@/styles/mixins/_mixin'
+@import '@/styles/_variables.module.sass'
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap')
+
+body
+    margin: 0
+    padding:0
+    background-color: $bgColor !important
+    font-family: 'Noto Sans TC', sans-serif
+    color: $fontColor
+    scroll-behavior: smooth
+    overflow-x: hidden
+
+
+img::selection
+    background: transparent
+
+$tag:"div","span","p","h1","h2","h3","h4","h5","a","input","b"
+
+@for $i from 1 through 2
+    @include selection(nth($tag,$i),$hot_pink)
+@for $i from 3 through 11
+    @include selection(nth($tag,$i),$green)
+
+// fs12px ~ fs30px 
+@for $i from 12 through 100
+    @include fsnpx($i)
+
+$font-weight:"Normal","Bold","Bolder","Lighter"
+
+// fwNormal, fwBold, fwBolder, fwLighter
+@for $i from 1 through 4
+    @include fwn(nth($font-weight,$i))
+    
+// h1px ~ h2000px
+@for $i from 1 through 2000
+    @include hnpx($i)
+
+// w1px ~ w2000px
+@for $i from 1 through 2000
+    @include wnpx($i)
+
+// p1px ~ p1000px 
+@for $i from 1 through 1000
+    @include pnpx($i)
+
+// m1px ~ m1000px 
+@for $i from 1 through 1000
+    @include mnpx($i)
+
+// pt1px ~ pt1000px 
+@for $i from 1 through 1000
+    @include ptnpx($i)
+
+// mt1px ~ mt1000px 
+@for $i from 1 through 1000
+    @include mtnpx($i)
+
+// pb1px ~ pb1000px 
+@for $i from 1 through 1000
+    @include pbnpx($i)
+
+// mb1px ~ mb000px 
+@for $i from 1 through 1000
+    @include mbnpx($i)
+
+// ps1px ~ ps1000px 
+@for $i from 1 through 1000
+    @include psnpx($i)
+
+// ms1px ~ ms1000px 
+@for $i from 1 through 1000
+    @include msnpx($i)
+
+// pe1px ~ pe1000px 
+@for $i from 1 through 1000
+    @include penpx($i)
+
+// me1px ~ me1000px 
+@for $i from 1 through 1000
+    @include menpx($i)
+
+// ls1px ~ ls100px 
+@for $i from 1 through 100
+    @include lsnpx($i)
+
+// 卷軸
+::-webkit-scrollbar
+  width: 15px
+  height: 10px
+//   display: none
+
+::-webkit-scrollbar-track
+  background-color: white
+
+
+::-webkit-scrollbar-thumb
+    // #BB952A #CDAE50 #FDE182 generate
+    background-image: linear-gradient(to top, #bb952a, #be9a32, #c19e39, #c5a340, #c8a847, #ceae4e, #d3b555, #d9bb5c, #e2c465, #ebce6f, #f4d778, #fde182)
+    height:20px
+
+// 圖片陰影
+.shadow
+    filter: drop-shadow(0.2rem 0.2rem 0.25rem $shadow)
+
+// 切版方便測試用
+.border
+    border:1px red solid
+
+// Bootstrap Row 下這個讓 Col 不換行
+.nowrap
+    display: flex
+    justify-content: center
+    align-items: center
+
+// 商城Container大小
+.shopContainer
+    width:80%
+    margin-left: auto
+    margin-right: auto
+
+// Link預設樣式
+.link
+    color: $fontColor
+    text-decoration: none
+
+// .link:hover
+//     // color: #CDAE50
+
+.w100
+    width: 100%

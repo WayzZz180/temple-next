@@ -1,0 +1,40 @@
+@import '@/styles/mixins/_mixin'
+@import '@/styles/_variables.module.sass'
+
+.btn
+  box-sizing: border-box
+  letter-spacing: 3px
+  padding:15px 60px
+  border: none
+  display: flex
+  align-items: center
+  justify-content: center
+  cursor: pointer
+  transition-duration: .5s
+  overflow: hidden
+  position: relative
+
+.text 
+  margin-left:5px
+  margin-bottom: 0px
+  padding: 0
+  height: 100%
+  width: 100%
+  display: flex
+  align-items: center
+  justify-content: center
+  color: #fff
+  transition-duration: .5s
+  font-weight: 500
+
+.btn:hover
+  opacity: 0.8
+  transition: opacity .6 ease
+
+.btn:hover .text
+    transform: scale(1.1)
+    font-weight:700
+
+.btn:active 
+  transform: scale(0.95)
+  transition-duration: .5s

@@ -1,0 +1,72 @@
+@mixin bgc($name, $color)
+    .#{$name}
+        background-color: $color
+
+@mixin hnpx($n)
+    .h#{$n}px
+        height: #{$n}px
+        
+@mixin wnpx($n)
+    .w#{$n}px
+        width: #{$n}px
+
+@mixin fsnpx($n)
+    .fs#{$n}px
+        font-size: #{$n}px
+
+@mixin fwn($n)
+    .fw#{$n}
+        font-weight: #{$n}
+
+@mixin pnpx($n)
+    .p#{$n}px
+        padding: #{$n}px
+
+@mixin ptnpx($n)
+    .pt#{$n}px
+        padding-top: #{$n}px
+
+@mixin pbnpx($n)
+    .pb#{$n}px
+        padding-bottom: #{$n}px
+
+@mixin psnpx($n)
+    .ps#{$n}px
+        padding-left: #{$n}px
+
+@mixin penpx($n)
+    .pe#{$n}px
+        padding-right: #{$n}px
+
+@mixin mnpx($n)
+    .m#{$n}px
+        margin: #{$n}px
+
+@mixin mtnpx($n)
+    .mt#{$n}px
+        margin-top: #{$n}px
+
+@mixin mbnpx($n)
+    .mb#{$n}px
+        margin-bottom: #{$n}px
+
+@mixin msnpx($n)
+    .ms#{$n}px
+        margin-left: #{$n}px
+
+@mixin menpx($n)
+    .me#{$n}px
+        margin-right: #{$n}px
+
+@mixin lsnpx($n)
+    .ls#{$n}px
+        letter-spacing: #{$n}px
+
+@mixin color($name, $color)
+    .#{$name}
+        color: $color 
+
+@mixin selection($name, $color)
+    #{$name}::selection
+        color: $color
+

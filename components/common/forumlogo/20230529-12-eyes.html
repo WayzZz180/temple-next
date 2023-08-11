@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .face {
+        position: relative;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        background-color: #3ecc6c;
+        border: 1px solid black;
+        left: 400px;
+        top: 50px;
+      }
+      .eye {
+        position: absolute;
+        left: 200px;
+        top: 300px;
+      }
+
+      .eye-white {
+        position: absolute;
+        top: -60px;
+        left: -60px;
+        width: 100px;
+        height: 100px;
+        background-color: #fafffb;
+        border-radius: 50%;
+        border: 10px solid black;
+      }
+      .eye-black {
+        position: absolute;
+        top: -25px;
+        left: 0px;
+        width: 50px;
+        height: 50px;
+        background-color: #0a093b;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="face">
+      <div class="eye">
+        <div class="eye-white"></div>
+        <div class="eye-black"></div>
+      </div>
+      <div class="eye" style="left: 400px">
+        <div class="eye-white"></div>
+        <div class="eye-black"></div>
+      </div>
+
+      <div class="eye" style="left: 300px; top: 200px">
+        <div class="eye-white"></div>
+        <div class="eye-black"></div>
+      </div>
+    </div>
+
+    <script>
+      const eyes = document.querySelectorAll(".eye");
+      window.addEventListener("mousemove", (event) => {
+        eyes.forEach((eye) => {
+          const r = eye.getBoundingClientRect();
+          const dx = event.pageX - r.x;
+          const dy = event.pageY - r.y;
+
+          const ang = (Math.atan2(dy, dx) / Math.PI) * 180;
+
+          eye.style.transform = `rotate(${ang}deg)`;
+        });
+      });
+    </script>
+  </body>
+</html>

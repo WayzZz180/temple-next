@@ -1,0 +1,78 @@
+.container
+    display: grid
+    justify-self: center
+    justify-items: center
+    align-self: center
+    align-items: center
+
+.b
+    position: absolute
+    animation: door_b 2.2s ease-in infinite alternate-reverse
+
+@keyframes door_b
+  0% 
+    transform: scale(1)
+  100% 
+    transform: scale(2)
+.o
+    position: absolute
+    animation: door_o 2.2s ease-in infinite alternate-reverse
+
+@keyframes door_o
+  0% 
+    transform: scale(0.8)
+  10% 
+    transform: scale(0.8)
+  100% 
+    transform: scale(2.25)
+
+.p
+    position: absolute
+    animation: door_p 2.2s ease-in infinite alternate-reverse
+
+@keyframes door_p
+  0% 
+    transform: scale(0.6)
+  16% 
+    transform: scale(0.6)
+  100% 
+    transform: scale(2.5)
+
+.z
+    position: absolute
+    animation: door_z 2.2s ease-in infinite alternate-reverse
+
+@keyframes door_z
+  0% 
+    transform: scale(0.4)
+  22% 
+    transform: scale(0.4)
+  100% 
+    transform: scale(2.75)
+
+.y
+    position: absolute
+    animation: door_y 2.2s ease-in infinite alternate-reverse
+
+@keyframes door_y
+  0% 
+    transform: scale(0.2)
+  30% 
+    transform: scale(0.2)
+  100% 
+    transform: scale(3)
+
+.bg
+  position: absolute
+  width: 1300px
+  height:1300px
+  background-color: #000
+  animation: door_bg 2.2s linear infinite
+
+@keyframes door_bg
+  0% 
+    opacity: 0
+  30% 
+    opacity: 1
+  100% 
+    opacity: 1

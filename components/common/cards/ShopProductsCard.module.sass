@@ -1,0 +1,57 @@
+@import '@/styles/_variables.module.sass'
+
+.container
+    display: flex
+    flex-direction: column
+    align-items: center
+    position: relative
+    overflow: hidden
+    transition: all .2s ease
+
+.img:hover
+    transform: translateY(-3px)
+    transform: scale(1.1)
+
+.line
+    background-color: $brown
+
+.flexStart
+    width: 100%
+    display: flex
+    justify-content: flex-start
+    align-items: center
+
+.textContainer
+    overflow: hidden 
+    text-overflow: ellipsis 
+    display: -webkit-box
+    -webkit-line-clamp: 2 
+    -webkit-box-orient: vertical
+    white-space: normal
+    font-weight: 600
+
+.inlineBlock
+    display: inline-block
+
+.flexBetween
+    width: 100%
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+.icons
+    display: flex
+    align-items: center
+    cursor: pointer
+
+.alert
+    position: relative
+    width:100%
+    height: 25px
+
+.highlighted
+    background-color: red 
+    
+.img
+    transition: all .2s ease
+

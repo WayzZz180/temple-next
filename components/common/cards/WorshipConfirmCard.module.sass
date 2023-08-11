@@ -1,0 +1,107 @@
+@import '@/styles/_variables.module.sass'
+
+
+.container 
+  position: relative
+  border: 2px solid transparent
+  box-sizing: border-box
+  animation: opacity 2.5s ease infinite
+
+@keyframes opacity
+  0%
+    background:  rgba(231,217,203,0.5)
+  50%
+    background:  rgba(231,217,203,1)
+  100%
+    background:  rgba(231,217,203,0.5)
+
+.container::after 
+  content: ""
+  position: absolute
+  width: 0
+  height: 0
+  top: -4px
+  left: -4px
+  box-sizing: border-box
+  animation: draw-borders-top-right 1.5s forwards
+
+
+.container::before 
+  content: ""
+  position: absolute
+  width: 0
+  height: 0
+  bottom: -4px
+  right: -4px
+  box-sizing: border-box
+  animation: draw-borders-bottom-left 1.5s forwards
+
+
+@keyframes draw-borders-top-right 
+  0% 
+    width: 0
+    height: 0
+    border-top: 2px solid $brown
+  
+  25% 
+    width: calc(100% + 8px)
+    height: 0
+    border-top: 2px solid $brown
+    border-right: 2px solid $brown
+  
+  50% 
+    width: calc(100% + 8px)
+    height: calc(100% + 8px)
+    border-top: 2px solid $brown
+    border-right: 2px solid $brown
+  
+  
+  100% 
+    width: calc(100% + 8px)
+    height: calc(100% + 8px)
+    width: calc(100% + 8px)
+    border-top: 2px solid $brown
+    border-right: 2px solid $brown
+  
+
+
+@keyframes draw-borders-bottom-left 
+  0% 
+    width: 0
+    height: 0
+    opacity: 0
+  
+  
+  50% 
+    width: 0
+    height: 0
+    border-bottom: 2px solid $brown
+    opacity: 0
+  
+  50.1% 
+    opacity: 1
+  
+  75% 
+    width: calc(100% + 8px)
+    height: 0
+    border-bottom: 2px solid $brown
+    border-left: 2px solid $brown
+  
+  
+  100% 
+    height: calc(100% + 8px)
+    width: calc(100% + 8px)
+    border-bottom: 2px solid $brown
+    border-left: 2px solid $brown
+  
+
+.image
+    display: flex
+    justify-content: center
+    align-items: center
+
+.detailContainer
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center

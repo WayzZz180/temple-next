@@ -1,0 +1,99 @@
+@import '@/styles/_variables.module.sass'
+
+.container
+   display: flex
+   align-items: center
+   justify-content: center
+   background: $bgColor
+
+.side
+   display: flex
+   flex-direction: column
+   justify-content: center
+   align-items: center
+   position: relative
+   bottom: 75px
+
+.couplet
+   display: flex
+   flex-direction: column
+   align-items: center
+   justify-content: center
+   position: relative
+
+.word
+  writing-mode: vertical-lr 
+  position: absolute
+  color: white
+  font-size: 30px
+  letter-spacing: 10px
+  cursor: default
+
+
+.relative
+   position: relative
+   display: flex
+   flex-direction: column
+   align-items: center
+   justify-content: center
+   flex-shrink: 0
+
+
+.BackLight
+   position: absolute
+   bottom: 125px
+   animation: rotate 10s infinite linear
+   z-index: 0
+
+@keyframes rotate
+   0%
+      transform: rotate(0deg)
+   100%
+      transform: rotate(360deg)
+      
+.flex_row
+    display: flex
+    align-items: center
+    justify-content: center
+
+.godContainer
+   display: flex
+   align-items: center
+   justify-content: center
+   position: relative
+   top:80px
+   z-index: 3
+
+.title
+   padding-top:60px 
+   color: $deep_black
+   font-size: 30px
+   font-weight: 700
+   line-height: 158.2%
+   letter-spacing: 6.4px
+   position: relative
+   top: 90px
+   cursor: default
+
+.img
+   position: absolute
+   transition: all .3s
+
+.img:hover
+   filter: drop-shadow(0rem 0rem 0.5rem #F4E62A)
+   transform: translateY(-3px)
+   cursor: pointer
+   transform: scale(1.1)
+
+.width
+   display: flex
+   align-items: center
+   justify-content: space-around
+   position: relative
+   width: 700px
+
+.chose
+   filter: drop-shadow(0rem 0rem 0.5rem #F4E62A)
+
+.titleChose
+   // border-bottom: 3px solid $brown

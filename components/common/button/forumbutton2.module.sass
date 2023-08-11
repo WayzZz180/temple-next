@@ -1,0 +1,101 @@
+@import '@/styles/mixins/_mixin'
+@import '@/styles/_variables.module.sass'
+
+
+.btn
+  box-sizing: border-box
+  border-radius: 7px
+  letter-spacing: 3px
+  border: none
+  display: flex
+  align-items: center
+  justify-content: center
+  cursor: pointer
+  transition-duration: .5s
+  overflow: hidden
+  position: relative
+
+
+.IconContainer 
+  position: absolute
+  left: -50px
+  width: 8px
+  height: 8px
+  background-color: transparent
+  border-radius: 50%
+  display: flex
+  align-items: center
+  justify-content: center
+  overflow: hidden
+  z-index: 2
+  transition-duration: .5s
+
+
+.IconContainer2
+  position: absolute
+  right: -50px
+  width: 8px
+  height: 8px
+  background-color: transparent
+  border-radius: 50%
+  display: flex
+  align-items: center
+  justify-content: center
+  overflow: hidden
+  z-index: 2
+  transition-duration: .5s
+
+.icon 
+  border-radius: 1px
+
+
+.text 
+  margin-left:5px
+  margin-bottom: 0px
+  padding: 0
+  height: 100%
+  width: 100%
+  display: flex
+  
+  align-items: center
+  justify-content: center
+  color: #fff
+  transition-duration: .5s
+  font-weight: 500
+
+
+.btn:hover .IconContainer 
+  transform: translateX(70px)
+  border-radius: 40px
+  transition-duration: 0.5s
+
+.btn:hover .IconContainer2
+  transform: translateX(-70px)
+  border-radius: 40px
+  transition-duration: 0.5s
+
+.btn:hover .text
+    transform: scale(1.1)
+    font-weight:700
+
+.btn:active 
+  transform: scale(0.95)
+  transition-duration: .5s
+
+.img
+  display: inline-block
+  animation: Star 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite
+
+@keyframes Star 
+  0%, 100% 
+    animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5)
+  
+  0% 
+    transform: rotateY(0deg)
+  
+  50% 
+    transform: rotateY(900deg)
+    animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1)
+  
+  100% 
+    transform: rotateY(1800deg)

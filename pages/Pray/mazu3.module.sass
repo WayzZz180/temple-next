@@ -1,0 +1,224 @@
+@import '@/styles/_variables.module.sass'
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;900&display=swap')
+
+.parent_container 
+  position: relative
+  width: 100%
+  height: 930px
+  overflow: hidden
+
+.flex_row 
+  display: flex
+  width: 100%
+  height: 100%
+  align-items: center
+  justify-content: center
+
+.circle
+    position: absolute
+    width:1145px
+    height:1145px
+    border-radius: 50%
+    background-color: $brown
+    left:290px
+    z-index: -1
+
+.circle2
+    position: absolute
+    width:1145px
+    height:1145px
+    border-radius: 50%
+    background-color: $brown
+    right:290px
+    z-index: -1
+
+.light
+    z-index: -2
+    position: absolute
+    animation: light 4s ease-in-out infinite alternate-reverse
+
+@keyframes light
+  0%
+    transform: scale(1)rotate(0deg)
+
+  30%
+    transform: scale(0.9)(-10deg)
+
+  60%
+    transform: scale(1.1)(0deg)
+
+  100%
+    transform: scale(1)rotate(10deg)
+
+.right
+    position: relative
+    right:100px
+    top:-200px
+    animation: right 2s ease-in-out infinite alternate-reverse
+
+@keyframes right
+  0% 
+    transform: translate(0px, 15px)rotate(0deg)
+
+  100% 
+    transform: translate(0px, -15px)rotate(-5deg)
+
+.left
+    position: relative
+    left:140px
+    bottom:-180px
+    z-index:1
+    animation: left 2s ease-in-out infinite alternate
+
+@keyframes left
+  0% 
+    transform: translate(0px, -15px)rotate(0deg)
+
+  100% 
+    transform: translate(0px, 15px)rotate(-5deg)
+
+.up
+    position: absolute
+    top:0px
+    left:0px
+    animation: up 2s ease-in-out infinite alternate
+
+@keyframes up
+  0% 
+    transform: translateX(-15px)
+
+  100% 
+    transform: translateX(15px)
+.down
+    position: absolute
+    bottom:0px
+    right:0px
+    animation: down 2s ease-in-out infinite alternate
+
+@keyframes down
+  0% 
+    transform: translateX(-15px)
+
+  100% 
+    transform: translateX(15px)
+
+.name
+    position: absolute
+    top:200px
+    left:270px
+    z-index:1 
+    visibility: hidden
+    animation: name 5s ease
+
+@keyframes name
+  0% 
+    opacity: 0
+  40% 
+    opacity: 0
+
+  100% 
+    opacity: 1
+    
+
+.title
+   position: absolute
+   color: #431D31
+   font-family:'Noto Serif TC', serif
+   font-size: 70px
+   font-weight: 900
+   line-height: 130%
+   letter-spacing: 60px
+   text-align: center
+   margin:0
+   padding-left:60px
+   left:255px
+   top:230px
+   z-index:2
+   visibility: hidden
+   animation: title 5s ease
+
+
+@keyframes title
+  0% 
+    opacity: 0
+  40% 
+    opacity: 0
+
+  100% 
+    opacity: 1
+
+.nemberGroup
+    position: absolute
+    width:330px
+    right:400px
+    
+.nember
+    position: absolute
+    color: #FFF
+    font-family: Inter
+    font-size: 74px
+    font-style: normal
+    font-weight: 700
+    line-height: 128.2%
+    letter-spacing: 7.4px
+    top:60px
+
+.nemberTitle
+    position: absolute
+    color: $hot_pink
+    text-align: justify
+    font-size: 40px
+    font-style: normal
+    font-weight: 900
+    line-height: 158.2%
+    letter-spacing: 8px
+    left:8px
+    z-index:1 
+
+.leftmove
+    z-index:2 
+    animation: leftmove 1s ease-out 
+
+@keyframes leftmove 
+  0% 
+    transform: translateY(350px)
+    opacity: 0
+
+  100% 
+    transform: translateY(0px)
+    opacity: 1
+
+.rightmove
+    z-index:1
+    visibility: hidden
+    animation: rightmove 3s ease-out 
+
+@keyframes rightmove 
+  0% 
+    transform: translate(-350px,200px)
+    opacity: 0
+  30% 
+    transform: translate(-350px,200px)
+    opacity: 0
+
+  100% 
+    transform: translate(0px,0px)
+    opacity: 1
+
+.btns
+  z-index: 4
+  visibility: hidden
+  position: relative
+  animation: btn 5s ease
+
+@keyframes btn
+  0% 
+    opacity: 0
+  40% 
+    opacity: 0
+
+  100% 
+    opacity: 1
+
+.show
+    visibility: visible
