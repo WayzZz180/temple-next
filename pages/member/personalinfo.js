@@ -32,6 +32,7 @@ export default function Personalinfo() {
   //拿token
   useEffect(() => {
     console.log(`personalinfo頁面 有沒有auth.token?1`, auth.token)
+    setCancelEditing(false)
     if (auth.token) {
       fetch(process.env.API_SERVER + '/member/personalinfo', {
         headers: {
