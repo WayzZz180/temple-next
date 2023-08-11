@@ -12,7 +12,7 @@ import MemberTitle from '@/components/common/title/memberTitle'
 import Button from '@/components/common/button/index.js'
 import MemberNavbar from '@/components/common/memberNavbar'
 import Coupon from '@/components/common/coupons/index.js'
-import SpinWheel from '@/components/common/spinWheel/index.js'
+import SpinWheel from '@/components/common/spinWheel/ULspinWheel.js'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'

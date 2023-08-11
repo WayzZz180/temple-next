@@ -36,7 +36,7 @@ export default function SpinWheel({ updateSpinWheel }) {
     coupon_value: '',
   })
   const [showConfetti, setShowConfetti] = useState(false)
-  const [sg, setSg] = useState(250)
+  const [sg, setSg] = useState(175)
 
   const handleModalCloseReload = () => {
     // 當點擊取消或按下 Esc 時，關閉小視窗
@@ -320,7 +320,7 @@ export default function SpinWheel({ updateSpinWheel }) {
           <Confetti
             width={typeof window !== 'undefined' ? window.innerWidth : 0}
             height={typeof window !== 'undefined' ? window.innerHeight : 0}
-            numberOfPieces={150}
+            numberOfPieces={sg}
             confettiSource={{ x: 960, y: 250 }}
             run={showConfetti}
             style={{ position: 'fixed', top: 0, left: 0 }}
@@ -331,7 +331,7 @@ export default function SpinWheel({ updateSpinWheel }) {
         <Confetti
           width={typeof window !== 'undefined' ? window.innerWidth : 0}
           height={typeof window !== 'undefined' ? window.innerHeight : 0}
-          numberOfPieces={150}
+          numberOfPieces={sg}
           // confettiSource={{ x: window.innerWidth / 2, y: 50 }}
           run={showConfetti}
           style={{ position: 'fixed', top: 0, left: 0 }}
