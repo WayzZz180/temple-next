@@ -36,8 +36,8 @@ export default function Header() {
       title2: '線上拜拜',
       links: [
         { label: '預約拜拜', url: '/worship' },
-        { label: '供品套組', url: '/worship/offerings' },
         { label: '預約紀錄', url: '/member/praying' },
+        { label: '供品一覽', url: '/worship/offeringsAll' },
       ],
     },
     {

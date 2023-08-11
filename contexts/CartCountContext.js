@@ -5,14 +5,24 @@ export default CartCountContext
 
 export const CartCountContextProvider = function ({ children }) {
   const [cartCount, setCartCount] = useState(0)
+
   const router = useRouter()
 
   const getCartCount = () => {
-    fetch(`${process.env.API_SERVER}/shop/count`)
-      .then((r) => r.json())
-      .then((data) => {
-        setCartCount(data)
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/count`, {
+        headers: {
+          Authorization,
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          setCartCount(data)
+        })
+    }
   }
 
   useEffect(() => {

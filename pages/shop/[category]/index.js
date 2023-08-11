@@ -122,6 +122,7 @@ export default function Category() {
   }, [dataFromChild, router.query])
 
   if (!data) return <Loading />
+
   return (
     <Container className={`${styles.container}`}>
       {/* 類別&搜尋 */}

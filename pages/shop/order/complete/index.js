@@ -23,6 +23,21 @@ export default function OrderComplete() {
   const [data, setData] = useState([])
   const [buyContent, setBuyContent] = useState([])
 
+  // const scrollTo = (id) => {
+  //   // 取得目標元素的位置
+  //   const buyContent = document.getElementById(id)
+  //   const buyContentPosition = buyContent.getBoundingClientRect().top
+
+  //   // 計算捲動的距離，這裡設定為捲動至目標元素頂部距離畫面頂部的距離
+  //   const offset = window.pageYOffset
+  //   const scrollDistance = buyContentPosition + offset
+
+  //   // 執行捲動動作
+  //   window.scrollTo({
+  //     top: scrollDistance,
+  //     behavior: 'smooth', // 使用平滑滾動效果
+  //   })
+  // }
   const scrollToBuyContent = () => {
     // 取得目標元素的位置
     const buyContent = document.getElementById('buyContent')
@@ -38,6 +53,7 @@ export default function OrderComplete() {
       behavior: 'smooth', // 使用平滑滾動效果
     })
   }
+
   const scrollToOrderDetails = () => {
     // 取得目標元素的位置
     const orderDetails = document.getElementById('orderDetails')
@@ -55,18 +71,31 @@ export default function OrderComplete() {
   }
 
   useEffect(() => {
-    // 訂單大綱資料
-    fetch(`${process.env.API_SERVER}/shop/order`)
-      .then((r) => r.json())
-      .then((data) => {
-        setData(data[0])
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      // 訂單大綱資料
+      fetch(`${process.env.API_SERVER}/shop/order`, {
+        headers: {
+          Authorization,
+        },
       })
-    // 訂單詳細資料
-    fetch(`${process.env.API_SERVER}/shop/orderDetails`)
-      .then((r) => r.json())
-      .then((data) => {
-        setBuyContent(data)
+        .then((r) => r.json())
+        .then((data) => {
+          setData(data[0])
+        })
+      // 訂單詳細資料
+      fetch(`${process.env.API_SERVER}/shop/orderDetails`, {
+        headers: {
+          Authorization,
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          setBuyContent(data)
+        })
+    }
   }, [router.query])
 
   return (
@@ -86,6 +115,12 @@ export default function OrderComplete() {
             text2="收件詳情"
             link1={scrollToBuyContent}
             link2={scrollToOrderDetails}
+            // link1={() => {
+            //   scrollTo('buyContent')
+            // }}
+            // link2={() => {
+            //   scrollTo('orderDetails')
+            // }}
           />
         </Row>
 

@@ -20,6 +20,7 @@ export default function MyWishlist() {
   const { auth, setAuth, logout } = useContext(AuthContext)
   const router = useRouter()
   const [wishlist, setWishlist] = useState([])
+  const [reset, setReset] = useState()
 
   useEffect(() => {
     console.log(`wishlist頁面 有沒有auth.token?1`, auth.token)
@@ -41,7 +42,7 @@ export default function MyWishlist() {
       // You can add any additional logic here
       console.log('用戶尚未註冊')
     }
-  }, [auth.token])
+  }, [router.query, reset])
 
   return (
     <div className={styles.flex}>
@@ -63,6 +64,7 @@ export default function MyWishlist() {
                 WLprice={v.product_price}
                 WLpid={v.pid}
                 WLcid={v.cid}
+                setReset={setReset}
               />
             </div>
           ))

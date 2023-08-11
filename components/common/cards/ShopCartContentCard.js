@@ -43,51 +43,69 @@ export default function ShopCartContentCard({
   // 更新數量(需要數量和pid)
   const updateCount = (count, pid) => {
     const updatedData = { count: count, pid: pid }
-    fetch(`${process.env.API_SERVER}/shop/cart`, {
-      method: 'PUT',
-      body: JSON.stringify({ requestData: updatedData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        getCartData()
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/cart`, {
+        method: 'PUT',
+        body: JSON.stringify({ requestData: updatedData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          getCartData()
+        })
+    }
   }
 
   // 刪除個別商品(需要pid)
   const deleteFromCart = (pid) => {
     const deletedData = { pid: pid }
-    fetch(`${process.env.API_SERVER}/shop/cart`, {
-      method: 'DELETE',
-      body: JSON.stringify({ requestData: deletedData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        getCartData()
-        getCartCount()
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/cart`, {
+        method: 'DELETE',
+        body: JSON.stringify({ requestData: deletedData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          getCartData()
+          getCartCount()
+        })
+    }
   }
 
   // 加入下次再買(需要pid)
   const addToWannaBuy = (pid) => {
     const addData = { pid: pid }
-    fetch(`${process.env.API_SERVER}/shop/wannaBuy`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: addData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        getCartData()
-        getCartCount()
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/wannaBuy`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: addData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          getCartData()
+          getCartCount()
+        })
+    }
   }
 
   // 瀏覽量加一
@@ -101,6 +119,7 @@ export default function ShopCartContentCard({
       .then((r) => r.json())
       .then((data) => {})
   }
+
   return (
     <Row className={`${styles.row} nowrap fwBold`}>
       <Col>
@@ -160,7 +179,9 @@ export default function ShopCartContentCard({
                     setCount(Number(count))
                   }
                 }}
-                onBlur={updateCount(count, pid)}
+                onBlur={() => {
+                  updateCount(count, pid)
+                }}
                 readOnly={stock_num === 0}
               ></input>
               {/* + */}

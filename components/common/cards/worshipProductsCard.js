@@ -60,7 +60,7 @@ export default function WorshipProductsCard({
       }}
     >
       {/* 圖片 */}
-      <div className={`${styles.image} mb10px`}>
+      <div className={`${styles.image} mb10px pt5px pb5px`}>
         <Image
           src={`/${src}`}
           alt="image"

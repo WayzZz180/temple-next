@@ -5,16 +5,24 @@ export default CartDataContext
 
 export const CartDataContextProvider = function ({ children }) {
   const [cartData, setCartData] = useState([])
-
   const router = useRouter()
-  const getCartData = () => {
-    fetch(`${process.env.API_SERVER}/shop/cart`)
-      .then((r) => r.json())
-      .then((data) => {
-        setCartData(data)
-      })
-  }
 
+  const getCartData = () => {
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/cart`, {
+        headers: {
+          Authorization,
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          setCartData(data)
+        })
+    }
+  }
   useEffect(() => {
     getCartData()
   }, [router.query])

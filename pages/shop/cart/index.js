@@ -46,11 +46,20 @@ export default function IndexCart() {
 
   // 瀏覽紀錄
   useEffect(() => {
-    fetch(`${process.env.API_SERVER}/shop/history`)
-      .then((r) => r.json())
-      .then((data) => {
-        setMarquee(data)
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/history`, {
+        headers: {
+          Authorization,
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          setMarquee(data)
+        })
+    }
   }, [])
 
   if (!cartData || !wannaBuyData || !marquee) return <Loading />
