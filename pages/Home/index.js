@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './head.module.sass'
 import Image from 'next/image'
 // svg
@@ -21,7 +21,24 @@ import HomeCarousels from '@/components/common/carousel/HomeCarousels'
 import HomeDoor from '@/components/common/cards/HomeDoor'
 import HomeDoor2 from '@/components/common/cards/HomeDoor2'
 
+
+ 
 export default function Home() {
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleClick = () => {
+    setIsClicked(true);
+    setTimeout(() => {
+      setIsClicked(false);
+    }, 6000); 
+
+
+  // 隐藏 HomeDoor2
+  setTimeout(() => {
+    setIsClicked(false);
+  }, 5000); // 5 seconds
+};
+
   return (
     <>
       {/* section1 */}
@@ -66,7 +83,7 @@ export default function Home() {
         </div>
         <div className={`${styles.position}`}>
           <div className={`${styles.signIn}`}>
-            <div id="change" className={`${styles.signInBlock}`}>
+          <div className={`${styles.signInBlock}`} onClick={handleClick}>
               {/* signin star */}
               <div className={`${styles.pinkStar}`}>
                 <Image src={pink_star} width={40} alt="star" />
@@ -76,11 +93,11 @@ export default function Home() {
                 <Image src={signIn} width={30} alt="signIn" />
               </div>
             </div>
-            <div className={styles.HomeDoor}>
+            <div className={`${styles.HomeDoor} ${isClicked ? styles.HomeDoorclick : ''}`}>
               <HomeDoor />
             </div>
-            <div className={`${styles.signInDoor}`}>
-              <div className={styles.HomeDoor2}>
+            <div className={`${styles.signInDoor} ${isClicked ? styles.signInDoorclick : ''}`}>
+            <div className={`${styles.HomeDoor2}`}>
                 <HomeDoor2 />
               </div>
             </div>
