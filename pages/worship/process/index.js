@@ -14,6 +14,7 @@ import { useRouter } from 'next/router'
 import God from '@/components/common/cards/WorshipProcessGod'
 import Button from '@/components/common/button'
 import Loading from '@/components/common/loading'
+
 // svg
 import BackTable from '@/assets/tableBack.svg'
 import FrontTable from '@/assets/tableFront.svg'

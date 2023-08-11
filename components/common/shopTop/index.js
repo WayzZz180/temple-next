@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './style.module.sass'
-//hooks
+// hooks
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 // components
 import ShopSearchBar from '@/components/common/bar/ShopSearchBar'
