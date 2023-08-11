@@ -1,0 +1,58 @@
+@import '@/styles/_variables.module.sass'
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400900&display=swap')
+
+.PIN_container
+    display: flex
+    width:80px
+    height:80px
+    position: absolute
+    align-items: center
+    justify-content: center
+
+.container
+  display: flex
+  border: 2.5px solid $hot_pink /* 使用颜色名称或十六进制颜色值 */
+  width: 30px
+  height: 30px
+  border-radius: 50%
+  position: absolute
+  align-items: center
+  justify-content: center
+  cursor: pointer
+
+.container:hover
+    width: 40px
+    height: 40px
+
+.line
+    position: absolute
+    border-bottom:2.5px solid $hot_pink
+    width:30px
+    height:0px
+    transform: rotate(45deg)
+    cursor: pointer
+
+// .line:hover
+//     position: absolute
+//     border-bottom:4px solid $hot_pink
+//     width:30px
+//     height:0px
+//     transform: rotate(45deg)
+//     cursor: pointer
+    
+.line2
+    position: absolute
+    border-bottom:2.5px solid $hot_pink
+    width:30px
+    height:0px
+    transform: rotate(-45deg)
+    cursor: pointer
+
+
+// .line2:hover
+//     position: absolute
+//     border-bottom:4px solid $hot_pink
+//     width:30px
+//     height:0px
+//     transform: rotate(-45deg)
+//     cursor: pointer

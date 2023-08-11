@@ -20,7 +20,7 @@
     display: flex
     position: absolute
     font-size: 85px
-    font-weight: 900
+    font-weight: 700
     font-family:"Noto Sans TC", sans-serif
     color:$brown
     left:227px
@@ -30,7 +30,7 @@
     display: flex
     position: absolute
     font-size: 85px
-    font-weight: 900
+    font-weight: 700
     font-family:"Noto Sans TC", sans-serif
     color:$brown
     right:227px
@@ -42,7 +42,7 @@
     width:950px
     top:135px
     font-size: 30px
-    font-weight: 900
+    font-weight: 700
     font-family:"Noto Sans TC", sans-serif
     letter-spacing:3.2px 
 
@@ -54,13 +54,36 @@
     width:1000px
     top:135px
     font-size: 30px
-    font-weight: 900
+    font-weight: 700
     font-family:"Noto Sans TC", sans-serif
     letter-spacing:3.2px 
-    background-color: $hot_pink
+    background-color: $brown
     color:#fff
     border: none
     justify-content: center
+    transform-style: preserve-3d
+    transition: transform 1s ease
 
-.greenButton 
+.button.greenButton 
   background-color: $green
+  pointer-events: none
+
+.button.hotPinkButton
+  background-color: $hot_pink
+  pointer-events: none
+
+.button.selectedButton
+    animation: rotateXAnimation .5s forwards
+
+@keyframes rotateXAnimation 
+  0% 
+    transform: rotateX(0deg)
+  
+  100% 
+    transform: rotateX(360deg)
+   
+.yesorno
+    position: absolute
+
+.hidden
+    display: none
