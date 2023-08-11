@@ -1,0 +1,63 @@
+@import '@/styles/_variables.module.sass' 
+
+
+.standard_input
+    height: 36px
+    padding: 18px 18px 0px 18px
+    background: $bgColor
+    border: 2px solid $black
+    font-size: 18px
+    // Q6 如何鎖定特定type?
+
+//日曆大小    
+.standard_input::-webkit-calendar-picker-indicator
+    width: 25px
+    height: 25px
+    
+    
+//提示文字
+.standard_input::placeholder
+    color: #868686
+    font-size: 18px
+    font-style: normal
+    font-weight: 700
+    line-height: normal
+    letter-spacing: 6.29px
+
+
+.standard_focus 
+    box-shadow: 0 0 0 1px $black
+    outline: none
+
+
+.error_message
+    color:$red
+        
+.error_input
+    height: 36px
+    padding: 0px 18px 
+    background: $bgColor
+    border: 2px solid $red
+    font-size: 18px
+    .focus 
+    box-shadow: 0 0 0 0px $red
+    outline: none
+
+//日曆大小    
+.error_input::-webkit-calendar-picker-indicator
+    width: 25px
+    height: 25px
+    
+
+//提示文字
+.error_input::placeholder
+    color: #868686
+    font-size: 18px
+    font-style: normal
+    font-weight: 700
+    line-height: normal
+    letter-spacing: 6.29px
+
+.error_focus
+    box-shadow: 0 0 0 1px $red
+    outline: none

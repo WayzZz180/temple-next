@@ -1,12 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './ShopProductsCard.module.sass'
+
 // svg
 import heart_fill from '@/assets/heart_fill.svg'
 import heart_outline from '@/assets/heart_outline.svg'
 import cart_fill from '@/assets/cart_fill.svg'
 import cart_outline from '@/assets/cart_outline.svg'
 import cart_noStock from '@/assets/cart_noStock.svg'
+import loading from '@/assets/loading.gif'
 
 //hooks
 import { useState, useEffect, useContext } from 'react'
@@ -19,6 +21,7 @@ import CartDataContext from '@/contexts/CartDataContext'
 
 //components
 import Stars from '@/components/common/stars'
+import Alert from '@/components/common/alert'
 
 export default function ShopProductsCard({
   src,
@@ -98,47 +101,64 @@ export default function ShopProductsCard({
   // 加入購物車
   const addToCart = () => {
     const addData = { count: 1, pid: pid }
-    fetch(`${process.env.API_SERVER}/shop/cart`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: addData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        getCartData()
-        getCartCount()
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/cart`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: addData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          getCartData()
+          getCartCount()
+        })
+    }
   }
 
   // 加入喜好商品
   const addToFav = () => {
     const addData = { pid: pid }
-    fetch(`${process.env.API_SERVER}/shop/favorite`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: addData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {})
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/favorite`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: addData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {})
+    }
   }
 
   // 刪除喜好商品
   const deleteFromFav = () => {
     const deletedData = { pid: pid }
-
-    fetch(`${process.env.API_SERVER}/shop/favorite`, {
-      method: 'DELETE',
-      body: JSON.stringify({ requestData: deletedData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {})
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/favorite`, {
+        method: 'DELETE',
+        body: JSON.stringify({ requestData: deletedData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {})
+    }
   }
 
   const regex = new RegExp(keyword, 'gi')
@@ -146,32 +166,76 @@ export default function ShopProductsCard({
   ">${keyword}</span>`
   const result = text.replace(regex, hightlight)
 
-  // console.log(pid,heartClickState,state)
+  const browse = () => {
+    // 瀏覽量加一
+    fetch(`${process.env.API_SERVER}/shop/${category}/${pid}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((data) => {})
+  }
+
+  // for alert
+  const [isOpen, setIsOpen] = useState(false)
+  const [reset, setReset] = useState(true)
+  // let handleReset = () => {}
+  // useEffect(() => {
+  //   handleReset = () => {
+  //     const timer = setTimeout(() => {
+  //       setReset(!reset)
+  //     }, 1500) // 3000毫秒 = 3秒
+
+  //     return () => {
+  //       clearTimeout(timer) // 清除定时器，以防组件卸载时触发
+  //     }
+  //   }
+  // }, [router.query])
+
+  useEffect(() => {
+    if (isOpen) setIsOpen(false)
+  }, [reset])
 
   return (
     <div className={`${styles.container}  p30px`}>
       {/* 產品圖 */}
-      <Link href={`/shop/${category}/${pid}`}>
-        <Image
-          src={src}
-          alt="product"
-          width={150}
-          height={150}
-          className="shadow mb20px"
-        ></Image>
-      </Link>
+      <div
+        role="presentation"
+        onClick={() => {
+          browse()
+        }}
+      >
+        <Link href={`/shop/${category}/${pid}`}>
+          <Image
+            src={src ? src : loading}
+            alt="product"
+            width={150}
+            height={150}
+            className={`${styles.img} shadow mb20px`}
+          ></Image>
+        </Link>
+      </div>
       {/* 分隔線 */}
       <div className={`${styles.line} w180px h3px`}></div>
       {/* 標題 */}
-      <Link href={`/shop/${category}/${pid}`} className="link">
-        <div className={`${styles.flexStart} mt15px fwBold fs18px`}>
-          <div
-            className={`${styles.textContainer} w180px h55px`}
-            id="text"
-            dangerouslySetInnerHTML={{ __html: result }}
-          ></div>
-        </div>
-      </Link>
+      <div
+        role="presentation"
+        onClick={() => {
+          browse()
+        }}
+      >
+        <Link href={`/shop/${category}/${pid}`} className="link">
+          <div className={`${styles.flexStart} mt15px fwBold fs18px`}>
+            <div
+              className={`${styles.textContainer} w180px h55px`}
+              id="text"
+              dangerouslySetInnerHTML={{ __html: result }}
+            ></div>
+          </div>
+        </Link>
+      </div>
       {/* 星星 */}
       <div className={`${styles.flexStart} mt15px`}>
         <Stars width={20} stars={stars} />
@@ -201,6 +265,7 @@ export default function ShopProductsCard({
         <span className={`${styles.inlineBlock} ${styles.icons}`}>
           {/* 愛心 */}
           <span
+            role="presentation"
             onClick={() => {
               heartClickState ? deleteFromFav() : addToFav()
               handleHeartClick()
@@ -219,19 +284,31 @@ export default function ShopProductsCard({
           </span>
           {/* 購物車 */}
           <span
+            role="presentation"
             onClick={() => {
               if (stock_num != 0) {
                 !foundCart && handleCartClick()
                 handleAnimationEnd()
                 addToCart()
               } else {
-                alert(`無庫存`)
+                // handleReset()
+                setIsOpen(true)
               }
             }}
             onMouseEnter={() => handleMouseEnter(2)}
             onMouseLeave={handleMouseLeave}
             className={`${styles.inlineBlock}`}
           >
+            {isOpen ? (
+              <Alert
+                isOpen={isOpen}
+                text={'沒有庫存了！'}
+                status="wrong"
+                setIsOpen={setIsOpen}
+              />
+            ) : (
+              ''
+            )}
             <Image
               src={
                 stock_num === 0

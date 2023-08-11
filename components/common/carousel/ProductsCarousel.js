@@ -19,7 +19,7 @@ import arrowL_fill from '@/assets/arrowL_fill.svg'
 //data
 import TitleData from '@/components/mydata/productsTitleData'
 
-export default function ProductsCarousel({ text, color, i ,id }) {
+export default function ProductsCarousel({ text, color, i, id }) {
   const router = useRouter()
   const reqData = TitleData.filter((v) => {
     return text === v.text
@@ -29,7 +29,7 @@ export default function ProductsCarousel({ text, color, i ,id }) {
 
   useEffect(() => {
     localStorage.getItem('keyword') && localStorage.removeItem('keyword')
-    
+
     fetch(process.env.API_SERVER + '/shop', {
       method: 'POST',
       body: JSON.stringify({ requestData: reqData }),
@@ -43,14 +43,22 @@ export default function ProductsCarousel({ text, color, i ,id }) {
       })
   }, [])
 
-  useEffect(()=>{
-
-    fetch(`${process.env.API_SERVER}/shop/favoriteMatch`)
-    .then((r) => r.json())
-    .then((data) => {
-      setPidArr(data)
-    })
-  },[router.query])
+  useEffect(() => {
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/favoriteMatch`, {
+        headers: {
+          Authorization,
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          setPidArr(data)
+        })
+    }
+  }, [router.query])
 
   const { imgSrc } = usePath(data)
 
@@ -72,7 +80,7 @@ export default function ProductsCarousel({ text, color, i ,id }) {
     // 一個類別
     <Fragment key={i}>
       {/* 類別標題 */}
-      <ShopCategory text={text} color={color} link={`/shop/${id}`}/>
+      <ShopCategory text={text} color={color} link={`/shop/${id}`} />
       {/* 第一層row */}
       <Row className={`${styles.row} `}>
         {/* 左箭頭 */}
@@ -97,9 +105,9 @@ export default function ProductsCarousel({ text, color, i ,id }) {
             {/*個別商品類別 */}
 
             {imgSrc.map((src, i) => {
-            const foundItem = pidArr.some((v) => v.pid === data[i].pid);
-            return (
-              <Col key={i} className={`${styles.flex_start}`}>
+              const foundItem = pidArr.some((v) => v.pid === data[i].pid)
+              return (
+                <Col key={i} className={`${styles.flex_start}`}>
                   <ShopProductsCard
                     src={src}
                     text={data[i].product_name}
@@ -111,9 +119,8 @@ export default function ProductsCarousel({ text, color, i ,id }) {
                     state={foundItem}
                   />
                 </Col>
-            )
-          })
-          }
+              )
+            })}
           </div>
         </div>
         {/* 右箭頭 */}

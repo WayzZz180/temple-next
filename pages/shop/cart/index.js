@@ -3,7 +3,6 @@ import styles from './cart.module.sass'
 //hooks
 import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
-import { CartDataContextProvider } from '@/contexts/CartCountContext'
 import CartDataContext from '@/contexts/CartDataContext'
 import WannaBuyDataContext from '@/contexts/WannaBuyDataContext'
 // bootstrap
@@ -17,6 +16,7 @@ import Cart from '@/components/common/cart/cart'
 import WannaBuy from '@/components/common/cart/wannaBuy'
 import CartCategory from '@/components/common/button/CartCategory'
 import Marquee from '@/components/common/marquee'
+import Loading from '@/components/common/loading'
 
 export default function IndexCart() {
   const router = useRouter()
@@ -46,18 +46,24 @@ export default function IndexCart() {
 
   // 瀏覽紀錄
   useEffect(() => {
-    fetch(`${process.env.API_SERVER}/shop/history`)
-      .then((r) => r.json())
-      .then((data) => {
-        setMarquee(data)
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/history`, {
+        headers: {
+          Authorization,
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          setMarquee(data)
+        })
+    }
   }, [])
 
-  if (!cartData) return <p>Loading...</p>
-  if (!wannaBuyData) return <p>Loading...</p>
-  if (!marquee) return <p>Loading...</p>
+  if (!cartData || !wannaBuyData || !marquee) return <Loading />
 
- 
   return (
     <>
       <Container>
@@ -77,7 +83,7 @@ export default function IndexCart() {
           </Col>
         </Row>
         {idFromChild === 1 ? (
-          <Cart data={cartData}/>
+          <Cart data={cartData} />
         ) : (
           <WannaBuy data={wannaBuyData} />
         )}
@@ -89,7 +95,7 @@ export default function IndexCart() {
             lineColor="green"
           />
         </Row>
-      </Container>    
+      </Container>
     </>
   )
 }

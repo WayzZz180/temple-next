@@ -5,14 +5,17 @@ import variables from '@/styles/_variables.module.sass'
 
 // hooks
 import { useState, useContext } from 'react'
-import CartContext from '@/contexts/CartCountContext'
+import CartCountContext from '@/contexts/CartCountContext'
 import CartDataContext from '@/contexts/CartDataContext'
 
 // bootstrap
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+
 // components
 import NoButton from '@/components/common/button/noButton'
+import Loading from '@/components/common/loading'
+
 // svg
 import add from '@/assets/add.svg'
 import minus from '@/assets/minus.svg'
@@ -26,10 +29,10 @@ export default function ShopCartContentCard({
   pid = 2,
   cid = 1,
 }) {
-  if (isNaN(quantity)) return <p></p>
+  if (isNaN(quantity)) return <Loading />
 
   // for navbar購物車數量
-  const { cartCount, setCartCount, getCartCount } = useContext(CartContext)
+  const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
 
   const { cartData, setCartData, getCartData } = useContext(CartDataContext)
   // for 更新數量
@@ -40,9 +43,75 @@ export default function ShopCartContentCard({
   // 更新數量(需要數量和pid)
   const updateCount = (count, pid) => {
     const updatedData = { count: count, pid: pid }
-    fetch(`${process.env.API_SERVER}/shop/cart`, {
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/cart`, {
+        method: 'PUT',
+        body: JSON.stringify({ requestData: updatedData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          getCartData()
+        })
+    }
+  }
+
+  // 刪除個別商品(需要pid)
+  const deleteFromCart = (pid) => {
+    const deletedData = { pid: pid }
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/cart`, {
+        method: 'DELETE',
+        body: JSON.stringify({ requestData: deletedData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          getCartData()
+          getCartCount()
+        })
+    }
+  }
+
+  // 加入下次再買(需要pid)
+  const addToWannaBuy = (pid) => {
+    const addData = { pid: pid }
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/wannaBuy`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: addData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          getCartData()
+          getCartCount()
+        })
+    }
+  }
+
+  // 瀏覽量加一
+  const browse = () => {
+    fetch(`${process.env.API_SERVER}/shop/${category}/${pid}`, {
       method: 'PUT',
-      body: JSON.stringify({ requestData: updatedData }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -51,46 +120,18 @@ export default function ShopCartContentCard({
       .then((data) => {})
   }
 
-  // 刪除個別商品(需要pid)
-  const deleteFromCart = (pid) => {
-    const deletedData = { pid: pid }
-    fetch(`${process.env.API_SERVER}/shop/cart`, {
-      method: 'DELETE',
-      body: JSON.stringify({ requestData: deletedData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        getCartData()
-        getCartCount()
-      })
-  }
-
-  // 加入下次再買(需要pid)
-  const addToWannaBuy = (pid) => {
-    const addData = { pid: pid }
-    fetch(`${process.env.API_SERVER}/shop/wannaBuy`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: addData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        getCartData()
-        getCartCount()
-      })
-  }
-
   return (
     <Row className={`${styles.row} nowrap fwBold`}>
       <Col>
         <div className={`${styles.container} pt30px pb30px fs18px`}>
           {/* 商品圖 */}
-          <div className={`${styles.image}`}>
+          <div
+            role="presentation"
+            className={`${styles.image}`}
+            onClick={() => {
+              browse()
+            }}
+          >
             <Link href={`/shop/${category}/${pid}`}>
               <Image src={src} alt="product" width={200} height={200} />
             </Link>
@@ -138,7 +179,9 @@ export default function ShopCartContentCard({
                     setCount(Number(count))
                   }
                 }}
-                onBlur={updateCount(count, pid)}
+                onBlur={() => {
+                  updateCount(count, pid)
+                }}
                 readOnly={stock_num === 0}
               ></input>
               {/* + */}

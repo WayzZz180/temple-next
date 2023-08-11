@@ -10,7 +10,6 @@ export default function MyApp({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => <Layout>{page}</Layout>)
 
   return (
-
     <AuthContextProvider>
       <CartCountContextProvider>
         <CartDataContextProvider>

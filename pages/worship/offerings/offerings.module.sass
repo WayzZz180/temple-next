@@ -1,0 +1,76 @@
+@import '@/styles/_variables.module.sass'
+@import '@/styles/mixins/responsive.sass'
+
+.choseContainer
+  display: flex
+  justify-content: center
+  align-items: center
+  gap: 30px
+
+.chose
+  letter-spacing: 3px
+
+.pink
+  color: $hot_pink
+
+.category
+  color: $fontColor
+  letter-spacing: 3px
+  display: block
+  text-decoration: none
+  position: relative
+  box-sizing: border-box
+  cursor: pointer
+
+.link
+  display: inline-block
+  position: relative
+
+.hovered::after
+  content: ""
+  position: absolute
+  bottom: 0
+  left: 35px
+  width: 66%
+  height: 2px
+  background-color: $brown
+  transform: scaleX(0)
+  transform-origin: left
+  transition: transform 0.2s ease-in
+
+.hovered:hover::after
+  transform: scaleX(1)
+
+
+.productsContainer
+  margin: auto
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: center
+  width: 100%
+    
+  @include desktop-m 
+      flex-wrap: wrap
+    
+.flex
+    display: flex    
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+
+.title
+   color: $title
+   font-weight: 700
+   letter-spacing: 3px
+   text-align: center
+   line-height: 40px
+
+.line
+   height: 8px
+   width: 100px
+   background: $green
+   margin-top:10px
+   margin-bottom: 30px
+

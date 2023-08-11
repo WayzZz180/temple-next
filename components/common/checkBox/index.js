@@ -10,9 +10,12 @@ export default function Checkbox({ width = ' ', height = '', label = '' }) {
           type="checkbox"
           id="myCheckbox"
           className={styles.customCheckbox}
+          style={{ cursor: 'pointer' }}
           label=""
         />
-        <label htmlFor="myCheckbox">{label}</label>
+        <label htmlFor="myCheckbox" className="fwBold ps10px">
+          {label}
+        </label>
       </div>
     </>
   )

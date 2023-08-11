@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 02, 2023 at 03:09 PM
+-- Generation Time: Aug 11, 2023 at 02:07 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -31,19 +31,28 @@ CREATE TABLE `coupons` (
   `coupon_id` int(11) NOT NULL,
   `coupon_type` varchar(255) NOT NULL,
   `coupon_name` varchar(50) NOT NULL,
-  `coupon_value` int(11) NOT NULL
+  `coupon_value` int(11) NOT NULL,
+  `conditions` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `coupons`
 --
 
-INSERT INTO `coupons` (`coupon_id`, `coupon_type`, `coupon_name`, `coupon_value`) VALUES
-(1, 'TRJ10', '10折價券', 10),
-(2, 'TRJ25', '25折價券', 25),
-(3, 'TRJ50', '50折價券', 50),
-(4, 'TRJ100', '100折價券', 100),
-(5, 'TRJ500', '500折價券', 500);
+INSERT INTO `coupons` (`coupon_id`, `coupon_type`, `coupon_name`, `coupon_value`, `conditions`) VALUES
+(1, 'TRJ10', '10元折價券', 10, 99),
+(2, 'TRJ20', '20元折價券', 20, 199),
+(3, 'TRJ30', '30元折價券', 30, 299),
+(4, 'TRJ40', '40元折價券', 40, 399),
+(5, 'TRJ50', '50元折價券', 50, 499),
+(6, 'TRJ60', '60元折價券', 60, 599),
+(7, 'TRJ70', '70元折價券', 70, 699),
+(8, 'TRJ80', '80元折價券', 80, 799),
+(9, 'TRJ90', '90元折價券', 90, 899),
+(10, 'TRJ100', '100元折價券', 100, 999),
+(11, 'TRJ1000', '1000元折價券', 1000, 1001),
+(12, 'TRJ200', '線上測驗全對', 100, 101),
+(13, 'TRJ200', '線上測驗參加獎', 200, 201);
 
 -- --------------------------------------------------------
 
@@ -55,19 +64,25 @@ CREATE TABLE `coupons_status` (
   `coupon_status_id` int(11) NOT NULL,
   `coupon_id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
-  `coupon_status` enum('未使用','已使用','已過期') NOT NULL,
+  `usage_status` enum('未使用','已使用','已過期') NOT NULL,
   `start_date` date NOT NULL,
-  `expiration_date` date NOT NULL
+  `expiration_date` date NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `coupons_status`
 --
 
-INSERT INTO `coupons_status` (`coupon_status_id`, `coupon_id`, `member_id`, `coupon_status`, `start_date`, `expiration_date`) VALUES
-(1, 1, 1, '未使用', '2023-08-02', '2023-09-01'),
-(2, 2, 2, '已使用', '2023-08-02', '2023-08-15'),
-(3, 3, 3, '已過期', '2023-07-26', '2023-08-01');
+INSERT INTO `coupons_status` (`coupon_status_id`, `coupon_id`, `member_id`, `usage_status`, `start_date`, `expiration_date`, `created_at`) VALUES
+(6, 8, 1, '未使用', '2023-07-13', '2023-08-12', '2023-08-07 17:15:17'),
+(7, 6, 1, '已過期', '2023-07-11', '2023-08-10', '2023-08-07 17:15:17'),
+(8, 4, 1, '已使用', '2023-07-08', '2023-08-07', '2023-08-07 17:15:17'),
+(9, 3, 1, '已過期', '2023-07-04', '2023-08-03', '2023-08-07 17:15:17'),
+(10, 5, 1, '已過期', '2023-06-15', '2023-07-15', '2023-08-07 17:15:17'),
+(15, 2, 1, '未使用', '2023-08-08', '2023-09-07', '2023-08-08 13:54:45'),
+(72, 5, 1, '未使用', '2023-08-09', '2023-09-08', '2023-08-09 15:19:03'),
+(74, 7, 1, '未使用', '2023-08-10', '2023-09-09', '2023-08-10 17:14:51');
 
 -- --------------------------------------------------------
 
@@ -77,9 +92,20 @@ INSERT INTO `coupons_status` (`coupon_status_id`, `coupon_id`, `member_id`, `cou
 
 CREATE TABLE `daily_signins` (
   `signin_id` int(11) NOT NULL,
-  `member_sid` int(11) NOT NULL,
-  `signin_date` date NOT NULL
+  `member_id` int(11) NOT NULL,
+  `signin_date` datetime NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `daily_signins`
+--
+
+INSERT INTO `daily_signins` (`signin_id`, `member_id`, `signin_date`, `created_at`) VALUES
+(1, 1, '2023-08-07 10:42:24', '2023-08-07 10:42:24'),
+(103, 1, '2023-08-08 13:35:59', '2023-08-08 13:35:59'),
+(161, 1, '2023-08-09 15:19:03', '2023-08-09 15:19:03'),
+(180, 1, '2023-08-10 17:14:51', '2023-08-10 17:14:51');
 
 -- --------------------------------------------------------
 
@@ -90,7 +116,7 @@ CREATE TABLE `daily_signins` (
 CREATE TABLE `members` (
   `member_id` int(11) NOT NULL,
   `member_account` varchar(255) NOT NULL,
-  `member_password` varchar(255) NOT NULL,
+  `member_password` varchar(255) DEFAULT NULL,
   `member_name` varchar(50) NOT NULL,
   `member_address` varchar(255) NOT NULL,
   `member_phone` varchar(20) DEFAULT NULL,
@@ -104,8 +130,8 @@ CREATE TABLE `members` (
 --
 
 INSERT INTO `members` (`member_id`, `member_account`, `member_password`, `member_name`, `member_address`, `member_phone`, `member_birthday`, `member_forum_name`, `member_profile`) VALUES
-(1, 'swiftie1202@gmail.com', '$2a$10$BfFRZxSTwgIrBKtyW25gxepy9jtPqt48KUrdmxunj7ArYL.bQZ2Ce', '黃琪涵', '台北市中正區信義路4段15巷8弄3號3樓', '0923003763', '1999-12-02', 'HannahOuO', NULL),
-(2, 'mjboyz399757@gmail.com', '$2b$10$w./CS5R3g7Vfrc/E3sf31uupWKm11WhrhbK5DNl.dpYVrubSf2Hey', '金牧賢', '新北市土城區土城北街4段125巷7弄11號11樓', '0941850649', '1992-01-29', NULL, NULL),
+(1, 'swiftie1202@gmail.com', '$2a$10$BfFRZxSTwgIrBKtyW25gxepy9jtPqt48KUrdmxunj7ArYL.bQZ2Ce', '黃琪涵', '台北市中正區信義路4段15巷8弄3號3樓', '0912151215', '1999-11-01', 'HannahOuO', '58a38a25-caad-48cd-b04a-59e27843bd4c.webp'),
+(2, 'mjboyz6@gmail.com', '$2b$10$w./CS5R3g7Vfrc/E3sf31uupWKm11WhrhbK5DNl.dpYVrubSf2Hey', '金牧賢', '新北市土城區土城北街4段125巷7弄11號11樓', '0912151214', '1992-01-29', NULL, NULL),
 (3, 'seanthephysicist@gmail.com', '$2b$10$XgxTEBV9dmue3iXHP2Or7eauMr8TSoxrOLcuVvVj6ECbHtMPPXdV2', '南于翔', '新北市土城區三峽大道2段78巷4弄7號7樓', '0936197274', '1982-09-01', NULL, NULL),
 (4, 'hao6han@gmail.com', '$2b$10$ZFL8y81rGWCrmUWWU.pqle/kia7wPDmV95EDhpkdYMvO7hb0X.H72', '朴顥瀚', '台北市萬華區延平北路3段30巷7弄19號19樓', '0906375680', '1984-05-23', NULL, NULL),
 (5, 'skywalker204@gmail.com', '$2b$10$17/SvJ14ox2b1lhETvz.gOoQ9C7rkrOqHTMDLYksfV/Oqc5bIBh/W', '尹博宇', '台北市中正區和平東路2段127巷3弄16號16樓', '0909718518', '1990-07-25', NULL, NULL),
@@ -183,11 +209,7 @@ INSERT INTO `members` (`member_id`, `member_account`, `member_password`, `member
 (77, 'oppenheimer693825@gmail.com', '$2b$10$E0YK8FUUbLgbDMn9mb9wnu9//Toe93E1ozaV8n8IPqBXdYTerDsL.', '翟楷弘', '台北市信義區民權西路4段155巷3弄7號7樓', '0919190784', '1974-10-25', NULL, NULL),
 (78, 'idris65985@gmail.com', '$2b$10$iuCvPDSN0iKfOCJScvVCJepE3fiP5Lm4jGAhXN/i/Ub4s9J5RMV5e', '玄翔允', '新北市萬里區三峽大道2段104巷2弄7號7樓', '0999751901', '1995-08-28', NULL, NULL),
 (79, 'sean248438@gmail.com', '$2b$10$MiVk17uqmBY7nxoWQyL.cuoUge4akfBfm698XnfP22lmH6SIQARna', '金沛怡', '台北市大安區忠孝東路3段27巷8弄9號9樓', '0997257075', '1973-05-28', NULL, NULL),
-(80, 'peterparker36777@gmail.com', '$2b$10$KTeVOacK.iFTYBHQhmVTYO5G3ATcEQIVBIyR9WDSwPVgF.vSpdbkG', '雷奎廷', '新北市三重區八里路2段81巷7弄9號9樓', '0925308421', '2006-07-31', NULL, NULL),
-(81, 'swiftie12012@gmail.com', 'Hannah1202', '測試', '測試', NULL, '2023-07-14', NULL, NULL),
-(82, 'swiftie11202@gmail.com', 'Hannah1202', '測試', '測', NULL, '2023-07-12', NULL, NULL),
-(83, 'swiftie2202@gmail.com', '$2a$10$UyG1TFU.4VkFrmpUldRUtuqySQQmz5.mbfxMpZG1I4X.jFZjizB1S', '測試', '雌', NULL, '2023-07-14', NULL, NULL),
-(84, 'swiftie122202@gmail.com', '$2a$10$bYDcKq8c0myoKuIz9wBXc.CYXSMmAl/M0vCPl8X4kxxQxmYxL68Fe', '測試', '測試', NULL, '2023-07-19', NULL, NULL);
+(80, 'peterparker36777@gmail.com', '$2b$10$KTeVOacK.iFTYBHQhmVTYO5G3ATcEQIVBIyR9WDSwPVgF.vSpdbkG', '雷奎廷', '新北市三重區八里路2段81巷7弄9號9樓', '0925308421', '2006-07-31', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -209,8 +231,7 @@ ALTER TABLE `coupons_status`
 -- Indexes for table `daily_signins`
 --
 ALTER TABLE `daily_signins`
-  ADD PRIMARY KEY (`signin_id`),
-  ADD UNIQUE KEY `unique_user_signin` (`member_sid`,`signin_date`);
+  ADD PRIMARY KEY (`signin_id`);
 
 --
 -- Indexes for table `members`
@@ -226,19 +247,25 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT for table `coupons`
 --
 ALTER TABLE `coupons`
-  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `coupons_status`
+--
+ALTER TABLE `coupons_status`
+  MODIFY `coupon_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
 
 --
 -- AUTO_INCREMENT for table `daily_signins`
 --
 ALTER TABLE `daily_signins`
-  MODIFY `signin_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `signin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
 
 --
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

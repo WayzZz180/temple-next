@@ -20,7 +20,7 @@ export default function DetailsText({ text = '' }) {
         </div>
 
         <div className="ms15px">
-          <div className="mt10px">23061067307593</div>
+          <div className="mt10px"> 媽祖</div>
           <div className="mt10px"> 2023/06/10</div>
           <div className="mt10px">
             宅配 |<span className={styles.text_pink}>已出貨</span>

@@ -1,7 +1,7 @@
 import styles from './style.module.sass'
 
 // hooks
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import usePath from '@/hooks/usePath.js'
 
@@ -13,46 +13,53 @@ import Col from 'react-bootstrap/Col'
 import ShopProductsCard from '@/components/common/cards/ShopProductsCard'
 import Pagination from '@/components/common/pagination'
 
-export default function GetData({data=[], pagination=[]}) {
+export default function GetData({ data = [], pagination = [] }) {
   const router = useRouter()
   const { category } = router.query //抓出類別
   const [keyword, setKeyword] = useState('')
   const [pidArr, setPidArr] = useState([])
 
-    // 商品圖片
-    const { imgSrc } = usePath(data)
-    const chunkArray = (arr, size) => {
-        const chunks = []
-        for (let i = 0; i < arr.length; i += size) {
-        chunks.push(arr.slice(i, i + size))
-        }
-        return chunks
+  // 商品圖片
+  const { imgSrc } = usePath(data)
+  const chunkArray = (arr, size) => {
+    const chunks = []
+    for (let i = 0; i < arr.length; i += size) {
+      chunks.push(arr.slice(i, i + size))
     }
-    const imgChunks = chunkArray(imgSrc, 5)
+    return chunks
+  }
+  const imgChunks = chunkArray(imgSrc, 5)
 
-  useEffect(()=>{
-    if(localStorage.getItem('keyword')){
+  useEffect(() => {
+    if (localStorage.getItem('keyword')) {
       setKeyword(localStorage.getItem('keyword'))
-    }else{
+    } else {
       setKeyword('')
     }
-
-    fetch(`${process.env.API_SERVER}/shop/favoriteMatch`)
-    .then((r) => r.json())
-    .then((data) => {
-      setPidArr(data)
-    })
-  },[router.query])
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/favoriteMatch`, {
+        headers: {
+          Authorization,
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          setPidArr(data)
+        })
+    }
+  }, [router.query])
 
   return (
-     <>
+    <>
       {/* 商品 */}
-      {
-      imgChunks?.map((chunk, rowIndex) => (
+      {imgChunks?.map((chunk, rowIndex) => (
         <Row key={rowIndex} className={`${styles.row}`}>
           {chunk.map((src, colIndex) => {
             const products = data[colIndex + rowIndex * 5]
-            const foundItem = pidArr.some((v) => v.pid === products.pid);
+            const foundItem = pidArr.some((v) => v.pid === products?.pid)
             return (
               <Col key={products?.pid}>
                 <ShopProductsCard
@@ -68,13 +75,10 @@ export default function GetData({data=[], pagination=[]}) {
                 />
               </Col>
             )
-          })
-          }
+          })}
         </Row>
-      ))
-      }
-      <Pagination pagination={pagination}/>
-  </>
-
+      ))}
+      <Pagination pagination={pagination} />
+    </>
   )
 }

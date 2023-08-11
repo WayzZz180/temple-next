@@ -15,7 +15,7 @@ import ShopCartContentCard from '@/components/common/cards/ShopCartContentCard'
 import Button from '@/components/common/button'
 import NoData from '../category/noData'
 
-export default function Cart({data=[]}) {
+export default function Cart({ data = [] }) {
   const router = useRouter()
   const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
   const { cartData, setCartData, getCartData } = useContext(CartDataContext)
@@ -28,36 +28,41 @@ export default function Cart({data=[]}) {
     { width: '11.1%', text: '數量' },
     { width: '17%', text: '小計' },
   ]
+
   // for 清空購物車
   const pid_array = data?.map((v, i) => {
     return v.pid
   })
 
-
   // 清空購物車(需要pid＿array)
   const deleteFromCart = (pid_array) => {
     const deletedData = { pid: pid_array }
-    fetch(`${process.env.API_SERVER}/shop/cart`, {
-      method: 'DELETE',
-      body: JSON.stringify({ requestData: deletedData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        getCartData()
-        getCartCount()
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/cart`, {
+        method: 'DELETE',
+        body: JSON.stringify({ requestData: deletedData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          getCartData()
+          getCartCount()
+        })
+    }
   }
 
   // 優惠券
   const coupon = 100
 
-
   const total = data?.reduce((result, v) => {
     return result + v.product_price * v.quantity
-    }, 0)
+  }, 0)
 
   return (
     <>
@@ -93,16 +98,16 @@ export default function Cart({data=[]}) {
         <NoData />
       ) : (
         data?.map((v, i) => (
-            <ShopCartContentCard
-              key={v.pid}
-              src={`/${v.image}`}
-              name={`${v.product_name}`}
-              price={`${v.product_price}`}
-              quantity={`${Number(v.quantity)}`}
-              stock_num={`${v.stock_num}`}
-              pid={`${v.pid}`}
-              cid={`${v.cid}`}
-            />
+          <ShopCartContentCard
+            key={v.pid}
+            src={`/${v.image}`}
+            name={`${v.product_name}`}
+            price={`${v.product_price}`}
+            quantity={`${Number(v.quantity)}`}
+            stock_num={`${v.stock_num}`}
+            pid={`${v.pid}`}
+            cid={`${v.cid}`}
+          />
         ))
       )}
 

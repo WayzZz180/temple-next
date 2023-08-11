@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
-
 //components
 import InputBox from '@/components/common/inputBox/index.js'
 import MemberTitle from '@/components/common/title/memberTitle'
@@ -26,9 +25,6 @@ export default function SignUp() {
 
   const [errorMessage, setErrorMessage] = useState('') // Define a state variable to store the error message
 
-
-
-  
   // 定義驗證規則
   const validationRules = {
     member_name: {
@@ -37,7 +33,7 @@ export default function SignUp() {
       message: '請輸入中文姓名，最多10個字',
     },
     member_forum_name: {
-      regex: /^[\u4e00-\u9fa5a-zA-Z0-9]{1,20}$/,
+      regex: /^[\u4e00-\u9fa5a-zA-Z0-9]{0,20}$/,
       message: '暱稱過長，請重新輸入',
     },
     member_account: {
@@ -64,6 +60,10 @@ export default function SignUp() {
       regex: /^[\u4e00-\u9fa5\d]+$/,
       message: '地址請輸入中文(和數字)',
     },
+    // member_carrier: {
+    //   regex: /^\/[a-zA-Z0-9]{7}$/,
+    //   message: '載具格式不正確，請檢查',
+    // },
   }
 
   const changeUser = (e) => {
@@ -117,10 +117,7 @@ export default function SignUp() {
     return null // 代表表單通過驗證，沒有錯誤 //有回傳代表有錯誤
   }
 
-
-  const doSignUp = (e) => {
-    e.preventDefault()
-
+  const doSignUp = () => {
     const validateResult = validateForm()
     if (validateResult) {
       // Collect all the invalid fields and set the state
@@ -136,7 +133,9 @@ export default function SignUp() {
       })
       setInvalidFields(invalidFieldsArray.filter((field) => field !== null))
 
-      alert('請檢查以下項目：\n' + invalidFieldsArray.join('\n'));
+      const hintModal = invalidFieldsArray.filter((field) => field !== null)
+
+      alert('請檢查以下項目：\n' + hintModal.join('\n'))
       // alert('資料有誤，請檢查一下喔!')
 
       return
@@ -167,7 +166,7 @@ export default function SignUp() {
 
         if (data) {
           alert('註冊成功，請重新登入')
-          router.push('/member/login');
+          router.push('/member/login')
         }
       })
       .catch((error) => {
@@ -192,157 +191,156 @@ export default function SignUp() {
         </Row>
       </Container>
 
-
-  
-
       <Container>
-        <form onSubmit={doSignUp}>
-          <Row>
-            <Col>
-    
-              <MemberTitle text="加入會員" text2="SIGN UP" lineColor="green" />
-            </Col>
-          </Row>
-          <Row className={styles.flex_space_between}>
-            <Col>
-              <InputBox
-                prompt="姓名"
-                type="text"
-                id="member_name"
-                placeholder="姓名"
-                onChange={changeUser}
-                validationRules={validationRules}
-                value={user.member_name}
-                width={202}
-                // 判斷是否為錯誤欄位，以及是否顯示錯誤訊息
-                isError={invalidFields.includes('member_name')}
-                errorMessage={getErrorForField('member_name')} // 取得該欄位的錯誤訊息
-              />
-            </Col>
-            {/* 202-15*2空白 = 202 */}
-            <Col>
-              <InputBox
-                prompt="暱稱"
-                type="text"
-                id="member_forum_name"
-                placeholder="暱稱"
-                onChange={changeUser}
-                validationRules={validationRules}
-                value={user.member_forum_name}
-                width={202}
-                isError={invalidFields.includes('member_forum_name')}
-                errorMessage={getErrorForField('member_forum_name')}
-              />
-            </Col>
-          </Row>
-          <Row className={styles.flex_centre}>
-            <Col>
-              <InputBox
-                prompt="Email"
-                id="member_account"
-                type="text"
-                placeholder="電子郵件地址"
-                onChange={changeUser}
-                validationRules={validationRules}
-                value={user.member_account}
-                // isError={invalidFields.includes('member_account')}
-                // errorMessage={getErrorForField('member_account')}
-                isError={invalidFields.includes('member_account')}
-                errorMessage={
-                  getErrorForField('member_account') || errorMessage
-                } // 顯示來自後端的錯誤訊息
-              />
-            </Col>
-          </Row>
-          <Row className={styles.flex_centre}>
-            <Col>
-              <InputBox
-                type="text"
-                id="member_password"
-                placeholder="密碼"
-                onChange={changeUser}
-                validationRules={validationRules}
-                value={user.member_password}
-                isError={invalidFields.includes('member_password')}
-                errorMessage={getErrorForField('member_password')}
-              />
-            </Col>
-          </Row>
-          <Row className={styles.flex_centre}>
-            <Col>
-              <InputBox
-                type="text"
-                id="confirm_password"
-                placeholder="確認密碼"
-                onChange={changeUser}
-                validationRules={validationRules}
-                value={user.confirm_password}
-                isError={invalidFields.includes('confirm_password')}
-                errorMessage={getErrorForField('confirm_password')}
-              />
-            </Col>
-          </Row>
-          <Row className={styles.flex_centre}>
-            <Col>
-              <InputBox
-                type="date"
-                id="member_birthday"
-                placeholder="出生年月日 "
-                onChange={changeUser}
-                validationRules={validationRules}
-                value={user.member_birthday}
-                isError={invalidFields.includes('member_birthday')}
-                errorMessage={getErrorForField('member_birthday')}
-              />
-            </Col>
-            {/* Q3 */}
-          </Row>
-          <Row className={styles.flex_centre}>
-            <Col>
-              <InputBox
-                type="text"
-                id="member_address"
-                placeholder="現居地址 "
-                onChange={changeUser}
-                validationRules={validationRules}
-                value={user.member_address}
-                isError={invalidFields.includes('member_address')}
-                errorMessage={getErrorForField('member_address')}
-              />
-            </Col>
-          </Row>
-          <Row className={styles.flex_container}>
-            <Col>
-              <div>
-                {/* <div style={{ letterSpacing: '4.1px' }}> */}
-                {/* Q4 */}
-                如建立帳號，即同意錦囊廟祭的{' '}
-                <Link href="#" className="link">
-                  隱私權政策
-                </Link>
-                和
-                <Link href="#" className="link">
-                  使用條款
-                </Link>
-              </div>
-            </Col>
-          </Row>
-          <Row className={styles.flex_centre}>
-            <Col>
-              <Button text="加入" btnColor="black" width={487} />
-            </Col>
-          </Row>
-          <Row className={styles.flex_centre}>
-            <Col>
-              <div>
-                已經是會員了嗎?
-                <Link href="#" className="link">
-                  登入
-                </Link>
-              </div>
-            </Col>
-          </Row>
-        </form>
+        <Row>
+          <Col>
+            <MemberTitle text="加入會員" text2="SIGN UP" lineColor="green" />
+          </Col>
+        </Row>
+        <Row className={styles.flex_space_between}>
+          <Col>
+            <InputBox
+              prompt="姓名"
+              type="text"
+              id="member_name"
+              placeholder="姓名"
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_name}
+              width={202}
+              // 判斷是否為錯誤欄位，以及是否顯示錯誤訊息
+              isError={invalidFields.includes('member_name')}
+              errorMessage={getErrorForField('member_name')} // 取得該欄位的錯誤訊息
+            />
+          </Col>
+          {/* 202-15*2空白 = 202 */}
+          <Col>
+            <InputBox
+              prompt="暱稱"
+              type="text"
+              id="member_forum_name"
+              placeholder="暱稱"
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_forum_name}
+              width={202}
+              isError={invalidFields.includes('member_forum_name')}
+              errorMessage={getErrorForField('member_forum_name')}
+            />
+          </Col>
+        </Row>
+        <Row className={styles.flex_centre}>
+          <Col>
+            <InputBox
+              prompt="Email"
+              id="member_account"
+              type="text"
+              placeholder="電子郵件地址"
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_account}
+              // isError={invalidFields.includes('member_account')}
+              // errorMessage={getErrorForField('member_account')}
+              isError={invalidFields.includes('member_account')}
+              errorMessage={getErrorForField('member_account') || errorMessage} // 顯示來自後端的錯誤訊息
+            />
+          </Col>
+        </Row>
+        <Row className={styles.flex_centre}>
+          <Col>
+            <InputBox
+              type="text"
+              id="member_password"
+              placeholder="密碼"
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_password}
+              isError={invalidFields.includes('member_password')}
+              errorMessage={getErrorForField('member_password')}
+            />
+          </Col>
+        </Row>
+        <Row className={styles.flex_centre}>
+          <Col>
+            <InputBox
+              type="text"
+              id="confirm_password"
+              placeholder="確認密碼"
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.confirm_password}
+              isError={invalidFields.includes('confirm_password')}
+              errorMessage={getErrorForField('confirm_password')}
+            />
+          </Col>
+        </Row>
+        <Row className={styles.flex_centre}>
+          <Col>
+            <InputBox
+              type="date"
+              id="member_birthday"
+              placeholder="出生年月日 "
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_birthday}
+              isError={invalidFields.includes('member_birthday')}
+              errorMessage={getErrorForField('member_birthday')}
+            />
+          </Col>
+          {/* Q3 */}
+        </Row>
+        <Row className={styles.flex_centre}>
+          <Col>
+            <InputBox
+              type="text"
+              id="member_address"
+              placeholder="現居地址 "
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_address}
+              isError={invalidFields.includes('member_address')}
+              errorMessage={getErrorForField('member_address')}
+            />
+          </Col>
+        </Row>
+        <Row className={styles.flex_container}>
+          <Col>
+            <div>
+              {/* <div style={{ letterSpacing: '4.1px' }}> */}
+              {/* Q4 */}
+              如建立帳號，即同意錦囊廟祭的{' '}
+              <Link href="#" className="link">
+                隱私權政策
+              </Link>
+              和
+              <Link href="#" className="link">
+                使用條款
+              </Link>
+            </div>
+          </Col>
+        </Row>
+        <Row className={styles.flex_centre}>
+          <Col>
+            <Button
+              text="加入"
+              btnColor="black"
+              width={487}
+              link={() => {
+                doSignUp()
+              }}
+            />
+          </Col>
+        </Row>
+        <Row className={styles.flex_centre}>
+          <Col>
+            <div>
+              已經是會員了嗎?
+              <Link href="#" className="link">
+                登入
+              </Link>
+            </div>
+          </Col>
+        </Row>
       </Container>
       <Container>
         <Row>

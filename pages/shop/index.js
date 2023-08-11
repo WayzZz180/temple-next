@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
 // components
 import ShopTop from '@/components/common/shopTop'
 import ShopTitle from '@/components/common/title/ShopTitle'
@@ -12,7 +10,6 @@ import Col from 'react-bootstrap/Col'
 import data from '@/components/mydata/productsTitleData'
 
 export default function Shop() {
-
   return (
     <Container className={'shopContainer'}>
       <ShopTop />
