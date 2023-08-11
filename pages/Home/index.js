@@ -20,7 +20,7 @@ import Job from '@/components/common/cards/HomeJob'
 import HomeCarousels from '@/components/common/carousel/HomeCarousels'
 import HomeDoor from '@/components/common/cards/HomeDoor'
 import HomeDoor2 from '@/components/common/cards/HomeDoor2'
-import { Route, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
 export default function Home() {
   const Router = useRouter()

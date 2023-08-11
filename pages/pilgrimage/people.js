@@ -8,9 +8,10 @@ import jump from '@/assets/jump.gif'
 import flag from '@/assets/flag.gif'
 import dog from '@/assets/dog_in.gif'
 import Quiz from '@/pages/pilgrimage/onlineQuiz'
-import Gossip from '@/pages/forum/forumgossip'
+import Gossip from '@/pages/forum/index'
 import Pray from '@/pages/pray/index'
 import Buy from '@/pages/shop/index'
+import Worship from '@/pages/worship/index'
 
 export default function Pilgrimage() {
   const [modalIsOpen, setIsOpen] = React.useState(false)
@@ -157,7 +158,7 @@ export default function Pilgrimage() {
             transform: 'scale(1)',
           }}
         >
-          <Buy />
+          <Worship />
         </div>
       </Modal2>
       <button className={`${styles.bubble5}`} onClick={openModal5}>

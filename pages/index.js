@@ -1,6 +1,7 @@
-import React from 'react'
-import styles from './Home/head.module.sass'
+import React, { useState, useEffect } from 'react'
+import styles from './head.module.sass'
 import Image from 'next/image'
+// svg
 import nav from '@/assets/nav.svg'
 import foo_dog_left from '@/assets/foo_dog_left.svg'
 import foo_dog_right from '@/assets/foo_dog_right.svg'
@@ -9,6 +10,8 @@ import dog from '@/assets/dog_in.gif'
 import pink_star from '@/assets/Pink_Star.svg'
 import lighting from '@/assets/green_lighting.svg'
 import signIn from '@/assets/sing_in.svg'
+
+// components
 import Title from '@/components/common/title'
 import God from '@/components/common/cards/HomeGod'
 import Online from '@/components/common/cards/HomeOnline'
@@ -17,8 +20,29 @@ import Job from '@/components/common/cards/HomeJob'
 import HomeCarousels from '@/components/common/carousel/HomeCarousels'
 import HomeDoor from '@/components/common/cards/HomeDoor'
 import HomeDoor2 from '@/components/common/cards/HomeDoor2'
+import { useRouter } from 'next/router'
 
 export default function Home() {
+  const Router = useRouter()
+  const [isClicked, setIsClicked] = useState(false)
+
+  const handleClick = () => {
+    setIsClicked(true)
+    setTimeout(() => {
+      setIsClicked(false)
+      Router.push('/Home/signOut')
+    }, 6000)
+
+    setTimeout(() => {
+      Router.push('/Home/signOut')
+    }, 4500)
+
+    // 隐藏 HomeDoor2
+    setTimeout(() => {
+      setIsClicked(false)
+    }, 5000) // 5 seconds
+  }
+
   return (
     <>
       {/* section1 */}
@@ -63,7 +87,11 @@ export default function Home() {
         </div>
         <div className={`${styles.position}`}>
           <div className={`${styles.signIn}`}>
-            <div id="change" className={`${styles.signInBlock}`}>
+            <div
+              role="presentation"
+              className={`${styles.signInBlock}`}
+              onClick={handleClick}
+            >
               {/* signin star */}
               <div className={`${styles.pinkStar}`}>
                 <Image src={pink_star} width={40} alt="star" />
@@ -73,11 +101,19 @@ export default function Home() {
                 <Image src={signIn} width={30} alt="signIn" />
               </div>
             </div>
-            <div className={styles.HomeDoor}>
+            <div
+              className={`${styles.HomeDoor} ${
+                isClicked ? styles.HomeDoorclick : ''
+              }`}
+            >
               <HomeDoor />
             </div>
-            <div className={`${styles.signInDoor}`}>
-              <div className={styles.HomeDoor2}>
+            <div
+              className={`${styles.signInDoor} ${
+                isClicked ? styles.signInDoorclick : ''
+              }`}
+            >
+              <div className={`${styles.HomeDoor2}`}>
                 <HomeDoor2 />
               </div>
             </div>

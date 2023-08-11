@@ -30,11 +30,11 @@ export default function Home() {
     setIsClicked(true)
     setTimeout(() => {
       setIsClicked(false)
-      Router.push('/Home')
+      Router.push('/')
     }, 6500)
 
     setTimeout(() => {
-      Router.push('/Home')
+      Router.push('/')
     }, 4500)
 
     // 隐藏 HomeDoor2
@@ -87,7 +87,11 @@ export default function Home() {
         </div>
         <div className={`${styles.position}`}>
           <div className={`${styles.signIn}`}>
-            <div className={`${styles.signInBlock}`} onClick={handleClick}>
+            <div
+              role="presentation"
+              className={`${styles.signInBlock}`}
+              onClick={handleClick}
+            >
               {/* signin star */}
               <div className={`${styles.pinkStar}`}>
                 <Image src={pink_star} width={40} alt="star" />
