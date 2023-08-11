@@ -1,0 +1,131 @@
+@import '@/styles/_variables.module.sass'
+@import url('https://fonts.googleapis.com/css2?family=Zen+Antique&display=swap')
+
+.parent_container 
+  position: relative
+  width: 100%
+  height: 930px
+  overflow: hidden
+
+.container1
+   display: flex
+   align-items: center
+   justify-content: center
+   width: 100%
+
+.container
+   display: flex
+   position: relative
+   align-items: center
+   justify-content: center
+   width: 100%
+   bottom: -636px
+
+.flex_row
+   position: absolute
+   display: flex
+   align-items: center
+   justify-content: center
+   width:1360px
+
+.flex_rowc
+   position: absolute
+   display: flex
+   width:1230px
+
+.text
+    position: relative
+    color: #FFF
+    font-size: 110px
+    font-weight: 700
+    text-align: center
+    letter-spacing: 55px
+    text-indent: 35px
+    width:250px
+
+
+.text2
+    position: relative
+    color: $hot_pink
+    font-size: 80px
+    font-weight: 700
+
+.flex_row2
+   position: relative
+   display: flex
+   align-items: center
+   justify-content: center
+   width:100%
+   margin: 0px 35px
+
+.flex_row3
+   position: relative
+   display: flex
+   align-items: center
+   justify-content: center
+   width:200px
+   top:-7px
+
+.flex_rowt
+   position: absolute
+   display: flex
+   align-items: center
+   justify-content: space-between
+   width:1170px
+   top: -125px
+.box
+    position: relative
+    width:120px
+    height:150px
+    background: $hot_pink
+    border-radius: 20px
+    margin: 0px 5px
+
+.title
+    position: relative
+    color: #2c2c2c
+    font-size: 20px
+    font-weight: 700
+    text-align: center
+    letter-spacing: 4px
+    text-indent: 4px
+    width:140px
+
+.lion
+    position: absolute
+    bottom: 0px
+    z-index: -1
+
+  
+.eyeleft 
+    width: 85px
+    height: 85px
+    border-radius: 100%
+    background-color: $brown
+    display: flex
+    position: absolute
+    left: calc(50% - 83px)
+    bottom:565px
+    left:800px
+  
+.eyeright 
+    width: 85px
+    height: 85px
+    border-radius: 100%
+    background-color: $brown
+    display: flex
+    position: absolute
+    right: calc(50% - 83px)
+    bottom:565px
+    right:800px
+  
+.eyeblack 
+    width: 30px
+    height: 30px
+    border-radius: 50%
+    background-color: #000
+    position: absolute
+    bottom: 0
+    left: 50%
+    transform-origin: top
+    transform: translateX(calc(-50% + var(--eye-position-x))) translateY(calc(-100% + var(--eye-position-y)))

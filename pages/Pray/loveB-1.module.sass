@@ -1,0 +1,93 @@
+@import '@/styles/_variables.module.sass'
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;900&display=swap')
+
+.parent_container 
+  position: relative
+  width: 100%
+  height: 930px
+  overflow: hidden
+
+.flex_row 
+  display: flex
+  width: 100%
+  height: 100%
+  align-items: center
+  justify-content: center
+
+.flex_row2
+  display: flex
+  position: relative
+  justify-content: space-around
+  bottom:90px
+
+.tower
+  padding:0px 25px
+
+.towerhover
+   filter: drop-shadow(0rem 0rem 0.5rem #F4E62A)
+   transform: translateY(-3px)scale(1.03)
+   cursor: pointer
+
+
+.flex_col
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-direction: column
+    width:480px
+    height:100%
+
+.light
+   position: absolute
+   left:775px
+   top:85px
+   animation: light 12s linear infinite 
+
+@keyframes light
+  0% 
+    transform: scale(1)rotate(0deg)
+
+  30%
+    transform: scale(1.2)rotate(95deg)
+
+  50%
+    transform: scale(1.1)rotate(180deg)
+  100% 
+    transform: scale(1)rotate(360deg)
+
+.love
+   z-index:1
+   margin-top:120px
+
+.shadow
+   display: flex
+   position: absolute
+   bottom:265px
+
+.text
+    color: #241B15
+    text-align: center
+    font-size: 25px
+    font-weight: 900
+    line-height: 128.2%
+    letter-spacing: 3px
+    margin:40px 0px
+
+.title
+    position: relative
+    color: #C39A6B
+    text-align: center
+    font-size: 32px
+    font-style: normal
+    font-weight: 900
+    line-height: 160%
+    margin:0px 17px
+
+.flex_row3
+  display: flex
+  position: absolute
+  width:500px
+  height:50px
+  justify-content: space-between
+  align-items: center
+  bottom:-70px

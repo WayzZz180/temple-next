@@ -1,0 +1,493 @@
+@import '@/styles/_variables.module.sass'
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;900&display=swap')
+
+.parent_container 
+  position: relative
+  width: 4900px
+  height: 930px
+  overflow: hidden
+
+.flex_row 
+  display: flex
+  width: 100%
+  height: 550px
+  align-items: flex-end
+  justify-content: center
+  z-index: 2
+
+.temple
+    z-index: 2
+  
+.moto
+    position: absolute
+    left:500px
+
+.img
+    position: absolute
+    left:950px
+
+.calender
+  position: absolute
+  top:377px
+  left:955px
+  z-index:5 
+  transform: scale(0.7) 
+
+.tree1
+    position: absolute
+    left:180px
+    transform-origin: bottom
+    animation: tree1 2s linear infinite alternate-reverse
+
+@keyframes tree1
+  0%
+    transform: skew(1deg)
+  100%
+   transform: skew(-1deg)
+
+.pavilion
+    position: absolute
+    left:1250px
+
+.tree2
+    position: absolute
+    left:1770px
+    transform-origin: bottom
+    animation: tree2 2s linear infinite alternate-reverse
+
+@keyframes tree2
+  0%
+    transform: skew(1deg)
+  100%
+   transform: skew(-1deg)
+
+.tree3
+    position: absolute
+    right:0px
+    z-index: 2
+    transform-origin: bottom
+    animation: tree3 2s linear infinite alternate-reverse
+
+@keyframes tree3
+  0%
+    transform: skew(1deg)
+  100%
+   transform: skew(-1deg)
+
+.Board
+    position: absolute
+    right:1300px
+    z-index: 2
+
+.video
+  position: absolute
+  right:1410px
+  top:520px
+
+.teabox
+    position: absolute
+    right:425px
+
+.stall
+    position: absolute
+    right:515px
+
+.smokemask
+    position: absolute
+    width:265px
+    height:126px
+    right:835px
+    bottom:310px
+    z-index:2
+    overflow: hidden
+
+.smoke
+    transform-origin: left bottom
+    animation: show 4s linear infinite forwards
+
+@keyframes show
+  0%
+    opacity: 0
+    transform: skew(10deg, 10deg) scale(0)
+  10%
+   opacity: 1
+  90%
+   opacity: 1
+  100%
+   opacity: 0
+   transform: skew(-50deg, -20deg) scale(1)
+
+.burner
+    position: absolute
+    right:950px
+.title
+    position: absolute
+    z-index: -1
+
+.flex_row2
+  top:20px
+  display: flex
+  position: absolute
+  width: 100%
+  height: 350px
+  align-items: center
+  justify-content: center
+  z-index: 1
+
+.C1
+    position: absolute
+    animation: could 180s linear infinite 
+
+@keyframes could
+  0%
+    transform: translateX(-2200px) translateZ(0)
+    opacity: 0
+  5%
+    opacity: 1
+  90%
+    opacity: 1
+  100% 
+    transform: translateX(800px) translateZ(0)
+    opacity: 0
+
+.C2
+    position: absolute
+    animation: could2 180s linear infinite 
+
+@keyframes could2
+  0%
+    transform: translateX(1250px) translateZ(0)
+    opacity: 0
+  5%
+    opacity: 1
+  90%
+    opacity: 1
+  100% 
+    transform: translateX(3250px) translateZ(0)
+    opacity: 0
+
+.C3
+    position: absolute
+    animation: could3 180s linear infinite 
+
+@keyframes could3
+  0%
+    transform: translateX(-750px) translateZ(0)
+    opacity: 0
+  5%
+    opacity: 1
+  90%
+    opacity: 1
+  100% 
+    transform: translateX(1250px) translateZ(0)
+    opacity: 0
+
+.C4
+    position: absolute
+    animation: could4 125s linear infinite 
+
+@keyframes could4
+  0%
+    transform: translateX(500px) translateZ(0)
+    opacity: 0
+  5%
+    opacity: 1
+  90%
+    opacity: 1
+  100% 
+    transform: translateX(2350px) translateZ(0)
+    opacity: 0
+
+.fly
+    position: absolute
+    animation: fly 8s linear infinite 
+
+@keyframes fly
+  0%
+    transform: translate(250px,150px) translateZ(0)rotate(5deg)
+  100% 
+    transform: translate(2350px,-2500px) translateZ(0)rotate(0deg)
+
+.teamcontainer
+  width:1000px
+  display: flex
+  align-items: flex-end
+  justify-content: space-around
+  margin-left: 460px
+
+.sona
+    position: relative
+    z-index: 3
+    width: 200px
+    height: 200px
+    top: -334px
+
+.sam
+    position: relative
+    z-index: 3
+    width: 140px
+    height: 280px
+    top: -334px
+
+.car
+    position: relative
+    z-index: 3
+    width: 440px
+    height: 220px
+    top: -334px
+
+.chi
+    position: relative
+    z-index: 3
+    width: 140px
+    height: 280px
+    top: -334px
+
+.umb
+    position: relative
+    z-index: 3
+    width: 135px
+    height: 270px
+    top: -334px
+
+.fixed 
+  position: fixed
+  bottom: 0
+  right: 0
+  width: 1920px
+  heught:930px
+  align-items: center
+
+.teamscontainer
+  position: fixed
+  right: 0
+  bottom: 0
+  width: 100%
+  height: 100%
+  max-width: 1920px
+  max-height: 930px
+  display: flex
+  justify-content: flex-end
+  align-items: flex-end
+  border: 2px solid #333
+  overflow: hidden
+
+.sh
+    position: absolute
+    z-index: -1
+    width: 160px
+    height: 210px
+    top:610px
+    right:-480px
+
+.jump
+    position: absolute
+    z-index: 1
+    width: 260px
+    height: 260px
+    top:620px
+    left:1390px
+
+.flag
+    position: absolute
+    z-index: 1
+    width: 380px
+    height: 380px
+    top:450px
+    left:610px
+.dog
+    position: absolute
+    z-index: 2
+    width: 170px
+    height: 150px
+    top:670px
+    left:2155px
+
+.bubble
+  left:530px
+  top:-350px
+  border-radius: 4px
+  border: none
+  position: relative
+  background-color:$hot_pink
+  cursor: pointer
+  -webkit-animation: pulse 1s
+  animation: pulse 1s infinite
+  box-shadow: 0 0 0 10px transparent
+
+@-webkit-keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
+  
+@keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
+
+.bubble:after 
+  content: ''
+  position: absolute
+  top: 40px
+  left: 135px
+  width: 25px
+  height: 30px
+  border-width: 0
+  border-style: solid
+  margin-top: -1px
+  border-left-width: 15px
+  border-left-color: currentColor
+  border-radius: 0 0 0 50px
+  color: $hot_pink
+
+.text 
+  letter-spacing: 2px
+  padding:10px
+  display: flex
+  color: #fff
+  font-weight: 500
+
+.bubble2
+  left:1110px
+  top: -280px
+  border-radius: 4px
+  border: none
+  position: relative
+  background-color:$hot_pink
+  cursor: pointer
+  -webkit-animation: pulse 1s
+  animation: pulse 1s infinite
+  box-shadow: 0 0 0 10px transparent
+
+@-webkit-keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
+  
+@keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
+
+.bubble2:after 
+  content: ''
+  position: absolute
+  top: 40px
+  left: 135px
+  width: 25px
+  height: 30px
+  border-width: 0
+  border-style: solid
+  margin-top: -1px
+  border-left-width: 15px
+  border-left-color: currentColor
+  border-radius: 0 0 0 50px
+  color: $hot_pink
+
+.bubble3
+  left:1700px
+  top: -280px
+  border-radius: 4px
+  border: none
+  position: relative
+  background-color:$hot_pink
+  z-index: 2
+  cursor: pointer
+  -webkit-animation: pulse 1s
+  animation: pulse 1s infinite
+  box-shadow: 0 0 0 10px transparent
+
+@-webkit-keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
+  
+@keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
+
+.bubble3:after 
+  content: ''
+  position: absolute
+  top: 40px
+  left: 60px
+  width: 25px
+  height: 30px
+  border-width: 0
+  border-style: solid
+  margin-top: -1px
+  border-left-width: 15px
+  border-left-color: currentColor
+  border-radius: 0 0 0 50px
+  color: $hot_pink
+  
+
+.bubble4
+  left:3255px
+  top: -355px
+  border-radius: 4px
+  border: none
+  position: relative
+  background-color:$hot_pink
+  z-index: 2
+  cursor: pointer
+  -webkit-animation: pulse 1s
+  animation: pulse 1s infinite
+  box-shadow: 0 0 0 10px transparent
+
+@-webkit-keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
+  
+@keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
+
+.bubble4:after 
+  content: ''
+  position: absolute
+  top: 40px
+  left: 60px
+  width: 25px
+  height: 30px
+  border-width: 0
+  border-style: solid
+  margin-top: -1px
+  border-left-width: 15px
+  border-left-color: currentColor
+  border-radius: 0 0 0 50px
+  color: $hot_pink
+
+.bubble5
+  left:3490px
+  top: -345px
+  border-radius: 4px
+  border: none
+  position: relative
+  background-color:$hot_pink
+  z-index: 2
+  cursor: pointer
+  -webkit-animation: pulse 1s
+  animation: pulse 1s infinite
+  box-shadow: 0 0 0 10px transparent
+
+@-webkit-keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
+  
+@keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
+
+.bubble5:after 
+  content: ''
+  position: absolute
+  top: 40px
+  left: 60px
+  width: 25px
+  height: 30px
+  border-width: 0
+  border-style: solid
+  margin-top: -1px
+  border-left-width: 15px
+  border-left-color: currentColor
+  border-radius: 0 0 0 50px
+  color: $hot_pink
+
+.modal::-webkit-scrollbar 
+  display: none
