@@ -18,6 +18,8 @@ import BasicTextFields2 from '@/components/common/launchdemo/textfield2'
 import ForumButton from '@/components/common/button/'
 import TextArea from '@/components/common/inputBox/textarea'
 import ImgUpload from '@/components/common/imgupload/imgupload'
+import { useState, useEffect } from 'react'
+import data from '@/components/mydata/productsTitleData'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />
@@ -36,6 +38,10 @@ export default function AlertDialogSlide({ page = 1 }) {
   }
   const [inputTitle, setInputTitle] = React.useState('')
   const [inputContent, setInputContent] = React.useState('')
+  const [memberId, setMemberId] = useState({
+    member_id: '',
+  })
+  // const [publishTime, setPublishTime] = React.useState('')
 
   const addData = (title, content) => {
     const reqData = {
@@ -59,7 +65,9 @@ export default function AlertDialogSlide({ page = 1 }) {
         // setTotalPages(data[1])
       })
   }
-
+  useEffect(() => {
+    setMemberId('member_id')
+  })
   // if(!data) return <Loading />
 
   return (
@@ -95,11 +103,13 @@ export default function AlertDialogSlide({ page = 1 }) {
                       sx={{ width: 77, height: 77 }}
                     />
                     <div className={`${styles.column1}`}>
-                      <div className={`${styles.userid}`}>123</div>
+                      <div className={`${styles.userid}`}>
+                        {data[0]?.member_id}
+                      </div>
                       <div className={`${styles.row2}`}>
                         <div className={`${styles.forumcategory}`}>123</div>
                         <div>·</div>
-                        <div className={`${styles.posttime}`}>5678</div>
+                        <div className={`${styles.posttime}`}>NOW</div>
                       </div>
                     </div>
                   </div>
