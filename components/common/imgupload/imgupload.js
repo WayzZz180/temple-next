@@ -16,9 +16,9 @@ function ImagePreview() {
   }
 
   return (
-    <div className={`${styles.app}`}>
+    <div className={`${styles.app} `}>
       <h2>圖片上傳</h2>
-      <input type="file" onChange={onChange} />
+      <input className="img-upload" type="file" onChange={onChange} />
       <img width="100%" src={img} alt="Preview" />
     </div>
   )

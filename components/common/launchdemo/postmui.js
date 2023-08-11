@@ -48,6 +48,14 @@ export default function AlertDialogSlide({ page = 1 }) {
       title: title,
       content: content,
     }
+    const input = document.querySelector('.img-upload')
+    console.log(input.files[0])
+    const fd = new FormData()
+    fd.append('preImg', input.files[0])
+    fetch(`${process.env.API_SERVER}/forum/${router.query.category}/addphoto`, {
+      method: 'POST',
+      body: fd,
+    })
 
     fetch(`${process.env.API_SERVER}/forum/${router.query.category}/add`, {
       method: 'POST',
@@ -60,9 +68,10 @@ export default function AlertDialogSlide({ page = 1 }) {
       .then((data) => {
         console.log('data:', data)
         handleClose()
-        // router.push(`/forum/gossip?page=3`)
-        // setData(data[0])
-        // setTotalPages(data[1])
+
+        //     // router.push(`/forum/gossip?page=3`)
+        //     // setData(data[0])
+        //     // setTotalPages(data[1])
       })
   }
   useEffect(() => {
