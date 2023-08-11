@@ -27,21 +27,27 @@ export default function PrayingDetails({
 
   useEffect(() => {
     const reqWid = { wid: wid }
-    fetch(`${process.env.API_SERVER}/worship/getDetails`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: reqWid }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        setData(data[0])
-        setProducts(data[1])
-        console.log('data:', data)
-        console.log('data1:', data[0])
-        console.log('data2:', data[1])
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/worship/getDetails`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: reqWid }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          setData(data[0])
+          setProducts(data[1])
+          console.log('data:', data)
+          console.log('data1:', data[0])
+          console.log('data2:', data[1])
+        })
+    }
   }, [router.query])
 
   if (!data || !products) return <Loading />

@@ -20,11 +20,20 @@ export default function Orders() {
 
   useEffect(() => {
     // 訂單大綱資料
-    fetch(`${process.env.API_SERVER}/shop/order`)
-      .then((r) => r.json())
-      .then((data) => {
-        setData(data)
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/order`, {
+        headers: {
+          Authorization,
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          setData(data)
+        })
+    }
   }, [router.query])
   if (!data) return <Loading />
 

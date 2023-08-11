@@ -18,11 +18,20 @@ export default function Praying() {
 
   // 參拜資料(worship_summary, worship_details)
   useEffect(() => {
-    fetch(`${process.env.API_SERVER}/worship/summary`)
-      .then((r) => r.json())
-      .then((data) => {
-        setData(data)
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/worship/summary`, {
+        headers: {
+          Authorization,
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          setData(data)
+        })
+    }
   }, [router.query])
 
   if (!data) return <Loading />
