@@ -3,7 +3,7 @@
 
 .parent_container 
   position: relative
-  width: 3860px
+  width: 4900px
   height: 930px
   overflow: hidden
 
@@ -20,11 +20,22 @@
   
 .moto
     position: absolute
-    left:420px
+    left:500px
+
+.img
+    position: absolute
+    left:950px
+
+.calender
+  position: absolute
+  top:377px
+  left:955px
+  z-index:5 
+  transform: scale(0.7) 
 
 .tree1
     position: absolute
-    left:80px
+    left:180px
     transform-origin: bottom
     animation: tree1 2s linear infinite alternate-reverse
 
@@ -36,11 +47,11 @@
 
 .pavilion
     position: absolute
-    left:760px
+    left:1250px
 
 .tree2
     position: absolute
-    left:1270px
+    left:1770px
     transform-origin: bottom
     animation: tree2 2s linear infinite alternate-reverse
 
@@ -52,7 +63,7 @@
 
 .tree3
     position: absolute
-    right:65px
+    right:0px
     z-index: 2
     transform-origin: bottom
     animation: tree3 2s linear infinite alternate-reverse
@@ -63,19 +74,29 @@
   100%
    transform: skew(-1deg)
 
+.Board
+    position: absolute
+    right:1300px
+    z-index: 2
+
+.video
+  position: absolute
+  right:1410px
+  top:520px
+
 .teabox
     position: absolute
-    right:525px
+    right:425px
 
 .stall
     position: absolute
-    right:615px
+    right:515px
 
 .smokemask
     position: absolute
     width:265px
     height:126px
-    right:975px
+    right:835px
     bottom:310px
     z-index:2
     overflow: hidden
@@ -98,7 +119,7 @@
 
 .burner
     position: absolute
-    right:1090px
+    right:950px
 .title
     position: absolute
     z-index: -1
@@ -115,7 +136,7 @@
 
 .C1
     position: absolute
-    animation: could 135s linear infinite 
+    animation: could 180s linear infinite 
 
 @keyframes could
   0%
@@ -126,12 +147,12 @@
   90%
     opacity: 1
   100% 
-    transform: translateX(1050px) translateZ(0)
+    transform: translateX(800px) translateZ(0)
     opacity: 0
 
 .C2
     position: absolute
-    animation: could2 130s linear infinite 
+    animation: could2 180s linear infinite 
 
 @keyframes could2
   0%
@@ -142,7 +163,7 @@
   90%
     opacity: 1
   100% 
-    transform: translateX(2250px) translateZ(0)
+    transform: translateX(3250px) translateZ(0)
     opacity: 0
 
 .C3
@@ -187,40 +208,47 @@
   100% 
     transform: translate(2350px,-2500px) translateZ(0)rotate(0deg)
 
+.teamcontainer
+  width:1000px
+  display: flex
+  align-items: flex-end
+  justify-content: space-around
+  margin-left: 460px
+
 .sona
     position: relative
     z-index: 3
     width: 200px
     height: 200px
-    top: -200px
+    top: -334px
 
 .sam
     position: relative
     z-index: 3
     width: 140px
     height: 280px
-    top: -200px
+    top: -334px
 
 .car
     position: relative
     z-index: 3
     width: 440px
     height: 220px
-    top: -200px
+    top: -334px
 
 .chi
     position: relative
     z-index: 3
     width: 140px
     height: 280px
-    top: -200px
+    top: -334px
 
 .umb
     position: relative
     z-index: 3
     width: 135px
     height: 270px
-    top: -200px
+    top: -334px
 
 .fixed 
   position: fixed
@@ -250,7 +278,7 @@
     width: 160px
     height: 210px
     top:610px
-    right:-1280px
+    right:-480px
 
 .jump
     position: absolute
@@ -258,7 +286,7 @@
     width: 260px
     height: 260px
     top:620px
-    left:900px
+    left:1390px
 
 .flag
     position: absolute
@@ -266,22 +294,34 @@
     width: 380px
     height: 380px
     top:450px
-    left:510px
+    left:610px
 .dog
     position: absolute
     z-index: 2
     width: 170px
     height: 150px
     top:670px
-    left:1630px
+    left:2155px
 
 .bubble
-  left:440px
+  left:530px
   top:-350px
   border-radius: 4px
   border: none
   position: relative
   background-color:$hot_pink
+  cursor: pointer
+  -webkit-animation: pulse 1s
+  animation: pulse 1s infinite
+  box-shadow: 0 0 0 10px transparent
+
+@-webkit-keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
+  
+@keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
 
 .bubble:after 
   content: ''
@@ -306,12 +346,24 @@
   font-weight: 500
 
 .bubble2
-  left:640px
+  left:1110px
   top: -280px
   border-radius: 4px
   border: none
   position: relative
   background-color:$hot_pink
+  cursor: pointer
+  -webkit-animation: pulse 1s
+  animation: pulse 1s infinite
+  box-shadow: 0 0 0 10px transparent
+
+@-webkit-keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
+  
+@keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
 
 .bubble2:after 
   content: ''
@@ -329,13 +381,25 @@
   color: $hot_pink
 
 .bubble3
-  left:1240px
+  left:1700px
   top: -280px
   border-radius: 4px
   border: none
   position: relative
   background-color:$hot_pink
   z-index: 2
+  cursor: pointer
+  -webkit-animation: pulse 1s
+  animation: pulse 1s infinite
+  box-shadow: 0 0 0 10px transparent
+
+@-webkit-keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
+  
+@keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
 
 .bubble3:after 
   content: ''
@@ -351,15 +415,28 @@
   border-left-color: currentColor
   border-radius: 0 0 0 50px
   color: $hot_pink
+  
 
 .bubble4
-  left:2080px
+  left:3255px
   top: -355px
   border-radius: 4px
   border: none
   position: relative
   background-color:$hot_pink
   z-index: 2
+  cursor: pointer
+  -webkit-animation: pulse 1s
+  animation: pulse 1s infinite
+  box-shadow: 0 0 0 10px transparent
+
+@-webkit-keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
+  
+@keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
 
 .bubble4:after 
   content: ''
@@ -377,13 +454,25 @@
   color: $hot_pink
 
 .bubble5
-  left:2440px
+  left:3490px
   top: -345px
   border-radius: 4px
   border: none
   position: relative
   background-color:$hot_pink
   z-index: 2
+  cursor: pointer
+  -webkit-animation: pulse 1s
+  animation: pulse 1s infinite
+  box-shadow: 0 0 0 10px transparent
+
+@-webkit-keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
+  
+@keyframes pulse 
+  0% 
+    box-shadow: 0 0 0 0 $hot_pink
 
 .bubble5:after 
   content: ''
@@ -399,3 +488,6 @@
   border-left-color: currentColor
   border-radius: 0 0 0 50px
   color: $hot_pink
+
+.modal::-webkit-scrollbar 
+  display: none

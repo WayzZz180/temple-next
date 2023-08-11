@@ -13,10 +13,10 @@ export default function PrayStudy() {
   const Router = useRouter()
 
   const studyA = () => {
-    Router.push('/Pray/studyA-1')
+    Router.push('/pray/studyB-1')
   }
   const studyB = () => {
-    Router.push('/Pray/studyB-1')
+    Router.push('/pray/studyA-1')
   }
   return (
     <>
@@ -82,12 +82,12 @@ export default function PrayStudy() {
           <div className={`${styles.title} mb60px`}>文昌</div>
           <div className={`${styles.line}`}></div>
           <div className={`${styles.content}`}>
-          文昌帝君主管考試、命運，掌管天下文運祿籍，助佑讀書撰文之神，是讀書文人、求科名者所最尊奉的神祗，自古以來就受到士人學子的崇拜。心中默念出你想祈求的事情，祈請文昌帝君，考試運勢或工作運勢一切順利。
+            文昌帝君主管考試、命運，掌管天下文運祿籍，助佑讀書撰文之神，是讀書文人、求科名者所最尊奉的神祗，自古以來就受到士人學子的崇拜。心中默念出你想祈求的事情，祈請文昌帝君，考試運勢或工作運勢一切順利。
           </div>
           <div className={`${styles.btn} mt90px`}>
-            <Button text="點學業燈" btnColor="green" link={studyA}/>
+            <Button text="點學業燈" btnColor="green" link={studyA} />
             <span className={`${styles.btn2}`}>
-              <Button text="上傳准考證" btnColor="green" link={studyB}/>
+              <Button text="上傳准考證" btnColor="green" link={studyB} />
             </span>
           </div>
         </div>

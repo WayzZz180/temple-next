@@ -10,6 +10,7 @@ import InputBox from '@/components/common/inputBox/index.js'
 import MemberTitle from '@/components/common/title/memberTitle'
 
 import Button from '@/components/common/button/index.js'
+import NoButton from '@/components/common/button/noButton.js'
 import MemberNavbar from '@/components/common/memberNavbar/index.js'
 import ProfilePhoto from '@/components/common/profilePhoto'
 
@@ -25,10 +26,13 @@ export default function Personalinfo() {
   const [errorMessage, setErrorMessage] = useState('') // Define a state variable to store the error message
   const [getImg, setGetImg] = useState('')
   const [modalIsOpen, setModalIsOpen] = useState(false) // 跟蹤 modal 是否打開
+  const [cancelEditing, setCancelEditing] = useState(false)
+  const dayjs = require('dayjs')
 
   //拿token
   useEffect(() => {
-    // console.log(`personalinfo頁面 有沒有auth.token?1`, auth.token)
+    console.log(`personalinfo頁面 有沒有auth.token?1`, auth.token)
+    setCancelEditing(false)
     if (auth.token) {
       fetch(process.env.API_SERVER + '/member/personalinfo', {
         headers: {
@@ -47,14 +51,12 @@ export default function Personalinfo() {
       // You can add any additional logic here
       // console.log('用戶尚未註冊')
     }
-  }, [auth.token])
+  }, [auth.token, cancelEditing])
 
   // Convert the date format to "YYYY-MM-DD"
   useEffect(() => {
     if (user.member_birthday) {
-      const formattedBirthday = new Date(user.member_birthday)
-        .toISOString()
-        .slice(0, 10)
+      const formattedBirthday = dayjs(user.member_birthday).format('YYYY-MM-DD')
       setUser((prevUser) => ({
         ...prevUser,
         member_birthday: formattedBirthday,
@@ -78,12 +80,11 @@ export default function Personalinfo() {
       regex: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
       message: '請輸入有效的Email格式',
     },
-    member_password: {
-      required: true,
-      // regex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,20}$/,
-      message: '密碼必須包含一個大寫、一個小寫英文字母和數字，8~20碼',
-    },
-
+    // member_password: {
+    //   required: true,
+    //   // regex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,20}$/,
+    //   message: '密碼必須包含一個大寫、一個小寫英文字母和數字，8~20碼',
+    // },
     member_birthday: {
       required: true,
       message: '請選擇生日',
@@ -115,9 +116,9 @@ export default function Personalinfo() {
       ? { field, message: rule.message }
       : rule.regex && !rule.regex.test(user[field])
       ? { field, message: rule.message }
-      : field === 'confirm_password' && !rule.custom(user[field], user)
-      ? { field, message: rule.message }
-      : null
+      : // : field === 'confirm_password' && !rule.custom(user[field], user)
+        // ? { field, message: rule.message }
+        null
   })
 
   // 定義 getErrorForField 函式
@@ -140,12 +141,12 @@ export default function Personalinfo() {
         return { field, message: rule.message }
       }
 
-      if (field === 'confirm_password') {
-        // 檢查 confirm_password 的自訂規則
-        if (!rule.custom(user[field], user)) {
-          return { field, message: rule.message }
-        }
-      }
+      // if (field === 'confirm_password') {
+      //   // 檢查 confirm_password 的自訂規則
+      //   if (!rule.custom(user[field], user)) {
+      //     return { field, message: rule.message }
+      //   }
+      // }
     }
 
     return null // 代表表單通過驗證，沒有錯誤 //有回傳代表有錯誤
@@ -159,9 +160,7 @@ export default function Personalinfo() {
     // 在這裡執行取得最新 JWT 的相關程式碼
   }
 
-  const edit = async (e) => {
-    e.preventDefault()
-
+  const edit = async () => {
     const validateResult = validateForm()
     if (validateResult) {
       // Collect all the invalid fields and set the state
@@ -171,9 +170,9 @@ export default function Personalinfo() {
           ? field
           : rule.regex && !rule.regex.test(user[field])
           ? field
-          : field === 'confirm_password' && !rule.custom(user[field], user)
-          ? field
-          : null
+          : // : field === 'confirm_password' && !rule.custom(user[field], user)
+            // ? field
+            null
       })
       setInvalidFields(invalidFieldsArray.filter((field) => field !== null))
 
@@ -235,6 +234,13 @@ export default function Personalinfo() {
     }
   }
 
+  const handleCancelEditing = () => {
+    // setUser({}) // 將使用者狀態重設為空，從而取消任何變更
+    setInvalidFields([]) // 清除無效的欄位陣列
+    setErrorMessage('') // 清除錯誤訊息
+    setCancelEditing(true)
+  }
+
   return (
     <div className={styles.flex}>
       <Container>
@@ -250,58 +256,56 @@ export default function Personalinfo() {
         </Row>
 
         <MemberNavbar />
-        <form onSubmit={edit}>
-          <Row className={styles.flex_space_between}>
-            <Col>
-              <InputBox
-                prompt="姓名"
-                type="text"
-                id="member_name"
-                placeholder="姓名"
-                onChange={changeUser}
-                validationRules={validationRules}
-                value={user.member_name}
-                width={417}
-                // 判斷是否為錯誤欄位，以及是否顯示錯誤訊息
-                isError={invalidFields.includes('member_name')}
-                errorMessage={getErrorForField('member_name')} // 取得該欄位的錯誤訊息
-              />
-            </Col>
-            {/* 202-15*2空白 = 202 */}
-            <Col>
-              <InputBox
-                prompt="暱稱"
-                type="text"
-                id="member_forum_name"
-                placeholder="暱稱"
-                onChange={changeUser}
-                validationRules={validationRules}
-                value={user.member_forum_name}
-                width={417}
-                isError={invalidFields.includes('member_forum_name')}
-                errorMessage={getErrorForField('member_forum_name')}
-              />
-            </Col>
-          </Row>
-          <Row className={styles.flex_centre}>
-            <Col>
-              <InputBox
-                prompt="電子郵件地址"
-                id="member_account"
-                type="text"
-                placeholder="電子郵件地址"
-                onChange={changeUser}
-                validationRules={validationRules}
-                value={user.member_account}
-                width={1028}
-                isError={invalidFields.includes('member_account')}
-                errorMessage={
-                  getErrorForField('member_account') || errorMessage
-                } // 顯示來自後端的錯誤訊息
-              />
-            </Col>
-          </Row>
-          {/* <Row className={styles.flex_centre}>
+
+        <Row className={styles.flex_space_between}>
+          <Col>
+            <InputBox
+              prompt="姓名"
+              type="text"
+              id="member_name"
+              placeholder="姓名"
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_name}
+              width={417}
+              // 判斷是否為錯誤欄位，以及是否顯示錯誤訊息
+              isError={invalidFields.includes('member_name')}
+              errorMessage={getErrorForField('member_name')} // 取得該欄位的錯誤訊息
+            />
+          </Col>
+          {/* 202-15*2空白 = 202 */}
+          <Col>
+            <InputBox
+              prompt="暱稱"
+              type="text"
+              id="member_forum_name"
+              placeholder="暱稱"
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_forum_name}
+              width={417}
+              isError={invalidFields.includes('member_forum_name')}
+              errorMessage={getErrorForField('member_forum_name')}
+            />
+          </Col>
+        </Row>
+        <Row className={styles.flex_centre}>
+          <Col>
+            <InputBox
+              prompt="電子郵件地址"
+              id="member_account"
+              type="text"
+              placeholder="電子郵件地址"
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_account}
+              width={1028}
+              isError={invalidFields.includes('member_account')}
+              errorMessage={getErrorForField('member_account') || errorMessage} // 顯示來自後端的錯誤訊息
+            />
+          </Col>
+        </Row>
+        {/* <Row className={styles.flex_centre}>
             <Col>
               <InputBox
                 prompt="密碼"
@@ -317,63 +321,81 @@ export default function Personalinfo() {
               />
             </Col>
           </Row> */}
-          <Row className={styles.flex_centre}>
-            <Col>
-              <InputBox
-                prompt="出生年月日"
-                type="date"
-                id="member_birthday"
-                placeholder="出生年月日 "
-                onChange={changeUser}
-                validationRules={validationRules}
-                value={user.member_birthday}
-                width={1028}
-                isError={invalidFields.includes('member_birthday')}
-                errorMessage={getErrorForField('member_birthday')}
-              />
-            </Col>
-            {/* Q3 */}
-          </Row>
-          <Row className={styles.flex_centre}>
-            <Col>
-              <InputBox
-                prompt="手機號碼"
-                id="member_phone"
-                type="text"
-                placeholder="手機號碼 "
-                onChange={changeUser}
-                validationRules={validationRules}
-                value={user.member_phone}
-                width={1028}
-                isError={invalidFields.includes('member_phone')}
-                errorMessage={getErrorForField('member_phone') || errorMessage}
-                // 顯示來自後端的錯誤訊息
-              />
-            </Col>
-          </Row>
-          <Row className={styles.flex_centre}>
-            <Col>
-              <InputBox
-                prompt="現居地址"
-                type="text"
-                id="member_address"
-                placeholder="現居地址 "
-                onChange={changeUser}
-                validationRules={validationRules}
-                value={user.member_address}
-                width={1028}
-                isError={invalidFields.includes('member_address')}
-                errorMessage={getErrorForField('member_address')}
-              />
-            </Col>
-          </Row>
+        <Row className={styles.flex_centre}>
+          <Col>
+            <InputBox
+              prompt="出生年月日"
+              type="date"
+              id="member_birthday"
+              placeholder="出生年月日 "
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_birthday}
+              width={1028}
+              isError={invalidFields.includes('member_birthday')}
+              errorMessage={getErrorForField('member_birthday')}
+            />
+          </Col>
+          {/* Q3 */}
+        </Row>
+        <Row className={styles.flex_centre}>
+          <Col>
+            <InputBox
+              prompt="手機號碼"
+              id="member_phone"
+              type="text"
+              placeholder="手機號碼 "
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_phone}
+              width={1028}
+              isError={invalidFields.includes('member_phone')}
+              errorMessage={getErrorForField('member_phone') || errorMessage}
+              // 顯示來自後端的錯誤訊息
+            />
+          </Col>
+        </Row>
+        <Row className={styles.flex_centre}>
+          <Col>
+            <InputBox
+              prompt="現居地址"
+              type="text"
+              id="member_address"
+              placeholder="現居地址 "
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_address}
+              width={1028}
+              isError={invalidFields.includes('member_address')}
+              errorMessage={getErrorForField('member_address')}
+            />
+          </Col>
+        </Row>
 
-          <Row className={styles.flex_end}>
-            <Col>
-              <Button text="儲存變更" btnColor="black" width={229} />
-            </Col>
-          </Row>
-        </form>
+        <Row className={styles.flex_end}>
+          <Col>
+            {/* <form onSubmit={edit}> */}
+            <Button
+              text="確定儲存"
+              btnColor="black"
+              width={229}
+              link={() => {
+                edit()
+              }}
+            />
+            {/* </form> */}
+          </Col>
+          <Col>
+            <NoButton
+              text="取消變更"
+              btnColor="black"
+              width={229}
+              link={() => {
+                handleCancelEditing()
+              }}
+            />
+          </Col>
+        </Row>
       </Container>
     </div>
   )

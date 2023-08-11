@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 
-import styles from '@/pages/forum/forumgossip.module.sass'
-
 //components
 import Forumline from '@/components/common/forumlogo/forumline'
 import Navbar from '@/components/common/forumlogo/navbar'
@@ -15,7 +13,7 @@ import ProfilePhoto from '@/components/common/profilePhoto'
 export default function Forumgossip() {
   return (
     <>
-      <div className={styles.flex}>
+      <div className={``}>
         <Container>
           <ProfilePhoto />
           <Row>
@@ -25,7 +23,7 @@ export default function Forumgossip() {
           </Row>
           <MemberNavbar />
 
-          <Forumper />
+          {/* <Forumper /> */}
         </Container>
       </div>
     </>

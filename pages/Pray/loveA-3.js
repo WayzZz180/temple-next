@@ -9,8 +9,33 @@ import upcould from '@/assets/CCouldU.svg'
 import downcould from '@/assets/CCouldD.svg'
 import redline from '@/assets/redline.svg'
 import star from '@/assets/Star_pink.svg'
+import { Route, useRouter } from 'next/router'
 
 export default function LoveA3() {
+  const Router = useRouter()
+  const [user, setUser] = useState({
+    Member_ID: '',
+    Name: '',
+    Datetime:'',
+  })
+
+  const handleSumbit = (e) => {
+    e.preventDefault()
+    fetch(process.env.API_SERVER + '/pray/loveA-3', {
+      method: 'POST',
+      body: JSON.stringify(user),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((r) => r.json())
+      .then((result) => {
+        console.log(result)
+      })
+    setTimeout(() => {
+      Router.push('/member/amulet')
+    }, 2000)
+  }
   return (
     <>
       <div className={styles.parent_container}>
@@ -73,7 +98,10 @@ export default function LoveA3() {
                 </div>
               </div>
               <div className={`${styles.btn} mt90px`}>
-                <Button text="收藏" btnColor="hot_pink" />
+                <Button text="收藏" btnColor="hot_pink" type="submit"
+              link={(e) => {
+                handleSumbit(e)
+              }}/>
                 <span className={`${styles.btn2}`}>
                   <Button text="分享" btnColor="hot_pink" />
                 </span>

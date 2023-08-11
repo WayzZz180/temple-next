@@ -6,7 +6,15 @@
 .cloud2
     position: absolute
     z-index: -1
-    top: 120px
+    top: 320px
+    animation: float 10s ease-in-out infinite alternate
+
+
+@keyframes float 
+  0% 
+     transform: translate(-50px, 0px)
+  100% 
+     transform: translate(50px, 0px)
 
 .logo
     position: absolute

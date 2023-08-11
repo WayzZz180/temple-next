@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import mazu from '@/assets/mazuGod.svg'
 import godlight from '@/assets/GodLight.svg'
 import styles from './mazu1.module.sass'

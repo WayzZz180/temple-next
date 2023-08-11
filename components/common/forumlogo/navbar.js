@@ -1,6 +1,7 @@
 // Navbar.js
 
 import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 import styles from './navbar.module.sass'
 import Link from 'next/link'
 import SearchIcon from '@mui/icons-material/Search'
@@ -13,6 +14,7 @@ import PostMui from '@/components/common/launchdemo/postmui'
 import SearchMui from '@/components/common/launchdemo/searchmui'
 
 export default function Navbar() {
+  const router = useRouter()
   // const [showModal, setShowModal] = useState(false)
   // const handleCloseModal = () => setShowModal(false)
   // const handleShowModal = () => setShowModal(true)
@@ -28,10 +30,17 @@ export default function Navbar() {
           <div className={`${styles.flex_row11}`}>
             <li className="fs20px">
               <Link href="#" className={`${styles.no_underline}`}>
-                熱門文章
+                個人文章
               </Link>
             </li>
           </div>
+          {/* <div className={`${styles.flex_row11}`}>
+            <li className="fs20px">
+              <Link href="#" className={`${styles.no_underline}`}>
+                個人文章
+              </Link>
+            </li>
+          </div> */}
         </div>
         <div className={`${styles.flex_row2}`}>
           <div className={`${styles.flex_row21}`}>
@@ -40,7 +49,7 @@ export default function Navbar() {
               onClick={handleShowModal}
               style={{ background: 'none' }}
             > */}
-            <PostMui />
+            <PostMui page={router.query.page} />
             {/* <AddIcon />
             發佈文章 */}
             {/* </Button> */}

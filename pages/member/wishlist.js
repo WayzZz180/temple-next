@@ -70,7 +70,7 @@ export default function MyWishlist() {
             </div>
           ))
         ) : (
-          <div>123</div>
+          <div>要不要參考一下我們的商城?TT</div>
         )}
       </Container>
     </div>
