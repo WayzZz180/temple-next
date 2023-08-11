@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import styles from './prayingSummary.module.sass'
 import variables from '@/styles/_variables.module.sass'
 import Modal from 'react-modal'
@@ -19,6 +20,8 @@ import studyGod from '@/assets/studyGod.svg'
 import timeInfo from '@/components/mydata/timeInfo'
 
 export default function PrayingSummary({ data = [] }) {
+  const router = useRouter()
+  // for src
   const gods = [
     {
       god: '媽祖',
@@ -36,6 +39,7 @@ export default function PrayingSummary({ data = [] }) {
 
   const god = gods.filter((v, i) => v.god === data?.god)
 
+  // title
   const info = [
     {
       title: '參拜對象',
@@ -51,8 +55,10 @@ export default function PrayingSummary({ data = [] }) {
     },
   ]
 
+  // Modal開關
   const [isOpen, setIsOpen] = useState(false)
 
+  // 現在時間
   const getNow = () => {
     const myDate = new Date()
     const hours = myDate.getHours()
@@ -109,6 +115,7 @@ export default function PrayingSummary({ data = [] }) {
   const day = dayTime.day
   const time = dayTime.time
 
+  // 時辰對的話顯示去拜拜按鈕
   const isNow = () => {
     if (day === data?.day && time === data?.time) {
       return true
@@ -118,7 +125,19 @@ export default function PrayingSummary({ data = [] }) {
   }
   const toPray = isNow()
 
-  // 點下去拜拜setlocalstorage
+  // 去拜拜將reservation加入localStorage
+  const setLocal = () => {
+    const tmp = {
+      god: data?.god,
+      day: data?.day,
+      time: data?.time,
+      today: true,
+      now: time,
+      pidArr: [data?.pid1, data?.pid2, data?.pid3],
+    }
+    localStorage.setItem('reservation', JSON.stringify(tmp))
+    router.push('/worship/process')
+  }
   return (
     <Container>
       <Row className={styles.flex}>
@@ -151,7 +170,7 @@ export default function PrayingSummary({ data = [] }) {
                 height="50px"
                 fontSize="20px"
                 link={() => {
-                  setIsOpen(true)
+                  setLocal()
                 }}
               />
             </div>

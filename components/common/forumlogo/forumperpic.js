@@ -8,7 +8,7 @@ function FigureExample() {
         width={118}
         height={118}
         alt="118x118"
-        src="holder.js/171x180"
+        src="http://localhost:3002/img/babyDory.jpg"
       />
     </Figure>
   )

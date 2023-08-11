@@ -21,6 +21,14 @@
     position: absolute
     top: 60.5vh
 
+.productsContainer
+    display: flex
+    justify-content: center
+    align-items: center
+    position: absolute
+    top: 44.5vh
+    z-index: 3
+   
 .incenseHidden
     position: absolute
     top: -15vh
@@ -36,7 +44,11 @@
         top: -15vh    
     100%
         top: 77.5vh
-    
+
+.burning
+    position: absolute
+    top: 77.3vh
+    z-index: 3
 
 .burner
     position: absolute
@@ -46,4 +58,43 @@
 .button
     position: absolute
     top: 93vh
+
+.sortList
+    list-style: none
+    display: flex
+    padding-left: 0px 
+    gap: 5px
+    cursor: grab
+
+.sortableContainer
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+.product
+    position: relative
+    top: 2.2vh
+
+.productAnimation
+    animation: product 4s ease-out 1
+
+@keyframes product
+    0%
+        top: -200vh
+    100%
+        top: 2.2vh
+
+.plate
+    position: relative
+    top: 0vh
+    
+.plateAnimation
+    animation: plate 2s ease-out 1
+
+@keyframes plate
+    0%
+        top: -100vh
+    100%
+        top: 0vh
 

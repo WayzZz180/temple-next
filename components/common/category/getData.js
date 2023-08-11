@@ -36,12 +36,20 @@ export default function GetData({ data = [], pagination = [] }) {
     } else {
       setKeyword('')
     }
-
-    fetch(`${process.env.API_SERVER}/shop/favoriteMatch`)
-      .then((r) => r.json())
-      .then((data) => {
-        setPidArr(data)
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/favoriteMatch`, {
+        headers: {
+          Authorization,
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          setPidArr(data)
+        })
+    }
   }, [router.query])
 
   return (

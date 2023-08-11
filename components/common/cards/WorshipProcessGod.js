@@ -39,6 +39,7 @@ export default function WorshipGod({
       transform: 'translate3d(0, -10px, 0)',
     },
   })
+
   return (
     <div className={`${styles.relative}`}>
       <div className={`${styles.container}`}>
@@ -57,18 +58,13 @@ export default function WorshipGod({
         {/* whole god  */}
         <div className={`${styles.relative}`}>
           {/* 背後轉的光 */}
-          <div className={`${styles.BackLight} ms10px`}>
+          <div className={`${styles.BackLight} ms1px`}>
             <Image src={BackLight} alt="light" width={280} />
           </div>
           {/* god */}
           <div className={`${styles.godContainer}`}>
             {/* God */}
-            <Image
-              src={loveGod}
-              alt=""
-              width={250}
-              className={`${styles.img} `}
-            />
+            <Image src={pic} alt="" width={250} className={`${styles.img} `} />
           </div>
           <div className={`${styles.title}`}>{text}</div>
           {/* god name */}

@@ -29,23 +29,20 @@
 
 @keyframes fairyL
   0% 
-    transform: translate(0px, -15px)
+    transform: translate(0px, -15px)rotate(-20deg)
 
   100% 
-    transform: translate(0px, 15px)
+    transform: translate(0px, 15px)rotate(-20deg)
 
 .fairyL2
+    display: none
     animation: fairyL2 2s ease-in-out 1
 
 @keyframes fairyL2
   0% 
-    transform: translate(400px, -250px)rotate(20deg)
-    opacity: 0
-  20%
-    opacity: 0
+    transform: translate(400px, -550px)rotate(-10deg)
   100% 
-    transform: translate(0px, 0px)
-    opacity: 1
+    transform: translate(0px, 0px)rotate(0deg)
 
 .fairyR
     display: flex
@@ -56,23 +53,20 @@
 
 @keyframes fairyR
   0% 
-    transform: translate(0px, -15px)
+    transform: translate(0px, -15px)rotate(20deg)
 
   100% 
-    transform: translate(0px, 15px)
+    transform: translate(0px, 15px)rotate(20deg)
 
 .fairyR2
+    display: none
     animation: fairyR2 2s ease-in-out 1
 
 @keyframes fairyR2
   0% 
-    transform: translate(-400px, -250px)rotate(-20deg)
-    opacity: 0
-  20%
-    opacity: 0
+    transform: translate(-400px, -550px)rotate(10deg)
   100% 
-    transform: translate(0px, 0px)
-    opacity: 1
+    transform: translate(0px, 0px)rotate(0deg)
 
 .circle_1
     display: flex
@@ -110,7 +104,7 @@
 .title
    color: $title
    font-family:"Noto Sans TC", sans-serif
-   font-size: 40px
+   font-size: 37px
    font-weight: 900
    letter-spacing: 10px
     
@@ -174,6 +168,8 @@
   bottom: 0px
   z-index: 4
   transform-origin: left
+
+.startAnimation2
   animation: scoreL 4s linear 1 forwards
 
 @keyframes scoreL
@@ -188,6 +184,8 @@
   bottom: 0px
   z-index: 4
   transform-origin: right
+
+.startAnimation
   animation: scoreR 4s linear 1 forwards
 
 @keyframes scoreR
@@ -258,3 +256,74 @@
 .score
   position: relative
   left:-2.5px
+
+.C3
+    position: absolute
+    z-index: 3
+    top:-110px
+    left:-500px
+    animation: c3 4s linear 1 forwards 1s
+
+.C3_2
+    transform: rotateY(-180deg)
+    position: absolute
+    z-index: 3
+    top:-380px
+    right:-500px
+    animation: c3_2 2s linear 1 forwards 1s
+
+.C3_3
+    transform: rotateY(-180deg)
+    position: absolute
+    top:100px
+    right:-500px
+    animation: c3_2 4s linear 1 forwards 1s
+
+@keyframes c3
+  0% 
+     transform: translate(0px,0px)
+  100% 
+     transform: translate(0px,-1100px)
+
+@keyframes c3_2
+  0% 
+     transform: translate(0px,0px)rotateY(-180deg)
+  100% 
+     transform: translate(0px,-1100px)rotateY(-180deg)
+
+
+
+.C4
+    position: absolute
+    z-index: 3
+    top:-100px
+    right:-1500px
+    animation: c4 6s linear 1 forwards 1s
+
+@keyframes c4
+  0% 
+     transform: translate(0px,0px)
+  100% 
+     transform: translate(2500px,0px)
+
+.C4_2
+    position: absolute
+    z-index: 3
+    top:-50px
+    left:-1400px
+    transform: rotateY(-180deg)
+    animation: c4_2 6s linear 1 forwards 1s
+
+@keyframes c4_2
+  0% 
+     transform: translate(0px,0px)rotateY(-180deg)
+  100% 
+     transform: translate(-2500px,0px)rotateY(-180deg)
+
+.scorebtn
+  position: absolute
+  bottom: 70px
+  z-index: 5
+  left:841px
+.show
+    display: block

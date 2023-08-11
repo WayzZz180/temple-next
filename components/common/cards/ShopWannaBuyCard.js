@@ -39,35 +39,47 @@ export default function ShopWannaBuyCard({
   // 從下次再買刪除個別商品
   const deleteFromWannaBuy = (pid) => {
     const deletedData = { pid: pid }
-    fetch(`${process.env.API_SERVER}/shop/wannaBuy`, {
-      method: 'DELETE',
-      body: JSON.stringify({ requestData: deletedData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        getWannaBuyData()
-        getCartCount()
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/wannaBuy`, {
+        method: 'DELETE',
+        body: JSON.stringify({ requestData: deletedData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          getWannaBuyData()
+          getCartCount()
+        })
+    }
   }
 
   // 從下次再買加入購物車
   const addToCart = () => {
     const addData = { count: 1, pid: pid, wannaBuy: true }
-    fetch(`${process.env.API_SERVER}/shop/cart`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: addData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        getWannaBuyData()
-        getCartCount()
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/cart`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: addData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          getWannaBuyData()
+          getCartCount()
+        })
+    }
   }
 
   // 日期

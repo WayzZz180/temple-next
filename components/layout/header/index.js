@@ -36,8 +36,8 @@ export default function Header() {
       title2: '線上拜拜',
       links: [
         { label: '預約拜拜', url: '/worship' },
-        { label: '供品套組', url: '/worship/offerings' },
         { label: '預約紀錄', url: '/member/praying' },
+        { label: '供品一覽', url: '/worship/offeringsAll' },
       ],
     },
     {
@@ -74,10 +74,11 @@ export default function Header() {
       title: '06',
       title2: '民俗論壇',
       links: [
-        { label: '八卦板', url: '#' },
-        { label: '鬼故事板', url: '#' },
-        { label: '愛情板', url: '#' },
-        { label: '籤詩板', url: '#' },
+        { label: '論壇首頁', url: '/forum' },
+        { label: '八卦板', url: '/forum/gossip?page=1' },
+        { label: '鬼故事板', url: '/forum/ghost?page=1' },
+        { label: '愛情板', url: '/forum/love?page=1' },
+        { label: '籤詩板', url: '/forum/fortunesticks?page=1' },
         { label: '神佛介紹', url: '#' },
         { label: '禁忌百科', url: '#' },
         { label: '節期拜法', url: '#' },

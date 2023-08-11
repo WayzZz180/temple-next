@@ -118,10 +118,10 @@ export default function Category() {
           setData([])
         }
       })
-    console.log(updatedInfo)
   }, [dataFromChild, router.query])
 
   if (!data) return <Loading />
+
   return (
     <Container className={`${styles.container}`}>
       {/* 類別&搜尋 */}

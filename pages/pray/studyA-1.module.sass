@@ -1,0 +1,256 @@
+@import '@/styles/_variables.module.sass'
+
+.flex_row
+   display: flex
+   overflow: hidden
+   width: 100%
+   height:930px
+
+.divlight
+   position: absolute
+   top:-200px
+   animation: divlight 1.5s ease-out 
+    
+
+@keyframes divlight
+  0% 
+    transform: translateY(350px)
+    opacity: 0
+  30% 
+    transform: translateY(350px)
+    opacity: 0
+
+  100% 
+    transform: translateY(0px)
+    opacity: 1
+
+   
+.light
+   animation: light 12s linear infinite 
+
+@keyframes light
+  0% 
+    transform: scale(1)rotate(0deg)
+
+  30%
+    transform: scale(1.2)rotate(95deg)
+
+  50%
+    transform: scale(1.1)rotate(180deg)
+  100% 
+    transform: scale(1)rotate(360deg)
+
+.mazu
+   z-index:1
+   padding-top: 40px
+   animation: mazu 1s ease-out 
+    
+
+@keyframes mazu
+  0% 
+    transform: translateY(350px)
+    opacity: 0
+
+  100% 
+    transform: translateY(0px)
+    opacity: 1
+
+.god
+   display: flex
+   width:100%
+   justify-content: center
+   position: relative
+
+
+.starsA
+   display: flex
+   align-items: center
+   padding-top:100px
+   margin-right:130px
+   animation: starA 1.5s ease-out
+    
+
+@keyframes starA
+  0% 
+    transform: translateY(0px)scale(0)
+    opacity: 0
+  50% 
+    transform: translateY(0px)scale(0)
+    opacity: 0
+
+  100% 
+    transform: translateY(0px)scale(1)
+    opacity: 1
+
+.starsB
+   display: flex
+   align-items: center
+   padding-top:100px
+   margin-left:130px
+   animation: starB 1.5s ease-out
+    
+
+@keyframes starB
+  0% 
+    transform: translateY(0px)scale(0)
+    opacity: 0
+  50% 
+    transform: translateY(0px)scale(0)
+    opacity: 0
+
+  100% 
+    transform: translateY(0px)scale(1)
+    opacity: 1
+
+.star1
+  padding:0px 20px 
+  animation-name: star1
+  animation-duration: 1.5s 
+  animation-direction: alternate-revers         
+  animation-iteration-count: infinite 
+  animation-timing-function: linear 
+
+@keyframes star1
+  0%
+    transform: scale(1.2)
+
+  30%
+    transform: scale(1.8)
+
+  50%
+    transform: scale(2)
+
+  100%
+    transform: scale(1.2)
+
+.star2
+  padding:0px 40px 
+  animation-name: star2
+  animation-duration: 1s       
+  animation-direction: alternate-revers   
+  animation-iteration-count: infinite 
+  animation-timing-function: linear   
+
+@keyframes star2
+  0%
+    transform: scale(1.7)
+
+  30%
+    transform: scale(1.3)
+
+  60%
+    transform: scale(1.5)
+
+  100%
+    transform: scale(1.7)
+
+.right
+    position: absolute
+    right:40px
+    bottom:90px
+    transform-origin: bottom
+    animation: right 2s ease-in-out infinite alternate-reverse
+
+@keyframes right
+  0% 
+    transform: translate(0px, 15px)rotate(-10deg)
+
+  100% 
+    transform: translate(0px, -15px)rotate(5deg)
+
+.left
+    position: absolute
+    left:40px
+    bottom:90px
+    transform-origin: bottom
+    animation: left 2s ease-in-out infinite alternate
+
+@keyframes left
+  0% 
+    transform: translate(0px, -15px)rotate(-5deg)
+
+  100% 
+    transform: translate(0px, 15px)rotate(10deg)
+
+.input
+    width:1180px
+    background-color: $green
+    display: flex
+    position: absolute 
+    justify-content: space-around
+    flex-wrap: nowrap
+    padding:17px 10px
+    z-index:1
+
+.inputAn
+    width:1200px
+    display: none
+    bottom:360px
+    position: absolute 
+    z-index:1
+    animation: input 1s ease
+    
+
+@keyframes input
+  0% 
+    transform: scale(0,1)
+
+  100% 
+    transform: scale(1,1)
+
+.container
+    display: flex
+    align-items: center
+    justify-content: center
+
+.leftAn  
+    z-index:2 
+    display: none
+    animation: leftAn 1s ease-out 
+    
+
+@keyframes leftAn
+  0% 
+    transform: translateX(750px)
+
+  100% 
+    transform: translateX(0px)
+
+.rightAn  
+    z-index:2 
+    display: none
+    animation: rightAn 1.1s ease-out
+    
+
+@keyframes rightAn
+  0% 
+    transform: translateX(-500px)
+
+  100% 
+    transform: translateX(132px)
+
+.btn
+    display: none
+    position: absolute
+    z-index: 3
+    top:-250px
+    right:-1200px
+    animation: btn 2s ease
+
+@keyframes btn
+  0% 
+    transform: scale(0)
+    opacity: 0
+  40% 
+    transform: scale(0)
+    opacity: 0
+
+  100% 
+    transform: scale(1)
+    opacity: 1
+.form
+  position: absolute
+  left:360px
+  bottom:20px
+.show
+    display: block

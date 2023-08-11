@@ -1,9 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
+// bootstrap
+import { Row, Col } from 'react-bootstrap'
 
-import { Container, Row, Col } from 'react-bootstrap'
-
-import React, { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { useRouter } from 'next/router'
+import CartCountContext from '@/contexts/CartCountContext'
 
 //components
 import styles from '@/components/common/wishlist/wishlist.module.sass'
@@ -17,8 +19,61 @@ export default function Wishlist({
   WLprice = '',
   WLpid = '',
   WLcid = '',
+  setReset = () => {},
 }) {
+  const router = useRouter()
   const cat = ['cookies', 'candy', 'salty', 'drinks', 'gifts']
+  const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
+  const [resetChild, setResetChild] = useState(false)
+  // 從喜好商品加入購物車
+  const addToCart = () => {
+    const addData = { count: 1, pid: WLpid, wishlist: true }
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/cart`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: addData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          getCartCount()
+          setResetChild(!resetChild)
+        })
+    }
+  }
+
+  // 從下次再買刪除個別商品
+  const deleteFromWishList = (pid) => {
+    const deletedData = { pid: pid }
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/wishlist`, {
+        method: 'DELETE',
+        body: JSON.stringify({ requestData: deletedData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          getCartCount()
+          setResetChild(!resetChild)
+        })
+    }
+  }
+
+  useEffect(() => {
+    setReset(resetChild)
+  }, [resetChild])
 
   const wishlistRow = (
     <Row className={styles.flex}>
@@ -44,10 +99,24 @@ export default function Wishlist({
       </Col>
       <Col className={styles.btnflex}>
         <div>
-          <Button text="加入購物車" btnColor="brown" fontSize="20px" />
+          <Button
+            text="加入購物車"
+            btnColor="brown"
+            fontSize="20px"
+            link={() => {
+              addToCart()
+            }}
+          />
         </div>
         <div>
-          <NoButton text="刪除" btnColor="brown" fontSize="20px" />
+          <NoButton
+            text="刪除"
+            btnColor="brown"
+            fontSize="20px"
+            link={() => {
+              deleteFromWishList(WLpid)
+            }}
+          />
         </div>
       </Col>
     </Row>

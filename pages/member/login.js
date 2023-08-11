@@ -43,6 +43,7 @@ export default function Login() {
   }
 
   const doLogin = () => {
+  const doLogin = () => {
     fetch(process.env.API_SERVER + '/member/login', {
       method: 'POST',
       body: JSON.stringify(user),

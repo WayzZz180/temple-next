@@ -10,20 +10,26 @@ import { useRouter } from 'next/router'
 const bayImages = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2']
 
 export default function Mazu2() {
-  const getRandomBayImage = () => {
-    const randomIndex = Math.floor(Math.random() * bayImages.length)
-    return bayImages[randomIndex]
-  }
 
   const [currentBayImage, setCurrentBayImage] = useState('/bay/bay.png')
+  const [previousBayImage, setPreviousBayImage] = useState(null)
   const [title, setTitle] = useState(null)
   const [isHidden, setIsHidden] = useState(true)
   const [buttonText, setButtonText] = useState('擲筊')
   const Router = useRouter()
 
+  const getRandomBayImage = () => {
+    let randomIndex;
+    do {
+      randomIndex = Math.floor(Math.random() * bayImages.length);
+    } while (bayImages[randomIndex] === previousBayImage); // Ensure not the same as previous
+    return bayImages[randomIndex];
+  };
+
   const handleThrowBay = async () => {
-    const randomBayImage = getRandomBayImage()
-    setCurrentBayImage(`/bay/bay_${randomBayImage}.gif`)
+    const randomBayImage = getRandomBayImage();
+    setPreviousBayImage(randomBayImage); // Update previous result
+    setCurrentBayImage(`/bay/bay_${randomBayImage}.gif`);
 
     // Set the title based on the selected bay image
     if (randomBayImage >= 'A1' && randomBayImage <= 'A3') {
@@ -93,15 +99,15 @@ export default function Mazu2() {
               style={{ display: 'block' }}
               className={`${styles.name2}`}
             />
-            <div className={`${styles.name3}`} onClick={handleThrowBay}>
-              {title === '聖筊' ? (
-                <Button text={buttonText} btnColor="hot_pink" link={mazu3} />
-              ) : (
-                <div onClick={handleRetry}>
-                  <Button text={buttonText} btnColor="hot_pink" />
-                </div>
-              )}
-            </div>
+        <div className={`${styles.name3}`}>
+  {title === '聖筊' ? (
+    <Button text={buttonText} btnColor="hot_pink" link={mazu3} onClick={() => setIsHidden(true)} />
+  ) : (
+    <div onClick={handleRetry}>
+      <Button text={buttonText} btnColor="hot_pink" onClick={() => setIsHidden(false)} />
+    </div>
+  )}
+</div>
           </div>
           <Image
             src={right}

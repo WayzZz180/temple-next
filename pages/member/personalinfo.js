@@ -1,4 +1,4 @@
-import styles from '@/pages/member/personalinfo.module.sass'
+import styles from './personalinfo.module.sass'
 import { AuthContextProvider } from '@/contexts/AuthContext'
 import AuthContext from '@/contexts/AuthContext'
 import React, { useState, useEffect, useContext, useRef } from 'react'
@@ -32,7 +32,6 @@ export default function Personalinfo() {
   //拿token
   useEffect(() => {
     console.log(`personalinfo頁面 有沒有auth.token?1`, auth.token)
-    setCancelEditing(false)
     if (auth.token) {
       fetch(process.env.API_SERVER + '/member/personalinfo', {
         headers: {
@@ -41,15 +40,15 @@ export default function Personalinfo() {
       })
         .then((r) => r.json())
         .then((data) => {
-          console.log(`personalinfo頁面 有沒有auth.token?2`, auth.token, data)
-          console.log(data)
+          // console.log(`personalinfo頁面 有沒有auth.token?2`, auth.token, data)
+          // console.log(data)
           // 進入頁面把資料抓出來
           setUser(data)
         })
     } else {
       // Handle the case when auth.token is not available or user is not logged in
       // You can add any additional logic here
-      console.log('用戶尚未註冊')
+      // console.log('用戶尚未註冊')
     }
   }, [auth.token, cancelEditing])
 
@@ -200,7 +199,7 @@ export default function Personalinfo() {
 
       // 如果後端出錯，存儲後端的錯誤訊息
       if (data.error) {
-        console.log('失敗:', data.error)
+        // console.log('失敗:', data.error)
         setErrorMessage(data.error)
 
         if (data.error === '該 email 已被使用。') {
@@ -214,7 +213,7 @@ export default function Personalinfo() {
       }
 
       // 如果後端過關
-      console.log('成功:', data)
+      // console.log('成功:', data)
 
       if (data.message === '資料沒有變動') {
         // 資料沒有變動

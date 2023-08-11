@@ -1,40 +1,12 @@
 import styles from './WorshipConfirmCard.module.sass'
 import Image from 'next/image'
-import { useClick } from '@/hooks/useClick'
-import { useHoverIndex } from '@/hooks/useHoverIndex'
-import { useEffect, useState } from 'react'
 
 export default function WorshipConfirmCard({
   pid = 21,
   src = 'worship/mazu (4).png',
   text = '紅湯圓',
   price = '45',
-  pidArr = [],
-  setPidArr = () => {},
 }) {
-  const { clickState, handleClick, setClickState } = useClick(false)
-  const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-1)
-
-  const [myPidArr, setMyPidArr] = useState(pidArr)
-
-  const foundPid = myPidArr.some((v) => Number(v) === pid)
-
-  const removePid = (pid) => {
-    const newPidArr = [...pidArr]
-    const filter = newPidArr.filter((v) => {
-      return v != pid
-    })
-    setMyPidArr(filter)
-  }
-  const pushPid = (pid) => {
-    const newPidArr = [...pidArr, pid]
-    setMyPidArr(newPidArr)
-  }
-
-  useEffect(() => {
-    setPidArr(myPidArr)
-  }, [myPidArr])
-
   return (
     <div
       role="presentation"
