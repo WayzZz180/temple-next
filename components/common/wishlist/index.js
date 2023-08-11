@@ -25,7 +25,13 @@ export default function Wishlist({
       <Col>
         <Link href={`/shop/${cat[WLcid]}/${WLpid}`}>
           {/* 記得改成shop */}
-          <Image src={`/${WLimage}`} alt="product" height={150} width={150} />
+          <Image
+            src={`/${WLimage}`}
+            alt="product"
+            height={150}
+            width={150}
+            className={styles.img}
+          />
         </Link>
       </Col>
       <Col>
