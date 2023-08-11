@@ -20,7 +20,7 @@ import Job from '@/components/common/cards/HomeJob'
 import HomeCarousels from '@/components/common/carousel/HomeCarousels'
 import HomeDoor from '@/components/common/cards/HomeDoor'
 import HomeDoor2 from '@/components/common/cards/HomeDoor2'
-import { useRouter } from 'next/router'
+import { Route, useRouter } from 'next/router'
 
 export default function Home() {
   const Router = useRouter()
@@ -43,6 +43,17 @@ export default function Home() {
     }, 5000) // 5 seconds
   }
 
+  const mazu = () => {
+    Router.push('/pray/mazu1')
+  }
+
+  const love = () => {
+    Router.push('/pray/loveA-1')
+  }
+
+  const study = () => {
+    Router.push('/pray/studyA-1')
+  }
   return (
     <>
       {/* section1 */}
@@ -87,11 +98,7 @@ export default function Home() {
         </div>
         <div className={`${styles.position}`}>
           <div className={`${styles.signIn}`}>
-            <div
-              role="presentation"
-              className={`${styles.signInBlock}`}
-              onClick={handleClick}
-            >
+            <div className={`${styles.signInBlock}`} onClick={handleClick}>
               {/* signin star */}
               <div className={`${styles.pinkStar}`}>
                 <Image src={pink_star} width={40} alt="star" />
@@ -136,9 +143,9 @@ export default function Home() {
         lineColor="green"
       />
       <div className={styles.flex_row2}>
-        <God text1="媽祖" text2="求籤" pic="MazuGod" />
-        <God text1="月老" text2="求紅線" />
-        <God text1="文昌" text2="點學業燈" pic="StudyGod" />
+        <God text1="媽祖" text2="求籤" pic="MazuGod" link={mazu} />
+        <God text1="月老" text2="求紅線" link={love} />
+        <God text1="文昌" text2="上傳准考證" pic="StudyGod" link={study} />
       </div>
       {/* section4 */}
       <Title text="遶境online" text2="PILGRIMAGE ONLINE" lineColor="green" />
