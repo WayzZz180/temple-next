@@ -179,7 +179,9 @@ export default function ShopCartContentCard({
                     setCount(Number(count))
                   }
                 }}
-                onBlur={updateCount(count, pid)}
+                onBlur={() => {
+                  updateCount(count, pid)
+                }}
                 readOnly={stock_num === 0}
               ></input>
               {/* + */}
