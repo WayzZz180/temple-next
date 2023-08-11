@@ -75,8 +75,11 @@ export default function dailySignIn() {
           />
         </Col>
       </Row>
-
-      <MemberNavbar />
+      <Row>
+        <Col className={`${styles.navbar}`}>
+          <MemberNavbar />
+        </Col>
+      </Row>
 
       {/* 轉盤 */}
 

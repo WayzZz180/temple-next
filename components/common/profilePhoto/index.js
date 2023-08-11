@@ -55,7 +55,7 @@ export default function ProfilePhoto() {
       // You can add any additional logic here
       console.log('用戶尚未註冊')
     }
-  }, [auth.token])
+  }, [auth.token, getImg])
 
   // 上傳照片測試
 

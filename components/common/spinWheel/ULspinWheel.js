@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import Modal from 'react-modal'
 import variables from '@/styles/_variables.module.sass'
 import Image from 'next/image'
+import Confetti from 'react-confetti'
 
 // components
 import InputBox from '@/components/common/inputBox/index.js'
@@ -34,10 +35,15 @@ export default function SpinWheel({ updateSpinWheel }) {
     coupon_type: '',
     coupon_value: '',
   })
+  const [showConfetti, setShowConfetti] = useState(false)
+  const [sg, setSg] = useState(250)
 
   const handleModalCloseReload = () => {
     // 當點擊取消或按下 Esc 時，關閉小視窗
     setModalIsOpen(false)
+    setTimeout(() => {
+      setSg(0)
+    }, 5000)
   }
   // 將 x 減去 3600，再對 360 取餘數，得到的結果會是 5 到 364 之間的值
   const result = rotationDegree % 360
@@ -112,9 +118,9 @@ export default function SpinWheel({ updateSpinWheel }) {
 
     setRotationDegree(rotationDegree + randomDegree)
     // 將 coupon_type 和 coupon_value 傳遞給 onCouponGenerated
-
     setTimeout(() => {
       setModalIsOpen(true)
+      setShowConfetti((prev) => !prev)
     }, 1200)
 
     setCouponInfo(coupon_type, coupon_value)
@@ -310,9 +316,27 @@ export default function SpinWheel({ updateSpinWheel }) {
             }}
             fontSize="20px"
             padding="10px 45px"
+          />{' '}
+          <Confetti
+            width={typeof window !== 'undefined' ? window.innerWidth : 0}
+            height={typeof window !== 'undefined' ? window.innerHeight : 0}
+            numberOfPieces={150}
+            confettiSource={{ x: 960, y: 250 }}
+            run={showConfetti}
+            style={{ position: 'fixed', top: 0, left: 0 }}
           />
         </div>
       </Modal>
+      {showConfetti && (
+        <Confetti
+          width={typeof window !== 'undefined' ? window.innerWidth : 0}
+          height={typeof window !== 'undefined' ? window.innerHeight : 0}
+          numberOfPieces={150}
+          // confettiSource={{ x: window.innerWidth / 2, y: 50 }}
+          run={showConfetti}
+          style={{ position: 'fixed', top: 0, left: 0 }}
+        />
+      )}
     </>
   )
 }
