@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import styles from './signOut.module.sass'
 import Image from 'next/image'
+import { useContext } from 'react'
+import AuthContext from '@/contexts/AuthContext'
+
 // svg
 import nav from '@/assets/nav.svg'
 import foo_dog_left from '@/assets/foo_dog_left.svg'
@@ -25,16 +28,19 @@ import { useRouter } from 'next/router'
 export default function Home() {
   const Router = useRouter()
   const [isClicked, setIsClicked] = useState(false)
+  const { auth, setAuth, logout } = useContext(AuthContext)
 
   const handleClick = () => {
     setIsClicked(true)
     setTimeout(() => {
       setIsClicked(false)
+      logout()
       Router.push('/')
     }, 6500)
 
     setTimeout(() => {
       Router.push('/')
+      logout()
     }, 4500)
 
     // 隐藏 HomeDoor2

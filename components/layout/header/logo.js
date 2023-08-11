@@ -5,14 +5,14 @@ import Link from 'next/link'
 import logoChiHeader from '@/assets/logoChiHeader.svg'
 import logoEngHeader from '@/assets/logoEngHeader.svg'
 
-export default function Logo() {
+export default function Logo({ link = '/' }) {
   return (
     <div className={`${styles.logo}`}>
       <div className={`${styles.flex_col}`}>
-        <Link href="/">
+        <Link href={link}>
           <Image src={logoChiHeader} width={105} alt="logo" />
         </Link>
-        <Link href="/">
+        <Link href={link}>
           <Image src={logoEngHeader} width={118} alt="logo" />
         </Link>
       </div>

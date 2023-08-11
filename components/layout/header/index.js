@@ -21,7 +21,7 @@ export default function Header() {
         { label: '拜拜紀錄', url: '/member/praying' },
         { label: '訂單記錄', url: '/member/orders' },
         { label: '收藏清單', url: '/member/wishlist' },
-        { label: '我的優惠券', url: '/member/coupons' },
+        { label: '我的優惠券', url: '/member/myCoupons?tab=1' },
         { label: '我的文章', url: '/member/articles' },
         { label: '護身符', url: '/member/amulet' },
         { label: '每日簽到', url: '/member/dailySignIn' },
@@ -36,7 +36,8 @@ export default function Header() {
       title2: '線上拜拜',
       links: [
         { label: '預約拜拜', url: '/worship' },
-        { label: '供品套組', url: '#' },
+        { label: '預約紀錄', url: '/member/praying' },
+        { label: '供品一覽', url: '/worship/offeringsAll' },
       ],
     },
     {
@@ -47,7 +48,7 @@ export default function Header() {
         { label: '購物車', url: '/shop/cart?tab=1' },
         { label: '喜好商品', url: '/member/wishlist' },
         { label: '訂單紀錄', url: '/member/orders' },
-        { label: '優惠券', url: '/member/coupons' },
+        { label: '優惠券', url: '/member/myCoupons?tab=1' },
       ],
     },
     {
@@ -73,10 +74,11 @@ export default function Header() {
       title: '06',
       title2: '民俗論壇',
       links: [
-        { label: '八卦板', url: '#' },
-        { label: '鬼故事板', url: '#' },
-        { label: '愛情板', url: '#' },
-        { label: '籤詩板', url: '#' },
+        { label: '論壇首頁', url: '/forum' },
+        { label: '八卦板', url: '/forum/gossip?page=1' },
+        { label: '鬼故事板', url: '/forum/ghost?page=1' },
+        { label: '愛情板', url: '/forum/love?page=1' },
+        { label: '籤詩板', url: '/forum/fortunesticks?page=1' },
         { label: '神佛介紹', url: '#' },
         { label: '禁忌百科', url: '#' },
         { label: '節期拜法', url: '#' },
@@ -101,7 +103,7 @@ export default function Header() {
         className={`${styles.navbarContainer} pt20px pb25px`}
         style={{
           backgroundColor:
-            currentPath === bgChange[0] ? variables['brown'] : '',
+            currentPath === String(bgChange[0]) ? variables['brown'] : '',
         }}
       >
         {/* 左半邊選單 */}
@@ -121,7 +123,7 @@ export default function Header() {
         </ul>
         {/* logo */}
         <div className={`${styles.logoContainer}`}>
-          <Logo />
+          <Logo link={auth.id === 0 ? '/' : '/Home/signOut'} />
         </div>
         {/* 右半邊選單 */}
         <ul className={`${styles.drop_down_menu}`}>
