@@ -35,15 +35,20 @@
 
 .incense
     position: absolute
-    top: 77vh
+    top: 77.5vh
     z-index: 3
-    // animation: down 2s ease-out 1
+    animation: down 2s ease-out 1
 
 @keyframes down
     0%
         top: -15vh    
     100%
         top: 77.5vh
+
+.burning
+    position: absolute
+    top: 77.3vh
+    z-index: 3
 
 .burner
     position: absolute
@@ -70,6 +75,8 @@
 .product
     position: relative
     top: 2.2vh
+
+.productAnimation
     animation: product 4s ease-out 1
 
 @keyframes product
@@ -81,6 +88,8 @@
 .plate
     position: relative
     top: 0vh
+    
+.plateAnimation
     animation: plate 2s ease-out 1
 
 @keyframes plate

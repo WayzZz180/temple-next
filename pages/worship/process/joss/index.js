@@ -29,14 +29,34 @@ export default function Joss() {
   }
   return (
     <main>
-      <Button
-        text="祭拜結束"
-        link={() => {
-          // TODO: 把祭拜紀錄寫進資料庫 如果已經有的話就更新complete
-          clearLocal()
-          router.push('/member/praying')
-        }}
-      />
+      <Container>
+        {/* 鐵桶 */}
+        <Row className={`${styles.floorContainer}`}>
+          <div>
+            <Image src={Fire} alt="floor" width={500} />
+          </div>
+        </Row>
+        {/* 金紙 */}
+        <Row className={`${styles.floorContainer}`}>
+          <div>
+            <Image src={HellMoney} alt="floor" width={500} />
+          </div>
+        </Row>
+        {/* 地板 */}
+        <Row className={`${styles.floorContainer}`}>
+          <div>
+            <Image src={Floor} alt="floor" width={500} />
+          </div>
+        </Row>
+        <Button
+          text="祭拜結束"
+          link={() => {
+            // TODO: 把祭拜紀錄寫進資料庫 如果已經有的話就更新complete
+            clearLocal()
+            router.push('/member/praying')
+          }}
+        />
+      </Container>
     </main>
   )
 }

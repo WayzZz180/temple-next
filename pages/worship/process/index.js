@@ -18,7 +18,8 @@ import Loading from '@/components/common/loading'
 import BackTable from '@/assets/tableBack.svg'
 import FrontTable from '@/assets/tableFront.svg'
 import Burner from '@/assets/worship_burner.svg'
-import Incense from '@/assets/incense.gif'
+import Incense from '@/assets/incense.svg'
+import IncenseBurning from '@/assets/incense.gif'
 import mazuGod from '@/assets/mazuGod.svg'
 import loveGod from '@/assets/loveGod.svg'
 import studyGod from '@/assets/studyGod.svg'
@@ -29,6 +30,7 @@ import godInfo from '@/components/mydata/godInfo'
 
 export default function Process() {
   const [active, setActive] = useState(false)
+  const [burn, setBurn] = useState(false)
   const router = useRouter()
   const [data, setData] = useState([])
   const [reservation, setReservation] = useState([])
@@ -76,7 +78,6 @@ export default function Process() {
 
   if (!reservation) return <Loading />
   const index = gods.findIndex((v, i) => v.god === reservation?.god)
-
   class Item extends React.Component {
     render() {
       return <li {...this.props}>{this.props.children}</li>
@@ -95,7 +96,6 @@ export default function Process() {
         items: items,
       })
     }
-
     render() {
       const { items } = this.state
       const listItems = items.map((item, i) => {
@@ -107,10 +107,18 @@ export default function Process() {
             sortId={i}
           >
             <div className={`${styles.sortableContainer}`}>
-              <div className={`${styles.product}`}>
+              <div
+                className={`${styles.product} ${
+                  !active && !burn ? styles.productAnimation : ''
+                }`}
+              >
                 <Image src={item} alt="products" width={120} height={120} />
               </div>
-              <div className={`${styles.plate}`}>
+              <div
+                className={`${styles.plate} ${
+                  !active && !burn ? styles.plateAnimation : ''
+                }`}
+              >
                 <Image src={Plate} alt="plate" width={70} />
               </div>
             </div>
@@ -159,11 +167,21 @@ export default function Process() {
               <SortableList items={items} />
             </div>
             {/* 香 */}
+
             <div
-              className={`${active ? styles.incense : styles.incenseHidden}`}
-              // className={styles.incense}
+              className={`${
+                active
+                  ? burn
+                    ? styles.burning
+                    : styles.incense
+                  : styles.incenseHidden
+              }`}
             >
-              <Image src={active ? Incense : ''} alt="incense" width={150} />
+              <Image
+                src={active ? (burn ? IncenseBurning : Incense) : ''}
+                alt="incense"
+                width={active ? (burn ? 151 : 5) : 5}
+              />
             </div>
             {/* 香爐 */}
             <div className={`${styles.burner}`}>
@@ -172,12 +190,16 @@ export default function Process() {
             {/* Button */}
             <div className={`${styles.button}`}>
               <Button
-                text={active ? '祭拜' : '點香'}
+                text={active ? (burn ? '下一步' : '祭拜') : '點香'}
                 fontSize="16px"
                 padding="10px 50px"
                 link={(e) => {
                   e.preventDefault
-                  setActive(true)
+                  active &&
+                    (burn
+                      ? router.push('/worship/process/joss')
+                      : setBurn(true))
+                  !active && setActive(true)
                 }}
               />
             </div>
