@@ -1,9 +1,39 @@
+@import '@/styles/_variables.module.sass' 
+
 .flex 
     display: flex
     flex-direction: row
     justify-content: center
     align-items: flex-start
-    // margin: 100px 0px 0px 0px
 
 .detailsContainer
     width: 100%
+
+.close
+    cursor: pointer
+    display: flex
+    justify-content: flex-end
+
+.close:hover
+    color: $green
+
+
+.col
+    width: 70%
+    display: flex
+    flex-direction: column
+    align-items: flex-end
+
+.billContainer
+    width:20%
+    position: relative
+    right: -15vh
+
+.detailsCategory
+    display: flex
+    justify-content: space-between
+    width: 100%
+
+.details
+    display: inline-block
+    line-height: 30px
