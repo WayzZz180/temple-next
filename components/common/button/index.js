@@ -14,6 +14,7 @@ export default function Button({
   fontSize = '24px',
   link = () => {},
   type = 'button',
+  disabled,
 }) {
   const var_color = variables[btnColor]
   return (
@@ -29,6 +30,7 @@ export default function Button({
           padding: `${padding}`,
           fontSize: `${fontSize}`,
         }}
+        disabled={disabled}
       >
         <span className={`${styles.IconContainer} `}>
           <Image
