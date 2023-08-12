@@ -20,7 +20,7 @@ export default function Button({
     <>
     <div
         style={{
-          transform: 'scale(0.6)',
+          transform: 'scale(0.7)',
           transformOrigin: 'center',
           width: '106px',
         }}

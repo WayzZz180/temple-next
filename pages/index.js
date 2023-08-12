@@ -20,6 +20,7 @@ import Job from '@/components/common/cards/HomeJob'
 import HomeCarousels from '@/components/common/carousel/HomeCarousels'
 import HomeDoor from '@/components/common/cards/HomeDoor'
 import HomeDoor2 from '@/components/common/cards/HomeDoor2'
+import { useRouter } from 'next/router'
 
 export default function Home() {
   const Router = useRouter()
@@ -34,26 +35,6 @@ export default function Home() {
 
     setTimeout(() => {
       Router.push('/member/login')
-    }, 4500)
-
-    // 隐藏 HomeDoor2
-    setTimeout(() => {
-      setIsClicked(false)
-    }, 5000) // 5 seconds
-  }
-
-  const Router = useRouter()
-  const [isClicked, setIsClicked] = useState(false)
-
-  const handleClick = () => {
-    setIsClicked(true)
-    setTimeout(() => {
-      setIsClicked(false)
-      Router.push('/Home/signOut')
-    }, 6000)
-
-    setTimeout(() => {
-      Router.push('/Home/signOut')
     }, 4500)
 
     // 隐藏 HomeDoor2
