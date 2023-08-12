@@ -35,6 +35,9 @@ export default function IndexCart() {
   const { wannaBuyData, setWannaBuyData, getWannaBuyData } =
     useContext(WannaBuyDataContext)
 
+  //loading
+  const [loading, setLoading] = useState(true)
+
   // 抓購物車或下次再買的資料
   useEffect(() => {
     if (tab) {
@@ -42,10 +45,7 @@ export default function IndexCart() {
     }
     getCartData()
     getWannaBuyData()
-  }, [router.query])
-
-  // 瀏覽紀錄
-  useEffect(() => {
+    // // 瀏覽紀錄
     const auth = localStorage.getItem('auth')
     if (auth) {
       const obj = JSON.parse(auth)
@@ -57,12 +57,32 @@ export default function IndexCart() {
       })
         .then((r) => r.json())
         .then((data) => {
+          setTimeout(() => {
+            setLoading(false)
+          }, 1500)
           setMarquee(data)
         })
     }
-  }, [])
+  }, [router.query])
 
-  if (!cartData || !wannaBuyData || !marquee) return <Loading />
+  // useEffect(() => {
+  //   const auth = localStorage.getItem('auth')
+  //   if (auth) {
+  //     const obj = JSON.parse(auth)
+  //     const Authorization = 'Bearer ' + obj.token
+  //     fetch(`${process.env.API_SERVER}/shop/history`, {
+  //       headers: {
+  //         Authorization,
+  //       },
+  //     })
+  //       .then((r) => r.json())
+  //       .then((data) => {
+  //         setMarquee(data)
+  //       })
+  //   }
+  // }, [])
+
+  if (loading) return <Loading />
 
   return (
     <>

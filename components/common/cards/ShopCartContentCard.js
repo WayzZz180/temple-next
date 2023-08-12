@@ -158,8 +158,8 @@ export default function ShopCartContentCard({
                     setCount(1)
                   } else {
                     setCount(count - 1)
+                    updateCount(count - 1, pid)
                   }
-                  updateCount(count - 1, pid)
                 }}
               />
               {/* 數量 */}
@@ -198,8 +198,8 @@ export default function ShopCartContentCard({
                     setCount(stock_num)
                   } else {
                     setCount(count + 1)
+                    updateCount(count + 1, pid)
                   }
-                  updateCount(count + 1, pid)
                 }}
               />
             </div>

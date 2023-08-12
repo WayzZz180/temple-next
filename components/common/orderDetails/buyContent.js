@@ -2,7 +2,7 @@ import styles from './buyContent.module.sass'
 import Image from 'next/image'
 
 // hooks
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useClick } from '@/hooks/useClick.js'
 
@@ -18,14 +18,25 @@ import Arrow from '@/assets/orderArrow.svg'
 
 export default function BuyContent({ data = [] }) {
   const [init, setInit] = useState(false)
-
+  const router = useRouter()
   //判斷有無點擊收藏和購物車
   const { clickState: openClickState, handleClick: handleOpenClick } =
     useClick(true)
+  const [coupon, setCoupon] = useState(0)
+  const [couponId, setCouponId] = useState(0)
+
+  useEffect(() => {
+    if (localStorage.getItem('coupon')) {
+      const value = JSON.parse(localStorage.getItem('coupon')).value
+      const id = JSON.parse(localStorage.getItem('coupon')).id
+      setCoupon(value)
+      setCouponId(id)
+    }
+  }, [router.query])
 
   const total = data?.reduce((result, v) => {
     return result + v.product_price * v.quantity
-  }, 0)
+  }, -coupon)
 
   return (
     <>
@@ -43,6 +54,11 @@ export default function BuyContent({ data = [] }) {
             }}
           >
             <div className={`fs28px fwBolder`}>合計：NT${total}</div>
+            {coupon ? (
+              <div className={`fs24px`}> (使用折價券：-NT${coupon})</div>
+            ) : (
+              ''
+            )}
             <div className={`${styles.flex_row} fs24px`}>
               <div>總共 {data?.length} 件&nbsp;</div>
               <div

@@ -57,12 +57,102 @@
 .detailsCategory
     display: flex
     justify-content: space-between
+    align-items: center
     width: 100%
 
 .details
     display: inline-block
     line-height: 30px
 
+
 .detailsButton
     position: relative
     right:0
+
+    
+ul.drop_down_menu
+    margin: 0
+    padding: 0
+    list-style: none
+    display: inline-block
+    cursor: pointer
+
+ul.drop_down_menu li
+    position: relative
+    white-space: nowrap
+
+ul.drop_down_menu>li:last-child 
+    border-right: none
+
+
+.link
+    letter-spacing: 3px
+    display: block
+    padding: 10px 30px
+    text-decoration: none
+    border-bottom: 1px solid $brown 
+
+.link:hover
+    color: $hot_pink
+
+.li
+    background: transparent
+    border: none
+    padding: 3px 2px
+    color: $fontColor
+    text-transform: uppercase
+    position: relative
+    transition: .2s ease
+
+.select::before
+    width: 70%
+
+.notSelect::before
+    width: 0   
+
+.li::before
+    content: ''
+    position: absolute
+    left: 23px
+    bottom: 0
+    height: 3px
+    background-color: #14d2bf
+    transition: .2s ease
+
+.li:hover
+    transition-delay: .2s
+
+.li:hover::before
+    width: 70%
+
+.liTitle
+    font-weight: 700
+    cursor: default
+    color: $deep_black
+    // color: #14d2bf
+    
+ul.drop_down_menu ul
+    margin: 0
+    padding: 0
+    list-style: none
+    background-color: white
+    position: absolute
+    z-index: 99
+    right: 0px
+    top: 40px
+    min-width: 80px
+    max-height:  300px
+    overflow-y: auto 
+
+ul.drop_down_menu ul
+    display: none
+
+.couponTitle
+    display: flex
+    align-items: center
+
+.choose
+    color: $hot_pink
+
+.expiration_date
+    color: $orderGray
