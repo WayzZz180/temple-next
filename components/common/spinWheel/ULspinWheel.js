@@ -32,8 +32,8 @@ export default function SpinWheel({ updateSpinWheel }) {
   const [modalIsOpen, setModalIsOpen] = useState(false) // 跟蹤 modal 是否打開
   // 優惠券資訊的狀態
   const [couponInfo, setCouponInfo] = useState({
-    coupon_type: '',
-    coupon_value: '',
+    // coupon_type: '',
+    // coupon_value: '',
   })
   const [showConfetti, setShowConfetti] = useState(false)
   const [sg, setSg] = useState(175)
@@ -50,61 +50,73 @@ export default function SpinWheel({ updateSpinWheel }) {
 
   // 使用 switch 和 case 語句根據 result 的值對應到不同的 coupon
   let coupon_type
+  let coupon_name
   let coupon_value
 
   switch (true) {
     case result >= 5 && result <= 40:
       coupon_type = 'A'
+      coupon_name = 'a'
       coupon_value = '100'
       break
 
     case result >= 41 && result <= 75:
       coupon_type = 'B'
+      coupon_name = 'b'
       coupon_value = '90'
       break
 
     case result >= 76 && result <= 110:
       coupon_type = 'C'
+      coupon_name = 'c'
       coupon_value = '80'
       break
 
     case result >= 111 && result <= 145:
       coupon_type = 'D'
+      coupon_name = ''
       coupon_value = '70'
       break
 
     case result >= 146 && result <= 180:
       coupon_type = 'E'
+      coupon_name = ''
       coupon_value = '60'
       break
 
     case result >= 181 && result <= 215:
       coupon_type = 'F'
+      coupon_name = ''
       coupon_value = '50'
       break
 
     case result >= 216 && result <= 250:
       coupon_type = 'G'
+      coupon_name = ''
       coupon_value = '40'
       break
 
     case result >= 251 && result <= 285:
       coupon_type = 'H'
+      coupon_name = ''
       coupon_value = '30'
       break
 
     case result >= 286 && result <= 320:
       coupon_type = 'I'
+      coupon_name = ''
       coupon_value = '20'
       break
 
     case result >= 321 && result <= 355:
       coupon_type = 'J'
+      coupon_name = ''
       coupon_value = '10'
       break
 
     case (result >= 356 && result <= 360) || (result >= 0 && result <= 4):
       coupon_type = 'K'
+      coupon_name = ''
       coupon_value = '1000'
       break
 
@@ -306,7 +318,7 @@ export default function SpinWheel({ updateSpinWheel }) {
           </div>
           <div className="fwBold fs30px mb20px">簽到成功</div>
           <div className="fwBold fs24px mb25px">
-            恭喜獲得 {coupon_type} 折價券，價值
+            恭喜獲得 {coupon_name} 折價券，價值
             {coupon_value}
           </div>
           <Button

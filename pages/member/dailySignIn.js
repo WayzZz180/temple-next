@@ -27,10 +27,10 @@ export default function dailySignIn() {
   const [si, setSi] = useState([])
   const [modalIsOpen, setModalIsOpen] = useState(false) // 跟蹤 modal 是否打開
   // 優惠券資訊的狀態
-  const [couponInfo, setCouponInfo] = useState({
-    coupon_type: '',
-    coupon_value: '',
-  })
+  // const [couponInfo, setCouponInfo] = useState({
+  //   coupon_type: '',
+  //   coupon_value: '',
+  // })
   // 狀態變數，用於觸發重新渲染
   const [spinWheelUpdated, setSpinWheelUpdated] = useState(false)
 

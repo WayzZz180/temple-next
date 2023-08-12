@@ -29,7 +29,7 @@ export default function Amulet({ amuletName = '' }) {
       break
     case '粽子':
       amulet = require('@/assets/zhongzi.svg')
-      slogan = '粽子包不住失敗，努力才是關鍵！'
+      slogan = '包裹著好運與智慧，包含著成功的味道'
       break
     case '青蔥':
       amulet = require('@/assets/scallion.svg')

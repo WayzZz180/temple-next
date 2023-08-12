@@ -12,6 +12,9 @@ import MemberTitle from '@/components/common/title/memberTitle'
 import Button from '@/components/common/button/index.js'
 import doorGodLeft from '@/assets/doorGodLeft.svg'
 import doorGodRight from '@/assets/doorGodRight.svg'
+import Alert from '@/components/common/alert'
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
+import VisibilityIcon from '@mui/icons-material/Visibility'
 
 //bt
 
@@ -24,6 +27,16 @@ export default function SignUp() {
   // const [isError, setIsError] = useState('')
 
   const [errorMessage, setErrorMessage] = useState('') // Define a state variable to store the error message
+  const [isIncorrect, setIsIncorrect] = useState(false)
+  const [isUsed, setIsUsed] = useState(false)
+  const [isSuccessful, setIsSuccessful] = useState(false)
+
+  const [hintModal, setHintModal] = useState('')
+  const [showPassword, setShowPassword] = useState(false) // 顯示密碼
+  // 切換顯示密碼
+  const toggleShowPassword = () => {
+    setShowPassword((prevshowPassword) => !prevshowPassword)
+  }
 
   // 定義驗證規則
   const validationRules = {
@@ -133,10 +146,13 @@ export default function SignUp() {
       })
       setInvalidFields(invalidFieldsArray.filter((field) => field !== null))
 
-      const hintModal = invalidFieldsArray.filter((field) => field !== null)
+      const hints = invalidFieldsArray.filter((field) => field !== null)
 
-      alert('請檢查以下項目：\n' + hintModal.join('\n'))
-      // alert('資料有誤，請檢查一下喔!')
+      setHintModal(hints)
+      setIsIncorrect(true)
+      // setTimeout(() => {
+      //   setIsOpen(false)
+      // }, 1750)
 
       return
     }
@@ -156,8 +172,12 @@ export default function SignUp() {
         // 存儲後端的錯誤訊息
         if (data.error) {
           console.log(data.error)
-          alert(data.error) // 顯示 email 已被使用的錯誤訊息
+          // alert(data.error) // 顯示 email 已被使用的錯誤訊息
           setInvalidFields('member_account') //讓isError變true
+          setIsUsed(true)
+          // setTimeout(() => {
+          //   setIsOpen(false)
+          // }, 1750)
           setErrorMessage(data.error)
           return // 終止後續的處理
         }
@@ -165,8 +185,10 @@ export default function SignUp() {
         console.log(data)
 
         if (data) {
-          alert('註冊成功，請重新登入')
-          router.push('/member/login')
+          setIsSuccessful(true)
+          setTimeout(() => {
+            router.push('/member/login')
+          }, 1750)
         }
       })
       .catch((error) => {
@@ -175,30 +197,33 @@ export default function SignUp() {
   }
 
   return (
-    <div className={styles.flex}>
-      <Container>
+    <>
+      <Container className={styles.flex}>
         <Row>
           <Col>
             <div className="mt100px">
               <Image
                 src={doorGodLeft}
                 alt="doorGodLeft"
-                height={835}
-                width={631}
+                // height={835}
+                width={525}
               ></Image>
             </div>
           </Col>
         </Row>
-      </Container>
 
-      <Container>
-        <Row>
+        <Row className="ps60px pe60px">
           <Col>
-            <MemberTitle text="加入會員" text2="SIGN UP" lineColor="green" />
+            <div className="mt100px">
+              <MemberTitle
+                text="會員註冊"
+                text2="SIGN UP"
+                lineColor="green"
+                width={500}
+              />
+            </div>
           </Col>
-        </Row>
-        <Row className={styles.flex_space_between}>
-          <Col>
+          <Col className={styles.flex_space_between}>
             <InputBox
               prompt="姓名"
               type="text"
@@ -212,9 +237,9 @@ export default function SignUp() {
               isError={invalidFields.includes('member_name')}
               errorMessage={getErrorForField('member_name')} // 取得該欄位的錯誤訊息
             />
-          </Col>
-          {/* 202-15*2空白 = 202 */}
-          <Col>
+
+            {/* 202-15*2空白 = 202 */}
+
             <InputBox
               prompt="暱稱"
               type="text"
@@ -228,9 +253,8 @@ export default function SignUp() {
               errorMessage={getErrorForField('member_forum_name')}
             />
           </Col>
-        </Row>
-        <Row className={styles.flex_centre}>
-          <Col>
+
+          <Col className={styles.flex_centre}>
             <InputBox
               prompt="Email"
               id="member_account"
@@ -245,11 +269,10 @@ export default function SignUp() {
               errorMessage={getErrorForField('member_account') || errorMessage} // 顯示來自後端的錯誤訊息
             />
           </Col>
-        </Row>
-        <Row className={styles.flex_centre}>
-          <Col>
+          <Col className={styles.flex_centre}>
             <InputBox
-              type="text"
+              prompt="密碼"
+              type={showPassword ? 'text' : 'password'}
               id="member_password"
               placeholder="密碼"
               onChange={changeUser}
@@ -259,11 +282,10 @@ export default function SignUp() {
               errorMessage={getErrorForField('member_password')}
             />
           </Col>
-        </Row>
-        <Row className={styles.flex_centre}>
-          <Col>
+          <Col className={styles.flex_centre}>
             <InputBox
-              type="text"
+              prompt="確認密碼"
+              type={showPassword ? 'text' : 'password'}
               id="confirm_password"
               placeholder="確認密碼"
               onChange={changeUser}
@@ -273,10 +295,23 @@ export default function SignUp() {
               errorMessage={getErrorForField('confirm_password')}
             />
           </Col>
-        </Row>
-        <Row className={styles.flex_centre}>
-          <Col>
+          {showPassword ? (
+            <div className={styles.flex_start} style={{ cursor: 'pointer' }}>
+              <VisibilityOffIcon
+                onClick={toggleShowPassword}
+                className="me10px"
+              />
+              隱藏密碼{' '}
+            </div>
+          ) : (
+            <div className={styles.flex_start} style={{ cursor: 'pointer' }}>
+              <VisibilityIcon onClick={toggleShowPassword} className="me10px" />
+              顯示密碼
+            </div>
+          )}
+          <Col className={styles.flex_centre}>
             <InputBox
+              prompt="生日"
               type="date"
               id="member_birthday"
               placeholder="出生年月日 "
@@ -287,11 +322,9 @@ export default function SignUp() {
               errorMessage={getErrorForField('member_birthday')}
             />
           </Col>
-          {/* Q3 */}
-        </Row>
-        <Row className={styles.flex_centre}>
-          <Col>
+          <Col className={styles.flex_centre}>
             <InputBox
+              prompt="地址"
               type="text"
               id="member_address"
               placeholder="現居地址 "
@@ -302,25 +335,21 @@ export default function SignUp() {
               errorMessage={getErrorForField('member_address')}
             />
           </Col>
-        </Row>
-        <Row className={styles.flex_container}>
-          <Col>
+          <Col className={`${styles.flex_container} fwBold`}>
             <div>
-              {/* <div style={{ letterSpacing: '4.1px' }}> */}
-              {/* Q4 */}
-              如建立帳號，即同意錦囊廟祭的{' '}
-              <Link href="#" className="link">
-                隱私權政策
-              </Link>
-              和
-              <Link href="#" className="link">
-                使用條款
-              </Link>
+              <div className="ls6px">
+                如註冊，即同意錦囊廟祭的
+                <Link href="#" className="link">
+                  隱私權政策
+                </Link>
+                和
+                <Link href="#" className="link">
+                  使用條款
+                </Link>
+              </div>
             </div>
           </Col>
-        </Row>
-        <Row className={styles.flex_centre}>
-          <Col>
+          <Col className={styles.flex_centre}>
             <Button
               text="加入"
               btnColor="black"
@@ -330,32 +359,35 @@ export default function SignUp() {
               }}
             />
           </Col>
-        </Row>
-        <Row className={styles.flex_centre}>
-          <Col>
-            <div>
-              已經是會員了嗎?
-              <Link href="#" className="link">
+          <Col className={styles.flex_centre}>
+            <div className={`${styles.login}`}>
+              <div className="fs18px fwBold pe5px">已經是會員了嗎?</div>
+
+              <Link
+                href="/member/login"
+                className={`${styles.linkHover} link fs18px fwBold`}
+              >
                 登入
               </Link>
             </div>
           </Col>
         </Row>
-      </Container>
-      <Container>
+
         <Row>
           <Col>
-            <div className="mt100px">
-              <Image
-                src={doorGodRight}
-                alt="doorGodRight"
-                height={835}
-                width={631}
-              ></Image>
+            <div>
+              <div className="mt100px">
+                <Image
+                  src={doorGodRight}
+                  alt="doorGodRight"
+                  // height={835}
+                  width={525}
+                ></Image>
+              </div>
             </div>
           </Col>
         </Row>
       </Container>
-    </div>
+    </>
   )
 }

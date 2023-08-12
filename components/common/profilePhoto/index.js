@@ -173,6 +173,7 @@ export default function ProfilePhoto() {
             maxWidth: '300px', // 調整最大寬度
             maxHeight: '250px', // 調整最大高度
             margin: 'auto', // 水平居中
+            background: variables['bgColor'],
           },
         }}
       >
