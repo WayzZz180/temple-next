@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from '@/components/common/imgupload/imgupload.module.sass'
 
-function ImagePreview() {
+function ImageUpload() {
   const [img, setImg] = useState('')
 
   const onChange = (e) => {
@@ -24,4 +24,4 @@ function ImagePreview() {
   )
 }
 
-export default ImagePreview
+export default ImageUpload

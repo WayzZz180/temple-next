@@ -33,7 +33,7 @@ function Forumgossip() {
     })
       .then((r) => r.json())
       .then((data) => {
-        // console.log('data:', data)
+        console.log('data:', data)
         setData(data[0])
         setTotalPages(data[1])
         setStateHeart(data[2])

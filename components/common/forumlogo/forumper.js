@@ -18,6 +18,7 @@ import heart_fill from '@/assets/heart_fill.svg'
 import heart_outline from '@/assets/heart_outline.svg'
 import collect_fill from '@/assets/collect_fill.svg'
 import collect_outline from '@/assets/collect_outline.svg'
+import index from '@/pages/member'
 
 // import FavoriteBorderSharpIcon from '@mui/icons-material/FavoriteBorderSharp'
 // import FavoriteSharpIcon from '@mui/icons-material/FavoriteSharp'
@@ -31,8 +32,11 @@ export default function Forumper({
   state_heart = false,
   state_collect = false,
   setHeart = () => {},
+  rows = [],
 }) {
   const router = useRouter()
+  // const [getImg, setGetImg] = useState('')
+  // const [imageURLs, setImageURLs] = useState([])
   //判斷hover
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-1)
   const isHeartHovered = hoveredIndex === 1
@@ -195,13 +199,18 @@ export default function Forumper({
                     </div>
                   </div>
                 </div>
+                {/* {imageURLs.map((imageURL, sid) => (
+                  <div key={sid}> */}
                 <Image
-                  src={`/${data?.img}`}
+                  src={`${process.env.API_SERVER}/img/${data.img}`}
                   width={158}
                   height={128}
                   className={`${styles.margin}`}
-                  alt="118x118"
+                  alt="158x128"
                 />
+                {/* {console.log(data?.img)} */}
+                {/* </div> */}
+                {/* ))} */}
                 {/* <FigureExample /> */}
               </div>
             </div>

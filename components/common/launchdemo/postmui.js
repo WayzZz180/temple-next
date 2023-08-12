@@ -20,6 +20,7 @@ import TextArea from '@/components/common/inputBox/textarea'
 import ImgUpload from '@/components/common/imgupload/imgupload'
 import { useState, useEffect } from 'react'
 import data from '@/components/mydata/productsTitleData'
+import { Logger } from 'sass'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />
@@ -43,36 +44,48 @@ export default function AlertDialogSlide({ page = 1 }) {
   })
   // const [publishTime, setPublishTime] = React.useState('')
 
-  const addData = (title, content) => {
+  const addData = async (title, content) => {
     const reqData = {
       title: title,
       content: content,
+      img: '',
     }
+
     const input = document.querySelector('.img-upload')
-    console.log(input.files[0])
     const fd = new FormData()
     fd.append('preImg', input.files[0])
-    fetch(`${process.env.API_SERVER}/forum/${router.query.category}/addphoto`, {
-      method: 'POST',
-      body: fd,
-    })
 
-    fetch(`${process.env.API_SERVER}/forum/${router.query.category}/add`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: reqData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        console.log('data:', data)
-        handleClose()
+    try {
+      await Promise.all([
+        fetch(
+          `${process.env.API_SERVER}/forum/${router.query.category}/addphoto`,
+          {
+            method: 'POST',
+            body: fd, // 確保這裡傳遞的是 FormData 物件
+          }
+        )
+          .then((r) => r.json())
+          .then((data) => {
+            console.log(data)
+            // console.log(fd)
+            reqData.img = data
+          }),
+      ])
+      await Promise.all([
+        fetch(`${process.env.API_SERVER}/forum/${router.query.category}/add`, {
+          method: 'POST',
+          body: JSON.stringify({ requestData: reqData }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }),
+      ])
 
-        //     // router.push(`/forum/gossip?page=3`)
-        //     // setData(data[0])
-        //     // setTotalPages(data[1])
-      })
+      handleClose()
+      console.log('Data added successfully')
+    } catch (error) {
+      console.error('Error adding data:', error)
+    }
   }
   useEffect(() => {
     setMemberId('member_id')
