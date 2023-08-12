@@ -21,7 +21,7 @@ const ExamplePage = () => {
           height={window.innerHeight}
           numberOfPieces={200}
           confettiSource={{ x: window.innerWidth / 2, y: 500 }}
-          //   gravity={{ x: 0, y: 0.2 }}
+          // gravity={{ x: 0, y: 0.2 }}
           run={showConfetti}
         />
       )}

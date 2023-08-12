@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from './process.module.sass'
+import { css, keyframes } from '@emotion/css'
 
 // bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
@@ -25,6 +26,7 @@ import mazuGod from '@/assets/mazuGod.svg'
 import loveGod from '@/assets/loveGod.svg'
 import studyGod from '@/assets/studyGod.svg'
 import Plate from '@/assets/plate.svg'
+import Star from '@/assets/Star_pink.svg'
 
 // data
 import godInfo from '@/components/mydata/godInfo'
@@ -35,6 +37,8 @@ export default function Process() {
   const router = useRouter()
   const [data, setData] = useState([])
   const [reservation, setReservation] = useState([])
+  const [drag, setDrag] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (localStorage.getItem('reservation')) {
@@ -56,11 +60,22 @@ export default function Process() {
         .then((r) => r.json())
         .then((data) => {
           setData(data)
+          setTimeout(() => {
+            setLoading(false)
+          }, 2000)
         })
     }
   }, [reservation])
 
-  if (!data) return <Loading />
+  const [items, setItems] = useState([])
+  if (items.length === 0) {
+    data?.map((v, i) => {
+      items.push(`/${v.image}`)
+    })
+  }
+  if (loading) return <Loading />
+
+  // if (!data) return <Loading />
 
   const gods = [
     {
@@ -107,17 +122,23 @@ export default function Process() {
             items={items}
             sortId={i}
           >
-            <div className={`${styles.sortableContainer}`}>
+            <div
+              role="presentation"
+              className={`${styles.sortableContainer}`}
+              onMouseDown={() => {
+                setDrag(true)
+              }}
+            >
               <div
                 className={`${styles.product} ${
-                  !active && !burn ? styles.productAnimation : ''
+                  !active && !burn && !drag ? styles.productAnimation : ''
                 }`}
               >
                 <Image src={item} alt="products" width={120} height={120} />
               </div>
               <div
                 className={`${styles.plate} ${
-                  !active && !burn ? styles.plateAnimation : ''
+                  !active && !burn && !drag ? styles.plateAnimation : ''
                 }`}
               >
                 <Image src={Plate} alt="plate" width={70} />
@@ -131,12 +152,14 @@ export default function Process() {
     }
   }
 
-  const [items, setItems] = useState([])
-  if (items.length === 0) {
-    data?.map((v, i) => {
-      items.push(`/${v.image}`)
-    })
-  }
+  const disappear = keyframes({
+    '0%': {
+      opacity: 1,
+    },
+    '100%': {
+      opacity: 0,
+    },
+  })
 
   return (
     <main>
@@ -189,7 +212,13 @@ export default function Process() {
               <Image src={Burner} alt="burner" width={75} />
             </div>
             {/* Button */}
-            <div className={`${styles.button}`}>
+            <div
+              role="presentation"
+              className={`${styles.button}`}
+              onMouseDown={() => {
+                setDrag(true)
+              }}
+            >
               <Button
                 text={active ? (burn ? '下一步' : '祭拜') : '點香'}
                 fontSize="16px"
@@ -205,6 +234,22 @@ export default function Process() {
               />
             </div>
           </Col>
+          <div
+            className={`${styles.hintContainer} ${
+              drag ? '' : styles.shine
+            } fwBold fs20px
+            ${css({
+              animation: drag ? `${disappear} 1s ease 1` : ``,
+              opacity: drag ? 0 : 1,
+            })}
+          `}
+          >
+            <div className={`${styles.hint}`}>
+              <Image src={Star} alt="star" />
+              <div className="p10px">拖曳供品以調整位置</div>
+              <Image src={Star} alt="star" />
+            </div>
+          </div>
         </Row>
       </Container>
     </main>

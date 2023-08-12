@@ -1,7 +1,6 @@
 import styles from './worship.module.sass'
 import Image from 'next/image'
 import { Container, Row, Col } from 'react-bootstrap'
-import Modal from 'react-modal'
 import Head from 'next/head'
 
 // hooks
@@ -43,7 +42,6 @@ import godInfo from '@/components/mydata/godInfo'
 
 export default function Worship() {
   const router = useRouter()
-  const [modal, setModal] = useState(false)
   // 選擇的神明
   const [god, setGod] = useState('媽祖')
 
@@ -270,10 +268,7 @@ export default function Worship() {
       setTimeClick('')
       setZodiac(index + 1)
       setTime(`${timeInfo[index].id}/${timeInfo[index].time}`)
-      setModal(true)
-      setTimeout(() => {
-        setModal(false)
-      }, 2000)
+
       return false
     } else {
       return true

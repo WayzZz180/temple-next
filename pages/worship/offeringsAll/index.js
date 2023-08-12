@@ -85,7 +85,11 @@ export default function Offerings() {
           <Button
             text="馬上拜拜去"
             link={() => {
-              router.push('/worship')
+              if (localStorage.getItem('auth')) {
+                router.push('/worship')
+              } else {
+                router.push('/member/login')
+              }
             }}
           />
         </Row>

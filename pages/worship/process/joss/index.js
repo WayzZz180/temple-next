@@ -1,13 +1,15 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from './joss.module.sass'
-
+import { css, keyframes } from '@emotion/css'
+import Modal from 'react-modal'
+import variables from '@/styles/_variables.module.sass'
 // bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 
 // hooks
-import Draggable from 'react-draggable' // The default
-import { DraggableCore } from 'react-draggable' // <DraggableCore>
+import Draggable from 'react-draggable'
+import Confetti from 'react-confetti'
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -22,24 +24,28 @@ import Floor from '@/assets/floor.svg'
 import Fire from '@/assets/fire.gif'
 import HellMoney from '@/assets/joss.svg'
 import jossContainer from '@/assets/jossContainer.svg'
+import Star from '@/assets/Star_pink.svg'
 
 export default function Joss() {
   const router = useRouter()
-  const [reservation, setReservation] = useState([])
+  const [drag, setDrag] = useState(false)
+  const [showConfetti, setShowConfetti] = useState(false)
+  const [modal, setModal] = useState(false)
+  const handleStartConfetti = () => {
+    setShowConfetti((prev) => !prev)
+    setTimeout(() => {
+      setShowConfetti(false)
+    }, 5000)
+  }
 
-  useEffect(() => {
-    if (localStorage.getItem('reservation')) {
-      setReservation(JSON.parse(localStorage.getItem('reservation')))
-    }
-  }, [router.query])
-
+  // 完成祭拜清除預約資訊
   const clearLocal = () => {
     if (localStorage.getItem('reservation')) {
       localStorage.removeItem('reservation')
     }
   }
-  // 金紙初始位置
 
+  // 有無燒完金紙判斷
   const [done, setDone] = useState(false)
 
   // draggable
@@ -56,10 +62,9 @@ export default function Joss() {
     handleStop(e, data) {
       const { y } = data
       const { index } = this.props
-      console.log(index)
       const position = 15 - y
-
       if (position > 615) {
+        setDrag(true)
         index === 0 && setDone(true)
         this.setState({ shouldAnimate: true })
       } else {
@@ -83,6 +88,7 @@ export default function Joss() {
             onStart={this.handleStart}
           >
             <div
+              role="presentation"
               className={`${styles.hellMoney} handle`}
               style={{ width: 300 }}
             >
@@ -99,7 +105,7 @@ export default function Joss() {
     }
   }
 
-  // 更新complete
+  // 更新 worship summary 的 complete
   const updateComplete = () => {
     const reqData = JSON.parse(localStorage.getItem('reservation'))
     const auth = localStorage.getItem('auth')
@@ -118,6 +124,16 @@ export default function Joss() {
         .then((data) => {})
     }
   }
+
+  // 提示消失
+  const disappear = keyframes({
+    '0%': {
+      opacity: 1,
+    },
+    '100%': {
+      opacity: 0,
+    },
+  })
 
   return (
     <main className={`${styles.main}`}>
@@ -153,18 +169,71 @@ export default function Joss() {
             <Button
               text="祭拜結束"
               link={() => {
-                if (done) {
-                  updateComplete()
+                // if (done) {
+                handleStartConfetti()
+                updateComplete()
+                setTimeout(() => {
                   clearLocal()
                   router.push('/member/praying')
-                } else {
-                  alert('還有剩')
-                }
+                }, 3000)
+                // } else {
+                //   setModal(true)
+                //   setTimeout(() => {
+                //     setModal(false)
+                //   }, 1500)
+                // }
               }}
             />
           </Col>
         </Row>
+        <div
+          className={`${styles.hintContainer} ${
+            drag ? '' : styles.shine
+          } fwBold fs20px
+            ${css({
+              animation: drag ? `${disappear} 1s ease 1` : ``,
+              opacity: drag ? 0 : 1,
+            })}
+          `}
+        >
+          <div className={`${styles.hint}`}>
+            <Image src={Star} alt="star" />
+            <div className="p10px">將金紙拖曳進鐵桶</div>
+            <Image src={Star} alt="star" />
+          </div>
+        </div>
       </Container>
+      {showConfetti && (
+        <Confetti
+          width={window.innerWidth}
+          height={window.innerHeight}
+          numberOfPieces={200}
+          confettiSource={{ x: window.innerWidth / 2, y: 500 }}
+          // gravity={{ x: 0, y: 0.2 }}
+          run={showConfetti}
+        />
+      )}
+      <Modal
+        isOpen={modal}
+        contentLabel="praying details"
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.5)', // 背景顏色透明度
+          },
+          content: {
+            maxWidth: '300px', // 調整最大寬度
+            maxHeight: '100px', // 調整最大高度
+            margin: 'auto', // 水平居中
+            background: variables['bgColor'],
+            textAlign: 'center',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
+        }}
+      >
+        <div className="fwBold fs20px">噢不！金紙還有剩！</div>
+      </Modal>
     </main>
   )
 }
