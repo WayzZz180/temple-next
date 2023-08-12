@@ -63,7 +63,7 @@ export default function ReadPost({ src = '', post }) {
         </div>
         <div className={`${styles.img}`}>
           <Image
-            src={`/${data?.img}`}
+            src={`${process.env.API_SERVER}/img/${data.img}`}
             alt="test"
             // className={`${styles.img}`}
             width={780}
