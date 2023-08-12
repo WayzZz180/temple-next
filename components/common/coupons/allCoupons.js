@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 
 // components
 import Coupon from '@/components/common/coupons/index.js'
+import NoCouponData from '@/components/common/category/noCouponData'
 
 //bootstrap
 
@@ -50,7 +51,7 @@ export default function AllCoupons() {
           </div>
         ))
       ) : (
-        <div>目前沒有可用優惠券</div>
+        <NoCouponData />
       )}
     </>
   )
