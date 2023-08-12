@@ -21,7 +21,14 @@ export default function Check() {
   const router = useRouter()
   const [reservation, setReservation] = useState([])
   const [data, setData] = useState([])
-
+  const [loading, setLoading] = useState(true)
+  // 訂單資訊
+  const [user, setUser] = useState({
+    delivery: '宅配',
+    payment: '信用卡',
+    receivedInfo: '民生社區',
+    status: '未出貨',
+  })
   useEffect(() => {
     setReservation(JSON.parse(localStorage.getItem('reservation')))
   }, [router.query])
@@ -40,6 +47,9 @@ export default function Check() {
         .then((r) => r.json())
         .then((data) => {
           setData(data)
+          setTimeout(() => {
+            setLoading(false)
+          }, 2000)
         })
     }
   }, [reservation])
@@ -50,21 +60,13 @@ export default function Check() {
       localStorage.removeItem('reservation')
     }
   }
-
-  if (!data) return <Loading />
+  if (loading) return <Loading />
+  // if (!data)
 
   // 總計
   const total = data?.reduce((result, v) => {
     return (result += Number(v.product_price))
   }, 0)
-
-  // 訂單資訊
-  const [user, setUser] = useState({
-    delivery: '宅配',
-    payment: '信用卡',
-    receivedInfo: '民生社區',
-    status: '未出貨',
-  })
 
   // 預約資訊
   const insert = () => {
@@ -144,8 +146,8 @@ export default function Check() {
                 !(reservation?.today && reservation?.time === reservation?.now)
               ) {
                 clearLocal()
-                insert()
               }
+              insert()
               router.push(route)
             }}
           />

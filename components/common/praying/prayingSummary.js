@@ -124,7 +124,6 @@ export default function PrayingSummary({ data = [] }) {
     }
   }
   const toPray = isNow()
-
   // 去拜拜將reservation加入localStorage
   const setLocal = () => {
     const tmp = {
@@ -161,7 +160,7 @@ export default function PrayingSummary({ data = [] }) {
               setIsOpen(true)
             }}
           />
-          {toPray ? (
+          {toPray && !data?.complete ? (
             <div className="mt20px">
               <Button
                 text="去拜拜"

@@ -54,10 +54,12 @@ export default function Offerings() {
 
   const [data, setData] = useState([])
   const [reservation, setReservation] = useState([])
+
   useEffect(() => {
     setReservation(JSON.parse(localStorage.getItem('reservation')))
   }, [router.query])
 
+  // 根據神明篩選套組產品
   useEffect(() => {
     const god = { god: reservation?.god }
     if (god.god) {
@@ -78,6 +80,8 @@ export default function Offerings() {
   const index = gods.findIndex((v) => v.text === reservation?.god)
   const slide_slice = slide[index]
   const [pidArr, setPidArr] = useState([])
+
+  // 把選擇的商品加進localStorage
   useEffect(() => {
     const value = JSON.parse(localStorage.getItem('reservation'))
     const insert = { ...value, pidArr: pidArr }
@@ -86,6 +90,33 @@ export default function Offerings() {
 
     setReservation(JSON.parse(localStorage.getItem('reservation')))
   }, [pidArr])
+  // 訂單資訊
+  const [user, setUser] = useState({
+    delivery: '無',
+    payment: '無',
+    receivedInfo: '無',
+    status: '無',
+  })
+  // 預約資訊
+  const insert = () => {
+    const reqData = { ...reservation, total: 0, complete: false, ...user }
+    // 加入worship_summary & details
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/worship/details`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: reqData }),
+        headers: {
+          Authorization,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {})
+    }
+  }
 
   return (
     <>
@@ -160,17 +191,26 @@ export default function Offerings() {
         </Row>
         <Row>
           <div className={`${styles.title} mt100px fs18px mb30px`}>
-            最多選擇三樣，如不需供品即開始祭拜
+            最多選擇三樣，如不需供品即可開始祭拜
           </div>
         </Row>
         <Row className="nowrap">
           <Button
-            text={reservation.pidArr?.length === 0 ? `開始祭拜` : `確認供品`}
+            text={
+              reservation.pidArr?.length === 0 && reservation.today
+                ? `開始祭拜`
+                : reservation.pidArr?.length === 0
+                ? `預約成功`
+                : `確認供品`
+            }
             btnColor="hot_pink"
             link={() => {
+              reservation.pidArr?.length === 0 ? insert() : ''
               router.push(
-                reservation.pidArr?.length === 0
+                reservation.pidArr?.length === 0 && reservation.today
                   ? `/worship/process`
+                  : reservation.pidArr?.length === 0
+                  ? '/member/praying'
                   : '/worship/offerings/confirm'
               )
             }}

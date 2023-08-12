@@ -42,7 +42,7 @@ export default function Process() {
     }
   }, [router.query])
 
-  // 參拜資料(worship_summary, worship_details)
+  // 抓商品資料
   useEffect(() => {
     const pidArr = { pidArr: reservation?.pidArr }
     if (pidArr?.pidArr) {
