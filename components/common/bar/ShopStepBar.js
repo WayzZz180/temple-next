@@ -35,7 +35,7 @@ export default function ShopStepBar({ path = '/shop/cart' }) {
                     {i + 1}
                   </div>
                   <div
-                    className="fwBold mt10px"
+                    className={`${styles.text} fwBold mt10px`}
                     style={{ opacity: v.path === path ? 1 : 0.5 }}
                   >
                     {v.text}

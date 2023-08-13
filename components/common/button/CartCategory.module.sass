@@ -4,10 +4,16 @@
 .flex_row
     display: flex
     justify-content: flex-start
+    @include mobile-m
+        flex-direction: column        
+        align-items: flex-start
+        gap: 15px
+        margin-bottom: 15px 
 
 .position
     position: relative
     cursor: pointer
+ 
     
 .button
     cursor: pointer
@@ -21,4 +27,8 @@
         border-bottom: 3px solid $brown
         border-radius: 7px  
     @include mobile-m
+        white-space: nowrap
+        padding: 10px 40px
+        font-size: 16px
+
         

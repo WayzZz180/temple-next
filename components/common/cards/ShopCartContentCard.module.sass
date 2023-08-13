@@ -1,7 +1,10 @@
 @import @/styles/_variables.module.sass
+@import '@/styles/mixins/responsive.sass'
 
 .row
     letter-spacing: 3px
+    @include desktop-m
+        display: none
 
 .container
     display: flex
@@ -20,6 +23,17 @@
     align-items: center
     justify-content: flex-start
     width: 20%
+    @include desktop-m
+        overflow: hidden 
+        text-overflow: ellipsis 
+        display: -webkit-box
+        -webkit-line-clamp: 1
+        -webkit-box-orient: vertical
+        white-space: normal
+        width: 150px
+        height: 25px
+    @include mobile
+        width: 100px
 
 .price
     display: flex
@@ -27,6 +41,8 @@
     justify-content: flex-start
     width: 4%
     color: $hot_pink
+    @include desktop-m
+        width: 50%
 
 .quantity
     display: flex
@@ -35,11 +51,18 @@
     justify-content: flex-start
     position: relative
     width: 15%
+    @include desktop-m
+        width: 100px
+        justify-content: flex-end
 
 .stock
     position: absolute
     top:65px
-    left:35px   
+    left:35px
+    white-space: nowrap   
+    @include desktop-m
+        top:50px
+        left:10px
     
 .total
     display: flex
@@ -73,6 +96,8 @@
     align-items: center
     padding: 10px 5px
     border-radius: 7px
+    @include desktop-m
+        padding: 5px 5px
 
 .addValue
     border: 0
@@ -88,3 +113,22 @@
     border: 0   
     background: $bgColor
     font-size: 30px
+
+.rwdContainer
+    display: none
+    @include desktop-m
+        display: block
+        margin: auto 
+        width: 70%
+
+.rwdCol
+    @include desktop-m
+        display: flex
+        border-bottom: 3px solid $brown
+
+.rwdName
+    @include desktop-m
+        display: flex
+        flex-direction: column
+        margin-left: 80px 
+        height: 100px
