@@ -1,10 +1,13 @@
 @import '@/styles/_variables.module.sass'
+@import '@/styles/mixins/responsive.sass'
 
 .background
   top:-1px
   position: relative
   background-color: $brown
   z-index: -2
+  @include mobile-m
+      position: absolute
 
 .doorbackground
   position: absolute
@@ -15,6 +18,8 @@
   margin: auto
   z-index: 2
   visibility: hidden
+  @include mobile-m
+      width:390px
 
 .doorbackgroundv
   visibility: visible
@@ -26,6 +31,7 @@
   bottom: 20px
   overflow: hidden
   margin: auto
+
 
 .place
   padding-top:5px
@@ -41,6 +47,8 @@
     position: absolute
     overflow: hidden
     z-index: 3
+    @include mobile-m
+      width:390px
 
 .dog
     position: absolute
@@ -120,6 +128,8 @@
     display: flex
     justify-content: center
     align-items: flex-end
+    @include mobile-m
+      width:390px
   
 .flex_row2
     width:100%
@@ -186,4 +196,3 @@
 
 .signInDoorclick
   display: block
-
