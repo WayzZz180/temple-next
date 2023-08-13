@@ -203,10 +203,10 @@ export default function Forumper({
                   <div key={sid}> */}
                 <Image
                   src={`${process.env.API_SERVER}/img/${data.img}`}
-                  width={158}
+                  width={168}
                   height={128}
                   className={`${styles.margin}`}
-                  alt="158x128"
+                  alt="168x128"
                 />
                 {/* {console.log(data?.img)} */}
                 {/* </div> */}

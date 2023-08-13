@@ -18,13 +18,18 @@ function Forumgossip() {
   const [stateHeart, setStateHeart] = useState([])
   const [stateCollect, setStateCollect] = useState([])
   const [heart, setHeart] = useState()
+  const [keyword, setKeyword] = useState('')
   // const forumContent = getForumContentByPostCategory(category) // 呼叫 API 函數來獲取相關內容
   useEffect(() => {
+    setKeyword(router.query.keyword || '')
+    const usp = new URLSearchParams(router.query)
     // const usp = new URLSearchParams(router.query)
     // usp.append('postcategory_sid', postCategory) // 將 post_category 添加到查詢參數
     // console.log('page:', router.query.page)
     const page = router.query.page
-    fetch(`${process.env.API_SERVER}/forum/${category}`, {
+    console.log('k:', router.query.keyword)
+
+    fetch(`${process.env.API_SERVER}/forum/${category}?${usp.toString()}`, {
       method: 'POST',
       body: JSON.stringify({ page: page }),
       headers: {
@@ -33,7 +38,8 @@ function Forumgossip() {
     })
       .then((r) => r.json())
       .then((data) => {
-        console.log('data:', data)
+        // console.log('data:', data)
+        // console.log('here')
         setData(data[0])
         setTotalPages(data[1])
         setStateHeart(data[2])
@@ -43,7 +49,30 @@ function Forumgossip() {
 
   const pagination = {
     page: router.query.page,
-    totalPages: totalPages.totalPages,
+    totalPages: totalPages?.totalPages,
+  }
+  // if (!data) return
+  const keywordSearch = () => {
+    // const page = router.query.page
+    // console.log(router.query.keyword)
+    // fetch(
+    //   `${process.env.API_SERVER}/forum/${category}?keyword=${router.query.keyword}`,
+    //   {
+    //     method: 'POST',
+    //     body: JSON.stringify({ page: page }),
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //   }
+    // )
+    //   .then((r) => r.json())
+    //   .then((data) => {
+    //     console.log('data:', data)
+    //     setData(data[0])
+    //     setTotalPages(data[1])
+    //     setStateHeart(data[2])
+    //     setStateCollect(data[3])
+    //   })
   }
   return (
     <>
@@ -54,7 +83,7 @@ function Forumgossip() {
         <div className={`${styles.flex}`}>
           <Title text={data[0]?.type_name} text2={router.query.category} />
         </div>
-        <Navbar />
+        <Navbar keywordSearch={keywordSearch} />
         <Forumline lineColor="brown" />
         {data?.map((v, i) => {
           const found_heart = stateHeart.some((i) => i.post_sid === v.sid)

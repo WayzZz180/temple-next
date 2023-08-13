@@ -13,7 +13,7 @@ import AddIcon from '@mui/icons-material/Add'
 import PostMui from '@/components/common/launchdemo/postmui'
 import SearchMui from '@/components/common/launchdemo/searchmui'
 
-export default function Navbar() {
+export default function Navbar({ keywordSearch = () => {} }) {
   const router = useRouter()
   // const [showModal, setShowModal] = useState(false)
   // const handleCloseModal = () => setShowModal(false)
@@ -59,7 +59,7 @@ export default function Navbar() {
               <SearchIcon />
               搜尋文章
             </Link> */}
-            <SearchMui />
+            <SearchMui keywordSearch={keywordSearch} />
           </li>
         </div>
       </div>

@@ -28,6 +28,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function AlertDialogSlide({ page = 1 }) {
   const router = useRouter()
+  const [selectedFile, setSelectedFile] = useState(null)
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
@@ -183,7 +184,10 @@ export default function AlertDialogSlide({ page = 1 }) {
               </div>
             </DialogContentText>
             <div className={`${styles.row2}`}>
-              <ImgUpload />
+              <ImgUpload
+                selectedFile={selectedFile}
+                setSelectedFile={setSelectedFile}
+              />
             </div>
           </DialogContent>
           <DialogActions>
@@ -205,7 +209,9 @@ export default function AlertDialogSlide({ page = 1 }) {
                   // e.preventDefault()
 
                   addData(inputTitle, inputContent)
-
+                  setInputTitle('')
+                  setInputContent('')
+                  setSelectedFile(null)
                   // console.log('page:', page)
                   // console.log('category:', router.query.category)
                 }}

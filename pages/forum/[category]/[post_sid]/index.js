@@ -145,9 +145,7 @@ export default function ReadPost({ src = '', post }) {
               </div>
               <div className={`${styles.col2}`}>
                 <div className={`${styles.commenter}`}></div>
-                <div className={`{${styles.commenttime}`}>
-                  2023-05-11-08:11:15
-                </div>
+                <div className={`{${styles.commenttime}`}>NOW</div>
                 <div className={`${styles.comment}`}>
                   <TextArea
                     type="text"
