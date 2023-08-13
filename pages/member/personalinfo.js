@@ -15,7 +15,8 @@ import NoButton from '@/components/common/button/noButton.js'
 import MemberNavbar from '@/components/common/memberNavbar/index.js'
 import ProfilePhoto from '@/components/common/profilePhoto'
 import Alert from '@/components/common/alert'
-import Head from 'next/head'
+import data from '@/components/mydata/memberNavbarData.js'
+
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 
@@ -393,7 +394,7 @@ export default function Personalinfo() {
             />
             {/* </form> */}
           </Col>
-          <Col>
+          <Col className="ms20px">
             <NoButton
               text="取消變更"
               btnColor="black"

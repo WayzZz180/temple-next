@@ -7,5 +7,6 @@ const data = [
   { id: 'articles', text: '我的文章' },
   { id: 'amulet', text: '護身符' },
   { id: 'dailySignIn', text: '每日簽到' },
+  { id: 'myCardGame', text: '遊戲區' },
 ]
 export default data

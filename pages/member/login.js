@@ -165,17 +165,15 @@ export default function Login() {
           </Col>
 
           <Col className={`${styles.flex_container} fwBold`}>
-            <div className="m0px">
-              <div className="ls5px">
-                如登入，即同意錦囊廟祭的
-                <Link href="#" className="link">
-                  隱私權政策
-                </Link>
-                和
-                <Link href="" className="link">
-                  使用條款
-                </Link>
-              </div>
+            <div className="ls6px">
+              如登入，即同意錦囊廟祭的
+              <Link href="#" className="link">
+                隱私權政策
+              </Link>
+              和
+              <Link href="" className="link">
+                使用條款
+              </Link>
             </div>
           </Col>
           <Col className={styles.flex_centre}>
