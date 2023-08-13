@@ -31,6 +31,7 @@ export default function Joss() {
   const [drag, setDrag] = useState(false)
   const [showConfetti, setShowConfetti] = useState(false)
   const [modal, setModal] = useState(false)
+
   const handleStartConfetti = () => {
     setShowConfetti((prev) => !prev)
     setTimeout(() => {
@@ -63,14 +64,15 @@ export default function Joss() {
       const { y } = data
       const { index } = this.props
       const position = 15 - y
-      if (position > 615) {
-        setDrag(true)
+      if (position > 475) {
         index === 0 && setDone(true)
+        // index === 4 && this.props.setDrag(true)
         this.setState({ shouldAnimate: true })
       } else {
         this.setState({ shouldAnimate: false })
       }
     }
+
     render() {
       if (!done) {
         const { shouldAnimate } = this.state
@@ -90,13 +92,13 @@ export default function Joss() {
             <div
               role="presentation"
               className={`${styles.hellMoney} handle`}
-              style={{ width: 300 }}
+              style={{ width: 280 }}
             >
               <Image
                 className={shouldAnimate ? styles.animation : ''}
                 alt="joss"
                 src={HellMoney}
-                width={300}
+                width={280}
               />
             </div>
           </Draggable>
@@ -148,11 +150,16 @@ export default function Joss() {
           {/* 鐵桶 */}
           <Col className={`${styles.jossContainer}`}>
             <div>
-              <Image src={jossContainer} alt="floor" width={300} />
+              <Image src={jossContainer} alt="floor" width={280} />
             </div>
           </Col>
           {/* 金紙 */}
-          <Col className={`${styles.hellMoneyContainer}`}>
+          <Col
+            className={`${styles.hellMoneyContainer}`}
+            onMouseDown={() => {
+              setDrag(true)
+            }}
+          >
             {Array(5)
               .fill(1)
               .map((v, i) => {

@@ -36,7 +36,7 @@ export default function ShopTop() {
           <div className={`${styles.title}`}>神明尬意ㄟ</div>
         </Col>
       </Row>
-      <Row className={`nowrap fs20px mb50px`}>
+      <Row className={`nowrap fs20px mb50px ${styles.rwdCategory}`}>
         {/* 類別詳細 */}
         {data.map((v, i) => {
           return (

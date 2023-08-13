@@ -107,7 +107,7 @@ export default function ProductsCarousel({ text, color, i, id }) {
             {imgSrc.map((src, i) => {
               const foundItem = pidArr.some((v) => v.pid === data[i].pid)
               return (
-                <Col key={i} className={`${styles.flex_start}`}>
+                <Col key={i} className={`${styles.cards}`}>
                   <ShopProductsCard
                     src={src}
                     text={data[i].product_name}

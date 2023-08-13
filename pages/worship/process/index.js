@@ -75,8 +75,6 @@ export default function Process() {
   }
   if (loading) return <Loading />
 
-  // if (!data) return <Loading />
-
   const gods = [
     {
       god: '媽組',

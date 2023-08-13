@@ -1,4 +1,5 @@
 @import '@/styles/_variables.module.sass'
+@import '@/styles/mixins/responsive.sass'
 
 .footer 
     background-color: $brown
@@ -13,14 +14,23 @@
     align-items: center
     padding-bottom: 20px
 
+.stars
+    @include mobile-m
+        display: none
+
 .flex_row
     display: flex
     align-items: center
     justify-content: space-around
     padding-bottom: 25px
     color: $deep_black
+    @include mobile
+        font-size: 14px
 
 .ahref
     text-decoration: none
     color: $deep_black
 
+.copyright
+    @include mobile
+        font-size: 12px

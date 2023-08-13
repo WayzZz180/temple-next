@@ -12,7 +12,7 @@ export default function Footer() {
 
   return (
     <footer className="mt100px">
-      <div className={`${styles.footer} wBold`}>
+      <div className={`${styles.footer} fwBold`}>
         {/* logo */}
         <div className={`${styles.flex_col}`}>
           <Link href="/">
@@ -25,7 +25,12 @@ export default function Footer() {
 
         {/* 第二排內容 */}
         <div className={`${styles.flex_row} fs16px fwBolder`}>
-          <Image src={stars} width={150} alt="stars" />
+          <Image
+            src={stars}
+            width={150}
+            alt="stars"
+            className={`${styles.stars}`}
+          />
           <span>
             {info.map((v, i) => (
               <React.Fragment key={i}>
@@ -36,11 +41,16 @@ export default function Footer() {
               </React.Fragment>
             ))}
           </span>
-          <Image src={stars} width={150} alt="stars" />
+          <Image
+            src={stars}
+            width={150}
+            alt="stars"
+            className={`${styles.stars}`}
+          />
         </div>
 
         {/* copyright */}
-        <div className={`${styles.flex_row} fs14px`}>
+        <div className={`${styles.flex_row} ${styles.copyright} fs14px`}>
           copyright © 2023 Temple Round Jing Co.,Ltd
         </div>
       </div>

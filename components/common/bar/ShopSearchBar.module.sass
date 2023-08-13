@@ -1,5 +1,5 @@
 @import '@/styles/_variables.module.sass'
-
+@import '@/styles/mixins/responsive.sass'
 .container
     display: flex
     align-items: center
@@ -7,6 +7,9 @@
     border-radius: 20px 
     height: 35px
     width: 100%
+    @include mobile-m
+        width: 80%
+        margin: auto
 
 .searchBar
     background-color: transparent
@@ -22,3 +25,4 @@
     align-items: center
     justify-content: center
     cursor: pointer
+
