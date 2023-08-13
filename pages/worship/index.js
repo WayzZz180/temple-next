@@ -311,6 +311,9 @@ export default function Worship() {
 
   return (
     <Container>
+      <Head>
+        <title>預約時辰</title>
+      </Head>
       <WorshipStepBar id={id} setStop={setStop} />
       {/* section1 */}
       <Row className={`${styles.worship}`}>

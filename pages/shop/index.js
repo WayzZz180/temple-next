@@ -1,3 +1,4 @@
+import Head from 'next/head'
 // components
 import ShopTop from '@/components/common/shopTop'
 import ShopTitle from '@/components/common/title/ShopTitle'
@@ -14,6 +15,9 @@ import data from '@/components/mydata/productsTitleData'
 export default function Shop() {
   return (
     <Container className={'shopContainer'}>
+      <Head>
+        <title>商城首頁</title>
+      </Head>
       <ShopTop />
 
       {/* 熱銷title */}

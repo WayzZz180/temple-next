@@ -1,5 +1,5 @@
 import styles from './style.module.sass'
-
+import Head from 'next/head'
 // hooks
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'

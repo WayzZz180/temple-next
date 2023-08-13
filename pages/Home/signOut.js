@@ -3,7 +3,7 @@ import styles from './signOut.module.sass'
 import Image from 'next/image'
 import { useContext } from 'react'
 import AuthContext from '@/contexts/AuthContext'
-
+import Head from 'next/head'
 // svg
 import nav from '@/assets/nav.svg'
 import foo_dog_left from '@/assets/foo_dog_left.svg'
@@ -50,6 +50,9 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <title>錦囊廟祭</title>
+      </Head>
       {/* section1 */}
       <div className={`${styles.container}`}>
         <div className={`${styles.background}`}>

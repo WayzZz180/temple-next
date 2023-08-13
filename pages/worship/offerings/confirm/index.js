@@ -1,4 +1,5 @@
 import styles from './confirm.module.sass'
+import Head from 'next/head'
 
 // bootstrap
 import Container from 'react-bootstrap/Container'
@@ -90,6 +91,9 @@ export default function Check() {
   }
   return (
     <Container className={`${styles.container}`}>
+      <Head>
+        <title>確認供品</title>
+      </Head>
       <div className={`${styles.cloudLeft}`}>
         <CloudLeft />
       </div>

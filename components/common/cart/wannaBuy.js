@@ -1,5 +1,5 @@
 import styles from './style.module.sass'
-
+import Head from 'next/head'
 // bootstrap
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -20,6 +20,9 @@ export default function wannaBuy({ data }) {
 
   return (
     <>
+      <Head>
+        <title>下次再買</title>
+      </Head>
       {/* 標題列 */}
       <Row className="nowrap">
         <Col className={`${styles.container} `}>

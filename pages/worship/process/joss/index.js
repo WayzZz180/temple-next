@@ -1,15 +1,17 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from './joss.module.sass'
-import { css, keyframes } from '@emotion/css'
-import Modal from 'react-modal'
 import variables from '@/styles/_variables.module.sass'
+import Head from 'next/head'
+
 // bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 
 // hooks
+import Modal from 'react-modal'
 import Draggable from 'react-draggable'
 import Confetti from 'react-confetti'
+import { css, keyframes } from '@emotion/css'
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -139,6 +141,9 @@ export default function Joss() {
 
   return (
     <main className={`${styles.main}`}>
+      <Head>
+        <title>燒金紙</title>
+      </Head>
       <Container className={`${styles.container}`}>
         <Row className={`${styles.prayContainer}`}>
           {/* 火 */}

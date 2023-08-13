@@ -1,11 +1,12 @@
 import styles from './style.module.sass'
 import Image from 'next/image'
+import Head from 'next/head'
+
 //hooks
 import { useEffect, useState, useContext, Fragment } from 'react'
 import { useRouter } from 'next/router'
 import CartCountContext from '@/contexts/CartCountContext'
 import CartDataContext from '@/contexts/CartDataContext'
-
 // bootstrap
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -115,6 +116,9 @@ export default function Cart({ data = [] }) {
         setShow(false)
       }}
     >
+      <Head>
+        <title>購物車</title>
+      </Head>
       {/* 標題列 */}
       <Row className="nowrap">
         <Col className={`${styles.container} `}>

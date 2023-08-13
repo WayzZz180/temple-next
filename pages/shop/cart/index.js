@@ -1,10 +1,12 @@
 import styles from './cart.module.sass'
+import Head from 'next/head'
 
 //hooks
 import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import CartDataContext from '@/contexts/CartDataContext'
 import WannaBuyDataContext from '@/contexts/WannaBuyDataContext'
+
 // bootstrap
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -86,6 +88,9 @@ export default function IndexCart() {
 
   return (
     <>
+      <Head>
+        <title>購物車</title>
+      </Head>
       <Container>
         {/* Step */}
         <Row>

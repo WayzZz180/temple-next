@@ -1,6 +1,5 @@
 import styles from './offerings.module.sass'
-import Image from 'next/image'
-import Link from 'next/link'
+import Head from 'next/head'
 
 // bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
@@ -120,6 +119,9 @@ export default function Offerings() {
 
   return (
     <>
+      <Head>
+        <title>選擇供品</title>
+      </Head>
       <Container className="mt100px">
         <HomeSet
           text1={slide_slice?.text1}

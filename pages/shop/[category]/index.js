@@ -1,5 +1,5 @@
 import styles from './category.module.sass'
-
+import Head from 'next/head'
 // hooks
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
@@ -124,6 +124,9 @@ export default function Category() {
 
   return (
     <Container className={`${styles.container}`}>
+      <Head>
+        <title>{categoryData?.text}</title>
+      </Head>
       {/* 類別&搜尋 */}
       <ShopTop />
       {/* Title */}

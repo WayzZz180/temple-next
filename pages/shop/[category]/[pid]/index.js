@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import styles from './pid.module.sass'
+import Head from 'next/head'
 
 // hooks
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
@@ -255,6 +256,9 @@ export default function Pid() {
 
   return (
     <>
+      <Head>
+        <title>{data?.product_name}</title>
+      </Head>
       <Container className={'mb125px'}>
         {/* 路由 */}
         <DetailsRoute
@@ -508,13 +512,19 @@ export default function Pid() {
           <Col className={`mt50px`}>
             <div className={`${styles.commentLine}`}></div>
             {/* 評價內容 */}
-            <Comment />
+            <Comment num={4} />
             <Comment
               name="森上梅岱前"
               content="好吃！CP值高！"
               date="2023-07-18 12:12"
+              num={5}
             />
-            <Comment />
+            <Comment
+              name="梅川伊芙"
+              content="就算會胖還是要吃....."
+              date="2023-08-12 18:20"
+              num={3}
+            />
 
             {/* 新增評論 */}
             {/* <div className={`${styles.addComment} fs20px pt50px pb50px`}>

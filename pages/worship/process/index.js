@@ -1,12 +1,13 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from './process.module.sass'
-import { css, keyframes } from '@emotion/css'
+import Head from 'next/head'
 
 // bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 
 // hooks
+import { css, keyframes } from '@emotion/css'
 import { sortable } from 'react-sortable'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -161,6 +162,9 @@ export default function Process() {
 
   return (
     <main>
+      <Head>
+        <title>拜拜囉</title>
+      </Head>
       <Container className={`${styles.container}`}>
         <Row className={`${styles.relative}`}>
           {/* God */}

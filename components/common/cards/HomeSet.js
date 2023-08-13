@@ -19,7 +19,7 @@ export default function HomeSet({
           <div className={`${styles.title}`}>{text2}</div>
           <div className={`${styles.line}`}></div>
           <div className={`${styles.content}`}>{text3}</div>
-          {router.asPath === '/' ? (
+          {router.asPath === '/Home/signOut' ? (
             <div className="mt50px">
               <Button
                 text="選購去"
