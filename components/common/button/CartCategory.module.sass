@@ -5,16 +5,16 @@
     display: flex
     justify-content: flex-start
     @include mobile-m
-        flex-direction: column        
+        justify-content: center
         align-items: flex-start
-        gap: 15px
         margin-bottom: 15px 
+        // gap: 15px
+        // flex-direction: column        
 
 .position
     position: relative
     cursor: pointer
  
-    
 .button
     cursor: pointer
     background: $bgColor
@@ -30,5 +30,8 @@
         white-space: nowrap
         padding: 10px 40px
         font-size: 16px
+        position: relative
+        right: 20px
+    
 
         

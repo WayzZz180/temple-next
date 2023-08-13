@@ -1,14 +1,18 @@
 @import @/styles/_variables.module.sass
+@import '@/styles/mixins/responsive.sass'
 
 .row
     letter-spacing: 3px
+    @include mobile-m
+        display: none
 
 .container
     display: flex
     width: 1336px
     align-items: center
     justify-content: space-between
-
+    @include mobile-m
+        width: 100%
 .image
     display: flex
     align-items: center
@@ -20,18 +24,39 @@
     align-items: center
     justify-content: flex-start
     width: 25%
+    @include mobile-m
+        align-items: flex-start
+        overflow: hidden 
+        text-overflow: ellipsis 
+        display: -webkit-box
+        -webkit-line-clamp: 1
+        -webkit-box-orient: vertical
+        white-space: normal
+        width: 180px
+        height: 25px
+        position: relative
+        left: 70px
+        bottom: 15px
 
 .price
     display: flex
     align-items: center
     justify-content: flex-start
     width: 4%
+    @include mobile-m
+        align-items: flex-start
+        position: relative
+        left: 70px
+
 
 .quantity
     display: flex
     align-items: center
     justify-content: flex-start
     width: 7%
+    @include mobile-m
+        width: 60px
+
 
 .quantityWord
     color: $hot_pink
@@ -52,3 +77,22 @@
     height: 3px
     width: 100%
     background: $brown
+
+
+.rwdRow
+    display: none
+    @include mobile-m
+        display: block
+
+.flex_row
+    @include mobile-m
+        display: flex
+        align-items: center
+        position: relative
+        right: 110px
+        top: 50px
+
+.flex_col
+    @include mobile-m
+        display: flex
+        flex-direction: column

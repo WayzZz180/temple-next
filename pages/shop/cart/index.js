@@ -67,23 +67,6 @@ export default function IndexCart() {
     }
   }, [router.query])
 
-  // useEffect(() => {
-  //   const auth = localStorage.getItem('auth')
-  //   if (auth) {
-  //     const obj = JSON.parse(auth)
-  //     const Authorization = 'Bearer ' + obj.token
-  //     fetch(`${process.env.API_SERVER}/shop/history`, {
-  //       headers: {
-  //         Authorization,
-  //       },
-  //     })
-  //       .then((r) => r.json())
-  //       .then((data) => {
-  //         setMarquee(data)
-  //       })
-  //   }
-  // }, [])
-
   if (loading) return <Loading />
 
   return (

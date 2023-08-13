@@ -1,11 +1,19 @@
 @import @/styles/_variables.module.sass
+@import '@/styles/mixins/responsive.sass'
 
 .col
     display: flex
     align-items: center
-
+    @include mobile-m
+        flex-direction: column
+        align-items: flex-start
+        font-size: 18px
 .title
     width: 200px
+    @include mobile-m
+        margin-bottom: 15px
 
 .customer
     border-bottom: 3px solid $brown
+    @include mobile-m
+        margin-bottom: 30px

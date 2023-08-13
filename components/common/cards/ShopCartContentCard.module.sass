@@ -33,7 +33,7 @@
         width: 150px
         height: 25px
     @include mobile
-        width: 100px
+        width: 150px
 
 .price
     display: flex
@@ -54,6 +54,8 @@
     @include desktop-m
         width: 100px
         justify-content: flex-end
+        position: relative
+        right:150px
 
 .stock
     position: absolute
@@ -61,8 +63,9 @@
     left:35px
     white-space: nowrap   
     @include desktop-m
-        top:50px
-        left:10px
+        top: 110px
+        left: 0px
+        font-size: 12px
     
 .total
     display: flex
@@ -98,12 +101,20 @@
     border-radius: 7px
     @include desktop-m
         padding: 5px 5px
+        border: 1px $black solid
+        width: 65px
+
 
 .addValue
     border: 0
     background: $bgColor
     width:30%
     text-align: center
+    @include desktop-m
+        width: 30px
+        font-size: 14px
+
+
 
 .addValue:focus
     border: 0
@@ -119,7 +130,7 @@
     @include desktop-m
         display: block
         margin: auto 
-        width: 70%
+        width: 80%
 
 .rwdCol
     @include desktop-m
@@ -132,3 +143,25 @@
         flex-direction: column
         margin-left: 80px 
         height: 100px
+
+.rwdDelete
+    @include desktop-m
+        position: relative
+        right: 52px
+
+.rwdDelete:hover
+    @include desktop-m
+        color: $green
+
+.rwdWannaBuy
+    @include desktop-m
+        border: none
+        outline: 0
+        color: white
+        background: $brown
+        border-radius: 7px
+        white-space: nowrap
+        height: 30px
+        margin-top: auto
+        position: relative
+        right: 115px

@@ -53,13 +53,18 @@ export default function BuyContent({ data = [] }) {
               }
             }}
           >
-            <div className={`fs28px fwBolder`}>合計：NT${total}</div>
+            <div className={`${styles.total} fs28px fwBolder`}>
+              合計：NT${total}
+            </div>
             {coupon ? (
-              <div className={`fs24px`}> (使用折價券：-NT${coupon})</div>
+              <div className={`${styles.coupon} fs24px`}>
+                {' '}
+                (使用折價券：-NT${coupon})
+              </div>
             ) : (
               ''
             )}
-            <div className={`${styles.flex_row} fs24px`}>
+            <div className={`${styles.count} fs24px`}>
               <div>總共 {data?.length} 件&nbsp;</div>
               <div
                 className={`${

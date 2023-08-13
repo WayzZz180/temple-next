@@ -249,7 +249,7 @@ export default function ShopCartContentCard({
       </Row>
 
       <Row className={`${styles.rwdContainer}`}>
-        <Col className={`${styles.rwdCol} pt15px pb15px`}>
+        <Col className={`${styles.rwdCol} pt50px pb50px`}>
           {/* 商品圖 */}
           <div
             role="presentation"
@@ -344,6 +344,32 @@ export default function ShopCartContentCard({
               剩餘：{stock_num} /件
             </div>
           </div>
+          <div
+            role="presentation"
+            onClick={() => {
+              deleteFromCart(pid)
+            }}
+            className={`${styles.rwdDelete}`}
+          >
+            X
+          </div>
+          {/* <div
+            role="presentation"
+            onClick={() => {
+              addToWannaBuy(pid)
+            }}
+            className={`${styles.rwdWannaBuy}`}
+          > */}
+          <button
+            type="button"
+            onClick={() => {
+              addToWannaBuy(pid)
+            }}
+            className={`${styles.rwdWannaBuy}`}
+          >
+            下次再買
+          </button>
+          {/* </div> */}
         </Col>
       </Row>
     </>

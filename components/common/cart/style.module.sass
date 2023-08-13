@@ -144,7 +144,6 @@ ul.drop_down_menu>li:last-child
     font-weight: 700
     cursor: default
     color: $deep_black
-    // color: #14d2bf
     
 ul.drop_down_menu ul
     margin: 0
@@ -158,6 +157,9 @@ ul.drop_down_menu ul
     min-width: 80px
     max-height:  300px
     overflow-y: auto 
+    @include mobile
+        width: 280px
+
 
 ul.drop_down_menu ul
     display: none

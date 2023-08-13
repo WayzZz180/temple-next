@@ -11,13 +11,14 @@ import InputBox from '@/components/common/inputBox'
 import Button from '@/components/common/button'
 import Title from '@/components/common/title'
 import BuyContent from '@/components/common/orderDetails/buyContent'
-
+import Alert from '@/components/common/alert'
 // bootstrap
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 
 export default function Order() {
   const router = useRouter()
+  const [isOpen, setIsOpen] = useState(false)
 
   // WAYZ 47-112
   const [user, setUser] = useState('')
@@ -141,8 +142,7 @@ export default function Order() {
           : null
       })
       setInvalidFields(invalidFieldsArray.filter((field) => field !== null))
-
-      alert('請檢查以下項目：\n' + invalidFieldsArray.join('\n'))
+      setIsOpen(true)
     } else {
       //Wayz 117-132
 
@@ -206,81 +206,93 @@ export default function Order() {
         <BuyContent data={cartData} total={total} />
       </div>
       {/* 表單 */}
-      <Container className="mt50px">
+      <Container className={`${styles.form} mt50px`}>
         <Title text="訂單資訊" text2="information" />
         <Row className={`${styles.flex_space_between}`}>
-          <InputBox
-            type="text"
-            id="member_name"
-            prompt="收件人姓名"
-            placeholder="姓名"
-            onChange={changeUser}
-            validationRules={validationRules}
-            value={user.member_name}
-            width={600}
-            height={60}
-            isError={invalidFields.includes('member_name')}
-            errorMessage={getErrorForField('member_name')}
-          />
-          <InputBox
-            type="text"
-            prompt="物流方式"
-            value="宅配"
-            width={600}
-            height={60}
-            readOnly={true}
-          />
+          <div className={`${styles.inputBox}`}>
+            <InputBox
+              type="text"
+              id="member_name"
+              prompt="收件人姓名"
+              placeholder="姓名"
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_name}
+              width={600}
+              height={60}
+              isError={invalidFields.includes('member_name')}
+              errorMessage={getErrorForField('member_name')}
+            />
+          </div>
+          <div className={`${styles.inputBox}`}>
+            <InputBox
+              type="text"
+              prompt="物流方式"
+              value="宅配"
+              width={600}
+              height={60}
+              readOnly={true}
+            />
+          </div>
         </Row>
         <Row className={`${styles.flex_space_between}`}>
-          <InputBox
-            type="text"
-            id="member_email"
-            prompt="收件人電子郵件"
-            placeholder="電子郵件"
-            onChange={changeUser}
-            validationRules={validationRules}
-            value={user.member_email}
-            width={600}
-            height={60}
-            isError={invalidFields.includes('member_email')}
-            errorMessage={getErrorForField('member_email')}
-          />
-          <InputBox
-            type="text"
-            prompt="付款方式"
-            value="信用卡一次付清"
-            width={600}
-            height={60}
-            readOnly={true}
-          />
+          <div className={`${styles.inputBox}`}>
+            <InputBox
+              type="text"
+              id="member_email"
+              prompt="收件人電子郵件"
+              placeholder="電子郵件"
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_email}
+              width={600}
+              height={60}
+              isError={invalidFields.includes('member_email')}
+              errorMessage={getErrorForField('member_email')}
+            />
+          </div>
+          <div className={`${styles.inputBox}`}>
+            <InputBox
+              type="text"
+              prompt="付款方式"
+              value="信用卡一次付清"
+              width={600}
+              height={60}
+              readOnly={true}
+            />
+          </div>
         </Row>
         <Row className={`${styles.flex_space_between}`}>
-          <InputBox
-            type="text"
-            id="member_phone"
-            prompt="收件人電話"
-            placeholder="手機號碼"
-            onChange={changeUser}
-            validationRules={validationRules}
-            value={user.member_phone}
-            width={600}
-            height={60}
-            isError={invalidFields.includes('member_phone')}
-            errorMessage={getErrorForField('member_phone')}
-          />
-          <InputBox
-            type="text"
-            id="member_address"
-            prompt="收件人地址"
-            placeholder="地址"
-            onChange={changeUser}
-            validationRules={validationRules}
-            value={user.member_address}
-            width={600}
-            height={60}
-            isError={invalidFields.includes('member_address')}
-            errorMessage={getErrorForField('member_address')}
-          />
+          <div className={`${styles.inputBox}`}>
+            <InputBox
+              type="text"
+              id="member_phone"
+              prompt="收件人電話"
+              placeholder="手機號碼"
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_phone}
+              width={600}
+              height={60}
+              isError={invalidFields.includes('member_phone')}
+              errorMessage={getErrorForField('member_phone')}
+            />
+          </div>
+          <div className={`${styles.inputBox}`}>
+            <InputBox
+              type="text"
+              id="member_address"
+              prompt="收件人地址"
+              placeholder="地址"
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_address}
+              width={600}
+              height={60}
+              isError={invalidFields.includes('member_address')}
+              errorMessage={getErrorForField('member_address')}
+            />
+          </div>
         </Row>
 
         <Row className={`${styles.flex_space_between} pt80px `}>
@@ -307,6 +319,136 @@ export default function Order() {
             }}
           />
         </Row>
+
+        {isOpen ? (
+          <Alert
+            isOpen={isOpen}
+            text="欄位資料格式錯誤"
+            status="wrong"
+            setIsOpen={setIsOpen}
+          />
+        ) : (
+          ''
+        )}
+      </Container>
+      <Container className={`${styles.rwdform} mt50px`}>
+        <Title text="訂單資訊" text2="information" />
+        <div className={`${styles.inputBox} mt10px`}>
+          <InputBox
+            type="text"
+            id="member_name"
+            prompt="收件人姓名"
+            placeholder="姓名"
+            onChange={changeUser}
+            validationRules={validationRules}
+            value={user.member_name}
+            width={250}
+            height={60}
+            isError={invalidFields.includes('member_name')}
+            errorMessage={getErrorForField('member_name')}
+          />
+        </div>
+        <div className={`${styles.inputBox}`}>
+          <InputBox
+            type="text"
+            prompt="物流方式"
+            value="宅配"
+            width={250}
+            height={60}
+            readOnly={true}
+          />
+        </div>
+        <div className={`${styles.inputBox}`}>
+          <InputBox
+            type="text"
+            id="member_email"
+            prompt="收件人電子郵件"
+            placeholder="電子郵件"
+            onChange={changeUser}
+            validationRules={validationRules}
+            value={user.member_email}
+            width={250}
+            height={60}
+            isError={invalidFields.includes('member_email')}
+            errorMessage={getErrorForField('member_email')}
+          />
+        </div>
+        <div className={`${styles.inputBox}`}>
+          <InputBox
+            type="text"
+            prompt="付款方式"
+            value="信用卡一次付清"
+            width={250}
+            height={60}
+            readOnly={true}
+          />
+        </div>
+        <div className={`${styles.inputBox}`}>
+          <InputBox
+            type="text"
+            id="member_phone"
+            prompt="收件人電話"
+            placeholder="手機號碼"
+            onChange={changeUser}
+            validationRules={validationRules}
+            value={user.member_phone}
+            width={250}
+            height={60}
+            isError={invalidFields.includes('member_phone')}
+            errorMessage={getErrorForField('member_phone')}
+          />
+        </div>
+        <div className={`${styles.inputBox}`}>
+          <InputBox
+            type="text"
+            id="member_address"
+            prompt="收件人地址"
+            placeholder="地址"
+            onChange={changeUser}
+            validationRules={validationRules}
+            value={user.member_address}
+            width={250}
+            height={60}
+            isError={invalidFields.includes('member_address')}
+            errorMessage={getErrorForField('member_address')}
+          />
+        </div>
+
+        <Row className={`${styles.button} pt15px `}>
+          <Button
+            text="送出訂單"
+            btnColor="hot_pink"
+            width=""
+            height=""
+            padding="15px 60px"
+            fontSize="24px"
+            link={() => {
+              sendOrder()
+            }}
+          />
+          <Button
+            text="返回購物車"
+            btnColor="brown"
+            width=""
+            height=""
+            padding="15px 60px"
+            fontSize="24px"
+            link={() => {
+              router.push('/shop/cart')
+            }}
+          />
+        </Row>
+
+        {isOpen ? (
+          <Alert
+            isOpen={isOpen}
+            text="欄位資料格式錯誤"
+            status="wrong"
+            setIsOpen={setIsOpen}
+          />
+        ) : (
+          ''
+        )}
       </Container>
     </Container>
   )
