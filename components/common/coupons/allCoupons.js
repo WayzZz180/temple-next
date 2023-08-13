@@ -14,14 +14,18 @@ export default function AllCoupons() {
   const router = useRouter()
 
   const [coupon, setCoupon] = useState([])
+  const [sortOrder, setSortOrder] = useState('DESC') // Default sort order 0813
 
   useEffect(() => {
     console.log(`coupons頁面 有沒有auth.token?1`, auth.token)
     if (auth.token) {
       fetch(process.env.API_SERVER + '/member/allCoupons', {
+        method: 'POST',
         headers: {
+          'Content-Type': 'application/json',
           Authorization: 'Bearer ' + auth.token,
         },
+        body: JSON.stringify({ sortOrder }), // Make sure sortOrder is passed correctly
       })
         .then((r) => r.json())
         .then((data) => {
@@ -35,10 +39,12 @@ export default function AllCoupons() {
       // You can add any additional logic here
       console.log('用戶尚未註冊')
     }
-  }, [auth.token])
+  }, [auth.token, sortOrder]) // Include sortOrder in the dependency array 0813
 
   return (
     <>
+      <button onClick={() => setSortOrder('ASC')}>ASC</button>
+      <button onClick={() => setSortOrder('DESC')}>DESC</button>
       {coupon && coupon.length > 0 ? (
         coupon.map((v, i) => (
           <div key={v.coupon_status_id}>
