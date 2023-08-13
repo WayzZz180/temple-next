@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import React, { useEffect } from 'react'
 import Image from 'next/image'
 
@@ -8,6 +9,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 
 //components
 import Button from '@/components/common/button'
+import data from '@/components/mydata/memberNavbarData.js'
 
 // cards
 import admissionTicketTest from '@/assets/admissionTicketTest.svg'
@@ -148,162 +150,167 @@ export default function CardGame() {
 
   return (
     <Container>
-      <div className="game-board">
-        {cards.map((card) => (
-          <div
-            key={card.id}
-            className={`card_container ${card.flipped ? 'flip' : ''} ${
-              card.matched ? 'matched' : ''
-            }`}
-            onClick={() => handleCardClick(card.id)}
-          >
-            <div className="card">
-              <div className="face">
-                ?
-                {/* {card.flipped ? (
+      <Head>
+        <title>優惠券遊戲</title>
+      </Head>
+      <Row>
+        <div className="game-board">
+          {cards.map((card) => (
+            <div
+              key={card.id}
+              className={`card_container ${card.flipped ? 'flip' : ''} ${
+                card.matched ? 'matched' : ''
+              }`}
+              onClick={() => handleCardClick(card.id)}
+            >
+              <div className="card">
+                <div className="face">
+                  ?
+                  {/* {card.flipped ? (
                 <Image src={card.img} width={80} height={80} />
               ) : (
                 '?'
               )} */}
-              </div>
-              <div className="face back">
-                <Image src={card.img} width={100} height={100} />
+                </div>
+                <div className="face back">
+                  <Image src={card.img} width={100} height={100} />
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-        {/* 計時器 */}
-        <div className="timer">{formattedTime}</div>
+          ))}
+          {/* 計時器 */}
+          <div className="timer">{formattedTime}</div>
 
-        {/* 開始遊戲 按鈕*/}
-        <div className="startbtn">
-          <div>
+          {/* 開始遊戲 按鈕*/}
+          <div className="startbtn">
+            <div>
+              <Button
+                text="開始"
+                btnColor="orderGray"
+                link={() => {
+                  setIsRunning(true)
+                  setGameStarted(true)
+                  shuffleCards()
+                }}
+                disabled={isRunning}
+              />
+            </div>
+          </div>
+
+          {/* 重新 按鈕*/}
+          <div className="startbtn">
             <Button
-              text="開始"
-              btnColor="orderGray"
+              text="重新"
+              btnColor="green"
               link={() => {
-                setIsRunning(true)
-                setGameStarted(true)
-                shuffleCards()
+                setCards(cardData)
+                setFlippedCards([])
+                setPoints(0)
+                setRemainingTime(60)
+                setIsRunning(false)
+                setGameStarted(false)
               }}
-              disabled={isRunning}
+              // disabled={isRunning}
             />
           </div>
+          <table>{/* Table content */}</table>
+
+          {/* 計分器 */}
+          <div className="center">
+            <div className="points">Points: {points} / 10 </div>
+          </div>
+          <style jsx>{`
+            .game-board {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center;
+              width: 1200px;
+            }
+
+            .card_container {
+              position: relative;
+              margin: 10px;
+              width: 150px;
+              height: 200px;
+              perspective: 1000;
+            }
+
+            .card_container.flip {
+              perspective: 1000;
+            }
+
+            .card_container.matched .card {
+              cursor: default;
+            }
+
+            .card {
+              background-color: #68c39f;
+              width: 100%;
+              height: 100%;
+              cursor: pointer;
+              border-radius: 3px;
+              box-shadow: 0.5px 2.5px #ccc;
+              transform-style: preserve-3d;
+              transition: all 0.25s linear;
+            }
+
+            .flip .card {
+              transform: rotateY(180deg);
+            }
+
+            .face {
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              backface-visibility: hidden;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 24px;
+              font-weight: bold;
+            }
+
+            .face.back {
+              background-color: #ffcc66;
+              color: white;
+              border-radius: 3px;
+              transform: rotateY(180deg);
+              box-sizing: border-box;
+              padding: 10px;
+              text-align: center;
+            }
+
+            .timer {
+              display: block;
+              margin: 10px auto;
+              width: 150px;
+              height: 50px;
+              line-height: 50px;
+              background-color: #fff;
+              border-radius: 25px;
+              border: 2px solid #1abc9c;
+              font-size: 40px;
+              text-align: center;
+              color: #999;
+            }
+
+            .startbtn {
+              display: block;
+              margin: 10px auto;
+              text-align: center;
+            }
+
+            .center {
+              margin: 15px auto;
+            }
+
+            .points {
+              position: absolute;
+              font-size: 24px;
+            }
+          `}</style>
         </div>
-
-        {/* 重新 按鈕*/}
-        <div className="startbtn">
-          <Button
-            text="重新"
-            btnColor="green"
-            link={() => {
-              setCards(cardData)
-              setFlippedCards([])
-              setPoints(0)
-              setRemainingTime(60)
-              setIsRunning(false)
-              setGameStarted(false)
-            }}
-            // disabled={isRunning}
-          />
-        </div>
-        <table>{/* Table content */}</table>
-
-        {/* 計分器 */}
-        <div className="center">
-          <div className="points">Points: {points} / 10 </div>
-        </div>
-        <style jsx>{`
-          .game-board {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 500px;
-          }
-
-          .card_container {
-            position: relative;
-            margin: 10px;
-            width: 100px;
-            height: 135px;
-            perspective: 1000;
-          }
-
-          .card_container.flip {
-            perspective: 1000;
-          }
-
-          .card_container.matched .card {
-            cursor: default;
-          }
-
-          .card {
-            background-color: #68c39f;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-            border-radius: 3px;
-            box-shadow: 0.5px 2.5px #ccc;
-            transform-style: preserve-3d;
-            transition: all 0.25s linear;
-          }
-
-          .flip .card {
-            transform: rotateY(180deg);
-          }
-
-          .face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-          }
-
-          .face.back {
-            background-color: #ffcc66;
-            color: white;
-            border-radius: 3px;
-            transform: rotateY(180deg);
-            box-sizing: border-box;
-            padding: 10px;
-            text-align: center;
-          }
-
-          .timer {
-            display: block;
-            margin: 10px auto;
-            width: 150px;
-            height: 50px;
-            line-height: 50px;
-            background-color: #fff;
-            border-radius: 25px;
-            border: 2px solid #1abc9c;
-            font-size: 40px;
-            text-align: center;
-            color: #999;
-          }
-
-          .startbtn {
-            display: block;
-            margin: 10px auto;
-            text-align: center;
-          }
-
-          .center {
-            margin: 15px auto;
-          }
-
-          .points {
-            position: absolute;
-            font-size: 24px;
-          }
-        `}</style>
-      </div>
+      </Row>
     </Container>
   )
 }

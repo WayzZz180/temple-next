@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import styles from '@/pages/member/dailySignIn.module.sass'
 import { AuthContextProvider } from '@/contexts/AuthContext'
 import AuthContext from '@/contexts/AuthContext'
@@ -13,7 +14,7 @@ import Button from '@/components/common/button/index.js'
 import MemberNavbar from '@/components/common/memberNavbar'
 import Coupon from '@/components/common/coupons/index.js'
 import SpinWheel from '@/components/common/spinWheel/ULspinWheel.js'
-
+import data from '@/components/mydata/memberNavbarData.js'
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 import ProfilePhoto from '@/components/common/profilePhoto'
@@ -65,6 +66,9 @@ export default function dailySignIn() {
   return (
     // <div className={styles.flex_centre}>
     <Container className="shopContainer">
+      <Head>
+        <title>{data[7]?.text}</title>
+      </Head>
       <ProfilePhoto />
       <Row>
         <Col>

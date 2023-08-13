@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import styles from './personalinfo.module.sass'
 import { AuthContextProvider } from '@/contexts/AuthContext'
 import AuthContext from '@/contexts/AuthContext'
@@ -14,7 +15,7 @@ import NoButton from '@/components/common/button/noButton.js'
 import MemberNavbar from '@/components/common/memberNavbar/index.js'
 import ProfilePhoto from '@/components/common/profilePhoto'
 import Alert from '@/components/common/alert'
-
+import Head from 'next/head'
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 
@@ -262,6 +263,9 @@ export default function Personalinfo() {
 
   return (
     <div className={styles.flex}>
+      <Head>
+        <title>{data[0]?.text}</title>
+      </Head>
       <Container>
         <ProfilePhoto />
         <Row>

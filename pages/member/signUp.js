@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import React from 'react'
 import Image from 'next/image'
 import styles from '@/pages/member/signUp.module.sass'
@@ -15,6 +16,7 @@ import doorGodRight from '@/assets/doorGodRight.svg'
 import Alert from '@/components/common/alert'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import VisibilityIcon from '@mui/icons-material/Visibility'
+import data from '@/components/mydata/memberNavbarData.js'
 
 //bt
 
@@ -198,6 +200,9 @@ export default function SignUp() {
 
   return (
     <>
+      <Head>
+        <title>會員註冊</title>
+      </Head>
       <Container className={styles.flex}>
         <Row>
           <Col>

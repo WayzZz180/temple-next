@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import React, { useEffect } from 'react'
 import Image from 'next/image'
 import styles from '@/pages/member/login.module.sass'
@@ -79,6 +80,9 @@ export default function Login() {
 
   return (
     <>
+      <Head>
+        <title>會員登入</title>
+      </Head>
       <Container className={styles.flex}>
         <Row>
           <Col>

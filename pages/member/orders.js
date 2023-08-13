@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import React from 'react'
 import styles from '@/pages/member/orders.module.sass'
 // hooks
@@ -10,7 +11,7 @@ import MemberNavbar from '@/components/common/memberNavbar'
 import OrderSummary from '@/components/common/cards/orderSummaryCard'
 import Loading from '@/components/common/loading'
 import ProfilePhoto from '@/components/common/profilePhoto'
-
+import data from '@/components/mydata/memberNavbarData.js'
 // bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 
@@ -39,6 +40,9 @@ export default function Orders() {
 
   return (
     <div className={styles.flex}>
+      <Head>
+        <title>{data[2]?.text}</title>
+      </Head>
       <Container>
         <ProfilePhoto />
         <Row>
