@@ -63,7 +63,7 @@ export default function CardGame() {
   ]
 
   //難度調整
-  const [idRange, setIdRange] = useState(8)
+  const [idRange, setIdRange] = useState(12)
   console.log(idRange)
   // const handleDifficultyChange = (event) => {
   //   const value = parseInt(event.target.value)
@@ -305,7 +305,7 @@ export default function CardGame() {
                 } ${card.matched ? styles.matched : ''}`}
                 onClick={() => handleCardClick(card.id)}
               >
-                <div className={idRange === 8 ? styles.card : styles.card2}>
+                <div className={idRange === 12 ? styles.card : styles.card2}>
                   <div className={styles.face}>
                     ?
                     {/* {card.flipped ? (
@@ -316,7 +316,7 @@ export default function CardGame() {
                   </div>
                   <div
                     className={`${styles.face} ${
-                      idRange === 8 ? styles.back : styles.back2
+                      idRange === 12 ? styles.back : styles.back2
                     }`}
                   >
                     <Image
@@ -389,11 +389,11 @@ export default function CardGame() {
           </div>
         </Col>
         <Col className="nowrap">
-          {idRange === 8 ? (
+          {idRange === 12 ? (
             <Button
               text="調整難度為:下下籤?"
               link={() => {
-                setIdRange(32)
+                setIdRange(36)
               }}
               disabled={isRunning || gameStarted}
             />
@@ -401,7 +401,7 @@ export default function CardGame() {
             <Button
               text="調整難度為:上上籤?"
               link={() => {
-                setIdRange(8)
+                setIdRange(12)
               }}
               disabled={isRunning || gameStarted}
             />
@@ -550,7 +550,7 @@ export default function CardGame() {
           <div className="mb20px">
             <Image src={coupon_red} alt="coupon" />
           </div>
-          <div className="fwBold fs24px mb25px">恭喜獲得 66(元)大順 折價券</div>
+          <div className="fwBold fs24px mb25px">恭喜獲得 66大順 折價券</div>
           <div className="fwBold fs24px mb20px">但...你敢挑戰下一個難度嗎?</div>
           <Button
             text="確認"
@@ -560,13 +560,7 @@ export default function CardGame() {
             fontSize="20px"
             padding="10px 45px"
           />
-          <Button
-            text="調整難度為:下下籤?"
-            link={() => {
-              setIdRange(32)
-            }}
-            disabled={isRunning || gameStarted}
-          />
+
           {/* <Confetti
             width={typeof window !== 'undefined' ? window.innerWidth : 0}
             height={typeof window !== 'undefined' ? window.innerHeight : 0}
