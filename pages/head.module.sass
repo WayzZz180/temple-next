@@ -6,6 +6,19 @@
   background-color: $brown
   z-index: -2
 
+.doorbackground
+  position: absolute
+  width: 100%
+  height: 930px
+  bottom: 0px
+  overflow: hidden
+  margin: auto
+  z-index: 2
+  visibility: hidden
+
+.doorbackgroundv
+  visibility: visible
+
 .container
   position: relative
   width: 100%
@@ -118,9 +131,10 @@
   width:1920px
   box-sizing: border-box
   position: absolute
-  left:290px
-  top:-200px
+  left:285px
+  top:755px
   display: none
+  z-index: 2
 
 
 .HomeDoorclick
@@ -149,7 +163,7 @@
 
 .signInDoor
   left:1174px
-  bottom:97px
+  bottom:75px
   position: absolute
   width:140px
   height:200px
@@ -158,11 +172,13 @@
   border-radius: 78px 78px 0 0
   box-sizing: border-box
   display: none
+  z-index: -1
 
 .HomeDoor2
   display: flex
   border: none
   padding: 101px 71px
+
 
 .HomeDoor2click
   display: none
@@ -170,3 +186,4 @@
 
 .signInDoorclick
   display: block
+

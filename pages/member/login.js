@@ -21,6 +21,8 @@ import VisibilityIcon from '@mui/icons-material/Visibility'
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 
+import HomeDoor from '@/components/common/cards/HomeDoorlogin'
+
 export default function Login() {
   const router = useRouter()
   const { auth, setAuth } = useContext(AuthContext)
@@ -73,7 +75,7 @@ export default function Login() {
     if (blackblock) {
       const timeout = setTimeout(() => {
         blackblock.style.display = "none";
-      }, 500)
+      }, 1800)
 
       return () => {
         clearTimeout(timeout);
@@ -83,7 +85,13 @@ export default function Login() {
 
   return (
     <Container className={styles.flex}>
-      <div className={styles.blackblock} id="blackblock"></div>
+      <div className={`${styles.background}`}>
+    <div className={`${styles.position}`}>
+      <div className={styles.blackblock} id="blackblock">
+        <HomeDoor />
+      </div>
+      </div>
+      </div>
       <Row>
         <Col>
           <div className="mt100px">

@@ -31,11 +31,11 @@ export default function Home() {
     setTimeout(() => {
       setIsClicked(false)
       Router.push('/member/login')
-    }, 6000)
+    }, 3900)
 
     setTimeout(() => {
       Router.push('/member/login')
-    }, 4500)
+    }, 3900)
 
     // 隐藏 HomeDoor2
     setTimeout(() => {
@@ -57,6 +57,24 @@ export default function Home() {
   return (
     <>
       {/* section1 */}
+      <div className={`${styles.doorbackground} ${isClicked ? styles.doorbackgroundv : ''}`}>
+      <div
+              className={`${styles.HomeDoor} ${
+                isClicked ? styles.HomeDoorclick : ''
+              }`}
+            >
+              <HomeDoor />
+            </div>
+            <div
+              className={`${styles.signInDoor} ${
+                isClicked ? styles.signInDoorclick : ''
+              }`}
+            >
+              <div className={`${styles.HomeDoor2}`}>
+                <HomeDoor2 />
+              </div>
+            </div>
+            </div>
       <div className={`${styles.container}`}>
         <div className={`${styles.background}`}>
           <div className={`${styles.place}`}>
@@ -110,22 +128,6 @@ export default function Home() {
               {/* sign in word */}
               <div className={``}>
                 <Image src={signIn} width={30} alt="signIn" />
-              </div>
-            </div>
-            <div
-              className={`${styles.HomeDoor} ${
-                isClicked ? styles.HomeDoorclick : ''
-              }`}
-            >
-              <HomeDoor />
-            </div>
-            <div
-              className={`${styles.signInDoor} ${
-                isClicked ? styles.signInDoorclick : ''
-              }`}
-            >
-              <div className={`${styles.HomeDoor2}`}>
-                <HomeDoor2 />
               </div>
             </div>
           </div>
