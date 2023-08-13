@@ -31,7 +31,7 @@ export default function Home() {
     setTimeout(() => {
       setIsClicked(false)
       Router.push('/member/login')
-    }, 3900)
+    }, 3950)
 
     setTimeout(() => {
       Router.push('/member/login')
