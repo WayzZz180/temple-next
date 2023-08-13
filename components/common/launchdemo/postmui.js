@@ -39,9 +39,10 @@ export default function AlertDialogSlide({ page = 1 }) {
   }
   const [inputTitle, setInputTitle] = React.useState('')
   const [inputContent, setInputContent] = React.useState('')
-  const [memberId, setMemberId] = useState({
-    member_id: '',
-  })
+  //會員
+  // const [memberId, setMemberId] = useState({
+  //   member_id: '',
+  // })
   // const [publishTime, setPublishTime] = React.useState('')
 
   const addData = async (title, content) => {
@@ -87,9 +88,11 @@ export default function AlertDialogSlide({ page = 1 }) {
       console.error('Error adding data:', error)
     }
   }
-  useEffect(() => {
-    setMemberId('member_id')
-  })
+  //會員
+  // useEffect(() => {
+  //   setMemberId('member_id')
+  // })
+
   // if(!data) return <Loading />
 
   return (
