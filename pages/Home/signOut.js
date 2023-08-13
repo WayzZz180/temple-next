@@ -28,6 +28,7 @@ export default function Home() {
   const Router = useRouter()
   const [isClicked, setIsClicked] = useState(false)
   const { auth, setAuth, logout } = useContext(AuthContext)
+
   const handleClick = () => {
     setIsClicked(true)
     setTimeout(() => {

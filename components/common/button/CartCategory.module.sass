@@ -1,4 +1,5 @@
 @import '@/styles/_variables.module.sass'
+@import '@/styles/mixins/responsive.sass'
 
 .flex_row
     display: flex
@@ -6,7 +7,6 @@
 
 .position
     position: relative
-    // bottom:-7px
     cursor: pointer
     
 .button
@@ -17,3 +17,8 @@
     border: 3px solid $brown
     border-bottom: 0px
     border-radius: 7px 7px 0px 0px 
+    @include tablet
+        border-bottom: 3px solid $brown
+        border-radius: 7px  
+    @include mobile-m
+        
