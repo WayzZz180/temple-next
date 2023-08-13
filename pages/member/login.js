@@ -134,22 +134,18 @@ export default function Login() {
                 <div
                   className={styles.flex_start}
                   style={{ cursor: 'pointer' }}
+                  onClick={toggleShowPassword}
                 >
-                  <VisibilityOffIcon
-                    onClick={toggleShowPassword}
-                    className="me10px"
-                  />
+                  <VisibilityOffIcon className="me10px" />
                   隱藏密碼{' '}
                 </div>
               ) : (
                 <div
                   className={styles.flex_start}
                   style={{ cursor: 'pointer' }}
+                  onClick={toggleShowPassword}
                 >
-                  <VisibilityIcon
-                    onClick={toggleShowPassword}
-                    className="me10px"
-                  />
+                  <VisibilityIcon className="me10px" />
                   顯示密碼
                 </div>
               )}

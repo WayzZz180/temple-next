@@ -3,7 +3,7 @@ import AuthContext from '@/contexts/AuthContext'
 import React, { useState, useEffect, useContext, useRef } from 'react'
 import { useRouter } from 'next/router'
 import Modal from 'react-modal'
-import styles from '@/components/common/profilePhoto/profilePhoto.module.sass'
+import styles from '@/components/common/studyTickets/studyTickets.module.sass'
 import variables from '@/styles/_variables.module.sass'
 
 // components
@@ -15,15 +15,13 @@ import MemberNavbar from '@/components/common/memberNavbar/index.js'
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 
-export default function ProfilePhoto() {
+export default function StudyTickets() {
   const { auth, setAuth, logout } = useContext(AuthContext)
   const router = useRouter()
-  const { id } = router.query
-  const [user, setUser] = useState('')
-  const [invalidFields, setInvalidFields] = useState([])
-  const [errorMessage, setErrorMessage] = useState('') // Define a state variable to store the error message
+
   const [getImg, setGetImg] = useState('')
   const [modalIsOpen, setModalIsOpen] = useState(false) // 設定 modal 是否打開
+  const [member, setMember] = useState('')
 
   useEffect(() => {
     Modal.setAppElement('#__next') // 設置 appElement 為 #__next
@@ -31,10 +29,10 @@ export default function ProfilePhoto() {
 
   //   Modal.setAppElement('#__next'); // 設置 appElement, Modal專用
 
-  // 讀出照片
+  // 讀出准考證
   useEffect(() => {
     if (auth.token) {
-      fetch(process.env.API_SERVER + '/member/profilePhoto', {
+      fetch(process.env.API_SERVER + '/member/studyTickets', {
         headers: {
           Authorization: 'Bearer ' + auth.token,
         },
@@ -42,13 +40,12 @@ export default function ProfilePhoto() {
         .then((r) => r.json())
         .then((data) => {
           console.log(data)
-          if (data && data.member_profile) {
+          setMember(data)
+          if (data && data.Ticket_Img) {
             // 從後端獲取到圖片資料，現在您可以將其顯示在前端
-            const imageURL =
-              process.env.API_SERVER + '/img/' + data.member_profile
+            const imageURL = process.env.API_SERVER + '/img/' + data.Ticket_Img
             setGetImg(imageURL)
           }
-          console.log(data.member_profile)
         })
     } else {
       // Handle the case when auth.token is not available or user is not logged in
@@ -57,12 +54,12 @@ export default function ProfilePhoto() {
     }
   }, [auth.token, getImg])
 
-  // 上傳照片測試
+  // 上傳准考證測試
 
   const handleImageClick = () => {
-    // 當點擊照片時，此函數將被觸發
+    // 當點擊准考證時，此函數將被觸發
     // 在此，您可以打開小視窗
-    console.log('點擊照片')
+    console.log('點擊准考證')
 
     // 觸發文件輸入框的點擊事件
     inputRef.current.click()
@@ -83,7 +80,7 @@ export default function ProfilePhoto() {
     if (str) {
       const obj = JSON.parse(str)
       const Authorization = 'Bearer ' + obj.token
-      fetch(process.env.API_SERVER + '/member/profilePhoto', {
+      fetch(process.env.API_SERVER + '/member/studyTickets', {
         method: 'POST',
         body: fd,
         headers: {
@@ -92,11 +89,11 @@ export default function ProfilePhoto() {
       })
         .then((res) => res.json())
         .then((data) => {
-          setGetImg(process.env.API_SERVER + '/img/' + data.filename) // 設置用戶照片的 URL
+          setGetImg(process.env.API_SERVER + '/img/' + data.filename) // 設置用戶准考證的 URL
           setModalIsOpen(false) // 上傳完成後，關閉小視窗
         })
         .catch((error) => {
-          console.error('上傳照片時出錯:', error)
+          console.error('上傳准考證時出錯:', error)
           setModalIsOpen(false) // 如果上傳失敗，也要關閉小視窗
         })
     }
@@ -112,7 +109,7 @@ export default function ProfilePhoto() {
     if (str) {
       const obj = JSON.parse(str)
       const Authorization = 'Bearer ' + obj.token
-      fetch(process.env.API_SERVER + '/member/profilePhoto', {
+      fetch(process.env.API_SERVER + '/member/studyTickets', {
         method: 'DELETE',
         headers: {
           Authorization,
@@ -125,45 +122,56 @@ export default function ProfilePhoto() {
             console.log(data.message)
             setModalIsOpen(false)
           } else {
-            console.error('刪除照片時出錯:', data.message)
+            console.error('刪除准考證時出錯:', data.message)
           }
         })
         .catch((error) => {
-          console.error('刪除照片時出錯:', error)
+          console.error('刪除准考證時出錯:', error)
         })
     }
   }
   const inputRef = useRef(null)
 
   // if (loading) {
-  //   return <div>Loading...</div>; // 等待取得使用者的 member_profile
+  //   return <div>Loading...</div>; // 等待取得使用者的 Ticket_Img
   // }
-
+  console.log(getImg)
   return (
     <>
-      <Row className={styles.flex_centre}>
-        <Col>
-          {/* 使用點擊事件觸發小視窗 */}
-          <div className={styles.photoFrame}>
-            <img
-              src={
-                getImg ? getImg : process.env.API_SERVER + '/img/babyDory.jpg'
-              }
-              alt="已上傳的圖片"
-              width={200}
-              height={200}
-              onClick={() => setModalIsOpen(true)}
-            />
-          </div>
-        </Col>
-      </Row>
+      <div className={`${styles.flex_centre} `}>
+        <div className={styles.photoFrame}>
+          <img
+            src={getImg ? getImg : process.env.API_SERVER + '/img/nullGray.png'}
+            alt="已上傳的圖片"
+            width={200}
+            height={200}
+            onClick={() => setModalIsOpen(true)}
+          />
+        </div>
+      </div>
+      <div className={`${styles.flex_centre} mt40px`}>
+        <div className={`${styles.flex} w525px`}>
+          <InputBox
+            prompt="姓名"
+            width={200}
+            value={member.member_name}
+            readOnly
+          />
+          <InputBox
+            prompt="第一志願"
+            width={200}
+            value={member.dream_school}
+            readOnly
+          />
+        </div>
+      </div>
 
       {/* 小視窗 */}
 
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={handleModalClose}
-        contentLabel="更換大頭貼"
+        contentLabel="更換准考證"
         style={{
           overlay: {
             backgroundColor: 'rgba(0, 0, 0, 0.5)', // 背景顏色透明度
@@ -177,13 +185,13 @@ export default function ProfilePhoto() {
         }}
       >
         <div className={`${styles.flex_centre2} fwBold`}>
-          <h2>更換大頭貼</h2>
+          <h2>更換准考證</h2>
           <p>選擇您想要進行的操作：</p>
         </div>
         {/* <div className={styles.flex_centre2}> */}
         <Button
-          text="上傳大頭貼"
-          btnColor="green"
+          text="上傳准考證"
+          btnColor="brown"
           link={() => {
             handleImageClick()
           }}
@@ -193,8 +201,8 @@ export default function ProfilePhoto() {
         />
 
         <Button
-          text="移除大頭貼"
-          btnColor="hot_pink"
+          text="移除准考證"
+          btnColor="brown"
           link={() => {
             handleRemoveImage()
           }}
@@ -204,7 +212,7 @@ export default function ProfilePhoto() {
         />
         <Button
           text="取消"
-          btnColor="orderGray"
+          btnColor="brown"
           link={() => {
             handleModalClose()
           }}

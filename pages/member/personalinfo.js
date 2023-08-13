@@ -100,7 +100,7 @@ export default function Personalinfo() {
     },
     member_address: {
       required: true,
-      regex: /^[\u4e00-\u9fa5\d]+$/,
+      regex: /^(?=.*[\u4e00-\u9fa5])(?=.*\d)[\u4e00-\u9fa5\d]+$/,
       message: '地址請輸入中文(和數字)',
     },
   }

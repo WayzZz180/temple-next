@@ -296,16 +296,21 @@ export default function SignUp() {
             />
           </Col>
           {showPassword ? (
-            <div className={styles.flex_start} style={{ cursor: 'pointer' }}>
-              <VisibilityOffIcon
-                onClick={toggleShowPassword}
-                className="me10px"
-              />
-              隱藏密碼{' '}
+            <div
+              className={styles.flex_start}
+              style={{ cursor: 'pointer' }}
+              onClick={toggleShowPassword}
+            >
+              <VisibilityOffIcon className="me10px" />
+              隱藏密碼
             </div>
           ) : (
-            <div className={styles.flex_start} style={{ cursor: 'pointer' }}>
-              <VisibilityIcon onClick={toggleShowPassword} className="me10px" />
+            <div
+              className={styles.flex_start}
+              style={{ cursor: 'pointer' }}
+              onClick={toggleShowPassword}
+            >
+              <VisibilityIcon className="me10px" />
               顯示密碼
             </div>
           )}
@@ -388,6 +393,37 @@ export default function SignUp() {
           </Col>
         </Row>
       </Container>
+      {isIncorrect ? (
+        <Alert
+          isOpen={true}
+          text={'請檢查輸入資料是否正確'}
+          status="false"
+          setIsOpen={setIsIncorrect}
+        />
+      ) : (
+        ''
+      )}
+      {isUsed ? (
+        <Alert
+          isOpen={true}
+          text={errorMessage}
+          status="false"
+          setIsOpen={setIsUsed}
+        />
+      ) : (
+        ''
+      )}
+
+      {isSuccessful ? (
+        <Alert
+          isOpen={true}
+          text={'註冊成功，請重新登入'}
+          status="correct"
+          setIsOpen={setIsSuccessful}
+        />
+      ) : (
+        ''
+      )}
     </>
   )
 }
