@@ -1,14 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './header.module.sass'
 import Link from 'next/link'
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
-import CartContext from '@/contexts/CartCountContext'
+import CartCountContext from '@/contexts/CartCountContext'
+
 import AuthContext from '@/contexts/AuthContext'
+import { set } from 'lodash'
 export default function NavbarItem({ title = '', title2, links }) {
-  const { cartCount } = useContext(CartContext)
+  // const { cartCount } = useContext(CartContext)
+
   const { auth, setAuth, logout } = useContext(AuthContext)
+  const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
   const router = useRouter()
+  const [login, setLogin] = useState(false)
+
+  useEffect(() => {
+    if (localStorage.getItem('auth')) {
+      setLogin(true)
+    } else {
+      setLogin(false)
+    }
+  }, [router.query])
+
   return (
     <li className={`mt10px`}>
       <div className={`${styles.title} fs14px ps30px `}>{title}</div>
@@ -33,7 +47,9 @@ export default function NavbarItem({ title = '', title2, links }) {
             <Link href={auth.id === 0 ? '' : link.url} className={`fs14px`}>
               {link.label}
               {link.label === '購物車' ? (
-                <span className={styles.count}>（{cartCount}）</span>
+                <span className={styles.count}>
+                  （{login ? cartCount : 0}）
+                </span>
               ) : (
                 ''
               )}

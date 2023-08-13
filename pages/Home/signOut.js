@@ -24,12 +24,10 @@ import HomeCarousels from '@/components/common/carousel/HomeCarousels'
 import HomeDoor from '@/components/common/cards/HomeDoor'
 import HomeDoor2 from '@/components/common/cards/HomeDoor2'
 import { Route, useRouter } from 'next/router'
-
 export default function Home() {
   const Router = useRouter()
   const [isClicked, setIsClicked] = useState(false)
   const { auth, setAuth, logout } = useContext(AuthContext)
-
   const handleClick = () => {
     setIsClicked(true)
     setTimeout(() => {
