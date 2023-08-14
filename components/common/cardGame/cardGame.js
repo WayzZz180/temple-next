@@ -303,6 +303,7 @@ export default function CardGame() {
           <div className={styles.game_board}>
             {cards.map((card) => (
               <div
+                role="presentation"
                 key={card.id}
                 className={`${styles.card_container} ${
                   card.flipped ? styles.flip : ''
@@ -344,14 +345,14 @@ export default function CardGame() {
         </Col>
       </Row>
       <Row>
-        <Col className="nowrap">
+        <Col className="nowrap mt15px">
           {/* 計時器 */}
           <div className={styles.timer}>{formattedTime}</div>
         </Col>
         <Col className="nowrap">
           {/* 開始遊戲 按鈕*/}
           <div className={styles.startBtn}>
-            <div>
+            <div className="mt15px mb15px">
               <Button
                 text="開始"
                 btnColor={gameStarted ? 'orderGray' : 'green'}

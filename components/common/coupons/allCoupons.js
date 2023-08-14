@@ -43,8 +43,8 @@ export default function AllCoupons() {
 
   return (
     <>
-      <button onClick={() => setSortOrder('ASC')}>ASC</button>
-      <button onClick={() => setSortOrder('DESC')}>DESC</button>
+      {/* <button onClick={() => setSortOrder('ASC')}>ASC</button>
+      <button onClick={() => setSortOrder('DESC')}>DESC</button> */}
       {coupon && coupon.length > 0 ? (
         coupon.map((v, i) => (
           <div key={v.coupon_status_id}>

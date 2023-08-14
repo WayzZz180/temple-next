@@ -318,7 +318,7 @@ export default function SpinWheel({ updateSpinWheel }) {
           </div>
           <div className="fwBold fs30px mb20px">簽到成功</div>
           <div className="fwBold fs24px mb25px">
-            恭喜獲得 {coupon_name} 折價券，價值
+            恭喜獲得 {coupon_name} 折價券，價值NT$
             {coupon_value}
           </div>
           <Button

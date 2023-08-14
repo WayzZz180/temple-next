@@ -100,20 +100,7 @@ export default function Login() {
       <Head>
         <title>會員登入</title>
       </Head>
-      <Container className={styles.flex}>
-        <Row>
-          <Col>
-            <div className="mt100px">
-              <Image
-                src={doorGodLeft}
-                alt="doorGodLeft"
-                // height={835}
-                width={525}
-              ></Image>
-            </div>
-          </Col>
-        </Row>
-      </Container>
+
       <Container className={styles.flex}>
         <div id="background" className={`${styles.background}`}>
           <div className={`${styles.position}`}>

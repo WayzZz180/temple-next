@@ -97,9 +97,11 @@ export default function dailySignIn() {
         </Col>
       </Row>
       {/* 簽到記錄 */}
-      <Row className={styles.flex_centre}>
+      <Row className={`${styles.flex_centre} ${styles.record} fwBold`}>
         <Col>
-          <div className={styles.text_align}>近10筆簽到記錄:</div>
+          <div className={`${styles.text_align} pt15px pb15px`}>
+            近10筆簽到記錄:
+          </div>
           {si.length > 0 ? (
             si.map((v, i) => {
               // Date formatting code here
