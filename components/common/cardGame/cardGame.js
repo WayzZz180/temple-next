@@ -396,7 +396,7 @@ export default function CardGame() {
         <Col className="nowrap">
           {idRange === 8 ? (
             <Button
-              text="調整難度為:下下籤?"
+              text="調整難度為:困難"
               link={() => {
                 setIdRange(32)
               }}
@@ -404,9 +404,9 @@ export default function CardGame() {
             />
           ) : (
             <Button
-              text="調整難度為:上上籤?"
+              text="調整難度為:簡單"
               link={() => {
-                setIdRange(32)
+                setIdRange(8)
               }}
               disabled={isRunning || gameStarted}
             />
