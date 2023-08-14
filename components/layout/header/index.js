@@ -57,19 +57,19 @@ export default function Header() {
       title: '04',
       title2: '線上遶境',
       links: [
-        { label: '線上測驗', url: '#' },
-        { label: '遶境直播', url: '#' },
+        { label: '線上測驗', url: '/pilgrimage' },
+        { label: '遶境直播', url: '/pilgrimage' },
       ],
     },
     {
       title: '05',
       title2: '求神問卜',
       links: [
-        { label: '求籤詩', url: '#' },
-        { label: '求紅線', url: '#' },
-        { label: '點姻緣燈', url: '#' },
-        { label: '點學業燈', url: '#' },
-        { label: '上傳准考證', url: '#' },
+        { label: '求籤詩', url: '/pray' },
+        { label: '求紅線', url: '/pray' },
+        { label: '點姻緣燈', url: '/pray' },
+        { label: '點學業燈', url: '/pray' },
+        { label: '上傳准考證', url: '/pray' },
       ],
     },
     {
