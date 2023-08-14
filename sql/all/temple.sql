@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Aug 14, 2023 at 04:32 AM
--- Server version: 5.7.24
--- PHP Version: 8.0.1
+-- 主機： localhost:8889
+-- 產生時間： 2023 年 08 月 14 日 04:48
+-- 伺服器版本： 5.7.39
+-- PHP 版本： 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `temple`
+-- 資料庫： `temple`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `amulet`
+-- 資料表結構 `amulet`
 --
 
 CREATE TABLE `amulet` (
@@ -35,7 +35,7 @@ CREATE TABLE `amulet` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `amulet`
+-- 傾印資料表的資料 `amulet`
 --
 
 INSERT INTO `amulet` (`Member_ID`, `Name`, `Sid`, `Datetime`) VALUES
@@ -53,7 +53,7 @@ INSERT INTO `amulet` (`Member_ID`, `Name`, `Sid`, `Datetime`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `browse_history`
+-- 資料表結構 `browse_history`
 --
 
 CREATE TABLE `browse_history` (
@@ -64,7 +64,7 @@ CREATE TABLE `browse_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `browse_history`
+-- 傾印資料表的資料 `browse_history`
 --
 
 INSERT INTO `browse_history` (`bid`, `member_id`, `pid`, `created_at`) VALUES
@@ -122,7 +122,7 @@ INSERT INTO `browse_history` (`bid`, `member_id`, `pid`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cart`
+-- 資料表結構 `cart`
 --
 
 CREATE TABLE `cart` (
@@ -134,7 +134,7 @@ CREATE TABLE `cart` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `cart`
+-- 傾印資料表的資料 `cart`
 --
 
 INSERT INTO `cart` (`sid`, `pid`, `quantity`, `created_at`, `member_id`) VALUES
@@ -145,7 +145,7 @@ INSERT INTO `cart` (`sid`, `pid`, `quantity`, `created_at`, `member_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- 資料表結構 `categories`
 --
 
 CREATE TABLE `categories` (
@@ -155,7 +155,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `categories`
+-- 傾印資料表的資料 `categories`
 --
 
 INSERT INTO `categories` (`cid`, `category_name`, `parent_id`) VALUES
@@ -201,7 +201,7 @@ INSERT INTO `categories` (`cid`, `category_name`, `parent_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comment`
+-- 資料表結構 `comment`
 --
 
 CREATE TABLE `comment` (
@@ -213,7 +213,7 @@ CREATE TABLE `comment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `comment`
+-- 傾印資料表的資料 `comment`
 --
 
 INSERT INTO `comment` (`sid`, `member_forum_name`, `comment`, `comment.time`, `post_sid`) VALUES
@@ -541,7 +541,7 @@ INSERT INTO `comment` (`sid`, `member_forum_name`, `comment`, `comment.time`, `p
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comment_img`
+-- 資料表結構 `comment_img`
 --
 
 CREATE TABLE `comment_img` (
@@ -553,7 +553,7 @@ CREATE TABLE `comment_img` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `coupons`
+-- 資料表結構 `coupons`
 --
 
 CREATE TABLE `coupons` (
@@ -565,7 +565,7 @@ CREATE TABLE `coupons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `coupons`
+-- 傾印資料表的資料 `coupons`
 --
 
 INSERT INTO `coupons` (`coupon_id`, `coupon_type`, `coupon_name`, `coupon_value`, `conditions`) VALUES
@@ -586,7 +586,7 @@ INSERT INTO `coupons` (`coupon_id`, `coupon_type`, `coupon_name`, `coupon_value`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `coupons_status`
+-- 資料表結構 `coupons_status`
 --
 
 CREATE TABLE `coupons_status` (
@@ -600,7 +600,7 @@ CREATE TABLE `coupons_status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `coupons_status`
+-- 傾印資料表的資料 `coupons_status`
 --
 
 INSERT INTO `coupons_status` (`coupon_status_id`, `coupon_id`, `member_id`, `usage_status`, `start_date`, `expiration_date`, `created_at`) VALUES
@@ -625,7 +625,7 @@ INSERT INTO `coupons_status` (`coupon_status_id`, `coupon_id`, `member_id`, `usa
 -- --------------------------------------------------------
 
 --
--- Table structure for table `daily_signins`
+-- 資料表結構 `daily_signins`
 --
 
 CREATE TABLE `daily_signins` (
@@ -636,7 +636,7 @@ CREATE TABLE `daily_signins` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `daily_signins`
+-- 傾印資料表的資料 `daily_signins`
 --
 
 INSERT INTO `daily_signins` (`signin_id`, `member_id`, `signin_date`, `created_at`) VALUES
@@ -747,7 +747,7 @@ INSERT INTO `daily_signins` (`signin_id`, `member_id`, `signin_date`, `created_a
 -- --------------------------------------------------------
 
 --
--- Table structure for table `good`
+-- 資料表結構 `good`
 --
 
 CREATE TABLE `good` (
@@ -757,7 +757,7 @@ CREATE TABLE `good` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `good`
+-- 傾印資料表的資料 `good`
 --
 
 INSERT INTO `good` (`good_sid`, `post_sid`, `member_id`) VALUES
@@ -771,7 +771,7 @@ INSERT INTO `good` (`good_sid`, `post_sid`, `member_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `knowledge`
+-- 資料表結構 `knowledge`
 --
 
 CREATE TABLE `knowledge` (
@@ -784,7 +784,7 @@ CREATE TABLE `knowledge` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `knowledgecategory`
+-- 資料表結構 `knowledgecategory`
 --
 
 CREATE TABLE `knowledgecategory` (
@@ -793,7 +793,7 @@ CREATE TABLE `knowledgecategory` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `knowledgecategory`
+-- 傾印資料表的資料 `knowledgecategory`
 --
 
 INSERT INTO `knowledgecategory` (`sid`, `k_type_name`) VALUES
@@ -805,7 +805,7 @@ INSERT INTO `knowledgecategory` (`sid`, `k_type_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `knowledge_img`
+-- 資料表結構 `knowledge_img`
 --
 
 CREATE TABLE `knowledge_img` (
@@ -817,7 +817,7 @@ CREATE TABLE `knowledge_img` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `like_products`
+-- 資料表結構 `like_products`
 --
 
 CREATE TABLE `like_products` (
@@ -828,7 +828,7 @@ CREATE TABLE `like_products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `like_products`
+-- 傾印資料表的資料 `like_products`
 --
 
 INSERT INTO `like_products` (`lid`, `member_id`, `pid`, `created_at`) VALUES
@@ -841,29 +841,146 @@ INSERT INTO `like_products` (`lid`, `member_id`, `pid`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `love_light`
+-- 資料表結構 `Love_Light`
 --
 
-CREATE TABLE `love_light` (
-  `Member_ID` int(11) DEFAULT NULL,
+CREATE TABLE `Love_Light` (
+  `Member_ID` varchar(255) DEFAULT NULL,
   `Tower_ID` varchar(50) DEFAULT NULL,
-  `All_Light` varchar(50) NOT NULL,
+  `All_Light` int(255) NOT NULL,
   `LocationX` varchar(50) NOT NULL,
   `LocationY` varchar(50) NOT NULL,
   `Datetime` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `love_light`
+-- 傾印資料表的資料 `Love_Light`
 --
 
-INSERT INTO `love_light` (`Member_ID`, `Tower_ID`, `All_Light`, `LocationX`, `LocationY`, `Datetime`) VALUES
-(12, NULL, 'aaa', '10', 'H', '2023-08-04 17:17:29');
+INSERT INTO `Love_Light` (`Member_ID`, `Tower_ID`, `All_Light`, `LocationX`, `LocationY`, `Datetime`) VALUES
+('12', '', 1, '7', 'P', '2023-08-07 21:14:17'),
+('12', '', 2, '21', 'Q', '2023-08-07 21:14:26'),
+('12', '', 3, '26', 'R', '2023-08-07 21:14:35'),
+('12', '', 4, '4', 'T', '2023-08-07 21:14:45'),
+('12', '', 5, '19', 'T', '2023-08-07 21:17:55'),
+('12', '', 6, '14', 'H', '2023-08-07 22:35:18'),
+('12', 'B', 7, '12', 'M', '2023-08-07 22:38:25'),
+('12', 'A', 8, '15', 'M', '2023-08-07 22:38:49'),
+('12', 'C', 9, '23', 'K', '2023-08-07 22:40:33'),
+('12', 'C', 10, '11', 'J', '2023-08-07 21:14:45'),
+('1', 'D', 11, '2', 'Y', '2023-08-07 21:14:45'),
+('1', 'B', 12, '7', 'Y', '2023-08-07 21:14:45'),
+('1', 'A', 13, '10', 'Y', '2023-08-07 21:14:45'),
+('1', 'C', 14, '13', 'X', '2023-08-07 21:14:45'),
+('1', 'C', 15, '5', 'W', '2023-08-07 21:14:45'),
+('1', 'D', 16, '10', 'W', '2023-08-07 21:14:45'),
+('1', 'B', 17, '14', 'W', '2023-08-07 21:14:45'),
+('1', 'A', 18, '3', 'V', '2023-08-07 21:14:45'),
+('1', 'C', 19, '7', 'V', '2023-08-07 21:14:45'),
+('1', 'C', 20, '14', 'V', '2023-08-07 21:14:45'),
+('1', 'D', 21, '5', 'U', '2023-08-07 21:14:45'),
+('1', 'B', 22, '10', 'U', '2023-08-07 21:14:45'),
+('1', 'A', 23, '3', 'T', '2023-08-07 21:14:45'),
+('1', 'C', 24, '7', 'T', '2023-08-07 21:14:45'),
+('1', 'C', 25, '6', 'S', '2023-08-07 21:14:45'),
+('1', 'D', 26, '7', 'S', '2023-08-07 21:14:45'),
+('1', 'B', 27, '8', 'S', '2023-08-07 21:14:45'),
+('1', 'A', 28, '12', 'S', '2023-08-07 21:14:45'),
+('1', 'C', 29, '5', 'R', '2023-08-07 21:14:45'),
+('1', 'C', 30, '8', 'Q', '2023-08-07 21:14:45'),
+('1', 'D', 31, '8', 'P', '2023-08-07 21:14:45'),
+('1', 'B', 32, '9', 'P', '2023-08-07 21:14:45'),
+('1', 'A', 33, '10', 'P', '2023-08-07 21:14:45'),
+('1', 'C', 34, '12', 'P', '2023-08-07 21:14:45'),
+('1', 'C', 35, '1', 'N', '2023-08-07 21:14:45'),
+('1', 'D', 36, '15', 'N', '2023-08-07 21:14:45'),
+('1', 'B', 37, '6', 'M', '2023-08-07 21:14:45'),
+('1', 'A', 38, '8', 'M', '2023-08-07 21:14:45'),
+('1', 'C', 39, '7', 'L', '2023-08-07 21:14:45'),
+('1', 'C', 40, '8', 'K', '2023-08-07 21:14:45'),
+('1', 'D', 41, '13', 'K', '2023-08-07 21:14:45'),
+('1', 'B', 42, '4', 'J', '2023-08-07 21:14:45'),
+('1', 'A', 43, '14', 'J', '2023-08-07 21:14:45'),
+('1', 'C', 44, '15', 'J', '2023-08-07 21:14:45'),
+('1', 'C', 45, '13', 'I', '2023-08-07 21:14:45'),
+('1', 'D', 46, '5', 'H', '2023-08-07 21:14:45'),
+('1', 'B', 47, '10', 'H', '2023-08-07 21:14:45'),
+('1', 'A', 48, '5', 'G', '2023-08-07 21:14:45'),
+('1', 'C', 49, '12', 'G', '2023-08-07 21:14:45'),
+('1', 'C', 50, '7', 'F', '2023-08-07 21:14:45'),
+('1', 'D', 51, '1', 'E', '2023-08-07 21:14:45'),
+('1', 'B', 52, '4', 'E', '2023-08-07 21:14:45'),
+('1', 'A', 53, '10', 'D', '2023-08-07 21:14:45'),
+('1', 'C', 54, '11', 'D', '2023-08-07 21:14:45'),
+('1', 'C', 55, '15', 'D', '2023-08-07 21:14:45'),
+('1', 'D', 56, '5', 'C', '2023-08-07 21:14:45'),
+('1', 'B', 57, '6', 'C', '2023-08-07 21:14:45'),
+('1', 'A', 58, '7', 'C', '2023-08-07 21:14:45'),
+('1', 'C', 59, '9', 'B', '2023-08-07 21:14:45'),
+('1', 'C', 60, '12', 'B', '2023-08-07 21:14:45'),
+('1', 'D', 61, '13', 'B', '2023-08-07 21:14:45'),
+('1', 'B', 62, '7', 'A', '2023-08-07 21:14:45'),
+('1', 'A', 63, '22', 'Z', '2023-08-07 21:14:45'),
+('1', 'C', 64, '26', 'Y', '2023-08-07 21:14:45'),
+('1', 'C', 65, '28', 'Y', '2023-08-07 21:14:45'),
+('1', 'D', 66, '19', 'X', '2023-08-07 21:14:45'),
+('1', 'B', 67, '22', 'X', '2023-08-07 21:14:45'),
+('1', 'A', 68, '24', 'W', '2023-08-07 21:14:45'),
+('1', 'C', 69, '28', 'W', '2023-08-07 21:14:45'),
+('1', 'C', 70, '18', 'V', '2023-08-07 21:14:45'),
+('1', 'D', 71, '22', 'V', '2023-08-07 21:14:45'),
+('1', 'D', 72, '26', 'V', '2023-08-07 21:14:45'),
+('1', 'B', 73, '28', 'V', '2023-08-07 21:14:45'),
+('1', 'A', 74, '25', 'T', '2023-08-07 21:14:45'),
+('1', 'C', 75, '18', 'S', '2023-08-07 21:14:45'),
+('1', 'C', 76, '22', 'S', '2023-08-07 21:14:45'),
+('1', 'D', 77, '28', 'S', '2023-08-07 21:14:45'),
+('1', 'D', 78, '19', 'R', '2023-08-07 21:14:45'),
+('1', 'B', 79, '21', 'R', '2023-08-07 21:14:45'),
+('1', 'A', 80, '22', 'R', '2023-08-07 21:14:45'),
+('1', 'C', 81, '25', 'Q', '2023-08-07 21:14:45'),
+('1', 'C', 82, '28', 'Q', '2023-08-07 21:14:45'),
+('1', 'D', 83, '18', 'P', '2023-08-07 21:14:45'),
+('1', 'D', 84, '21', 'P', '2023-08-07 21:14:45'),
+('1', 'B', 85, '22', 'P', '2023-08-07 21:14:45'),
+('1', 'A', 86, '24', 'P', '2023-08-07 21:14:45'),
+('1', 'C', 87, '22', 'O', '2023-08-07 21:14:45'),
+('1', 'C', 88, '25', 'O', '2023-08-07 21:14:45'),
+('1', 'D', 89, '29', 'O', '2023-08-07 21:14:45'),
+('1', 'D', 90, '22', 'N', '2023-08-07 21:14:45'),
+('1', 'B', 91, '20', 'M', '2023-08-07 21:14:45'),
+('1', 'A', 92, '26', 'M', '2023-08-07 21:14:45'),
+('1', 'C', 93, '30', 'M', '2023-08-07 21:14:45'),
+('1', 'C', 94, '22', 'L', '2023-08-07 21:14:45'),
+('1', 'D', 95, '19', 'K', '2023-08-07 21:14:45'),
+('1', 'D', 96, '22', 'K', '2023-08-07 21:14:45'),
+('1', 'B', 97, '26', 'K', '2023-08-07 21:14:45'),
+('1', 'A', 98, '17', 'J', '2023-08-07 21:14:45'),
+('1', 'C', 99, '24', 'J', '2023-08-07 21:14:45'),
+('1', 'C', 100, '30', 'J', '2023-08-07 21:14:45'),
+('1', 'D', 101, '22', 'I', '2023-08-07 21:14:45'),
+('1', 'D', 102, '18', 'H', '2023-08-07 21:14:45'),
+('1', 'B', 103, '22', 'G', '2023-08-07 21:14:45'),
+('1', 'A', 104, '30', 'G', '2023-08-07 21:14:45'),
+('1', 'C', 105, '18', 'F', '2023-08-07 21:14:45'),
+('1', 'C', 106, '20', 'F', '2023-08-07 21:14:45'),
+('1', 'D', 107, '26', 'F', '2023-08-07 21:14:45'),
+('1', 'D', 108, '27', 'E', '2023-08-07 21:14:45'),
+('1', 'B', 109, '22', 'D', '2023-08-07 21:14:45'),
+('1', 'A', 110, '29', 'D', '2023-08-07 21:14:45'),
+('1', 'C', 111, '21', 'C', '2023-08-07 21:14:45'),
+('1', 'C', 112, '24', 'C', '2023-08-07 21:14:45'),
+('1', 'D', 113, '18', 'B', '2023-08-07 21:14:45'),
+('1', 'D', 114, '23', 'B', '2023-08-07 21:14:45'),
+('1', 'B', 115, '26', 'B', '2023-08-07 21:14:45'),
+('1', 'A', 116, '24', 'A', '2023-08-07 21:14:45'),
+('1', 'C', 117, '28', 'A', '2023-08-07 21:14:45'),
+('12', 'A', 118, '8', 'Z', '2023-08-12 09:02:15');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `love_light_tower`
+-- 資料表結構 `love_light_tower`
 --
 
 CREATE TABLE `love_light_tower` (
@@ -872,7 +989,7 @@ CREATE TABLE `love_light_tower` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `love_light_tower`
+-- 傾印資料表的資料 `love_light_tower`
 --
 
 INSERT INTO `love_light_tower` (`LightTower`, `Tower_ID`) VALUES
@@ -886,7 +1003,7 @@ INSERT INTO `love_light_tower` (`LightTower`, `Tower_ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `love_redline`
+-- 資料表結構 `love_redline`
 --
 
 CREATE TABLE `love_redline` (
@@ -899,7 +1016,7 @@ CREATE TABLE `love_redline` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `love_redline`
+-- 傾印資料表的資料 `love_redline`
 --
 
 INSERT INTO `love_redline` (`Member_ID`, `SID`, `Name`, `Birthday`, `Address`, `Datetime`) VALUES
@@ -909,7 +1026,7 @@ INSERT INTO `love_redline` (`Member_ID`, `SID`, `Name`, `Birthday`, `Address`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `members`
+-- 資料表結構 `members`
 --
 
 CREATE TABLE `members` (
@@ -926,7 +1043,7 @@ CREATE TABLE `members` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `members`
+-- 傾印資料表的資料 `members`
 --
 
 INSERT INTO `members` (`member_id`, `member_account`, `member_password`, `member_name`, `member_address`, `member_phone`, `member_birthday`, `member_forum_name`, `member_profile`, `member_invoice`) VALUES
@@ -1020,10 +1137,10 @@ INSERT INTO `members` (`member_id`, `member_account`, `member_password`, `member
 -- --------------------------------------------------------
 
 --
--- Table structure for table `online_question`
+-- 資料表結構 `Online_Question`
 --
 
-CREATE TABLE `online_question` (
+CREATE TABLE `Online_Question` (
   `Question_ID` int(50) NOT NULL,
   `Question` varchar(255) NOT NULL,
   `option1` varchar(255) NOT NULL,
@@ -1033,15 +1150,15 @@ CREATE TABLE `online_question` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `online_question`
+-- 傾印資料表的資料 `Online_Question`
 --
 
-INSERT INTO `online_question` (`Question_ID`, `Question`, `option1`, `option2`, `option3`, `Answer`) VALUES
+INSERT INTO `Online_Question` (`Question_ID`, `Question`, `option1`, `option2`, `option3`, `Answer`) VALUES
 (1, '三月瘋媽祖，常在電視上看到一群人，排成一長條人龍，跪在地上，等待媽祖神轎經 過時，從其底下鑽過，稱為「鑽神轎」。請問「鑽神轎」這個動作，從文化層面具有何 種意義？', '(A)以跪拜禮表達對媽祖的崇敬', '(B)儀式性動作，具有消災解厄保平安的意義', '(C)呈現媽祖信徒人數眾多', 'B'),
 (2, '「門神」向為臺灣各式廟宇或城門之重要守護神祇，不同年代或宗教信仰對「門神」有不同之稱呼，下 列何者錯誤？', '(A)神茶與鬱壘', '(B)茄藍與韋馱', '(C)增福財帛星君與玄壇元帥趙公明', 'C'),
 (3, '臺灣傳統建築裝飾題材上，常用的避邪圖案為何？', '(A)蝙蝠', '(B)石敢當', '(C)柿子', 'B'),
 (4, '燒金，也就是焚燒金、銀紙錢（冥紙），是臺灣常見的宗教習俗，燃燒金紙的習俗是為了什麼？', '(A)驅除厄運', '(B)酬謝恭送神靈', '(C)儀式慶祝', 'B'),
-(5, '「粉紅超跑」指的是什麼？', '(A)粉紅法拉利', '(B)在義大利舉辦的賽車遊行', '(C)白沙屯媽祖蓋有粉紅色遮雨布的鑾轎', 'C'),
+(5, '白沙屯拱天宮香火鼎盛，每年帶領信眾，從通霄徒步遶境到北港，常聽大家稱呼的「粉紅超跑」指的是什麼？', '(A)粉紅法拉利', '(B)在義大利舉辦的賽車遊行', '(C)蓋有粉紅色遮雨布的鑾轎', 'C'),
 (6, '在台灣宮廟信仰中，文昌帝君是一位重要的神明。請問在宮廟中，文昌帝君扮演著什麼角色？', '(A) 財富之神，帶來財富和好運', '(B) 學業之神，掌管人間文書和學業', '(C) 醫療之神，守護人們的健康和醫藥事務', 'B'),
 (7, '月老，相傳是人間「媒神」職掌民間締結婚姻之事，專門負責牽線搭橋，主持姻緣和婚姻的神祇，月老通常被形容為一位什麼樣的形象？', '(A) 穿著紅色套裝，會送給好孩子神秘禮物的胖胖老人', '(B)身穿水手服，手持彎月形神杖，代表愛與正義的美少女', '(C)白鬍長鬚，臉泛紅光的慈祥老者，拄著拐杖、手持著姻緣簿', 'C'),
 (8, '鬼門開時，使得孤魂野鬼得以暫時返回陽間。為了安撫這些遊魂野鬼，人們會進行各種供養儀式，為祂們解除冤屈和苦楚，以下哪個活動是為了供養亡靈和孤魂野鬼？', '(A)在桌子依序擺放供品，點香祭拜', '(B)放歌跳舞', '(C)舉辦大型祭典放煙火', 'A');
@@ -1049,10 +1166,10 @@ INSERT INTO `online_question` (`Question_ID`, `Question`, `option1`, `option2`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `online_quiz`
+-- 資料表結構 `Online_Quiz`
 --
 
-CREATE TABLE `online_quiz` (
+CREATE TABLE `Online_Quiz` (
   `Member_ID` int(11) NOT NULL,
   `Sid` varchar(50) NOT NULL,
   `Score` varchar(50) NOT NULL,
@@ -1062,7 +1179,7 @@ CREATE TABLE `online_quiz` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_details`
+-- 資料表結構 `order_details`
 --
 
 CREATE TABLE `order_details` (
@@ -1074,7 +1191,7 @@ CREATE TABLE `order_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `order_details`
+-- 傾印資料表的資料 `order_details`
 --
 
 INSERT INTO `order_details` (`odid`, `oid`, `quantity`, `pid`, `product_price`) VALUES
@@ -1090,7 +1207,7 @@ INSERT INTO `order_details` (`odid`, `oid`, `quantity`, `pid`, `product_price`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_summary`
+-- 資料表結構 `order_summary`
 --
 
 CREATE TABLE `order_summary` (
@@ -1109,7 +1226,7 @@ CREATE TABLE `order_summary` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `order_summary`
+-- 傾印資料表的資料 `order_summary`
 --
 
 INSERT INTO `order_summary` (`oid`, `member_id`, `total`, `customer_name`, `customer_email`, `customer_phone`, `customer_address`, `payment`, `delivery`, `coupon`, `created_at`, `status`) VALUES
@@ -1120,10 +1237,10 @@ INSERT INTO `order_summary` (`oid`, `member_id`, `total`, `customer_name`, `cust
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal`
+-- 資料表結構 `Personal`
 --
 
-CREATE TABLE `personal` (
+CREATE TABLE `Personal` (
   `Member_ID` varchar(50) NOT NULL,
   `Prayer_ID` int(11) NOT NULL,
   `Name` varchar(50) NOT NULL,
@@ -1132,20 +1249,21 @@ CREATE TABLE `personal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `personal`
+-- 傾印資料表的資料 `Personal`
 --
 
-INSERT INTO `personal` (`Member_ID`, `Prayer_ID`, `Name`, `Birthday`, `Address`) VALUES
+INSERT INTO `Personal` (`Member_ID`, `Prayer_ID`, `Name`, `Birthday`, `Address`) VALUES
 ('aaa', 8, '2222', '2023-08-08', '2222'),
 ('aaa', 9, '444', '2023-08-16', '4444'),
 ('aaa', 10, 'yu', '2023-08-11', 'yyyy'),
-('aaa', 11, '11111', '2023-08-03', '111111'),
-('aaa', 12, 'ffffff', '2023-08-08', 'fffff');
+('aaa', 11, 'ddddd', '2023-08-09', 'ddddd'),
+('aaa', 12, 'eyyyee', '2023-08-08', 'eeeeee'),
+('aaa', 13, 'eeee', '2023-08-08', 'eeeee');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `poetry`
+-- 資料表結構 `poetry`
 --
 
 CREATE TABLE `poetry` (
@@ -1153,7 +1271,7 @@ CREATE TABLE `poetry` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `poetry`
+-- 傾印資料表的資料 `poetry`
 --
 
 INSERT INTO `poetry` (`Poetry_ID`) VALUES
@@ -1221,7 +1339,7 @@ INSERT INTO `poetry` (`Poetry_ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `post`
+-- 資料表結構 `post`
 --
 
 CREATE TABLE `post` (
@@ -1236,7 +1354,7 @@ CREATE TABLE `post` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `post`
+-- 傾印資料表的資料 `post`
 --
 
 INSERT INTO `post` (`sid`, `member_id`, `title`, `content`, `publish_time`, `postcategory_sid`, `good`, `img`) VALUES
@@ -1572,7 +1690,7 @@ INSERT INTO `post` (`sid`, `member_id`, `title`, `content`, `publish_time`, `pos
 -- --------------------------------------------------------
 
 --
--- Table structure for table `postcategory`
+-- 資料表結構 `postcategory`
 --
 
 CREATE TABLE `postcategory` (
@@ -1581,7 +1699,7 @@ CREATE TABLE `postcategory` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `postcategory`
+-- 傾印資料表的資料 `postcategory`
 --
 
 INSERT INTO `postcategory` (`sid`, `type_name`) VALUES
@@ -1593,7 +1711,7 @@ INSERT INTO `postcategory` (`sid`, `type_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `postcollect`
+-- 資料表結構 `postcollect`
 --
 
 CREATE TABLE `postcollect` (
@@ -1603,7 +1721,7 @@ CREATE TABLE `postcollect` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `postcollect`
+-- 傾印資料表的資料 `postcollect`
 --
 
 INSERT INTO `postcollect` (`postcollect_sid`, `post_sid`, `member_id`) VALUES
@@ -1617,7 +1735,7 @@ INSERT INTO `postcollect` (`postcollect_sid`, `post_sid`, `member_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `post_img`
+-- 資料表結構 `post_img`
 --
 
 CREATE TABLE `post_img` (
@@ -1629,7 +1747,7 @@ CREATE TABLE `post_img` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pray`
+-- 資料表結構 `pray`
 --
 
 CREATE TABLE `pray` (
@@ -1638,7 +1756,7 @@ CREATE TABLE `pray` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `pray`
+-- 傾印資料表的資料 `pray`
 --
 
 INSERT INTO `pray` (`God_ID`, `Type`) VALUES
@@ -1649,7 +1767,7 @@ INSERT INTO `pray` (`God_ID`, `Type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- 資料表結構 `products`
 --
 
 CREATE TABLE `products` (
@@ -1667,7 +1785,7 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `products`
+-- 傾印資料表的資料 `products`
 --
 
 INSERT INTO `products` (`pid`, `product_name`, `product_price`, `product_details`, `cid`, `recommend`, `browse_num`, `purchase_num`, `stock_num`, `stars`, `image`) VALUES
@@ -3754,7 +3872,7 @@ INSERT INTO `products` (`pid`, `product_name`, `product_price`, `product_details
 -- --------------------------------------------------------
 
 --
--- Table structure for table `shop_comment`
+-- 資料表結構 `shop_comment`
 --
 
 CREATE TABLE `shop_comment` (
@@ -3770,806 +3888,145 @@ CREATE TABLE `shop_comment` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `study_light`
+-- 資料表結構 `Study_Light`
 --
 
-CREATE TABLE `study_light` (
+CREATE TABLE `Study_Light` (
   `Member_ID` int(11) DEFAULT NULL,
+  `Tower_ID` varchar(50) NOT NULL,
   `All_Light` int(50) NOT NULL,
-  `LightLocation` varchar(50) NOT NULL,
+  `LocationX` varchar(50) NOT NULL,
+  `LocationY` varchar(50) NOT NULL,
   `Datetime` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `study_light`
+-- 傾印資料表的資料 `Study_Light`
 --
 
-INSERT INTO `study_light` (`Member_ID`, `All_Light`, `LightLocation`, `Datetime`) VALUES
-(NULL, 1, 'A1', NULL),
-(NULL, 2, 'A2', NULL),
-(NULL, 3, 'A3', NULL),
-(NULL, 4, 'A4', NULL),
-(NULL, 5, 'A5', NULL),
-(NULL, 6, 'A6', NULL),
-(NULL, 7, 'A7', NULL),
-(NULL, 8, 'A8', NULL),
-(NULL, 9, 'A9', NULL),
-(NULL, 10, 'A10', NULL),
-(NULL, 11, 'A11', NULL),
-(NULL, 12, 'A12', NULL),
-(NULL, 13, 'A13', NULL),
-(NULL, 14, 'A14', NULL),
-(NULL, 15, 'A15', NULL),
-(NULL, 16, 'A16', NULL),
-(NULL, 17, 'A17', NULL),
-(NULL, 18, 'A18', NULL),
-(NULL, 19, 'A19', NULL),
-(NULL, 20, 'A20', NULL),
-(NULL, 21, 'A21', NULL),
-(NULL, 22, 'A22', NULL),
-(NULL, 23, 'A23', NULL),
-(NULL, 24, 'A24', NULL),
-(NULL, 25, 'A25', NULL),
-(NULL, 26, 'A26', NULL),
-(NULL, 27, 'A27', NULL),
-(NULL, 28, 'A28', NULL),
-(NULL, 29, 'A29', NULL),
-(NULL, 30, 'A30', NULL),
-(NULL, 31, 'B1', NULL),
-(NULL, 32, 'B2', NULL),
-(NULL, 33, 'B3', NULL),
-(NULL, 34, 'B4', NULL),
-(NULL, 35, 'B5', NULL),
-(NULL, 36, 'B6', NULL),
-(NULL, 37, 'B7', NULL),
-(NULL, 38, 'B8', NULL),
-(NULL, 39, 'B9', NULL),
-(NULL, 40, 'B10', NULL),
-(NULL, 41, 'B11', NULL),
-(NULL, 42, 'B12', NULL),
-(NULL, 43, 'B13', NULL),
-(NULL, 44, 'B14', NULL),
-(NULL, 45, 'B15', NULL),
-(NULL, 46, 'B16', NULL),
-(NULL, 47, 'B17', NULL),
-(NULL, 48, 'B18', NULL),
-(NULL, 49, 'B19', NULL),
-(NULL, 50, 'B20', NULL),
-(NULL, 51, 'B21', NULL),
-(NULL, 52, 'B22', NULL),
-(NULL, 53, 'B23', NULL),
-(NULL, 54, 'B24', NULL),
-(NULL, 55, 'B25', NULL),
-(NULL, 56, 'B26', NULL),
-(NULL, 57, 'B27', NULL),
-(NULL, 58, 'B28', NULL),
-(NULL, 59, 'B29', NULL),
-(NULL, 60, 'B30', NULL),
-(NULL, 61, 'C1', NULL),
-(NULL, 62, 'C2', NULL),
-(NULL, 63, 'C3', NULL),
-(NULL, 64, 'C4', NULL),
-(NULL, 65, 'C6', NULL),
-(NULL, 66, 'C6', NULL),
-(NULL, 67, 'C7', NULL),
-(NULL, 68, 'C8', NULL),
-(NULL, 69, 'C9', NULL),
-(NULL, 70, 'C10', NULL),
-(NULL, 71, 'C11', NULL),
-(NULL, 72, 'C12', NULL),
-(NULL, 73, 'C13', NULL),
-(NULL, 74, 'C14', NULL),
-(NULL, 75, 'C15', NULL),
-(NULL, 76, 'C16', NULL),
-(NULL, 77, 'C17', NULL),
-(NULL, 78, 'C18', NULL),
-(NULL, 79, 'C19', NULL),
-(NULL, 80, 'C20', NULL),
-(NULL, 81, 'C21', NULL),
-(NULL, 82, 'C22', NULL),
-(NULL, 83, 'C23', NULL),
-(NULL, 84, 'C24', NULL),
-(NULL, 85, 'C25', NULL),
-(NULL, 86, 'C26', NULL),
-(NULL, 87, 'C27', NULL),
-(NULL, 88, 'C28', NULL),
-(NULL, 89, 'C29', NULL),
-(NULL, 90, 'C30', NULL),
-(NULL, 91, 'D1', NULL),
-(NULL, 92, 'D2', NULL),
-(NULL, 93, 'D3', NULL),
-(NULL, 94, 'D4', NULL),
-(NULL, 95, 'D5', NULL),
-(NULL, 96, 'D6', NULL),
-(NULL, 97, 'D7', NULL),
-(NULL, 98, 'D8', NULL),
-(NULL, 99, 'D9', NULL),
-(NULL, 100, 'D10', NULL),
-(NULL, 101, 'D11', NULL),
-(NULL, 102, 'D12', NULL),
-(NULL, 103, 'D13', NULL),
-(NULL, 104, 'D14', NULL),
-(NULL, 105, 'D15', NULL),
-(NULL, 106, 'D16', NULL),
-(NULL, 107, 'D17', NULL),
-(NULL, 108, 'D18', NULL),
-(NULL, 109, 'D19', NULL),
-(NULL, 110, 'D20', NULL),
-(NULL, 111, 'D21', NULL),
-(NULL, 112, 'D22', NULL),
-(NULL, 113, 'D23', NULL),
-(NULL, 114, 'D24', NULL),
-(NULL, 115, 'D25', NULL),
-(NULL, 116, 'D26', NULL),
-(NULL, 117, 'D27', NULL),
-(NULL, 118, 'D28', NULL),
-(NULL, 119, 'D29', NULL),
-(NULL, 120, 'D30', NULL),
-(NULL, 121, 'E1', NULL),
-(NULL, 122, 'E2', NULL),
-(NULL, 123, 'E3', NULL),
-(NULL, 124, 'E4', NULL),
-(NULL, 125, 'E5', NULL),
-(NULL, 126, 'E6', NULL),
-(NULL, 127, 'E7', NULL),
-(NULL, 128, 'E8', NULL),
-(NULL, 129, 'E9', NULL),
-(NULL, 130, 'E10', NULL),
-(NULL, 131, 'E11', NULL),
-(NULL, 132, 'E12', NULL),
-(NULL, 133, 'E13', NULL),
-(NULL, 134, 'E14', NULL),
-(NULL, 135, 'E15', NULL),
-(NULL, 136, 'E16', NULL),
-(NULL, 137, 'E17', NULL),
-(NULL, 138, 'E18', NULL),
-(NULL, 139, 'E19', NULL),
-(NULL, 140, 'E20', NULL),
-(NULL, 141, 'E21', NULL),
-(NULL, 142, 'E22', NULL),
-(NULL, 143, 'E23', NULL),
-(NULL, 144, 'E24', NULL),
-(NULL, 145, 'E25', NULL),
-(NULL, 146, 'E26', NULL),
-(NULL, 147, 'E27', NULL),
-(NULL, 148, 'E28', NULL),
-(NULL, 149, 'E29', NULL),
-(NULL, 150, 'E30', NULL),
-(NULL, 151, 'F1', NULL),
-(NULL, 152, 'F2', NULL),
-(NULL, 153, 'F3', NULL),
-(NULL, 154, 'F4', NULL),
-(NULL, 155, 'F5', NULL),
-(NULL, 156, 'F6', NULL),
-(NULL, 157, 'F7', NULL),
-(NULL, 158, 'F8', NULL),
-(NULL, 159, 'F9', NULL),
-(NULL, 160, 'F10', NULL),
-(NULL, 161, 'F11', NULL),
-(NULL, 162, 'F12', NULL),
-(NULL, 163, 'F13', NULL),
-(NULL, 164, 'F14', NULL),
-(NULL, 165, 'F15', NULL),
-(NULL, 166, 'F16', NULL),
-(NULL, 167, 'F17', NULL),
-(NULL, 168, 'F18', NULL),
-(NULL, 169, 'F19', NULL),
-(NULL, 170, 'F20', NULL),
-(NULL, 171, 'F21', NULL),
-(NULL, 172, 'F22', NULL),
-(NULL, 173, 'F23', NULL),
-(NULL, 174, 'F24', NULL),
-(NULL, 175, 'F25', NULL),
-(NULL, 176, 'F26', NULL),
-(NULL, 177, 'F27', NULL),
-(NULL, 178, 'F28', NULL),
-(NULL, 179, 'F29', NULL),
-(NULL, 180, 'F30', NULL),
-(NULL, 181, 'G1', NULL),
-(NULL, 182, 'G2', NULL),
-(NULL, 183, 'G3', NULL),
-(NULL, 184, 'G4', NULL),
-(NULL, 185, 'G5', NULL),
-(NULL, 186, 'G6', NULL),
-(NULL, 187, 'G7', NULL),
-(NULL, 188, 'G8', NULL),
-(NULL, 189, 'G9', NULL),
-(NULL, 190, 'G10', NULL),
-(NULL, 191, 'G11', NULL),
-(NULL, 192, 'G12', NULL),
-(NULL, 193, 'G13', NULL),
-(NULL, 194, 'G14', NULL),
-(NULL, 195, 'G15', NULL),
-(NULL, 196, 'G16', NULL),
-(NULL, 197, 'G17', NULL),
-(NULL, 198, 'G18', NULL),
-(NULL, 199, 'G19', NULL),
-(NULL, 200, 'G20', NULL),
-(NULL, 201, 'G21', NULL),
-(NULL, 202, 'G22', NULL),
-(NULL, 203, 'G23', NULL),
-(NULL, 204, 'G24', NULL),
-(NULL, 205, 'G25', NULL),
-(NULL, 206, 'G26', NULL),
-(NULL, 207, 'G27', NULL),
-(NULL, 208, 'G28', NULL),
-(NULL, 209, 'G29', NULL),
-(NULL, 210, 'G30', NULL),
-(NULL, 211, 'H1', NULL),
-(NULL, 212, 'H2', NULL),
-(NULL, 213, 'H3', NULL),
-(NULL, 214, 'H4', NULL),
-(NULL, 215, 'H5', NULL),
-(NULL, 216, 'H6', NULL),
-(NULL, 217, 'H7', NULL),
-(NULL, 218, 'H8', NULL),
-(NULL, 219, 'H9', NULL),
-(NULL, 220, 'H10', NULL),
-(NULL, 221, 'H11', NULL),
-(NULL, 222, 'H12', NULL),
-(NULL, 223, 'H13', NULL),
-(NULL, 224, 'H14', NULL),
-(NULL, 225, 'H15', NULL),
-(NULL, 226, 'H16', NULL),
-(NULL, 227, 'H17', NULL),
-(NULL, 228, 'H18', NULL),
-(NULL, 229, 'H19', NULL),
-(NULL, 230, 'H20', NULL),
-(NULL, 231, 'H21', NULL),
-(NULL, 232, 'H22', NULL),
-(NULL, 233, 'H23', NULL),
-(NULL, 234, 'H24', NULL),
-(NULL, 235, 'H25', NULL),
-(NULL, 236, 'H26', NULL),
-(NULL, 237, 'H27', NULL),
-(NULL, 238, 'H28', NULL),
-(NULL, 239, 'H29', NULL),
-(NULL, 240, 'H30', NULL),
-(NULL, 241, 'I1', NULL),
-(NULL, 242, 'I2', NULL),
-(NULL, 243, 'I3', NULL),
-(NULL, 244, 'I4', NULL),
-(NULL, 245, 'I5', NULL),
-(NULL, 246, 'I6', NULL),
-(NULL, 247, 'I7', NULL),
-(NULL, 248, 'I8', NULL),
-(NULL, 249, 'I9', NULL),
-(NULL, 250, 'I10', NULL),
-(NULL, 251, 'I11', NULL),
-(NULL, 252, 'I12', NULL),
-(NULL, 253, 'I13', NULL),
-(NULL, 254, 'I14', NULL),
-(NULL, 255, 'I15', NULL),
-(NULL, 256, 'I16', NULL),
-(NULL, 257, 'I17', NULL),
-(NULL, 258, 'I18', NULL),
-(NULL, 259, 'I19', NULL),
-(NULL, 260, 'I20', NULL),
-(NULL, 261, 'I21', NULL),
-(NULL, 262, 'I22', NULL),
-(NULL, 263, 'I23', NULL),
-(NULL, 264, 'I24', NULL),
-(NULL, 265, 'I25', NULL),
-(NULL, 266, 'I26', NULL),
-(NULL, 267, 'I27', NULL),
-(NULL, 268, 'I28', NULL),
-(NULL, 269, 'I29', NULL),
-(NULL, 270, 'I30', NULL),
-(NULL, 271, 'J1', NULL),
-(NULL, 272, 'J2', NULL),
-(NULL, 273, 'J3', NULL),
-(NULL, 274, 'J4', NULL),
-(NULL, 275, 'J5', NULL),
-(NULL, 276, 'J6', NULL),
-(NULL, 277, 'J7', NULL),
-(NULL, 278, 'J8', NULL),
-(NULL, 279, 'J9', NULL),
-(NULL, 280, 'J10', NULL),
-(NULL, 281, 'J11', NULL),
-(NULL, 282, 'J12', NULL),
-(NULL, 283, 'J13', NULL),
-(NULL, 284, 'J14', NULL),
-(NULL, 285, 'J15', NULL),
-(NULL, 286, 'J16', NULL),
-(NULL, 287, 'J17', NULL),
-(NULL, 288, 'J18', NULL),
-(NULL, 289, 'J19', NULL),
-(NULL, 290, 'J20', NULL),
-(NULL, 291, 'J21', NULL),
-(NULL, 292, 'J22', NULL),
-(NULL, 293, 'J23', NULL),
-(NULL, 294, 'J24', NULL),
-(NULL, 295, 'J25', NULL),
-(NULL, 296, 'J26', NULL),
-(NULL, 297, 'J27', NULL),
-(NULL, 298, 'J28', NULL),
-(NULL, 299, 'J29', NULL),
-(NULL, 300, 'J30', NULL),
-(NULL, 301, 'K1', NULL),
-(NULL, 302, 'K2', NULL),
-(NULL, 303, 'K3', NULL),
-(NULL, 304, 'K4', NULL),
-(NULL, 305, 'K5', NULL),
-(NULL, 306, 'K6', NULL),
-(NULL, 307, 'K7', NULL),
-(NULL, 308, 'K8', NULL),
-(NULL, 309, 'K9', NULL),
-(NULL, 310, 'K10', NULL),
-(NULL, 311, 'K11', NULL),
-(NULL, 312, 'K12', NULL),
-(NULL, 313, 'K13', NULL),
-(NULL, 314, 'K14', NULL),
-(NULL, 315, 'K15', NULL),
-(NULL, 316, 'K16', NULL),
-(NULL, 317, 'K17', NULL),
-(NULL, 318, 'K18', NULL),
-(NULL, 319, 'K19', NULL),
-(NULL, 320, 'K20', NULL),
-(NULL, 321, 'K21', NULL),
-(NULL, 322, 'K22', NULL),
-(NULL, 323, 'K23', NULL),
-(NULL, 324, 'K24', NULL),
-(NULL, 325, 'K25', NULL),
-(NULL, 326, 'K26', NULL),
-(NULL, 327, 'K27', NULL),
-(NULL, 328, 'K28', NULL),
-(NULL, 329, 'K29', NULL),
-(NULL, 330, 'K30', NULL),
-(NULL, 331, 'L1', NULL),
-(NULL, 332, 'L2', NULL),
-(NULL, 333, 'L3', NULL),
-(NULL, 334, 'L4', NULL),
-(NULL, 335, 'L5', NULL),
-(NULL, 336, 'L6', NULL),
-(NULL, 337, 'L7', NULL),
-(NULL, 338, 'L8', NULL),
-(NULL, 339, 'L9', NULL),
-(NULL, 340, 'L10', NULL),
-(NULL, 341, 'L11', NULL),
-(NULL, 342, 'L12', NULL),
-(NULL, 343, 'L13', NULL),
-(NULL, 344, 'L14', NULL),
-(NULL, 345, 'L15', NULL),
-(NULL, 346, 'L16', NULL),
-(NULL, 347, 'L17', NULL),
-(NULL, 348, 'L18', NULL),
-(NULL, 349, 'L19', NULL),
-(NULL, 350, 'L20', NULL),
-(NULL, 351, 'L21', NULL),
-(NULL, 352, 'L22', NULL),
-(NULL, 353, 'L23', NULL),
-(NULL, 354, 'L24', NULL),
-(NULL, 355, 'L25', NULL),
-(NULL, 356, 'L26', NULL),
-(NULL, 357, 'L27', NULL),
-(NULL, 358, 'L28', NULL),
-(NULL, 359, 'L29', NULL),
-(NULL, 360, 'L30', NULL),
-(NULL, 361, 'M1', NULL),
-(NULL, 362, 'M2', NULL),
-(NULL, 363, 'M3', NULL),
-(NULL, 364, 'M4', NULL),
-(NULL, 365, 'M5', NULL),
-(NULL, 366, 'M6', NULL),
-(NULL, 367, 'M7', NULL),
-(NULL, 368, 'M8', NULL),
-(NULL, 369, 'M9', NULL),
-(NULL, 370, 'M10', NULL),
-(NULL, 371, 'M11', NULL),
-(NULL, 372, 'M12', NULL),
-(NULL, 373, 'M13', NULL),
-(NULL, 374, 'M14', NULL),
-(NULL, 375, 'M15', NULL),
-(NULL, 376, 'M16', NULL),
-(NULL, 377, 'M17', NULL),
-(NULL, 378, 'M18', NULL),
-(NULL, 379, 'M19', NULL),
-(NULL, 380, 'M20', NULL),
-(NULL, 381, 'M21', NULL),
-(NULL, 382, 'M22', NULL),
-(NULL, 383, 'M23', NULL),
-(NULL, 384, 'M24', NULL),
-(NULL, 385, 'M25', NULL),
-(NULL, 386, 'M26', NULL),
-(NULL, 387, 'M27', NULL),
-(NULL, 388, 'M28', NULL),
-(NULL, 389, 'M29', NULL),
-(NULL, 390, 'M30', NULL),
-(NULL, 391, 'N1', NULL),
-(NULL, 392, 'N2', NULL),
-(NULL, 393, 'N3', NULL),
-(NULL, 394, 'N4', NULL),
-(NULL, 395, 'N5', NULL),
-(NULL, 396, 'N6', NULL),
-(NULL, 397, 'N7', NULL),
-(NULL, 398, 'N8', NULL),
-(NULL, 399, 'N9', NULL),
-(NULL, 400, 'N10', NULL),
-(NULL, 401, 'N11', NULL),
-(NULL, 402, 'N12', NULL),
-(NULL, 403, 'N13', NULL),
-(NULL, 404, 'N14', NULL),
-(NULL, 405, 'N15', NULL),
-(NULL, 406, 'N16', NULL),
-(NULL, 407, 'N17', NULL),
-(NULL, 408, 'N18', NULL),
-(NULL, 409, 'N19', NULL),
-(NULL, 410, 'N20', NULL),
-(NULL, 411, 'N21', NULL),
-(NULL, 412, 'N22', NULL),
-(NULL, 413, 'N23', NULL),
-(NULL, 414, 'N24', NULL),
-(NULL, 415, 'N25', NULL),
-(NULL, 416, 'N26', NULL),
-(NULL, 417, 'N27', NULL),
-(NULL, 418, 'N28', NULL),
-(NULL, 419, 'N29', NULL),
-(NULL, 420, 'N30', NULL),
-(NULL, 421, 'O1', NULL),
-(NULL, 422, 'O2', NULL),
-(NULL, 423, 'O3', NULL),
-(NULL, 424, 'O4', NULL),
-(NULL, 425, 'O5', NULL),
-(NULL, 426, 'O6', NULL),
-(NULL, 427, 'O7', NULL),
-(NULL, 428, 'O8', NULL),
-(NULL, 429, 'O9', NULL),
-(NULL, 430, 'O10', NULL),
-(NULL, 431, 'O11', NULL),
-(NULL, 432, 'O12', NULL),
-(NULL, 433, 'O13', NULL),
-(NULL, 434, 'O14', NULL),
-(NULL, 435, 'O15', NULL),
-(NULL, 436, 'O16', NULL),
-(NULL, 437, 'O17', NULL),
-(NULL, 438, 'O18', NULL),
-(NULL, 439, 'O19', NULL),
-(NULL, 440, 'O20', NULL),
-(NULL, 441, 'O21', NULL),
-(NULL, 442, 'O22', NULL),
-(NULL, 443, 'O23', NULL),
-(NULL, 444, 'O24', NULL),
-(NULL, 445, 'O25', NULL),
-(NULL, 446, 'O26', NULL),
-(NULL, 447, 'O27', NULL),
-(NULL, 448, 'O28', NULL),
-(NULL, 449, 'O29', NULL),
-(NULL, 450, 'O30', NULL),
-(NULL, 451, 'P1', NULL),
-(NULL, 452, 'P2', NULL),
-(NULL, 453, 'P3', NULL),
-(NULL, 454, 'P4', NULL),
-(NULL, 455, 'P5', NULL),
-(NULL, 456, 'P6', NULL),
-(NULL, 457, 'P7', NULL),
-(NULL, 458, 'P8', NULL),
-(NULL, 459, 'P9', NULL),
-(NULL, 460, 'P10', NULL),
-(NULL, 461, 'P11', NULL),
-(NULL, 462, 'P12', NULL),
-(NULL, 463, 'P13', NULL),
-(NULL, 464, 'P14', NULL),
-(NULL, 465, 'P15', NULL),
-(NULL, 466, 'P16', NULL),
-(NULL, 467, 'P17', NULL),
-(NULL, 468, 'P18', NULL),
-(NULL, 469, 'P19', NULL),
-(NULL, 470, 'P20', NULL),
-(NULL, 471, 'P21', NULL),
-(NULL, 472, 'P22', NULL),
-(NULL, 473, 'P23', NULL),
-(NULL, 474, 'P24', NULL),
-(NULL, 475, 'P25', NULL),
-(NULL, 476, 'P26', NULL),
-(NULL, 477, 'P27', NULL),
-(NULL, 478, 'P28', NULL),
-(NULL, 479, 'P29', NULL),
-(NULL, 480, 'P30', NULL),
-(NULL, 481, 'Q1', NULL),
-(NULL, 482, 'Q2', NULL),
-(NULL, 483, 'Q3', NULL),
-(NULL, 484, 'Q4', NULL),
-(NULL, 485, 'Q5', NULL),
-(NULL, 486, 'Q6', NULL),
-(NULL, 487, 'Q7', NULL),
-(NULL, 488, 'Q8', NULL),
-(NULL, 489, 'Q9', NULL),
-(NULL, 490, 'Q10', NULL),
-(NULL, 491, 'Q11', NULL),
-(NULL, 492, 'Q12', NULL),
-(NULL, 493, 'Q13', NULL),
-(NULL, 494, 'Q14', NULL),
-(NULL, 495, 'Q15', NULL),
-(NULL, 496, 'Q16', NULL),
-(NULL, 497, 'Q17', NULL),
-(NULL, 498, 'Q18', NULL),
-(NULL, 499, 'Q19', NULL),
-(NULL, 500, 'Q20', NULL),
-(NULL, 501, 'Q21', NULL),
-(NULL, 502, 'Q22', NULL),
-(NULL, 503, 'Q23', NULL),
-(NULL, 504, 'Q24', NULL),
-(NULL, 505, 'Q25', NULL),
-(NULL, 506, 'Q26', NULL),
-(NULL, 507, 'Q27', NULL),
-(NULL, 508, 'Q28', NULL),
-(NULL, 509, 'Q29', NULL),
-(NULL, 510, 'Q30', NULL),
-(NULL, 511, 'R1', NULL),
-(NULL, 512, 'R2', NULL),
-(NULL, 513, 'R3', NULL),
-(NULL, 514, 'R4', NULL),
-(NULL, 515, 'R5', NULL),
-(NULL, 516, 'R6', NULL),
-(NULL, 517, 'R7', NULL),
-(NULL, 518, 'R8', NULL),
-(NULL, 519, 'R9', NULL),
-(NULL, 520, 'R10', NULL),
-(NULL, 521, 'R11', NULL),
-(NULL, 522, 'R12', NULL),
-(NULL, 523, 'R13', NULL),
-(NULL, 524, 'R14', NULL),
-(NULL, 525, 'R15', NULL),
-(NULL, 526, 'R16', NULL),
-(NULL, 527, 'R17', NULL),
-(NULL, 528, 'R18', NULL),
-(NULL, 529, 'R19', NULL),
-(NULL, 530, 'R20', NULL),
-(NULL, 531, 'R21', NULL),
-(NULL, 532, 'R22', NULL),
-(NULL, 533, 'R23', NULL),
-(NULL, 534, 'R24', NULL),
-(NULL, 535, 'R25', NULL),
-(NULL, 536, 'R26', NULL),
-(NULL, 537, 'R27', NULL),
-(NULL, 538, 'R28', NULL),
-(NULL, 539, 'R29', NULL),
-(NULL, 540, 'R30', NULL),
-(NULL, 541, 'S1', NULL),
-(NULL, 542, 'S2', NULL),
-(NULL, 543, 'S3', NULL),
-(NULL, 544, 'S4', NULL),
-(NULL, 545, 'S5', NULL),
-(NULL, 546, 'S6', NULL),
-(NULL, 547, 'S7', NULL),
-(NULL, 548, 'S8', NULL),
-(NULL, 549, 'S9', NULL),
-(NULL, 550, 'S10', NULL),
-(NULL, 551, 'S11', NULL),
-(NULL, 552, 'S12', NULL),
-(NULL, 553, 'S13', NULL),
-(NULL, 554, 'S14', NULL),
-(NULL, 555, 'S15', NULL),
-(NULL, 556, 'S16', NULL),
-(NULL, 557, 'S17', NULL),
-(NULL, 558, 'S18', NULL),
-(NULL, 559, 'S19', NULL),
-(NULL, 560, 'S20', NULL),
-(NULL, 561, 'S21', NULL),
-(NULL, 562, 'S22', NULL),
-(NULL, 563, 'S23', NULL),
-(NULL, 564, 'S24', NULL),
-(NULL, 565, 'S25', NULL),
-(NULL, 566, 'S26', NULL),
-(NULL, 567, 'S27', NULL),
-(NULL, 568, 'S28', NULL),
-(NULL, 569, 'S29', NULL),
-(NULL, 570, 'S30', NULL),
-(NULL, 571, 'T1', NULL),
-(NULL, 572, 'T2', NULL),
-(NULL, 573, 'T3', NULL),
-(NULL, 574, 'T4', NULL),
-(NULL, 575, 'T5', NULL),
-(NULL, 576, 'T6', NULL),
-(NULL, 577, 'T7', NULL),
-(NULL, 578, 'T8', NULL),
-(NULL, 579, 'T9', NULL),
-(NULL, 580, 'T10', NULL),
-(NULL, 581, 'T11', NULL),
-(NULL, 582, 'T12', NULL),
-(NULL, 583, 'T13', NULL),
-(NULL, 584, 'T14', NULL),
-(NULL, 585, 'T15', NULL),
-(NULL, 586, 'T16', NULL),
-(NULL, 587, 'T17', NULL),
-(NULL, 588, 'T18', NULL),
-(NULL, 589, 'T19', NULL),
-(NULL, 590, 'T20', NULL),
-(NULL, 591, 'T21', NULL),
-(NULL, 592, 'T22', NULL),
-(NULL, 593, 'T23', NULL),
-(NULL, 594, 'T24', NULL),
-(NULL, 595, 'T25', NULL),
-(NULL, 596, 'T26', NULL),
-(NULL, 597, 'T27', NULL),
-(NULL, 598, 'T28', NULL),
-(NULL, 599, 'T29', NULL),
-(NULL, 600, 'T30', NULL),
-(NULL, 601, 'U1', NULL),
-(NULL, 602, 'U2', NULL),
-(NULL, 603, 'U3', NULL),
-(NULL, 604, 'U4', NULL),
-(NULL, 605, 'U5', NULL),
-(NULL, 606, 'U6', NULL),
-(NULL, 607, 'U7', NULL),
-(NULL, 608, 'U8', NULL),
-(NULL, 609, 'U9', NULL),
-(NULL, 610, 'U10', NULL),
-(NULL, 611, 'U11', NULL),
-(NULL, 612, 'U12', NULL),
-(NULL, 613, 'U13', NULL),
-(NULL, 614, 'U14', NULL),
-(NULL, 615, 'U15', NULL),
-(NULL, 616, 'U16', NULL),
-(NULL, 617, 'U17', NULL),
-(NULL, 618, 'U18', NULL),
-(NULL, 619, 'U19', NULL),
-(NULL, 620, 'U20', NULL),
-(NULL, 621, 'U21', NULL),
-(NULL, 622, 'U22', NULL),
-(NULL, 623, 'U23', NULL),
-(NULL, 624, 'U24', NULL),
-(NULL, 625, 'U25', NULL),
-(NULL, 626, 'U26', NULL),
-(NULL, 627, 'U27', NULL),
-(NULL, 628, 'U28', NULL),
-(NULL, 629, 'U29', NULL),
-(NULL, 630, 'U30', NULL),
-(NULL, 631, 'V1', NULL),
-(NULL, 632, 'V2', NULL),
-(NULL, 633, 'V3', NULL),
-(NULL, 634, 'V4', NULL),
-(NULL, 635, 'V5', NULL),
-(NULL, 636, 'V6', NULL),
-(NULL, 637, 'V7', NULL),
-(NULL, 638, 'V8', NULL),
-(NULL, 639, 'V9', NULL),
-(NULL, 640, 'V10', NULL),
-(NULL, 641, 'V11', NULL),
-(NULL, 642, 'V12', NULL),
-(NULL, 643, 'V13', NULL),
-(NULL, 644, 'V14', NULL),
-(NULL, 645, 'V15', NULL),
-(NULL, 646, 'V16', NULL),
-(NULL, 647, 'V17', NULL),
-(NULL, 648, 'V18', NULL),
-(NULL, 649, 'V19', NULL),
-(NULL, 650, 'V20', NULL),
-(NULL, 651, 'V21', NULL),
-(NULL, 652, 'V22', NULL),
-(NULL, 653, 'V23', NULL),
-(NULL, 654, 'V24', NULL),
-(NULL, 655, 'V25', NULL),
-(NULL, 656, 'V26', NULL),
-(NULL, 657, 'V27', NULL),
-(NULL, 658, 'V28', NULL),
-(NULL, 659, 'V29', NULL),
-(NULL, 660, 'V30', NULL),
-(NULL, 661, 'W1', NULL),
-(NULL, 662, 'W2', NULL),
-(NULL, 663, 'W3', NULL),
-(NULL, 664, 'W4', NULL),
-(NULL, 665, 'W5', NULL),
-(NULL, 666, 'W6', NULL),
-(NULL, 667, 'W7', NULL),
-(NULL, 668, 'W8', NULL),
-(NULL, 669, 'W9', NULL),
-(NULL, 670, 'W10', NULL),
-(NULL, 671, 'W11', NULL),
-(NULL, 672, 'W12', NULL),
-(NULL, 673, 'W13', NULL),
-(NULL, 674, 'W14', NULL),
-(NULL, 675, 'W15', NULL),
-(NULL, 676, 'W16', NULL),
-(NULL, 677, 'W17', NULL),
-(NULL, 678, 'W18', NULL),
-(NULL, 679, 'W19', NULL),
-(NULL, 680, 'W20', NULL),
-(NULL, 681, 'W21', NULL),
-(NULL, 682, 'W22', NULL),
-(NULL, 683, 'W23', NULL),
-(NULL, 684, 'W24', NULL),
-(NULL, 685, 'W25', NULL),
-(NULL, 686, 'W26', NULL),
-(NULL, 687, 'W27', NULL),
-(NULL, 688, 'W28', NULL),
-(NULL, 689, 'W29', NULL),
-(NULL, 690, 'W30', NULL),
-(NULL, 691, 'X1', NULL),
-(NULL, 692, 'X2', NULL),
-(NULL, 693, 'X3', NULL),
-(NULL, 694, 'X4', NULL),
-(NULL, 695, 'X5', NULL),
-(NULL, 696, 'X6', NULL),
-(NULL, 697, 'X7', NULL),
-(NULL, 698, 'X8', NULL),
-(NULL, 699, 'X9', NULL),
-(NULL, 700, 'X10', NULL),
-(NULL, 701, 'X11', NULL),
-(NULL, 702, 'X12', NULL),
-(NULL, 703, 'X13', NULL),
-(NULL, 704, 'X14', NULL),
-(NULL, 705, 'X15', NULL),
-(NULL, 706, 'X16', NULL),
-(NULL, 707, 'X17', NULL),
-(NULL, 708, 'X18', NULL),
-(NULL, 709, 'X19', NULL),
-(NULL, 710, 'X20', NULL),
-(NULL, 711, 'X21', NULL),
-(NULL, 712, 'X22', NULL),
-(NULL, 713, 'X23', NULL),
-(NULL, 714, 'X24', NULL),
-(NULL, 715, 'X25', NULL),
-(NULL, 716, 'X26', NULL),
-(NULL, 717, 'X27', NULL),
-(NULL, 718, 'X28', NULL),
-(NULL, 719, 'X29', NULL),
-(NULL, 720, 'X30', NULL),
-(NULL, 721, 'Y1', NULL),
-(NULL, 722, 'Y2', NULL),
-(NULL, 723, 'Y3', NULL),
-(NULL, 724, 'Y4', NULL),
-(NULL, 725, 'Y5', NULL),
-(NULL, 726, 'Y6', NULL),
-(NULL, 727, 'Y7', NULL),
-(NULL, 728, 'Y8', NULL),
-(NULL, 729, 'Y9', NULL),
-(NULL, 730, 'Y10', NULL),
-(NULL, 731, 'Y11', NULL),
-(NULL, 732, 'Y12', NULL),
-(NULL, 733, 'Y13', NULL),
-(NULL, 734, 'Y14', NULL),
-(NULL, 735, 'Y15', NULL),
-(NULL, 736, 'Y16', NULL),
-(NULL, 737, 'Y17', NULL),
-(NULL, 738, 'Y18', NULL),
-(NULL, 739, 'Y19', NULL),
-(NULL, 740, 'Y20', NULL),
-(NULL, 741, 'Y21', NULL),
-(NULL, 742, 'Y22', NULL),
-(NULL, 743, 'Y23', NULL),
-(NULL, 744, 'Y24', NULL),
-(NULL, 745, 'Y25', NULL),
-(NULL, 746, 'Y26', NULL),
-(NULL, 747, 'Y27', NULL),
-(NULL, 748, 'Y28', NULL),
-(NULL, 749, 'Y29', NULL),
-(NULL, 750, 'Y30', NULL),
-(NULL, 751, 'Z1', NULL),
-(NULL, 752, 'Z2', NULL),
-(NULL, 753, 'Z3', NULL),
-(NULL, 754, 'Z4', NULL),
-(NULL, 755, 'Z5', NULL),
-(NULL, 756, 'Z6', NULL),
-(NULL, 757, 'Z7', NULL),
-(NULL, 758, 'Z8', NULL),
-(NULL, 759, 'Z9', NULL),
-(NULL, 760, 'Z10', NULL),
-(NULL, 761, 'Z11', NULL),
-(NULL, 762, 'Z12', NULL),
-(NULL, 763, 'Z13', NULL),
-(NULL, 764, 'Z14', NULL),
-(NULL, 765, 'Z15', NULL),
-(NULL, 766, 'Z16', NULL),
-(NULL, 767, 'Z17', NULL),
-(NULL, 768, 'Z18', NULL),
-(NULL, 769, 'Z19', NULL),
-(NULL, 770, 'Z20', NULL),
-(NULL, 771, 'Z21', NULL),
-(NULL, 772, 'Z22', NULL),
-(NULL, 773, 'Z23', NULL),
-(NULL, 774, 'Z24', NULL),
-(NULL, 775, 'Z25', NULL),
-(NULL, 776, 'Z26', NULL),
-(NULL, 777, 'Z27', NULL),
-(NULL, 778, 'Z28', NULL),
-(NULL, 779, 'Z29', NULL),
-(NULL, 780, 'Z30', NULL);
+INSERT INTO `Study_Light` (`Member_ID`, `Tower_ID`, `All_Light`, `LocationX`, `LocationY`, `Datetime`) VALUES
+(12, '', 1, '7', 'P', '2023-08-07 21:14:17'),
+(12, '', 2, '21', 'Q', '2023-08-07 21:14:26'),
+(12, '', 3, '26', 'R', '2023-08-07 21:14:35'),
+(12, '', 4, '4', 'T', '2023-08-07 21:14:45'),
+(12, '', 5, '19', 'T', '2023-08-07 21:17:55'),
+(12, '', 6, '14', 'H', '2023-08-07 22:35:18'),
+(12, 'B', 7, '12', 'M', '2023-08-07 22:38:25'),
+(12, 'A', 8, '15', 'M', '2023-08-07 22:38:49'),
+(12, 'C', 9, '23', 'K', '2023-08-07 22:40:33'),
+(12, 'C', 10, '11', 'J', '2023-08-07 21:14:45'),
+(1, 'D', 11, '2', 'Y', '2023-08-07 21:14:45'),
+(1, 'B', 12, '7', 'Y', '2023-08-07 21:14:45'),
+(1, 'A', 13, '10', 'Y', '2023-08-07 21:14:45'),
+(1, 'C', 14, '13', 'X', '2023-08-07 21:14:45'),
+(1, 'C', 15, '5', 'W', '2023-08-07 21:14:45'),
+(1, 'D', 16, '10', 'W', '2023-08-07 21:14:45'),
+(1, 'B', 17, '14', 'W', '2023-08-07 21:14:45'),
+(1, 'A', 18, '3', 'V', '2023-08-07 21:14:45'),
+(1, 'C', 19, '7', 'V', '2023-08-07 21:14:45'),
+(1, 'C', 20, '14', 'V', '2023-08-07 21:14:45'),
+(1, 'D', 21, '5', 'U', '2023-08-07 21:14:45'),
+(1, 'B', 22, '10', 'U', '2023-08-07 21:14:45'),
+(1, 'A', 23, '3', 'T', '2023-08-07 21:14:45'),
+(1, 'C', 24, '7', 'T', '2023-08-07 21:14:45'),
+(1, 'C', 25, '6', 'S', '2023-08-07 21:14:45'),
+(1, 'D', 26, '7', 'S', '2023-08-07 21:14:45'),
+(1, 'B', 27, '8', 'S', '2023-08-07 21:14:45'),
+(1, 'A', 28, '12', 'S', '2023-08-07 21:14:45'),
+(1, 'C', 29, '5', 'R', '2023-08-07 21:14:45'),
+(1, 'C', 30, '8', 'Q', '2023-08-07 21:14:45'),
+(1, 'D', 31, '8', 'P', '2023-08-07 21:14:45'),
+(1, 'B', 32, '9', 'P', '2023-08-07 21:14:45'),
+(1, 'A', 33, '10', 'P', '2023-08-07 21:14:45'),
+(1, 'C', 34, '12', 'P', '2023-08-07 21:14:45'),
+(1, 'C', 35, '1', 'N', '2023-08-07 21:14:45'),
+(1, 'D', 36, '15', 'N', '2023-08-07 21:14:45'),
+(1, 'B', 37, '6', 'M', '2023-08-07 21:14:45'),
+(1, 'A', 38, '8', 'M', '2023-08-07 21:14:45'),
+(1, 'C', 39, '7', 'L', '2023-08-07 21:14:45'),
+(1, 'C', 40, '8', 'K', '2023-08-07 21:14:45'),
+(1, 'D', 41, '13', 'K', '2023-08-07 21:14:45'),
+(1, 'B', 42, '4', 'J', '2023-08-07 21:14:45'),
+(1, 'A', 43, '14', 'J', '2023-08-07 21:14:45'),
+(1, 'C', 44, '15', 'J', '2023-08-07 21:14:45'),
+(1, 'C', 45, '13', 'I', '2023-08-07 21:14:45'),
+(1, 'D', 46, '5', 'H', '2023-08-07 21:14:45'),
+(1, 'B', 47, '10', 'H', '2023-08-07 21:14:45'),
+(1, 'A', 48, '5', 'G', '2023-08-07 21:14:45'),
+(1, 'C', 49, '12', 'G', '2023-08-07 21:14:45'),
+(1, 'C', 50, '7', 'F', '2023-08-07 21:14:45'),
+(1, 'D', 51, '1', 'E', '2023-08-07 21:14:45'),
+(1, 'B', 52, '4', 'E', '2023-08-07 21:14:45'),
+(1, 'A', 53, '10', 'D', '2023-08-07 21:14:45'),
+(1, 'C', 54, '11', 'D', '2023-08-07 21:14:45'),
+(1, 'C', 55, '15', 'D', '2023-08-07 21:14:45'),
+(1, 'D', 56, '5', 'C', '2023-08-07 21:14:45'),
+(1, 'B', 57, '6', 'C', '2023-08-07 21:14:45'),
+(1, 'A', 58, '7', 'C', '2023-08-07 21:14:45'),
+(1, 'C', 59, '9', 'B', '2023-08-07 21:14:45'),
+(1, 'C', 60, '12', 'B', '2023-08-07 21:14:45'),
+(1, 'D', 61, '13', 'B', '2023-08-07 21:14:45'),
+(1, 'B', 62, '7', 'A', '2023-08-07 21:14:45'),
+(1, 'A', 63, '22', 'Z', '2023-08-07 21:14:45'),
+(1, 'C', 64, '26', 'Y', '2023-08-07 21:14:45'),
+(1, 'C', 65, '28', 'Y', '2023-08-07 21:14:45'),
+(1, 'D', 66, '19', 'X', '2023-08-07 21:14:45'),
+(1, 'B', 67, '22', 'X', '2023-08-07 21:14:45'),
+(1, 'A', 68, '24', 'W', '2023-08-07 21:14:45'),
+(1, 'C', 69, '28', 'W', '2023-08-07 21:14:45'),
+(1, 'C', 70, '18', 'V', '2023-08-07 21:14:45'),
+(1, 'D', 71, '22', 'V', '2023-08-07 21:14:45'),
+(1, 'D', 72, '26', 'V', '2023-08-07 21:14:45'),
+(1, 'B', 73, '28', 'V', '2023-08-07 21:14:45'),
+(1, 'A', 74, '25', 'T', '2023-08-07 21:14:45'),
+(1, 'C', 75, '18', 'S', '2023-08-07 21:14:45'),
+(1, 'C', 76, '22', 'S', '2023-08-07 21:14:45'),
+(1, 'D', 77, '28', 'S', '2023-08-07 21:14:45'),
+(1, 'D', 78, '19', 'R', '2023-08-07 21:14:45'),
+(1, 'B', 79, '21', 'R', '2023-08-07 21:14:45'),
+(1, 'A', 80, '22', 'R', '2023-08-07 21:14:45'),
+(1, 'C', 81, '25', 'Q', '2023-08-07 21:14:45'),
+(1, 'C', 82, '28', 'Q', '2023-08-07 21:14:45'),
+(1, 'D', 83, '18', 'P', '2023-08-07 21:14:45'),
+(1, 'D', 84, '21', 'P', '2023-08-07 21:14:45'),
+(1, 'B', 85, '22', 'P', '2023-08-07 21:14:45'),
+(1, 'A', 86, '24', 'P', '2023-08-07 21:14:45'),
+(1, 'C', 87, '22', 'O', '2023-08-07 21:14:45'),
+(1, 'C', 88, '25', 'O', '2023-08-07 21:14:45'),
+(1, 'D', 89, '29', 'O', '2023-08-07 21:14:45'),
+(1, 'D', 90, '22', 'N', '2023-08-07 21:14:45'),
+(1, 'B', 91, '20', 'M', '2023-08-07 21:14:45'),
+(1, 'A', 92, '26', 'M', '2023-08-07 21:14:45'),
+(1, 'C', 93, '30', 'M', '2023-08-07 21:14:45'),
+(1, 'C', 94, '22', 'L', '2023-08-07 21:14:45'),
+(1, 'D', 95, '19', 'K', '2023-08-07 21:14:45'),
+(1, 'D', 96, '22', 'K', '2023-08-07 21:14:45'),
+(1, 'B', 97, '26', 'K', '2023-08-07 21:14:45'),
+(1, 'A', 98, '17', 'J', '2023-08-07 21:14:45'),
+(1, 'C', 99, '24', 'J', '2023-08-07 21:14:45'),
+(1, 'C', 100, '30', 'J', '2023-08-07 21:14:45'),
+(1, 'D', 101, '22', 'I', '2023-08-07 21:14:45'),
+(1, 'D', 102, '18', 'H', '2023-08-07 21:14:45'),
+(1, 'B', 103, '22', 'G', '2023-08-07 21:14:45'),
+(1, 'A', 104, '30', 'G', '2023-08-07 21:14:45'),
+(1, 'C', 105, '18', 'F', '2023-08-07 21:14:45'),
+(1, 'C', 106, '20', 'F', '2023-08-07 21:14:45'),
+(1, 'D', 107, '26', 'F', '2023-08-07 21:14:45'),
+(1, 'D', 108, '27', 'E', '2023-08-07 21:14:45'),
+(1, 'B', 109, '22', 'D', '2023-08-07 21:14:45'),
+(1, 'A', 110, '29', 'D', '2023-08-07 21:14:45'),
+(1, 'C', 111, '21', 'C', '2023-08-07 21:14:45'),
+(1, 'C', 112, '24', 'C', '2023-08-07 21:14:45'),
+(1, 'D', 113, '18', 'B', '2023-08-07 21:14:45'),
+(1, 'D', 114, '23', 'B', '2023-08-07 21:14:45'),
+(1, 'B', 115, '26', 'B', '2023-08-07 21:14:45'),
+(1, 'A', 116, '24', 'A', '2023-08-07 21:14:45'),
+(1, 'C', 117, '28', 'A', '2023-08-07 21:14:45');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `study_light_toewr`
+-- 資料表結構 `study_light_toewr`
 --
 
 CREATE TABLE `study_light_toewr` (
@@ -4578,7 +4035,7 @@ CREATE TABLE `study_light_toewr` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `study_light_toewr`
+-- 傾印資料表的資料 `study_light_toewr`
 --
 
 INSERT INTO `study_light_toewr` (`LightTower`, `Tower_ID`) VALUES
@@ -4592,20 +4049,33 @@ INSERT INTO `study_light_toewr` (`LightTower`, `Tower_ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `study_ticket`
+-- 資料表結構 `Study_Ticket`
 --
 
-CREATE TABLE `study_ticket` (
-  `Member_ID` int(11) NOT NULL,
+CREATE TABLE `Study_Ticket` (
+  `Member_ID` varchar(255) NOT NULL,
   `Sid` int(50) NOT NULL,
-  `Ticket_ID` varchar(50) NOT NULL,
-  `Ticket_Img` varchar(50) NOT NULL
+  `Name` varchar(50) NOT NULL,
+  `School` varchar(50) NOT NULL,
+  `Ticket_Img` varchar(50) NOT NULL,
+  `Datetime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 傾印資料表的資料 `Study_Ticket`
+--
+
+INSERT INTO `Study_Ticket` (`Member_ID`, `Sid`, `Name`, `School`, `Ticket_Img`, `Datetime`) VALUES
+('5', 4, '孟克柔', '師大附中', '7f565048cdc05d1b927ac1a87234033d.jpeg', '2023-08-10 14:55:12'),
+('4', 5, '謝長廷', '輔仁大學', '0c85776b759c26b7ffcb434247910172.jpeg', '2023-08-10 20:57:23'),
+('3', 6, '孫燕姿', '北藝大', '6a3e87bbeb800b904a2e7b38a89b684a.jpeg', '2023-08-10 21:11:15'),
+('2', 9, '江美琪', '師範大學', '0987f53a3705060ac0d2438ba499da3d.jpeg', '2023-08-10 21:32:04'),
+('1', 34, '洪郁雯', '松山高中', '准考證-08.jpg', '2023-08-12 07:41:45');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wanna_buy`
+-- 資料表結構 `wanna_buy`
 --
 
 CREATE TABLE `wanna_buy` (
@@ -4616,7 +4086,7 @@ CREATE TABLE `wanna_buy` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `wanna_buy`
+-- 傾印資料表的資料 `wanna_buy`
 --
 
 INSERT INTO `wanna_buy` (`wid`, `member_id`, `pid`, `created_at`) VALUES
@@ -4630,7 +4100,7 @@ INSERT INTO `wanna_buy` (`wid`, `member_id`, `pid`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `worship`
+-- 資料表結構 `worship`
 --
 
 CREATE TABLE `worship` (
@@ -4642,7 +4112,7 @@ CREATE TABLE `worship` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `worship`
+-- 傾印資料表的資料 `worship`
 --
 
 INSERT INTO `worship` (`pid`, `product_name`, `product_price`, `cid`, `image`) VALUES
@@ -4674,7 +4144,7 @@ INSERT INTO `worship` (`pid`, `product_name`, `product_price`, `cid`, `image`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `worship_details`
+-- 資料表結構 `worship_details`
 --
 
 CREATE TABLE `worship_details` (
@@ -4690,7 +4160,7 @@ CREATE TABLE `worship_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `worship_details`
+-- 傾印資料表的資料 `worship_details`
 --
 
 INSERT INTO `worship_details` (`did`, `wid`, `delivery`, `payment`, `receivedInfo`, `status`, `pid1`, `pid2`, `pid3`) VALUES
@@ -4719,7 +4189,7 @@ INSERT INTO `worship_details` (`did`, `wid`, `delivery`, `payment`, `receivedInf
 -- --------------------------------------------------------
 
 --
--- Table structure for table `worship_summary`
+-- 資料表結構 `worship_summary`
 --
 
 CREATE TABLE `worship_summary` (
@@ -4734,7 +4204,7 @@ CREATE TABLE `worship_summary` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `worship_summary`
+-- 傾印資料表的資料 `worship_summary`
 --
 
 INSERT INTO `worship_summary` (`wid`, `member_id`, `god`, `day`, `time`, `total`, `complete`, `created_at`) VALUES
@@ -4761,348 +4231,359 @@ INSERT INTO `worship_summary` (`wid`, `member_id`, `god`, `day`, `time`, `total`
 (55, 1, '媽祖', '2023/08/13', '未時/1pm-3pm', 609, 1, '2023-08-13 14:16:16');
 
 --
--- Indexes for dumped tables
+-- 已傾印資料表的索引
 --
 
 --
--- Indexes for table `amulet`
+-- 資料表索引 `amulet`
 --
 ALTER TABLE `amulet`
   ADD PRIMARY KEY (`Sid`);
 
 --
--- Indexes for table `browse_history`
+-- 資料表索引 `browse_history`
 --
 ALTER TABLE `browse_history`
   ADD PRIMARY KEY (`bid`);
 
 --
--- Indexes for table `cart`
+-- 資料表索引 `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`sid`);
 
 --
--- Indexes for table `categories`
+-- 資料表索引 `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`cid`);
 
 --
--- Indexes for table `comment`
+-- 資料表索引 `comment`
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`sid`);
 
 --
--- Indexes for table `comment_img`
+-- 資料表索引 `comment_img`
 --
 ALTER TABLE `comment_img`
   ADD PRIMARY KEY (`comment_img_sid`);
 
 --
--- Indexes for table `coupons`
+-- 資料表索引 `coupons`
 --
 ALTER TABLE `coupons`
   ADD PRIMARY KEY (`coupon_id`);
 
 --
--- Indexes for table `coupons_status`
+-- 資料表索引 `coupons_status`
 --
 ALTER TABLE `coupons_status`
   ADD PRIMARY KEY (`coupon_status_id`);
 
 --
--- Indexes for table `daily_signins`
+-- 資料表索引 `daily_signins`
 --
 ALTER TABLE `daily_signins`
   ADD PRIMARY KEY (`signin_id`);
 
 --
--- Indexes for table `good`
+-- 資料表索引 `good`
 --
 ALTER TABLE `good`
   ADD PRIMARY KEY (`good_sid`);
 
 --
--- Indexes for table `like_products`
+-- 資料表索引 `like_products`
 --
 ALTER TABLE `like_products`
   ADD PRIMARY KEY (`lid`);
 
 --
--- Indexes for table `love_light`
+-- 資料表索引 `Love_Light`
 --
-ALTER TABLE `love_light`
+ALTER TABLE `Love_Light`
   ADD PRIMARY KEY (`All_Light`);
 
 --
--- Indexes for table `love_light_tower`
+-- 資料表索引 `love_light_tower`
 --
 ALTER TABLE `love_light_tower`
   ADD PRIMARY KEY (`LightTower`);
 
 --
--- Indexes for table `love_redline`
+-- 資料表索引 `love_redline`
 --
 ALTER TABLE `love_redline`
   ADD PRIMARY KEY (`SID`);
 
 --
--- Indexes for table `members`
+-- 資料表索引 `members`
 --
 ALTER TABLE `members`
   ADD PRIMARY KEY (`member_id`);
 
 --
--- Indexes for table `online_question`
+-- 資料表索引 `Online_Question`
 --
-ALTER TABLE `online_question`
+ALTER TABLE `Online_Question`
   ADD PRIMARY KEY (`Question_ID`);
 
 --
--- Indexes for table `online_quiz`
+-- 資料表索引 `Online_Quiz`
 --
-ALTER TABLE `online_quiz`
+ALTER TABLE `Online_Quiz`
   ADD PRIMARY KEY (`Sid`),
   ADD KEY `Member_ID` (`Member_ID`);
 
 --
--- Indexes for table `order_details`
+-- 資料表索引 `order_details`
 --
 ALTER TABLE `order_details`
   ADD PRIMARY KEY (`odid`);
 
 --
--- Indexes for table `order_summary`
+-- 資料表索引 `order_summary`
 --
 ALTER TABLE `order_summary`
   ADD PRIMARY KEY (`oid`);
 
 --
--- Indexes for table `personal`
+-- 資料表索引 `Personal`
 --
-ALTER TABLE `personal`
+ALTER TABLE `Personal`
   ADD PRIMARY KEY (`Prayer_ID`);
 
 --
--- Indexes for table `poetry`
+-- 資料表索引 `poetry`
 --
 ALTER TABLE `poetry`
   ADD PRIMARY KEY (`Poetry_ID`);
 
 --
--- Indexes for table `post`
+-- 資料表索引 `post`
 --
 ALTER TABLE `post`
   ADD PRIMARY KEY (`sid`);
 
 --
--- Indexes for table `postcollect`
+-- 資料表索引 `postcollect`
 --
 ALTER TABLE `postcollect`
   ADD PRIMARY KEY (`postcollect_sid`);
 
 --
--- Indexes for table `post_img`
+-- 資料表索引 `post_img`
 --
 ALTER TABLE `post_img`
   ADD PRIMARY KEY (`post_img_sid`);
 
 --
--- Indexes for table `pray`
+-- 資料表索引 `pray`
 --
 ALTER TABLE `pray`
   ADD PRIMARY KEY (`God_ID`);
 
 --
--- Indexes for table `products`
+-- 資料表索引 `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`pid`);
 
 --
--- Indexes for table `shop_comment`
+-- 資料表索引 `shop_comment`
 --
 ALTER TABLE `shop_comment`
   ADD PRIMARY KEY (`cid`);
 
 --
--- Indexes for table `study_light`
+-- 資料表索引 `Study_Light`
 --
-ALTER TABLE `study_light`
+ALTER TABLE `Study_Light`
   ADD PRIMARY KEY (`All_Light`),
   ADD KEY `Member_ID` (`Member_ID`);
 
 --
--- Indexes for table `study_light_toewr`
+-- 資料表索引 `study_light_toewr`
 --
 ALTER TABLE `study_light_toewr`
   ADD PRIMARY KEY (`LightTower`);
 
 --
--- Indexes for table `study_ticket`
+-- 資料表索引 `Study_Ticket`
 --
-ALTER TABLE `study_ticket`
-  ADD PRIMARY KEY (`Sid`),
-  ADD KEY `Member_ID` (`Member_ID`);
+ALTER TABLE `Study_Ticket`
+  ADD PRIMARY KEY (`Sid`);
 
 --
--- Indexes for table `wanna_buy`
+-- 資料表索引 `wanna_buy`
 --
 ALTER TABLE `wanna_buy`
   ADD PRIMARY KEY (`wid`);
 
 --
--- Indexes for table `worship`
+-- 資料表索引 `worship`
 --
 ALTER TABLE `worship`
   ADD PRIMARY KEY (`pid`);
 
 --
--- Indexes for table `worship_details`
+-- 資料表索引 `worship_details`
 --
 ALTER TABLE `worship_details`
   ADD PRIMARY KEY (`did`);
 
 --
--- Indexes for table `worship_summary`
+-- 資料表索引 `worship_summary`
 --
 ALTER TABLE `worship_summary`
   ADD PRIMARY KEY (`wid`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
 --
 
 --
--- AUTO_INCREMENT for table `amulet`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `amulet`
 --
 ALTER TABLE `amulet`
   MODIFY `Sid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `browse_history`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `browse_history`
 --
 ALTER TABLE `browse_history`
   MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3103;
 
 --
--- AUTO_INCREMENT for table `cart`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `cart`
 --
 ALTER TABLE `cart`
   MODIFY `sid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
 
 --
--- AUTO_INCREMENT for table `comment`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `comment`
 --
 ALTER TABLE `comment`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT COMMENT '留言編號', AUTO_INCREMENT=321;
 
 --
--- AUTO_INCREMENT for table `coupons`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `coupons`
 --
 ALTER TABLE `coupons`
   MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `coupons_status`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `coupons_status`
 --
 ALTER TABLE `coupons_status`
   MODIFY `coupon_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 
 --
--- AUTO_INCREMENT for table `daily_signins`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `daily_signins`
 --
 ALTER TABLE `daily_signins`
   MODIFY `signin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
 
 --
--- AUTO_INCREMENT for table `good`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `good`
 --
 ALTER TABLE `good`
   MODIFY `good_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
--- AUTO_INCREMENT for table `like_products`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `like_products`
 --
 ALTER TABLE `like_products`
   MODIFY `lid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
 
 --
--- AUTO_INCREMENT for table `love_redline`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `Love_Light`
+--
+ALTER TABLE `Love_Light`
+  MODIFY `All_Light` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `love_redline`
 --
 ALTER TABLE `love_redline`
   MODIFY `SID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `members`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `members`
 --
 ALTER TABLE `members`
   MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
--- AUTO_INCREMENT for table `order_details`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `order_details`
 --
 ALTER TABLE `order_details`
   MODIFY `odid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
 
 --
--- AUTO_INCREMENT for table `personal`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `Personal`
 --
-ALTER TABLE `personal`
-  MODIFY `Prayer_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+ALTER TABLE `Personal`
+  MODIFY `Prayer_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `post`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `post`
 --
 ALTER TABLE `post`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT COMMENT '文章編號', AUTO_INCREMENT=374;
 
 --
--- AUTO_INCREMENT for table `postcollect`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `postcollect`
 --
 ALTER TABLE `postcollect`
   MODIFY `postcollect_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `products`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `products`
 --
 ALTER TABLE `products`
   MODIFY `pid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2086;
 
 --
--- AUTO_INCREMENT for table `shop_comment`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `shop_comment`
 --
 ALTER TABLE `shop_comment`
   MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `study_light`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `Study_Light`
 --
-ALTER TABLE `study_light`
-  MODIFY `All_Light` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=781;
+ALTER TABLE `Study_Light`
+  MODIFY `All_Light` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
--- AUTO_INCREMENT for table `wanna_buy`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `Study_Ticket`
+--
+ALTER TABLE `Study_Ticket`
+  MODIFY `Sid` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `wanna_buy`
 --
 ALTER TABLE `wanna_buy`
   MODIFY `wid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `worship`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `worship`
 --
 ALTER TABLE `worship`
   MODIFY `pid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT for table `worship_details`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `worship_details`
 --
 ALTER TABLE `worship_details`
   MODIFY `did` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
--- AUTO_INCREMENT for table `worship_summary`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `worship_summary`
 --
 ALTER TABLE `worship_summary`
   MODIFY `wid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
