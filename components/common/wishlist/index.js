@@ -29,6 +29,7 @@ export default function Wishlist({
   const addToCart = () => {
     const addData = { count: 1, pid: WLpid, wishlist: true }
     const auth = localStorage.getItem('auth')
+
     if (auth) {
       const obj = JSON.parse(auth)
       const Authorization = 'Bearer ' + obj.token
