@@ -18,6 +18,8 @@
     align-items: center
     justify-content: flex-start
     width: 10%
+    @include mobile-m
+        margin-top: 15px
 
 .name
     display: flex
@@ -35,7 +37,7 @@
         width: 180px
         height: 25px
         position: relative
-        left: 70px
+        left: 75px
         bottom: 15px
 
 .price
@@ -46,7 +48,7 @@
     @include mobile-m
         align-items: flex-start
         position: relative
-        left: 70px
+        left: 75px
 
 
 .quantity
@@ -89,7 +91,7 @@
         display: flex
         align-items: center
         position: relative
-        right: 110px
+        right: 102px
         top: 50px
 
 .flex_col

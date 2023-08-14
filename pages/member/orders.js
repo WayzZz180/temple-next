@@ -14,16 +14,20 @@ import OrderSummary from '@/components/common/cards/orderSummaryCard'
 import Loading from '@/components/common/loading'
 import ProfilePhoto from '@/components/common/profilePhoto'
 import ShopOrderContentCard from '@/components/common/cards/ShopOrderContentCard'
+import Title from '@/components/common/title'
+import CheckOrder from '@/components/common/orderDetails/checkOrder'
+import Button from '@/components/common/button'
 
 // bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 
 export default function Orders() {
   const router = useRouter()
-  const [data, setData] = useState([])
   const [modal, setModal] = useState(false)
   const [details, setDetails] = useState([])
   const [coupon, setCoupon] = useState([])
+  const [data, setData] = useState([])
+  const [index, setIndex] = useState()
 
   useEffect(() => {
     // 訂單大綱資料
@@ -95,6 +99,7 @@ export default function Orders() {
                     e.stopPropagation()
                     getDetails(v.oid)
                     setModal(true)
+                    setIndex(i)
                   }}
                 />
               </Col>
@@ -136,7 +141,7 @@ export default function Orders() {
           />
         ))}
         {/* 明細 */}
-        <Row className="nowrap">
+        <Row className="nowrap fwBold">
           <Col className={`${styles.col} mt50px fs18px`}>
             <div className={`${styles.billContainer}`}>
               <div className={`${styles.detailsCategory}`}>
@@ -161,6 +166,44 @@ export default function Orders() {
               </div>
             </div>
           </Col>
+        </Row>
+        <Row>
+          {/* 訂單表單資料 */}
+          <Container
+            id="orderDetails"
+            className={`${styles.container} pb100px mt50px`}
+          >
+            <div className="pt75px">
+              <Title
+                text="收件詳情"
+                text2="order details"
+                marginTop="0"
+                lineRowor="hot_pink"
+              />
+            </div>
+            <Row className={`${styles.flex_col}`}>
+              <div className={`${styles.checkOrder}`}>
+                <CheckOrder
+                  text="收件人姓名"
+                  content={data[index]?.customer_name}
+                />
+                <CheckOrder
+                  text="收件人電話"
+                  content={data[index]?.customer_phone}
+                />
+                <CheckOrder
+                  text="收件人電子郵件"
+                  content={data[index]?.customer_email}
+                />
+                <CheckOrder
+                  text="收件人地址"
+                  content={data[index]?.customer_address}
+                />
+                <CheckOrder text="物流方式" content={data[index]?.delivery} />
+                <CheckOrder text="付款方式" content={data[index]?.payment} />
+              </div>
+            </Row>
+          </Container>
         </Row>
       </Modal>
     </div>

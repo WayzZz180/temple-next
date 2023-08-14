@@ -12,6 +12,7 @@ import Button from '@/components/common/button'
 import Title from '@/components/common/title'
 import BuyContent from '@/components/common/orderDetails/buyContent'
 import Alert from '@/components/common/alert'
+
 // bootstrap
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -84,6 +85,8 @@ export default function Order() {
       ...old,
       [e.target.id]: e.target.value,
     }))
+  }
+  useEffect(() => {
     setCustomerData({
       customer_name: user.member_name,
 
@@ -97,8 +100,7 @@ export default function Order() {
 
       delivery: '宅配',
     })
-  }
-
+  }, [user])
   const invalidFieldsArray = Object.keys(validationRules).map((field) => {
     const rule = validationRules[field]
     return rule.required && (!user[field] || user[field].trim() === '')

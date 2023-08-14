@@ -1,5 +1,5 @@
 import styles from './orderTitle.module.sass'
-import varaibles from '@/styles/_variables.module.sass'
+import variables from '@/styles/_variables.module.sass'
 export default function OrderTitle({ data = [], info = [] }) {
   return (
     <>
@@ -12,12 +12,22 @@ export default function OrderTitle({ data = [], info = [] }) {
                 <div
                   className={`${styles.content} fwBold`}
                   style={{
-                    color: v.title === '訂單金額' ? varaibles['hot_pink'] : '',
+                    color: v.title === '訂單金額' ? variables['hot_pink'] : '',
                   }}
                 >
                   {v.content}
                   {v.title === '配送方式' ? (
-                    <span className={`${styles.status}`}>{data?.status}</span>
+                    <span
+                      // className={`${styles.status}`}
+                      style={{
+                        color:
+                          data?.status === '已完成'
+                            ? variables['green']
+                            : variables['hot_pink'],
+                      }}
+                    >
+                      {data?.status}
+                    </span>
                   ) : (
                     ''
                   )}
