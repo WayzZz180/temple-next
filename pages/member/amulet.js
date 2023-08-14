@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import styles from '@/pages/member/amulet.module.sass'
 import AuthContext from '@/contexts/AuthContext'
 import React, { useState, useEffect, useContext } from 'react'
@@ -9,6 +10,7 @@ import Button from '@/components/common/button/index.js'
 import MemberNavbar from '@/components/common/memberNavbar'
 import Amulet from '@/components/common/amuletDetails/index.js'
 import ProfilePhoto from '@/components/common/profilePhoto'
+import data from '@/components/mydata/memberNavbarData.js'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
@@ -43,6 +45,9 @@ export default function MyAmulet() {
 
   return (
     <div className={styles.flex}>
+      <Head>
+        <title>{data[6]?.text}</title>
+      </Head>
       <Container>
         <ProfilePhoto />
         <Row>

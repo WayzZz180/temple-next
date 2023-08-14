@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import React from 'react'
 import styles from '@/pages/member/praying.module.sass'
 import { useState, useEffect } from 'react'
@@ -9,7 +10,7 @@ import MemberNavbar from '@/components/common/memberNavbar'
 import PrayingSummary from '@/components/common/praying/prayingSummary'
 import ProfilePhoto from '@/components/common/profilePhoto'
 import Loading from '@/components/common/loading'
-
+import data from '@/components/mydata/memberNavbarData.js'
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 
@@ -39,6 +40,9 @@ export default function Praying() {
 
   return (
     <div className={styles.flex}>
+      <Head>
+        <title>{data[1]?.text}</title>
+      </Head>
       <Container>
         <ProfilePhoto />
         <Row>

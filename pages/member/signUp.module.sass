@@ -8,7 +8,12 @@
   // margin: 100px 0px 0px 0px
   // Q1
 
-    
+.flex_start
+  display: flex
+  flex-direction: row
+  margin:17.5px 0px 
+  justify-content: flex-start
+  
 .flex_space_between
   display: flex
   flex-direction: row
@@ -26,18 +31,37 @@
 // Q2
 
 
-.flex_container div
+.flex_container
   width:487px
   display: flex
   // align-items: center
   justify-content: space-between
  
-.flex_container div a
-  margin: 0px
-//Q4
+
 
 
 .invalid_input
   border: 2px solid $red
 
 //直接控制ROW?
+
+// 文字往右推
+.letter_spacing
+    letter-spacing:6px
+
+
+// 讓圖片往下
+.img_down
+    margin-top:100px
+    
+.login
+    display: flex
+    align-items: center
+
+.linkHover
+  transition: all .2s ease
+
+.linkHover:hover
+    color: $hot_pink
+
+

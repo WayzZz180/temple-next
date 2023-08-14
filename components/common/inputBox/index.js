@@ -7,7 +7,7 @@ export default function InputBox({
   placeholder = '',
   onChange,
   id,
-  width = '453px',
+  width = '460px',
   value = '',
   height = '45px',
   isError,

@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import styles from '@/pages/member/wishlist.module.sass'
 import Image from 'next/image'
 import { Fragment } from 'react'
@@ -12,6 +13,7 @@ import Button from '@/components/common/button/index.js'
 import MemberNavbar from '@/components/common/memberNavbar'
 import Wishlist from '@/components/common/wishlist'
 import ProfilePhoto from '@/components/common/profilePhoto'
+import data from '@/components/mydata/memberNavbarData.js'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
@@ -47,6 +49,9 @@ export default function MyWishlist() {
 
   return (
     <div className={styles.flex}>
+      <Head>
+        <title>{data[5]?.text}</title>
+      </Head>
       <Container>
         <ProfilePhoto />
         <Row>
