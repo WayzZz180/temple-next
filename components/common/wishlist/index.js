@@ -29,6 +29,7 @@ export default function Wishlist({
   const addToCart = () => {
     const addData = { count: 1, pid: WLpid, wishlist: true }
     const auth = localStorage.getItem('auth')
+
     if (auth) {
       const obj = JSON.parse(auth)
       const Authorization = 'Bearer ' + obj.token
@@ -48,7 +49,7 @@ export default function Wishlist({
     }
   }
 
-  // 從下次再買刪除個別商品
+  // 從喜好商品刪除個別商品
   const deleteFromWishList = (pid) => {
     const deletedData = { pid: pid }
     const auth = localStorage.getItem('auth')

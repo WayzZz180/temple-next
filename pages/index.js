@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styles from './head.module.sass'
 import Image from 'next/image'
+import Head from 'next/head'
 // svg
 import nav from '@/assets/nav.svg'
 import foo_dog_left from '@/assets/foo_dog_left.svg'
@@ -30,12 +31,12 @@ export default function Home() {
     setIsClicked(true)
     setTimeout(() => {
       setIsClicked(false)
-      Router.push('/Home/signOut')
-    }, 6000)
+      Router.push('/member/login')
+    }, 4000)
 
     setTimeout(() => {
-      Router.push('/Home/signOut')
-    }, 4500)
+      Router.push('/member/login')
+    }, 3900)
 
     // 隐藏 HomeDoor2
     setTimeout(() => {
@@ -43,9 +44,45 @@ export default function Home() {
     }, 5000) // 5 seconds
   }
 
+  const mazu = () => {
+    Router.push('/pray/mazu1')
+  }
+
+  const love = () => {
+    Router.push('/pray/loveA-1')
+  }
+
+  const study = () => {
+    Router.push('/pray/studyA-1')
+  }
   return (
     <>
+      <Head>
+        <title>錦囊廟祭</title>
+      </Head>
       {/* section1 */}
+      <div
+        className={`${styles.doorbackground} ${
+          isClicked ? styles.doorbackgroundv : ''
+        }`}
+      >
+        <div
+          className={`${styles.HomeDoor} ${
+            isClicked ? styles.HomeDoorclick : ''
+          }`}
+        >
+          <HomeDoor />
+        </div>
+        <div
+          className={`${styles.signInDoor} ${
+            isClicked ? styles.signInDoorclick : ''
+          }`}
+        >
+          <div className={`${styles.HomeDoor2}`}>
+            <HomeDoor2 />
+          </div>
+        </div>
+      </div>
       <div className={`${styles.container}`}>
         <div className={`${styles.background}`}>
           <div className={`${styles.place}`}>
@@ -101,22 +138,6 @@ export default function Home() {
                 <Image src={signIn} width={30} alt="signIn" />
               </div>
             </div>
-            <div
-              className={`${styles.HomeDoor} ${
-                isClicked ? styles.HomeDoorclick : ''
-              }`}
-            >
-              <HomeDoor />
-            </div>
-            <div
-              className={`${styles.signInDoor} ${
-                isClicked ? styles.signInDoorclick : ''
-              }`}
-            >
-              <div className={`${styles.HomeDoor2}`}>
-                <HomeDoor2 />
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -136,9 +157,9 @@ export default function Home() {
         lineColor="green"
       />
       <div className={styles.flex_row2}>
-        <God text1="媽祖" text2="求籤" pic="MazuGod" />
-        <God text1="月老" text2="求紅線" />
-        <God text1="文昌" text2="點學業燈" pic="StudyGod" />
+        <God text1="媽祖" text2="求籤" pic="MazuGod" link={mazu} />
+        <God text1="月老" text2="求紅線" link={love} />
+        <God text1="文昌" text2="上傳准考證" pic="StudyGod" link={study} />
       </div>
       {/* section4 */}
       <Title text="遶境online" text2="PILGRIMAGE ONLINE" lineColor="green" />

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import styles from './signOut.module.sass'
 import Image from 'next/image'
+import { useContext } from 'react'
+import AuthContext from '@/contexts/AuthContext'
+import Head from 'next/head'
 // svg
 import nav from '@/assets/nav.svg'
 import foo_dog_left from '@/assets/foo_dog_left.svg'
@@ -20,21 +23,24 @@ import Job from '@/components/common/cards/HomeJob'
 import HomeCarousels from '@/components/common/carousel/HomeCarousels'
 import HomeDoor from '@/components/common/cards/HomeDoor'
 import HomeDoor2 from '@/components/common/cards/HomeDoor2'
-import { Route, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
 export default function Home() {
   const Router = useRouter()
   const [isClicked, setIsClicked] = useState(false)
+  const { auth, setAuth, logout } = useContext(AuthContext)
 
   const handleClick = () => {
     setIsClicked(true)
     setTimeout(() => {
       setIsClicked(false)
+      logout()
       Router.push('/')
     }, 6500)
 
     setTimeout(() => {
       Router.push('/')
+      logout()
     }, 4500)
 
     // 隐藏 HomeDoor2
@@ -42,9 +48,22 @@ export default function Home() {
       setIsClicked(false)
     }, 5000) // 5 seconds
   }
+  const mazu = () => {
+    Router.push('/pray/mazu1')
+  }
 
+  const love = () => {
+    Router.push('/pray/loveA-1')
+  }
+
+  const study = () => {
+    Router.push('/pray/studyA-1')
+  }
   return (
     <>
+      <Head>
+        <title>錦囊廟祭</title>
+      </Head>
       {/* section1 */}
       <div className={`${styles.container}`}>
         <div className={`${styles.background}`}>
@@ -136,9 +155,9 @@ export default function Home() {
         lineColor="green"
       />
       <div className={styles.flex_row2}>
-        <God text1="媽祖" text2="求籤" pic="MazuGod" />
-        <God text1="月老" text2="求紅線" />
-        <God text1="文昌" text2="點學業燈" pic="StudyGod" />
+        <God text1="媽祖" text2="求籤" pic="MazuGod" link={mazu} />
+        <God text1="月老" text2="求紅線" link={love} />
+        <God text1="文昌" text2="點學業燈" pic="StudyGod" link={study} />
       </div>
       {/* section4 */}
       <Title text="遶境online" text2="PILGRIMAGE ONLINE" lineColor="green" />

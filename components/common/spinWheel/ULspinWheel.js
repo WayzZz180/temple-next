@@ -22,6 +22,7 @@ import {
 import coupon_red from '@/assets/coupon_red.svg'
 import wheel from '@/assets/wheel.svg'
 import spin_button2 from '@/assets/spin_button2.svg'
+import dog_out from '@/assets/dog_out.gif'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
@@ -32,15 +33,18 @@ export default function SpinWheel({ updateSpinWheel }) {
   const [modalIsOpen, setModalIsOpen] = useState(false) // 跟蹤 modal 是否打開
   // 優惠券資訊的狀態
   const [couponInfo, setCouponInfo] = useState({
-    coupon_type: '',
-    coupon_value: '',
+    // coupon_type: '',
+    // coupon_value: '',
   })
   const [showConfetti, setShowConfetti] = useState(false)
-  const [sg, setSg] = useState(250)
+  const [sg, setSg] = useState(175)
+  const [couponReceivedModalIsOpen, setCouponReceivedModalIsOpen] =
+    useState(false)
 
   const handleModalCloseReload = () => {
     // 當點擊取消或按下 Esc 時，關閉小視窗
     setModalIsOpen(false)
+    setCouponReceivedModalIsOpen(false)
     setTimeout(() => {
       setSg(0)
     }, 5000)
@@ -50,61 +54,73 @@ export default function SpinWheel({ updateSpinWheel }) {
 
   // 使用 switch 和 case 語句根據 result 的值對應到不同的 coupon
   let coupon_type
+  let coupon_name
   let coupon_value
 
   switch (true) {
     case result >= 5 && result <= 40:
       coupon_type = 'A'
+      coupon_name = 'a'
       coupon_value = '100'
       break
 
     case result >= 41 && result <= 75:
       coupon_type = 'B'
+      coupon_name = 'b'
       coupon_value = '90'
       break
 
     case result >= 76 && result <= 110:
       coupon_type = 'C'
+      coupon_name = 'c'
       coupon_value = '80'
       break
 
     case result >= 111 && result <= 145:
       coupon_type = 'D'
+      coupon_name = ''
       coupon_value = '70'
       break
 
     case result >= 146 && result <= 180:
       coupon_type = 'E'
+      coupon_name = ''
       coupon_value = '60'
       break
 
     case result >= 181 && result <= 215:
       coupon_type = 'F'
+      coupon_name = ''
       coupon_value = '50'
       break
 
     case result >= 216 && result <= 250:
       coupon_type = 'G'
+      coupon_name = ''
       coupon_value = '40'
       break
 
     case result >= 251 && result <= 285:
       coupon_type = 'H'
+      coupon_name = ''
       coupon_value = '30'
       break
 
     case result >= 286 && result <= 320:
       coupon_type = 'I'
+      coupon_name = ''
       coupon_value = '20'
       break
 
     case result >= 321 && result <= 355:
       coupon_type = 'J'
+      coupon_name = ''
       coupon_value = '10'
       break
 
     case (result >= 356 && result <= 360) || (result >= 0 && result <= 4):
       coupon_type = 'K'
+      coupon_name = ''
       coupon_value = '1000'
       break
 
@@ -121,7 +137,8 @@ export default function SpinWheel({ updateSpinWheel }) {
     setTimeout(() => {
       setModalIsOpen(true)
       setShowConfetti((prev) => !prev)
-    }, 1200)
+    }, 3200)
+    // 秒數
 
     setCouponInfo(coupon_type, coupon_value)
   }
@@ -147,7 +164,13 @@ export default function SpinWheel({ updateSpinWheel }) {
         // 存儲後端的錯誤訊息
         if (data.error) {
           console.log(data.error)
-          alert(data.error) // 顯示 email 已被使用的錯誤訊息
+          // alert(data.error) // 處理拿過了
+
+          setCouponReceivedModalIsOpen(true)
+
+          setTimeout(() => {
+            setModalIsOpen(false)
+          }, 10)
 
           return // 終止後續的處理
         }
@@ -161,7 +184,7 @@ export default function SpinWheel({ updateSpinWheel }) {
         }
       })
       .catch((error) => {
-        alert('簽到失敗', error)
+        // alert('簽到失敗', error)
       })
   }
 
@@ -205,7 +228,8 @@ export default function SpinWheel({ updateSpinWheel }) {
                 className={styles.wheel}
                 style={{
                   transform: `rotate(${rotationDegree}deg)`,
-                  transition: 'transform 1s cubic-bezier(0,.7,0,1.02)',
+                  transition: 'transform 3s cubic-bezier(0,.7,0,1.02)',
+                  // 秒數
                 }}
               >
                 {RainbowCoupon.map(({ color, value }, index) => (
@@ -281,6 +305,7 @@ export default function SpinWheel({ updateSpinWheel }) {
           </div>
         </Col>
       </Row>
+      {/* 第一次拿 */}
       <Modal
         isOpen={modalIsOpen}
         contentLabel="簽到成功!"
@@ -306,7 +331,7 @@ export default function SpinWheel({ updateSpinWheel }) {
           </div>
           <div className="fwBold fs30px mb20px">簽到成功</div>
           <div className="fwBold fs24px mb25px">
-            恭喜獲得 {coupon_type} 折價券，價值
+            恭喜獲得 {coupon_name} 折價券，價值NT$
             {coupon_value}
           </div>
           <Button
@@ -320,7 +345,7 @@ export default function SpinWheel({ updateSpinWheel }) {
           <Confetti
             width={typeof window !== 'undefined' ? window.innerWidth : 0}
             height={typeof window !== 'undefined' ? window.innerHeight : 0}
-            numberOfPieces={150}
+            numberOfPieces={sg}
             confettiSource={{ x: 960, y: 250 }}
             run={showConfetti}
             style={{ position: 'fixed', top: 0, left: 0 }}
@@ -331,12 +356,58 @@ export default function SpinWheel({ updateSpinWheel }) {
         <Confetti
           width={typeof window !== 'undefined' ? window.innerWidth : 0}
           height={typeof window !== 'undefined' ? window.innerHeight : 0}
-          numberOfPieces={150}
+          numberOfPieces={sg}
           // confettiSource={{ x: window.innerWidth / 2, y: 50 }}
           run={showConfetti}
           style={{ position: 'fixed', top: 0, left: 0 }}
         />
       )}
+      {/* 拿過了 */}
+      <Modal
+        isOpen={couponReceivedModalIsOpen}
+        contentLabel="已經領取過優惠券!"
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.5)', // 背景顏色透明度
+            zIndex: 2, //1 為spin pointer
+          },
+          content: {
+            maxWidth: '370px', // 調整最大寬度
+            maxHeight: '325px', // 調整最大高度
+            margin: 'auto', // 水平居中
+            background: variables['bgColor'],
+            //   // border: '',
+            //   // color: 'white',
+          },
+        }}
+      >
+        <div className={`${styles.flex_center3} mt10px`}>
+          <div>
+            <Image src={dog_out} alt="coupon" width={250} height={200} />
+          </div>
+          <div className="fwBold fs24px mb25px">
+            恭喜中獎，但今天已經簽到過囉~
+          </div>
+
+          <Button
+            text="確認"
+            link={() => {
+              handleModalCloseReload()
+            }}
+            fontSize="20px"
+            padding="10px 45px"
+          />
+
+          {/* <Confetti
+            width={typeof window !== 'undefined' ? window.innerWidth : 0}
+            height={typeof window !== 'undefined' ? window.innerHeight : 0}
+            numberOfPieces={sg}
+            confettiSource={{ x: 960, y: 250 }}
+            run={showConfetti}
+            style={{ position: 'fixed', top: 0, left: 0 }}
+          /> */}
+        </div>
+      </Modal>
     </>
   )
 }

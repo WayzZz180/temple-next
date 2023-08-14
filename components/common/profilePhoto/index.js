@@ -9,7 +9,7 @@ import variables from '@/styles/_variables.module.sass'
 // components
 import InputBox from '@/components/common/inputBox/index.js'
 import Title from '@/components/common/title/index.js'
-import Button from '@/components/common/button/index.js'
+import Button from '@/components/common/button'
 import MemberNavbar from '@/components/common/memberNavbar/index.js'
 
 //bootstrap
@@ -107,8 +107,7 @@ export default function ProfilePhoto() {
     setModalIsOpen(false)
   }
 
-  const handleRemoveImage = (e) => {
-    e.preventDefault()
+  const handleRemoveImage = () => {
     const str = localStorage.getItem('auth')
     if (str) {
       const obj = JSON.parse(str)
@@ -171,35 +170,54 @@ export default function ProfilePhoto() {
           },
           content: {
             maxWidth: '300px', // 調整最大寬度
-            maxHeight: '250px', // 調整最大高度
+            maxHeight: '360px', // 調整最大高度
             margin: 'auto', // 水平居中
+            background: variables['bgColor'],
           },
         }}
       >
-        <div className={styles.flex_centre2}>
+        <div className={`${styles.flex_centre2} fwBold`}>
           <h2>更換大頭貼</h2>
           <p>選擇您想要進行的操作：</p>
         </div>
-        <div>
-          <button
-            onClick={handleImageClick}
-            style={{ color: variables['green'] }}
-            className="w100"
-          >
-            上傳大頭貼
-          </button>
+        {/* <div className={styles.flex_centre2}> */}
+        <div className={`${styles.button}`}>
+          <Button
+            text="上傳大頭貼"
+            btnColor="green"
+            link={() => {
+              handleImageClick()
+            }}
+            width="100%"
+            fontSize="20px"
+            padding="10px 50px"
+          />
         </div>
-        <div>
-          <button onClick={handleRemoveImage} className="w100">
-            移除大頭貼
-          </button>
+        <div className={`${styles.button}`}>
+          <Button
+            text="移除大頭貼"
+            btnColor="hot_pink"
+            link={() => {
+              handleRemoveImage()
+            }}
+            width="100%"
+            fontSize="20px"
+            padding="10px 50px"
+          />
         </div>
-        <div>
-          <button onClick={handleModalClose} className="w100">
-            取消
-          </button>
+        <div className={`${styles.button}`}>
+          <Button
+            text="取消"
+            btnColor="orderGray"
+            link={() => {
+              handleModalClose()
+            }}
+            width="100%"
+            fontSize="20px"
+            padding="10px 50px"
+          />
         </div>
-
+        {/* </div> */}
         {/* 文件輸入框初始時被隱藏 */}
         <input
           type="file"

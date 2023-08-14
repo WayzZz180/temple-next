@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import styles from './personalinfo.module.sass'
 import { AuthContextProvider } from '@/contexts/AuthContext'
 import AuthContext from '@/contexts/AuthContext'
@@ -13,6 +14,8 @@ import Button from '@/components/common/button/index.js'
 import NoButton from '@/components/common/button/noButton.js'
 import MemberNavbar from '@/components/common/memberNavbar/index.js'
 import ProfilePhoto from '@/components/common/profilePhoto'
+import Alert from '@/components/common/alert'
+import data from '@/components/mydata/memberNavbarData.js'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
@@ -28,6 +31,10 @@ export default function Personalinfo() {
   const [modalIsOpen, setModalIsOpen] = useState(false) // 跟蹤 modal 是否打開
   const [cancelEditing, setCancelEditing] = useState(false)
   const dayjs = require('dayjs')
+  const [isIncorrect, setIsIncorrect] = useState(false)
+  const [isUsed, setIsUsed] = useState(false)
+  const [isUnChanged, setIsUnChanged] = useState(false)
+  const [isSuccessful, setIsSuccessful] = useState(false)
 
   //拿token
   useEffect(() => {
@@ -90,13 +97,12 @@ export default function Personalinfo() {
       message: '請選擇生日',
     },
     member_phone: {
-      required: true,
-      regex: /^09\d{8}$/,
+      regex: /^(09\d{8})?$/,
       message: '請檢查手機號碼格式',
     },
     member_address: {
       required: true,
-      regex: /^[\u4e00-\u9fa5\d]+$/,
+      regex: /^(?=.*[\u4e00-\u9fa5])(?=.*\d)[\u4e00-\u9fa5\d]+$/,
       message: '地址請輸入中文(和數字)',
     },
   }
@@ -178,7 +184,7 @@ export default function Personalinfo() {
 
       const hintModal = invalidFieldsArray.filter((field) => field !== null)
 
-      alert('請檢查以下項目：\n' + hintModal.join('\n'))
+      setIsIncorrect(true)
       return
     }
 
@@ -198,33 +204,48 @@ export default function Personalinfo() {
       )
       const data = await response.json()
 
+      // // 如果後端出錯，存儲後端的錯誤訊息
+      // if (data.error) {
+      //   // console.log('失敗:', data.error)
+      //   setErrorMessage(data.error)
+
+      //   if (data.error === '該 email 已被使用。') {
+      //     setInvalidFields(['member_account'])
+      //   } else if (data.error === '該手機號碼已被使用。') {
+      //     setInvalidFields(['member_phone'])
+      //   }
+
+      //   alert(data.error)
+      //   return // 終止後續的處理
+      // }
+
       // 如果後端出錯，存儲後端的錯誤訊息
       if (data.error) {
-        // console.log('失敗:', data.error)
+        console.log('失敗:', data.error)
         setErrorMessage(data.error)
-
-        if (data.error === '該 email 已被使用。') {
+        setIsUsed(true)
+        if (data.part === 'email') {
           setInvalidFields(['member_account'])
-        } else if (data.error === '該手機號碼已被使用。') {
+        } else if (data.part === 'phone') {
           setInvalidFields(['member_phone'])
         }
+        console.log(invalidFields)
 
-        alert(data.error)
         return // 終止後續的處理
       }
 
       // 如果後端過關
-      // console.log('成功:', data)
+      console.log('成功:', data)
 
       if (data.message === '資料沒有變動') {
         // 資料沒有變動
-        alert(data.message)
+        setIsUnChanged(true)
         setInvalidFields([])
         setErrorMessage([])
       } else if (data.success) {
         // 資料更新成功且有變動
         await fetchJWT()
-        alert('修改成功')
+        setIsSuccessful(true)
         setInvalidFields([])
         setErrorMessage([])
         // window.location.reload();
@@ -243,6 +264,9 @@ export default function Personalinfo() {
 
   return (
     <div className={styles.flex}>
+      <Head>
+        <title>{data[0]?.text}</title>
+      </Head>
       <Container>
         <ProfilePhoto />
         <Row>
@@ -267,7 +291,7 @@ export default function Personalinfo() {
               onChange={changeUser}
               validationRules={validationRules}
               value={user.member_name}
-              width={417}
+              width={470}
               // 判斷是否為錯誤欄位，以及是否顯示錯誤訊息
               isError={invalidFields.includes('member_name')}
               errorMessage={getErrorForField('member_name')} // 取得該欄位的錯誤訊息
@@ -283,7 +307,7 @@ export default function Personalinfo() {
               onChange={changeUser}
               validationRules={validationRules}
               value={user.member_forum_name}
-              width={417}
+              width={470}
               isError={invalidFields.includes('member_forum_name')}
               errorMessage={getErrorForField('member_forum_name')}
             />
@@ -299,28 +323,13 @@ export default function Personalinfo() {
               onChange={changeUser}
               validationRules={validationRules}
               value={user.member_account}
-              width={1028}
+              width={1005}
               isError={invalidFields.includes('member_account')}
               errorMessage={getErrorForField('member_account') || errorMessage} // 顯示來自後端的錯誤訊息
             />
           </Col>
         </Row>
-        {/* <Row className={styles.flex_centre}>
-            <Col>
-              <InputBox
-                prompt="密碼"
-                type="text"
-                id="member_password"
-                placeholder="密碼"
-                onChange={changeUser}
-                validationRules={validationRules}
-                value={user.member_password}
-                width={1028}
-                isError={invalidFields.includes('member_password')}
-                errorMessage={getErrorForField('member_password')}
-              />
-            </Col>
-          </Row> */}
+
         <Row className={styles.flex_centre}>
           <Col>
             <InputBox
@@ -331,7 +340,7 @@ export default function Personalinfo() {
               onChange={changeUser}
               validationRules={validationRules}
               value={user.member_birthday}
-              width={1028}
+              width={1005}
               isError={invalidFields.includes('member_birthday')}
               errorMessage={getErrorForField('member_birthday')}
             />
@@ -348,7 +357,7 @@ export default function Personalinfo() {
               onChange={changeUser}
               validationRules={validationRules}
               value={user.member_phone}
-              width={1028}
+              width={1005}
               isError={invalidFields.includes('member_phone')}
               errorMessage={getErrorForField('member_phone') || errorMessage}
               // 顯示來自後端的錯誤訊息
@@ -365,27 +374,16 @@ export default function Personalinfo() {
               onChange={changeUser}
               validationRules={validationRules}
               value={user.member_address}
-              width={1028}
+              width={1005}
               isError={invalidFields.includes('member_address')}
               errorMessage={getErrorForField('member_address')}
             />
           </Col>
         </Row>
 
-        <Row className={styles.flex_end}>
-          <Col>
+        <Row className={`${styles.flex_end} mt50px`}>
+          <Col className="me30px">
             {/* <form onSubmit={edit}> */}
-            <Button
-              text="確定儲存"
-              btnColor="black"
-              width={229}
-              link={() => {
-                edit()
-              }}
-            />
-            {/* </form> */}
-          </Col>
-          <Col>
             <NoButton
               text="取消變更"
               btnColor="black"
@@ -394,8 +392,59 @@ export default function Personalinfo() {
                 handleCancelEditing()
               }}
             />
+            {/* </form> */}
+          </Col>
+          <Col>
+            <Button
+              text="確定儲存"
+              btnColor="black"
+              width={229}
+              link={() => {
+                edit()
+              }}
+            />
           </Col>
         </Row>
+        {isIncorrect ? (
+          <Alert
+            isOpen={true}
+            text={'請檢查輸入資料是否正確'}
+            status="false"
+            setIsOpen={setIsIncorrect}
+          />
+        ) : (
+          ''
+        )}
+        {isUsed ? (
+          <Alert
+            isOpen={true}
+            text={errorMessage}
+            status="false"
+            setIsOpen={setIsUsed}
+          />
+        ) : (
+          ''
+        )}
+        {isUnChanged ? (
+          <Alert
+            isOpen={true}
+            text={'資料沒有變動'}
+            status="correct"
+            setIsOpen={setIsUnChanged}
+          />
+        ) : (
+          ''
+        )}
+        {isSuccessful ? (
+          <Alert
+            isOpen={true}
+            text={'修改成功'}
+            status="correct"
+            setIsOpen={setIsSuccessful}
+          />
+        ) : (
+          ''
+        )}
       </Container>
     </div>
   )

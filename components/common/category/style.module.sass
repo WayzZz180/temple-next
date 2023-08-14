@@ -1,4 +1,5 @@
 @import @/styles/_variables.module.sass
+@import '@/styles/mixins/responsive.sass'
 
 .container
     width: 80%
@@ -7,9 +8,10 @@
     margin: auto
 
 .row
-    width: 1210px
+    width: 100%
     margin: auto
     display: flex
+    justify-content: center
 
 .menuContainer
     width: 100%
@@ -26,7 +28,12 @@
     height: 3px
     width: 100%
     background: $brown
-
+    @include mobile-m
+        margin-top: 50px
 .noData
     width: 70%
     text-align: center
+    @include mobile-m
+        margin-top: 50px
+        font-size: 20px
+    

@@ -50,6 +50,7 @@ export default function Alert({
           background: variables['bgColor'],
         },
       }}
+      className={`${styles.modal}`}
     >
       {/* <div
         role="presentation"
@@ -67,6 +68,7 @@ export default function Alert({
           src={status === 'correct' ? correct : wrong}
           alt="alert"
           width={300}
+          className={`${styles.image}`}
         />
       </div>
       <div className={`${styles.text} fwBold fs30px mt50px`}>{text}</div>

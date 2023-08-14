@@ -18,18 +18,39 @@ export default function ShopCommentCard({
         
         老闆還會送你個優惠折扣碼之類的~`,
   date = `2023-05-31 19:30`,
+  num = 4,
 }) {
+  const outline = 5 - num
   return (
     <>
       <div className={`${styles.container} pt50px pb80px`}>
         {/* 暱稱 */}
         <div className={`fs27px fwBold`}>{name}</div>
         <div className="pt10px pb30px">
-          <Image src={goldenStar_fill} alt="star" width={25} />
-          <Image src={goldenStar_fill} alt="star" width={25} />
-          <Image src={goldenStar_fill} alt="star" width={25} />
-          <Image src={goldenStar_fill} alt="star" width={25} />
-          <Image src={goldenStar_outline} alt="star" width={25} />
+          {Array(num)
+            .fill(1)
+            .map((v, i) => {
+              return (
+                <Image
+                  key={`fill${i}`}
+                  src={goldenStar_fill}
+                  alt="star"
+                  width={25}
+                />
+              )
+            })}
+          {Array(outline)
+            .fill(1)
+            .map((v, i) => {
+              return (
+                <Image
+                  key={`outline${i}`}
+                  src={goldenStar_outline}
+                  alt="star"
+                  width={25}
+                />
+              )
+            })}
         </div>
         {/* 評價內容 */}
         <div className={`${styles.contentContainer}`}>

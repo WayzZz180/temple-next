@@ -1,9 +1,12 @@
 @import '@/styles/_variables.module.sass'
+@import '@/styles/mixins/responsive.sass'
 
 .navbarContainer 
   display: flex
   justify-content: space-around
   align-items: center
+  @include mobile-m
+        display: none
 
 .header
     position: relative
@@ -14,6 +17,7 @@
     left: 0
     right: 0
     z-index: -1
+        // top: -100px
     
 .bg
     object-fit: cover
@@ -34,11 +38,16 @@
     width: 120px
 
 .logo
-    display: inline-block
-    margin:auto
+    @include mobile-m
+        display: inline-block
+        margin:auto
 
 .title
     color: #F4E62A
+    @include mobile-m
+        padding-left: 0px 
+        padding-right: 45px 
+   
 
 .title2
     color: $deep_black
@@ -49,17 +58,31 @@ ul.drop_down_menu
     margin: 0
     padding: 0
     list-style: none
-
+    @include mobile-m
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center 
+        background: $brown
+        position: relative
+        top:80px
+        // transition: height .5 ease
 
 ul.drop_down_menu li
     position: relative
     white-space: nowrap
+    @include mobile-m
+        width: 100%
 
 ul.drop_down_menu>li:last-child 
     border-right: none
+    @include mobile-m
+    padding-bottom: 15px
 
 ul.drop_down_menu>li 
     float: left
+    @include mobile-m
+        text-align: center
 
 ul.drop_down_menu a
     color: $deep_black
@@ -76,6 +99,8 @@ ul.drop_down_menu ul li
     text-transform: uppercase
     position: relative
     transition: .2s ease
+    @include mobile-m
+        width: 100vw
 
 ul.drop_down_menu ul li::before
     content: ''
@@ -92,6 +117,8 @@ ul.drop_down_menu ul li:hover
 
 ul.drop_down_menu ul li:hover::before
     width: 60%
+    @include mobile-m
+        width: 90%
 
 
 ul.drop_down_menu ul
@@ -110,3 +137,110 @@ ul.drop_down_menu ul
 
 ul.drop_down_menu li:hover>ul
     display: block
+
+
+.mobilemenu 
+    display: none
+    @include mobile-m
+        display: block
+        float: right
+        margin: 1em
+        left:23px
+        top:30px
+        position: absolute
+        width: 20px
+        height: 25px
+        cursor: pointer
+        z-index: 1
+
+.mobilemenuline,
+.mobilemenu::before,
+.mobilemenu::after 
+    display: none
+    @include mobile-m
+        display: block
+        position: absolute
+        width: 100%
+        height: 4px
+        background-color: #431D31
+
+/* 漢堡選單中間橫槓 */
+.mobilemenuline 
+    @include mobile-m
+        top: 50%
+        transform: translateY(-50%)
+
+/* 漢堡選單上面橫槓 */
+.mobilemenu::before 
+    @include mobile-m
+        width: 30px
+        content: ''
+        top: 0
+
+/* 漢堡選單下面橫槓 */
+.mobilemenu::after 
+    @include mobile-m
+        width: 30px
+        content: ''
+        bottom: 0
+
+.open .mobilemenuline 
+        display: none
+
+/* 以下設定為點擊後上下橫線旋轉位移 */
+.open.mobilemenu::before,
+.open.mobilemenu::after 
+    @include mobile-m
+        top: 30%
+        transform: translateY(-50%)
+        transition: transform .3s ease 
+
+
+.open.mobilemenu::before 
+    @include mobile-m
+         transform: rotate(45deg)
+         transition: transform .3s ease 
+
+
+.open.mobilemenu::after 
+    @include mobile-m
+        transform: rotate(-45deg)
+        transition: transform .3s ease 
+
+.rwdnavbarContainer
+    display: none
+    @include mobile-m
+        display: block
+
+// .open.rwdnavbarContainer
+//     display: block
+//     height:100vh
+
+// .open .logo
+//     display: none
+
+// .open ul.drop_down_menu li
+//     display: block
+
+.logoContainer
+    @include mobile-m
+        display: flex
+        justify-content: center
+        position: relative
+
+.logo
+    @include mobile-m
+        position: absolute
+        top: 8px
+        right: 65px
+
+.liContainer
+    display: block
+    cursor: pointer
+    @include mobile-m
+        display: none
+.rwdliContainer
+    cursor: pointer
+    display: none
+    @include mobile-m
+        display: block

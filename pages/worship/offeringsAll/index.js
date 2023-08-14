@@ -1,7 +1,5 @@
 import styles from './offerings.module.sass'
-import Image from 'next/image'
-import Link from 'next/link'
-
+import Head from 'next/head'
 // bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
 
@@ -10,10 +8,8 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 // components
-import ShopTitle from '@/components/common/title/ShopTitle'
 import WorshipProductsCard from '@/components/common/cards/WorshipProductsCard'
 import Button from '@/components/common/button'
-import HomeSet from '@/components/common/cards/HomeSet'
 
 import HomeCarousels from '@/components/common/carousel/HomeCarousels'
 
@@ -41,6 +37,9 @@ export default function Offerings() {
   ]
   return (
     <>
+      <Head>
+        <title>供品一覽</title>
+      </Head>
       <Container className="mt100px">
         <HomeCarousels />
       </Container>
@@ -85,7 +84,11 @@ export default function Offerings() {
           <Button
             text="馬上拜拜去"
             link={() => {
-              router.push('/worship')
+              if (localStorage.getItem('auth')) {
+                router.push('/worship')
+              } else {
+                router.push('/member/login')
+              }
             }}
           />
         </Row>

@@ -12,6 +12,7 @@ import Gossip from '@/pages/forum/index'
 import Pray from '@/pages/pray/index'
 import Buy from '@/pages/shop/index'
 import Worship from '@/pages/worship/index'
+import Singnblock from '@/components/common/signinblock'
 
 export default function Pilgrimage() {
   const [modalIsOpen, setIsOpen] = React.useState(false)
@@ -77,6 +78,9 @@ export default function Pilgrimage() {
       <Image id="" alt="" src={jump} className={`${styles.jump}`} />
       <Image id="" alt="" src={flag} className={`${styles.flag}`} />
       <Image id="" alt="" src={dog} className={`${styles.dog}`} />
+      <div className={`${styles.signin}`}>
+        <Singnblock />
+      </div>
       <button className={`${styles.bubble}`} onClick={openModal}>
         <div className={`${styles.text}`}>來做測驗，拿小禮物～</div>
       </button>
@@ -101,7 +105,7 @@ export default function Pilgrimage() {
       <button className={`${styles.bubble2}`} onClick={openModal2}>
         <div className={`${styles.text}`}>好熱鬧啊，快來一起聊</div>
       </button>
-      <Modal2
+      <Modal
         isOpen={modalIsOpen2}
         onClose={closeModal2}
         style={customStyles}
@@ -116,13 +120,21 @@ export default function Pilgrimage() {
             transform: 'scale(1)',
           }}
         >
-          <Gossip />
+          <div
+            style={{
+              transform: 'scale(1.01)',
+              transformOrigin: 'top left',
+              height: '3600px',
+            }}
+          >
+            <Gossip />
+          </div>
         </div>
-      </Modal2>
+      </Modal>
       <button className={`${styles.bubble3}`} onClick={openModal3}>
         <div className={`${styles.text}`}>汪咿～！</div>
       </button>
-      <Modal2
+      <Modal
         isOpen={modalIsOpen3}
         onClose={closeModal3}
         style={customStyles}
@@ -137,13 +149,20 @@ export default function Pilgrimage() {
             transform: 'scale(1)',
           }}
         >
-          <Pray />
+          <div
+            style={{
+              transform: 'scale(1)',
+              transformOrigin: 'top left',
+            }}
+          >
+            <Pray />
+          </div>
         </div>
-      </Modal2>
+      </Modal>
       <button className={`${styles.bubble4}`} onClick={openModal4}>
         <div className={`${styles.text}`}>心誠則靈</div>
       </button>
-      <Modal2
+      <Modal
         isOpen={modalIsOpen4}
         onClose={closeModal4}
         style={customStyles}
@@ -158,13 +177,20 @@ export default function Pilgrimage() {
             transform: 'scale(1)',
           }}
         >
-          <Worship />
+          <div
+            style={{
+              transform: 'scale(1)',
+              transformOrigin: 'top left',
+            }}
+          >
+            <Worship />
+          </div>
         </div>
-      </Modal2>
+      </Modal>
       <button className={`${styles.bubble5}`} onClick={openModal5}>
         <div className={`${styles.text}`}>供品底加買啦～！</div>
       </button>
-      <Modal2
+      <Modal
         isOpen={modalIsOpen5}
         onClose={closeModal5}
         style={customStyles}
@@ -179,9 +205,15 @@ export default function Pilgrimage() {
             transform: 'scale(1)',
           }}
         >
+          <div
+            style={{
+              transform: 'scale(1)',
+              transformOrigin: 'top left',
+            }}
+          ></div>
           <Buy />
         </div>
-      </Modal2>
+      </Modal>
     </>
   )
 }

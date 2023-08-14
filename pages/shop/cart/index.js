@@ -1,10 +1,12 @@
 import styles from './cart.module.sass'
+import Head from 'next/head'
 
 //hooks
 import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import CartDataContext from '@/contexts/CartDataContext'
 import WannaBuyDataContext from '@/contexts/WannaBuyDataContext'
+
 // bootstrap
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -35,6 +37,9 @@ export default function IndexCart() {
   const { wannaBuyData, setWannaBuyData, getWannaBuyData } =
     useContext(WannaBuyDataContext)
 
+  //loading
+  const [loading, setLoading] = useState(true)
+
   // 抓購物車或下次再買的資料
   useEffect(() => {
     if (tab) {
@@ -42,10 +47,7 @@ export default function IndexCart() {
     }
     getCartData()
     getWannaBuyData()
-  }, [router.query])
-
-  // 瀏覽紀錄
-  useEffect(() => {
+    // // 瀏覽紀錄
     const auth = localStorage.getItem('auth')
     if (auth) {
       const obj = JSON.parse(auth)
@@ -57,15 +59,21 @@ export default function IndexCart() {
       })
         .then((r) => r.json())
         .then((data) => {
+          setTimeout(() => {
+            setLoading(false)
+          }, 1500)
           setMarquee(data)
         })
     }
-  }, [])
+  }, [router.query])
 
-  if (!cartData || !wannaBuyData || !marquee) return <Loading />
+  if (loading) return <Loading />
 
   return (
     <>
+      <Head>
+        <title>購物車</title>
+      </Head>
       <Container>
         {/* Step */}
         <Row>

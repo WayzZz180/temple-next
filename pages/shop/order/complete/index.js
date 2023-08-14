@@ -9,10 +9,10 @@ import ShopStepBar from '@/components/common/bar/ShopStepBar'
 import OrderSummaryCard from '@/components/common/cards/orderSummaryCard'
 import BuyContent from '@/components/common/orderDetails/buyContent'
 import Title from '@/components/common/title'
-import InputBox from '@/components/common/inputBox'
 import Button from '@/components/common/button'
 import CheckOrder from '@/components/common/orderDetails/checkOrder'
-
+import Cloud1 from '@/components/common/cloud/cloudR'
+import Cloud2 from '@/components/common/cloud/cloudL'
 // bootstrap
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -23,21 +23,6 @@ export default function OrderComplete() {
   const [data, setData] = useState([])
   const [buyContent, setBuyContent] = useState([])
 
-  // const scrollTo = (id) => {
-  //   // 取得目標元素的位置
-  //   const buyContent = document.getElementById(id)
-  //   const buyContentPosition = buyContent.getBoundingClientRect().top
-
-  //   // 計算捲動的距離，這裡設定為捲動至目標元素頂部距離畫面頂部的距離
-  //   const offset = window.pageYOffset
-  //   const scrollDistance = buyContentPosition + offset
-
-  //   // 執行捲動動作
-  //   window.scrollTo({
-  //     top: scrollDistance,
-  //     behavior: 'smooth', // 使用平滑滾動效果
-  //   })
-  // }
   const scrollToBuyContent = () => {
     // 取得目標元素的位置
     const buyContent = document.getElementById('buyContent')
@@ -139,6 +124,12 @@ export default function OrderComplete() {
           id="orderDetails"
           className={`${styles.container} pb100px mt50px`}
         >
+          <div className={`${styles.cloud1}`}>
+            <Cloud1 />
+          </div>
+          <div className={`${styles.cloud2}`}>
+            <Cloud2 />
+          </div>
           <div className="pt75px">
             <Title
               text="收件詳情"
@@ -158,10 +149,6 @@ export default function OrderComplete() {
               <CheckOrder text="收件人地址" content={data?.customer_address} />
               <CheckOrder text="物流方式" content={data?.delivery} />
               <CheckOrder text="付款方式" content={data?.payment} />
-              <CheckOrder
-                text="載具"
-                content={data?.invoice ? data?.invoice : '無'}
-              />
             </div>
             <div className={`${styles.button} pt100px`}>
               <Button

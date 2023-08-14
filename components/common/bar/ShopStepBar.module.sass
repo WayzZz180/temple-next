@@ -1,4 +1,5 @@
 @import @/styles/_variables.module.sass
+@import '@/styles/mixins/responsive.sass'
 
 .align
     display: flex
@@ -11,6 +12,9 @@
     align-items: center
     justify-content: center
     width: 100%
+    @include mobile-m
+        position: relative
+        top:30px
 
 .circle
     display: flex
@@ -27,7 +31,15 @@
     height:5px
     background: $green
     opacity: 50%
+    @include mobile-m
+        width: 100px
+    @include mobile
+        width: 70px
 
+.text
+    @include mobile-m
+        font-size: 16px
+        white-space: nowrap
 // .active
 //     border: 3px white dotted
 //     animation: border .4s ease infinite

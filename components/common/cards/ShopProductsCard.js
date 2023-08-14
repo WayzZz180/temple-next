@@ -209,7 +209,7 @@ export default function ShopProductsCard({
       >
         <Link href={`/shop/${category}/${pid}`}>
           <Image
-            src={src ? src : loading}
+            src={src}
             alt="product"
             width={150}
             height={150}

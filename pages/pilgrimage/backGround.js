@@ -21,7 +21,6 @@ import Board from '@/assets/BulletinBoard.svg'
 import Calender from './calendar'
 import img from '@/assets/calendar.svg'
 import fly from '@/assets/fly.gif'
-import People from './people'
 
 export default function Bg({ direction }) {
   const [backgroundPosition, setBackgroundPosition] = useState(0)

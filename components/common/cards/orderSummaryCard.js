@@ -42,11 +42,11 @@ export default function OrderSummary({
   return (
     <>
       <Col className={`${styles.container}`}>
-        <div>
+        <div className={`${styles.title}`}>
           <Title data={data} info={info} />
         </div>
         <div className={`${styles.button}`}>
-          <div className="details">
+          <div className="">
             <Button
               text={text1}
               btnColor="brown"
@@ -61,6 +61,32 @@ export default function OrderSummary({
               btnColor="brown"
               fontSize="20px"
               padding="10px 60px"
+              link={link2}
+            />
+          </div>
+          <div className={`${styles.total}`}>
+            <div className={`${styles.totalTitle} fwBold fs20px`}>訂單金額</div>
+            <div className={`${styles.price} fwBold fs28px`}>
+              ${data?.total}
+            </div>
+          </div>
+        </div>
+        <div className={`${styles.rwdButton}`}>
+          <div className="">
+            <Button
+              text={text1}
+              btnColor="brown"
+              fontSize="20px"
+              padding="10px 120px"
+              link={link1}
+            />
+          </div>
+          <div className="">
+            <Button
+              text={text2}
+              btnColor="brown"
+              fontSize="20px"
+              padding="10px 120px"
               link={link2}
             />
           </div>

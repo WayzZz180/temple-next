@@ -1,9 +1,80 @@
+@import '@/styles/_variables.module.sass' 
+
 .flex 
     display: flex
     flex-direction: row
     justify-content: center
     align-items: flex-start
-    // margin: 100px 0px 0px 0px
 
 .detailsContainer
     width: 100%
+
+.close
+    cursor: pointer
+    display: flex
+    justify-content: flex-end
+
+.close:hover
+    color: $green
+
+
+.col
+    width: 70%
+    display: flex
+    flex-direction: column
+    align-items: flex-end
+
+.billContainer
+    width:20%
+    display: flex
+    flex-direction: column
+    align-items: flex-end
+    position: relative
+    left: 61vh
+    letter-spacing: 3px
+
+.detailsCategory
+    display: flex
+    justify-content: space-between
+
+.details
+    display: inline-block
+    line-height: 30px
+    padding-bottom: 5px
+    margin: auto
+
+.container
+    width:70%
+    margin-left: auto
+    margin-right: auto
+    position: relative
+    letter-spacing: 3px
+
+.totalBox
+    text-align: center
+    background: $brown
+    color: white
+    width: 100%
+    letter-spacing: 3px
+    line-height: 55px
+    cursor: pointer
+
+
+.flex_col
+  display: flex
+  flex-direction: column
+  margin: 30px 0px 
+  justify-content: space-between
+
+.button
+    margin: auto
+
+.col
+    display: flex
+    align-items: center
+
+.customer
+    border-bottom: 3px solid $brown
+
+.checkOrder
+    margin: auto

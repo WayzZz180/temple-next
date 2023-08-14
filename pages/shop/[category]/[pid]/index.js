@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import styles from './pid.module.sass'
+import Head from 'next/head'
 
 // hooks
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
@@ -18,6 +19,7 @@ import Button from '@/components/common/button'
 import NoButton from '@/components/common/button/noButton'
 import Comment from '@/components/common/cards/ShopCommentCard'
 import Stars from '@/components/common/stars'
+import Alert from '@/components/common/alert'
 
 // svg
 import cart_fill from '@/assets/cart_fill.svg'
@@ -48,6 +50,7 @@ export default function Pid() {
   const [count, setCount] = useState(1)
   const [animationEnd, setAnimationEnd] = useState(false)
   const [pidArr, setPidArr] = useState([])
+  const [isOpen, setIsOpen] = useState(false)
 
   //判斷有無 Hover
   const { hoveredIndex, handleMouseEnter, handleMouseLeave } = useHoverIndex(-1)
@@ -252,9 +255,21 @@ export default function Pid() {
         .then((data) => {})
     }
   }
-
   return (
     <>
+      <Head>
+        <title>{data?.product_name}</title>
+      </Head>
+      {isOpen ? (
+        <Alert
+          status="wrong"
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          text="沒有庫存了！"
+        />
+      ) : (
+        ''
+      )}
       <Container className={'mb125px'}>
         {/* 路由 */}
         <DetailsRoute
@@ -361,6 +376,8 @@ export default function Pid() {
                   if (data?.stock_num != 0) {
                     cartClickState ? '' : handleCartClick()
                     handleAnimationEnd()
+                  } else {
+                    setIsOpen(true)
                   }
                 }}
                 onMouseEnter={() => handleMouseEnter(2)}
@@ -508,13 +525,19 @@ export default function Pid() {
           <Col className={`mt50px`}>
             <div className={`${styles.commentLine}`}></div>
             {/* 評價內容 */}
-            <Comment />
+            <Comment num={4} />
             <Comment
               name="森上梅岱前"
               content="好吃！CP值高！"
               date="2023-07-18 12:12"
+              num={5}
             />
-            <Comment />
+            <Comment
+              name="梅川伊芙"
+              content="就算會胖還是要吃....."
+              date="2023-08-12 18:20"
+              num={3}
+            />
 
             {/* 新增評論 */}
             {/* <div className={`${styles.addComment} fs20px pt50px pb50px`}>

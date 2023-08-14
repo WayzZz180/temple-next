@@ -34,11 +34,31 @@ export default function Marquee({
             // waitForTransition:false
           }}
           // watchSlidesProgress={true}
-          slidesPerView={10}
+          // slidesPerView={10}
           className="mySwiper"
           grabCursor="false"
           modules={[Autoplay, Pagination, Navigation]}
           speed={1000}
+          breakpoints={{
+            1674: {
+              slidesPerView: 10,
+            },
+            1440: {
+              slidesPerView: 8,
+            },
+            1024: {
+              slidesPerView: 6,
+            },
+            768: {
+              slidesPerView: 4,
+            },
+            574: {
+              slidesPerView: 3,
+            },
+            390: {
+              slidesPerView: 1,
+            },
+          }}
         >
           <div className={`${styles.marqueeContent} mt30px`}>
             <Row className="nowrap">

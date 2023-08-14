@@ -11,6 +11,7 @@ export default function HomeGod({
   text1 = 'text1',
   text2 = 'text2',
   pic = 'loveGod',
+  link = () => {},
 }) {
   const temp = '../../' + pic + '.svg'
   return (
@@ -29,7 +30,7 @@ export default function HomeGod({
         </div>
         <div className={`${styles.title}`}>{text1}</div>
         <div className="mt20px">
-          <Button text={text2} btnColor="green" />
+          <Button text={text2} btnColor="green" link={link} />
         </div>
       </div>
     </>

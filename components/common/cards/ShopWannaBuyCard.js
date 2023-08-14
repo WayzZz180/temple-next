@@ -13,6 +13,7 @@ import Col from 'react-bootstrap/Col'
 
 // components
 import NoButton from '@/components/common/button/noButton'
+import Alert from '../alert'
 
 // data
 import TitleData from '@/components/mydata/productsTitleData'
@@ -32,7 +33,7 @@ export default function ShopWannaBuyCard({
   // for 更新下次再買資料
   const { wannaBuyData, setWannaBuyData, getWannaBuyData } =
     useContext(WannaBuyDataContext)
-
+  const [isOpen, setIsOpen] = useState(false)
   // 商品類別
   const category = TitleData[cid].id
 
@@ -61,24 +62,28 @@ export default function ShopWannaBuyCard({
 
   // 從下次再買加入購物車
   const addToCart = () => {
-    const addData = { count: 1, pid: pid, wannaBuy: true }
-    const auth = localStorage.getItem('auth')
-    if (auth) {
-      const obj = JSON.parse(auth)
-      const Authorization = 'Bearer ' + obj.token
-      fetch(`${process.env.API_SERVER}/shop/cart`, {
-        method: 'POST',
-        body: JSON.stringify({ requestData: addData }),
-        headers: {
-          Authorization,
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((r) => r.json())
-        .then((data) => {
-          getWannaBuyData()
-          getCartCount()
+    if (stock_num > 0) {
+      const addData = { count: 1, pid: pid, wannaBuy: true }
+      const auth = localStorage.getItem('auth')
+      if (auth) {
+        const obj = JSON.parse(auth)
+        const Authorization = 'Bearer ' + obj.token
+        fetch(`${process.env.API_SERVER}/shop/cart`, {
+          method: 'POST',
+          body: JSON.stringify({ requestData: addData }),
+          headers: {
+            Authorization,
+            'Content-Type': 'application/json',
+          },
         })
+          .then((r) => r.json())
+          .then((data) => {
+            getWannaBuyData()
+            getCartCount()
+          })
+      }
+    } else {
+      setIsOpen(true)
     }
   }
 
@@ -152,6 +157,16 @@ export default function ShopWannaBuyCard({
         {/* 分隔線 */}
         <div className={`${styles.line}`}></div>
       </Col>
+      {isOpen ? (
+        <Alert
+          status="wrong"
+          isOpen={isOpen}
+          text={'沒有庫存了！'}
+          setIsOpen={setIsOpen}
+        />
+      ) : (
+        ''
+      )}
     </Row>
   )
 }

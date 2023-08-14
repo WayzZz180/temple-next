@@ -1,17 +1,23 @@
+import Head from 'next/head'
 // components
 import ShopTop from '@/components/common/shopTop'
 import ShopTitle from '@/components/common/title/ShopTitle'
 import ProductsCarousel from '@/components/common/carousel/ProductsCarousel'
+
 // bootstrap
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
+// data
 import data from '@/components/mydata/productsTitleData'
 
 export default function Shop() {
   return (
     <Container className={'shopContainer'}>
+      <Head>
+        <title>商城首頁</title>
+      </Head>
       <ShopTop />
 
       {/* 熱銷title */}

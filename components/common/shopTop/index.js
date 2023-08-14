@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './style.module.sass'
-//hooks
+// hooks
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 // components
 import ShopSearchBar from '@/components/common/bar/ShopSearchBar'
@@ -36,7 +36,7 @@ export default function ShopTop() {
           <div className={`${styles.title}`}>神明尬意ㄟ</div>
         </Col>
       </Row>
-      <Row className={`nowrap fs20px mb50px`}>
+      <Row className={`nowrap fs20px mb50px ${styles.rwdCategory}`}>
         {/* 類別詳細 */}
         {data.map((v, i) => {
           return (

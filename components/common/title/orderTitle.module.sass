@@ -1,9 +1,12 @@
 @import '@/styles/_variables.module.sass'
+@import '@/styles/mixins/responsive.sass'
 
 .flex
     display: flex
     flex-direction: column
     justify-content: space-between
+    @include mobile-m
+        font-size: 18px
 
 .container
     display: flex
@@ -13,10 +16,15 @@
 .title
     display: inline-block
     color: $orderGray
+    white-space: nowrap
 
 .content
     display: inline-block
     color: $deep_black
+    white-space: nowrap
+    @include mobile-m
+        width: 192px
+        white-space: normal
 
 .status
     color: $hot_pink

@@ -1,14 +1,20 @@
 @import '@/styles/_variables.module.sass'
+@import '@/styles/mixins/responsive.sass'
 
 .flex_row
     display: flex
     justify-content: flex-start
+    @include mobile-m
+        justify-content: center
+        align-items: flex-start
+        margin-bottom: 15px 
+        // gap: 15px
+        // flex-direction: column        
 
 .position
     position: relative
-    // bottom:-7px
     cursor: pointer
-    
+ 
 .button
     cursor: pointer
     background: $bgColor
@@ -17,3 +23,15 @@
     border: 3px solid $brown
     border-bottom: 0px
     border-radius: 7px 7px 0px 0px 
+    @include tablet
+        border-bottom: 3px solid $brown
+        border-radius: 7px  
+    @include mobile-m
+        white-space: nowrap
+        padding: 10px 40px
+        font-size: 16px
+        position: relative
+        right: 20px
+    
+
+        

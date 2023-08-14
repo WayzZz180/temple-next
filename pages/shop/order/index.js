@@ -11,6 +11,7 @@ import InputBox from '@/components/common/inputBox'
 import Button from '@/components/common/button'
 import Title from '@/components/common/title'
 import BuyContent from '@/components/common/orderDetails/buyContent'
+import Alert from '@/components/common/alert'
 
 // bootstrap
 import Container from 'react-bootstrap/Container'
@@ -18,36 +19,44 @@ import Row from 'react-bootstrap/Row'
 
 export default function Order() {
   const router = useRouter()
-
-  // for 訂單資料
-  const { cartData, setCartData, getCartData } = useContext(CartDataContext)
-  // 小計
-  const total = cartData?.reduce((result, v) => {
-    return result + v.product_price * v.quantity
-  }, 0)
-
-  const [customerData, setCustomerData] = useState({
-    customer_name: '沈子威',
-
-    customer_phone: '0912345678',
-
-    customer_email: 'wayz180@gmail.com',
-
-    customer_address: '南京復興民生社區',
-
-    payment: '現金',
-
-    delivery: '超商取貨',
-
-    invoice: '/CHILD1215',
-
-    coupon: null,
-  })
+  const [isOpen, setIsOpen] = useState(false)
 
   // WAYZ 47-112
   const [user, setUser] = useState('')
   const [invalidFields, setInvalidFields] = useState([])
   const [errorMessage, setErrorMessage] = useState('')
+  // for 訂單資料
+  const { cartData, setCartData, getCartData } = useContext(CartDataContext)
+
+  const [coupon, setCoupon] = useState(0)
+  const [couponId, setCouponId] = useState(0)
+
+  useEffect(() => {
+    if (localStorage.getItem('coupon')) {
+      const value = JSON.parse(localStorage.getItem('coupon')).value
+      const id = JSON.parse(localStorage.getItem('coupon')).id
+      setCoupon(value)
+      setCouponId(id)
+    }
+  }, [router.query])
+
+  // 小計
+  const total = cartData?.reduce((result, v) => {
+    return result + v.product_price * v.quantity
+  }, -coupon)
+  const [customerData, setCustomerData] = useState({
+    customer_name: user.member_name,
+
+    customer_phone: user.member_phone,
+
+    customer_email: user.member_email,
+
+    customer_address: user.member_address,
+
+    payment: '信用卡一次付清',
+
+    delivery: '宅配',
+  })
   const validationRules = {
     member_name: {
       required: true,
@@ -62,17 +71,13 @@ export default function Order() {
     },
     member_address: {
       required: true,
-      regex: /^[\u4e00-\u9fa5\d]+$/,
-      message: '地址請輸入中文(和數字)',
+      regex: /^(?=.*[\u4e00-\u9fa5])(?=.*\d)[\u4e00-\u9fa5\d]+$/,
+      message: '地址請輸入中文(數字)',
     },
     member_phone: {
       required: true,
       regex: /^09\d{8}$/,
       message: '請檢查手機號碼格式',
-    },
-    member_carrier: {
-      regex: /^\/[a-zA-Z0-9]{7}$/,
-      message: '載具格式不正確，請檢查',
     },
   }
   const changeUser = (e) => {
@@ -81,6 +86,21 @@ export default function Order() {
       [e.target.id]: e.target.value,
     }))
   }
+  useEffect(() => {
+    setCustomerData({
+      customer_name: user.member_name,
+
+      customer_phone: user.member_phone,
+
+      customer_email: user.member_email,
+
+      customer_address: user.member_address,
+
+      payment: '信用卡一次付清',
+
+      delivery: '宅配',
+    })
+  }, [user])
   const invalidFieldsArray = Object.keys(validationRules).map((field) => {
     const rule = validationRules[field]
     return rule.required && (!user[field] || user[field].trim() === '')
@@ -113,7 +133,6 @@ export default function Order() {
 
   // customer_name, customer_phone, customer_address, payment, delivery, coupon,
   const sendOrder = () => {
-    //Wayz 116-132
     const validateResult = validateForm()
     if (validateResult) {
       const invalidFieldsArray = Object.keys(validationRules).map((field) => {
@@ -125,34 +144,37 @@ export default function Order() {
           : null
       })
       setInvalidFields(invalidFieldsArray.filter((field) => field !== null))
+      setIsOpen(true)
+    } else {
+      //Wayz 117-132
 
-      alert('請檢查以下項目：\n' + invalidFieldsArray.join('\n'))
-      return
-    }
-    //Wayz 117-132
-
-    // 驗證通過，繼續進行表單提交
-    // 取得或提交表單資料
-    const orderData = {
-      cartData: cartData,
-      customerData: customerData,
-      total: total,
-      status: '未出貨',
-    }
-    const auth = localStorage.getItem('auth')
-    if (auth) {
-      const obj = JSON.parse(auth)
-      const Authorization = 'Bearer ' + obj.token
-      fetch(`${process.env.API_SERVER}/shop/order`, {
-        method: 'POST',
-        body: JSON.stringify({ requestData: orderData }),
-        headers: {
-          Authorization,
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((r) => r.json())
-        .then((data) => {})
+      // 驗證通過，繼續進行表單提交
+      // 取得或提交表單資料
+      const orderData = {
+        cartData: cartData,
+        customerData: customerData,
+        coupon: couponId,
+        total: total,
+        status: '未出貨',
+      }
+      const auth = localStorage.getItem('auth')
+      if (auth) {
+        const obj = JSON.parse(auth)
+        const Authorization = 'Bearer ' + obj.token
+        fetch(`${process.env.API_SERVER}/shop/order`, {
+          method: 'POST',
+          body: JSON.stringify({ requestData: orderData }),
+          headers: {
+            Authorization,
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((r) => r.json())
+          .then((data) => {
+            updateData()
+            router.push('/shop/order/complete')
+          })
+      }
     }
   }
 
@@ -177,89 +199,102 @@ export default function Order() {
         .then((data) => {})
     }
   }
+
   return (
     <Container className={`${styles.container}`}>
       {/* step */}
       <ShopStepBar path="/shop/order" />
       <div className="mt100px">
-        <BuyContent data={cartData} />
+        <BuyContent data={cartData} total={total} />
       </div>
       {/* 表單 */}
-      <Container className="mt50px">
+      <Container className={`${styles.form} mt50px`}>
         <Title text="訂單資訊" text2="information" />
         <Row className={`${styles.flex_space_between}`}>
-          <InputBox
-            type="text"
-            id="member_name"
-            prompt="收件人姓名"
-            placeholder="沈子威"
-            onChange={changeUser}
-            validationRules={validationRules}
-            value={user.member_name}
-            width={600}
-            height={60}
-            isError={invalidFields.includes('member_name')}
-            errorMessage={getErrorForField('member_name')}
-          />
-          <InputBox
-            type="text"
-            prompt="物流方式"
-            placeholder="Hannah"
-            onChange
-            width={600}
-            height={60}
-          />
+          <div className={`${styles.inputBox}`}>
+            <InputBox
+              type="text"
+              id="member_name"
+              prompt="收件人姓名"
+              placeholder="姓名"
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_name}
+              width={600}
+              height={60}
+              isError={invalidFields.includes('member_name')}
+              errorMessage={getErrorForField('member_name')}
+            />
+          </div>
+          <div className={`${styles.inputBox}`}>
+            <InputBox
+              type="text"
+              prompt="物流方式"
+              value="宅配"
+              width={600}
+              height={60}
+              readOnly={true}
+            />
+          </div>
         </Row>
         <Row className={`${styles.flex_space_between}`}>
-          <InputBox
-            type="text"
-            id="member_email"
-            prompt="收件人電子郵件"
-            placeholder="wayz180@gmail.com"
-            onChange={changeUser}
-            validationRules={validationRules}
-            value={user.member_email}
-            width={600}
-            height={60}
-            isError={invalidFields.includes('member_email')}
-            errorMessage={getErrorForField('member_email')}
-          />
-          <InputBox
-            type="text"
-            prompt="付款方式"
-            placeholder="現金"
-            onChange
-            width={600}
-            height={60}
-          />
+          <div className={`${styles.inputBox}`}>
+            <InputBox
+              type="text"
+              id="member_email"
+              prompt="收件人電子郵件"
+              placeholder="電子郵件"
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_email}
+              width={600}
+              height={60}
+              isError={invalidFields.includes('member_email')}
+              errorMessage={getErrorForField('member_email')}
+            />
+          </div>
+          <div className={`${styles.inputBox}`}>
+            <InputBox
+              type="text"
+              prompt="付款方式"
+              value="信用卡一次付清"
+              width={600}
+              height={60}
+              readOnly={true}
+            />
+          </div>
         </Row>
         <Row className={`${styles.flex_space_between}`}>
-          <InputBox
-            type="text"
-            id="member_phone"
-            prompt="收件人電話"
-            placeholder="組長好帥!"
-            onChange={changeUser}
-            validationRules={validationRules}
-            value={user.member_phone}
-            width={600}
-            height={60}
-            isError={invalidFields.includes('member_phone')}
-            errorMessage={getErrorForField('member_phone')}
-          />
-          <InputBox
-            type="text"
-            id="member_address"
-            prompt="收件人地址"
-            placeholder="無家日ToT"
-            onChange={changeUser}
-            validationRules={validationRules}
-            value={user.member_address}
-            width={600}
-            height={60}
-            isError={invalidFields.includes('member_address')}
-            errorMessage={getErrorForField('member_address')}
-          />
+          <div className={`${styles.inputBox}`}>
+            <InputBox
+              type="text"
+              id="member_phone"
+              prompt="收件人電話"
+              placeholder="手機號碼"
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_phone}
+              width={600}
+              height={60}
+              isError={invalidFields.includes('member_phone')}
+              errorMessage={getErrorForField('member_phone')}
+            />
+          </div>
+          <div className={`${styles.inputBox}`}>
+            <InputBox
+              type="text"
+              id="member_address"
+              prompt="收件人地址"
+              placeholder="地址"
+              onChange={changeUser}
+              validationRules={validationRules}
+              value={user.member_address}
+              width={600}
+              height={60}
+              isError={invalidFields.includes('member_address')}
+              errorMessage={getErrorForField('member_address')}
+            />
+          </div>
         </Row>
 
         <Row className={`${styles.flex_space_between} pt80px `}>
@@ -283,11 +318,139 @@ export default function Order() {
             fontSize="24px"
             link={() => {
               sendOrder()
-              updateData()
-              router.push('/shop/order/complete')
             }}
           />
         </Row>
+
+        {isOpen ? (
+          <Alert
+            isOpen={isOpen}
+            text="欄位資料格式錯誤"
+            status="wrong"
+            setIsOpen={setIsOpen}
+          />
+        ) : (
+          ''
+        )}
+      </Container>
+      <Container className={`${styles.rwdform} mt50px`}>
+        <Title text="訂單資訊" text2="information" />
+        <div className={`${styles.inputBox} mt10px`}>
+          <InputBox
+            type="text"
+            id="member_name"
+            prompt="收件人姓名"
+            placeholder="姓名"
+            onChange={changeUser}
+            validationRules={validationRules}
+            value={user.member_name}
+            width={250}
+            height={60}
+            isError={invalidFields.includes('member_name')}
+            errorMessage={getErrorForField('member_name')}
+          />
+        </div>
+        <div className={`${styles.inputBox}`}>
+          <InputBox
+            type="text"
+            prompt="物流方式"
+            value="宅配"
+            width={250}
+            height={60}
+            readOnly={true}
+          />
+        </div>
+        <div className={`${styles.inputBox}`}>
+          <InputBox
+            type="text"
+            id="member_email"
+            prompt="收件人電子郵件"
+            placeholder="電子郵件"
+            onChange={changeUser}
+            validationRules={validationRules}
+            value={user.member_email}
+            width={250}
+            height={60}
+            isError={invalidFields.includes('member_email')}
+            errorMessage={getErrorForField('member_email')}
+          />
+        </div>
+        <div className={`${styles.inputBox}`}>
+          <InputBox
+            type="text"
+            prompt="付款方式"
+            value="信用卡一次付清"
+            width={250}
+            height={60}
+            readOnly={true}
+          />
+        </div>
+        <div className={`${styles.inputBox}`}>
+          <InputBox
+            type="text"
+            id="member_phone"
+            prompt="收件人電話"
+            placeholder="手機號碼"
+            onChange={changeUser}
+            validationRules={validationRules}
+            value={user.member_phone}
+            width={250}
+            height={60}
+            isError={invalidFields.includes('member_phone')}
+            errorMessage={getErrorForField('member_phone')}
+          />
+        </div>
+        <div className={`${styles.inputBox}`}>
+          <InputBox
+            type="text"
+            id="member_address"
+            prompt="收件人地址"
+            placeholder="地址"
+            onChange={changeUser}
+            validationRules={validationRules}
+            value={user.member_address}
+            width={250}
+            height={60}
+            isError={invalidFields.includes('member_address')}
+            errorMessage={getErrorForField('member_address')}
+          />
+        </div>
+
+        <Row className={`${styles.button} pt15px `}>
+          <Button
+            text="送出訂單"
+            btnColor="hot_pink"
+            width=""
+            height=""
+            padding="15px 60px"
+            fontSize="24px"
+            link={() => {
+              sendOrder()
+            }}
+          />
+          <Button
+            text="返回購物車"
+            btnColor="brown"
+            width=""
+            height=""
+            padding="15px 60px"
+            fontSize="24px"
+            link={() => {
+              router.push('/shop/cart')
+            }}
+          />
+        </Row>
+
+        {isOpen ? (
+          <Alert
+            isOpen={isOpen}
+            text="欄位資料格式錯誤"
+            status="wrong"
+            setIsOpen={setIsOpen}
+          />
+        ) : (
+          ''
+        )}
       </Container>
     </Container>
   )

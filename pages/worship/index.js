@@ -42,7 +42,6 @@ import godInfo from '@/components/mydata/godInfo'
 
 export default function Worship() {
   const router = useRouter()
-
   // 選擇的神明
   const [god, setGod] = useState('媽祖')
 
@@ -207,12 +206,6 @@ export default function Worship() {
     if (localStorage.getItem('reservation')) {
       const str = JSON.parse(localStorage.getItem('reservation'))
 
-      // if (str.pidArr.length === 0) {
-      //   localStorage.removeItem('reservation')
-      //   location.replace('/worship')
-      //   return
-      // }
-
       setGod(str.god)
       setDay(str.day)
       setTime(str.time)
@@ -275,6 +268,7 @@ export default function Worship() {
       setTimeClick('')
       setZodiac(index + 1)
       setTime(`${timeInfo[index].id}/${timeInfo[index].time}`)
+
       return false
     } else {
       return true
@@ -317,6 +311,9 @@ export default function Worship() {
 
   return (
     <Container>
+      <Head>
+        <title>預約時辰</title>
+      </Head>
       <WorshipStepBar id={id} setStop={setStop} />
       {/* section1 */}
       <Row className={`${styles.worship}`}>

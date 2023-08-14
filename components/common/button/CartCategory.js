@@ -31,7 +31,7 @@ export default function CartCategory({ setIdFromChild, idFromChild }) {
       <div className={`${styles.flex_row}`}>
         {category.map((v, i) => {
           return (
-            <Link key={i} href={`?tab=${v.id}`}>
+            <Link key={i} className="link" href={`?tab=${v.id}`}>
               <div className={`${styles.position} me15px`}>
                 <button
                   className={`${styles.button} fwBold fs20px`}

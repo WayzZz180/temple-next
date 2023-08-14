@@ -4,7 +4,8 @@ import Title from '@/components/common/title'
 import HomeGod from '@/components/common/cards/HomeGod'
 import HomeCarousel from '@/components/common/carousel/HomeCarousels'
 import HomeDoor from '@/components/common/cards/HomeDoor'
-import Light_Row from '@/components/common/Modal/close'
+import Light_Row from '@/components/common/button/bts'
+import Light_Ro from '@/components/common/button'
 
 // import DefaultLayout from '@/components/layout/default-layout'
 
@@ -23,6 +24,7 @@ export default function About() {
       {/* <HomeGod />
       <HomeCarousel /> */}
       <Light_Row />
+      <Light_Ro />
     </>
   )
 }

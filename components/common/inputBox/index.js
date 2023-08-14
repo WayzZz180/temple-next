@@ -7,12 +7,13 @@ export default function InputBox({
   placeholder = '',
   onChange,
   id,
-  width = '453px',
+  width = '460px',
   value = '',
   height = '45px',
   isError,
   showError, // 新增一個 showError 屬性來控制錯誤訊息的顯示
   errorMessage,
+  readOnly = false,
 }) {
   const [isFocus, setIsFocus] = useState(false)
 
@@ -29,6 +30,7 @@ export default function InputBox({
       <div className={`${styles.prompt} mb10px fwBold fs18px`}>{prompt}</div>
       <div className={styles.input_box_wrapper}>
         <input
+          autocomplete="off"
           type={type}
           value={value}
           id={id}
@@ -41,6 +43,7 @@ export default function InputBox({
           className={`${styles.standard_input} ${
             isError ? styles.error_input : ''
           } ${isFocus ? styles.standard_focus : ''}`}
+          readOnly={readOnly}
         />
         {/* 根據 isError 屬性來決定是否顯示錯誤訊息 */}
         {isError && <div className={styles.error_message}>{errorMessage}</div>}

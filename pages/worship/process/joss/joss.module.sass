@@ -1,6 +1,87 @@
 @import '@/styles/_variables.module.sass'
 
-.floorContainer
+.main
+    height: 100vh
+    overflow: hidden
+
+.container
+    position: relative
     display: flex
+    flex-direction: column
     align-items: center
     justify-content: center
+
+.prayContainer
+    position: relative
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+
+.fire
+    position: absolute
+    top: -19vh
+
+.jossContainer
+    position: absolute
+    top: 30vh
+
+
+.hellMoneyContainer
+    position: absolute
+    top:77vh
+    cursor: grab
+
+.toBurn
+    position: absolute
+    top: -18vh
+    height: 30vh
+    width: 30vw
+
+.hellMoney
+    position: absolute
+    left: -15vh
+
+.animation
+    opacity: 0
+    animation: burn .3s 1
+
+@keyframes burn 
+    0%
+        opacity: 1
+    100%    
+        opacity: 0
+
+.floorContainer
+    position: absolute  
+    top: 42vh
+    z-index: -5
+    height: 900px
+    overflow: hidden
+
+.button
+    position: relative
+    top: 82vh
+    left: 78vh
+
+.hintContainer
+    cursor: default
+    position: relative
+    // left:22vh
+    // top: 80vh
+
+.shine
+    animation: opacity 1.2s ease  infinite 
+
+@keyframes opacity
+    0%
+        opacity: 1
+    50%
+        opacity: 0.2
+    100%
+        opacity: 1
+
+.hint
+    display: flex
+    justify-content: flex-start
+    align-items: center
