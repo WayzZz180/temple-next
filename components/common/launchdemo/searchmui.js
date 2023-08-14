@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import * as React from 'react'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
@@ -9,35 +9,16 @@ import SearchIcon from '@mui/icons-material/Search'
 import BasicTextFields3 from '@/components/common/launchdemo/textfield3'
 import styles from '@/components/common/launchdemo/postmui.module.sass'
 import { useRouter } from 'next/router'
-import ForumButton from '@/components/common/button/forumbutton2'
+import { useEffect, useState, useContext } from 'react'
+import InputBox from '@/components/common/inputBox/index'
 
-export default function AlertDialog() {
-  const [open, setOpen] = useState(false)
+export default function AlertDialog({ keywordSearch = () => {} }) {
+  // const router = useRouter()
   const router = useRouter()
-  const { category, post_sid } = router.query
-  const [data, setData] = useState([])
-  const [totalPages, setTotalPages] = useState(1)
-  const [keyword, setKeyword] = useState('')
-
-  useEffect(() => {
-    setKeyword(router.query.keyword || '')
-    const usp = new URLSearchParams(router.query)
-
-    fetch(
-      `${
-        process.env.API_SERVER
-      }/forum/${category}/${post_sid}?${usp.toString()}`
-    )
-      .then((r) => r.json())
-      .then((result) => {
-        if (result.success) {
-          setData(result.data)
-        } else {
-          // console.log('沒有資料!')
-        }
-      })
-  }, [router.query])
-
+  const [open, setOpen] = React.useState(false)
+  const [keyword, setKeyword] = React.useState(
+    router.query.keyword ? router.query.keyword : ''
+  )
   const handleClickOpen = () => {
     setOpen(true)
   }
@@ -45,7 +26,37 @@ export default function AlertDialog() {
   const handleClose = () => {
     setOpen(false)
   }
+  console.log(router)
 
+  const [data, setData] = useState({
+    redirect: '',
+    totalRows: 0,
+    perPage: 6,
+    totalPages: 0,
+    page: 1,
+    rows: [],
+  })
+  // useEffect(() => {
+  //   const usp = new URLSearchParams(router.query)
+  //   const page = router.query.page
+
+  //   fetch(
+  //     `${process.env.API_SERVER}/forum/${router.query.category}?keyword=${router.query.keyword}`,
+  //     {
+  //       method: 'POST',
+  //       body: JSON.stringify({ page: page }),
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //     }
+  //   )
+  //     .then((r) => r.json())
+  //     .then((data) => {
+  //       console.log(data)
+  //       setData(data)
+  //     })
+  // }, [router.query])
+  // console.log(keyword)
   return (
     <div>
       <Button
@@ -62,47 +73,48 @@ export default function AlertDialog() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{'關鍵字搜尋'}</DialogTitle>
+        {/* <DialogTitle id="alert-dialog-title">{'關鍵字搜尋'}</DialogTitle> */}
         <DialogContent>
           <form
             onSubmit={(e) => {
               e.preventDefault()
+              keywordSearch()
               router.push(
-                `/forum/${category}/${post_sid}?keyword=` +
-                  e.currentTarget.keyword.value
+                `/forum/${router.query.category}?page=1&keyword=` + keyword
               )
+              setKeyword('')
               handleClose()
             }}
           >
             <DialogContentText id="alert-dialog-description">
-              <BasicTextFields3
+              {/* <BasicTextFields3
                 // name="keyword"
-                value={router.query.keyword || ''}
+                value={keyword}
+                onChange={(e) => {
+                  setKeyword(e.currentTarget.value)
+                }}
+              /> */}
+              <InputBox
+                type="text"
+                prompt="關鍵字搜尋"
+                placeholder="關鍵字"
+                value={keyword}
+                onChange={(e) => {
+                  setKeyword(e.currentTarget.value)
+                }}
               />
             </DialogContentText>
             <DialogActions>
               <div className={`${styles.row2}`}>
-                <ForumButton
-                  btnColor="hot_pink"
-                  text="cancel"
-                  link={handleClose}
-                  width="30px"
-                  height="20px"
-                  fontSize="15px"
-                />
-                <ForumButton
-                  btnColor="green"
-                  text="search"
-                  // onClick={handleClose}
-                  type="submit"
-                  width="30px"
-                  height="20px"
-                  fontSize="15px"
-                />
-                {/* <Button onClick={handleClose} color="error">
+                <Button onClick={handleClose} color="error">
                   取消
                 </Button>
-                <Button type="submit">搜尋</Button> */}
+                <Button
+                  type="submit"
+                  // autoFocus
+                >
+                  搜尋
+                </Button>
               </div>
             </DialogActions>
           </form>

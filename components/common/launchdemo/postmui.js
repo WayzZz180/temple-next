@@ -20,6 +20,7 @@ import TextArea from '@/components/common/inputBox/textarea'
 import ImgUpload from '@/components/common/imgupload/imgupload'
 import { useState, useEffect } from 'react'
 import data from '@/components/mydata/productsTitleData'
+import { Logger } from 'sass'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />
@@ -27,6 +28,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function AlertDialogSlide({ page = 1 }) {
   const router = useRouter()
+  const [selectedFile, setSelectedFile] = useState(null)
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
@@ -38,36 +40,60 @@ export default function AlertDialogSlide({ page = 1 }) {
   }
   const [inputTitle, setInputTitle] = React.useState('')
   const [inputContent, setInputContent] = React.useState('')
-  const [memberId, setMemberId] = useState({
-    member_id: '',
-  })
+  //會員
+  // const [memberId, setMemberId] = useState({
+  //   member_id: '',
+  // })
   // const [publishTime, setPublishTime] = React.useState('')
 
-  const addData = (title, content) => {
+  const addData = async (title, content) => {
     const reqData = {
       title: title,
       content: content,
+      img: '',
     }
 
-    fetch(`${process.env.API_SERVER}/forum/${router.query.category}/add`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: reqData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        console.log('data:', data)
-        handleClose()
-        // router.push(`/forum/gossip?page=3`)
-        // setData(data[0])
-        // setTotalPages(data[1])
-      })
+    const input = document.querySelector('.img-upload')
+    const fd = new FormData()
+    fd.append('preImg', input.files[0])
+
+    try {
+      await Promise.all([
+        fetch(
+          `${process.env.API_SERVER}/forum/${router.query.category}/addphoto`,
+          {
+            method: 'POST',
+            body: fd, // 確保這裡傳遞的是 FormData 物件
+          }
+        )
+          .then((r) => r.json())
+          .then((data) => {
+            console.log(data)
+            // console.log(fd)
+            reqData.img = data
+          }),
+      ])
+      await Promise.all([
+        fetch(`${process.env.API_SERVER}/forum/${router.query.category}/add`, {
+          method: 'POST',
+          body: JSON.stringify({ requestData: reqData }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }),
+      ])
+
+      handleClose()
+      console.log('Data added successfully')
+    } catch (error) {
+      console.error('Error adding data:', error)
+    }
   }
-  useEffect(() => {
-    setMemberId('member_id')
-  })
+  //會員
+  // useEffect(() => {
+  //   setMemberId('member_id')
+  // })
+
   // if(!data) return <Loading />
 
   return (
@@ -131,6 +157,7 @@ export default function AlertDialogSlide({ page = 1 }) {
                       autoComplete="off"
                       id="title"
                       required
+                      // minLength={3}
                     />
                     {/* <BasicTextFields /> */}
                   </div>
@@ -151,6 +178,7 @@ export default function AlertDialogSlide({ page = 1 }) {
                       id="content"
                       required
                       lineheight="32px"
+                      // minLength={15}
                     />
                     {/* <BasicTextFields2 /> */}
                   </div>
@@ -158,7 +186,10 @@ export default function AlertDialogSlide({ page = 1 }) {
               </div>
             </DialogContentText>
             <div className={`${styles.row2}`}>
-              <ImgUpload />
+              <ImgUpload
+                selectedFile={selectedFile}
+                setSelectedFile={setSelectedFile}
+              />
             </div>
           </DialogContent>
           <DialogActions>
@@ -180,7 +211,9 @@ export default function AlertDialogSlide({ page = 1 }) {
                   // e.preventDefault()
 
                   addData(inputTitle, inputContent)
-
+                  setInputTitle('')
+                  setInputContent('')
+                  setSelectedFile(null)
                   // console.log('page:', page)
                   // console.log('category:', router.query.category)
                 }}
