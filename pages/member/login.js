@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import styles from '@/pages/member/login.module.sass'
 import Link from 'next/link'
-import { useState, useContext , useEffect } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import AuthContext from '@/contexts/AuthContext'
 import { AuthContextProvider } from '@/contexts/AuthContext'
 import { useRouter } from 'next/router'
@@ -69,28 +69,28 @@ export default function Login() {
   }
 
   //黑色區塊消失
-    useEffect(() => {
-    const blackblock = document.getElementById('blackblock')
+  useEffect(() => {
+    const blackblock = document.getElementById('background')
 
     if (blackblock) {
       const timeout = setTimeout(() => {
-        blackblock.style.display = "none";
-      }, 1800)
+        blackblock.style.display = 'none'
+      }, 1000)
 
       return () => {
-        clearTimeout(timeout);
+        clearTimeout(timeout)
       }
     }
   }, [])
 
   return (
     <Container className={styles.flex}>
-      <div className={`${styles.background}`}>
-    <div className={`${styles.position}`}>
-      <div className={styles.blackblock} id="blackblock">
-        <HomeDoor />
-      </div>
-      </div>
+      <div id="background" className={`${styles.background}`}>
+        <div className={`${styles.position}`}>
+          <div className={styles.blackblock} id="blackblock">
+            <HomeDoor />
+          </div>
+        </div>
       </div>
       <Row>
         <Col>
