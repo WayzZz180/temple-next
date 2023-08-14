@@ -11,6 +11,7 @@ import Alert from '@/components/common/alert'
 export default function NavbarItem({ title = '', title2, links }) {
   // const { cartCount } = useContext(CartContext)
   const [isOpen, setIsOpen] = useState(false)
+  const [alertIsOpen, setAlertIsOpen] = useState(false)
   const { auth, setAuth, logout } = useContext(AuthContext)
   const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
   const router = useRouter()
@@ -43,7 +44,7 @@ export default function NavbarItem({ title = '', title2, links }) {
                 link.label != '商城首頁' &&
                 link.label !== '登入' &&
                 link.label != '供品一覽'
-                  ? alert('請先登入')
+                  ? setAlertIsOpen(true)
                   : router.push(link.url)
               }}
             >
@@ -86,7 +87,7 @@ export default function NavbarItem({ title = '', title2, links }) {
                 link.label != '商城首頁' &&
                 link.label !== '登入' &&
                 link.label != '供品一覽'
-                  ? alert('請先登入')
+                  ? setAlertIsOpen(true)
                   : router.push(link.url)
               }}
             >
@@ -104,6 +105,16 @@ export default function NavbarItem({ title = '', title2, links }) {
           ))}
         </ul>
       </li>
+      {alertIsOpen ? (
+        <Alert
+          status="wrong"
+          text="請先登入"
+          isOpen={alertIsOpen}
+          setIsOpen={setAlertIsOpen}
+        />
+      ) : (
+        ''
+      )}
     </>
   )
 }

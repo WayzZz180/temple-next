@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Aug 14, 2023 at 06:24 AM
--- Server version: 5.7.24
--- PHP Version: 8.0.1
+-- 主機： localhost:8889
+-- 產生時間： 2023 年 08 月 14 日 08:09
+-- 伺服器版本： 5.7.39
+-- PHP 版本： 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `temple`
+-- 資料庫： `temple`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `amulet`
+-- 資料表結構 `amulet`
 --
 
 CREATE TABLE `amulet` (
@@ -35,7 +35,7 @@ CREATE TABLE `amulet` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `amulet`
+-- 傾印資料表的資料 `amulet`
 --
 
 INSERT INTO `amulet` (`Member_ID`, `Name`, `Sid`, `Datetime`) VALUES
@@ -49,7 +49,7 @@ INSERT INTO `amulet` (`Member_ID`, `Name`, `Sid`, `Datetime`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `browse_history`
+-- 資料表結構 `browse_history`
 --
 
 CREATE TABLE `browse_history` (
@@ -60,7 +60,7 @@ CREATE TABLE `browse_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `browse_history`
+-- 傾印資料表的資料 `browse_history`
 --
 
 INSERT INTO `browse_history` (`bid`, `member_id`, `pid`, `created_at`) VALUES
@@ -118,7 +118,7 @@ INSERT INTO `browse_history` (`bid`, `member_id`, `pid`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `card_game_status`
+-- 資料表結構 `card_game_status`
 --
 
 CREATE TABLE `card_game_status` (
@@ -129,7 +129,7 @@ CREATE TABLE `card_game_status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `card_game_status`
+-- 傾印資料表的資料 `card_game_status`
 --
 
 INSERT INTO `card_game_status` (`card_game_id`, `member_id`, `points`, `created_at`) VALUES
@@ -342,7 +342,7 @@ INSERT INTO `card_game_status` (`card_game_id`, `member_id`, `points`, `created_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cart`
+-- 資料表結構 `cart`
 --
 
 CREATE TABLE `cart` (
@@ -354,7 +354,7 @@ CREATE TABLE `cart` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `cart`
+-- 傾印資料表的資料 `cart`
 --
 
 INSERT INTO `cart` (`sid`, `pid`, `quantity`, `created_at`, `member_id`) VALUES
@@ -365,7 +365,7 @@ INSERT INTO `cart` (`sid`, `pid`, `quantity`, `created_at`, `member_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- 資料表結構 `categories`
 --
 
 CREATE TABLE `categories` (
@@ -375,7 +375,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `categories`
+-- 傾印資料表的資料 `categories`
 --
 
 INSERT INTO `categories` (`cid`, `category_name`, `parent_id`) VALUES
@@ -421,7 +421,7 @@ INSERT INTO `categories` (`cid`, `category_name`, `parent_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comment`
+-- 資料表結構 `comment`
 --
 
 CREATE TABLE `comment` (
@@ -433,7 +433,7 @@ CREATE TABLE `comment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `comment`
+-- 傾印資料表的資料 `comment`
 --
 
 INSERT INTO `comment` (`sid`, `member_id`, `comment`, `comment_time`, `post_sid`) VALUES
@@ -764,7 +764,7 @@ INSERT INTO `comment` (`sid`, `member_id`, `comment`, `comment_time`, `post_sid`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comment_img`
+-- 資料表結構 `comment_img`
 --
 
 CREATE TABLE `comment_img` (
@@ -776,7 +776,7 @@ CREATE TABLE `comment_img` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `coupons`
+-- 資料表結構 `coupons`
 --
 
 CREATE TABLE `coupons` (
@@ -788,7 +788,7 @@ CREATE TABLE `coupons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `coupons`
+-- 傾印資料表的資料 `coupons`
 --
 
 INSERT INTO `coupons` (`coupon_id`, `coupon_type`, `coupon_name`, `coupon_value`, `conditions`) VALUES
@@ -811,7 +811,7 @@ INSERT INTO `coupons` (`coupon_id`, `coupon_type`, `coupon_name`, `coupon_value`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `coupons_status`
+-- 資料表結構 `coupons_status`
 --
 
 CREATE TABLE `coupons_status` (
@@ -825,7 +825,7 @@ CREATE TABLE `coupons_status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `coupons_status`
+-- 傾印資料表的資料 `coupons_status`
 --
 
 INSERT INTO `coupons_status` (`coupon_status_id`, `coupon_id`, `member_id`, `usage_status`, `start_date`, `expiration_date`, `created_at`) VALUES
@@ -863,7 +863,7 @@ INSERT INTO `coupons_status` (`coupon_status_id`, `coupon_id`, `member_id`, `usa
 -- --------------------------------------------------------
 
 --
--- Table structure for table `daily_signins`
+-- 資料表結構 `daily_signins`
 --
 
 CREATE TABLE `daily_signins` (
@@ -874,7 +874,7 @@ CREATE TABLE `daily_signins` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `daily_signins`
+-- 傾印資料表的資料 `daily_signins`
 --
 
 INSERT INTO `daily_signins` (`signin_id`, `member_id`, `signin_date`, `created_at`) VALUES
@@ -908,7 +908,7 @@ INSERT INTO `daily_signins` (`signin_id`, `member_id`, `signin_date`, `created_a
 -- --------------------------------------------------------
 
 --
--- Table structure for table `good`
+-- 資料表結構 `good`
 --
 
 CREATE TABLE `good` (
@@ -918,7 +918,7 @@ CREATE TABLE `good` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `good`
+-- 傾印資料表的資料 `good`
 --
 
 INSERT INTO `good` (`good_sid`, `post_sid`, `member_id`) VALUES
@@ -943,7 +943,7 @@ INSERT INTO `good` (`good_sid`, `post_sid`, `member_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `knowledge`
+-- 資料表結構 `knowledge`
 --
 
 CREATE TABLE `knowledge` (
@@ -956,7 +956,7 @@ CREATE TABLE `knowledge` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `knowledgecategory`
+-- 資料表結構 `knowledgecategory`
 --
 
 CREATE TABLE `knowledgecategory` (
@@ -965,7 +965,7 @@ CREATE TABLE `knowledgecategory` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `knowledgecategory`
+-- 傾印資料表的資料 `knowledgecategory`
 --
 
 INSERT INTO `knowledgecategory` (`sid`, `k_type_name`) VALUES
@@ -977,7 +977,7 @@ INSERT INTO `knowledgecategory` (`sid`, `k_type_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `knowledge_img`
+-- 資料表結構 `knowledge_img`
 --
 
 CREATE TABLE `knowledge_img` (
@@ -989,7 +989,7 @@ CREATE TABLE `knowledge_img` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `like_products`
+-- 資料表結構 `like_products`
 --
 
 CREATE TABLE `like_products` (
@@ -1000,7 +1000,7 @@ CREATE TABLE `like_products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `like_products`
+-- 傾印資料表的資料 `like_products`
 --
 
 INSERT INTO `like_products` (`lid`, `member_id`, `pid`, `created_at`) VALUES
@@ -1013,7 +1013,7 @@ INSERT INTO `like_products` (`lid`, `member_id`, `pid`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `love_light`
+-- 資料表結構 `love_light`
 --
 
 CREATE TABLE `love_light` (
@@ -1026,7 +1026,7 @@ CREATE TABLE `love_light` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `love_light`
+-- 傾印資料表的資料 `love_light`
 --
 
 INSERT INTO `love_light` (`Member_ID`, `Tower_ID`, `All_Light`, `LocationX`, `LocationY`, `Datetime`) VALUES
@@ -1152,7 +1152,7 @@ INSERT INTO `love_light` (`Member_ID`, `Tower_ID`, `All_Light`, `LocationX`, `Lo
 -- --------------------------------------------------------
 
 --
--- Table structure for table `love_light_tower`
+-- 資料表結構 `love_light_tower`
 --
 
 CREATE TABLE `love_light_tower` (
@@ -1161,7 +1161,7 @@ CREATE TABLE `love_light_tower` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `love_light_tower`
+-- 傾印資料表的資料 `love_light_tower`
 --
 
 INSERT INTO `love_light_tower` (`LightTower`, `Tower_ID`) VALUES
@@ -1175,7 +1175,7 @@ INSERT INTO `love_light_tower` (`LightTower`, `Tower_ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `love_redline`
+-- 資料表結構 `love_redline`
 --
 
 CREATE TABLE `love_redline` (
@@ -1188,7 +1188,7 @@ CREATE TABLE `love_redline` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `love_redline`
+-- 傾印資料表的資料 `love_redline`
 --
 
 INSERT INTO `love_redline` (`Member_ID`, `SID`, `Name`, `Birthday`, `Address`, `Datetime`) VALUES
@@ -1198,7 +1198,7 @@ INSERT INTO `love_redline` (`Member_ID`, `SID`, `Name`, `Birthday`, `Address`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `members`
+-- 資料表結構 `members`
 --
 
 CREATE TABLE `members` (
@@ -1214,7 +1214,7 @@ CREATE TABLE `members` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `members`
+-- 傾印資料表的資料 `members`
 --
 
 INSERT INTO `members` (`member_id`, `member_account`, `member_password`, `member_name`, `member_address`, `member_phone`, `member_birthday`, `member_forum_name`, `member_profile`) VALUES
@@ -1304,7 +1304,7 @@ INSERT INTO `members` (`member_id`, `member_account`, `member_password`, `member
 -- --------------------------------------------------------
 
 --
--- Table structure for table `online_question`
+-- 資料表結構 `online_question`
 --
 
 CREATE TABLE `online_question` (
@@ -1317,7 +1317,7 @@ CREATE TABLE `online_question` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `online_question`
+-- 傾印資料表的資料 `online_question`
 --
 
 INSERT INTO `online_question` (`Question_ID`, `Question`, `option1`, `option2`, `option3`, `Answer`) VALUES
@@ -1333,7 +1333,7 @@ INSERT INTO `online_question` (`Question_ID`, `Question`, `option1`, `option2`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `online_quiz`
+-- 資料表結構 `online_quiz`
 --
 
 CREATE TABLE `online_quiz` (
@@ -1346,7 +1346,7 @@ CREATE TABLE `online_quiz` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_details`
+-- 資料表結構 `order_details`
 --
 
 CREATE TABLE `order_details` (
@@ -1358,7 +1358,7 @@ CREATE TABLE `order_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `order_details`
+-- 傾印資料表的資料 `order_details`
 --
 
 INSERT INTO `order_details` (`odid`, `oid`, `quantity`, `pid`, `product_price`) VALUES
@@ -1374,7 +1374,7 @@ INSERT INTO `order_details` (`odid`, `oid`, `quantity`, `pid`, `product_price`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_summary`
+-- 資料表結構 `order_summary`
 --
 
 CREATE TABLE `order_summary` (
@@ -1393,7 +1393,7 @@ CREATE TABLE `order_summary` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `order_summary`
+-- 傾印資料表的資料 `order_summary`
 --
 
 INSERT INTO `order_summary` (`oid`, `member_id`, `total`, `customer_name`, `customer_email`, `customer_phone`, `customer_address`, `payment`, `delivery`, `coupon`, `created_at`, `status`) VALUES
@@ -1404,7 +1404,7 @@ INSERT INTO `order_summary` (`oid`, `member_id`, `total`, `customer_name`, `cust
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal`
+-- 資料表結構 `personal`
 --
 
 CREATE TABLE `personal` (
@@ -1416,7 +1416,7 @@ CREATE TABLE `personal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `personal`
+-- 傾印資料表的資料 `personal`
 --
 
 INSERT INTO `personal` (`Member_ID`, `Prayer_ID`, `Name`, `Birthday`, `Address`) VALUES
@@ -1431,7 +1431,7 @@ INSERT INTO `personal` (`Member_ID`, `Prayer_ID`, `Name`, `Birthday`, `Address`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `poetry`
+-- 資料表結構 `poetry`
 --
 
 CREATE TABLE `poetry` (
@@ -1439,7 +1439,7 @@ CREATE TABLE `poetry` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `poetry`
+-- 傾印資料表的資料 `poetry`
 --
 
 INSERT INTO `poetry` (`Poetry_ID`) VALUES
@@ -1507,7 +1507,7 @@ INSERT INTO `poetry` (`Poetry_ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `post`
+-- 資料表結構 `post`
 --
 
 CREATE TABLE `post` (
@@ -1522,7 +1522,7 @@ CREATE TABLE `post` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `post`
+-- 傾印資料表的資料 `post`
 --
 
 INSERT INTO `post` (`sid`, `member_id`, `title`, `content`, `publish_time`, `postcategory_sid`, `good`, `img`) VALUES
@@ -1854,7 +1854,7 @@ INSERT INTO `post` (`sid`, `member_id`, `title`, `content`, `publish_time`, `pos
 -- --------------------------------------------------------
 
 --
--- Table structure for table `postcategory`
+-- 資料表結構 `postcategory`
 --
 
 CREATE TABLE `postcategory` (
@@ -1863,7 +1863,7 @@ CREATE TABLE `postcategory` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `postcategory`
+-- 傾印資料表的資料 `postcategory`
 --
 
 INSERT INTO `postcategory` (`sid`, `type_name`) VALUES
@@ -1875,7 +1875,7 @@ INSERT INTO `postcategory` (`sid`, `type_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `postcollect`
+-- 資料表結構 `postcollect`
 --
 
 CREATE TABLE `postcollect` (
@@ -1885,7 +1885,7 @@ CREATE TABLE `postcollect` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `postcollect`
+-- 傾印資料表的資料 `postcollect`
 --
 
 INSERT INTO `postcollect` (`postcollect_sid`, `post_sid`, `member_id`) VALUES
@@ -1897,7 +1897,7 @@ INSERT INTO `postcollect` (`postcollect_sid`, `post_sid`, `member_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `post_img`
+-- 資料表結構 `post_img`
 --
 
 CREATE TABLE `post_img` (
@@ -1909,7 +1909,7 @@ CREATE TABLE `post_img` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pray`
+-- 資料表結構 `pray`
 --
 
 CREATE TABLE `pray` (
@@ -1918,7 +1918,7 @@ CREATE TABLE `pray` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `pray`
+-- 傾印資料表的資料 `pray`
 --
 
 INSERT INTO `pray` (`God_ID`, `Type`) VALUES
@@ -1929,7 +1929,7 @@ INSERT INTO `pray` (`God_ID`, `Type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- 資料表結構 `products`
 --
 
 CREATE TABLE `products` (
@@ -1947,7 +1947,7 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `products`
+-- 傾印資料表的資料 `products`
 --
 
 INSERT INTO `products` (`pid`, `product_name`, `product_price`, `product_details`, `cid`, `recommend`, `browse_num`, `purchase_num`, `stock_num`, `stars`, `image`) VALUES
@@ -4034,7 +4034,7 @@ INSERT INTO `products` (`pid`, `product_name`, `product_price`, `product_details
 -- --------------------------------------------------------
 
 --
--- Table structure for table `study_light`
+-- 資料表結構 `study_light`
 --
 
 CREATE TABLE `study_light` (
@@ -4047,7 +4047,7 @@ CREATE TABLE `study_light` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `study_light`
+-- 傾印資料表的資料 `study_light`
 --
 
 INSERT INTO `study_light` (`Member_ID`, `Tower_ID`, `All_Light`, `LocationX`, `LocationY`, `Datetime`) VALUES
@@ -4172,7 +4172,7 @@ INSERT INTO `study_light` (`Member_ID`, `Tower_ID`, `All_Light`, `LocationX`, `L
 -- --------------------------------------------------------
 
 --
--- Table structure for table `study_light_toewr`
+-- 資料表結構 `study_light_toewr`
 --
 
 CREATE TABLE `study_light_toewr` (
@@ -4181,7 +4181,7 @@ CREATE TABLE `study_light_toewr` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `study_light_toewr`
+-- 傾印資料表的資料 `study_light_toewr`
 --
 
 INSERT INTO `study_light_toewr` (`LightTower`, `Tower_ID`) VALUES
@@ -4195,7 +4195,7 @@ INSERT INTO `study_light_toewr` (`LightTower`, `Tower_ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `study_ticket2`
+-- 資料表結構 `study_ticket2`
 --
 
 CREATE TABLE `study_ticket2` (
@@ -4208,7 +4208,7 @@ CREATE TABLE `study_ticket2` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `study_ticket2`
+-- 傾印資料表的資料 `study_ticket2`
 --
 
 INSERT INTO `study_ticket2` (`Member_ID`, `Sid`, `Name`, `School`, `Ticket_Img`, `Datetime`) VALUES
@@ -4222,7 +4222,7 @@ INSERT INTO `study_ticket2` (`Member_ID`, `Sid`, `Name`, `School`, `Ticket_Img`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `study_tickets`
+-- 資料表結構 `study_tickets`
 --
 
 CREATE TABLE `study_tickets` (
@@ -4234,7 +4234,7 @@ CREATE TABLE `study_tickets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `study_tickets`
+-- 傾印資料表的資料 `study_tickets`
 --
 
 INSERT INTO `study_tickets` (`Member_ID`, `Sid`, `Ticket_ID`, `Ticket_Img`, `dream_school`) VALUES
@@ -4257,7 +4257,7 @@ INSERT INTO `study_tickets` (`Member_ID`, `Sid`, `Ticket_ID`, `Ticket_Img`, `dre
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wanna_buy`
+-- 資料表結構 `wanna_buy`
 --
 
 CREATE TABLE `wanna_buy` (
@@ -4268,7 +4268,7 @@ CREATE TABLE `wanna_buy` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `wanna_buy`
+-- 傾印資料表的資料 `wanna_buy`
 --
 
 INSERT INTO `wanna_buy` (`wid`, `member_id`, `pid`, `created_at`) VALUES
@@ -4285,7 +4285,7 @@ INSERT INTO `wanna_buy` (`wid`, `member_id`, `pid`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `worship`
+-- 資料表結構 `worship`
 --
 
 CREATE TABLE `worship` (
@@ -4297,7 +4297,7 @@ CREATE TABLE `worship` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `worship`
+-- 傾印資料表的資料 `worship`
 --
 
 INSERT INTO `worship` (`pid`, `product_name`, `product_price`, `cid`, `image`) VALUES
@@ -4329,7 +4329,7 @@ INSERT INTO `worship` (`pid`, `product_name`, `product_price`, `cid`, `image`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `worship_details`
+-- 資料表結構 `worship_details`
 --
 
 CREATE TABLE `worship_details` (
@@ -4345,39 +4345,19 @@ CREATE TABLE `worship_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `worship_details`
+-- 傾印資料表的資料 `worship_details`
 --
 
 INSERT INTO `worship_details` (`did`, `wid`, `delivery`, `payment`, `receivedInfo`, `status`, `pid1`, `pid2`, `pid3`) VALUES
-(21, 35, '無', '無', '無', '無', NULL, NULL, NULL),
-(22, 36, '無', '無', '無', '無', NULL, NULL, NULL),
-(23, 37, '無', '無', '無', '無', NULL, NULL, NULL),
-(24, 38, '宅配', '信用卡', '民生社區', '未出貨', 18, 23, NULL),
-(25, 39, '無', '無', '無', '無', NULL, NULL, NULL),
-(26, 40, '宅配', '信用卡', '民生社區', '未出貨', 10, 9, 14),
-(27, 41, '宅配', '信用卡', '民生社區', '未出貨', 15, 14, 12),
-(28, 42, '宅配', '信用卡', '民生社區', '未出貨', 3, 4, 7),
-(29, 43, '宅配', '信用卡', '民生社區', '未出貨', 3, 6, 5),
-(30, 44, '宅配', '信用卡', '民生社區', '未出貨', 6, 7, 8),
-(31, 45, '宅配', '信用卡', '民生社區', '未出貨', 21, 19, 23),
-(32, 46, '宅配', '信用卡', '民生社區', '未出貨', 11, 10, 9),
-(33, 47, '宅配', '信用卡', '民生社區', '未出貨', 20, 22, 24),
-(34, 48, '宅配', '信用卡', '民生社區', '未出貨', 24, 23, 22),
-(35, 49, '宅配', '信用卡', '民生社區', '未出貨', 23, 24, 22),
-(36, 50, '宅配', '信用卡', '民生社區', '未出貨', 20, 23, 22),
-(37, 51, '宅配', '信用卡', '民生社區', '未出貨', 22, 23, 20),
-(38, 52, '宅配', '信用卡', '民生社區', '未出貨', 6, 7, 8),
-(39, 53, '宅配', '信用卡', '民生社區', '未出貨', 14, 12, NULL),
-(40, 54, '宅配', '信用卡', '民生社區', '未出貨', 19, 18, 20),
-(41, 55, '宅配', '信用卡', '民生社區', '未出貨', 4, 3, 5),
-(42, 56, '宅配', '信用卡', '民生社區', '未出貨', 5, 7, NULL),
-(43, 57, '無', '無', '無', '無', NULL, NULL, NULL),
-(44, 58, '宅配', '信用卡', '民生社區', '未出貨', 4, 6, 7);
+(45, 59, '宅配', '信用卡', '民生社區', '已完成', 3, 6, 8),
+(46, 60, '宅配', '信用卡', '民生社區', '已完成', 14, 12, NULL),
+(47, 61, '宅配', '信用卡', '民生社區', '未出貨', 20, 17, 18),
+(48, 62, '無', '無', '無', '無', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `worship_summary`
+-- 資料表結構 `worship_summary`
 --
 
 CREATE TABLE `worship_summary` (
@@ -4392,398 +4372,378 @@ CREATE TABLE `worship_summary` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `worship_summary`
+-- 傾印資料表的資料 `worship_summary`
 --
 
 INSERT INTO `worship_summary` (`wid`, `member_id`, `god`, `day`, `time`, `total`, `complete`, `created_at`) VALUES
-(35, 1, '媽祖', '2023/07/16', '申時/3pm-5pm', 0, 1, '2023-08-12 16:31:06'),
-(36, 1, '月老', '2023/07/24', '申時/3pm-5pm', 0, 1, '2023-08-12 16:32:18'),
-(37, 1, '文昌', '2023/07/31', '申時/3pm-5pm', 0, 1, '2023-08-12 16:32:54'),
-(38, 1, '文昌', '2023/08/12', '酉時/5pm-7pm', 110, 1, '2023-08-12 16:44:38'),
-(39, 1, '媽祖', '2023/08/12', '申時/3pm-5pm', 0, 1, '2023-08-12 16:45:05'),
-(40, 1, '月老', '2023/08/12', '酉時/5pm-7pm', 249, 1, '2023-08-12 17:02:02'),
-(41, 1, '月老', '2023/08/12', '酉時/5pm-7pm', 289, 1, '2023-08-12 17:26:02'),
-(42, 1, '媽祖', '2023/08/23', '未時/1pm-3pm', 549, 0, '2023-08-12 17:26:52'),
-(43, 1, '媽祖', '2023/08/31', '酉時/5pm-7pm', 555, 0, '2023-08-12 17:35:09'),
-(44, 1, '媽祖', '2023/08/12', '酉時/5pm-7pm', 225, 1, '2023-08-12 17:38:16'),
-(45, 1, '文昌', '2023/08/12', '酉時/5pm-7pm', 219, 1, '2023-08-12 18:20:40'),
-(46, 1, '月老', '2023/08/12', '酉時/5pm-7pm', 230, 1, '2023-08-12 18:22:55'),
-(47, 1, '文昌', '2023/08/12', '酉時/5pm-7pm', 246, 1, '2023-08-12 18:24:03'),
-(48, 1, '文昌', '2023/08/12', '酉時/5pm-7pm', 276, 1, '2023-08-12 18:33:20'),
-(49, 1, '文昌', '2023/08/12', '酉時/5pm-7pm', 276, 1, '2023-08-12 18:34:56'),
-(50, 1, '文昌', '2023/08/13', '巳時/9am-11am', 270, 1, '2023-08-13 10:44:03'),
-(51, 1, '文昌', '2023/08/13', '午時/11am-1pm', 270, 1, '2023-08-13 10:46:00'),
-(52, 1, '媽祖', '2023/08/13', '巳時/9am-11am', 225, 1, '2023-08-13 10:46:15'),
-(53, 1, '月老', '2023/08/13', '午時/11am-1pm', 259, 1, '2023-08-13 12:12:22'),
-(54, 1, '文昌', '2023/08/13', '未時/1pm-3pm', 159, 1, '2023-08-13 14:14:18'),
-(55, 1, '媽祖', '2023/08/13', '未時/1pm-3pm', 609, 1, '2023-08-13 14:16:16'),
-(56, 1, '媽祖', '2023/08/31', '未時/1pm-3pm', 180, 0, '2023-08-14 14:01:55'),
-(57, 1, '媽祖', '2023/08/14', '未時/1pm-3pm', 0, 0, '2023-08-14 14:02:03'),
-(58, 1, '媽祖', '2023/08/14', '未時/1pm-3pm', 204, 0, '2023-08-14 14:02:13');
+(59, 1, '媽祖', '2023/08/16', '午時/11am-1pm', 555, 1, '2023-07-12 15:55:56'),
+(60, 1, '月老', '2023/08/14', '申時/3pm-5pm', 259, 0, '2023-08-06 12:56:24'),
+(61, 1, '文昌', '2023/08/17', '巳時/9am-11am', 430, 0, '2023-08-14 15:57:58'),
+(62, 1, '文昌', '2023/08/14', '申時/3pm-5pm', 0, 1, '2023-08-14 15:58:51');
 
 --
--- Indexes for dumped tables
+-- 已傾印資料表的索引
 --
 
 --
--- Indexes for table `amulet`
+-- 資料表索引 `amulet`
 --
 ALTER TABLE `amulet`
   ADD PRIMARY KEY (`Sid`);
 
 --
--- Indexes for table `browse_history`
+-- 資料表索引 `browse_history`
 --
 ALTER TABLE `browse_history`
   ADD PRIMARY KEY (`bid`);
 
 --
--- Indexes for table `card_game_status`
+-- 資料表索引 `card_game_status`
 --
 ALTER TABLE `card_game_status`
   ADD PRIMARY KEY (`card_game_id`);
 
 --
--- Indexes for table `cart`
+-- 資料表索引 `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`sid`);
 
 --
--- Indexes for table `categories`
+-- 資料表索引 `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`cid`);
 
 --
--- Indexes for table `comment`
+-- 資料表索引 `comment`
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`sid`);
 
 --
--- Indexes for table `comment_img`
+-- 資料表索引 `comment_img`
 --
 ALTER TABLE `comment_img`
   ADD PRIMARY KEY (`comment_img_sid`);
 
 --
--- Indexes for table `coupons`
+-- 資料表索引 `coupons`
 --
 ALTER TABLE `coupons`
   ADD PRIMARY KEY (`coupon_id`);
 
 --
--- Indexes for table `coupons_status`
+-- 資料表索引 `coupons_status`
 --
 ALTER TABLE `coupons_status`
   ADD PRIMARY KEY (`coupon_status_id`);
 
 --
--- Indexes for table `daily_signins`
+-- 資料表索引 `daily_signins`
 --
 ALTER TABLE `daily_signins`
   ADD PRIMARY KEY (`signin_id`);
 
 --
--- Indexes for table `good`
+-- 資料表索引 `good`
 --
 ALTER TABLE `good`
   ADD PRIMARY KEY (`good_sid`);
 
 --
--- Indexes for table `like_products`
+-- 資料表索引 `like_products`
 --
 ALTER TABLE `like_products`
   ADD PRIMARY KEY (`lid`);
 
 --
--- Indexes for table `love_light`
+-- 資料表索引 `love_light`
 --
 ALTER TABLE `love_light`
   ADD PRIMARY KEY (`All_Light`);
 
 --
--- Indexes for table `love_light_tower`
+-- 資料表索引 `love_light_tower`
 --
 ALTER TABLE `love_light_tower`
   ADD PRIMARY KEY (`LightTower`);
 
 --
--- Indexes for table `love_redline`
+-- 資料表索引 `love_redline`
 --
 ALTER TABLE `love_redline`
   ADD PRIMARY KEY (`SID`);
 
 --
--- Indexes for table `members`
+-- 資料表索引 `members`
 --
 ALTER TABLE `members`
   ADD PRIMARY KEY (`member_id`);
 
 --
--- Indexes for table `online_question`
+-- 資料表索引 `online_question`
 --
 ALTER TABLE `online_question`
   ADD PRIMARY KEY (`Question_ID`);
 
 --
--- Indexes for table `online_quiz`
+-- 資料表索引 `online_quiz`
 --
 ALTER TABLE `online_quiz`
   ADD PRIMARY KEY (`Sid`),
   ADD KEY `Member_ID` (`Member_ID`);
 
 --
--- Indexes for table `order_details`
+-- 資料表索引 `order_details`
 --
 ALTER TABLE `order_details`
   ADD PRIMARY KEY (`odid`);
 
 --
--- Indexes for table `order_summary`
+-- 資料表索引 `order_summary`
 --
 ALTER TABLE `order_summary`
   ADD PRIMARY KEY (`oid`);
 
 --
--- Indexes for table `personal`
+-- 資料表索引 `personal`
 --
 ALTER TABLE `personal`
   ADD PRIMARY KEY (`Prayer_ID`);
 
 --
--- Indexes for table `poetry`
+-- 資料表索引 `poetry`
 --
 ALTER TABLE `poetry`
   ADD PRIMARY KEY (`Poetry_ID`);
 
 --
--- Indexes for table `post`
+-- 資料表索引 `post`
 --
 ALTER TABLE `post`
   ADD PRIMARY KEY (`sid`);
 
 --
--- Indexes for table `postcollect`
+-- 資料表索引 `postcollect`
 --
 ALTER TABLE `postcollect`
   ADD PRIMARY KEY (`postcollect_sid`);
 
 --
--- Indexes for table `post_img`
+-- 資料表索引 `post_img`
 --
 ALTER TABLE `post_img`
   ADD PRIMARY KEY (`post_img_sid`);
 
 --
--- Indexes for table `pray`
+-- 資料表索引 `pray`
 --
 ALTER TABLE `pray`
   ADD PRIMARY KEY (`God_ID`);
 
 --
--- Indexes for table `products`
+-- 資料表索引 `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`pid`);
 
 --
--- Indexes for table `study_light`
+-- 資料表索引 `study_light`
 --
 ALTER TABLE `study_light`
   ADD PRIMARY KEY (`All_Light`),
   ADD KEY `Member_ID` (`Member_ID`);
 
 --
--- Indexes for table `study_light_toewr`
+-- 資料表索引 `study_light_toewr`
 --
 ALTER TABLE `study_light_toewr`
   ADD PRIMARY KEY (`LightTower`);
 
 --
--- Indexes for table `study_ticket2`
+-- 資料表索引 `study_ticket2`
 --
 ALTER TABLE `study_ticket2`
   ADD PRIMARY KEY (`Sid`);
 
 --
--- Indexes for table `study_tickets`
+-- 資料表索引 `study_tickets`
 --
 ALTER TABLE `study_tickets`
   ADD PRIMARY KEY (`Sid`);
 
 --
--- Indexes for table `wanna_buy`
+-- 資料表索引 `wanna_buy`
 --
 ALTER TABLE `wanna_buy`
   ADD PRIMARY KEY (`wid`);
 
 --
--- Indexes for table `worship`
+-- 資料表索引 `worship`
 --
 ALTER TABLE `worship`
   ADD PRIMARY KEY (`pid`);
 
 --
--- Indexes for table `worship_details`
+-- 資料表索引 `worship_details`
 --
 ALTER TABLE `worship_details`
   ADD PRIMARY KEY (`did`);
 
 --
--- Indexes for table `worship_summary`
+-- 資料表索引 `worship_summary`
 --
 ALTER TABLE `worship_summary`
   ADD PRIMARY KEY (`wid`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
 --
 
 --
--- AUTO_INCREMENT for table `amulet`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `amulet`
 --
 ALTER TABLE `amulet`
   MODIFY `Sid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `browse_history`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `browse_history`
 --
 ALTER TABLE `browse_history`
   MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3117;
 
 --
--- AUTO_INCREMENT for table `card_game_status`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `card_game_status`
 --
 ALTER TABLE `card_game_status`
   MODIFY `card_game_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=206;
 
 --
--- AUTO_INCREMENT for table `cart`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `cart`
 --
 ALTER TABLE `cart`
   MODIFY `sid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
 
 --
--- AUTO_INCREMENT for table `comment`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `comment`
 --
 ALTER TABLE `comment`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT COMMENT '留言編號', AUTO_INCREMENT=334;
 
 --
--- AUTO_INCREMENT for table `coupons`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `coupons`
 --
 ALTER TABLE `coupons`
   MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `coupons_status`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `coupons_status`
 --
 ALTER TABLE `coupons_status`
   MODIFY `coupon_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=282;
 
 --
--- AUTO_INCREMENT for table `daily_signins`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `daily_signins`
 --
 ALTER TABLE `daily_signins`
   MODIFY `signin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=263;
 
 --
--- AUTO_INCREMENT for table `good`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `good`
 --
 ALTER TABLE `good`
   MODIFY `good_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 
 --
--- AUTO_INCREMENT for table `like_products`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `like_products`
 --
 ALTER TABLE `like_products`
   MODIFY `lid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 
 --
--- AUTO_INCREMENT for table `love_light`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `love_light`
 --
 ALTER TABLE `love_light`
   MODIFY `All_Light` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
--- AUTO_INCREMENT for table `love_redline`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `love_redline`
 --
 ALTER TABLE `love_redline`
   MODIFY `SID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `members`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `members`
 --
 ALTER TABLE `members`
   MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
--- AUTO_INCREMENT for table `order_details`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `order_details`
 --
 ALTER TABLE `order_details`
   MODIFY `odid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
 
 --
--- AUTO_INCREMENT for table `personal`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `personal`
 --
 ALTER TABLE `personal`
   MODIFY `Prayer_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `post`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `post`
 --
 ALTER TABLE `post`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT COMMENT '文章編號', AUTO_INCREMENT=462;
 
 --
--- AUTO_INCREMENT for table `postcollect`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `postcollect`
 --
 ALTER TABLE `postcollect`
   MODIFY `postcollect_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT for table `products`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `products`
 --
 ALTER TABLE `products`
   MODIFY `pid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2086;
 
 --
--- AUTO_INCREMENT for table `study_light`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `study_light`
 --
 ALTER TABLE `study_light`
   MODIFY `All_Light` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
--- AUTO_INCREMENT for table `study_ticket2`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `study_ticket2`
 --
 ALTER TABLE `study_ticket2`
   MODIFY `Sid` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
--- AUTO_INCREMENT for table `wanna_buy`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `wanna_buy`
 --
 ALTER TABLE `wanna_buy`
   MODIFY `wid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `worship`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `worship`
 --
 ALTER TABLE `worship`
   MODIFY `pid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT for table `worship_details`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `worship_details`
 --
 ALTER TABLE `worship_details`
-  MODIFY `did` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `did` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
--- AUTO_INCREMENT for table `worship_summary`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `worship_summary`
 --
 ALTER TABLE `worship_summary`
-  MODIFY `wid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `wid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

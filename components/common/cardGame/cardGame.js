@@ -310,7 +310,7 @@ export default function CardGame() {
                 } ${card.matched ? styles.matched : ''}`}
                 onClick={() => handleCardClick(card.id)}
               >
-                <div className={idRange === 12 ? styles.card : styles.card2}>
+                <div className={idRange === 8 ? styles.card : styles.card2}>
                   <div className={styles.face}>
                     ?
                     {/* {card.flipped ? (
@@ -321,7 +321,7 @@ export default function CardGame() {
                   </div>
                   <div
                     className={`${styles.face} ${
-                      idRange === 12 ? styles.back : styles.back2
+                      idRange === 8 ? styles.back : styles.back2
                     }`}
                   >
                     <Image
