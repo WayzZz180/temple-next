@@ -439,7 +439,7 @@ export default function CardGame() {
             這樣...還要離開我嗎?
           </div>
           <div className="mb5px">
-            <NoButton
+            <Button
               text="確認"
               btnColor="orderGray"
               link={() => {
@@ -499,7 +499,7 @@ export default function CardGame() {
             要不要再試試看呢?
           </div>
           <div className="mb5px">
-            <NoButton
+            <Button
               text="確認"
               btnColor="green"
               link={() => {
