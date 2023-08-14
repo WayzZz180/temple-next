@@ -14,8 +14,8 @@ import { Container, Row, Col } from 'react-bootstrap'
 //components
 import Button from '@/components/common/button'
 import NoButton from '@/components/common/button/noButton.js'
-
 import data from '@/components/mydata/memberNavbarData.js'
+import dog_out from '@/assets/dog_out.gif'
 
 // cards
 import Rightgod from '@/assets/rightgod.svg'
@@ -63,14 +63,15 @@ export default function CardGame() {
   ]
 
   //難度調整
-  const [idRange, setIdRange] = useState(12)
+  const [idRange, setIdRange] = useState(4)
   console.log(idRange)
   // const handleDifficultyChange = (event) => {
   //   const value = parseInt(event.target.value)
   //   setNumberOfCards(value)
   // }
 
-  for (let id = 1; id <= idRange; id++) {
+  // for (let id = 1; id <= idRange; id++) {
+  for (let id = 1; id <= 4; id++) {
     const imgIndex = Math.floor((id - 1) / 2)
     const card = {
       id: id,
@@ -84,7 +85,7 @@ export default function CardGame() {
   // 難度調整 關鍵行
   useEffect(() => {
     const newCardData = []
-    for (let id = 1; id <= idRange; id++) {
+    for (let id = 1; id <= 4; id++) {
       const imgIndex = Math.floor((id - 1) / 2)
       const card = {
         id: id,
@@ -176,9 +177,8 @@ export default function CardGame() {
     if (allCardsMatched) {
       // setIsRunning(false) // 停止計時器
       setGameOver(true)
-      handleRecordGame()
-      setCouponModalIsOpen(true)
       handleCoupon()
+      // handleRecordGame()
       // 在這裡增加所其他遊戲的邏輯跟判斷
     }
   }, [cards])
@@ -192,7 +192,7 @@ export default function CardGame() {
     }
   }, [gameStarted])
   //計時器邏輯
-  const [remainingTime, setRemainingTime] = useState(3) // 60 seconds
+  const [remainingTime, setRemainingTime] = useState(60) // 60 seconds
   const [isRunning, setIsRunning] = useState(false)
 
   useEffect(() => {
@@ -225,41 +225,48 @@ export default function CardGame() {
   // modal 視窗 跳出 提示 相關
   const [restartModalIsOpen, setRestartModalIsOpen] = useState(false)
   const [failedModalIsOpen, setFailedModalIsOpen] = useState(false)
-  const [couponModalIsOpen, setCouponModalIsOpen] = useState(false)
+  const [couponSuccessfulModalIsOpen, setCouponSuccessfulModalIsOpen] =
+    useState(false)
+  const [couponReceivedModalIsOpen, setCouponReceivedModalIsOpen] =
+    useState(false)
+
   const [showConfetti, setShowConfetti] = useState(false)
   const [sg, setSg] = useState(175)
 
-  // API 遊玩紀錄
-  const handleRecordGame = () => {
-    if (auth.token) {
-      fetch(process.env.API_SERVER + '/member/cardGame', {
-        method: 'POST',
-        body: JSON.stringify({ points }),
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + auth.token,
-        },
-      })
-        .then((r) => r.json())
-        .then((data) => {
-          // 存儲後端的錯誤訊息
-          if (data.error) {
-            console.log(data.error)
-            alert(data.error) // 顯示 email 已被使用的錯誤訊息
+  // // API 遊玩紀錄
+  // const handleRecordGame = () => {
+  //   if (auth.token) {
+  //     fetch(process.env.API_SERVER + '/member/cardGame', {
+  //       method: 'POST',
+  //       body: JSON.stringify({ points }),
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: 'Bearer ' + auth.token,
+  //       },
+  //     })
+  //       .then((r) => r.json())
+  //       .then((data) => {
+  //         // 存儲後端的錯誤訊息
+  //         if (data.error) {
+  //           console.log(data.error)
+  //           alert(data.error) // 顯示 錯誤訊息
 
-            return // 終止後續的處理
-          }
+  //           return // 終止後續的處理
+  //         }
 
-          console.log(data)
+  //         console.log(data)
 
-          if (data) {
-          }
-        })
-        .catch((error) => {
-          alert('簽到失敗', error)
-        })
-    }
-  }
+  //         if (data) {
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         alert('簽到失敗', error)
+  //       })
+  //   }
+  // }
+
+  // 已經領取
+  const [errorMessage, setErrorMessage] = useState('')
   // API 優惠券紀錄
   const handleCoupon = () => {
     if (auth.token) {
@@ -276,18 +283,15 @@ export default function CardGame() {
           // 存儲後端的錯誤訊息
           if (data.error) {
             console.log(data.error)
-            alert(data.error) // 顯示 email 已被使用的錯誤訊息
-
+            setCouponReceivedModalIsOpen(true)
             return // 終止後續的處理
           }
-
+          setCouponSuccessfulModalIsOpen(true)
           console.log(data)
-
-          if (data) {
-          }
         })
         .catch((error) => {
-          alert('簽到失敗', error)
+          // alert('簽到失敗', error)
+          // setCouponReceivedModalIsOpen(true)
         })
     }
   }
@@ -446,7 +450,7 @@ export default function CardGame() {
                 setGameStarted(false)
                 setGameOver(false)
                 setRestartModalIsOpen(false)
-                handleRecordGame()
+                // handleRecordGame()
               }}
               width="100%"
               fontSize="20px"
@@ -506,7 +510,7 @@ export default function CardGame() {
                 setGameStarted(false)
                 setGameOver(false)
                 setFailedModalIsOpen(false)
-                handleRecordGame()
+                // handleRecordGame()
               }}
               width="100%"
               fontSize="20px"
@@ -527,9 +531,9 @@ export default function CardGame() {
           </div>
         </div>
       </Modal>
-      {/*優惠券提示 */}
+      {/*優惠券 成功 提示 */}
       <Modal
-        isOpen={couponModalIsOpen}
+        isOpen={couponSuccessfulModalIsOpen}
         contentLabel="成功取得優惠券!"
         style={{
           overlay: {
@@ -538,7 +542,7 @@ export default function CardGame() {
           },
           content: {
             maxWidth: '370px', // 調整最大寬度
-            maxHeight: '300px', // 調整最大高度
+            maxHeight: '325px', // 調整最大高度
             margin: 'auto', // 水平居中
             background: variables['bgColor'],
             //   // border: '',
@@ -555,7 +559,7 @@ export default function CardGame() {
           <Button
             text="確認"
             link={() => {
-              setCouponModalIsOpen(false)
+              setCouponSuccessfulModalIsOpen(false)
             }}
             fontSize="20px"
             padding="10px 45px"
@@ -581,6 +585,52 @@ export default function CardGame() {
           style={{ position: 'fixed', top: 0, left: 0 }}
         />
       )} */}
+      {/*優惠券 領過 提示 */}
+      <Modal
+        isOpen={couponReceivedModalIsOpen}
+        contentLabel="已經領取過優惠券!"
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.5)', // 背景顏色透明度
+            zIndex: 2, //1 為spin pointer
+          },
+          content: {
+            maxWidth: '370px', // 調整最大寬度
+            maxHeight: '325px', // 調整最大高度
+            margin: 'auto', // 水平居中
+            background: variables['bgColor'],
+            //   // border: '',
+            //   // color: 'white',
+          },
+        }}
+      >
+        <div className={`${styles.flex_center} mt10px`}>
+          <div>
+            <Image src={dog_out} alt="coupon" width={250} height={200} />
+          </div>
+          <div className="fwBold fs24px mb25px">
+            您太強啦，但今天已經領取過囉~
+          </div>
+
+          <Button
+            text="確認"
+            link={() => {
+              setCouponReceivedModalIsOpen(false)
+            }}
+            fontSize="20px"
+            padding="10px 45px"
+          />
+
+          {/* <Confetti
+            width={typeof window !== 'undefined' ? window.innerWidth : 0}
+            height={typeof window !== 'undefined' ? window.innerHeight : 0}
+            numberOfPieces={sg}
+            confettiSource={{ x: 960, y: 250 }}
+            run={showConfetti}
+            style={{ position: 'fixed', top: 0, left: 0 }}
+          /> */}
+        </div>
+      </Modal>
     </>
   )
 }
