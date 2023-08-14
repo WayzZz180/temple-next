@@ -38,11 +38,22 @@ export default function StudyA1() {
 
     return () => clearTimeout(timer)
   }, [])
+  const handlePresetClick = () => {
+    setUser({
+      ...user,
+      Name: '洪郁雯',
+      School: '松山高中',
+    })
+  }
   return (
     <>
       <div className={`${styles.container}`}>
         <div className={`${styles.flex_row}`}>
-          <div className={`${styles.leftAn} ${isVisible ? styles.show : ''}`}>
+          <div
+            role="presentation"
+            className={`${styles.leftAn} ${isVisible ? styles.show : ''}`}
+            onClick={handlePresetClick}
+          >
             <Image
               src={handLeft}
               alt=""
@@ -132,8 +143,8 @@ export default function StudyA1() {
               btnColor="green"
               link={handleButtonClick}
             />
-            </div>
           </div>
+        </div>
       </div>
     </>
   )
