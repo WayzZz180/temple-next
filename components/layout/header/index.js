@@ -166,10 +166,15 @@ export default function Header() {
             currentPath === String(bgChange[0]) ? variables['brown'] : '',
         }}
       >
-        {/* 左半邊選單 */}
-        <ul className={`${styles.drop_down_menu}`}>
-          {info.map((v, i) => {
-            if (i < 3) {
+        {/* logo */}
+        <div className={`${styles.logoContainer}`}>
+          <div className={`${styles.logo}`}>
+            <Logo />
+          </div>
+        </div>
+        <div style={{ display: isMenuOpen ? 'block' : 'none' }}>
+          <ul className={`${styles.drop_down_menu}`}>
+            {info.map((v, i) => {
               return (
                 <NavbarItem
                   key={i}
@@ -178,28 +183,9 @@ export default function Header() {
                   links={v.links}
                 />
               )
-            }
-          })}
-        </ul>
-        {/* logo */}
-        <div className={`${styles.logoContainer}`}>
-          <Logo />
+            })}
+          </ul>
         </div>
-        {/* 右半邊選單 */}
-        <ul className={`${styles.drop_down_menu}`}>
-          {info.map((v, i) => {
-            if (i > 2) {
-              return (
-                <NavbarItem
-                  key={v.title}
-                  title={v.title}
-                  title2={v.title2}
-                  links={v.links}
-                />
-              )
-            }
-          })}
-        </ul>
       </div>
       <div className={`${styles.bgContainer} `}>
         <Image src={headerBg} alt="headerBg" className={`${styles.bg}`} />
