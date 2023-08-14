@@ -13,10 +13,10 @@ import Col from 'react-bootstrap/Col'
 import ShopProductsCard from '@/components/common/cards/ShopProductsCard'
 import Pagination from '@/components/common/pagination'
 
-export default function GetData({ data = [], pagination = [] }) {
+export default function GetData({ data = [], pagination = [], encode = '' }) {
   const router = useRouter()
   const { category } = router.query //抓出類別
-  const [keyword, setKeyword] = useState('')
+  const [keyword, setKeyword] = useState(encode)
   const [pidArr, setPidArr] = useState([])
 
   // 商品圖片
@@ -29,10 +29,18 @@ export default function GetData({ data = [], pagination = [] }) {
     return chunks
   }
   const imgChunks = chunkArray(imgSrc, 5)
-
+  useEffect(() => {
+    if (encode) {
+      setKeyword(encode)
+    }
+  }, [encode])
   useEffect(() => {
     if (localStorage.getItem('keyword')) {
-      setKeyword(localStorage.getItem('keyword'))
+      if (encode) {
+        setKeyword(encode)
+      } else {
+        setKeyword(localStorage.getItem('keyword'))
+      }
     } else {
       setKeyword('')
     }

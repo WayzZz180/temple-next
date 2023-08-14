@@ -260,6 +260,7 @@ export default function Pid() {
       <Head>
         <title>{data?.product_name}</title>
       </Head>
+
       {isOpen ? (
         <Alert
           status="wrong"

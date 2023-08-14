@@ -23,7 +23,7 @@ export default function Category() {
   const [data, setData] = useState([])
   const [pagination, setPagination] = useState([])
   const [dataFromChild, setDataFromChild] = useState([])
-
+  const [encode, setEncode] = useState()
   //要篩選的資料
   const [info, setInfo] = useState([
     {
@@ -114,6 +114,7 @@ export default function Category() {
         if (data.success) {
           setData(data.data)
           setPagination(data.pagination)
+          setEncode(data.keyword)
         } else {
           setData([])
         }
@@ -151,12 +152,7 @@ export default function Category() {
       </div>
       {/* 商品 */}
       {data?.length > 0 ? (
-        <GetData
-          data={data}
-          pagination={pagination}
-          dataFromChild={dataFromChild}
-          info={info}
-        />
+        <GetData data={data} pagination={pagination} encode={encode} />
       ) : (
         <NoData />
       )}
