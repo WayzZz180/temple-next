@@ -97,40 +97,51 @@ export default function Header() {
     return v === currentPath
   })
   //手機版
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+    setIsMenuOpen(!isMenuOpen)
+  }
+  const [isOpeninsile, setIsOpeninsile] = useState(false)
+
+  const openinsild = () => {
+    setIsOpeninsile(!isOpeninsile)
+  }
   return (
     <header className={`${styles.header}`}>
-      <div role="presentation" className={`${styles.mobilemenu} ${isMenuOpen ? styles.open : ''}`}
-        onClick={toggleMenu}>
-          <span className={`${styles.mobilemenuline} `}></span>
-        </div>
       <div
-        className={`${styles.navbarContainer} ${isMenuOpen ? styles.open : ''} pt20px pb25px`}
+        role="presentation"
+        className={`${styles.mobilemenu} ${isMenuOpen ? styles.open : ''}`}
+        onClick={toggleMenu}
+      >
+        <span className={`${styles.mobilemenuline} `}></span>
+      </div>
+      <div
+        className={`${styles.navbarContainer} ${
+          isMenuOpen ? styles.open : ''
+        } pt20px pb25px`}
         style={{
           backgroundColor:
             currentPath === String(bgChange[0]) ? variables['brown'] : '',
         }}
       >
         {/* 左半邊選單 */}
-        <ul className={`${styles.drop_down_menu} `}>
+        <ul className={`${styles.drop_down_menu}`} onclick={openinsild}>
           {info.map((v, i) => {
             if (i < 3) {
               return (
-                <NavbarItem
-                  key={i}
-                  title={v.title}
-                  title2={v.title2}
-                  links={v.links}
-                />
+                <div style={{ display: openinsild ? 'block' : 'none' }} key={i}>
+                  <NavbarItem
+                    title={v.title}
+                    title2={v.title2}
+                    links={v.links}
+                  />
+                </div>
               )
             }
           })}
         </ul>
-   
+
         {/* logo */}
         <div className={`${styles.logoContainer}`}>
           <Logo link={auth.id === 0 ? '/' : '/Home/signOut'} />
