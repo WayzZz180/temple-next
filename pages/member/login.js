@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import Image from 'next/image'
 import styles from '@/pages/member/login.module.sass'
 import Link from 'next/link'
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import AuthContext from '@/contexts/AuthContext'
 import { AuthContextProvider } from '@/contexts/AuthContext'
 import { useRouter } from 'next/router'
@@ -113,26 +113,27 @@ export default function Login() {
             </div>
           </Col>
         </Row>
-    <Container className={styles.flex}>
-      <div id="background" className={`${styles.background}`}>
-        <div className={`${styles.position}`}>
-          <div className={styles.blackblock} id="blackblock">
-            <HomeDoor />
+      </Container>
+      <Container className={styles.flex}>
+        <div id="background" className={`${styles.background}`}>
+          <div className={`${styles.position}`}>
+            <div className={styles.blackblock} id="blackblock">
+              <HomeDoor />
+            </div>
           </div>
         </div>
-      </div>
-      <Row>
-        <Col>
-          <div className="mt100px">
-            <Image
-              src={doorGodLeft}
-              alt="doorGodLeft"
-              // height={835}
-              width={525}
-            ></Image>
-          </div>
-        </Col>
-      </Row>
+        <Row>
+          <Col>
+            <div className="mt100px">
+              <Image
+                src={doorGodLeft}
+                alt="doorGodLeft"
+                // height={835}
+                width={525}
+              ></Image>
+            </div>
+          </Col>
+        </Row>
 
         <Row className="ps60px pe60px">
           <Col>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styles from './header.module.sass'
 import Link from 'next/link'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import CartCountContext from '@/contexts/CartCountContext'
 
