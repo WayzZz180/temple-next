@@ -133,7 +133,7 @@ export default function SpinWheel({ updateSpinWheel }) {
     setTimeout(() => {
       setModalIsOpen(true)
       setShowConfetti((prev) => !prev)
-    }, 1200)
+    }, 4400)
 
     setCouponInfo(coupon_type, coupon_value)
   }
@@ -194,6 +194,7 @@ export default function SpinWheel({ updateSpinWheel }) {
           <div className={styles.flex_center}>
             <div className={styles.container}>
               <Image
+                alt="spin_button"
                 src={spin_button2}
                 className={styles.spin_button}
                 onClick={handleSpin}
@@ -217,7 +218,7 @@ export default function SpinWheel({ updateSpinWheel }) {
                 className={styles.wheel}
                 style={{
                   transform: `rotate(${rotationDegree}deg)`,
-                  transition: 'transform 1s cubic-bezier(0,.7,0,1.02)',
+                  transition: 'transform 4s cubic-bezier(0,.7,0,1.02)',
                 }}
               >
                 {RainbowCoupon.map(({ color, value }, index) => (
@@ -318,7 +319,8 @@ export default function SpinWheel({ updateSpinWheel }) {
           </div>
           <div className="fwBold fs30px mb20px">簽到成功</div>
           <div className="fwBold fs24px mb25px">
-            恭喜獲得 {coupon_name} 折價券，價值NT$
+            {/* 恭喜獲得 {coupon_name} 折價券，價值NT$ */}
+            恭喜獲得折價券，價值NT$
             {coupon_value}
           </div>
           <Button
