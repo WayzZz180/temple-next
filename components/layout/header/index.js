@@ -1,13 +1,15 @@
+import styles from './header.module.sass'
+import variables from '@/styles/_variables.module.sass'
 import React from 'react'
 import Image from 'next/image'
-import styles from './header.module.sass'
-import Logo from './logo'
-import headerBg from '@/assets/header.svg'
-import NavbarItem from './navbaritem'
+import { useState, useContext } from 'react'
 import { useRouter } from 'next/router'
-import variables from '@/styles/_variables.module.sass'
-import { useContext } from 'react'
 import AuthContext from '@/contexts/AuthContext'
+// svg
+import headerBg from '@/assets/header.svg'
+// components
+import Logo from './logo'
+import NavbarItem from './navbaritem'
 
 export default function Header() {
   const { auth, setAuth, logout } = useContext(AuthContext)
@@ -96,10 +98,69 @@ export default function Header() {
     return v === currentPath
   })
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
+  const [isOpeninsile, setIsOpeninsile] = useState(false)
+
+  const openinsild = () => {
+    setIsOpeninsile(!isOpeninsile)
+  }
   return (
     <header className={`${styles.header}`}>
       <div
+        role="presentation"
+        className={`${styles.mobilemenu} ${isMenuOpen ? styles.open : ''}`}
+        onClick={toggleMenu}
+      >
+        <span className={`${styles.mobilemenuline} `}></span>
+      </div>
+      <div
         className={`${styles.navbarContainer} pt20px pb25px`}
+        style={{
+          backgroundColor:
+            currentPath === String(bgChange[0]) ? variables['brown'] : '',
+        }}
+      >
+        {/* 左半邊選單 */}
+        <ul className={`${styles.drop_down_menu}`}>
+          {info.map((v, i) => {
+            if (i < 3) {
+              return (
+                <NavbarItem
+                  key={i}
+                  title={v.title}
+                  title2={v.title2}
+                  links={v.links}
+                />
+              )
+            }
+          })}
+        </ul>
+        {/* logo */}
+        <div className={`${styles.logoContainer}`}>
+          <Logo />
+        </div>
+        {/* 右半邊選單 */}
+        <ul className={`${styles.drop_down_menu}`}>
+          {info.map((v, i) => {
+            if (i > 2) {
+              return (
+                <NavbarItem
+                  key={v.title}
+                  title={v.title}
+                  title2={v.title2}
+                  links={v.links}
+                />
+              )
+            }
+          })}
+        </ul>
+      </div>
+      <div
+        className={`${styles.rwdnavbarContainer} pt20px pb25px`}
         style={{
           backgroundColor:
             currentPath === String(bgChange[0]) ? variables['brown'] : '',
@@ -148,16 +209,7 @@ export default function Header() {
 }
 
 //   //手機版
-//   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-//   const toggleMenu = () => {
-//     setIsMenuOpen(!isMenuOpen)
-//   }
-//   const [isOpeninsile, setIsOpeninsile] = useState(false)
-
-//   const openinsild = () => {
-//     setIsOpeninsile(!isOpeninsile)
-//   }
 //   return (
 //     <header className={`${styles.header}`}>
 //       <div

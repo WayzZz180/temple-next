@@ -1,9 +1,12 @@
 @import '@/styles/_variables.module.sass'
+@import '@/styles/mixins/responsive.sass'
 
 .navbarContainer 
   display: flex
   justify-content: space-around
   align-items: center
+  @include mobile-m
+        display: none
 
 .header
     position: relative
@@ -14,6 +17,8 @@
     left: 0
     right: 0
     z-index: -1
+    @include mobile-m
+        top: -100px
     
 .bg
     object-fit: cover
@@ -39,7 +44,7 @@
 
 .title
     color: #F4E62A
-
+   
 .title2
     color: $deep_black
     text-decoration: none
@@ -110,3 +115,4 @@ ul.drop_down_menu ul
 
 ul.drop_down_menu li:hover>ul
     display: block
+
