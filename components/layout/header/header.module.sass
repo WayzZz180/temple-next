@@ -38,8 +38,9 @@
     width: 120px
 
 .logo
-    display: inline-block
-    margin:auto
+    @include mobile-m
+        display: inline-block
+        margin:auto
 
 .title
     color: #F4E62A
@@ -66,7 +67,6 @@ ul.drop_down_menu
         position: relative
         top:80px
         // transition: height .5 ease
-    
 
 ul.drop_down_menu li
     position: relative
@@ -207,15 +207,20 @@ ul.drop_down_menu li:hover>ul
         transform: rotate(-45deg)
         transition: transform .3s ease 
 
-.open.rwdnavbarContainer
-    display: block
-    height:100vh
-
-.open .logo
+.rwdnavbarContainer
     display: none
+    @include mobile-m
+        display: block
 
-.open ul.drop_down_menu li
-    display: block
+// .open.rwdnavbarContainer
+//     display: block
+//     height:100vh
+
+// .open .logo
+//     display: none
+
+// .open ul.drop_down_menu li
+//     display: block
 
 .logoContainer
     @include mobile-m
@@ -228,3 +233,14 @@ ul.drop_down_menu li:hover>ul
         position: absolute
         top: 8px
         right: 65px
+
+.liContainer
+    display: block
+    cursor: pointer
+    @include mobile-m
+        display: none
+.rwdliContainer
+    cursor: pointer
+    display: none
+    @include mobile-m
+        display: block
