@@ -9,7 +9,7 @@
     height: 35px
     width: 100%
     @include mobile-m
-        width: 80%
+        width: 100%
         margin: auto
 
 .searchBar
@@ -17,6 +17,8 @@
     color:$deep_black
     width: 360px
     border:0    
+    @include mobile-m
+        width: 95%
 
 .searchBar:focus
     outline: none

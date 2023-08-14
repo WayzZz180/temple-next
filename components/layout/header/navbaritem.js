@@ -9,7 +9,7 @@ import AuthContext from '@/contexts/AuthContext'
 import { set } from 'lodash'
 export default function NavbarItem({ title = '', title2, links }) {
   // const { cartCount } = useContext(CartContext)
-
+  const [isOpen, setIsOpen] = useState(false)
   const { auth, setAuth, logout } = useContext(AuthContext)
   const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
   const router = useRouter()
@@ -25,11 +25,19 @@ export default function NavbarItem({ title = '', title2, links }) {
 
   return (
     <li className={`mt10px`}>
-      <div className={`${styles.title} fs14px ps30px `}>{title}</div>
+      <div
+        role="presentation"
+        className={`${styles.title} fs14px ps30px `}
+        onClick={() => {
+          setIsOpen(!isOpen)
+        }}
+      >
+        {title}
+      </div>
       <div className={`${styles.title2} fs16px mt5px pb15px ps30px pe30px`}>
         {title2}
       </div>
-      <ul>
+      <ul style={{ display: isOpen ? 'block' : 'none' }}>
         {links.map((link, index) => (
           <li
             role="presentation"

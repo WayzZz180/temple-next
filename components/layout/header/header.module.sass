@@ -17,7 +17,6 @@
     left: 0
     right: 0
     z-index: -1
-    @include mobile-m
         // top: -100px
     
 .bg
@@ -73,11 +72,12 @@ ul.drop_down_menu li
     position: relative
     white-space: nowrap
     @include mobile-m
-        border-bottom: 3px solid $green
         width: 100%
 
 ul.drop_down_menu>li:last-child 
     border-right: none
+    @include mobile-m
+    padding-bottom: 15px
 
 ul.drop_down_menu>li 
     float: left
@@ -99,6 +99,8 @@ ul.drop_down_menu ul li
     text-transform: uppercase
     position: relative
     transition: .2s ease
+    @include mobile-m
+        width: 100vw
 
 ul.drop_down_menu ul li::before
     content: ''
@@ -115,6 +117,8 @@ ul.drop_down_menu ul li:hover
 
 ul.drop_down_menu ul li:hover::before
     width: 60%
+    @include mobile-m
+        width: 90%
 
 
 ul.drop_down_menu ul
@@ -224,150 +228,3 @@ ul.drop_down_menu li:hover>ul
         position: absolute
         top: 8px
         right: 65px
-
-// @import '@/styles/_variables.module.sass'
-// @import '@/styles/mixins/responsive.sass'
-
-// .navbarContainer 
-//   display: flex
-//   justify-content: space-around
-//   align-items: center
-//   @include mobile-m
-//         padding: 0px 60px
-//         padding-top:120px
-//         transition: height .5s ease 
-//         position: absolute
-//         top:0px
-//         left:0
-//         flex-direction: column
-//         height:0px
-//         width:100%
-//         overflow: hidden
-//         // display: none
-//         // text-align: center
-//         background-color: #fff
-
-// .header
-//     position: relative
-
-
-// .bgContainer
-//     position: absolute
-//     top: -1px
-//     left: 0
-//     right: 0
-//     z-index: -1
-    
-// .bg
-//     object-fit: cover
-//     width: 100%
-
-
-// .flex_row
-//     display: flex
-//     flex-direction: row
-//     align-items: center
-//     justify-content: space-around
-//     color: $deep_black
-
-// .flex_col
-//     display: flex
-//     flex-direction: column
-//     align-items: center
-//     width: 120px
-
-// .logo
-//     display: inline-block
-//     margin: auto
-//     @include mobile-m
-//         position: relative
-//         width:100px
-//         top:120px
-
-// .title
-//     color: #F4E62A
-
-// .title2
-//     color: $deep_black
-//     text-decoration: none
-//     font-weight: 900
-
-// ul.drop_down_menu
-//     margin: 0
-//     padding: 0
-//     list-style: none 
-//     @include mobile-m
-//         width: 390px
-//         flex-direction: column 
-     
-
-// ul.drop_down_menu li
-//     position: relative
-//     white-space: nowrap
-//     @include mobile-m
-//         display: none
-//         width: 290px
-//         left:50px
-//         align-items: center
-//         flex-direction: column
-//         border-bottom: 3px solid $green
-
-// ul.drop_down_menu>li:last-child 
-//     border-right: none
-
-// ul.drop_down_menu>li 
-//     float: left
-//     align-items: space-around
-//     justify-content: space-around
-
-// ul.drop_down_menu a
-//     color: $deep_black
-//     display: block
-//     padding: 0 30px
-//     text-decoration: none
-//     line-height: 35px
-
-// ul.drop_down_menu ul li
-//     background: transparent
-//     border: none
-//     padding: 3px 2px
-//     color: $deep_black
-//     text-transform: uppercase
-//     position: relative
-//     transition: .2s ease
-    
-
-// ul.drop_down_menu ul li::before
-//     content: ''
-//     position: absolute
-//     left: 23px
-//     bottom: 0
-//     height: 3px
-//     width: 0
-//     background-color: #14d2bf
-//     transition: .2s ease
-
-// ul.drop_down_menu ul li:hover
-//     transition-delay: .2s
-
-// ul.drop_down_menu ul li:hover::before
-//     width: 60%
-
-
-// ul.drop_down_menu ul
-//     margin: 0
-//     padding: 0
-//     list-style: none
-//     background-color: white
-//     position: absolute
-//     z-index: 99
-//     left: -1px
-//     top: 100%
-//     min-width: 80px
-
-// ul.drop_down_menu ul
-//     display: none
-
-// ul.drop_down_menu li:hover>ul
-//     display: block
-//     @include mobile-m
