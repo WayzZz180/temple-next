@@ -12,6 +12,7 @@ import Gossip from '@/pages/forum/index'
 import Pray from '@/pages/pray/index'
 import Buy from '@/pages/shop/index'
 import Worship from '@/pages/worship/index'
+import Singnblock from '@/components/common/signinblock'
 
 export default function Pilgrimage() {
   const [modalIsOpen, setIsOpen] = React.useState(false)
@@ -77,6 +78,9 @@ export default function Pilgrimage() {
       <Image id="" alt="" src={jump} className={`${styles.jump}`} />
       <Image id="" alt="" src={flag} className={`${styles.flag}`} />
       <Image id="" alt="" src={dog} className={`${styles.dog}`} />
+      <div className={`${styles.signin}`}>
+        <Singnblock />
+      </div>
       <button className={`${styles.bubble}`} onClick={openModal}>
         <div className={`${styles.text}`}>來做測驗，拿小禮物～</div>
       </button>
@@ -116,14 +120,14 @@ export default function Pilgrimage() {
             transform: 'scale(1)',
           }}
         >
-        <div
-        style={{
-          transform: 'scale(1.01)',
-          transformOrigin: 'top left',
-          height: '3600px',
-        }}
-      >
-          <Gossip />
+          <div
+            style={{
+              transform: 'scale(1.01)',
+              transformOrigin: 'top left',
+              height: '3600px',
+            }}
+          >
+            <Gossip />
           </div>
         </div>
       </Modal>
@@ -144,14 +148,15 @@ export default function Pilgrimage() {
             overflow: 'auto',
             transform: 'scale(1)',
           }}
-        ><div
-        style={{
-          transform: 'scale(1)',
-          transformOrigin: 'top left',
-        }}
-      >
-          <Pray />
-        </div>
+        >
+          <div
+            style={{
+              transform: 'scale(1)',
+              transformOrigin: 'top left',
+            }}
+          >
+            <Pray />
+          </div>
         </div>
       </Modal>
       <button className={`${styles.bubble4}`} onClick={openModal4}>
@@ -172,14 +177,14 @@ export default function Pilgrimage() {
             transform: 'scale(1)',
           }}
         >
-        <div
-        style={{
-          transform: 'scale(1)',
-          transformOrigin: 'top left',
-        }}
-      >
-          <Worship />
-        </div>
+          <div
+            style={{
+              transform: 'scale(1)',
+              transformOrigin: 'top left',
+            }}
+          >
+            <Worship />
+          </div>
         </div>
       </Modal>
       <button className={`${styles.bubble5}`} onClick={openModal5}>
@@ -200,12 +205,12 @@ export default function Pilgrimage() {
             transform: 'scale(1)',
           }}
         >
-                <div
-        style={{
-          transform: 'scale(1)',
-          transformOrigin: 'top left',
-        }}
-      ></div>
+          <div
+            style={{
+              transform: 'scale(1)',
+              transformOrigin: 'top left',
+            }}
+          ></div>
           <Buy />
         </div>
       </Modal>
