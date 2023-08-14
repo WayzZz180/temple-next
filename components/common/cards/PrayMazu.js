@@ -3,7 +3,7 @@ import Image from 'next/image'
 import mazu from '@/assets/mazuGod.svg'
 import godlight from '@/assets/GodLight.svg'
 import styles from './PrayMazu.module.sass'
-import Button from '@/components/common/button'
+import Button from '@/components/common/button/bts'
 import star from '@/assets/Star_pink.svg'
 import shadow from '@/assets/GodShadow.svg'
 import name from '@/assets/GodName.svg'
@@ -14,6 +14,9 @@ export default function PrayMazu() {
 
   const ButtonClick = () => {
     Router.push('/pray/mazu1')
+  }
+  const ButtonClick2 = () => {
+    Router.push('/')
   }
 
   return (
@@ -86,6 +89,9 @@ export default function PrayMazu() {
           </div>
           <div className={`${styles.btn} mt90px`}>
             <Button text="求籤" btnColor="hot_pink" link={ButtonClick} />
+            <span className={`${styles.btn2}`}>
+              <Button text="回首頁" btnColor="hot_pink" link={ButtonClick2} />
+            </span>
           </div>
         </div>
       </div>

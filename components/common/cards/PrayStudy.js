@@ -3,7 +3,7 @@ import Image from 'next/image'
 import study from '@/assets/studyGod.svg'
 import godlight from '@/assets/GodLight.svg'
 import styles from './PrayStudy.module.sass'
-import Button from '@/components/common/button'
+import Button from '@/components/common/button/bts'
 import star from '@/assets/green_sq.svg'
 import shadow from '@/assets/GodShadow.svg'
 import name from '@/assets/GodName.svg'
@@ -18,6 +18,10 @@ export default function PrayStudy() {
   const studyB = () => {
     Router.push('/pray/studyA-1')
   }
+  const ButtonClick2 = () => {
+    Router.push('/')
+  }
+
   return (
     <>
       <div className={`${styles.flex_row} mt150px`}>
@@ -88,6 +92,9 @@ export default function PrayStudy() {
             <Button text="點學業燈" btnColor="green" link={studyA} />
             <span className={`${styles.btn2}`}>
               <Button text="上傳准考證" btnColor="green" link={studyB} />
+            </span>
+            <span className={`${styles.btn3}`}>
+              <Button text="回首頁" btnColor="green" link={ButtonClick2} />
             </span>
           </div>
         </div>

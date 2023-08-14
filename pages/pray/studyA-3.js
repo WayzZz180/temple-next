@@ -17,7 +17,7 @@ export default function Mazu3() {
   const [user, setUser] = useState({
     Member_ID: '',
     Name: '',
-    Datetime:'',
+    Datetime: '',
   })
 
   const handleSumbit = (e) => {
@@ -36,6 +36,9 @@ export default function Mazu3() {
     setTimeout(() => {
       Router.push('/member/amulet')
     }, 2000)
+  }
+  const ButtonClick = () => {
+    Router.push('/pray')
   }
   return (
     <>
@@ -99,12 +102,16 @@ export default function Mazu3() {
                 </div>
               </div>
               <div className={`${styles.btn} mt90px`}>
-                <Button text="收藏" btnColor="green" type="submit"
-              link={(e) => {
-                handleSumbit(e)
-              }}/>
+                <Button
+                  text="收藏"
+                  btnColor="green"
+                  type="submit"
+                  link={(e) => {
+                    handleSumbit(e)
+                  }}
+                />
                 <span className={`${styles.btn2}`}>
-                  <Button text="分享" btnColor="green" />
+                  <Button text="其他神明" btnColor="green" link={ButtonClick} />
                 </span>
               </div>
             </div>
