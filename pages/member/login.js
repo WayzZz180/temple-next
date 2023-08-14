@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import styles from '@/pages/member/login.module.sass'
 import Link from 'next/link'
-import { useState, useContext } from 'react'
+import { useState, useContext , useEffect } from 'react'
 import AuthContext from '@/contexts/AuthContext'
 import { AuthContextProvider } from '@/contexts/AuthContext'
 import { useRouter } from 'next/router'
@@ -20,6 +20,8 @@ import VisibilityIcon from '@mui/icons-material/Visibility'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
+
+import HomeDoor from '@/components/common/cards/HomeDoorlogin'
 
 export default function Login() {
   const router = useRouter()
@@ -66,8 +68,30 @@ export default function Login() {
       })
   }
 
+  //黑色區塊消失
+    useEffect(() => {
+    const blackblock = document.getElementById('blackblock')
+
+    if (blackblock) {
+      const timeout = setTimeout(() => {
+        blackblock.style.display = "none";
+      }, 1800)
+
+      return () => {
+        clearTimeout(timeout);
+      }
+    }
+  }, [])
+
   return (
     <Container className={styles.flex}>
+      <div className={`${styles.background}`}>
+    <div className={`${styles.position}`}>
+      <div className={styles.blackblock} id="blackblock">
+        <HomeDoor />
+      </div>
+      </div>
+      </div>
       <Row>
         <Col>
           <div className="mt100px">

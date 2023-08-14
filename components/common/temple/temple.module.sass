@@ -1,14 +1,23 @@
+@import '@/styles/_variables.module.sass'
+@import '@/styles/mixins/responsive.sass'
+
+.temple
+  width: 100%
+  @include mobile-m
+    transform: scale(0.3)
+    border:2px solid #000
+    
 .flex
     display: flex
     justify-content: center
     align-content: center
     position: relative
+
 .cloud
     position: absolute
     z-index: -1
     top:200px
     animation: float 10s ease-in-out infinite alternate
-
 
 @keyframes float 
   0% 

@@ -87,7 +87,7 @@ export default function Quiz() {
   }
 
   const handleClick = () => {
-    Router.push('/member/coupons')
+    Router.push('/member/myCoupons')
   }
   return (
     <>

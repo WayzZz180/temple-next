@@ -18,6 +18,13 @@ export default function Button({
   const var_color = variables[btnColor]
   return (
     <>
+    <div
+        style={{
+          transform: 'scale(0.7)',
+          transformOrigin: 'center',
+          width: '106px',
+        }}
+      >
       <button
         onClick={link}
         type={type}
@@ -48,6 +55,7 @@ export default function Button({
           ></Image>
         </span>
       </button>
+      </div>
     </>
   )
 }

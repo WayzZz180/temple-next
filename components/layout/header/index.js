@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import styles from './header.module.sass'
 import Logo from './logo'
@@ -55,19 +55,19 @@ export default function Header() {
       title: '04',
       title2: '線上遶境',
       links: [
-        { label: '線上測驗', url: '#' },
-        { label: '遶境直播', url: '#' },
+        { label: '線上測驗', url: '/pilgrimage' },
+        { label: '遶境直播', url: '/pilgrimage' },
       ],
     },
     {
       title: '05',
       title2: '求神問卜',
       links: [
-        { label: '求籤詩', url: '#' },
-        { label: '求紅線', url: '#' },
-        { label: '點姻緣燈', url: '#' },
+        { label: '求籤詩', url: '/pray/mazu1' },
+        { label: '求紅線', url: '/pray/loveA-1' },
+        { label: '點姻緣燈', url: '/pray/loveB-1' },
         { label: '點學業燈', url: '#' },
-        { label: '上傳准考證', url: '#' },
+        { label: '上傳准考證', url: '/pray/studyA-1' },
       ],
     },
     {
@@ -96,31 +96,52 @@ export default function Header() {
   const bgChange = bgChangeUrl.filter((v) => {
     return v === currentPath
   })
+  //手機版
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
+  const [isOpeninsile, setIsOpeninsile] = useState(false)
+
+  const openinsild = () => {
+    setIsOpeninsile(!isOpeninsile)
+  }
   return (
     <header className={`${styles.header}`}>
       <div
-        className={`${styles.navbarContainer} pt20px pb25px`}
+        role="presentation"
+        className={`${styles.mobilemenu} ${isMenuOpen ? styles.open : ''}`}
+        onClick={toggleMenu}
+      >
+        <span className={`${styles.mobilemenuline} `}></span>
+      </div>
+      <div
+        className={`${styles.navbarContainer} ${
+          isMenuOpen ? styles.open : ''
+        } pt20px pb25px`}
         style={{
           backgroundColor:
             currentPath === String(bgChange[0]) ? variables['brown'] : '',
         }}
       >
         {/* 左半邊選單 */}
-        <ul className={`${styles.drop_down_menu}`}>
+        <ul className={`${styles.drop_down_menu}`} onclick={openinsild}>
           {info.map((v, i) => {
             if (i < 3) {
               return (
-                <NavbarItem
-                  key={i}
-                  title={v.title}
-                  title2={v.title2}
-                  links={v.links}
-                />
+                <div style={{ display: openinsild ? 'block' : 'none' }} key={i}>
+                  <NavbarItem
+                    title={v.title}
+                    title2={v.title2}
+                    links={v.links}
+                  />
+                </div>
               )
             }
           })}
         </ul>
+
         {/* logo */}
         <div className={`${styles.logoContainer}`}>
           <Logo link={auth.id === 0 ? '/' : '/Home/signOut'} />
@@ -141,6 +162,7 @@ export default function Header() {
           })}
         </ul>
       </div>
+
       <div className={`${styles.bgContainer} `}>
         <Image src={headerBg} alt="headerBg" className={`${styles.bg}`} />
       </div>
