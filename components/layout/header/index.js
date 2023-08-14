@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import styles from './header.module.sass'
 import Logo from './logo'
@@ -96,18 +96,27 @@ export default function Header() {
   const bgChange = bgChangeUrl.filter((v) => {
     return v === currentPath
   })
+  //手機版
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
   return (
     <header className={`${styles.header}`}>
+      <div role="presentation" className={`${styles.mobilemenu} ${isMenuOpen ? styles.open : ''}`}
+        onClick={toggleMenu}>
+          <span className={`${styles.mobilemenuline} `}></span>
+        </div>
       <div
-        className={`${styles.navbarContainer} pt20px pb25px`}
+        className={`${styles.navbarContainer} ${isMenuOpen ? styles.open : ''} pt20px pb25px`}
         style={{
           backgroundColor:
             currentPath === String(bgChange[0]) ? variables['brown'] : '',
         }}
       >
         {/* 左半邊選單 */}
-        <ul className={`${styles.drop_down_menu}`}>
+        <ul className={`${styles.drop_down_menu} `}>
           {info.map((v, i) => {
             if (i < 3) {
               return (
@@ -121,6 +130,7 @@ export default function Header() {
             }
           })}
         </ul>
+   
         {/* logo */}
         <div className={`${styles.logoContainer}`}>
           <Logo link={auth.id === 0 ? '/' : '/Home/signOut'} />
@@ -141,6 +151,7 @@ export default function Header() {
           })}
         </ul>
       </div>
+
       <div className={`${styles.bgContainer} `}>
         <Image src={headerBg} alt="headerBg" className={`${styles.bg}`} />
       </div>
