@@ -71,8 +71,8 @@ export default function Order() {
     },
     member_address: {
       required: true,
-      regex: /^[\u4e00-\u9fa5\d]+$/,
-      message: '地址請輸入中文(和數字)',
+      regex: /^(?=.*[\u4e00-\u9fa5])(?=.*\d)[\u4e00-\u9fa5\d]+$/,
+      message: '地址請輸入中文(數字)',
     },
     member_phone: {
       required: true,

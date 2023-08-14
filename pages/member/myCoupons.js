@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import styles from '@/pages/member/myCoupons.module.sass'
 
 //hooks
@@ -19,6 +20,8 @@ import CartCategory from '@/components/common/button/CartCategory'
 import ProfilePhoto from '@/components/common/profilePhoto'
 import MemberTitle from '@/components/common/title/memberTitle'
 import MemberNavbar from '@/components/common/memberNavbar'
+import data from '@/components/mydata/memberNavbarData.js'
+
 // coupon components
 import CouponCategory from '@/components/common/button/CouponCategory.js'
 import CouponNavbar from '@/components/common/coupons/couponNavbar'
@@ -43,6 +46,9 @@ export default function IndexCart() {
 
   return (
     <div className={styles.flex}>
+      <Head>
+        <title>{data[4]?.text}</title>
+      </Head>
       <Container>
         <ProfilePhoto />
         <Row>

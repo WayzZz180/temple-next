@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import styles from './header.module.sass'
 import Link from 'next/link'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import CartCountContext from '@/contexts/CartCountContext'
 
 import AuthContext from '@/contexts/AuthContext'
-import { set } from 'lodash'
+import Alert from '@/components/common/alert'
+
 export default function NavbarItem({ title = '', title2, links }) {
   // const { cartCount } = useContext(CartContext)
   const [isOpen, setIsOpen] = useState(false)
@@ -23,6 +24,7 @@ export default function NavbarItem({ title = '', title2, links }) {
     }
   }, [router.query])
 
+  const [pleaseLogIn, setPleaseLogIn] = useState(false)
   return (
     <>
       <li className={`${styles.liContainer} mt10px`}>

@@ -3,11 +3,10 @@ import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 
 const title_cart = [
-  { width: '16%', text: '優惠券' },
-  { width: '16.8%', text: '名稱/有效期限' },
-  { width: '11.3%', text: '價值' },
-  { width: '25.1%', text: '使用狀態' },
-  //   { width: '17%', text: '小計' },
+  { text: '優惠券' },
+  { width: '250px', text: '有效期限/名稱' },
+  { text: '價值' },
+  { text: '使用狀態' },
 ]
 
 export default function CouponNavbar() {
@@ -19,7 +18,7 @@ export default function CouponNavbar() {
             <span
               key={i}
               className={`${styles.title} ${
-                i === 0 ? 'ps65px' : ''
+                i === 0 ? 'ps45px' : ''
               } fs20px p15px`}
               style={{ width: v.width }}
             >

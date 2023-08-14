@@ -13,7 +13,7 @@ import coupon_red from '@/assets/coupon_red.svg'
 import Button from '@/components/common/button/index.js'
 import admissionTicketTest from '@/assets/admissionTicketTest.svg'
 import InputBox from '@/components/common/inputBox/index.js'
-
+import StudyTickets from '@/components/common/studyTickets/index.js'
 export default function Amulet({ amuletName = '' }) {
   const [zhongziModalIsOpen, setZhongziModalIsOpen] = useState(false) // 跟蹤 modal 是否打開
   const [poemModalIsOpen, setPoemModalIsOpen] = useState(false) // 跟蹤 modal 是否打開
@@ -29,7 +29,7 @@ export default function Amulet({ amuletName = '' }) {
       break
     case '粽子':
       amulet = require('@/assets/zhongzi.svg')
-      slogan = '粽子包不住失敗，努力才是關鍵！'
+      slogan = '包裹著好運與智慧，包含著成功的味道'
       break
     case '青蔥':
       amulet = require('@/assets/scallion.svg')
@@ -204,7 +204,7 @@ export default function Amulet({ amuletName = '' }) {
           },
           content: {
             maxWidth: '700px', // 調整最大寬度
-            maxHeight: '700px', // 調整最大高度
+            maxHeight: '725px', // 調整最大高度
             margin: 'auto', // 水平居中
             background: variables['bgColor'],
             //   // border: '',
@@ -219,19 +219,7 @@ export default function Amulet({ amuletName = '' }) {
           X
         </div>
 
-        <div className={`${styles.flex_center} `}>
-          <Image
-            src={admissionTicketTest}
-            alt="admissionTicketTest"
-            width={550}
-          />
-        </div>
-        <div className={`${styles.flex_center} mt40px`}>
-          <div className={`${styles.flex} w550px`}>
-            <InputBox prompt="姓名" width={200} />
-            <InputBox prompt="第一志願" width={200} />
-          </div>
-        </div>
+        <StudyTickets />
       </Modal>
 
       <Modal

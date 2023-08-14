@@ -1,4 +1,5 @@
-import React from 'react'
+import Head from 'next/head'
+import React, { useEffect } from 'react'
 import Image from 'next/image'
 import styles from '@/pages/member/login.module.sass'
 import Link from 'next/link'
@@ -17,6 +18,7 @@ import doorGodRight from '@/assets/doorGodRight.svg'
 import Checkbox from '@/components/common/checkBox'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import VisibilityIcon from '@mui/icons-material/Visibility'
+import Alert from '@/components/common/alert'
 
 //bootstrap
 import { Container, Row, Col } from 'react-bootstrap'
@@ -31,6 +33,9 @@ export default function Login() {
     member_password: '',
   })
   const [showPassword, setShowPassword] = useState(false) // 顯示密碼
+  const [loginSuccess, setLoginSuccess] = useState(false)
+  const [loginFailed, setLoginFailed] = useState(false)
+  const [ErrorMessage, setErrorMessage] = useState('')
 
   // 切換顯示密碼
   const toggleShowPassword = () => {
@@ -60,10 +65,17 @@ export default function Login() {
           const obj = { ...data.data }
           localStorage.setItem('auth', JSON.stringify(obj))
           setAuth(obj)
-          alert('登入成功')
-          router.push('/member/personalinfo')
+          // alert('登入成功')
+          setLoginSuccess(true)
+          setTimeout(() => {
+            router.push('/member/personalinfo')
+          }, 1750)
         } else {
-          alert(data.error || '帳密錯誤')
+          setLoginFailed(true)
+          setErrorMessage(data.error)
+          // setTimeout(() => {
+          //   setLoginFailed(false)
+          // }, 1750)
         }
       })
   }
@@ -84,6 +96,23 @@ export default function Login() {
   }, [])
 
   return (
+    <>
+      <Head>
+        <title>會員登入</title>
+      </Head>
+      <Container className={styles.flex}>
+        <Row>
+          <Col>
+            <div className="mt100px">
+              <Image
+                src={doorGodLeft}
+                alt="doorGodLeft"
+                // height={835}
+                width={525}
+              ></Image>
+            </div>
+          </Col>
+        </Row>
     <Container className={styles.flex}>
       <div id="background" className={`${styles.background}`}>
         <div className={`${styles.position}`}>
@@ -105,73 +134,74 @@ export default function Login() {
         </Col>
       </Row>
 
-      <Row className="ps60px pe60px">
-        <Col>
-          <div className="mt100px">
-            <MemberTitle
-              text="登入會員"
-              text2="LOGIN"
-              lineColor="green"
-              width={450}
-            />
-          </div>
-        </Col>
-        <Col className={styles.flex_centre}>
-          <div>
-            <InputBox
-              prompt="帳號"
-              type="email"
-              // className="form-control"
-              id="member_account"
-              placeholder="電子郵件地址"
-              value={user.member_account}
-              onChange={changeUser}
-            />
-          </div>
-        </Col>
-        <Col className={styles.flex_centre}>
-          <div>
-            <div className="">
+        <Row className="ps60px pe60px">
+          <Col>
+            <div className="mt100px">
+              <MemberTitle
+                text="登入會員"
+                text2="LOGIN"
+                lineColor="green"
+                width={500}
+              />
+            </div>
+          </Col>
+          <Col className={styles.flex_centre}>
+            <div>
               <InputBox
-                type={showPassword ? 'text' : 'password'}
-                prompt="密碼"
+                prompt="帳號"
+                type="email"
                 // className="form-control"
-                id="member_password"
-                placeholder="密碼"
-                value={user.member_password}
+                id="member_account"
+                placeholder="電子郵件地址"
+                value={user.member_account}
                 onChange={changeUser}
               />
             </div>
-            {showPassword ? (
-              <div className={styles.flex_start} style={{ cursor: 'pointer' }}>
-                <VisibilityOffIcon
-                  onClick={toggleShowPassword}
-                  className="me10px"
+          </Col>
+          <Col className={styles.flex_centre}>
+            <div>
+              <div className="">
+                <InputBox
+                  type={showPassword ? 'text' : 'password'}
+                  prompt="密碼"
+                  // className="form-control"
+                  id="member_password"
+                  placeholder="密碼"
+                  value={user.member_password}
+                  onChange={changeUser}
                 />
-                隱藏密碼{' '}
               </div>
-            ) : (
-              <div className={styles.flex_start} style={{ cursor: 'pointer' }}>
-                <VisibilityIcon
+              {showPassword ? (
+                <div
+                  className={styles.flex_start}
+                  style={{ cursor: 'pointer' }}
                   onClick={toggleShowPassword}
-                  className="me10px"
-                />
-                顯示密碼
-              </div>
-            )}
-          </div>
-        </Col>
-        <Col>
-          <div className={styles.flex_checkbox}>
-            <Checkbox label="保持登入狀態？" />
-            <Link href="#" className={`${styles.linkHover} link fwBold`}>
-              忘記密碼？
-            </Link>
-          </div>
-        </Col>
+                >
+                  <VisibilityOffIcon className="me10px" />
+                  隱藏密碼{' '}
+                </div>
+              ) : (
+                <div
+                  className={styles.flex_start}
+                  style={{ cursor: 'pointer' }}
+                  onClick={toggleShowPassword}
+                >
+                  <VisibilityIcon className="me10px" />
+                  顯示密碼
+                </div>
+              )}
+            </div>
+          </Col>
+          <Col>
+            <div className={styles.flex_checkbox}>
+              <Checkbox label="保持登入狀態？" />
+              <Link href="#" className={`${styles.linkHover} link fwBold`}>
+                忘記密碼？
+              </Link>
+            </div>
+          </Col>
 
-        <Col className={`${styles.flex_container} fwBold`}>
-          <div>
+          <Col className={`${styles.flex_container} fwBold`}>
             <div className="ls6px">
               如登入，即同意錦囊廟祭的
               <Link href="#" className="link">
@@ -182,10 +212,8 @@ export default function Login() {
                 使用條款
               </Link>
             </div>
-          </div>
-        </Col>
-        <Col className={styles.flex_centre}>
-          <div className="mb15px">
+          </Col>
+          <Col className={styles.flex_centre}>
             <Button
               text="登入"
               btnColor="black"
@@ -194,16 +222,10 @@ export default function Login() {
                 doLogin()
               }}
             />
-          </div>
-        </Col>
+          </Col>
 
-        <Col className={styles.flex_centre}>
-          <div>
+          <Col className={styles.flex_centre}>
             <div className={`${styles.join}`}>
-              {/* 不是會員？
-              <Link href="/member/signUp" className="link">
-                加入我們
-              </Link> */}
               <div className="fs18px fwBold pe5px">不是會員？</div>
 
               <Link
@@ -213,24 +235,44 @@ export default function Login() {
                 加入我們
               </Link>
             </div>
-          </div>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
 
-      <Row>
-        <Col>
-          <div>
-            <div className="mt100px">
-              <Image
-                src={doorGodRight}
-                alt="doorGodRight"
-                // height={835}
-                width={525}
-              ></Image>
+        <Row>
+          <Col>
+            <div>
+              <div className="mt100px">
+                <Image
+                  src={doorGodRight}
+                  alt="doorGodRight"
+                  // height={835}
+                  width={525}
+                ></Image>
+              </div>
             </div>
-          </div>
-        </Col>
-      </Row>
-    </Container>
+          </Col>
+        </Row>
+      </Container>
+      {loginSuccess ? (
+        <Alert
+          isOpen={true}
+          text={`登入成功`}
+          status="correct"
+          setIsOpen={setLoginSuccess}
+        />
+      ) : (
+        ''
+      )}
+      {loginFailed ? (
+        <Alert
+          isOpen={true}
+          text={ErrorMessage || '帳號或密碼錯誤，請重新輸入'}
+          status="wrong"
+          setIsOpen={setLoginFailed}
+        />
+      ) : (
+        ''
+      )}
+    </>
   )
 }

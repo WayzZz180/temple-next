@@ -27,6 +27,7 @@ export default function Header() {
         { label: '我的文章', url: '/member/articles' },
         { label: '護身符', url: '/member/amulet' },
         { label: '每日簽到', url: '/member/dailySignIn' },
+        { label: '遊戲區', url: '/member/myCardGame' },
 
         auth.id === 0
           ? { label: '登入', url: '/member/login' }
