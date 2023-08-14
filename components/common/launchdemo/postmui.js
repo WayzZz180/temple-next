@@ -57,36 +57,39 @@ export default function AlertDialogSlide({ page = 1 }) {
     const fd = new FormData()
     fd.append('preImg', input.files[0])
 
-    try {
-      await Promise.all([
-        fetch(
-          `${process.env.API_SERVER}/forum/${router.query.category}/addphoto`,
-          {
-            method: 'POST',
-            body: fd, // 確保這裡傳遞的是 FormData 物件
-          }
-        )
-          .then((r) => r.json())
-          .then((data) => {
-            console.log(data)
-            // console.log(fd)
-            reqData.img = data
-          }),
-      ])
-      await Promise.all([
-        fetch(`${process.env.API_SERVER}/forum/${router.query.category}/add`, {
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(
+        `${process.env.API_SERVER}/forum/${router.query.category}/addphoto`,
+        {
           method: 'POST',
-          body: JSON.stringify({ requestData: reqData }),
+          body: fd, // 確保這裡傳遞的是 FormData 物件
           headers: {
-            'Content-Type': 'application/json',
+            Authorization,
           },
-        }),
-      ])
-
-      handleClose()
-      console.log('Data added successfully')
-    } catch (error) {
-      console.error('Error adding data:', error)
+        }
+      )
+        .then((r) => r.json())
+        .then((data) => {
+          console.log(data)
+          // console.log(fd)
+          reqData.img = data
+        })
+    }
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/forum/${router.query.category}/add`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: reqData }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization,
+        },
+      }),
+        handleClose()
     }
   }
   //會員
@@ -146,6 +149,9 @@ export default function AlertDialogSlide({ page = 1 }) {
                   <div className={`${styles.col2}`}>
                     <TextArea
                       height="40px"
+                      // weight="500px"
+                      // later-space="pre-line"
+                      whiteSpace="pre-wrap"
                       value={inputTitle}
                       onChange={
                         (e) => {
@@ -166,6 +172,9 @@ export default function AlertDialogSlide({ page = 1 }) {
                     <TextArea
                       type="text"
                       height="500px"
+                      // weight="500px"
+                      // later-space="pre-line"
+                      whiteSpace="pre-wrap"
                       value={inputContent}
                       onChange={
                         (e) => {
