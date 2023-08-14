@@ -63,7 +63,7 @@ export default function CardGame() {
   ]
 
   //難度調整
-  const [idRange, setIdRange] = useState(4)
+  const [idRange, setIdRange] = useState(8)
   console.log(idRange)
   // const handleDifficultyChange = (event) => {
   //   const value = parseInt(event.target.value)
@@ -71,7 +71,7 @@ export default function CardGame() {
   // }
 
   // for (let id = 1; id <= idRange; id++) {
-  for (let id = 1; id <= 4; id++) {
+  for (let id = 1; id <= idRange; id++) {
     const imgIndex = Math.floor((id - 1) / 2)
     const card = {
       id: id,
@@ -85,7 +85,7 @@ export default function CardGame() {
   // 難度調整 關鍵行
   useEffect(() => {
     const newCardData = []
-    for (let id = 1; id <= 4; id++) {
+    for (let id = 1; id <= idRange; id++) {
       const imgIndex = Math.floor((id - 1) / 2)
       const card = {
         id: id,
@@ -393,11 +393,11 @@ export default function CardGame() {
           </div>
         </Col>
         <Col className="nowrap">
-          {idRange === 12 ? (
+          {idRange === 8 ? (
             <Button
               text="調整難度為:下下籤?"
               link={() => {
-                setIdRange(36)
+                setIdRange(32)
               }}
               disabled={isRunning || gameStarted}
             />
@@ -405,7 +405,7 @@ export default function CardGame() {
             <Button
               text="調整難度為:上上籤?"
               link={() => {
-                setIdRange(12)
+                setIdRange(32)
               }}
               disabled={isRunning || gameStarted}
             />
