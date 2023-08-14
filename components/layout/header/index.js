@@ -1,6 +1,6 @@
 import styles from './header.module.sass'
 import variables from '@/styles/_variables.module.sass'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Image from 'next/image'
 import { useState, useContext } from 'react'
 import { useRouter } from 'next/router'
@@ -13,6 +13,7 @@ import NavbarItem from './navbaritem'
 
 export default function Header() {
   const { auth, setAuth, logout } = useContext(AuthContext)
+  const [isLogin, setIsLogin] = useState(false)
 
   const info = [
     {
@@ -77,20 +78,22 @@ export default function Header() {
       title: '06',
       title2: '民俗論壇',
       links: [
-        { label: '八卦板', url: '#' },
-        { label: '鬼故事板', url: '#' },
-        { label: '愛情板', url: '#' },
-        { label: '籤詩板', url: '#' },
-        { label: '神佛介紹', url: '#' },
-        { label: '禁忌百科', url: '#' },
-        { label: '節期拜法', url: '#' },
-        { label: '山野怪談', url: '#' },
+        { label: '論壇首頁', url: '/forum' },
+        { label: '八卦板', url: '/forum/gossip?page=1' },
+        { label: '鬼故事板', url: '/forum/ghost?page=1' },
+        { label: '愛情板', url: '/forum/love?page=1' },
+        { label: '籤詩板', url: '/forum/fortunesticks?page=1' },
       ],
     },
   ]
 
   const router = useRouter()
   const currentPath = router.asPath
+  useEffect(() => {
+    if (localStorage.getItem('auth')) {
+      setIsLogin(true)
+    }
+  }, [router.query])
 
   // 底色要變咖啡色的路由
   const bgChangeUrl = ['/', '/Home', '/forum', '/worship']
@@ -137,7 +140,7 @@ export default function Header() {
         </ul>
         {/* logo */}
         <div className={`${styles.logoContainer}`}>
-          <Logo />
+          <Logo link={isLogin ? '/Home/signOut' : '/'} />
         </div>
         {/* 右半邊選單 */}
         <ul className={`${styles.drop_down_menu}`}>
@@ -166,7 +169,7 @@ export default function Header() {
         {/* logo */}
         <div className={`${styles.logoContainer}`}>
           <div className={`${styles.logo}`}>
-            <Logo />
+            <Logo link={isLogin ? '/Home/signOut' : '/'} />
           </div>
         </div>
         <div style={{ display: isMenuOpen ? 'block' : 'none' }}>
