@@ -267,7 +267,7 @@ export default function Personalinfo() {
               onChange={changeUser}
               validationRules={validationRules}
               value={user.member_name}
-              width={417}
+              width={470}
               // 判斷是否為錯誤欄位，以及是否顯示錯誤訊息
               isError={invalidFields.includes('member_name')}
               errorMessage={getErrorForField('member_name')} // 取得該欄位的錯誤訊息
@@ -283,7 +283,7 @@ export default function Personalinfo() {
               onChange={changeUser}
               validationRules={validationRules}
               value={user.member_forum_name}
-              width={417}
+              width={470}
               isError={invalidFields.includes('member_forum_name')}
               errorMessage={getErrorForField('member_forum_name')}
             />
@@ -299,7 +299,7 @@ export default function Personalinfo() {
               onChange={changeUser}
               validationRules={validationRules}
               value={user.member_account}
-              width={1028}
+              width={1005}
               isError={invalidFields.includes('member_account')}
               errorMessage={getErrorForField('member_account') || errorMessage} // 顯示來自後端的錯誤訊息
             />
@@ -315,7 +315,7 @@ export default function Personalinfo() {
                 onChange={changeUser}
                 validationRules={validationRules}
                 value={user.member_password}
-                width={1028}
+                width={1005}
                 isError={invalidFields.includes('member_password')}
                 errorMessage={getErrorForField('member_password')}
               />
@@ -331,7 +331,7 @@ export default function Personalinfo() {
               onChange={changeUser}
               validationRules={validationRules}
               value={user.member_birthday}
-              width={1028}
+              width={1005}
               isError={invalidFields.includes('member_birthday')}
               errorMessage={getErrorForField('member_birthday')}
             />
@@ -348,7 +348,7 @@ export default function Personalinfo() {
               onChange={changeUser}
               validationRules={validationRules}
               value={user.member_phone}
-              width={1028}
+              width={1005}
               isError={invalidFields.includes('member_phone')}
               errorMessage={getErrorForField('member_phone') || errorMessage}
               // 顯示來自後端的錯誤訊息
@@ -365,33 +365,33 @@ export default function Personalinfo() {
               onChange={changeUser}
               validationRules={validationRules}
               value={user.member_address}
-              width={1028}
+              width={1005}
               isError={invalidFields.includes('member_address')}
               errorMessage={getErrorForField('member_address')}
             />
           </Col>
         </Row>
 
-        <Row className={styles.flex_end}>
-          <Col>
+        <Row className={`${styles.flex_end} mt50px`}>
+          <Col className="me30px">
             {/* <form onSubmit={edit}> */}
-            <Button
-              text="確定儲存"
-              btnColor="black"
-              width={229}
-              link={() => {
-                edit()
-              }}
-            />
-            {/* </form> */}
-          </Col>
-          <Col>
             <NoButton
               text="取消變更"
               btnColor="black"
               width={229}
               link={() => {
                 handleCancelEditing()
+              }}
+            />
+            {/* </form> */}
+          </Col>
+          <Col>
+            <Button
+              text="確定儲存"
+              btnColor="black"
+              width={229}
+              link={() => {
+                edit()
               }}
             />
           </Col>
