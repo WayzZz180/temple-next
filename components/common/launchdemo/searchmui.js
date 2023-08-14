@@ -73,7 +73,7 @@ export default function AlertDialog({ keywordSearch = () => {} }) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{'關鍵字搜尋'}</DialogTitle>
+        {/* <DialogTitle id="alert-dialog-title">{'關鍵字搜尋'}</DialogTitle> */}
         <DialogContent>
           <form
             onSubmit={(e) => {
@@ -96,7 +96,7 @@ export default function AlertDialog({ keywordSearch = () => {} }) {
               /> */}
               <InputBox
                 type="text"
-                prompt="搜尋"
+                prompt="關鍵字搜尋"
                 placeholder="關鍵字"
                 value={keyword}
                 onChange={(e) => {

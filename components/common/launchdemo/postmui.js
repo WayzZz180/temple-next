@@ -157,6 +157,7 @@ export default function AlertDialogSlide({ page = 1 }) {
                       autoComplete="off"
                       id="title"
                       required
+                      // minLength={3}
                     />
                     {/* <BasicTextFields /> */}
                   </div>
@@ -177,6 +178,7 @@ export default function AlertDialogSlide({ page = 1 }) {
                       id="content"
                       required
                       lineheight="32px"
+                      // minLength={15}
                     />
                     {/* <BasicTextFields2 /> */}
                   </div>

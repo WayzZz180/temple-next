@@ -97,8 +97,8 @@ export default function ReadPost({ src = '', post }) {
           <div className={`${styles.row5}`}>
             <div className={`${styles.adjust}`}>{data?.member_id}</div>
             <div>·</div>
-            <div className={`${styles.adjust}`}>{data?.postcategory_sid}</div>
-            <div>·</div>
+            {/* <div className={`${styles.adjust}`}>{data?.postcategory_sid}</div>
+            <div>·</div> */}
             <div className={`${styles.adjust}`}>{data?.publish_time}</div>
           </div>
         </div>
