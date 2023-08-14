@@ -103,11 +103,6 @@ export default function Header() {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
-  const [isOpeninsile, setIsOpeninsile] = useState(false)
-
-  const openinsild = () => {
-    setIsOpeninsile(!isOpeninsile)
-  }
   return (
     <header className={`${styles.header}`}>
       <div
