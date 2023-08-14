@@ -36,7 +36,6 @@ export default function Mazu2() {
       setTimeout(() => {
         setButtonText('再擲一次')
       }, 2500)
-      
     } else if (randomBayImage >= 'C1' && randomBayImage <= 'C2') {
       setTitle('無筊')
       setTimeout(() => {
