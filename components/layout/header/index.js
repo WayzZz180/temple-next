@@ -102,11 +102,6 @@ export default function Header() {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
-  const [isOpeninsile, setIsOpeninsile] = useState(false)
-
-  const openinsild = () => {
-    setIsOpeninsile(!isOpeninsile)
-  }
   return (
     <header className={`${styles.header}`}>
       <div
@@ -126,17 +121,16 @@ export default function Header() {
         }}
       >
         {/* 左半邊選單 */}
-        <ul className={`${styles.drop_down_menu}`} onclick={openinsild}>
+        <ul className={`${styles.drop_down_menu}`}>
           {info.map((v, i) => {
             if (i < 3) {
               return (
-                <div style={{ display: openinsild ? 'block' : 'none' }} key={i}>
-                  <NavbarItem
-                    title={v.title}
-                    title2={v.title2}
-                    links={v.links}
-                  />
-                </div>
+                <NavbarItem
+                  key={i}
+                  title={v.title}
+                  title2={v.title2}
+                  links={v.links}
+                />
               )
             }
           })}

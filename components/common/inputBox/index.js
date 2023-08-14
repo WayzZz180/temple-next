@@ -29,6 +29,7 @@ export default function InputBox({
       <div className={`${styles.prompt} mb10px fwBold fs18px`}>{prompt}</div>
       <div className={styles.input_box_wrapper}>
         <input
+          autocomplete="off"
           type={type}
           value={value}
           id={id}
