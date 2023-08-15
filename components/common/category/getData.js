@@ -22,7 +22,6 @@ export default function GetData({
   const router = useRouter()
   const { category } = router.query //抓出類別
   const [keyword, setKeyword] = useState(encode)
-  // const [pidArr, setPidArr] = useState([])
 
   // 商品圖片
   const { imgSrc } = usePath(data)
