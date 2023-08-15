@@ -22,7 +22,7 @@ export default function Forumcard({
     >
       <div className={`${styles.flex}`}>
         <div className={`${styles.container}`}>
-          <Image src={`${temp}`} alt="" width="250" height="250"></Image>
+          <Image src={`${temp}`} alt="" width="230" height="230"></Image>
         </div>
         <div className={`${styles.adjust} `}>{text1}</div>
         <div className="mt20px">
