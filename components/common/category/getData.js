@@ -13,11 +13,16 @@ import Col from 'react-bootstrap/Col'
 import ShopProductsCard from '@/components/common/cards/ShopProductsCard'
 import Pagination from '@/components/common/pagination'
 
-export default function GetData({ data = [], pagination = [], encode = '' }) {
+export default function GetData({
+  data = [],
+  pagination = [],
+  encode = '',
+  pidArr = [],
+}) {
   const router = useRouter()
   const { category } = router.query //抓出類別
   const [keyword, setKeyword] = useState(encode)
-  const [pidArr, setPidArr] = useState([])
+  // const [pidArr, setPidArr] = useState([])
 
   // 商品圖片
   const { imgSrc } = usePath(data)
@@ -43,20 +48,6 @@ export default function GetData({ data = [], pagination = [], encode = '' }) {
       }
     } else {
       setKeyword('')
-    }
-    const auth = localStorage.getItem('auth')
-    if (auth) {
-      const obj = JSON.parse(auth)
-      const Authorization = 'Bearer ' + obj.token
-      fetch(`${process.env.API_SERVER}/shop/favoriteMatch`, {
-        headers: {
-          Authorization,
-        },
-      })
-        .then((r) => r.json())
-        .then((data) => {
-          setPidArr(data)
-        })
     }
   }, [router.query])
   return (
