@@ -49,8 +49,13 @@
 .checkboxContainer
     display: flex
     justify-content: flex-end    
+    @include mobile-m
+        justify-content: center
+        margin-bottom: 25px    
+
 .checkbox
     width: 170px
     cursor: pointer
-
+    @include mobile-m
+        width: 160px
     

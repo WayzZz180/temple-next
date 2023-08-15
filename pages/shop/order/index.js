@@ -381,6 +381,25 @@ export default function Order() {
       </Container>
       <Container className={`${styles.rwdform} mt50px`}>
         <Title text="訂單資訊" text2="information" />
+        <Row className={`${styles.checkboxContainer}`}>
+          <div className={`${styles.checkbox} fs18px`}>
+            <input
+              type="checkbox"
+              id="myCheckbox"
+              className={styles.customCheckbox}
+              style={{ cursor: 'pointer' }}
+              onClick={() => {
+                handleUser()
+              }}
+            />
+            <label
+              htmlFor="myCheckbox"
+              className={`${styles.checkbox} fwBold ps10px`}
+            >
+              訂單同會員資料
+            </label>
+          </div>
+        </Row>
         <div className={`${styles.inputBox} mt10px`}>
           <InputBox
             type="text"
