@@ -8,6 +8,7 @@ const CountdownTimer = () => {
   targetDate.setDate(targetDate.getDate() + 30)
 
   const calculateTimeLeft = () => {
+    const targetDate = new Date('2023-09-14T23:00:00')
     const now = new Date()
     const difference = targetDate - now
 
@@ -53,33 +54,33 @@ const CountdownTimer = () => {
   }, [])
 
   //動動眼睛
-  const [eyePosition, setEyePosition] = useState({ x: 0, y: 0 });
+  const [eyePosition, setEyePosition] = useState({ x: 0, y: 0 })
 
   // 調整這些值以確保眼睛在預期的位置
-  const eyeLeftOffset = 900;
-  const eyeTopOffset = 78;
+  const eyeLeftOffset = 900
+  const eyeTopOffset = 78
 
   const handleMouseMove = (event) => {
-    const { clientX, clientY } = event;
-    const relativeX = clientX - eyeLeftOffset;
-    const relativeY = clientY - eyeTopOffset;
+    const { clientX, clientY } = event
+    const relativeX = clientX - eyeLeftOffset
+    const relativeY = clientY - eyeTopOffset
 
     // 限制眼睛位置在範圍內
-    const maxX = 20;
-    const maxY = 20;
-    const clampedX = Math.min(Math.max(relativeX, -maxX), maxX);
-    const clampedY = Math.min(Math.max(relativeY, -maxY), maxY);
+    const maxX = 20
+    const maxY = 20
+    const clampedX = Math.min(Math.max(relativeX, -maxX), maxX)
+    const clampedY = Math.min(Math.max(relativeY, -maxY), maxY)
 
-    setEyePosition({ x: clampedX, y: clampedY });
-  };
+    setEyePosition({ x: clampedX, y: clampedY })
+  }
 
   useEffect(() => {
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove)
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
+      window.removeEventListener('mousemove', handleMouseMove)
+    }
+  }, [])
   return (
     <>
       <div className={styles.parent_container}>
@@ -147,10 +148,10 @@ const CountdownTimer = () => {
             <div
               className={styles.eyeblack}
               style={{
-              '--eye-position-x': `${eyePosition.x}px`,
-              '--eye-position-y': `${eyePosition.y}px`,
-              '--eye-left-offset': `${eyeLeftOffset}px`,
-              '--eye-top-offset': `${eyeTopOffset}px`,
+                '--eye-position-x': `${eyePosition.x}px`,
+                '--eye-position-y': `${eyePosition.y}px`,
+                '--eye-left-offset': `${eyeLeftOffset}px`,
+                '--eye-top-offset': `${eyeTopOffset}px`,
               }}
             ></div>
           </div>
@@ -158,10 +159,10 @@ const CountdownTimer = () => {
             <div
               className={styles.eyeblack}
               style={{
-              '--eye-position-x': `${eyePosition.x}px`,
-              '--eye-position-y': `${eyePosition.y}px`,
-              '--eye-left-offset': `${eyeLeftOffset}px`,
-              '--eye-top-offset': `${eyeTopOffset}px`,
+                '--eye-position-x': `${eyePosition.x}px`,
+                '--eye-position-y': `${eyePosition.y}px`,
+                '--eye-left-offset': `${eyeLeftOffset}px`,
+                '--eye-top-offset': `${eyeTopOffset}px`,
               }}
             ></div>
           </div>
