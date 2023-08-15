@@ -47,16 +47,17 @@ export default function AlertDialogSlide({ page = 1 }) {
   // const [publishTime, setPublishTime] = React.useState('')
 
   const addData = async (title, content) => {
+    const fd = new FormData()
+    const input = document.querySelector('.img-upload')
+    fd.append('preImg', input.files[0])
+
     const reqData = {
       title: title,
       content: content,
-      img: '',
+      img: input.files[0].name,
     }
 
-    const input = document.querySelector('.img-upload')
-    const fd = new FormData()
-    fd.append('preImg', input.files[0])
-
+    // console.log('file:', input.files[0].name)
     const auth = localStorage.getItem('auth')
     if (auth) {
       const obj = JSON.parse(auth)
