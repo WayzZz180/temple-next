@@ -28,6 +28,7 @@ import loveGod from '@/assets/loveGod.svg'
 import studyGod from '@/assets/studyGod.svg'
 import Plate from '@/assets/plate.svg'
 import Star from '@/assets/Star_pink.svg'
+import Smoke from '@/assets/smoke.svg'
 
 // data
 import godInfo from '@/components/mydata/godInfo'
@@ -40,12 +41,39 @@ export default function Process() {
   const [reservation, setReservation] = useState([])
   const [drag, setDrag] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [smokeDisappear, setSmokeDisappear] = useState(false)
+  const smoke = keyframes({
+    '0%': {
+      transform: 'translate3d(0,0,0)',
+      opacity: 1,
+    },
+    '25%': {
+      opacity: 0.2,
+    },
+    '50%': {
+      opacity: 0.8,
+    },
+    '70%': {
+      opacity: 0.6,
+    },
+    '100%': {
+      transform: 'translate3d(0,50px,0)',
+      opacity: 0.2,
+    },
+  })
 
   useEffect(() => {
     if (localStorage.getItem('reservation')) {
       setReservation(JSON.parse(localStorage.getItem('reservation')))
     }
   }, [router.query])
+  useEffect(() => {
+    if (burn) {
+      setTimeout(() => {
+        setSmokeDisappear(true)
+      }, 3000)
+    }
+  }, [burn])
 
   // 抓商品資料
   useEffect(() => {
@@ -193,7 +221,21 @@ export default function Process() {
               <SortableList items={items} />
             </div>
             {/* 香 */}
-
+            <div
+              className={`${styles.smokeContainer}`}
+              style={{
+                display: burn ? (smokeDisappear ? 'none' : 'block') : 'none',
+              }}
+            >
+              <Image
+                src={Smoke}
+                alt="smoke"
+                width={100}
+                className={css({
+                  animation: burn ? `${smoke} 3s ease-out 1` : ``,
+                })}
+              />
+            </div>
             <div
               className={`${
                 active

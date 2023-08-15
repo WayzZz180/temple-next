@@ -12,6 +12,7 @@ import Button from '@/components/common/button'
 import Title from '@/components/common/title'
 import BuyContent from '@/components/common/orderDetails/buyContent'
 import Alert from '@/components/common/alert'
+import Checkbox from '@/components/common/checkBox'
 
 // bootstrap
 import Container from 'react-bootstrap/Container'
@@ -24,7 +25,7 @@ export default function Order() {
   // WAYZ 47-112
   const [user, setUser] = useState('')
   const [invalidFields, setInvalidFields] = useState([])
-  const [errorMessage, setErrorMessage] = useState('')
+  const [check, setCheck] = useState(true)
   // for 訂單資料
   const { cartData, setCartData, getCartData } = useContext(CartDataContext)
 
@@ -131,7 +132,6 @@ export default function Order() {
   }
   // WAYZ 47-112
 
-  // customer_name, customer_phone, customer_address, payment, delivery, coupon,
   const sendOrder = () => {
     const validateResult = validateForm()
     if (validateResult) {
@@ -200,6 +200,33 @@ export default function Order() {
     }
   }
 
+  const handleUser = () => {
+    setCheck(!check)
+
+    if (check) {
+      const auth = localStorage.getItem('auth')
+      if (auth) {
+        const obj = JSON.parse(auth)
+        const Authorization = 'Bearer ' + obj.token
+        fetch(`${process.env.API_SERVER}/member/personalinfo`, {
+          headers: {
+            Authorization,
+          },
+        })
+          .then((r) => r.json())
+          .then((data) => {
+            console.log(data)
+            setUser((old) => ({
+              ...old,
+              ['member_name']: data.member_name,
+              ['member_phone']: data.member_phone,
+              ['member_email']: data.member_account,
+              ['member_address']: data.member_address,
+            }))
+          })
+      }
+    }
+  }
   return (
     <Container className={`${styles.container}`}>
       {/* step */}
@@ -210,6 +237,25 @@ export default function Order() {
       {/* 表單 */}
       <Container className={`${styles.form} mt50px`}>
         <Title text="訂單資訊" text2="information" />
+        <Row className={`${styles.checkboxContainer}`}>
+          <div className={`${styles.checkbox} fs18px`}>
+            <input
+              type="checkbox"
+              id="myCheckbox"
+              className={styles.customCheckbox}
+              style={{ cursor: 'pointer' }}
+              onClick={() => {
+                handleUser()
+              }}
+            />
+            <label
+              htmlFor="myCheckbox"
+              className={`${styles.checkbox} fwBold ps10px`}
+            >
+              訂單同會員資料
+            </label>
+          </div>
+        </Row>
         <Row className={`${styles.flex_space_between}`}>
           <div className={`${styles.inputBox}`}>
             <InputBox
@@ -335,6 +381,25 @@ export default function Order() {
       </Container>
       <Container className={`${styles.rwdform} mt50px`}>
         <Title text="訂單資訊" text2="information" />
+        <Row className={`${styles.checkboxContainer}`}>
+          <div className={`${styles.checkbox} fs18px`}>
+            <input
+              type="checkbox"
+              id="myCheckbox"
+              className={styles.customCheckbox}
+              style={{ cursor: 'pointer' }}
+              onClick={() => {
+                handleUser()
+              }}
+            />
+            <label
+              htmlFor="myCheckbox"
+              className={`${styles.checkbox} fwBold ps10px`}
+            >
+              訂單同會員資料
+            </label>
+          </div>
+        </Row>
         <div className={`${styles.inputBox} mt10px`}>
           <InputBox
             type="text"
