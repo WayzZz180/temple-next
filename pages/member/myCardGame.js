@@ -31,11 +31,7 @@ export default function dailySignIn() {
       <ProfilePhoto />
       <Row>
         <Col>
-          <MemberTitle
-            text="遊戲區"
-            text2="Recall Rendezvous"
-            lineColor="green"
-          />
+          <MemberTitle text="遊戲區" text2="Card Matching" lineColor="green" />
         </Col>
       </Row>
       <Row>
