@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../Home/head.module.sass'
+
 import Image from 'next/image'
 import pink_star from '@/assets/Pink_Star.svg'
 import signIn from '@/assets/sing_in.svg'

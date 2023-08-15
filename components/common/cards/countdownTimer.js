@@ -5,7 +5,7 @@ import lion from '@/assets/lion.svg'
 
 const CountdownTimer = () => {
   const targetDate = new Date()
-  targetDate.setDate(targetDate.getDate() + 38)
+  targetDate.setDate(targetDate.getDate() + 30)
 
   const calculateTimeLeft = () => {
     const now = new Date()
