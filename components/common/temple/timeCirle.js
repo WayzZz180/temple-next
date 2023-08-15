@@ -3,8 +3,8 @@ import Image from 'next/image'
 import styles from './temple.module.sass'
 
 export default function TimeCirle({
-  date: initialDate = '1/9',
-  whatday: initialWhatday = '天公生',
+  date: initialDate = '12/22',
+  whatday: initialWhatday = '冬至',
   setNumber,
 }) {
   const [zodiac, setZodiac] = useState(1)
@@ -54,7 +54,7 @@ export default function TimeCirle({
           <div className={`${styles.calendrtitle}`}>農曆</div>
           <div className={`${styles.calendrnumber}`}>{date}</div>
           <div className={`${styles.flex_row}`}>
-          <div className={`${styles.calendrtext}`}>{whatday}</div>
+            <div className={`${styles.calendrtext}`}>{whatday}</div>
           </div>
           <div
             className={`${styles.slice1}`}
@@ -91,8 +91,8 @@ export default function TimeCirle({
             role="presentation"
             onClick={() => {
               setNumber(4)
-              setDate(buttonInfo[4].date)
-              setWhatday(buttonInfo[4].whatday)
+              setDate(buttonInfo[3].date)
+              setWhatday(buttonInfo[3].whatday)
             }}
             onMouseEnter={() => handleHover(4)}
           ></div>
