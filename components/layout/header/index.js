@@ -89,10 +89,13 @@ export default function Header() {
 
   const router = useRouter()
   const currentPath = router.asPath
+  const [isMenuOpen, setIsMenuOpen] = useState(true)
+
   useEffect(() => {
     if (localStorage.getItem('auth')) {
       setIsLogin(true)
     }
+    setIsMenuOpen(false)
   }, [router.query])
 
   // 底色要變咖啡色的路由
@@ -102,8 +105,6 @@ export default function Header() {
     return v === currentPath
   })
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
@@ -112,7 +113,9 @@ export default function Header() {
       <div
         role="presentation"
         className={`${styles.mobilemenu} ${isMenuOpen ? styles.open : ''}`}
-        onClick={toggleMenu}
+        onClick={() => {
+          toggleMenu()
+        }}
       >
         <span className={`${styles.mobilemenuline} `}></span>
       </div>

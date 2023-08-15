@@ -119,8 +119,11 @@ export default function Check() {
         })}
       </Row>
       <Row className="nowrap">
-        <Col>
+        <Col className={`${styles.totalContainer}`}>
           <div className={`${styles.total} fs24px fwBold`}>總計：{total}元</div>
+          <div className={`${styles.total} fs20px fwBold pt5px`}>
+            （訂單資訊同會員資料）
+          </div>
         </Col>
       </Row>
       <Row className={`${styles.button} nowrap mt50px`}>

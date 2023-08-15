@@ -16,6 +16,13 @@ export default function NavbarItem({ title = '', title2, links }) {
   const { cartCount, setCartCount, getCartCount } = useContext(CartCountContext)
   const router = useRouter()
   const [login, setLogin] = useState(false)
+  const [liClick, setLiClick] = useState(false)
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsOpen(false)
+    }
+  }, [liClick])
 
   useEffect(() => {
     if (localStorage.getItem('auth')) {
@@ -89,6 +96,7 @@ export default function NavbarItem({ title = '', title2, links }) {
                 link.label != '供品一覽'
                   ? setAlertIsOpen(true)
                   : router.push(link.url)
+                setLiClick(!liClick)
               }}
             >
               <Link href={auth.id === 0 ? '' : link.url} className={`fs14px`}>

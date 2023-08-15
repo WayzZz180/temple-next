@@ -133,7 +133,6 @@ const numberToChinese2 = (number) => {
     '第五十八首 - 辛酉籤',
     '第五十九首 - 壬戌籤',
     '第六十首 - 癸亥籤',
-    
   ]
   return chineseNums2[number - 1] || number.toString()
 }
@@ -204,7 +203,7 @@ export default function Mazu4() {
     }, 2000)
   }
   const ButtonClick = () => {
-    Router.push('/Home')
+    Router.push('/pray')
   }
   return (
     <>
@@ -260,7 +259,7 @@ export default function Mazu4() {
                   handleSumbit(e)
                 }}
               />
-              <Button text="回首頁" btnColor="hot_pink" link={ButtonClick} />
+              <Button text="其他神明" btnColor="hot_pink" link={ButtonClick} />
             </div>
           </div>
         </div>

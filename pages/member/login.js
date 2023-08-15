@@ -161,6 +161,7 @@ export default function Login() {
               </div>
               {showPassword ? (
                 <div
+                  role="presentation"
                   className={styles.flex_start}
                   style={{ cursor: 'pointer' }}
                   onClick={toggleShowPassword}
@@ -170,6 +171,7 @@ export default function Login() {
                 </div>
               ) : (
                 <div
+                  role="presentation"
                   className={styles.flex_start}
                   style={{ cursor: 'pointer' }}
                   onClick={toggleShowPassword}

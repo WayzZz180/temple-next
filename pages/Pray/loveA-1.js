@@ -17,7 +17,7 @@ export default function LoveA1() {
     Name: '',
     Birthday: '',
     Address: '',
-    Datetime:'',
+    Datetime: '',
   })
   const changeUser = (e) => {
     setUser((old) => ({ ...old, [e.target.id]: e.target.value }))
@@ -50,11 +50,26 @@ export default function LoveA1() {
 
     return () => clearTimeout(timer)
   }, [])
+
+  const handlePresetClick = () => {
+    setUser({
+      ...user,
+      Name: '洪郁雯',
+      Birthday: '2000-01-21',
+      Address: '台南市東區東門路三段226巷66號',
+    })
+  }
+  console.log(handlePresetClick)
+
   return (
     <>
       <div className={`${styles.container}`}>
         <div className={`${styles.flex_row}`}>
-          <div className={`${styles.leftAn} ${isVisible ? styles.show : ''}`}>
+          <div
+            role="presentation"
+            className={`${styles.leftAn} ${isVisible ? styles.show : ''}`}
+            onClick={handlePresetClick}
+          >
             <Image
               src={handLeft}
               alt=""

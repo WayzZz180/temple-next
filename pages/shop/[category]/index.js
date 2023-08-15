@@ -23,6 +23,8 @@ export default function Category() {
   const [data, setData] = useState([])
   const [pagination, setPagination] = useState([])
   const [dataFromChild, setDataFromChild] = useState([])
+  const [encode, setEncode] = useState()
+  const [pidArr, setPidArr] = useState([])
 
   //要篩選的資料
   const [info, setInfo] = useState([
@@ -114,10 +116,25 @@ export default function Category() {
         if (data.success) {
           setData(data.data)
           setPagination(data.pagination)
+          setEncode(data.keyword)
         } else {
           setData([])
         }
       })
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/shop/favoriteMatch`, {
+        headers: {
+          Authorization,
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          setPidArr(data)
+        })
+    }
   }, [dataFromChild, router.query])
 
   if (!data) return <Loading />
@@ -154,8 +171,8 @@ export default function Category() {
         <GetData
           data={data}
           pagination={pagination}
-          dataFromChild={dataFromChild}
-          info={info}
+          encode={encode}
+          pidArr={pidArr}
         />
       ) : (
         <NoData />

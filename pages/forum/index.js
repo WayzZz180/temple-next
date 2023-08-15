@@ -58,10 +58,10 @@ export default function Forum() {
         <Title text="知識區" text2="KNOWLEDGE普拉斯" />
       </div>
       <div className={`${styles.flex_row2}`}>
-        <Forumcard text1="神佛介紹" text2="長知識" pic="introgod" />
-        <Forumcard text1="禁忌百科" text2="母湯喔" pic="dontdo" />
-        <Forumcard text1="節期拜法" text2="長知識" pic="howtobye" />
-        <Forumcard text1="山野怪談" text2="長知識" pic="monogatari" />
+        <Forumcard text1="神佛介紹" text2="長知識" pic="introgod" href={`/forum/godstory`}/>
+        <Forumcard text1="禁忌百科" text2="母湯喔" pic="dontdo" href={`/forum/folktaboos`}/>
+        <Forumcard text1="節期拜法" text2="長知識" pic="howtobye" href={`/forum/seasoncircle`}/>
+        <Forumcard text1="山野怪談" text2="長知識" pic="monogatari" href={`/forum/monsters`}/>
       </div>
       <div className={`${styles.flex_know}`}>
         <Title

@@ -44,20 +44,20 @@ export default function CardGame() {
   const cardData = []
   const imageSources = [
     Leftgod,
+    temple,
+    teabox,
+    foo_dog_right,
+    dog_in,
+    samL,
+    flag,
     lion,
     zhongzi,
-    flag,
     worship_burner,
-    foo_dog_right,
-    samL,
-    dog_in,
     studyGod,
     Rightgod,
     loveGod,
-    teabox,
     // coupon_red,
     mazuGod,
-    temple,
     loveSet,
     plum,
   ]
@@ -192,7 +192,7 @@ export default function CardGame() {
     }
   }, [gameStarted])
   //計時器邏輯
-  const [remainingTime, setRemainingTime] = useState(60) // 60 seconds
+  const [remainingTime, setRemainingTime] = useState(5) // 60 seconds
   const [isRunning, setIsRunning] = useState(false)
 
   useEffect(() => {
@@ -266,7 +266,26 @@ export default function CardGame() {
   // }
 
   // 已經領取
-  const [errorMessage, setErrorMessage] = useState('')
+  const [showCouponStatus, setShowCouponStatus] = useState('')
+  useEffect(() => {
+    if (auth.token) {
+      fetch(process.env.API_SERVER + '/member/cardGameCoupon', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + auth.token,
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          console.log(`CG頁面 data:`, data.data)
+          setShowCouponStatus(data.data)
+        })
+    } else {
+      setShowCouponStatus('已經領取')
+    }
+  }, [auth.token, gameOver])
+
   // API 優惠券紀錄
   const handleCoupon = () => {
     if (auth.token) {
@@ -283,6 +302,7 @@ export default function CardGame() {
           // 存儲後端的錯誤訊息
           if (data.error) {
             console.log(data.error)
+
             setCouponReceivedModalIsOpen(true)
             return // 終止後續的處理
           }
@@ -326,7 +346,7 @@ export default function CardGame() {
                   >
                     <Image
                       src={card.img}
-                      width={160}
+                      width={155}
                       height={190}
                       alt=""
                       style={
@@ -382,14 +402,18 @@ export default function CardGame() {
         <Col className="nowrap">
           {/* 計分器 */}
           <div className={styles.center}>
-            <div className={styles.points}>Points: {points} </div>
+            <div className={styles.points}>這次的分數: {points} </div>
+            <div className={styles.points}>歷史最高分: {points} </div>
+
             {/* <div className={styles.points}>Points: {points} / 10 </div> */}
           </div>
         </Col>
         <Col className="nowrap">
           {/* 遊玩次數 */}
           <div className={styles.center}>
-            <div className={styles.points}>本日已遊玩次數 X / 3 </div>
+            <div className={styles.points}>
+              今天優惠券狀況 : {showCouponStatus}
+            </div>
             {/* <div className={styles.points}>本日可遊玩次數 X / 3 </div> */}
           </div>
         </Col>
@@ -399,6 +423,7 @@ export default function CardGame() {
               text="調整難度為:困難"
               link={() => {
                 setIdRange(32)
+                setRemainingTime(90)
               }}
               disabled={isRunning || gameStarted}
             />
@@ -407,6 +432,7 @@ export default function CardGame() {
               text="調整難度為:簡單"
               link={() => {
                 setIdRange(8)
+                setRemainingTime(30)
               }}
               disabled={isRunning || gameStarted}
             />
@@ -441,12 +467,17 @@ export default function CardGame() {
           <div className="mb5px">
             <Button
               text="確認"
-              btnColor="orderGray"
+              btnColor="green"
               link={() => {
                 setCards(cardData)
                 setFlippedCards([])
                 setPoints(0)
-                setRemainingTime(60)
+                if (idRange === 8) {
+                  setRemainingTime(30)
+                } else {
+                  setRemainingTime(90)
+                }
+
                 setIsRunning(false)
                 setGameStarted(false)
                 setGameOver(false)
@@ -461,7 +492,7 @@ export default function CardGame() {
           <div>
             <Button
               text="取消"
-              btnColor="green"
+              btnColor="orderGray"
               link={() => {
                 setRestartModalIsOpen(false)
               }}
@@ -506,7 +537,11 @@ export default function CardGame() {
                 setCards(cardData)
                 setFlippedCards([])
                 setPoints(0)
-                setRemainingTime(60)
+                if (idRange === 8) {
+                  setRemainingTime(30)
+                } else {
+                  setRemainingTime(90)
+                }
                 setIsRunning(false)
                 setGameStarted(false)
                 setGameOver(false)

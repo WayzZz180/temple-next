@@ -42,10 +42,9 @@ export default function ReadPost({ src = '', post }) {
       })
   }, [router.query])
 
-  // const auth = localStorage.getItem('auth')
-
   const addData = async (comment) => {
     const auth = localStorage.getItem('auth')
+
     try {
       if (auth) {
         const obj = JSON.parse(auth)

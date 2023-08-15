@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styles from './style.module.sass'
 // hooks
+import { useRouter } from 'next/router'
 import { useHoverIndex } from '@/hooks/useHoverIndex.js'
 // components
 import ShopSearchBar from '@/components/common/bar/ShopSearchBar'
@@ -14,6 +15,7 @@ import Col from 'react-bootstrap/Col'
 import data from '@/components/mydata/productsTitleData'
 
 export default function ShopTop() {
+  const router = useRouter()
   // 類別hover
   const {
     hoveredIndex: hoveredIndexStar,
@@ -33,7 +35,15 @@ export default function ShopTop() {
       <Row className="nowrap mt100px mb50px fs24px">
         {/* 標題 */}
         <Col>
-          <div className={`${styles.title}`}>神明尬意ㄟ</div>
+          <div
+            role="presentation"
+            className={`${styles.title}`}
+            onClick={() => {
+              router.push('/shop')
+            }}
+          >
+            神明尬意ㄟ
+          </div>
         </Col>
       </Row>
       <Row className={`nowrap fs20px mb50px ${styles.rwdCategory}`}>
