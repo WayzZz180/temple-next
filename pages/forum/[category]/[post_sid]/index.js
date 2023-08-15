@@ -42,37 +42,50 @@ export default function ReadPost({ src = '', post }) {
       })
   }, [router.query])
 
+  const auth = localStorage.getItem('auth')
+
   const addData = async (comment) => {
     try {
-      // 新增評論
-      const response = await fetch(
-        `${process.env.API_SERVER}/forum/${router.query.category}/${router.query.post_sid}/add-comment`,
-        {
-          method: 'POST',
-          body: JSON.stringify({ comment }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
+      if (auth) {
+        const obj = JSON.parse(auth)
+        const Authorization = 'Bearer ' + obj.token
+
+        // 新增評論
+        const response = await fetch(
+          `${process.env.API_SERVER}/forum/${router.query.category}/${router.query.post_sid}/add-comment`,
+          {
+            method: 'POST',
+            body: JSON.stringify({ comment }),
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization,
+            },
+          }
+        )
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok')
         }
-      )
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok')
-      }
+        // 清空輸入框
+        setInputComment('')
 
-      // 清空輸入框
-      setInputComment('')
+        // 重新獲取評論
+        const commentResponse = await fetch(
+          `${process.env.API_SERVER}/forum/${router.query.category}/${router.query.post_sid}/comments`,
+          {
+            headers: {
+              Authorization,
+            },
+          }
+        )
+        const commentResult = await commentResponse.json()
 
-      // 重新獲取評論
-      const commentResponse = await fetch(
-        `${process.env.API_SERVER}/forum/${router.query.category}/${router.query.post_sid}/comments`
-      )
-      const commentResult = await commentResponse.json()
-
-      if (commentResult.success) {
-        setComments(commentResult.comments)
-      } else {
-        console.log('沒有評論!')
+        if (commentResult.success) {
+          setComments(commentResult.comments)
+        } else {
+          console.log('沒有評論!')
+        }
       }
     } catch (error) {
       console.error('An error occurred:', error)

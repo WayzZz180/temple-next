@@ -27,24 +27,29 @@ function Forumgossip() {
     // usp.append('postcategory_sid', postCategory) // 將 post_category 添加到查詢參數
     // console.log('page:', router.query.page)
     const page = router.query.page
-    console.log('k:', router.query.keyword)
-
-    fetch(`${process.env.API_SERVER}/forum/${category}?${usp.toString()}`, {
-      method: 'POST',
-      body: JSON.stringify({ page: page }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        // console.log('data:', data)
-        // console.log('here')
-        setData(data[0])
-        setTotalPages(data[1])
-        setStateHeart(data[2])
-        setStateCollect(data[3])
+    // console.log('k:', router.query.keyword)
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/forum/${category}?${usp.toString()}`, {
+        method: 'POST',
+        body: JSON.stringify({ page: page }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization,
+        },
       })
+        .then((r) => r.json())
+        .then((data) => {
+          // console.log('data:', data)
+          // console.log('here')
+          setData(data[0])
+          setTotalPages(data[1])
+          setStateHeart(data[2])
+          setStateCollect(data[3])
+        })
+    }
   }, [router.query, heart])
 
   const pagination = {

@@ -18,6 +18,19 @@ export default function Navbar({ keywordSearch = () => {} }) {
   // const [showModal, setShowModal] = useState(false)
   // const handleCloseModal = () => setShowModal(false)
   // const handleShowModal = () => setShowModal(true)
+  const [sortOrder, setSortOrder] = useState('DESC') // Initialize with DESC
+
+  const toggleSortOrder = () => {
+    const newSortOrder = sortOrder === 'DESC' ? 'ASC' : 'DESC'
+    setSortOrder(newSortOrder)
+  }
+
+  const getSortLink = () => {
+    const currentSortLink = router.query.page
+      ? `?page=${router.query.page}&sort=${sortOrder}`
+      : `?sort=${sortOrder}`
+    return currentSortLink
+  }
   return (
     <>
       <div className={`${styles.flex_row}`}>

@@ -71,58 +71,79 @@ export default function Forumper({
   // 按讚
   const addToGood = () => {
     const addData = { sid: data?.sid }
-
-    fetch(`${process.env.API_SERVER}/forum/good`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: addData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {})
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/forum/good`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: addData }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization,
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {})
+    }
   }
 
   // 收回讚
   const deleteFromGood = () => {
     const deletedData = { sid: data?.sid }
-    fetch(`${process.env.API_SERVER}/forum/good`, {
-      method: 'DELETE',
-      body: JSON.stringify({ requestData: deletedData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {})
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/forum/good`, {
+        method: 'DELETE',
+        body: JSON.stringify({ requestData: deletedData }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization,
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {})
+    }
   }
-
   // 珍藏
   const addToCollect = () => {
     const addData = { sid: data?.sid }
-
-    fetch(`${process.env.API_SERVER}/forum/collect`, {
-      method: 'POST',
-      body: JSON.stringify({ requestData: addData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {})
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/forum/collect`, {
+        method: 'POST',
+        body: JSON.stringify({ requestData: addData }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization,
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {})
+    }
   }
   // 收回收藏
   const deleteFromCollect = () => {
     const deletedData = { sid: data?.sid }
-    fetch(`${process.env.API_SERVER}/forum/collect`, {
-      method: 'DELETE',
-      body: JSON.stringify({ requestData: deletedData }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((r) => r.json())
-      .then((data) => {})
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/forum/collect`, {
+        method: 'DELETE',
+        body: JSON.stringify({ requestData: deletedData }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization,
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {})
+    }
   }
 
   return (
