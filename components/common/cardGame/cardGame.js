@@ -63,7 +63,7 @@ export default function CardGame() {
   ]
 
   //難度調整
-  const [idRange, setIdRange] = useState(8)
+  const [idRange, setIdRange] = useState(6)
   console.log(idRange)
   // const handleDifficultyChange = (event) => {
   //   const value = parseInt(event.target.value)
@@ -116,6 +116,8 @@ export default function CardGame() {
   const [cards, setCards] = useState(cardData)
   const [flippedCards, setFlippedCards] = useState([])
   const [points, setPoints] = useState(0)
+  const [highestPoints, setHighestPoints] = useState(0)
+
   const [canClick, setCanClick] = useState(true)
 
   // 遊戲邏輯
@@ -146,7 +148,7 @@ export default function CardGame() {
             )
           )
           setCanClick(true)
-        }, 800)
+        }, 700)
       }
       setFlippedCards([])
     }
@@ -177,6 +179,7 @@ export default function CardGame() {
     if (allCardsMatched) {
       // setIsRunning(false) // 停止計時器
       setGameOver(true)
+      handleRecordGame()
       handleCoupon()
       // handleRecordGame()
       // 在這裡增加所其他遊戲的邏輯跟判斷
@@ -205,6 +208,7 @@ export default function CardGame() {
         } else {
           clearInterval(interval)
           setFailedModalIsOpen(true)
+          handleRecordGame()
         }
       }, 1000)
     } else {
@@ -233,37 +237,36 @@ export default function CardGame() {
   const [showConfetti, setShowConfetti] = useState(false)
   const [sg, setSg] = useState(175)
 
-  // // API 遊玩紀錄
-  // const handleRecordGame = () => {
-  //   if (auth.token) {
-  //     fetch(process.env.API_SERVER + '/member/cardGame', {
-  //       method: 'POST',
-  //       body: JSON.stringify({ points }),
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         Authorization: 'Bearer ' + auth.token,
-  //       },
-  //     })
-  //       .then((r) => r.json())
-  //       .then((data) => {
-  //         // 存儲後端的錯誤訊息
-  //         if (data.error) {
-  //           console.log(data.error)
-  //           alert(data.error) // 顯示 錯誤訊息
+  // API 遊玩紀錄
+  const handleRecordGame = () => {
+    if (auth.token) {
+      fetch(process.env.API_SERVER + '/member/cardGame', {
+        method: 'POST',
+        body: JSON.stringify({ points }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + auth.token,
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          console.log(data)
+          // 存儲後端的錯誤訊息
+          if (data.error) {
+            console.log(data.error)
+            // alert(data.error) // 顯示 錯誤訊息
 
-  //           return // 終止後續的處理
-  //         }
+            return // 終止後續的處理
+          }
 
-  //         console.log(data)
-
-  //         if (data) {
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         alert('簽到失敗', error)
-  //       })
-  //   }
-  // }
+          if (data) {
+          }
+        })
+        .catch((error) => {
+          alert('簽到失敗', error)
+        })
+    }
+  }
 
   // 已經領取
   const [showCouponStatus, setShowCouponStatus] = useState('')
@@ -316,6 +319,37 @@ export default function CardGame() {
     }
   }
 
+  //讀取最高分
+  useEffect(() => {
+    if (auth.token) {
+      fetch(process.env.API_SERVER + '/member/cardGame', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + auth.token,
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          console.log(`最高分`, data)
+          setHighestPoints(data.points)
+          // 存儲後端的錯誤訊息
+          if (data.error) {
+            console.log(data.error)
+            // alert(data.error) // 顯示 錯誤訊息
+
+            return // 終止後續的處理
+          }
+
+          if (data) {
+          }
+        })
+        .catch((error) => {
+          alert('簽到失敗', error)
+        })
+    }
+  }, [auth.token, gameOver])
+
   return (
     <>
       <Row>
@@ -330,7 +364,7 @@ export default function CardGame() {
                 } ${card.matched ? styles.matched : ''}`}
                 onClick={() => handleCardClick(card.id)}
               >
-                <div className={idRange === 8 ? styles.card : styles.card2}>
+                <div className={idRange === 6 ? styles.card : styles.card2}>
                   <div className={styles.face}>
                     ?
                     {/* {card.flipped ? (
@@ -341,7 +375,7 @@ export default function CardGame() {
                   </div>
                   <div
                     className={`${styles.face} ${
-                      idRange === 8 ? styles.back : styles.back2
+                      idRange === 6 ? styles.back : styles.back2
                     }`}
                   >
                     <Image
@@ -396,6 +430,7 @@ export default function CardGame() {
               link={() => {
                 setRestartModalIsOpen(true)
               }}
+              disabled={!gameStarted}
             />
           </div>
         </Col>
@@ -403,7 +438,7 @@ export default function CardGame() {
           {/* 計分器 */}
           <div className={styles.center}>
             <div className={styles.points}>這次的分數: {points} </div>
-            <div className={styles.points}>歷史最高分: {points} </div>
+            <div className={styles.points}>歷史最高分: {highestPoints} </div>
 
             {/* <div className={styles.points}>Points: {points} / 10 </div> */}
           </div>
@@ -418,12 +453,12 @@ export default function CardGame() {
           </div>
         </Col>
         <Col className="nowrap">
-          {idRange === 8 ? (
+          {idRange === 6 ? (
             <Button
               text="調整難度為:困難"
               link={() => {
-                setIdRange(32)
-                setRemainingTime(90)
+                setIdRange(24)
+                setRemainingTime(60)
               }}
               disabled={isRunning || gameStarted}
             />
@@ -431,7 +466,7 @@ export default function CardGame() {
             <Button
               text="調整難度為:簡單"
               link={() => {
-                setIdRange(8)
+                setIdRange(6)
                 setRemainingTime(30)
               }}
               disabled={isRunning || gameStarted}
@@ -460,7 +495,7 @@ export default function CardGame() {
         }}
       >
         <div className={`${styles.flex_center} mt10px`}>
-          <div className="fs24px mb20px">本次遊戲仍會列入紀錄喔</div>
+          <div className="fs24px mb20px">本次分數將不會列入紀錄喔</div>
           <div className={`${styles.flex} fwBold fs24px mb20px`}>
             這樣...還要離開我嗎?
           </div>
@@ -470,17 +505,18 @@ export default function CardGame() {
               btnColor="green"
               link={() => {
                 setCards(cardData)
-                setFlippedCards([])
                 setPoints(0)
-                if (idRange === 8) {
+                if (idRange === 6) {
                   setRemainingTime(30)
                 } else {
-                  setRemainingTime(90)
+                  setRemainingTime(60)
                 }
 
                 setIsRunning(false)
+                setFlippedCards([])
                 setGameStarted(false)
                 setGameOver(false)
+
                 setRestartModalIsOpen(false)
                 // handleRecordGame()
               }}
@@ -534,19 +570,26 @@ export default function CardGame() {
               text="確認"
               btnColor="green"
               link={() => {
+                // handleRecordGame()
+                //新增
                 setCards(cardData)
-                setFlippedCards([])
                 setPoints(0)
-                if (idRange === 8) {
+                if (idRange === 6) {
                   setRemainingTime(30)
                 } else {
-                  setRemainingTime(90)
+                  setRemainingTime(60)
                 }
-                setIsRunning(false)
-                setGameStarted(false)
+
+                setIsRunning(true)
+                setFlippedCards([])
+
+                setGameStarted(true)
                 setGameOver(false)
                 setFailedModalIsOpen(false)
-                // handleRecordGame()
+
+                shuffleCards()
+                setCanClick(true)
+                //新增
               }}
               width="100%"
               fontSize="20px"
