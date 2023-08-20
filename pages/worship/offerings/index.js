@@ -116,7 +116,11 @@ export default function Offerings() {
         .then((data) => {})
     }
   }
-
+  const clearLocal = () => {
+    if (localStorage.getItem('reservation')) {
+      localStorage.removeItem('reservation')
+    }
+  }
   return (
     <>
       <Head>
@@ -215,6 +219,9 @@ export default function Offerings() {
                   ? '/member/praying'
                   : '/worship/offerings/confirm'
               )
+              if (reservation.pidArr?.length === 0 && !reservation.today) {
+                clearLocal()
+              }
             }}
           />
         </Row>

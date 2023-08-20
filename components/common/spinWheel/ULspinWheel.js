@@ -47,7 +47,7 @@ export default function SpinWheel({ updateSpinWheel }) {
     setCouponReceivedModalIsOpen(false)
     setTimeout(() => {
       setSg(0)
-    }, 5000)
+    }, 3000)
   }
   // 將 x 減去 3600，再對 360 取餘數，得到的結果會是 5 到 364 之間的值
   const result = rotationDegree % 360
