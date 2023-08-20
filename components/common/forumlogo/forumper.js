@@ -191,12 +191,12 @@ export default function Forumper({
                       {/* <FavoriteBorderSharpIcon className={`${styles.marr}`} /> */}
                       {data?.good}
                     </div>
-                    <div className={`${styles.setmid}`}>
-                      {/* <ChatBubbleOutlineSharpIcon
+                    {/* <div className={`${styles.setmid}`}> */}
+                    {/* <ChatBubbleOutlineSharpIcon
                           className={`${styles.marr}`}
                         /> */}
-                      999
-                    </div>
+                    {/* 999 */}
+                    {/* </div> */}
                     <div
                       role="presentation"
                       className={`${styles.setmid}`}

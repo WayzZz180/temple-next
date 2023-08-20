@@ -83,6 +83,10 @@ export default function Header() {
         { label: '鬼故事板', url: '/forum/ghost?page=1' },
         { label: '愛情板', url: '/forum/love?page=1' },
         { label: '籤詩板', url: '/forum/fortunesticks?page=1' },
+        { label: '神佛介紹', url: '/forum/godstory' },
+        { label: '禁忌百科', url: '/forum/folktaboos' },
+        { label: '節期拜法', url: '/forum/seasoncircle' },
+        { label: '山野怪談', url: '/forum/monsters' },
       ],
     },
   ]

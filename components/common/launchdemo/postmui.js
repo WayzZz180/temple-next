@@ -21,6 +21,7 @@ import ImgUpload from '@/components/common/imgupload/imgupload'
 import { useState, useEffect } from 'react'
 import data from '@/components/mydata/productsTitleData'
 import { Logger } from 'sass'
+import babyDory from '@/public/img/babyDory.jpg'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />
@@ -30,6 +31,7 @@ export default function AlertDialogSlide({ page = 1 }) {
   const router = useRouter()
   const [selectedFile, setSelectedFile] = useState(null)
   const [open, setOpen] = React.useState(false)
+  const [member, setMember] = React.useState([])
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -92,7 +94,21 @@ export default function AlertDialogSlide({ page = 1 }) {
       }),
         handleClose()
     }
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(`${process.env.API_SERVER}/member/personalinfo`, {
+        headers: {
+          Authorization,
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          setMember(data)
+        })
+    }
   }
+  console.log(member)
   //會員
   // useEffect(() => {
   //   setMemberId('member_id')
@@ -129,7 +145,7 @@ export default function AlertDialogSlide({ page = 1 }) {
                   <div className={`${styles.row1}`}>
                     <Avatar
                       alt="Remy Sharp"
-                      src="/static/images/avatar/1.jpg"
+                      src={babyDory}
                       sx={{ width: 77, height: 77 }}
                     />
                     <div className={`${styles.column1}`}>

@@ -7,6 +7,7 @@ import Image from 'next/image'
 import Head from 'next/head'
 import TextArea from '@/components/common/inputBox/textarea'
 import ForumButton from '@/components/common/button/'
+import BabyDory from '@/public/img/babyDory.jpg'
 
 export default function ReadPost({ src = '', post }) {
   const router = useRouter()
@@ -16,30 +17,50 @@ export default function ReadPost({ src = '', post }) {
 
   useEffect(() => {
     // 獲取文章資訊
-    fetch(
-      `${process.env.API_SERVER}/forum/${router.query.category}/${router.query.post_sid}`
-    )
-      .then((r) => r.json())
-      .then((result) => {
-        if (result.success) {
-          setData(result.row)
-        } else {
-          console.log('沒有資料!')
+    const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(
+        `${process.env.API_SERVER}/forum/${router.query.category}/${router.query.post_sid}`,
+        {
+          headers: {
+            Authorization,
+          },
         }
-      })
+      )
+        .then((r) => r.json())
+        .then((result) => {
+          if (result.success) {
+            setData(result.row)
+          } else {
+            console.log('沒有資料!')
+          }
+        })
+    }
 
     // 獲取文章評論
-    fetch(
-      `${process.env.API_SERVER}/forum/${router.query.category}/${router.query.post_sid}/comments`
-    )
-      .then((r) => r.json())
-      .then((result) => {
-        if (result.success) {
-          setComments(result.comments)
-        } else {
-          console.log('沒有評論!')
+    // const auth = localStorage.getItem('auth')
+    if (auth) {
+      const obj = JSON.parse(auth)
+      const Authorization = 'Bearer ' + obj.token
+      fetch(
+        `${process.env.API_SERVER}/forum/${router.query.category}/${router.query.post_sid}/comments`,
+        {
+          headers: {
+            Authorization,
+          },
         }
-      })
+      )
+        .then((r) => r.json())
+        .then((result) => {
+          if (result.success) {
+            setComments(result.comments)
+          } else {
+            console.log('沒有評論!')
+          }
+        })
+    }
   }, [router.query])
 
   const addData = async (comment) => {
@@ -103,7 +124,7 @@ export default function ReadPost({ src = '', post }) {
         <div className={`${styles.row}`}>
           <Avatar
             alt="Remy Sharp"
-            src="/static/images/avatar/1.jpg"
+            src={BabyDory}
             sx={{ width: 77, height: 77 }}
             className={`${styles.avatar}`}
           />
