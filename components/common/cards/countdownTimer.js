@@ -4,8 +4,8 @@ import styles from './cuntdownTimer.module.sass'
 import lion from '@/assets/lion.svg'
 
 const CountdownTimer = () => {
-  const targetDate = new Date()
-  targetDate.setDate(targetDate.getDate() + 30)
+  // const targetDate = new Date()
+  // targetDate.setDate(targetDate.getDate() + 30)
 
   const calculateTimeLeft = () => {
     const targetDate = new Date('2023-09-14T23:00:00')

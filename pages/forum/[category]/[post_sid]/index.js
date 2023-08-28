@@ -8,6 +8,7 @@ import Head from 'next/head'
 import TextArea from '@/components/common/inputBox/textarea'
 import ForumButton from '@/components/common/button/'
 import BabyDory from '@/public/img/babyDory.jpg'
+import AlternatingSumCalculator from '@/components/common/fortest/AlternatingSumCalculator'
 
 export default function ReadPost({ src = '', post }) {
   const router = useRouter()
@@ -216,6 +217,7 @@ export default function ReadPost({ src = '', post }) {
           </form>
         </div>
       </div>
+      <AlternatingSumCalculator />
     </>
   )
 }
